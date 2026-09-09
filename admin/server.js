@@ -2,7 +2,6 @@
 const express = require('express');
 const multer  = require('multer');
 const path    = require('path');
-const crypto  = require('crypto');
 const { v4: uuidv4 } = require('uuid');
 const { createClient } = require('@supabase/supabase-js');
 
@@ -449,58 +448,64 @@ app.post('/api/landing/:type/publish', async (req, res) => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  Auth (cookie-based signed session)
+//  Auth (Supabase Auth — users managed in Supabase dashboard)
 // ══════════════════════════════════════════════════════════════
-const ADMIN_EMAIL    = process.env.ADMIN_EMAIL    || 'admin@pntc.edu.ph';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
-const SESSION_SECRET = process.env.SESSION_SECRET || 'pntc-admin-dev-secret';
-const SESSION_DAYS   = 7;
+const COOKIE_NAME = 'pntc_session';
+const COOKIE_MAX  = 7 * 24 * 3600; // 7 days
 
-function makeToken() {
-  const ts  = Date.now().toString();
-  const sig = crypto.createHmac('sha256', SESSION_SECRET).update(ts).digest('hex');
-  return `${ts}.${sig}`;
+function getSessionToken(cookieHeader) {
+  if (!cookieHeader) return null;
+  for (const part of cookieHeader.split(';')) {
+    const [k, ...v] = part.trim().split('=');
+    if (k.trim() === COOKIE_NAME) return v.join('=') || null;
+  }
+  return null;
 }
 
-function verifySession(cookieHeader) {
-  if (!cookieHeader) return false;
-  const cookies = Object.fromEntries(
-    cookieHeader.split(';').map(c => {
-      const [k, ...v] = c.trim().split('=');
-      return [k.trim(), v.join('=')];
-    })
-  );
-  const token = cookies['pntc_session'];
-  if (!token) return false;
-  const dot = token.indexOf('.');
-  if (dot === -1) return false;
-  const ts  = token.slice(0, dot);
-  const sig = token.slice(dot + 1);
-  const expected = crypto.createHmac('sha256', SESSION_SECRET).update(ts).digest('hex');
-  if (sig !== expected) return false;
-  if (Date.now() - parseInt(ts) > SESSION_DAYS * 24 * 3600 * 1000) return false;
-  return true;
-}
-
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/auth/login', async (req, res) => {
   const { email, password } = req.body || {};
-  if (!ADMIN_PASSWORD) {
-    return res.status(500).json({ ok: false, error: 'ADMIN_PASSWORD env var not set. Add it in Vercel Project Settings → Environment Variables.' });
+  if (!email || !password) {
+    return res.status(400).json({ ok: false, error: 'Email and password are required.' });
   }
-  if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-    const token = makeToken();
-    res.setHeader('Set-Cookie', `pntc_session=${token}; HttpOnly; Path=/; Max-Age=${SESSION_DAYS * 24 * 3600}; SameSite=Lax`);
-    return res.json({ ok: true });
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error || !data.session) {
+      return res.status(401).json({ ok: false, error: 'Invalid email or password.' });
+    }
+    res.setHeader('Set-Cookie',
+      `${COOKIE_NAME}=${data.session.access_token}; HttpOnly; Path=/; Max-Age=${COOKIE_MAX}; SameSite=Lax`
+    );
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: e.message });
   }
-  res.status(401).json({ ok: false, error: 'Invalid email or password.' });
 });
 
-app.get('/api/auth/check', (req, res) => {
-  res.json({ ok: verifySession(req.headers.cookie) });
+app.get('/api/auth/check', async (req, res) => {
+  const token = getSessionToken(req.headers.cookie);
+  if (!token) return res.json({ ok: false });
+  try {
+    const { data, error } = await supabase.auth.getUser(token);
+    res.json({ ok: !error && !!data?.user });
+  } catch {
+    res.json({ ok: false });
+  }
 });
 
-app.post('/api/auth/logout', (req, res) => {
-  res.setHeader('Set-Cookie', 'pntc_session=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax');
+app.post('/api/auth/logout', async (req, res) => {
+  const token = getSessionToken(req.headers.cookie);
+  if (token) {
+    try {
+      // Create a user-scoped client to sign out properly
+      const userClient = createClient(
+        process.env.SUPABASE_URL || '',
+        process.env.SUPABASE_SERVICE_KEY || '',
+        { global: { headers: { Authorization: `Bearer ${token}` } } }
+      );
+      await userClient.auth.signOut();
+    } catch (_) {}
+  }
+  res.setHeader('Set-Cookie', `${COOKIE_NAME}=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax`);
   res.json({ ok: true });
 });
 
