@@ -292,13 +292,17 @@ body {
       if (res.ok) {
         window.location.href = '/admin/';
       } else {
-        const data = await res.json().catch(() => ({}));
-        showError(data.error || 'Invalid email or password. Please try again.');
+        let data = {};
+        try { data = await res.json(); } catch (_) {
+          showError('Server error (HTTP ' + res.status + '). The admin server may not be deployed yet — push your code to GitHub and wait for Vercel to redeploy.');
+          passEl.value = ''; passEl.focus(); return;
+        }
+        showError(data.error || 'Invalid email or password.');
         passEl.value = '';
         passEl.focus();
       }
     } catch (err) {
-      showError('Cannot reach the server. Make sure the admin server is running.');
+      showError('Cannot reach the server. Check that your code was pushed to GitHub and Vercel has redeployed.');
     } finally {
       setLoading(false);
     }
