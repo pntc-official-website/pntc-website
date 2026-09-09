@@ -448,10 +448,12 @@ app.post('/api/landing/:type/publish', async (req, res) => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  Auth (Supabase Auth — users managed in Supabase dashboard)
+//  Auth (direct GoTrue REST — avoids service-role header clash)
 // ══════════════════════════════════════════════════════════════
-const COOKIE_NAME = 'pntc_session';
-const COOKIE_MAX  = 7 * 24 * 3600; // 7 days
+const COOKIE_NAME  = 'pntc_session';
+const COOKIE_MAX   = 7 * 24 * 3600; // 7 days
+const GOTRUE_URL   = (process.env.SUPABASE_URL || '').replace(/\/$/, '') + '/auth/v1';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || '';
 
 function getSessionToken(cookieHeader) {
   if (!cookieHeader) return null;
@@ -468,16 +470,21 @@ app.post('/api/auth/login', async (req, res) => {
     return res.status(400).json({ ok: false, error: 'Email and password are required.' });
   }
   try {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error || !data.session) {
-      return res.status(401).json({ ok: false, error: 'Invalid email or password.' });
+    const r = await fetch(`${GOTRUE_URL}/token?grant_type=password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await r.json();
+    if (!r.ok || !data.access_token) {
+      return res.status(401).json({ ok: false, error: data.error_description || data.msg || 'Invalid email or password.' });
     }
     res.setHeader('Set-Cookie',
-      `${COOKIE_NAME}=${data.session.access_token}; HttpOnly; Path=/; Max-Age=${COOKIE_MAX}; SameSite=Lax`
+      `${COOKIE_NAME}=${data.access_token}; HttpOnly; Path=/; Max-Age=${COOKIE_MAX}; SameSite=Lax`
     );
     res.json({ ok: true });
   } catch (e) {
-    res.status(500).json({ ok: false, error: e.message });
+    res.status(500).json({ ok: false, error: 'Auth service unreachable: ' + e.message });
   }
 });
 
@@ -485,8 +492,10 @@ app.get('/api/auth/check', async (req, res) => {
   const token = getSessionToken(req.headers.cookie);
   if (!token) return res.json({ ok: false });
   try {
-    const { data, error } = await supabase.auth.getUser(token);
-    res.json({ ok: !error && !!data?.user });
+    const r = await fetch(`${GOTRUE_URL}/user`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${token}` }
+    });
+    res.json({ ok: r.ok });
   } catch {
     res.json({ ok: false });
   }
@@ -496,13 +505,10 @@ app.post('/api/auth/logout', async (req, res) => {
   const token = getSessionToken(req.headers.cookie);
   if (token) {
     try {
-      // Create a user-scoped client to sign out properly
-      const userClient = createClient(
-        process.env.SUPABASE_URL || '',
-        process.env.SUPABASE_SERVICE_KEY || '',
-        { global: { headers: { Authorization: `Bearer ${token}` } } }
-      );
-      await userClient.auth.signOut();
+      await fetch(`${GOTRUE_URL}/logout`, {
+        method: 'POST',
+        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${token}` }
+      });
     } catch (_) {}
   }
   res.setHeader('Set-Cookie', `${COOKIE_NAME}=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax`);
