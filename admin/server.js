@@ -377,6 +377,90 @@ app.post('/api/images/:site/replace', replaceUpload.single('image'), async (req,
 });
 
 // ══════════════════════════════════════════════════════════════
+//  GitHub Site Images (list, replace, upload)
+// ══════════════════════════════════════════════════════════════
+app.get('/api/images/github/:site', async (req, res) => {
+  const site = SITES[req.params.site];
+  if (!site) return res.status(404).json({ error: 'Unknown site' });
+  if (!GH_TOKEN) return res.status(503).json({ error: 'GitHub token not configured' });
+  try {
+    const brRes = await fetch(
+      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/branches/${GH_BRANCH}`,
+      { headers: { Authorization: `Bearer ${GH_TOKEN}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' } }
+    );
+    if (!brRes.ok) throw new Error(`GitHub API ${brRes.status}`);
+    const brData  = await brRes.json();
+    const treeSha = brData.commit?.commit?.tree?.sha;
+    if (!treeSha) throw new Error('Could not resolve HEAD tree');
+
+    const tRes = await fetch(
+      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/git/trees/${treeSha}?recursive=1`,
+      { headers: { Authorization: `Bearer ${GH_TOKEN}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' } }
+    );
+    const tData = await tRes.json();
+    if (!tRes.ok) throw new Error(tData.message || 'Tree API error');
+
+    const IMG_RE  = /\.(jpe?g|png|gif|webp|svg)$/i;
+    const prefix  = site.dir + '/';
+    const RAWBASE = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}`;
+    const ts      = Date.now();
+
+    const images = (tData.tree || [])
+      .filter(f => f.type === 'blob' && f.path.startsWith(prefix) && IMG_RE.test(f.path))
+      .map(f => {
+        const enc = f.path.split('/').map(encodeURIComponent).join('/');
+        return { path: f.path, filename: f.path.split('/').pop(), relPath: f.path.slice(prefix.length), sha: f.sha, size: f.size || 0, url: `${RAWBASE}/${enc}?v=${ts}`, source: 'github' };
+      });
+
+    images.sort((a, b) => a.relPath.localeCompare(b.relPath));
+    res.json(images);
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.post('/api/images/github/:site/replace', replaceUpload.single('image'), async (req, res) => {
+  const site = SITES[req.params.site];
+  if (!site || !req.file || !req.body.filePath) {
+    return res.status(400).json({ error: 'Need image file and filePath' });
+  }
+  try {
+    const existing = await ghGetFile(req.body.filePath);
+    const encPath  = req.body.filePath.split('/').map(encodeURIComponent).join('/');
+    const body     = { message: `Update image: ${req.body.filePath.split('/').pop()}`, content: req.file.buffer.toString('base64'), branch: GH_BRANCH };
+    if (existing?.sha) body.sha = existing.sha;
+    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${encPath}`, {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${GH_TOKEN}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json', 'X-GitHub-Api-Version': '2022-11-28' },
+      body: JSON.stringify(body)
+    });
+    if (!r.ok) { const e = await r.text(); throw new Error(`GitHub ${r.status}: ${e.slice(0, 200)}`); }
+    const d = await r.json();
+    res.json({ ok: true, sha: d.content?.sha });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.post('/api/images/github/:site/upload', replaceUpload.single('image'), async (req, res) => {
+  const site = SITES[req.params.site];
+  if (!site || !req.file) return res.status(400).json({ error: 'No image provided' });
+  try {
+    const safeName = (req.file.originalname || 'image').replace(/[^a-zA-Z0-9._\- ]/g, '').trim()
+      || `upload-${Date.now()}${path.extname(req.file.originalname || '.jpg')}`;
+    const filePath = `${site.dir}/${safeName}`;
+    const existing = await ghGetFile(filePath);
+    const encPath  = filePath.split('/').map(encodeURIComponent).join('/');
+    const body     = { message: `Upload image: ${safeName}`, content: req.file.buffer.toString('base64'), branch: GH_BRANCH };
+    if (existing?.sha) body.sha = existing.sha;
+    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${encPath}`, {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${GH_TOKEN}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json', 'X-GitHub-Api-Version': '2022-11-28' },
+      body: JSON.stringify(body)
+    });
+    if (!r.ok) { const e = await r.text(); throw new Error(`GitHub ${r.status}: ${e.slice(0, 200)}`); }
+    const RAWBASE = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}`;
+    res.json({ ok: true, path: filePath, url: `${RAWBASE}/${encPath}` });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+// ══════════════════════════════════════════════════════════════
 //  Landing Page Content Management
 // ══════════════════════════════════════════════════════════════
 const LANDING_TABLE_MAP = {

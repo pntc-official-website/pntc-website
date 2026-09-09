@@ -6,49 +6,129 @@
 <title>PNTC Admin – Image Manager</title>
 <link rel="stylesheet" href="admin.css">
 <style>
-.site-tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.site-tab {
-  padding: .5rem 1.25rem;
-  border-radius: 6px;
-  font-size: .82rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--muted);
-  transition: all .15s;
+/* ── Source toggle ── */
+.source-toggle {
+  display: flex; gap: .4rem; margin-bottom: 1rem;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: .3rem;
+  width: fit-content;
 }
-.site-tab.active { background: var(--gold); color: #111; border-color: var(--gold); }
-.site-tab:hover:not(.active) { border-color: var(--muted); color: var(--text); }
+.src-btn {
+  padding: .45rem 1.1rem; border-radius: 6px; border: none;
+  font-size: .8rem; font-weight: 700; cursor: pointer;
+  background: transparent; color: var(--muted);
+  transition: all .15s; letter-spacing: .04em;
+}
+.src-btn.active { background: var(--card); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,.18); }
 
+/* ── Context info bar ── */
+.source-info {
+  display: flex; align-items: flex-start; gap: .6rem;
+  background: rgba(200,150,12,.07); border: 1px solid rgba(200,150,12,.2);
+  border-radius: 6px; padding: .65rem 1rem; margin-bottom: 1.25rem;
+  font-size: .8rem; color: var(--muted); line-height: 1.5;
+}
+.source-info strong { color: var(--gold); }
+
+/* ── Upload zone ── */
 .upload-zone {
-  border: 2px dashed var(--border);
-  border-radius: 8px;
-  padding: 2rem;
-  text-align: center;
-  cursor: pointer;
-  transition: border-color .2s, background .2s;
-  margin-bottom: 1.5rem;
+  border: 2px dashed var(--border); border-radius: 8px;
+  padding: 1.5rem 2rem; text-align: center; cursor: pointer;
+  transition: border-color .2s, background .2s; margin-bottom: 1.25rem;
 }
 .upload-zone:hover, .upload-zone.drag-over { border-color: var(--gold); background: rgba(200,150,12,.04); }
-.upload-zone p { color: var(--muted); font-size: .88rem; margin-top: .5rem; }
+.upload-zone p { color: var(--muted); font-size: .85rem; margin-top: .35rem; }
 
-.img-modal { position: fixed; inset: 0; background: rgba(0,0,0,.8); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+/* ── Image grid ── */
+.img-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+}
+.img-tile {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; overflow: hidden; cursor: pointer;
+  transition: border-color .15s, transform .15s;
+}
+.img-tile:hover { border-color: var(--gold); transform: translateY(-2px); }
+.img-tile-thumb {
+  width: 100%; aspect-ratio: 4/3;
+  background: var(--bg); overflow: hidden; position: relative;
+}
+.img-tile-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; transition: opacity .2s;
+}
+.img-tile-info { padding: .6rem .75rem; }
+.img-tile-name {
+  font-size: .75rem; font-weight: 600; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.img-tile-sub { font-size: .68rem; color: var(--muted); margin-top: .15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* folder group headers */
+.folder-group { margin-bottom: 1.5rem; }
+.folder-label {
+  font-size: .68rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: .65rem; padding-bottom: .35rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Modal ── */
+.img-modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,.75);
+  z-index: 500; display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+}
 .img-modal[hidden] { display: none; }
 .img-modal-inner {
-  background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-  max-width: 640px; width: 100%; overflow: hidden;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; max-width: 680px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
 }
-.img-modal-preview { width: 100%; max-height: 360px; object-fit: contain; background: var(--bg); }
+.modal-preview-wrap {
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  max-height: 340px; overflow: hidden; display: flex;
+  align-items: center; justify-content: center;
+}
+.modal-preview-wrap img { max-width: 100%; max-height: 340px; object-fit: contain; display: block; }
 .img-modal-body { padding: 1.5rem; }
-.img-modal-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: .25rem; word-break: break-all; }
-.img-modal-meta { font-size: .78rem; color: var(--muted); margin-bottom: 1rem; }
-.replace-zone {
-  border: 2px dashed var(--border); border-radius: 6px; padding: 1rem;
-  text-align: center; cursor: pointer; transition: border-color .2s; margin-bottom: 1rem;
+
+.modal-badge {
+  display: inline-block; font-size: .72rem; font-weight: 700;
+  padding: .3rem .75rem; border-radius: 20px; margin-bottom: .85rem;
+  letter-spacing: .04em;
 }
-.replace-zone:hover { border-color: var(--gold); }
-.replace-zone p { font-size: .8rem; color: var(--muted); margin-top: .35rem; }
+.badge-github   { background: rgba(34,197,94,.1);  color: #4ade80; }
+.badge-supabase { background: rgba(99,102,241,.12); color: #818cf8; }
+
+.img-modal-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: .2rem; word-break: break-all; }
+.img-modal-meta { font-size: .78rem; color: var(--muted); margin-bottom: 1.1rem; }
+
+.path-copy {
+  display: flex; align-items: center; gap: .5rem;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 6px; padding: .5rem .75rem; margin-bottom: 1.1rem;
+}
+.path-copy code { flex: 1; font-size: .75rem; color: var(--gold); word-break: break-all; }
+.path-copy button {
+  flex-shrink: 0; background: none; border: 1px solid var(--border);
+  border-radius: 4px; padding: .2rem .6rem; font-size: .72rem; font-weight: 600;
+  color: var(--muted); cursor: pointer; transition: color .15s, border-color .15s;
+}
+.path-copy button:hover { color: var(--text); border-color: var(--muted); }
+
+.replace-zone {
+  border: 2px dashed var(--border); border-radius: 6px;
+  padding: 1.1rem; text-align: center; cursor: pointer;
+  transition: border-color .2s, background .2s; margin-bottom: 1rem;
+}
+.replace-zone:hover, .replace-zone.drag-over { border-color: var(--gold); background: rgba(200,150,12,.04); }
+.replace-zone p { font-size: .8rem; color: var(--muted); margin-top: .3rem; }
+.replace-zone strong { color: var(--text); }
+
+.modal-actions { display: flex; gap: .75rem; justify-content: flex-end; flex-wrap: wrap; }
 </style>
 </head>
 <body>
@@ -83,22 +163,40 @@
     <!-- Site tabs -->
     <div class="site-tabs">
       <button class="site-tab active" data-site="shs">SHS</button>
-      <button class="site-tab" data-site="colleges">PNTC Colleges</button>
+      <button class="site-tab" data-site="colleges">Colleges</button>
       <button class="site-tab" data-site="maritime">Maritime</button>
       <button class="site-tab" data-site="aman">Aman Sinaya</button>
     </div>
 
+    <!-- Source toggle -->
+    <div class="source-toggle">
+      <button class="src-btn active" data-source="github">📁 Site Images</button>
+      <button class="src-btn" data-source="supabase">☁️ Blog Uploads</button>
+    </div>
+
+    <!-- Context info -->
+    <div class="source-info" id="src-info">
+      <span id="src-info-github">
+        <strong>Site Images</strong> are stored in the GitHub repo.
+        Uploading or replacing here commits the file to GitHub — <strong>Vercel redeploys automatically</strong> and the live site updates in ~30 seconds.
+      </span>
+      <span id="src-info-supabase" hidden>
+        <strong>Blog Uploads</strong> live in Supabase Storage.
+        Replacing one overwrites the file at the same URL — pages using it <strong>update automatically</strong> (no redeploy needed).
+      </span>
+    </div>
+
     <!-- Upload zone -->
     <div class="upload-zone" id="upload-zone">
-      <div style="font-size:2rem">📤</div>
-      <p><strong style="color:var(--text)">Click or drag &amp; drop</strong> to upload a new image to this site</p>
-      <p>JPG, PNG, WebP, SVG supported</p>
+      <div style="font-size:1.75rem">📤</div>
+      <p><strong style="color:var(--text)">Click or drag &amp; drop</strong> to upload an image to this site</p>
+      <p id="upload-sub">JPG, PNG, WebP, SVG — commits to GitHub repo</p>
       <input type="file" id="upload-input" accept="image/*" multiple style="display:none">
     </div>
 
     <!-- Search -->
     <div class="form-group" style="margin-bottom:1rem">
-      <input type="text" class="form-input" id="img-search" placeholder="Search images by filename…" style="font-size:.88rem">
+      <input type="text" class="form-input" id="img-search" placeholder="Search by filename or folder…" style="font-size:.88rem">
     </div>
 
     <!-- Grid -->
@@ -112,21 +210,30 @@
 <!-- Image detail modal -->
 <div class="img-modal" id="img-modal" hidden>
   <div class="img-modal-inner">
-    <img src="" alt="" class="img-modal-preview" id="modal-preview">
+    <div class="modal-preview-wrap">
+      <img src="" alt="" id="modal-preview">
+    </div>
     <div class="img-modal-body">
+      <span class="modal-badge" id="modal-badge"></span>
       <h3 id="modal-filename"></h3>
       <div class="img-modal-meta" id="modal-meta"></div>
 
+      <!-- URL copy row -->
+      <div class="path-copy">
+        <code id="modal-url-text"></code>
+        <button onclick="copyModalUrl()">Copy URL</button>
+      </div>
+
+      <!-- Replace zone -->
       <div class="replace-zone" id="replace-zone">
-        <div style="font-size:1.5rem">🔄</div>
-        <p><strong style="color:var(--text)">Click to replace this image</strong></p>
-        <p>Upload a new file to overwrite this image in-place<br>(same filename, same URL — all pages update automatically)</p>
+        <div style="font-size:1.4rem">🔄</div>
+        <p><strong>Click or drag a new file to replace this image</strong></p>
+        <p id="replace-sub">Saves to GitHub &amp; triggers Vercel redeploy (~30 sec)</p>
         <input type="file" id="replace-input" accept="image/*" style="display:none">
       </div>
 
-      <div style="display:flex;gap:.75rem;justify-content:flex-end">
+      <div class="modal-actions">
         <button class="btn btn-ghost" onclick="closeModal()">Close</button>
-        <button class="btn btn-primary" id="copy-url-btn">Copy URL</button>
       </div>
     </div>
   </div>
@@ -135,11 +242,12 @@
 <div id="toast"></div>
 
 <script>
-let currentSite = 'shs';
-let allImages   = [];
-let selectedImg = null;
+let currentSite   = 'shs';
+let currentSource = 'github';
+let allImages     = [];
+let selectedImg   = null;
 
-// Site tabs
+// ── Site tabs ─────────────────────────────────────────────────
 document.querySelectorAll('.site-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.site-tab').forEach(t => t.classList.remove('active'));
@@ -149,81 +257,164 @@ document.querySelectorAll('.site-tab').forEach(tab => {
   });
 });
 
-// Search
+// ── Source toggle ─────────────────────────────────────────────
+document.querySelectorAll('.src-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.src-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentSource = btn.dataset.source;
+    applySourceUI();
+    loadImages();
+  });
+});
+
+function applySourceUI() {
+  const isGH = currentSource === 'github';
+  document.getElementById('src-info-github').hidden  = !isGH;
+  document.getElementById('src-info-supabase').hidden = isGH;
+  document.getElementById('upload-sub').textContent = isGH
+    ? 'JPG, PNG, WebP, SVG — commits to GitHub repo'
+    : 'JPG, PNG, WebP, SVG — stored in Supabase';
+  document.getElementById('replace-sub').textContent = isGH
+    ? 'Saves to GitHub & triggers Vercel redeploy (~30 sec)'
+    : 'Overwrites the file at the same URL instantly';
+}
+
+// ── Search ────────────────────────────────────────────────────
 document.getElementById('img-search').addEventListener('input', renderGrid);
 
-// Upload zone
+// ── Upload zone ───────────────────────────────────────────────
 const uploadZone  = document.getElementById('upload-zone');
 const uploadInput = document.getElementById('upload-input');
 
-uploadZone.addEventListener('click', () => uploadInput.click());
-uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
-uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+uploadZone.addEventListener('click',     () => uploadInput.click());
+uploadZone.addEventListener('dragover',  e  => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+uploadZone.addEventListener('dragleave', ()  => uploadZone.classList.remove('drag-over'));
 uploadZone.addEventListener('drop', e => {
-  e.preventDefault();
-  uploadZone.classList.remove('drag-over');
+  e.preventDefault(); uploadZone.classList.remove('drag-over');
   uploadFiles(e.dataTransfer.files);
 });
-uploadInput.addEventListener('change', () => uploadFiles(uploadInput.files));
+uploadInput.addEventListener('change', () => { uploadFiles(uploadInput.files); uploadInput.value = ''; });
 
 async function uploadFiles(files) {
-  for (const file of files) {
+  const arr = [...files];
+  for (const file of arr) {
     showToast(`Uploading ${file.name}…`, false, true);
     const fd = new FormData();
     fd.append('image', file);
     fd.append('site',  currentSite);
+    const endpoint = currentSource === 'github'
+      ? `/api/images/github/${currentSite}/upload`
+      : '/api/upload/featured';
     try {
-      await fetch('/api/upload/featured', { method: 'POST', body: fd });
-    } catch {}
+      const res  = await fetch(endpoint, { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || 'Upload failed');
+    } catch (e) { showToast(e.message, true); return; }
   }
-  showToast('Upload complete');
+  showToast(currentSource === 'github'
+    ? 'Uploaded! Vercel is redeploying — live in ~30 seconds.'
+    : 'Upload complete.');
   await loadImages();
 }
 
+// ── Load images ───────────────────────────────────────────────
 async function loadImages() {
   document.getElementById('img-grid').innerHTML = '<div class="loading">Loading…</div>';
+  document.getElementById('img-count').textContent = '';
   try {
-    const res  = await fetch(`/api/images/${currentSite}`);
-    allImages  = await res.json();
+    const url = currentSource === 'github'
+      ? `/api/images/github/${currentSite}`
+      : `/api/images/${currentSite}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to load images');
+    allImages = Array.isArray(data) ? data : [];
     renderGrid();
-  } catch(e) {
-    document.getElementById('img-grid').innerHTML = '<div class="empty-state"><p>Could not load images.</p></div>';
+  } catch (e) {
+    document.getElementById('img-grid').innerHTML =
+      `<div class="empty-state"><div class="icon">⚠️</div><p>${esc(e.message)}</p></div>`;
   }
 }
 
+// ── Render grid (grouped by folder) ──────────────────────────
 function renderGrid() {
   const q    = document.getElementById('img-search').value.toLowerCase();
-  const imgs = q ? allImages.filter(i => i.filename.toLowerCase().includes(q) || i.relPath.toLowerCase().includes(q)) : allImages;
+  const imgs = q
+    ? allImages.filter(i => i.filename.toLowerCase().includes(q) || (i.relPath||'').toLowerCase().includes(q))
+    : allImages;
 
   document.getElementById('img-count').textContent = `${imgs.length} image${imgs.length !== 1 ? 's' : ''}`;
 
   if (!imgs.length) {
     document.getElementById('img-grid').innerHTML = `<div class="empty-state">
       <div class="icon">🖼️</div>
-      <p>${q ? 'No images match your search.' : 'No images found. Upload some above!'}</p>
+      <p>${q ? 'No images match your search.' : 'No images uploaded yet.'}</p>
     </div>`;
     return;
   }
 
-  document.getElementById('img-grid').innerHTML = `
-    <div class="img-grid">
-      ${imgs.map(img => `
-        <div class="img-tile" onclick="openModal(${JSON.stringify(JSON.stringify(img))})">
-          <div class="img-tile-thumb" style="background-image:url('${img.url}')"></div>
-          <div class="img-tile-info">
-            <div class="img-tile-name" title="${esc(img.filename)}">${esc(img.filename)}</div>
-            <div class="img-tile-size">${fmtSize(img.size)} · ${esc(img.relPath.split('/').slice(0,-1).join('/') || 'root')}</div>
-          </div>
-        </div>`).join('')}
-    </div>`;
+  // Group by folder (first path segment of relPath)
+  const groups = {};
+  for (const img of imgs) {
+    const parts  = (img.relPath || '').split('/');
+    const folder = parts.length > 1 ? parts.slice(0, -1).join('/') : 'root';
+    if (!groups[folder]) groups[folder] = [];
+    groups[folder].push(img);
+  }
+
+  const html = Object.entries(groups).map(([folder, list]) => `
+    <div class="folder-group">
+      <div class="folder-label">📂 ${esc(folder === 'root' ? '/ (site root)' : folder)}</div>
+      <div class="img-grid">
+        ${list.map(img => `
+          <div class="img-tile" onclick='openModal(${JSON.stringify(JSON.stringify(img))})'>
+            <div class="img-tile-thumb">
+              <img src="${escAttr(img.url)}" alt="${escAttr(img.filename)}" loading="lazy"
+                   onerror="this.style.opacity='.12'">
+            </div>
+            <div class="img-tile-info">
+              <div class="img-tile-name" title="${escAttr(img.filename)}">${esc(img.filename)}</div>
+              <div class="img-tile-sub">${fmtSize(img.size)}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  document.getElementById('img-grid').innerHTML = html;
 }
 
+// ── Modal ─────────────────────────────────────────────────────
 function openModal(imgJson) {
   selectedImg = JSON.parse(imgJson);
-  document.getElementById('modal-preview').src = selectedImg.url;
+
+  // Fresh preview URL (cache-bust for github images)
+  const previewUrl = selectedImg.source === 'github'
+    ? selectedImg.url.replace(/[?&]v=\d+/, '') + '?v=' + Date.now()
+    : selectedImg.url;
+  document.getElementById('modal-preview').src   = previewUrl;
+  document.getElementById('modal-preview').alt   = selectedImg.filename;
   document.getElementById('modal-filename').textContent = selectedImg.filename;
-  document.getElementById('modal-meta').textContent = `${fmtSize(selectedImg.size)} · ${selectedImg.relPath}`;
+  document.getElementById('modal-meta').textContent     = `${fmtSize(selectedImg.size)} · ${selectedImg.relPath}`;
+
+  // Badge
+  const badge = document.getElementById('modal-badge');
+  if (selectedImg.source === 'github') {
+    badge.textContent = '📁 GitHub — Vercel redeploys on replace';
+    badge.className   = 'modal-badge badge-github';
+  } else {
+    badge.textContent = '☁️ Supabase — URL unchanged on replace';
+    badge.className   = 'modal-badge badge-supabase';
+  }
+
+  // URL display (clean, no cache query)
+  const cleanUrl = selectedImg.source === 'github'
+    ? selectedImg.url.replace(/[?&]v=\d+/, '')
+    : selectedImg.url;
+  document.getElementById('modal-url-text').textContent = cleanUrl;
+
   document.getElementById('img-modal').hidden = false;
+  document.getElementById('replace-input').value = '';
 }
 
 function closeModal() {
@@ -231,51 +422,75 @@ function closeModal() {
   selectedImg = null;
 }
 
-// Copy URL
-document.getElementById('copy-url-btn').onclick = () => {
-  if (!selectedImg) return;
-  navigator.clipboard.writeText(window.location.origin + selectedImg.url)
-    .then(() => showToast('URL copied to clipboard'))
-    .catch(() => showToast('Copy failed', true));
-};
-
-// Replace image
-const replaceZone  = document.getElementById('replace-zone');
-const replaceInput = document.getElementById('replace-input');
-
-replaceZone.addEventListener('click', () => replaceInput.click());
-replaceInput.addEventListener('change', async () => {
-  if (!selectedImg || !replaceInput.files[0]) return;
-  showToast('Replacing image…', false, true);
-  const fd = new FormData();
-  fd.append('image',   replaceInput.files[0]);
-  fd.append('relPath', selectedImg.relPath);
-  try {
-    const res  = await fetch(`/api/images/${currentSite}/replace`, { method: 'POST', body: fd });
-    const data = await res.json();
-    if (data.ok) {
-      showToast('Image replaced! Pages using this image will automatically show the new version.');
-      closeModal();
-      await loadImages();
-    } else {
-      showToast(data.error || 'Replace failed', true);
-    }
-  } catch {
-    showToast('Replace failed', true);
-  }
-  replaceInput.value = '';
-});
-
-// Close modal on overlay click
 document.getElementById('img-modal').addEventListener('click', e => {
   if (e.target === document.getElementById('img-modal')) closeModal();
 });
 
-function esc(s)  { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function fmtSize(bytes) {
-  if (bytes < 1024)       return bytes + ' B';
-  if (bytes < 1024*1024)  return (bytes/1024).toFixed(1) + ' KB';
-  return (bytes/(1024*1024)).toFixed(1) + ' MB';
+function copyModalUrl() {
+  const url = document.getElementById('modal-url-text').textContent;
+  navigator.clipboard.writeText(url)
+    .then(() => showToast('URL copied'))
+    .catch(() => showToast('Copy failed', true));
+}
+
+// ── Replace ───────────────────────────────────────────────────
+const replaceZone  = document.getElementById('replace-zone');
+const replaceInput = document.getElementById('replace-input');
+
+replaceZone.addEventListener('click',    () => replaceInput.click());
+replaceZone.addEventListener('dragover', e  => { e.preventDefault(); replaceZone.classList.add('drag-over'); });
+replaceZone.addEventListener('dragleave',()  => replaceZone.classList.remove('drag-over'));
+replaceZone.addEventListener('drop', e => {
+  e.preventDefault(); replaceZone.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) doReplace(file);
+});
+replaceInput.addEventListener('change', () => {
+  if (replaceInput.files[0]) doReplace(replaceInput.files[0]);
+});
+
+async function doReplace(file) {
+  if (!selectedImg) return;
+  showToast('Replacing image…', false, true);
+  const fd = new FormData();
+  fd.append('image', file);
+  try {
+    let res;
+    if (selectedImg.source === 'github') {
+      fd.append('filePath', selectedImg.path);
+      res = await fetch(`/api/images/github/${currentSite}/replace`, { method: 'POST', body: fd });
+    } else {
+      fd.append('relPath', selectedImg.relPath);
+      res = await fetch(`/api/images/${currentSite}/replace`, { method: 'POST', body: fd });
+    }
+    const data = await res.json();
+    if (data.ok) {
+      const msg = selectedImg.source === 'github'
+        ? 'Image updated! Vercel is redeploying — live in ~30 seconds.'
+        : 'Image replaced. Pages using it now show the new version.';
+      showToast(msg);
+      // Show new file immediately in the modal
+      document.getElementById('modal-preview').src = URL.createObjectURL(file);
+      await loadImages();
+    } else {
+      showToast(data.error || 'Replace failed', true);
+    }
+  } catch (e) { showToast('Replace failed: ' + e.message, true); }
+  replaceInput.value = '';
+}
+
+// ── Helpers ───────────────────────────────────────────────────
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function escAttr(s) {
+  return esc(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function fmtSize(b) {
+  if (!b)         return '–';
+  if (b < 1024)   return b + ' B';
+  if (b < 1<<20)  return (b/1024).toFixed(1) + ' KB';
+  return (b/(1<<20)).toFixed(1) + ' MB';
 }
 
 let toastTimer;
@@ -284,13 +499,18 @@ function showToast(msg, isError=false, loading=false) {
   t.textContent = loading ? '⏳ ' + msg : (isError ? '❌ ' : '✅ ') + msg;
   t.className   = 'show' + (isError ? ' error' : '');
   clearTimeout(toastTimer);
-  if (!loading) toastTimer = setTimeout(() => t.className = '', 4000);
+  if (!loading) toastTimer = setTimeout(() => t.className = '', 5000);
 }
 
 loadImages();
 
-async function logout() { await fetch('/api/auth/logout', { method:'POST' }); location.href='/admin/login.html'; }
-fetch('/api/auth/check').then(r=>r.json()).then(d=>{ if(!d.ok) location.href='/admin/login.html'; });
+async function logout() {
+  await fetch('/api/auth/logout', { method: 'POST' });
+  location.href = '/admin/login.html';
+}
+fetch('/api/auth/check').then(r => r.json()).then(d => {
+  if (!d.ok) location.href = '/admin/login.html';
+});
 </script>
 </body>
 </html>
