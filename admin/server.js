@@ -121,6 +121,24 @@ const replaceUpload = multer({ storage: multer.memoryStorage() });
 // ══════════════════════════════════════════════════════════════
 app.get('/api/sites', (_req, res) => res.json(Object.values(SITES)));
 
+// Public (no auth) endpoint — used by site pages to load news dynamically
+app.get('/api/public/posts', async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  const { site, limit = 3 } = req.query;
+  try {
+    let q = supabase
+      .from('posts')
+      .select('id,title,slug,excerpt,featuredImage,category,publishedAt,author,sites')
+      .eq('status', 'published')
+      .order('publishedAt', { ascending: false })
+      .limit(Math.min(parseInt(limit) || 3, 20));
+    if (site) q = q.contains('sites', [site]);
+    const { data, error } = await q;
+    if (error) throw error;
+    res.json(data || []);
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
 // ══════════════════════════════════════════════════════════════
 //  API — Posts
 // ══════════════════════════════════════════════════════════════
@@ -171,7 +189,6 @@ async function publishPostToGitHub(post) {
     const existIndex    = await ghGetFile(indexFilePath);
     await ghPutFile(indexFilePath, indexHtml, `Update blog index: ${site.name}`, existIndex?.sha);
 
-    await updateWhatsNewGitHub(sitePostsMapped, site);
     results.push({ site: site.name, file: postFilePath });
   }
   return results;
