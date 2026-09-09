@@ -9,9 +9,11 @@ const app  = express();
 const PORT = process.env.PORT || 3000;
 
 // ── Supabase ────────────────────────────────────────────────────
+// Use placeholder values if env vars missing so the module loads without throwing.
+// Actual API calls will fail gracefully with a clear error message.
 const supabase = createClient(
-  process.env.SUPABASE_URL         || '',
-  process.env.SUPABASE_SERVICE_KEY || ''
+  process.env.SUPABASE_URL         || 'https://placeholder.supabase.co',
+  process.env.SUPABASE_SERVICE_KEY || 'placeholder-key'
 );
 
 // ── GitHub ─────────────────────────────────────────────────────
@@ -468,6 +470,9 @@ app.post('/api/auth/login', async (req, res) => {
   const { email, password } = req.body || {};
   if (!email || !password) {
     return res.status(400).json({ ok: false, error: 'Email and password are required.' });
+  }
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_KEY) {
+    return res.status(500).json({ ok: false, error: 'Supabase env vars are missing. Add SUPABASE_URL and SUPABASE_SERVICE_KEY in Vercel → Project Settings → Environment Variables, then redeploy.' });
   }
   try {
     const r = await fetch(`${GOTRUE_URL}/token?grant_type=password`, {
