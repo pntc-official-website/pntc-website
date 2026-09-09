@@ -1407,6 +1407,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
           var tag=p.category?'<span class="news-tag">'+esc(p.category)+'</span>':'';
           return '<article class="news-card reveal"'+delay+'>'+thumb+'<div class="news-body">'+tag+'<div class="news-date">'+esc(date)+'</div><h3>'+esc(p.title)+'</h3><p>'+esc(p.excerpt||'')+'</p><a href="blog/'+esc(p.slug)+'.html" class="news-link">Read More '+SVG+'</a></div></article>';
         }).join('');
+        el.querySelectorAll('.reveal').forEach(function(c){c.classList.add('visible');});
       })
       .catch(function(){});
   })();
