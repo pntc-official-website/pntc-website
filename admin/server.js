@@ -1,64 +1,18 @@
 'use strict';
 const express = require('express');
 const multer  = require('multer');
+const fs      = require('fs');
 const path    = require('path');
+const crypto  = require('crypto');
 const { v4: uuidv4 } = require('uuid');
-const { createClient } = require('@supabase/supabase-js');
 
 const app  = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-// ── Supabase ────────────────────────────────────────────────────
-const supabase = createClient(
-  process.env.SUPABASE_URL         || '',
-  process.env.SUPABASE_SERVICE_KEY || ''
-);
-
-// ── GitHub ─────────────────────────────────────────────────────
-const GH_TOKEN  = process.env.GITHUB_TOKEN;
-const GH_OWNER  = process.env.GITHUB_OWNER;
-const GH_REPO   = process.env.GITHUB_REPO;
-const GH_BRANCH = process.env.GITHUB_BRANCH || 'main';
-
-async function ghGetFile(filePath) {
-  const encoded = filePath.split('/').map(p => encodeURIComponent(p)).join('/');
-  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${encoded}?ref=${GH_BRANCH}`;
-  const res = await fetch(url, {
-    headers: {
-      'Authorization': `Bearer ${GH_TOKEN}`,
-      'Accept': 'application/vnd.github+json',
-      'X-GitHub-Api-Version': '2022-11-28'
-    }
-  });
-  if (!res.ok) return null;
-  return res.json();
-}
-
-async function ghPutFile(filePath, content, message, sha) {
-  const encoded = filePath.split('/').map(p => encodeURIComponent(p)).join('/');
-  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${encoded}`;
-  const body = {
-    message,
-    content: Buffer.from(content, 'utf8').toString('base64'),
-    branch:  GH_BRANCH
-  };
-  if (sha) body.sha = sha;
-  const res = await fetch(url, {
-    method: 'PUT',
-    headers: {
-      'Authorization': `Bearer ${GH_TOKEN}`,
-      'Accept': 'application/vnd.github+json',
-      'Content-Type': 'application/json',
-      'X-GitHub-Api-Version': '2022-11-28'
-    },
-    body: JSON.stringify(body)
-  });
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`GitHub API ${res.status}: ${err}`);
-  }
-  return res.json();
-}
+// ── Paths ──────────────────────────────────────────────────────
+const WEBSITE_ROOT = path.resolve(__dirname, '..');
+const DATA_DIR     = path.join(__dirname, 'data');
+const POSTS_FILE   = path.join(DATA_DIR, 'posts.json');
 
 // ── Site Config ────────────────────────────────────────────────
 const SITES = {
@@ -103,36 +57,91 @@ const SITES = {
 // ── Middleware ─────────────────────────────────────────────────
 app.use(express.json({ limit: '50mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/site-files', express.static(WEBSITE_ROOT));
 
-// Local dev only: serve website files so /site-files/ works in the admin
-if (process.env.NODE_ENV !== 'production') {
-  try {
-    const fs = require('fs');
-    const WEBSITE_ROOT = path.resolve(__dirname, '..');
-    if (fs.existsSync(WEBSITE_ROOT)) {
-      app.use('/site-files', express.static(WEBSITE_ROOT));
-    }
-  } catch (_) {}
-}
+// ── Data helpers ───────────────────────────────────────────────
+if (!fs.existsSync(DATA_DIR))   fs.mkdirSync(DATA_DIR, { recursive: true });
+if (!fs.existsSync(POSTS_FILE)) fs.writeFileSync(POSTS_FILE, '[]', 'utf8');
 
-// ── Helpers ────────────────────────────────────────────────────
+function readPosts()       { return JSON.parse(fs.readFileSync(POSTS_FILE, 'utf8')); }
+function writePosts(posts) { fs.writeFileSync(POSTS_FILE, JSON.stringify(posts, null, 2), 'utf8'); }
+
 function slugify(text) {
   return text.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'post';
 }
 
-async function ensureUniqSlug(slug, excludeId) {
+function ensureUniqSlug(slug, existingPosts, excludeId) {
   let base = slug, n = 1;
-  while (true) {
-    let q = supabase.from('posts').select('id').eq('slug', slug);
-    if (excludeId) q = q.neq('id', excludeId);
-    const { data } = await q;
-    if (!data || data.length === 0) break;
+  while (existingPosts.some(p => p.slug === slug && p.id !== excludeId)) {
     slug = `${base}-${n++}`;
   }
   return slug;
 }
 
+// ── Upload storage (per-site) ──────────────────────────────────
+function siteStorage(subFolder) {
+  return multer.diskStorage({
+    destination(req, file, cb) {
+      const site = SITES[req.params.site || req.body.site];
+      if (!site) return cb(new Error('Unknown site'));
+      const dir = path.join(WEBSITE_ROOT, site.dir, 'uploads', subFolder || '');
+      fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename(req, file, cb) {
+      const ext = path.extname(file.originalname).toLowerCase();
+      cb(null, Date.now() + '-' + Math.random().toString(36).slice(2,7) + ext);
+    }
+  });
+}
+
 const replaceUpload = multer({ storage: multer.memoryStorage() });
+
+// ══════════════════════════════════════════════════════════════
+//  Auth
+// ══════════════════════════════════════════════════════════════
+const ADMIN_EMAIL     = process.env.ADMIN_EMAIL    || 'admissions@mypntc.edu.ph';
+const _ADMIN_RAW      = process.env.ADMIN_PASSWORD || 'TheBestOf2026!';
+const ADMIN_PASS_HASH = crypto.createHash('sha256').update('pntc2026:' + _ADMIN_RAW).digest('hex');
+
+const sessions = new Map(); // token → expiresAt (ms)
+
+function genToken()     { return crypto.randomBytes(32).toString('hex'); }
+function parseCookie(r) { const m = (r.headers.cookie||'').match(/pntc_session=([^;]+)/); return m?m[1]:null; }
+function isAuth(req) {
+  const t = parseCookie(req);
+  if (!t || !sessions.has(t)) return false;
+  if (sessions.get(t) < Date.now()) { sessions.delete(t); return false; }
+  return true;
+}
+
+app.post('/api/auth/login', (req, res) => {
+  const { email, password } = req.body || {};
+  const hash = crypto.createHash('sha256').update('pntc2026:' + (password || '')).digest('hex');
+  if ((email || '').trim().toLowerCase() !== ADMIN_EMAIL.toLowerCase() || hash !== ADMIN_PASS_HASH) {
+    return res.status(401).json({ error: 'Invalid email or password.' });
+  }
+  const token  = genToken();
+  const maxAge = 8 * 3600;
+  sessions.set(token, Date.now() + maxAge * 1000);
+  res.setHeader('Set-Cookie', `pntc_session=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${maxAge}`);
+  res.json({ ok: true });
+});
+
+app.post('/api/auth/logout', (req, res) => {
+  const t = parseCookie(req); if (t) sessions.delete(t);
+  res.setHeader('Set-Cookie', 'pntc_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0');
+  res.json({ ok: true });
+});
+
+app.get('/api/auth/check', (req, res) => res.json({ ok: isAuth(req) }));
+
+// Protect all /api/* except /api/auth/*
+app.use('/api', (req, res, next) => {
+  if (req.path.startsWith('/auth/')) return next();
+  if (!isAuth(req)) return res.status(401).json({ error: 'Not authenticated' });
+  next();
+});
 
 // ══════════════════════════════════════════════════════════════
 //  API — Sites
@@ -142,342 +151,202 @@ app.get('/api/sites', (_req, res) => res.json(Object.values(SITES)));
 // ══════════════════════════════════════════════════════════════
 //  API — Posts
 // ══════════════════════════════════════════════════════════════
-app.get('/api/posts', async (_req, res) => {
-  try {
-    const { data, error } = await supabase
-      .from('posts').select('*')
-      .order('updatedAt', { ascending: false });
-    if (error) throw error;
-    res.json(data || []);
-  } catch (e) { res.status(500).json({ error: e.message }); }
+app.get('/api/posts', (_req, res) => {
+  const posts = readPosts().sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+  res.json(posts);
 });
 
-app.get('/api/posts/:id', async (req, res) => {
-  try {
-    const { data, error } = await supabase
-      .from('posts').select('*').eq('id', req.params.id).single();
-    if (error || !data) return res.status(404).json({ error: 'Not found' });
-    res.json(data);
-  } catch (e) { res.status(500).json({ error: e.message }); }
+app.get('/api/posts/:id', (req, res) => {
+  const post = readPosts().find(p => p.id === req.params.id);
+  if (!post) return res.status(404).json({ error: 'Not found' });
+  res.json(post);
 });
 
-app.post('/api/posts', async (req, res) => {
-  try {
-    const now  = new Date().toISOString();
-    const slug = await ensureUniqSlug(slugify(req.body.title || 'untitled'), null);
-    const post = {
-      id:            uuidv4(),
-      title:         req.body.title         || 'Untitled Post',
-      slug,
-      excerpt:       req.body.excerpt       || '',
-      content:       req.body.content       || '',
-      featuredImage: req.body.featuredImage || '',
-      sites:         req.body.sites         || [],
-      status:        req.body.status        || 'draft',
-      category:      req.body.category      || '',
-      tags:          req.body.tags          || [],
-      author:        req.body.author        || 'PNTC Communications',
-      createdAt:     now,
-      updatedAt:     now,
-      publishedAt:   req.body.status === 'published' ? now : null
-    };
-    const { data, error } = await supabase.from('posts').insert(post).select().single();
-    if (error) throw error;
-    res.json(data);
-  } catch (e) { res.status(500).json({ error: e.message }); }
+app.post('/api/posts', (req, res) => {
+  const posts = readPosts();
+  const now   = new Date().toISOString();
+  const slug  = ensureUniqSlug(slugify(req.body.title || 'untitled'), posts, null);
+  const post  = {
+    id:            uuidv4(),
+    title:         req.body.title         || 'Untitled Post',
+    slug,
+    excerpt:       req.body.excerpt       || '',
+    content:       req.body.content       || '',
+    featuredImage: req.body.featuredImage || '',
+    sites:         req.body.sites         || [],
+    status:        req.body.status        || 'draft',
+    category:      req.body.category      || '',
+    tags:          req.body.tags          || [],
+    author:        req.body.author        || 'PNTC Communications',
+    createdAt:     now,
+    updatedAt:     now,
+    publishedAt:   req.body.status === 'published' ? now : null
+  };
+  posts.push(post);
+  writePosts(posts);
+  res.json(post);
 });
 
-app.put('/api/posts/:id', async (req, res) => {
-  try {
-    const { data: current, error: fetchErr } = await supabase
-      .from('posts').select('*').eq('id', req.params.id).single();
-    if (fetchErr || !current) return res.status(404).json({ error: 'Not found' });
+app.put('/api/posts/:id', (req, res) => {
+  const posts = readPosts();
+  const idx   = posts.findIndex(p => p.id === req.params.id);
+  if (idx === -1) return res.status(404).json({ error: 'Not found' });
 
-    const now = new Date().toISOString();
-    if (req.body.title && req.body.title !== current.title) {
-      req.body.slug = await ensureUniqSlug(slugify(req.body.title), current.id);
-    }
-    const updated = {
-      ...current,
-      ...req.body,
-      id:          current.id,
-      createdAt:   current.createdAt,
-      updatedAt:   now,
-      publishedAt: req.body.status === 'published' && !current.publishedAt ? now : current.publishedAt
-    };
-    const { data, error } = await supabase
-      .from('posts').update(updated).eq('id', current.id).select().single();
-    if (error) throw error;
-    res.json(data);
-  } catch (e) { res.status(500).json({ error: e.message }); }
-});
+  const current = posts[idx];
+  const now     = new Date().toISOString();
 
-app.delete('/api/posts/:id', async (req, res) => {
-  try {
-    const { error } = await supabase.from('posts').delete().eq('id', req.params.id);
-    if (error) throw error;
-    res.json({ ok: true });
-  } catch (e) { res.status(500).json({ error: e.message }); }
-});
-
-// ══════════════════════════════════════════════════════════════
-//  API — Publish (generates HTML → commits to GitHub → Vercel redeploys)
-// ══════════════════════════════════════════════════════════════
-app.post('/api/publish/:id', async (req, res) => {
-  try {
-    const { data: post, error: fetchErr } = await supabase
-      .from('posts').select('*').eq('id', req.params.id).single();
-    if (fetchErr || !post) return res.status(404).json({ error: 'Not found' });
-
-    const now     = new Date().toISOString();
-    const updated = {
-      ...post,
-      status:      'published',
-      publishedAt: post.publishedAt || now,
-      updatedAt:   now
-    };
-
-    // Mark as published in Supabase
-    await supabase.from('posts').update(updated).eq('id', post.id);
-
-    const results = [];
-
-    for (const siteId of updated.sites) {
-      const site = SITES[siteId];
-      if (!site) continue;
-
-      const postForSite = { ...updated, featuredImage: resolveImageForSite(updated.featuredImage, site) };
-
-      // Commit post HTML
-      const postHtml     = buildPostHTML(postForSite, site);
-      const postFilePath = `${site.dir}/blog/${updated.slug}.html`;
-      const existPost    = await ghGetFile(postFilePath);
-      await ghPutFile(postFilePath, postHtml, `Publish: ${updated.title}`, existPost?.sha);
-
-      // Get all published posts for this site
-      const { data: sitePosts } = await supabase
-        .from('posts').select('*')
-        .contains('sites', [siteId])
-        .eq('status', 'published')
-        .order('publishedAt', { ascending: false });
-
-      const sitePostsMapped = (sitePosts || []).map(p => ({
-        ...p,
-        featuredImage: resolveImageForSite(p.featuredImage, site)
-      }));
-
-      // Commit regenerated blog index
-      const indexHtml     = buildBlogIndex(sitePostsMapped, site);
-      const indexFilePath = `${site.dir}/blog/index.html`;
-      const existIndex    = await ghGetFile(indexFilePath);
-      await ghPutFile(indexFilePath, indexHtml, `Update blog index: ${site.name}`, existIndex?.sha);
-
-      // Update What's New in the site's main index.html
-      await updateWhatsNewGitHub(sitePostsMapped, site);
-
-      results.push({ site: site.name, file: postFilePath });
-    }
-
-    res.json({ ok: true, published: results, post: updated });
-  } catch (e) {
-    console.error('Publish error:', e);
-    res.status(500).json({ error: e.message });
+  if (req.body.title && req.body.title !== current.title) {
+    req.body.slug = ensureUniqSlug(slugify(req.body.title), posts, current.id);
   }
+
+  posts[idx] = {
+    ...current,
+    ...req.body,
+    id:        current.id,
+    createdAt: current.createdAt,
+    updatedAt: now,
+    publishedAt: req.body.status === 'published' && !current.publishedAt ? now : current.publishedAt
+  };
+
+  writePosts(posts);
+  res.json(posts[idx]);
+});
+
+app.delete('/api/posts/:id', (req, res) => {
+  let posts = readPosts();
+  posts = posts.filter(p => p.id !== req.params.id);
+  writePosts(posts);
+  res.json({ ok: true });
 });
 
 // ══════════════════════════════════════════════════════════════
-//  API — Image Upload (to Supabase Storage)
+//  API — Publish
 // ══════════════════════════════════════════════════════════════
-app.post('/api/upload/featured', (req, res) => {
+app.post('/api/publish/:id', (req, res) => {
+  const posts = readPosts();
+  const idx   = posts.findIndex(p => p.id === req.params.id);
+  if (idx === -1) return res.status(404).json({ error: 'Not found' });
+
+  const now = new Date().toISOString();
+
+  // Mark as published BEFORE processing so all site filters include it
+  posts[idx].status      = 'published';
+  posts[idx].publishedAt = posts[idx].publishedAt || now;
+  posts[idx].updatedAt   = now;
+  const post = posts[idx];
+
+  const results = [];
+
+  for (const siteId of post.sites) {
+    const site = SITES[siteId];
+    if (!site) continue;
+
+    const siteDir = path.join(WEBSITE_ROOT, site.dir);
+    const blogDir = path.join(siteDir, 'blog');
+    fs.mkdirSync(blogDir, { recursive: true });
+
+    const postForSite = { ...post, featuredImage: resolveImageToSite(post.featuredImage, site) };
+
+    // Write post HTML
+    const html     = buildPostHTML(postForSite, site);
+    const filename = `${post.slug}.html`;
+    fs.writeFileSync(path.join(blogDir, filename), html, 'utf8');
+
+    // Collect all published posts for this site with resolved image paths
+    const sitePosts = posts
+      .filter(p => p.sites.includes(siteId) && p.status === 'published')
+      .map(p => ({ ...p, featuredImage: resolveImageToSite(p.featuredImage, site) }));
+
+    // Regenerate blog/index.html listing
+    const indexHtml = buildBlogIndex(sitePosts, site);
+    fs.writeFileSync(path.join(blogDir, 'index.html'), indexHtml, 'utf8');
+
+    // Update the site's What's New section in index.html
+    updateWhatsNew(sitePosts, site, siteDir);
+
+    results.push({ site: site.name, file: `${site.dir}/blog/${filename}` });
+  }
+
+  writePosts(posts);
+  res.json({ ok: true, published: results, post });
+});
+
+// ══════════════════════════════════════════════════════════════
+//  API — Image upload (featured image with site param in body)
+// ══════════════════════════════════════════════════════════════
+app.post('/api/upload/featured', (req, res, next) => {
   const mem = multer({ storage: multer.memoryStorage() }).single('image');
-  mem(req, res, async err => {
-    if (err) return res.status(500).json({ error: err.message });
+  mem(req, res, err => {
+    if (err) return next(err);
     if (!req.file) return res.status(400).json({ error: 'No image' });
 
     const siteId = req.body.site;
     const site   = SITES[siteId];
     if (!site) return res.status(400).json({ error: 'Unknown site' });
 
-    try {
-      const ext       = path.extname(req.file.originalname).toLowerCase() || '.jpg';
-      const filename  = `${Date.now()}-${Math.random().toString(36).slice(2,6)}${ext}`;
-      const storePath = `${site.dir}/uploads/featured/${filename}`;
+    const dir = path.join(WEBSITE_ROOT, site.dir, 'uploads', 'featured');
+    fs.mkdirSync(dir, { recursive: true });
+    const ext      = path.extname(req.file.originalname).toLowerCase() || '.jpg';
+    const filename = Date.now() + '-' + Math.random().toString(36).slice(2,6) + ext;
+    fs.writeFileSync(path.join(dir, filename), req.file.buffer);
 
-      const { error: upErr } = await supabase.storage
-        .from('site-images')
-        .upload(storePath, req.file.buffer, { contentType: req.file.mimetype });
-      if (upErr) throw upErr;
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('site-images').getPublicUrl(storePath);
-
-      res.json({ url: publicUrl, filename, siteDir: site.dir });
-    } catch (e) {
-      res.status(500).json({ error: e.message });
-    }
+    const url = `/site-files/${encodeURIComponent(site.dir)}/uploads/featured/${filename}`;
+    res.json({ url, filename, siteDir: site.dir });
   });
 });
 
 // ══════════════════════════════════════════════════════════════
-//  API — Images per site (from Supabase Storage)
+//  API — Images per site
 // ══════════════════════════════════════════════════════════════
-app.get('/api/images/:site', async (req, res) => {
+app.get('/api/images/:site', (req, res) => {
   const site = SITES[req.params.site];
   if (!site) return res.status(404).json({ error: 'Unknown site' });
 
-  try {
-    const IMG_RE = /\.(jpe?g|png|gif|webp|svg)$/i;
-    const images = [];
+  const siteDir = path.join(WEBSITE_ROOT, site.dir);
+  const images  = [];
+  const IMG_RE  = /\.(jpe?g|png|gif|webp|svg)$/i;
 
-    async function listDir(prefix) {
-      const { data: entries, error } = await supabase.storage
-        .from('site-images').list(prefix, { limit: 500 });
-      if (error || !entries) return;
-      for (const entry of entries) {
-        const fullPath = `${prefix}/${entry.name}`;
-        if (!entry.id) {
-          await listDir(fullPath); // it's a folder
-        } else if (IMG_RE.test(entry.name)) {
-          const { data: { publicUrl } } = supabase.storage
-            .from('site-images').getPublicUrl(fullPath);
-          images.push({
-            filename: entry.name,
-            relPath:  fullPath.replace(`${site.dir}/`, ''),
-            url:      publicUrl,
-            size:     entry.metadata?.size || 0,
-            mtime:    new Date(entry.created_at || 0).getTime()
-          });
-        }
+  function walk(dir, rel) {
+    if (!fs.existsSync(dir)) return;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const fullPath = path.join(dir, entry.name);
+      const relPath  = rel ? `${rel}/${entry.name}` : entry.name;
+      if (entry.isDirectory()) {
+        walk(fullPath, relPath);
+      } else if (IMG_RE.test(entry.name)) {
+        const stat = fs.statSync(fullPath);
+        images.push({
+          filename: entry.name,
+          relPath,
+          url:  `/site-files/${encodeURIComponent(site.dir)}/${relPath.replace(/\\/g, '/')}`,
+          size: stat.size,
+          mtime: stat.mtimeMs
+        });
       }
     }
-
-    await listDir(site.dir);
-    images.sort((a, b) => b.mtime - a.mtime);
-    res.json(images);
-  } catch (e) {
-    res.status(500).json({ error: e.message });
   }
+
+  walk(siteDir, '');
+  images.sort((a, b) => b.mtime - a.mtime);
+  res.json(images);
 });
 
-app.post('/api/images/:site/replace', replaceUpload.single('image'), async (req, res) => {
+// Replace an existing image in-place
+app.post('/api/images/:site/replace', replaceUpload.single('image'), (req, res) => {
   const site = SITES[req.params.site];
   if (!site || !req.file || !req.body.relPath) {
     return res.status(400).json({ error: 'Invalid request' });
   }
-  try {
-    const storePath = `${site.dir}/${req.body.relPath}`;
-    const { error } = await supabase.storage
-      .from('site-images')
-      .upload(storePath, req.file.buffer, { contentType: req.file.mimetype, upsert: true });
-    if (error) throw error;
-
-    const { data: { publicUrl } } = supabase.storage
-      .from('site-images').getPublicUrl(storePath);
-
-    res.json({ ok: true, url: publicUrl });
-  } catch (e) {
-    res.status(500).json({ error: e.message });
+  const targetPath = path.join(WEBSITE_ROOT, site.dir, req.body.relPath);
+  if (!fs.existsSync(path.dirname(targetPath))) {
+    return res.status(404).json({ error: 'Target directory not found' });
   }
+  fs.writeFileSync(targetPath, req.file.buffer);
+  res.json({ ok: true, url: `/site-files/${encodeURIComponent(site.dir)}/${req.body.relPath}` });
 });
 
 // ══════════════════════════════════════════════════════════════
-//  Landing Page Content Management (Supabase tables)
-// ══════════════════════════════════════════════════════════════
-const LANDING_TABLE_MAP = {
-  research:    'research',
-  careers:     'careers',
-  directory:   'directory',
-  merchandise: 'merchandise'
-};
-
-const LANDING_MARKERS = {
-  research:    { start: '<!-- PNTC_RESEARCH_START -->',  end: '<!-- PNTC_RESEARCH_END -->'  },
-  careers:     { start: '<!-- PNTC_CAREERS_START -->',   end: '<!-- PNTC_CAREERS_END -->'   },
-  directory:   { start: '<!-- PNTC_DIRECTORY_START -->', end: '<!-- PNTC_DIRECTORY_END -->' },
-  merchandise: { start: '<!-- PNTC_MERCH_START -->',     end: '<!-- PNTC_MERCH_END -->'     }
-};
-
-app.get('/api/landing/:type', async (req, res) => {
-  const { type } = req.params;
-  if (!LANDING_TABLE_MAP[type]) return res.status(404).json({ error: 'Unknown type' });
-  try {
-    const { data, error } = await supabase
-      .from(LANDING_TABLE_MAP[type]).select('*')
-      .order('createdAt', { ascending: true });
-    if (error) throw error;
-    res.json(data || []);
-  } catch (e) { res.status(500).json({ error: e.message }); }
-});
-
-app.post('/api/landing/:type', async (req, res) => {
-  const { type } = req.params;
-  if (!LANDING_TABLE_MAP[type]) return res.status(404).json({ error: 'Unknown type' });
-  try {
-    const now  = new Date().toISOString();
-    const item = { id: uuidv4(), ...req.body, createdAt: now, updatedAt: now };
-    const { data, error } = await supabase.from(LANDING_TABLE_MAP[type]).insert(item).select().single();
-    if (error) throw error;
-    res.json(data);
-  } catch (e) { res.status(500).json({ error: e.message }); }
-});
-
-app.put('/api/landing/:type/:id', async (req, res) => {
-  const { type, id } = req.params;
-  if (!LANDING_TABLE_MAP[type]) return res.status(404).json({ error: 'Unknown type' });
-  try {
-    const updated = { ...req.body, id, updatedAt: new Date().toISOString() };
-    const { data, error } = await supabase
-      .from(LANDING_TABLE_MAP[type]).update(updated).eq('id', id).select().single();
-    if (error) throw error;
-    res.json(data);
-  } catch (e) { res.status(500).json({ error: e.message }); }
-});
-
-app.delete('/api/landing/:type/:id', async (req, res) => {
-  const { type, id } = req.params;
-  if (!LANDING_TABLE_MAP[type]) return res.status(404).json({ error: 'Unknown type' });
-  try {
-    const { error } = await supabase.from(LANDING_TABLE_MAP[type]).delete().eq('id', id);
-    if (error) throw error;
-    res.json({ ok: true });
-  } catch (e) { res.status(500).json({ error: e.message }); }
-});
-
-app.post('/api/landing/:type/publish', async (req, res) => {
-  const { type } = req.params;
-  if (!LANDING_TABLE_MAP[type]) return res.status(404).json({ error: 'Unknown type' });
-
-  try {
-    const { data: items, error } = await supabase
-      .from(LANDING_TABLE_MAP[type]).select('*')
-      .order('createdAt', { ascending: true });
-    if (error) throw error;
-
-    const cfg         = LANDING_MARKERS[type];
-    const landingPath = 'PNTC Main Landing Page/index.html';
-    const existing    = await ghGetFile(landingPath);
-    if (!existing) return res.status(404).json({ error: 'Landing page not found in repo' });
-
-    let html = Buffer.from(existing.content, 'base64').toString('utf8');
-    const si = html.indexOf(cfg.start);
-    const ei = html.indexOf(cfg.end);
-    if (si === -1 || ei === -1) return res.status(500).json({ error: 'Markers not found in landing page' });
-
-    const block = buildLandingBlock(type, items || []);
-    html = html.slice(0, si) + cfg.start + '\n' + block + '\n    ' + cfg.end + html.slice(ei + cfg.end.length);
-
-    await ghPutFile(landingPath, html, `Update landing ${type}`, existing.sha);
-    res.json({ ok: true, type, count: (items || []).length });
-  } catch (e) {
-    res.status(500).json({ error: e.message });
-  }
-});
-
-// ── Root redirect ──────────────────────────────────────────────
-app.get('/', (_req, res) => res.redirect('/index.html'));
-
-// ══════════════════════════════════════════════════════════════
-//  HTML Generators  (UI unchanged — same output as before)
+//  HTML Generators
 // ══════════════════════════════════════════════════════════════
 function buildPostHTML(post, site) {
   const date = new Date(post.publishedAt || post.createdAt)
@@ -516,10 +385,7 @@ html{scroll-behavior:smooth}
 body{font-family:${bodyFont};background:#fff;color:#222;overflow-x:hidden;line-height:1.7}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
-
 :root{--navy:${site.color};--accent:${site.accent}}
-
-/* NAV */
 .nav{position:sticky;top:0;z-index:200;background:var(--navy);height:72px;display:flex;align-items:center;padding:0 clamp(1.25rem,4vw,3rem);gap:2rem;box-shadow:0 2px 20px rgba(0,0,0,.4)}
 .nav-logo{height:44px;width:auto;object-fit:contain;flex-shrink:0}
 .nav-links{display:flex;align-items:center;gap:2rem;margin-left:auto}
@@ -527,23 +393,15 @@ a{color:inherit;text-decoration:none}
 .nav-links a:hover{color:var(--accent)}
 .nav-cta{flex-shrink:0;padding:.5rem 1.4rem;background:var(--accent);color:#111;font-weight:800;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;border-radius:${isSHS ? '20px' : '2px'};transition:opacity .2s}
 .nav-cta:hover{opacity:.85}
-
-/* BREADCRUMB */
 .crumb{background:#F6F7FB;padding:10px clamp(1.25rem,4vw,3rem);font-size:.78rem;color:#777;letter-spacing:.04em}
 .crumb a{color:var(--navy);font-weight:600}
 .crumb a:hover{text-decoration:underline}
-
-/* HERO */
 .post-hero{background:var(--navy);padding:clamp(3rem,6vw,5rem) clamp(1.25rem,4vw,3rem);position:relative;overflow:hidden}
 .post-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.06) 0%,transparent 60%)}
 .post-eyebrow{font-size:.7rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem;position:relative;z-index:1}
 .post-title{font-family:${titleFont};font-weight:${titleWeight};font-size:${titleSize};color:#fff;line-height:1.1;max-width:800px;position:relative;z-index:1;margin-bottom:1.25rem;letter-spacing:${isSHS ? '.01em' : '.02em'}}
 .post-meta{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;color:rgba(255,255,255,.5);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;position:relative;z-index:1}
-
-/* FEATURED IMAGE */
 .feat-img{width:100%;max-height:540px;object-fit:cover;display:block}
-
-/* BODY */
 .post-wrap{max-width:820px;margin:0 auto;padding:clamp(2.5rem,5vw,4rem) clamp(1.25rem,4vw,2rem)}
 .post-wrap h2{font-family:${titleFont};font-weight:${titleWeight};font-size:clamp(1.4rem,3vw,2rem);color:var(--navy);margin:2.5rem 0 1rem;letter-spacing:.02em;${!isSHS ? 'text-transform:uppercase;' : ''}}
 .post-wrap h3{font-size:1.1rem;font-weight:700;color:var(--navy);margin:2rem 0 .75rem}
@@ -554,23 +412,16 @@ a{color:inherit;text-decoration:none}
 .post-wrap blockquote{border-left:4px solid var(--accent);padding:1rem 1.5rem;margin:1.75rem 0;background:#FEFBF2;border-radius:0 6px 6px 0;font-style:italic;color:#555}
 .post-wrap a{color:var(--navy);text-decoration:underline}
 .post-wrap hr{border:none;border-top:1px solid #E8EBF2;margin:2.5rem 0}
-
-/* TAGS */
 .tags{max-width:820px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2rem) 2.5rem;display:flex;flex-wrap:wrap;gap:.5rem}
 .tag{background:#EEF2FF;color:var(--navy);font-size:.72rem;font-weight:700;padding:.35rem .85rem;border-radius:20px;letter-spacing:.06em;text-transform:uppercase}
-
-/* BACK */
 .back-row{text-align:center;padding:0 1rem 3.5rem}
 .back-btn{display:inline-flex;align-items:center;gap:.5rem;color:var(--navy);font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;padding:.75rem 1.75rem;border:2px solid var(--navy);border-radius:${isSHS ? '6px' : '2px'};transition:all .2s}
 .back-btn:hover{background:var(--navy);color:#fff}
-
-/* FOOTER */
 footer{background:var(--navy);color:rgba(255,255,255,.45);text-align:center;padding:2.5rem 1.5rem;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
 footer strong{color:var(--accent)}
 </style>
 </head>
 <body>
-
 <nav class="nav">
   <img src="${logoPath}" alt="PNTC" class="nav-logo">
   <div class="nav-links">
@@ -579,11 +430,9 @@ footer strong{color:var(--accent)}
   </div>
   <a href="${homePath}#contact" class="nav-cta">Inquire Now</a>
 </nav>
-
 <div class="crumb">
   <a href="${homePath}">Home</a> &rsaquo; <a href="${blogPath}">News &amp; Blog</a> &rsaquo; ${escHtml(post.title)}
 </div>
-
 <div class="post-hero">
   ${post.category ? `<div class="post-eyebrow">${escHtml(post.category)}</div>` : ''}
   <h1 class="post-title">${escHtml(post.title)}</h1>
@@ -593,25 +442,19 @@ footer strong{color:var(--accent)}
     <span>${date}</span>
   </div>
 </div>
-
 ${post.featuredImage ? `<img src="${toBlogRelPath(post.featuredImage, site)}" alt="${escHtml(post.title)}" class="feat-img">` : ''}
-
 <article class="post-wrap">
   ${post.content}
 </article>
-
 ${tags ? `<div class="tags">${tags}</div>` : ''}
-
 <div class="back-row">
   <a href="${blogPath}" class="back-btn">← Back to News &amp; Blog</a>
 </div>
-
 <footer>
   <strong>${escHtml(site.name)}</strong><br>
   Dasmariñas, Cavite, Philippines<br><br>
   &copy; ${new Date().getFullYear()} PNTC. All rights reserved.
 </footer>
-
 </body>
 </html>`;
 }
@@ -623,7 +466,7 @@ function buildBlogIndex(posts, site) {
 
   const isSHS     = site.id === 'shs';
   const titleFont = isSHS ? `'Alfa Slab One', serif` : `'Barlow Condensed', sans-serif`;
-  const bodyFont  = isSHS ? `'Inter', sans-serif`     : `'Montserrat', sans-serif`;
+  const bodyFont  = isSHS ? `'Inter', sans-serif`    : `'Montserrat', sans-serif`;
   const fonts     = isSHS
     ? `<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">`
     : `<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">`;
@@ -715,12 +558,9 @@ function escHtml(str) {
   return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ── Image path conversion ──────────────────────────────────────
-// Handles both Supabase Storage URLs (https://...) and legacy /site-files/ paths
+// ── Image path helpers ─────────────────────────────────────────
 function toSiteRelPath(adminUrl, site) {
   if (!adminUrl) return '';
-  // Absolute HTTP URLs (Supabase Storage, external CDN) — use as-is
-  if (adminUrl.startsWith('http://') || adminUrl.startsWith('https://')) return adminUrl;
   const prefix  = `/site-files/${encodeURIComponent(site.dir)}/`;
   const prefix2 = `/site-files/${site.dir}/`;
   if (adminUrl.startsWith(prefix))  return decodeURIComponent(adminUrl.slice(prefix.length));
@@ -730,25 +570,36 @@ function toSiteRelPath(adminUrl, site) {
 
 function toBlogRelPath(adminUrl, site) {
   const rel = toSiteRelPath(adminUrl, site);
-  // Absolute paths (http, https, or root-relative starting with /) stay as-is
-  if (!rel || rel.startsWith('http') || rel.startsWith('../') || rel.startsWith('/')) return rel;
+  if (!rel || rel.startsWith('http') || rel.startsWith('../')) return rel;
   return '../' + rel;
 }
 
-// Replaces resolveImageToSite — no filesystem copying needed since
-// Supabase Storage URLs are absolute and legacy /site-files/ paths are
-// served via the Vercel rewrite rule.
-function resolveImageForSite(adminUrl, _targetSite) {
-  return adminUrl || '';
+function resolveImageToSite(adminUrl, targetSite) {
+  if (!adminUrl) return '';
+  for (const site of Object.values(SITES)) {
+    const prefix  = `/site-files/${encodeURIComponent(site.dir)}/`;
+    const prefix2 = `/site-files/${site.dir}/`;
+    let rel;
+    if (adminUrl.startsWith(prefix))  rel = decodeURIComponent(adminUrl.slice(prefix.length));
+    else if (adminUrl.startsWith(prefix2)) rel = adminUrl.slice(prefix2.length);
+    if (rel === undefined) continue;
+    if (site.dir === targetSite.dir) return adminUrl;
+    const srcPath  = path.join(WEBSITE_ROOT, site.dir, rel);
+    const filename = path.basename(rel);
+    const destDir  = path.join(WEBSITE_ROOT, targetSite.dir, 'uploads', 'featured');
+    fs.mkdirSync(destDir, { recursive: true });
+    if (fs.existsSync(srcPath)) fs.copyFileSync(srcPath, path.join(destDir, filename));
+    return `/site-files/${encodeURIComponent(targetSite.dir)}/uploads/featured/${filename}`;
+  }
+  return adminUrl;
 }
 
-// ── What's New updater (GitHub API instead of filesystem) ──────
-async function updateWhatsNewGitHub(allPosts, site) {
-  const filePath = `${site.dir}/index.html`;
-  const existing = await ghGetFile(filePath);
-  if (!existing) return;
+// ── What's New updater ─────────────────────────────────────────
+function updateWhatsNew(allPosts, site, siteDir) {
+  const indexPath = path.join(siteDir, 'index.html');
+  if (!fs.existsSync(indexPath)) return;
 
-  let html = Buffer.from(existing.content, 'base64').toString('utf8');
+  let html = fs.readFileSync(indexPath, 'utf8');
   const START = '<!-- PNTC_NEWS_START -->';
   const END   = '<!-- PNTC_NEWS_END -->';
   const si    = html.indexOf(START);
@@ -766,7 +617,7 @@ async function updateWhatsNewGitHub(allPosts, site) {
   else                             block = buildDefaultNewsBlock(published, site);
 
   html = html.slice(0, si) + START + '\n' + block + '\n  ' + END + html.slice(ei + END.length);
-  await ghPutFile(filePath, html, `Update What's New: ${site.name}`, existing.sha);
+  fs.writeFileSync(indexPath, html, 'utf8');
 }
 
 function buildSHSNewsBlock(posts, site) {
@@ -774,11 +625,9 @@ function buildSHSNewsBlock(posts, site) {
   const cards = posts.map(p => {
     const date  = new Date(p.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     const img   = toSiteRelPath(p.featuredImage, site);
-    const thumb = img && !img.startsWith('/')
+    const thumb = img
       ? `<div class="ev-thumb-wrap"><img src="${img}" alt="${escHtml(p.title)}" style="width:100%;height:100%;object-fit:cover"></div>`
-      : img
-        ? `<div class="ev-thumb-wrap"><img src="${img}" alt="${escHtml(p.title)}" style="width:100%;height:100%;object-fit:cover"></div>`
-        : `<div class="ev-thumb-wrap" style="background:linear-gradient(135deg,#181D71,#0d1245)"></div>`;
+      : `<div class="ev-thumb-wrap" style="background:linear-gradient(135deg,#181D71,#0d1245)"></div>`;
     return `      <a href="blog/${p.slug}.html" class="ev-card" style="text-decoration:none;color:inherit;cursor:pointer">
         ${thumb}
         <div class="ev-body-wrap">
@@ -848,7 +697,79 @@ ${cards}
   </div>`;
 }
 
-// ── Landing page block generators ─────────────────────────────
+// ══════════════════════════════════════════════════════════════
+//  Landing Page Content Management
+// ══════════════════════════════════════════════════════════════
+const LANDING_DIR  = path.join(__dirname, 'data');
+const LANDING_PAGE = path.join(WEBSITE_ROOT, 'PNTC Main Landing Page', 'index.html');
+
+const LANDING_TYPES = {
+  research:    { file: path.join(LANDING_DIR, 'research.json'),    start: '<!-- PNTC_RESEARCH_START -->',  end: '<!-- PNTC_RESEARCH_END -->'   },
+  careers:     { file: path.join(LANDING_DIR, 'careers.json'),     start: '<!-- PNTC_CAREERS_START -->',   end: '<!-- PNTC_CAREERS_END -->'    },
+  directory:   { file: path.join(LANDING_DIR, 'directory.json'),   start: '<!-- PNTC_DIRECTORY_START -->', end: '<!-- PNTC_DIRECTORY_END -->'  },
+  merchandise: { file: path.join(LANDING_DIR, 'merchandise.json'), start: '<!-- PNTC_MERCH_START -->',     end: '<!-- PNTC_MERCH_END -->'      }
+};
+
+for (const cfg of Object.values(LANDING_TYPES)) {
+  if (!fs.existsSync(cfg.file)) fs.writeFileSync(cfg.file, '[]', 'utf8');
+}
+
+function readLanding(type)        { return JSON.parse(fs.readFileSync(LANDING_TYPES[type].file, 'utf8')); }
+function writeLanding(type, items) { fs.writeFileSync(LANDING_TYPES[type].file, JSON.stringify(items, null, 2), 'utf8'); }
+
+app.get('/api/landing/:type', (req, res) => {
+  const { type } = req.params;
+  if (!LANDING_TYPES[type]) return res.status(404).json({ error: 'Unknown type' });
+  res.json(readLanding(type));
+});
+
+app.post('/api/landing/:type', (req, res) => {
+  const { type } = req.params;
+  if (!LANDING_TYPES[type]) return res.status(404).json({ error: 'Unknown type' });
+  const items = readLanding(type);
+  const item  = { id: uuidv4(), ...req.body, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() };
+  items.push(item);
+  writeLanding(type, items);
+  res.json(item);
+});
+
+app.put('/api/landing/:type/:id', (req, res) => {
+  const { type, id } = req.params;
+  if (!LANDING_TYPES[type]) return res.status(404).json({ error: 'Unknown type' });
+  const items = readLanding(type);
+  const idx   = items.findIndex(i => i.id === id);
+  if (idx === -1) return res.status(404).json({ error: 'Not found' });
+  items[idx] = { ...items[idx], ...req.body, id, updatedAt: new Date().toISOString() };
+  writeLanding(type, items);
+  res.json(items[idx]);
+});
+
+app.delete('/api/landing/:type/:id', (req, res) => {
+  const { type, id } = req.params;
+  if (!LANDING_TYPES[type]) return res.status(404).json({ error: 'Unknown type' });
+  writeLanding(type, readLanding(type).filter(i => i.id !== id));
+  res.json({ ok: true });
+});
+
+app.post('/api/landing/:type/publish', (req, res) => {
+  const { type } = req.params;
+  if (!LANDING_TYPES[type]) return res.status(404).json({ error: 'Unknown type' });
+  if (!fs.existsSync(LANDING_PAGE)) return res.status(404).json({ error: 'Landing page not found' });
+
+  const items = readLanding(type);
+  const cfg   = LANDING_TYPES[type];
+  let   html  = fs.readFileSync(LANDING_PAGE, 'utf8');
+
+  const si = html.indexOf(cfg.start);
+  const ei = html.indexOf(cfg.end);
+  if (si === -1 || ei === -1) return res.status(500).json({ error: 'Markers not found in landing page' });
+
+  const block = buildLandingBlock(type, items);
+  html = html.slice(0, si) + cfg.start + '\n' + block + '\n    ' + cfg.end + html.slice(ei + cfg.end.length);
+  fs.writeFileSync(LANDING_PAGE, html, 'utf8');
+  res.json({ ok: true, type, count: items.length });
+});
+
 function buildLandingBlock(type, items) {
   if (!items.length) return '';
   switch (type) {
@@ -910,7 +831,7 @@ ${cards}
 
 function buildMerchandiseBlock(items) {
   const cards = items.map(item => {
-    const imgClass    = item.imgClass || 'mi-navy';
+    const imgClass     = item.imgClass || 'mi-navy';
     const inquireEmail = `mailto:info@pntc.edu.ph?subject=Merchandise - ${encodeURIComponent(item.name || '')}`;
     return `      <div class="merch-card reveal">
         <div class="merch-img ${escHtml(imgClass)}">${escHtml(item.icon || '🛍️')}</div>
@@ -928,18 +849,17 @@ ${cards}
     </div>`;
 }
 
-// ── Start / Export ─────────────────────────────────────────────
-if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log('');
-    console.log('  ╔══════════════════════════════════════════╗');
-    console.log('  ║   PNTC Admin Console                     ║');
-    console.log(`  ║   http://localhost:${PORT}                   ║`);
-    console.log('  ╚══════════════════════════════════════════╝');
-    console.log('');
-    console.log('  Keep this window open while using the admin.');
-    console.log('  Press Ctrl+C to stop.\n');
-  });
-} else {
-  module.exports = app;
-}
+// ── Root redirect ──────────────────────────────────────────────
+app.get('/', (_req, res) => res.redirect('/login.html'));
+
+// ── Start ──────────────────────────────────────────────────────
+app.listen(PORT, () => {
+  console.log('');
+  console.log('  ╔══════════════════════════════════════════╗');
+  console.log('  ║   PNTC Admin Console                     ║');
+  console.log('  ║   http://localhost:3000                   ║');
+  console.log('  ╚══════════════════════════════════════════╝');
+  console.log('');
+  console.log('  Keep this window open while using the admin.');
+  console.log('  Press Ctrl+C to stop.\n');
+});

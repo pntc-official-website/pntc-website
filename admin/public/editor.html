@@ -52,7 +52,11 @@
     <a class="nav-item" href="images.html"><span class="nav-icon">🖼️</span> Image Manager</a>
     <a class="nav-item" href="landing.html"><span class="nav-icon">🏛️</span> Landing Page</a>
   </nav>
-  <div class="sidebar-bottom"><strong>PNTC Admin</strong>jsam7980@gmail.com</div>
+  <div class="sidebar-bottom">
+    <strong>PNTC Admin</strong>
+    admissions@mypntc.edu.ph
+    <button onclick="logout()" style="margin-top:.6rem;width:100%;padding:.45rem;background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.25);border-radius:5px;font-size:.75rem;font-weight:700;cursor:pointer;letter-spacing:.06em;text-transform:uppercase">Logout</button>
+  </div>
 </aside>
 
 <div class="main">
@@ -432,6 +436,9 @@ function showToast(msg, isError=false, loading=false) {
 }
 
 loadPost();
+
+async function logout() { await fetch('/api/auth/logout', { method:'POST' }); location.href='/login.html'; }
+fetch('/api/auth/check').then(r=>r.json()).then(d=>{ if(!d.ok) location.href='/login.html'; });
 </script>
 </body>
 </html>

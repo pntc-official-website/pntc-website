@@ -108,6 +108,17 @@ address { font-style:normal; }
 }
 .nav-cta:hover { background:var(--gold-lt); transform:translateY(-1px); }
 
+.nav-login {
+  flex-shrink:0; padding:.5rem 1.1rem;
+  border:1.5px solid rgba(255,255,255,.35);
+  color:rgba(255,255,255,.78); border-radius:4px;
+  font-family:var(--font); font-weight:700;
+  font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+  transition:border-color .18s, color .18s;
+  margin-right:.5rem;
+}
+.nav-login:hover { border-color:#fff; color:#fff; }
+
 .hamburger {
   display:none; flex-direction:column; gap:5px;
   margin-left:auto; padding:4px; cursor:pointer;
@@ -701,7 +712,7 @@ h1.hero-h1 span.gold { color:var(--gold); }
    RESPONSIVE
 ═══════════════════════════════════════════════ */
 @media (max-width:960px) {
-  .nav-links, .nav-cta { display:none; }
+  .nav-links, .nav-cta, .nav-login { display:none; }
   .hamburger { display:flex; }
   .net-grid { grid-template-columns:1fr; }
   .net-card { min-height:300px; }
@@ -736,6 +747,7 @@ h1.hero-h1 span.gold { color:var(--gold); }
     <a href="#research">Research</a>
     <a href="#directory">Directory</a>
   </div>
+  <a href="../admin/login.html" class="nav-login" aria-label="Staff login">Login</a>
   <a href="#cta" class="nav-cta">Enroll Now</a>
   <button class="hamburger" id="mob-toggle" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -1129,7 +1141,7 @@ h1.hero-h1 span.gold { color:var(--gold); }
     </div>
     <div class="footer-bottom">
       <p class="footer-copy">© 2026 PNTC Colleges, Inc. All rights reserved. CHED – MARINA Accredited.</p>
-      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Accessibility</a></div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Accessibility</a><a href="../admin/login.html" style="opacity:.35">Staff Login</a></div>
     </div>
   </div>
 </footer>

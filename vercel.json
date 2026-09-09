@@ -11,6 +11,7 @@
     { "source": "/site-files/:path*", "destination": "/:path*" },
     { "source": "/admin",             "destination": "/admin/public/index.html" },
     { "source": "/admin/",            "destination": "/admin/public/index.html" },
-    { "source": "/admin/:file*",      "destination": "/admin/public/:file*" }
+    { "source": "/admin/:file*",      "destination": "/admin/public/:file*" },
+    { "source": "/",                  "destination": "/PNTC Main Landing Page/index.html" }
   ]
 }

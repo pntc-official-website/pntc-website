@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PNTC Admin Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html, body { height:100%; font-family:'Montserrat',sans-serif; }
+
+:root {
+  --navy-deep: #08142A;
+  --navy:      #0D2454;
+  --gold:      #B8860B;
+  --gold-lt:   #D4A017;
+  --white:     #FFFFFF;
+  --muted:     rgba(255,255,255,.5);
+  --err:       #FF6B6B;
+}
+
+body {
+  display:flex; min-height:100vh;
+  background: var(--navy-deep);
+}
+
+/* ── Left panel ── */
+.panel-left {
+  display:flex; flex-direction:column; justify-content:space-between;
+  width:44%; min-height:100vh; padding:3rem 3.5rem;
+  background: linear-gradient(155deg, var(--navy) 0%, var(--navy-deep) 100%);
+  position:relative; overflow:hidden;
+}
+.panel-left::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse at 30% 60%, rgba(184,134,11,.08) 0%, transparent 65%);
+  pointer-events:none;
+}
+.panel-left::after {
+  content:'';
+  position:absolute; bottom:-120px; left:-80px;
+  width:400px; height:400px; border-radius:50%;
+  border:1px solid rgba(184,134,11,.12);
+  pointer-events:none;
+}
+
+.logo-wrap { position:relative; z-index:1; }
+.logo-wrap img { height:48px; width:auto; }
+
+.brand-tagline {
+  position:relative; z-index:1;
+}
+.brand-tagline .eyebrow {
+  font-size:.62rem; font-weight:800; letter-spacing:.28em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:1rem;
+}
+.brand-tagline h1 {
+  font-size:clamp(1.6rem,2.8vw,2.4rem); font-weight:900;
+  color:var(--white); line-height:1.15; margin-bottom:1.25rem;
+  letter-spacing:-.01em;
+}
+.brand-tagline p {
+  font-size:.82rem; font-weight:400; color:var(--muted);
+  line-height:1.75; max-width:300px;
+}
+
+.panel-footer {
+  position:relative; z-index:1;
+  font-size:.68rem; font-weight:600; letter-spacing:.06em;
+  text-transform:uppercase; color:rgba(255,255,255,.2);
+}
+
+/* ── Right panel (form) ── */
+.panel-right {
+  flex:1; display:flex; align-items:center; justify-content:center;
+  padding:2.5rem 2rem;
+  background:#F0F4FA;
+}
+
+.form-card {
+  width:100%; max-width:420px;
+}
+.form-card h2 {
+  font-size:1.35rem; font-weight:800; color:var(--navy);
+  letter-spacing:-.01em; margin-bottom:.35rem;
+}
+.form-card .sub {
+  font-size:.8rem; color:#6B7A9F; font-weight:500; margin-bottom:2.25rem;
+}
+
+.form-group { margin-bottom:1.25rem; }
+.form-group label {
+  display:block; font-size:.7rem; font-weight:700;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--navy); margin-bottom:.55rem;
+}
+.form-group input {
+  width:100%; padding:.78rem 1rem;
+  border:1.5px solid #D0D9EE; border-radius:6px;
+  font-family:inherit; font-size:.9rem; font-weight:500;
+  color:var(--navy); background:#fff;
+  outline:none; transition:border-color .18s, box-shadow .18s;
+}
+.form-group input:focus {
+  border-color:var(--navy); box-shadow:0 0 0 3px rgba(13,36,84,.1);
+}
+
+/* password wrapper */
+.pw-wrap { position:relative; }
+.pw-wrap input { padding-right:3rem; }
+.pw-toggle {
+  position:absolute; right:.85rem; top:50%; transform:translateY(-50%);
+  background:none; border:none; cursor:pointer; padding:4px;
+  color:#8898BB; transition:color .18s;
+}
+.pw-toggle:hover { color:var(--navy); }
+.pw-toggle svg { display:block; width:18px; height:18px; }
+
+/* error */
+.error-msg {
+  display:none; align-items:center; gap:.5rem;
+  background:#FFF0F0; border:1px solid rgba(255,107,107,.35);
+  border-radius:6px; padding:.7rem 1rem;
+  font-size:.78rem; font-weight:600; color:#C0392B;
+  margin-bottom:1.25rem;
+}
+.error-msg.show { display:flex; }
+.error-msg svg { flex-shrink:0; width:16px; height:16px; }
+
+/* submit */
+.btn-submit {
+  width:100%; padding:.85rem;
+  background:var(--navy); color:#fff; border:none;
+  border-radius:6px; cursor:pointer;
+  font-family:inherit; font-size:.82rem; font-weight:800;
+  letter-spacing:.12em; text-transform:uppercase;
+  transition:background .18s, transform .12s;
+  display:flex; align-items:center; justify-content:center; gap:.6rem;
+}
+.btn-submit:hover { background:var(--gold); }
+.btn-submit:active { transform:scale(.98); }
+.btn-submit:disabled { opacity:.55; cursor:not-allowed; transform:none; }
+
+.btn-submit .spinner {
+  display:none; width:16px; height:16px;
+  border:2px solid rgba(255,255,255,.4);
+  border-top-color:#fff; border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+.btn-submit.loading .spinner { display:block; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+.back-link {
+  display:block; text-align:center; margin-top:1.5rem;
+  font-size:.74rem; font-weight:600; letter-spacing:.05em;
+  color:#8898BB; text-decoration:none;
+  transition:color .18s;
+}
+.back-link:hover { color:var(--navy); }
+
+/* ── Responsive ── */
+@media (max-width:700px) {
+  body { flex-direction:column; }
+  .panel-left {
+    width:100%; min-height:auto; padding:2rem 1.75rem 2.25rem;
+  }
+  .brand-tagline { margin:2rem 0 1rem; }
+  .brand-tagline h1 { font-size:1.5rem; }
+  .panel-footer { margin-top:1.25rem; }
+  .panel-right { padding:2rem 1.25rem 3rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Left brand panel -->
+<div class="panel-left">
+  <div class="logo-wrap">
+    <img src="../SHS/PNTC White Horizontal.png" alt="PNTC">
+  </div>
+
+  <div class="brand-tagline">
+    <div class="eyebrow">Admin Console</div>
+    <h1>Welcome Back to PNTC</h1>
+    <p>Sign in to manage content across all PNTC sites — news, careers, directory, merchandise, and more.</p>
+  </div>
+
+  <div class="panel-footer">© 2026 PNTC Colleges, Inc.</div>
+</div>
+
+<!-- Right form panel -->
+<div class="panel-right">
+  <div class="form-card">
+    <h2>Sign In</h2>
+    <p class="sub">Use your PNTC administrator credentials.</p>
+
+    <div class="error-msg" id="err">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span id="err-text">Invalid email or password.</span>
+    </div>
+
+    <form id="login-form" novalidate>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email"
+               placeholder="your@email.com"
+               autocomplete="username" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="password" name="password"
+                 placeholder="••••••••••••"
+                 autocomplete="current-password" required>
+          <button type="button" class="pw-toggle" id="pw-toggle" aria-label="Toggle password visibility">
+            <svg id="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submit-btn">
+        <span class="spinner"></span>
+        <span class="btn-label">Sign In</span>
+      </button>
+    </form>
+
+    <a href="../PNTC Main Landing Page/index.html" class="back-link">← Back to PNTC Website</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  const form      = document.getElementById('login-form');
+  const emailEl   = document.getElementById('email');
+  const passEl    = document.getElementById('password');
+  const errBox    = document.getElementById('err');
+  const errText   = document.getElementById('err-text');
+  const submitBtn = document.getElementById('submit-btn');
+  const pwToggle  = document.getElementById('pw-toggle');
+  const eyeIcon   = document.getElementById('eye-icon');
+
+  // Eye icon paths
+  const eyeOpen   = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  const eyeClosed = '<line x1="17.94" y1="17.94" x2="22" y2="22"/><line x1="1" y1="1" x2="5.06" y2="5.06"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="12" x2="5.13" y2="5.13"/>';
+
+  let pwVisible = false;
+  pwToggle.addEventListener('click', function () {
+    pwVisible = !pwVisible;
+    passEl.type = pwVisible ? 'text' : 'password';
+    eyeIcon.innerHTML = pwVisible ? eyeClosed : eyeOpen;
+  });
+
+  function showError(msg) {
+    errText.textContent = msg;
+    errBox.classList.add('show');
+  }
+  function hideError() { errBox.classList.remove('show'); }
+
+  function setLoading(on) {
+    submitBtn.disabled = on;
+    submitBtn.classList.toggle('loading', on);
+    submitBtn.querySelector('.btn-label').textContent = on ? 'Signing in…' : 'Sign In';
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    hideError();
+
+    const email    = emailEl.value.trim();
+    const password = passEl.value;
+
+    if (!email || !password) {
+      showError('Please enter your email and password.');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch('/api/auth/login', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ email, password })
+      });
+
+      if (res.ok) {
+        // Redirect to admin console
+        window.location.href = '/index.html';
+      } else {
+        const data = await res.json().catch(() => ({}));
+        showError(data.error || 'Invalid email or password. Please try again.');
+        passEl.value = '';
+        passEl.focus();
+      }
+    } catch (err) {
+      showError('Cannot reach the server. Make sure the admin server is running.');
+    } finally {
+      setLoading(false);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
