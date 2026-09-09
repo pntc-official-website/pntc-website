@@ -143,11 +143,46 @@ app.get('/api/posts/:id', async (req, res) => {
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
+// ── Shared publish logic ───────────────────────────────────────
+async function publishPostToGitHub(post) {
+  const results = [];
+  for (const siteId of (post.sites || [])) {
+    const site = SITES[siteId];
+    if (!site) continue;
+
+    const postForSite  = { ...post, featuredImage: resolveImageForSite(post.featuredImage, site) };
+    const postHtml     = buildPostHTML(postForSite, site);
+    const postFilePath = `${site.dir}/blog/${post.slug}.html`;
+    const existPost    = await ghGetFile(postFilePath);
+    await ghPutFile(postFilePath, postHtml, `Publish: ${post.title}`, existPost?.sha);
+
+    const { data: sitePosts } = await supabase
+      .from('posts').select('*')
+      .contains('sites', [siteId])
+      .eq('status', 'published')
+      .order('publishedAt', { ascending: false });
+
+    const sitePostsMapped = (sitePosts || []).map(p => ({
+      ...p, featuredImage: resolveImageForSite(p.featuredImage, site)
+    }));
+
+    const indexHtml     = buildBlogIndex(sitePostsMapped, site);
+    const indexFilePath = `${site.dir}/blog/index.html`;
+    const existIndex    = await ghGetFile(indexFilePath);
+    await ghPutFile(indexFilePath, indexHtml, `Update blog index: ${site.name}`, existIndex?.sha);
+
+    await updateWhatsNewGitHub(sitePostsMapped, site);
+    results.push({ site: site.name, file: postFilePath });
+  }
+  return results;
+}
+
 app.post('/api/posts', async (req, res) => {
   try {
-    const now  = new Date().toISOString();
-    const slug = await ensureUniqSlug(slugify(req.body.title || 'untitled'), null);
-    const post = {
+    const now    = new Date().toISOString();
+    const status = req.body.status || 'draft';
+    const slug   = await ensureUniqSlug(slugify(req.body.title || 'untitled'), null);
+    const post   = {
       id:            uuidv4(),
       title:         req.body.title         || 'Untitled Post',
       slug,
@@ -155,16 +190,26 @@ app.post('/api/posts', async (req, res) => {
       content:       req.body.content       || '',
       featuredImage: req.body.featuredImage || '',
       sites:         req.body.sites         || [],
-      status:        req.body.status        || 'draft',
+      status,
       category:      req.body.category      || '',
       tags:          req.body.tags          || [],
       author:        req.body.author        || 'PNTC Communications',
       createdAt:     now,
       updatedAt:     now,
-      publishedAt:   req.body.status === 'published' ? now : null
+      publishedAt:   status === 'published' ? now : null
     };
     const { data, error } = await supabase.from('posts').insert(post).select().single();
     if (error) throw error;
+
+    if (status === 'published' && post.sites.length) {
+      try {
+        const published = await publishPostToGitHub(data);
+        return res.json({ ...data, _published: published });
+      } catch (pubErr) {
+        console.error('Auto-publish error:', pubErr);
+        return res.json({ ...data, _publishError: pubErr.message });
+      }
+    }
     res.json(data);
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
@@ -190,6 +235,16 @@ app.put('/api/posts/:id', async (req, res) => {
     const { data, error } = await supabase
       .from('posts').update(updated).eq('id', current.id).select().single();
     if (error) throw error;
+
+    if (updated.status === 'published' && (updated.sites || []).length) {
+      try {
+        const published = await publishPostToGitHub(data);
+        return res.json({ ...data, _published: published });
+      } catch (pubErr) {
+        console.error('Auto-publish error:', pubErr);
+        return res.json({ ...data, _publishError: pubErr.message });
+      }
+    }
     res.json(data);
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
@@ -202,9 +257,7 @@ app.delete('/api/posts/:id', async (req, res) => {
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
-// ══════════════════════════════════════════════════════════════
-//  API — Publish (generates HTML → commits to GitHub → Vercel redeploys)
-// ══════════════════════════════════════════════════════════════
+// ── Publish endpoint (kept for manual re-publish) ──────────────
 app.post('/api/publish/:id', async (req, res) => {
   try {
     const { data: post, error: fetchErr } = await supabase
@@ -218,43 +271,9 @@ app.post('/api/publish/:id', async (req, res) => {
       publishedAt: post.publishedAt || now,
       updatedAt:   now
     };
-
     await supabase.from('posts').update(updated).eq('id', post.id);
 
-    const results = [];
-
-    for (const siteId of updated.sites) {
-      const site = SITES[siteId];
-      if (!site) continue;
-
-      const postForSite = { ...updated, featuredImage: resolveImageForSite(updated.featuredImage, site) };
-
-      const postHtml     = buildPostHTML(postForSite, site);
-      const postFilePath = `${site.dir}/blog/${updated.slug}.html`;
-      const existPost    = await ghGetFile(postFilePath);
-      await ghPutFile(postFilePath, postHtml, `Publish: ${updated.title}`, existPost?.sha);
-
-      const { data: sitePosts } = await supabase
-        .from('posts').select('*')
-        .contains('sites', [siteId])
-        .eq('status', 'published')
-        .order('publishedAt', { ascending: false });
-
-      const sitePostsMapped = (sitePosts || []).map(p => ({
-        ...p,
-        featuredImage: resolveImageForSite(p.featuredImage, site)
-      }));
-
-      const indexHtml     = buildBlogIndex(sitePostsMapped, site);
-      const indexFilePath = `${site.dir}/blog/index.html`;
-      const existIndex    = await ghGetFile(indexFilePath);
-      await ghPutFile(indexFilePath, indexHtml, `Update blog index: ${site.name}`, existIndex?.sha);
-
-      await updateWhatsNewGitHub(sitePostsMapped, site);
-
-      results.push({ site: site.name, file: postFilePath });
-    }
-
+    const results = await publishPostToGitHub(updated);
     res.json({ ok: true, published: results, post: updated });
   } catch (e) {
     console.error('Publish error:', e);

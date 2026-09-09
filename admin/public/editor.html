@@ -381,33 +381,35 @@ document.getElementById('btn-publish').onclick = async () => {
   if (!getCheckedSites().length) {
     showToast('Please select at least one site to publish to', true); return;
   }
-  document.getElementById('btn-publish').disabled = true;
+  const btn = document.getElementById('btn-publish');
+  btn.disabled = true;
   document.getElementById('save-status').textContent = 'Publishing…';
 
-  // First save, then publish
-  let post = await save('published');
+  const post = await save('published');
+  btn.disabled = false;
+
   if (!post || post.error) {
     showToast(post?.error || 'Error saving', true);
-    document.getElementById('btn-publish').disabled = false;
     return;
   }
   if (!postId) history.replaceState({}, '', `editor.html?id=${post.id}`);
 
-  const pubRes  = await fetch(`/api/publish/${post.id}`, { method: 'POST' });
-  const pubData = await pubRes.json();
+  document.getElementById('pub-status').innerHTML =
+    `<span class="badge badge-published"><span class="badge-dot"></span>Published</span>`;
+  document.getElementById('post-info').style.display = 'block';
+  document.getElementById('info-published').textContent = fmtDate(new Date().toISOString());
+  document.getElementById('info-slug').textContent = post.slug || '';
 
-  document.getElementById('btn-publish').disabled = false;
-  if (pubData.ok) {
+  if (post._publishError) {
     document.getElementById('save-status').textContent = '';
-    document.getElementById('pub-status').innerHTML =
-      `<span class="badge badge-published"><span class="badge-dot"></span>Published</span>`;
-    const sites = pubData.published.map(p => p.site).join(', ');
+    showToast('Saved but GitHub publish failed: ' + post._publishError, true);
+  } else if (post._published) {
+    document.getElementById('save-status').textContent = '';
+    const sites = post._published.map(p => p.site).join(', ');
     showToast(`Published to: ${sites}`);
-    document.getElementById('post-info').style.display = 'block';
-    document.getElementById('info-published').textContent = fmtDate(new Date().toISOString());
-    document.getElementById('info-slug').textContent = pubData.post?.slug || '';
   } else {
-    showToast(pubData.error || 'Error publishing', true);
+    document.getElementById('save-status').textContent = '';
+    showToast('Published');
   }
 };
 
