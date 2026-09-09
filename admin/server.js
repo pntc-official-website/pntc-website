@@ -132,7 +132,7 @@ app.get('/api/public/posts', async (req, res) => {
       .eq('status', 'published')
       .order('publishedAt', { ascending: false })
       .limit(Math.min(parseInt(limit) || 3, 20));
-    if (site) q = q.contains('sites', [site]);
+    if (site) q = q.filter('sites', 'cs', JSON.stringify([site]));
     const { data, error } = await q;
     if (error) throw error;
     res.json(data || []);
