@@ -2,6 +2,7 @@
 const express = require('express');
 const multer  = require('multer');
 const path    = require('path');
+const crypto  = require('crypto');
 const { v4: uuidv4 } = require('uuid');
 const { createClient } = require('@supabase/supabase-js');
 
@@ -445,6 +446,62 @@ app.post('/api/landing/:type/publish', async (req, res) => {
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
+});
+
+// ══════════════════════════════════════════════════════════════
+//  Auth (cookie-based signed session)
+// ══════════════════════════════════════════════════════════════
+const ADMIN_EMAIL    = process.env.ADMIN_EMAIL    || 'admin@pntc.edu.ph';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
+const SESSION_SECRET = process.env.SESSION_SECRET || 'pntc-admin-dev-secret';
+const SESSION_DAYS   = 7;
+
+function makeToken() {
+  const ts  = Date.now().toString();
+  const sig = crypto.createHmac('sha256', SESSION_SECRET).update(ts).digest('hex');
+  return `${ts}.${sig}`;
+}
+
+function verifySession(cookieHeader) {
+  if (!cookieHeader) return false;
+  const cookies = Object.fromEntries(
+    cookieHeader.split(';').map(c => {
+      const [k, ...v] = c.trim().split('=');
+      return [k.trim(), v.join('=')];
+    })
+  );
+  const token = cookies['pntc_session'];
+  if (!token) return false;
+  const dot = token.indexOf('.');
+  if (dot === -1) return false;
+  const ts  = token.slice(0, dot);
+  const sig = token.slice(dot + 1);
+  const expected = crypto.createHmac('sha256', SESSION_SECRET).update(ts).digest('hex');
+  if (sig !== expected) return false;
+  if (Date.now() - parseInt(ts) > SESSION_DAYS * 24 * 3600 * 1000) return false;
+  return true;
+}
+
+app.post('/api/auth/login', (req, res) => {
+  const { email, password } = req.body || {};
+  if (!ADMIN_PASSWORD) {
+    return res.status(500).json({ ok: false, error: 'ADMIN_PASSWORD env var not set. Add it in Vercel Project Settings → Environment Variables.' });
+  }
+  if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+    const token = makeToken();
+    res.setHeader('Set-Cookie', `pntc_session=${token}; HttpOnly; Path=/; Max-Age=${SESSION_DAYS * 24 * 3600}; SameSite=Lax`);
+    return res.json({ ok: true });
+  }
+  res.status(401).json({ ok: false, error: 'Invalid email or password.' });
+});
+
+app.get('/api/auth/check', (req, res) => {
+  res.json({ ok: verifySession(req.headers.cookie) });
+});
+
+app.post('/api/auth/logout', (req, res) => {
+  res.setHeader('Set-Cookie', 'pntc_session=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax');
+  res.json({ ok: true });
 });
 
 app.get('/', (_req, res) => res.redirect('/index.html'));

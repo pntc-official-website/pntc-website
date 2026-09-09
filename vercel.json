@@ -1,14 +1,15 @@
 {
   "version": 2,
   "functions": {
-    "api/index.js": {
-      "maxDuration": 30,
-      "memory": 512
-    }
+    "api/index.js": { "maxDuration": 30, "memory": 512 }
   },
   "rewrites": [
     { "source": "/api/:path*",        "destination": "/api/index.js" },
     { "source": "/site-files/:path*", "destination": "/:path*" },
+    { "source": "/SHS Site Thumbnail.png",                          "destination": "/PNTC Main Landing Page/SHS Site Thumbnail.png" },
+    { "source": "/PNTC Colleges Site Thumbnail.jpg",                "destination": "/PNTC Main Landing Page/PNTC Colleges Site Thumbnail.jpg" },
+    { "source": "/Maritime Training Center Site  Thumbnail.jpeg",   "destination": "/PNTC Main Landing Page/Maritime Training Center Site  Thumbnail.jpeg" },
+    { "source": "/Aman Sinaya Site Thumbnail.jpg",                  "destination": "/PNTC Main Landing Page/Aman Sinaya Site Thumbnail.jpg" },
     { "source": "/admin",             "destination": "/admin/public/index.html" },
     { "source": "/admin/",            "destination": "/admin/public/index.html" },
     { "source": "/admin/:file*",      "destination": "/admin/public/:file*" },

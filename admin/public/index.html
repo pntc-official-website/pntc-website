@@ -198,11 +198,11 @@ load();
 
 async function logout() {
   await fetch('/api/auth/logout', { method: 'POST' });
-  location.href = '/login.html';
+  location.href = '/admin/login.html';
 }
 
 // Auth guard
-fetch('/api/auth/check').then(r => r.json()).then(d => { if (!d.ok) location.href = '/login.html'; });
+fetch('/api/auth/check').then(r => r.json()).then(d => { if (!d.ok) location.href = '/admin/login.html'; });
 </script>
 </body>
 </html>

@@ -491,8 +491,8 @@ async function publish(type) {
 // ── Init ───────────────────────────────────────────────────────
 loadAll();
 
-async function logout() { await fetch('/api/auth/logout', { method:'POST' }); location.href='/login.html'; }
-fetch('/api/auth/check').then(r=>r.json()).then(d=>{ if(!d.ok) location.href='/login.html'; });
+async function logout() { await fetch('/api/auth/logout', { method:'POST' }); location.href='/admin/login.html'; }
+fetch('/api/auth/check').then(r=>r.json()).then(d=>{ if(!d.ok) location.href='/admin/login.html'; });
 </script>
 </body>
 </html>

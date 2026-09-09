@@ -136,7 +136,7 @@ body::before{
 
 <script>
 // If already logged in, skip straight to dashboard
-fetch('/api/auth/check').then(r=>r.json()).then(d=>{ if(d.ok) location.href='/index.html'; });
+fetch('/api/auth/check').then(r=>r.json()).then(d=>{ if(d.ok) location.href='/admin/'; });
 
 document.getElementById('password').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
@@ -162,7 +162,7 @@ async function doLogin() {
     });
     const d = await r.json();
     if (d.ok) {
-      location.href = '/index.html';
+      location.href = '/admin/';
     } else {
       err.textContent = d.error || 'Login failed. Check your credentials.';
       err.classList.add('show');
