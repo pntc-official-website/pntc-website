@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PNTC Admin – Dashboard</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <img src="/site-files/SHS/PNTC White Horizontal.png" alt="PNTC" onerror="this.style.display='none'">
+    <div class="sidebar-brand-sub">Admin Console</div>
+  </div>
+  <div class="sidebar-section-label">Navigation</div>
+  <nav class="sidebar-nav">
+    <a class="nav-item active" href="index.html">
+      <span class="nav-icon">🏠</span> Dashboard
+    </a>
+    <a class="nav-item" href="posts.html">
+      <span class="nav-icon">📝</span> Posts &amp; Blog
+      <span class="nav-badge" id="post-count">–</span>
+    </a>
+    <a class="nav-item" href="images.html">
+      <span class="nav-icon">🖼️</span> Image Manager
+    </a>
+    <a class="nav-item" href="landing.html">
+      <span class="nav-icon">🏛️</span> Landing Page
+    </a>
+  </nav>
+  <div class="sidebar-section-label">Sites</div>
+  <nav class="sidebar-nav" id="site-nav"></nav>
+  <div class="sidebar-bottom">
+    <strong>PNTC Admin</strong>
+    jsam7980@gmail.com
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <span class="topbar-title">Dashboard</span>
+    <span class="topbar-sub">Welcome back</span>
+    <div style="margin-left:auto">
+      <a href="editor.html" class="btn btn-primary">+ New Post</a>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- Stats row -->
+    <div class="grid-4" style="margin-bottom:1.5rem" id="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Total Posts</div>
+        <div class="stat-value" id="s-total">–</div>
+        <div class="stat-sub">All sites</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Published</div>
+        <div class="stat-value" id="s-pub" style="color:#4ADE80">–</div>
+        <div class="stat-sub">Live on sites</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Drafts</div>
+        <div class="stat-value" id="s-draft" style="color:var(--gold)">–</div>
+        <div class="stat-sub">Pending publish</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Sites</div>
+        <div class="stat-value">4</div>
+        <div class="stat-sub">Microsites managed</div>
+      </div>
+    </div>
+
+    <!-- Site overview -->
+    <div style="margin-bottom:1.5rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+        <h2 style="font-size:1rem;font-weight:700">Site Overview</h2>
+      </div>
+      <div class="grid-2" id="site-cards"></div>
+    </div>
+
+    <!-- Recent posts -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Recent Posts</span>
+        <a href="posts.html" class="btn btn-ghost btn-sm">View All</a>
+      </div>
+      <div id="recent-posts">
+        <div class="loading">Loading…</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const SITES_INFO = {
+  shs:      { name: 'PNTC Senior High School',         short: 'SHS',         color: '#181D71' },
+  colleges: { name: 'PNTC Colleges',                   short: 'Colleges',    color: '#0B2A6B' },
+  maritime: { name: 'PNTC Maritime Training Center',   short: 'Maritime',    color: '#0D1B3E' },
+  aman:     { name: 'Training Vessel Aman Sinaya',     short: 'Aman Sinaya', color: '#0A1F35' }
+};
+
+async function load() {
+  const [postsRes] = await Promise.all([fetch('/api/posts')]);
+  const posts = await postsRes.json();
+
+  // Stats
+  const pub   = posts.filter(p => p.status === 'published').length;
+  const draft = posts.filter(p => p.status === 'draft').length;
+  document.getElementById('s-total').textContent = posts.length;
+  document.getElementById('s-pub').textContent   = pub;
+  document.getElementById('s-draft').textContent = draft;
+  document.getElementById('post-count').textContent = posts.length;
+
+  // Site nav
+  const siteNav = document.getElementById('site-nav');
+  siteNav.innerHTML = Object.values(SITES_INFO).map(s => `
+    <a class="nav-item" href="posts.html?site=${Object.keys(SITES_INFO).find(k=>SITES_INFO[k].name===s.name)}">
+      <span class="nav-icon" style="width:8px;height:8px;border-radius:50%;background:${s.color};display:inline-block;flex-shrink:0"></span>
+      ${s.short}
+    </a>
+  `).join('');
+
+  // Site cards
+  const siteCards = document.getElementById('site-cards');
+  siteCards.innerHTML = Object.entries(SITES_INFO).map(([id, s]) => {
+    const count = posts.filter(p => p.sites && p.sites.includes(id)).length;
+    const pub_  = posts.filter(p => p.sites && p.sites.includes(id) && p.status === 'published').length;
+    return `
+    <div class="card" style="border-left:3px solid ${s.color}">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem">
+        <div>
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem">${s.short}</div>
+          <div style="font-size:.95rem;font-weight:600;margin-bottom:.75rem">${s.name}</div>
+        </div>
+        <a href="posts.html?site=${id}" class="btn btn-ghost btn-sm">View Posts</a>
+      </div>
+      <div style="display:flex;gap:1.5rem">
+        <div>
+          <div style="font-size:1.6rem;font-weight:700;font-family:'Barlow Condensed',sans-serif">${count}</div>
+          <div style="font-size:.72rem;color:var(--muted)">Total Posts</div>
+        </div>
+        <div>
+          <div style="font-size:1.6rem;font-weight:700;font-family:'Barlow Condensed',sans-serif;color:#4ADE80">${pub_}</div>
+          <div style="font-size:.72rem;color:var(--muted)">Published</div>
+        </div>
+        <div>
+          <div style="font-size:1.6rem;font-weight:700;font-family:'Barlow Condensed',sans-serif;color:var(--gold)">${count - pub_}</div>
+          <div style="font-size:.72rem;color:var(--muted)">Drafts</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Recent posts
+  const recent = posts.slice(0, 8);
+  const tbody  = document.getElementById('recent-posts');
+  if (!recent.length) {
+    tbody.innerHTML = `<div class="empty-state"><div class="icon">📄</div><p>No posts yet. <a href="editor.html" style="color:var(--gold)">Create your first post →</a></p></div>`;
+    return;
+  }
+  tbody.innerHTML = `
+    <table class="data-table">
+      <thead><tr>
+        <th>Title</th><th>Sites</th><th>Status</th><th>Date</th><th></th>
+      </tr></thead>
+      <tbody>
+        ${recent.map(p => `
+          <tr>
+            <td class="td-title"><a href="editor.html?id=${p.id}">${esc(p.title)}</a><br>
+              <span class="td-muted">${esc(p.category || '')}</span>
+            </td>
+            <td>${(p.sites||[]).map(s=>`<span class="tag-pill">${SITES_INFO[s]?.short||s}</span>`).join(' ')}</td>
+            <td><span class="badge badge-${p.status}"><span class="badge-dot"></span>${p.status}</span></td>
+            <td class="td-muted">${fmtDate(p.updatedAt)}</td>
+            <td><div class="td-actions">
+              <a href="editor.html?id=${p.id}" class="btn btn-ghost btn-sm">Edit</a>
+            </div></td>
+          </tr>`).join('')}
+      </tbody>
+    </table>`;
+}
+
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmtDate(d) {
+  if (!d) return '–';
+  return new Date(d).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+}
+
+load();
+</script>
+</body>
+</html>

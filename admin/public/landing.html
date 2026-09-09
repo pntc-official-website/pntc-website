@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PNTC Admin – Landing Page</title>
+<link rel="stylesheet" href="admin.css">
+<style>
+.lp-tabs { display:flex; gap:.5rem; margin-bottom:1.5rem; flex-wrap:wrap; }
+.lp-tab {
+  padding:.5rem 1.25rem; border-radius:6px; font-size:.82rem; font-weight:600;
+  cursor:pointer; border:1px solid var(--border); background:transparent;
+  color:var(--muted); transition:all .15s;
+}
+.lp-tab.active { background:var(--gold); color:#111; border-color:var(--gold); }
+.lp-tab:hover:not(.active) { border-color:var(--muted); color:var(--text); }
+
+.lp-panel { display:none; }
+.lp-panel.active { display:block; }
+
+.item-list { display:flex; flex-direction:column; gap:.75rem; margin-bottom:1.5rem; }
+.item-row {
+  background:var(--card); border:1px solid var(--border); border-radius:8px;
+  padding:1rem 1.25rem; display:flex; align-items:flex-start; gap:1rem;
+}
+.item-row-body { flex:1; min-width:0; }
+.item-row-title { font-weight:700; font-size:.9rem; margin-bottom:.25rem; }
+.item-row-sub { font-size:.78rem; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.item-row-actions { display:flex; gap:.5rem; flex-shrink:0; }
+
+.modal-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:500;
+  display:flex; align-items:center; justify-content:center; padding:1.5rem;
+}
+.modal-overlay[hidden] { display:none; }
+.modal-box {
+  background:var(--card); border:1px solid var(--border); border-radius:10px;
+  width:100%; max-width:560px; max-height:90vh; overflow-y:auto; padding:1.5rem;
+}
+.modal-title { font-size:1rem; font-weight:700; margin-bottom:1.25rem; }
+.modal-footer { display:flex; gap:.75rem; margin-top:1.25rem; justify-content:flex-end; }
+
+.icon-preview { font-size:2rem; line-height:1; margin-bottom:.25rem; }
+
+/* badge color picker */
+.badge-opts { display:flex; gap:.5rem; flex-wrap:wrap; }
+.badge-opt { padding:.3rem .8rem; border-radius:4px; font-size:.72rem; font-weight:700; cursor:pointer; border:2px solid transparent; }
+.badge-opt.sel { border-color:var(--gold); }
+.b-ft-preview { background:#0B2A6B; color:#C8960C; }
+.b-pt-preview { background:#1a3a1a; color:#4ADE80; }
+.b-contract-preview { background:#3a1a00; color:#F97316; }
+
+/* img class picker */
+.img-class-opts { display:flex; gap:.5rem; flex-wrap:wrap; }
+.img-class-opt { padding:.35rem .75rem; border-radius:4px; font-size:.72rem; cursor:pointer; border:2px solid transparent; font-weight:600; }
+.img-class-opt.sel { border-color:var(--gold); }
+
+.publish-bar {
+  background:var(--card); border:1px solid var(--border); border-radius:8px;
+  padding:1rem 1.25rem; display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:1.5rem;
+}
+.publish-info { font-size:.82rem; color:var(--muted); }
+.publish-info strong { color:var(--text); }
+
+.contacts-list { display:flex; flex-direction:column; gap:.4rem; margin-bottom:.5rem; }
+.contact-row { display:flex; gap:.5rem; align-items:center; }
+.contact-row .form-input { flex:1; }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <img src="/site-files/SHS/PNTC White Horizontal.png" alt="PNTC" onerror="this.style.display='none'">
+    <div class="sidebar-brand-sub">Admin Console</div>
+  </div>
+  <div class="sidebar-section-label">Navigation</div>
+  <nav class="sidebar-nav">
+    <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span> Dashboard</a>
+    <a class="nav-item" href="posts.html"><span class="nav-icon">📝</span> Posts &amp; Blog</a>
+    <a class="nav-item" href="images.html"><span class="nav-icon">🖼️</span> Image Manager</a>
+    <a class="nav-item active" href="landing.html"><span class="nav-icon">🏛️</span> Landing Page</a>
+  </nav>
+  <div class="sidebar-section-label">Sites</div>
+  <nav class="sidebar-nav" id="site-nav"></nav>
+  <div class="sidebar-bottom"><strong>PNTC Admin</strong>jsam7980@gmail.com</div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <span class="topbar-title">Landing Page Content</span>
+    <span class="topbar-sub">PNTC Main Landing Page</span>
+  </div>
+
+  <div class="page-content">
+
+    <div class="lp-tabs">
+      <button class="lp-tab active" data-tab="research">🏅 Research &amp; Recognition</button>
+      <button class="lp-tab" data-tab="careers">💼 Careers</button>
+      <button class="lp-tab" data-tab="directory">📋 Directory</button>
+      <button class="lp-tab" data-tab="merchandise">🛍️ Merchandise</button>
+    </div>
+
+    <!-- RESEARCH TAB -->
+    <div class="lp-panel active" id="panel-research">
+      <div class="publish-bar">
+        <div class="publish-info"><strong id="research-count">0</strong> items · <span id="research-pub-status">Not published yet</span></div>
+        <button class="btn btn-primary" onclick="publish('research')">Publish to Landing Page</button>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:1rem">
+        <button class="btn btn-primary" onclick="openModal('research')">+ Add Recognition</button>
+      </div>
+      <div class="item-list" id="list-research"></div>
+    </div>
+
+    <!-- CAREERS TAB -->
+    <div class="lp-panel" id="panel-careers">
+      <div class="publish-bar">
+        <div class="publish-info"><strong id="careers-count">0</strong> items · <span id="careers-pub-status">Not published yet</span></div>
+        <button class="btn btn-primary" onclick="publish('careers')">Publish to Landing Page</button>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:1rem">
+        <button class="btn btn-primary" onclick="openModal('careers')">+ Add Job Opening</button>
+      </div>
+      <div class="item-list" id="list-careers"></div>
+    </div>
+
+    <!-- DIRECTORY TAB -->
+    <div class="lp-panel" id="panel-directory">
+      <div class="publish-bar">
+        <div class="publish-info"><strong id="directory-count">0</strong> items · <span id="directory-pub-status">Not published yet</span></div>
+        <button class="btn btn-primary" onclick="publish('directory')">Publish to Landing Page</button>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:1rem">
+        <button class="btn btn-primary" onclick="openModal('directory')">+ Add Directory Entry</button>
+      </div>
+      <div class="item-list" id="list-directory"></div>
+    </div>
+
+    <!-- MERCHANDISE TAB -->
+    <div class="lp-panel" id="panel-merchandise">
+      <div class="publish-bar">
+        <div class="publish-info"><strong id="merchandise-count">0</strong> items · <span id="merchandise-pub-status">Not published yet</span></div>
+        <button class="btn btn-primary" onclick="publish('merchandise')">Publish to Landing Page</button>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:1rem">
+        <button class="btn btn-primary" onclick="openModal('merchandise')">+ Add Merchandise</button>
+      </div>
+      <div class="item-list" id="list-merchandise"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" hidden>
+  <div class="modal-box">
+    <div class="modal-title" id="modal-title">Add Item</div>
+    <div id="modal-form"></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" id="modal-save-btn" onclick="saveItem()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────
+let activeTab  = 'research';
+let editId     = null;
+let editType   = null;
+const data     = { research: [], careers: [], directory: [], merchandise: [] };
+
+// ── Tab switching ──────────────────────────────────────────────
+document.querySelectorAll('.lp-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.lp-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.lp-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    activeTab = btn.dataset.tab;
+    document.getElementById('panel-' + activeTab).classList.add('active');
+  });
+});
+
+// ── Load all data ──────────────────────────────────────────────
+async function loadAll() {
+  for (const type of ['research','careers','directory','merchandise']) {
+    const r = await fetch('/api/landing/' + type);
+    data[type] = await r.json();
+    renderList(type);
+  }
+}
+
+// ── Sidebar sites ──────────────────────────────────────────────
+fetch('/api/sites').then(r=>r.json()).then(sites => {
+  const nav = document.getElementById('site-nav');
+  sites.forEach(s => {
+    const a = document.createElement('a');
+    a.className = 'nav-item';
+    a.href = `posts.html?site=${s.id}`;
+    a.innerHTML = `<span class="nav-icon" style="width:8px;height:8px;border-radius:50%;background:${s.color};display:inline-block"></span> ${s.short}`;
+    nav.appendChild(a);
+  });
+});
+
+// ── Render lists ───────────────────────────────────────────────
+function renderList(type) {
+  const el = document.getElementById('list-' + type);
+  const ct = document.getElementById(type + '-count');
+  if (ct) ct.textContent = data[type].length;
+  if (!data[type].length) {
+    el.innerHTML = '<div style="color:var(--muted);font-size:.85rem;padding:1.5rem 0;text-align:center">No items yet. Click "+ Add" to get started.</div>';
+    return;
+  }
+  el.innerHTML = data[type].map(item => renderItemRow(type, item)).join('');
+}
+
+function renderItemRow(type, item) {
+  let title='', sub='';
+  switch(type) {
+    case 'research':
+      title = `${item.icon||'🏅'} ${item.title||''}`;
+      sub   = item.year || '';
+      break;
+    case 'careers':
+      title = item.title || '';
+      sub   = `${item.department||''} · ${item.badgeType||'Full-Time'} · 📍 ${item.location||'Dasmariñas, Cavite'}`;
+      break;
+    case 'directory':
+      title = `${item.icon||'📋'} ${item.name||''}`;
+      sub   = item.description || '';
+      break;
+    case 'merchandise':
+      title = `${item.icon||'🛍️'} ${item.name||''}`;
+      sub   = `${item.category||''} · ${item.price||''}`;
+      break;
+  }
+  return `<div class="item-row">
+    <div class="item-row-body">
+      <div class="item-row-title">${esc(title)}</div>
+      <div class="item-row-sub">${esc(sub)}</div>
+    </div>
+    <div class="item-row-actions">
+      <button class="btn" style="padding:.35rem .85rem;font-size:.78rem" onclick="openModal('${type}','${item.id}')">Edit</button>
+      <button class="btn" style="padding:.35rem .85rem;font-size:.78rem;color:#f87171" onclick="deleteItem('${type}','${item.id}')">Delete</button>
+    </div>
+  </div>`;
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Modal ──────────────────────────────────────────────────────
+function openModal(type, id) {
+  editType = type;
+  editId   = id || null;
+  const existing = id ? data[type].find(i => i.id === id) : null;
+  document.getElementById('modal-title').textContent = (id ? 'Edit' : 'Add') + ' — ' + typeLabel(type);
+  document.getElementById('modal-form').innerHTML = buildForm(type, existing);
+  document.getElementById('modal').removeAttribute('hidden');
+}
+
+function closeModal() {
+  document.getElementById('modal').setAttribute('hidden', '');
+  editId = editType = null;
+}
+
+function typeLabel(t) {
+  return { research:'Recognition', careers:'Job Opening', directory:'Directory Entry', merchandise:'Merchandise' }[t] || t;
+}
+
+function buildForm(type, item) {
+  switch(type) {
+    case 'research': return formResearch(item);
+    case 'careers':  return formCareers(item);
+    case 'directory':return formDirectory(item);
+    case 'merchandise': return formMerchandise(item);
+  }
+  return '';
+}
+
+function fi(label, id, value, placeholder, type='text') {
+  return `<div class="form-group">
+    <label class="form-label">${label}</label>
+    <input class="form-input" type="${type}" id="${id}" value="${esc(value||'')}" placeholder="${placeholder||''}">
+  </div>`;
+}
+function ta(label, id, value, placeholder) {
+  return `<div class="form-group">
+    <label class="form-label">${label}</label>
+    <textarea class="form-input" id="${id}" rows="3" placeholder="${placeholder||''}">${esc(value||'')}</textarea>
+  </div>`;
+}
+
+// Research form
+function formResearch(item) {
+  return fi('Icon (Emoji)', 'f-icon', item?.icon, '🏅')
+       + fi('Title', 'f-title', item?.title, 'e.g. ISO 9001:2015 Certification')
+       + ta('Body / Description', 'f-body', item?.body, 'Describe the achievement or research...')
+       + fi('Year / Badge Label', 'f-year', item?.year, 'e.g. QMS Certified · 2024');
+}
+
+// Careers form
+function formCareers(item) {
+  const badge = item?.badgeType || 'Full-Time';
+  return fi('Job Title', 'f-title', item?.title, 'e.g. Faculty Member – BS Maritime')
+       + fi('Department', 'f-department', item?.department, 'e.g. Maritime Department')
+       + fi('Location', 'f-location', item?.location || 'Dasmariñas, Cavite', 'Dasmariñas, Cavite')
+       + ta('Description / Requirements', 'f-description', item?.description, 'Describe the role and qualifications...')
+       + `<div class="form-group">
+    <label class="form-label">Badge / Employment Type</label>
+    <div class="badge-opts">
+      <div class="badge-opt b-ft-preview ${badge==='Full-Time'?'sel':''}" data-badge="Full-Time" onclick="selectBadge(this)">Full-Time</div>
+      <div class="badge-opt b-pt-preview ${badge==='Part-Time'?'sel':''}" data-badge="Part-Time" onclick="selectBadge(this)">Part-Time</div>
+      <div class="badge-opt b-contract-preview ${badge==='Contract'?'sel':''}" data-badge="Contract" onclick="selectBadge(this)">Contract</div>
+    </div>
+    <input type="hidden" id="f-badge-type" value="${badge}">
+  </div>`;
+}
+
+function selectBadge(el) {
+  document.querySelectorAll('.badge-opt').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('f-badge-type').value = el.dataset.badge;
+}
+
+// Directory form
+function formDirectory(item) {
+  const contacts = item?.contacts || [''];
+  const rows = contacts.map((c,i) => `<div class="contact-row" id="cr-${i}">
+    <input class="form-input" id="contact-${i}" value="${esc(c)}" placeholder="email@pntc.edu.ph or tel:+63...">
+    <button class="btn" style="padding:.35rem .65rem;font-size:.78rem" onclick="removeContact(${i})">✕</button>
+  </div>`).join('');
+  return fi('Icon (Emoji)', 'f-icon', item?.icon, '📋')
+       + fi('Office / Department Name', 'f-name', item?.name, 'e.g. Admissions Office')
+       + ta('Description', 'f-description', item?.description, 'Brief description of this office...')
+       + `<div class="form-group">
+    <label class="form-label">Contact Links (email, tel:, or URL)</label>
+    <div class="contacts-list" id="contacts-list">${rows}</div>
+    <button class="btn" style="font-size:.78rem;padding:.3rem .75rem;margin-top:.4rem" onclick="addContact()">+ Add Contact</button>
+  </div>`;
+}
+
+let contactCount = 0;
+function addContact() {
+  contactCount++;
+  const list = document.getElementById('contacts-list');
+  const id = Date.now();
+  const div = document.createElement('div');
+  div.className = 'contact-row';
+  div.id = 'cr-' + id;
+  div.innerHTML = `<input class="form-input" id="contact-${id}" placeholder="email@pntc.edu.ph or tel:+63...">
+    <button class="btn" style="padding:.35rem .65rem;font-size:.78rem" onclick="this.parentElement.remove()">✕</button>`;
+  list.appendChild(div);
+}
+function removeContact(i) {
+  const el = document.getElementById('cr-' + i);
+  if (el) el.remove();
+}
+
+// Merchandise form
+const IMG_CLASSES = [
+  { cls:'mi-navy',  label:'Navy',   bg:'#0B2A6B', fg:'#C8960C' },
+  { cls:'mi-gold',  label:'Gold',   bg:'#C8960C', fg:'#111'    },
+  { cls:'mi-cream', label:'Cream',  bg:'#f5f0e8', fg:'#333'    },
+  { cls:'mi-dark',  label:'Dark',   bg:'#1a1a2e', fg:'#C8960C' },
+  { cls:'mi-green', label:'Green',  bg:'#1a3a1a', fg:'#4ADE80' },
+  { cls:'mi-ocean', label:'Ocean',  bg:'#0a2a3a', fg:'#38bdf8' }
+];
+
+function formMerchandise(item) {
+  const sel = item?.imgClass || 'mi-navy';
+  const opts = IMG_CLASSES.map(o =>
+    `<div class="img-class-opt ${o.cls==='mi-navy'?'sel':''} ${sel===o.cls?'sel':''}" data-cls="${o.cls}" style="background:${o.bg};color:${o.fg}" onclick="selectImgClass(this)">${o.label}</div>`
+  ).join('');
+  return fi('Emoji / Icon', 'f-icon', item?.icon, '👕')
+       + fi('Product Name', 'f-name', item?.name, 'e.g. PNTC Classic Polo Shirt')
+       + fi('Category', 'f-category', item?.category, 'e.g. Apparel')
+       + ta('Note / Description', 'f-note', item?.note, 'e.g. Embroidered crest. Navy & white.')
+       + fi('Price', 'f-price', item?.price, 'e.g. ₱ 450')
+       + `<div class="form-group">
+    <label class="form-label">Image Background Color</label>
+    <div class="img-class-opts" id="img-class-opts">${opts}</div>
+    <input type="hidden" id="f-img-class" value="${esc(sel)}">
+  </div>`;
+}
+
+function selectImgClass(el) {
+  document.querySelectorAll('.img-class-opt').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('f-img-class').value = el.dataset.cls;
+}
+
+// ── Save item ──────────────────────────────────────────────────
+async function saveItem() {
+  const type = editType;
+  let body = {};
+  switch(type) {
+    case 'research':
+      body = {
+        icon:  document.getElementById('f-icon')?.value  || '',
+        title: document.getElementById('f-title')?.value || '',
+        body:  document.getElementById('f-body')?.value  || '',
+        year:  document.getElementById('f-year')?.value  || ''
+      };
+      break;
+    case 'careers':
+      body = {
+        title:       document.getElementById('f-title')?.value       || '',
+        department:  document.getElementById('f-department')?.value  || '',
+        location:    document.getElementById('f-location')?.value    || 'Dasmariñas, Cavite',
+        description: document.getElementById('f-description')?.value || '',
+        badgeType:   document.getElementById('f-badge-type')?.value  || 'Full-Time'
+      };
+      break;
+    case 'directory': {
+      const inputs = document.querySelectorAll('#contacts-list input');
+      const contacts = Array.from(inputs).map(i => i.value.trim()).filter(Boolean);
+      body = {
+        icon:        document.getElementById('f-icon')?.value        || '',
+        name:        document.getElementById('f-name')?.value        || '',
+        description: document.getElementById('f-description')?.value || '',
+        contacts
+      };
+      break;
+    }
+    case 'merchandise':
+      body = {
+        icon:     document.getElementById('f-icon')?.value     || '',
+        name:     document.getElementById('f-name')?.value     || '',
+        category: document.getElementById('f-category')?.value || '',
+        note:     document.getElementById('f-note')?.value     || '',
+        price:    document.getElementById('f-price')?.value    || '',
+        imgClass: document.getElementById('f-img-class')?.value|| 'mi-navy'
+      };
+      break;
+  }
+
+  const url    = editId ? `/api/landing/${type}/${editId}` : `/api/landing/${type}`;
+  const method = editId ? 'PUT' : 'POST';
+  const r      = await fetch(url, { method, headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  const saved  = await r.json();
+
+  if (editId) {
+    const idx = data[type].findIndex(i => i.id === editId);
+    if (idx !== -1) data[type][idx] = saved;
+  } else {
+    data[type].push(saved);
+  }
+  renderList(type);
+  closeModal();
+}
+
+// ── Delete item ────────────────────────────────────────────────
+async function deleteItem(type, id) {
+  if (!confirm('Delete this item?')) return;
+  await fetch(`/api/landing/${type}/${id}`, { method:'DELETE' });
+  data[type] = data[type].filter(i => i.id !== id);
+  renderList(type);
+}
+
+// ── Publish ────────────────────────────────────────────────────
+async function publish(type) {
+  const btn = event.target;
+  btn.textContent = 'Publishing…';
+  btn.disabled = true;
+  try {
+    const r = await fetch(`/api/landing/${type}/publish`, { method:'POST' });
+    const j = await r.json();
+    if (j.ok) {
+      const el = document.getElementById(type + '-pub-status');
+      if (el) el.textContent = 'Published · ' + new Date().toLocaleString();
+      btn.textContent = 'Published ✓';
+      setTimeout(() => { btn.textContent = 'Publish to Landing Page'; btn.disabled = false; }, 2000);
+    } else {
+      alert('Error: ' + (j.error || 'Unknown error'));
+      btn.textContent = 'Publish to Landing Page'; btn.disabled = false;
+    }
+  } catch(e) {
+    alert('Network error: ' + e.message);
+    btn.textContent = 'Publish to Landing Page'; btn.disabled = false;
+  }
+}
+
+// ── Init ───────────────────────────────────────────────────────
+loadAll();
+</script>
+</body>
+</html>

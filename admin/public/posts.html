@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PNTC Admin – Posts</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <img src="/site-files/SHS/PNTC White Horizontal.png" alt="PNTC" onerror="this.style.display='none'">
+    <div class="sidebar-brand-sub">Admin Console</div>
+  </div>
+  <div class="sidebar-section-label">Navigation</div>
+  <nav class="sidebar-nav">
+    <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span> Dashboard</a>
+    <a class="nav-item active" href="posts.html"><span class="nav-icon">📝</span> Posts &amp; Blog</a>
+    <a class="nav-item" href="images.html"><span class="nav-icon">🖼️</span> Image Manager</a>
+    <a class="nav-item" href="landing.html"><span class="nav-icon">🏛️</span> Landing Page</a>
+  </nav>
+  <div class="sidebar-section-label">Filter by Site</div>
+  <nav class="sidebar-nav">
+    <a class="nav-item" href="posts.html" id="filter-all"><span class="nav-icon">📋</span> All Sites</a>
+    <a class="nav-item" href="posts.html?site=shs" id="filter-shs"><span class="nav-icon" style="width:8px;height:8px;border-radius:50%;background:#181D71;display:inline-block"></span> SHS</a>
+    <a class="nav-item" href="posts.html?site=colleges" id="filter-colleges"><span class="nav-icon" style="width:8px;height:8px;border-radius:50%;background:#0B2A6B;display:inline-block"></span> Colleges</a>
+    <a class="nav-item" href="posts.html?site=maritime" id="filter-maritime"><span class="nav-icon" style="width:8px;height:8px;border-radius:50%;background:#0D1B3E;display:inline-block"></span> Maritime</a>
+    <a class="nav-item" href="posts.html?site=aman" id="filter-aman"><span class="nav-icon" style="width:8px;height:8px;border-radius:50%;background:#0A1F35;display:inline-block"></span> Aman Sinaya</a>
+  </nav>
+  <div class="sidebar-bottom"><strong>PNTC Admin</strong>jsam7980@gmail.com</div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <span class="topbar-title">Posts &amp; Blog</span>
+    <div style="margin-left:auto;display:flex;gap:.75rem;align-items:center">
+      <!-- Status filter -->
+      <select class="form-select" id="status-filter" style="width:140px;padding:.45rem .75rem;font-size:.82rem">
+        <option value="">All Statuses</option>
+        <option value="published">Published</option>
+        <option value="draft">Drafts</option>
+      </select>
+      <a href="editor.html" class="btn btn-primary">+ New Post</a>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title" id="list-heading">All Posts</span>
+        <span style="font-size:.8rem;color:var(--muted)" id="list-count"></span>
+      </div>
+      <div id="post-list"><div class="loading">Loading…</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete confirm modal -->
+<div class="modal-overlay" id="del-modal" hidden>
+  <div class="modal">
+    <h3>Delete Post?</h3>
+    <p>This will permanently remove the post from the admin. Already-published HTML files on the sites will not be deleted automatically.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="document.getElementById('del-modal').hidden=true">Cancel</button>
+      <button class="btn btn-danger" id="del-confirm">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const SITES_INFO = {
+  shs:      { name: 'PNTC Senior High School',       short: 'SHS',         color: '#181D71' },
+  colleges: { name: 'PNTC Colleges',                 short: 'Colleges',    color: '#0B2A6B' },
+  maritime: { name: 'PNTC Maritime Training Center', short: 'Maritime',    color: '#0D1B3E' },
+  aman:     { name: 'Training Vessel Aman Sinaya',   short: 'Aman Sinaya', color: '#0A1F35' }
+};
+
+let allPosts = [];
+let pendingDelete = null;
+
+const params     = new URLSearchParams(location.search);
+const siteFilter = params.get('site') || '';
+
+// Mark active sidebar filter
+if (siteFilter) {
+  document.getElementById('filter-' + siteFilter)?.classList.add('active');
+} else {
+  document.getElementById('filter-all')?.classList.add('active');
+}
+
+async function load() {
+  const res  = await fetch('/api/posts');
+  allPosts   = await res.json();
+  render();
+}
+
+function render() {
+  const status  = document.getElementById('status-filter').value;
+  let posts     = allPosts;
+
+  if (siteFilter) posts = posts.filter(p => (p.sites||[]).includes(siteFilter));
+  if (status)     posts = posts.filter(p => p.status === status);
+
+  document.getElementById('list-heading').textContent =
+    siteFilter ? (SITES_INFO[siteFilter]?.name || siteFilter) + ' Posts' : 'All Posts';
+  document.getElementById('list-count').textContent = `${posts.length} post${posts.length !== 1 ? 's' : ''}`;
+
+  const el = document.getElementById('post-list');
+
+  if (!posts.length) {
+    el.innerHTML = `<div class="empty-state">
+      <div class="icon">📄</div>
+      <p>No posts found. <a href="editor.html" style="color:var(--gold)">Create your first post →</a></p>
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = `
+    <table class="data-table">
+      <thead><tr>
+        <th>Title</th>
+        <th>Sites</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Last Updated</th>
+        <th>Actions</th>
+      </tr></thead>
+      <tbody>
+        ${posts.map(p => `
+          <tr>
+            <td class="td-title">
+              <a href="editor.html?id=${p.id}">${esc(p.title)}</a>
+              ${p.excerpt ? `<div class="td-muted" style="margin-top:.25rem;max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.excerpt)}</div>` : ''}
+            </td>
+            <td>${(p.sites||[]).map(s=>`<span class="tag-pill">${SITES_INFO[s]?.short||s}</span>`).join(' ')}</td>
+            <td class="td-muted">${esc(p.category||'–')}</td>
+            <td><span class="badge badge-${p.status}"><span class="badge-dot"></span>${p.status}</span></td>
+            <td class="td-muted">${fmtDate(p.updatedAt)}</td>
+            <td><div class="td-actions">
+              <a href="editor.html?id=${p.id}" class="btn btn-ghost btn-sm">Edit</a>
+              ${p.status === 'draft' ? `<button class="btn btn-blue btn-sm" onclick="publish('${p.id}')">Publish</button>` : ''}
+              <button class="btn btn-danger btn-sm" onclick="confirmDelete('${p.id}')">Delete</button>
+            </div></td>
+          </tr>`).join('')}
+      </tbody>
+    </table>`;
+}
+
+async function publish(id) {
+  showToast('Publishing…', false, true);
+  const res  = await fetch(`/api/publish/${id}`, { method: 'POST' });
+  const data = await res.json();
+  if (data.ok) {
+    showToast(`Published to ${data.published.map(p=>p.site).join(', ')}`);
+    await load();
+  } else {
+    showToast(data.error || 'Error publishing', true);
+  }
+}
+
+function confirmDelete(id) {
+  pendingDelete = id;
+  document.getElementById('del-modal').hidden = false;
+}
+
+document.getElementById('del-confirm').onclick = async () => {
+  if (!pendingDelete) return;
+  await fetch(`/api/posts/${pendingDelete}`, { method: 'DELETE' });
+  document.getElementById('del-modal').hidden = true;
+  pendingDelete = null;
+  showToast('Post deleted');
+  await load();
+};
+
+document.getElementById('status-filter').addEventListener('change', render);
+
+function esc(s)  { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmtDate(d) {
+  if (!d) return '–';
+  return new Date(d).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+}
+
+let toastTimer;
+function showToast(msg, isError=false, loading=false) {
+  const t = document.getElementById('toast');
+  t.textContent = loading ? '⏳ ' + msg : (isError ? '❌ ' : '✅ ') + msg;
+  t.className   = 'show' + (isError ? ' error' : '');
+  clearTimeout(toastTimer);
+  if (!loading) toastTimer = setTimeout(() => t.className = '', 3500);
+}
+
+load();
+</script>
+</body>
+</html>

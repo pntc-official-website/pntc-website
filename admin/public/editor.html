@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PNTC Admin – Post Editor</title>
+<link rel="stylesheet" href="admin.css">
+<!-- Quill rich text editor -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css">
+<style>
+.editor-layout { display: grid; grid-template-columns: 1fr 300px; gap: 1.5rem; align-items: start; }
+.ql-editor { min-height: 440px; }
+.feat-preview {
+  width: 100%; aspect-ratio: 16/9;
+  background: var(--bg); border: 2px dashed var(--border);
+  border-radius: 6px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: .5rem;
+  cursor: pointer; transition: border-color .2s; overflow: hidden;
+  position: relative;
+}
+.feat-preview:hover { border-color: var(--gold); }
+.feat-preview img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.feat-preview .overlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,.5);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .2s;
+}
+.feat-preview:hover .overlay { opacity: 1; }
+.feat-placeholder { color: var(--muted); font-size: .82rem; text-align: center; padding: 1rem; }
+.feat-placeholder .icon { font-size: 2rem; margin-bottom: .5rem; }
+.tag-input-wrap { position: relative; }
+.tag-list { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
+.tag-chip { display: inline-flex; align-items: center; gap: .35rem; background: rgba(200,150,12,.12); color: var(--gold); font-size: .72rem; font-weight: 700; padding: .25rem .6rem; border-radius: 20px; }
+.tag-chip button { background: none; border: none; color: inherit; cursor: pointer; font-size: .85rem; line-height: 1; padding: 0; }
+.save-row { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+@media (max-width: 900px) {
+  .editor-layout { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <img src="/site-files/SHS/PNTC White Horizontal.png" alt="PNTC" onerror="this.style.display='none'">
+    <div class="sidebar-brand-sub">Admin Console</div>
+  </div>
+  <div class="sidebar-section-label">Navigation</div>
+  <nav class="sidebar-nav">
+    <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span> Dashboard</a>
+    <a class="nav-item active" href="posts.html"><span class="nav-icon">📝</span> Posts &amp; Blog</a>
+    <a class="nav-item" href="images.html"><span class="nav-icon">🖼️</span> Image Manager</a>
+    <a class="nav-item" href="landing.html"><span class="nav-icon">🏛️</span> Landing Page</a>
+  </nav>
+  <div class="sidebar-bottom"><strong>PNTC Admin</strong>jsam7980@gmail.com</div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <a href="posts.html" style="color:var(--muted);font-size:.85rem">← Posts</a>
+    <span class="topbar-title" id="page-heading" style="margin-left:1rem">New Post</span>
+    <div style="margin-left:auto" id="pub-status"></div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- Title -->
+    <div class="form-group">
+      <input type="text" class="form-input" id="post-title"
+        placeholder="Post Title"
+        style="font-size:1.5rem;font-weight:700;padding:1rem 1.25rem;border-radius:8px">
+    </div>
+
+    <div class="editor-layout">
+
+      <!-- Left: Content -->
+      <div>
+        <!-- Category + Author row -->
+        <div class="grid-2" style="margin-bottom:1.25rem">
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Category</label>
+            <input type="text" class="form-input" id="post-category" placeholder="e.g. Announcements, Events, News">
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Author</label>
+            <input type="text" class="form-input" id="post-author" value="PNTC Communications" placeholder="Author name">
+          </div>
+        </div>
+
+        <!-- Excerpt -->
+        <div class="form-group">
+          <label class="form-label">Excerpt <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(short summary shown in blog lists)</span></label>
+          <textarea class="form-textarea" id="post-excerpt" rows="2" placeholder="A short summary that appears in the blog listing and social previews…"></textarea>
+        </div>
+
+        <!-- Editor -->
+        <div class="form-group">
+          <label class="form-label">Content</label>
+          <div id="quill-editor"></div>
+        </div>
+
+        <!-- Save row -->
+        <div class="save-row" style="margin-top:1.5rem">
+          <button class="btn btn-secondary" id="btn-draft">Save Draft</button>
+          <button class="btn btn-primary" id="btn-publish">🚀 Publish to Sites</button>
+          <span id="save-status" style="color:var(--muted);font-size:.8rem"></span>
+        </div>
+      </div>
+
+      <!-- Right: Sidebar fields -->
+      <div style="display:flex;flex-direction:column;gap:1.25rem">
+
+        <!-- Publish to sites -->
+        <div class="card">
+          <div class="card-title" style="margin-bottom:1rem">Publish to Sites</div>
+          <div class="site-checks" id="site-checks">
+            <!-- Populated by JS -->
+          </div>
+          <div class="form-hint" style="margin-top:.75rem">Select all sites where this post should appear.</div>
+        </div>
+
+        <!-- Featured image -->
+        <div class="card">
+          <div class="card-title" style="margin-bottom:1rem">Featured Image</div>
+          <div class="feat-preview" id="feat-preview" onclick="document.getElementById('feat-file').click()">
+            <div class="feat-placeholder" id="feat-placeholder">
+              <div class="icon">📷</div>
+              <div>Click to upload<br>featured image</div>
+            </div>
+            <div class="overlay" id="feat-overlay" style="display:none">
+              <span style="color:#fff;font-size:.82rem;font-weight:600">Change Image</span>
+            </div>
+          </div>
+          <input type="file" id="feat-file" accept="image/*" style="display:none">
+          <div class="form-group" style="margin-top:.75rem;margin-bottom:0">
+            <label class="form-label">Site (for image storage)</label>
+            <select class="form-select form-select-sm" id="feat-site" style="font-size:.8rem;padding:.4rem .75rem">
+              <option value="shs">SHS</option>
+              <option value="colleges">Colleges</option>
+              <option value="maritime">Maritime</option>
+              <option value="aman">Aman Sinaya</option>
+            </select>
+          </div>
+          <div id="feat-url-display" style="margin-top:.5rem;font-size:.72rem;color:var(--muted);word-break:break-all"></div>
+        </div>
+
+        <!-- Tags -->
+        <div class="card">
+          <div class="card-title" style="margin-bottom:1rem">Tags</div>
+          <div class="tag-input-wrap">
+            <input type="text" class="form-input" id="tag-input" placeholder="Add tag, press Enter" style="font-size:.85rem">
+          </div>
+          <div class="tag-list" id="tag-list"></div>
+        </div>
+
+        <!-- Post info (when editing) -->
+        <div class="card" id="post-info" style="display:none">
+          <div class="card-title" style="margin-bottom:.75rem">Post Info</div>
+          <div style="font-size:.78rem;color:var(--muted);line-height:1.8">
+            <div>ID: <span id="info-id" style="color:var(--text)"></span></div>
+            <div>Created: <span id="info-created" style="color:var(--text)"></span></div>
+            <div>Published: <span id="info-published" style="color:var(--text)"></span></div>
+            <div>Slug: <code id="info-slug" style="color:var(--gold);background:rgba(200,150,12,.1);padding:.1rem .35rem;border-radius:3px"></code></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- Quill JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+<script>
+const SITES = [
+  { id: 'shs',      name: 'PNTC Senior High School',       short: 'SHS',         color: '#181D71' },
+  { id: 'colleges', name: 'PNTC Colleges',                 short: 'Colleges',    color: '#0B2A6B' },
+  { id: 'maritime', name: 'PNTC Maritime Training Center', short: 'Maritime',    color: '#0D1B3E' },
+  { id: 'aman',     name: 'Training Vessel Aman Sinaya',   short: 'Aman Sinaya', color: '#0A1F35' }
+];
+
+// Quill init
+const quill = new Quill('#quill-editor', {
+  theme: 'snow',
+  placeholder: 'Write your post content here…',
+  modules: {
+    toolbar: [
+      [{ header: [2, 3, 4, false] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      ['blockquote', 'code-block'],
+      ['link', 'image'],
+      [{ align: [] }],
+      ['clean']
+    ]
+  }
+});
+
+// Site checkboxes
+const siteChecks = document.getElementById('site-checks');
+SITES.forEach(s => {
+  const item = document.createElement('label');
+  item.className = 'site-check-item';
+  item.innerHTML = `
+    <input type="checkbox" value="${s.id}" class="site-cb">
+    <span style="width:10px;height:10px;border-radius:2px;background:${s.color};flex-shrink:0"></span>
+    <span class="site-check-label">${s.name}</span>
+    <span class="site-check-short">${s.short}</span>`;
+  item.querySelector('input').addEventListener('change', e => {
+    item.classList.toggle('checked', e.target.checked);
+    // Update featured site selector to first checked
+    updateFeatSite();
+  });
+  siteChecks.appendChild(item);
+});
+
+function updateFeatSite() {
+  const checked = getCheckedSites();
+  if (checked.length) document.getElementById('feat-site').value = checked[0];
+}
+
+function getCheckedSites() {
+  return [...document.querySelectorAll('.site-cb:checked')].map(c => c.value);
+}
+
+// Tags
+const tags = [];
+const tagInput = document.getElementById('tag-input');
+const tagList  = document.getElementById('tag-list');
+
+tagInput.addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ',') && tagInput.value.trim()) {
+    e.preventDefault();
+    addTag(tagInput.value.trim().replace(/,$/, ''));
+    tagInput.value = '';
+  }
+});
+
+function addTag(t) {
+  if (!t || tags.includes(t)) return;
+  tags.push(t);
+  renderTags();
+}
+
+function renderTags() {
+  tagList.innerHTML = tags.map((t, i) =>
+    `<span class="tag-chip">${esc(t)}<button onclick="removeTag(${i})" title="Remove">×</button></span>`
+  ).join('');
+}
+
+function removeTag(i) { tags.splice(i, 1); renderTags(); }
+
+// Featured image upload
+const featFile    = document.getElementById('feat-file');
+const featPreview = document.getElementById('feat-preview');
+const featOverlay = document.getElementById('feat-overlay');
+let   featuredUrl = '';
+
+featFile.addEventListener('change', async () => {
+  const file = featFile.files[0];
+  if (!file) return;
+  const siteId = document.getElementById('feat-site').value;
+  const fd     = new FormData();
+  fd.append('image', file);
+  fd.append('site',  siteId);
+  showToast('Uploading image…', false, true);
+  try {
+    const res  = await fetch('/api/upload/featured', { method: 'POST', body: fd });
+    const data = await res.json();
+    featuredUrl = data.url;
+    showFeatPreview(featuredUrl);
+    document.getElementById('feat-url-display').textContent = data.filename;
+    showToast('Image uploaded');
+  } catch(e) {
+    showToast('Upload failed', true);
+  }
+});
+
+function showFeatPreview(url) {
+  if (!url) return;
+  let img = featPreview.querySelector('img');
+  if (!img) {
+    img = document.createElement('img');
+    featPreview.appendChild(img);
+  }
+  img.src = url;
+  featPreview.querySelector('.feat-placeholder').style.display = 'none';
+  featOverlay.style.display = 'flex';
+}
+
+// Load existing post if editing
+const postId = new URLSearchParams(location.search).get('id');
+let   savedSlug = '';
+
+async function loadPost() {
+  if (!postId) return;
+  document.getElementById('page-heading').textContent = 'Edit Post';
+  const res  = await fetch(`/api/posts/${postId}`);
+  const post = await res.json();
+  if (post.error) { showToast('Post not found', true); return; }
+
+  document.getElementById('post-title').value    = post.title    || '';
+  document.getElementById('post-category').value = post.category || '';
+  document.getElementById('post-author').value   = post.author   || '';
+  document.getElementById('post-excerpt').value  = post.excerpt  || '';
+  quill.root.innerHTML = post.content || '';
+  savedSlug    = post.slug;
+  featuredUrl  = post.featuredImage || '';
+  if (featuredUrl) showFeatPreview(featuredUrl);
+
+  // Sites
+  (post.sites || []).forEach(sid => {
+    const cb = siteChecks.querySelector(`input[value="${sid}"]`);
+    if (cb) { cb.checked = true; cb.closest('label').classList.add('checked'); }
+  });
+  updateFeatSite();
+
+  // Tags
+  (post.tags || []).forEach(t => tags.push(t));
+  renderTags();
+
+  // Status badge
+  const badge = post.status === 'published'
+    ? `<span class="badge badge-published"><span class="badge-dot"></span>Published</span>`
+    : `<span class="badge badge-draft"><span class="badge-dot"></span>Draft</span>`;
+  document.getElementById('pub-status').innerHTML = badge;
+
+  // Post info
+  document.getElementById('post-info').style.display = 'block';
+  document.getElementById('info-id').textContent        = post.id.slice(0, 8) + '…';
+  document.getElementById('info-created').textContent   = fmtDate(post.createdAt);
+  document.getElementById('info-published').textContent = post.publishedAt ? fmtDate(post.publishedAt) : 'Not yet';
+  document.getElementById('info-slug').textContent      = post.slug;
+}
+
+function collectData(status) {
+  return {
+    title:         document.getElementById('post-title').value.trim(),
+    category:      document.getElementById('post-category').value.trim(),
+    author:        document.getElementById('post-author').value.trim(),
+    excerpt:       document.getElementById('post-excerpt').value.trim(),
+    content:       quill.root.innerHTML,
+    sites:         getCheckedSites(),
+    tags,
+    featuredImage: featuredUrl,
+    status
+  };
+}
+
+async function save(status) {
+  const data = collectData(status);
+  if (!data.title) { showToast('Please enter a title', true); return null; }
+
+  const url    = postId ? `/api/posts/${postId}` : '/api/posts';
+  const method = postId ? 'PUT' : 'POST';
+  const res    = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+  return res.json();
+}
+
+document.getElementById('btn-draft').onclick = async () => {
+  document.getElementById('btn-draft').disabled = true;
+  document.getElementById('save-status').textContent = 'Saving…';
+  const post = await save('draft');
+  document.getElementById('btn-draft').disabled = false;
+  if (post && !post.error) {
+    document.getElementById('save-status').textContent = `Saved as draft at ${new Date().toLocaleTimeString()}`;
+    if (!postId) history.replaceState({}, '', `editor.html?id=${post.id}`);
+    showToast('Draft saved');
+  } else {
+    showToast(post?.error || 'Error saving', true);
+  }
+};
+
+document.getElementById('btn-publish').onclick = async () => {
+  if (!getCheckedSites().length) {
+    showToast('Please select at least one site to publish to', true); return;
+  }
+  document.getElementById('btn-publish').disabled = true;
+  document.getElementById('save-status').textContent = 'Publishing…';
+
+  // First save, then publish
+  let post = await save('published');
+  if (!post || post.error) {
+    showToast(post?.error || 'Error saving', true);
+    document.getElementById('btn-publish').disabled = false;
+    return;
+  }
+  if (!postId) history.replaceState({}, '', `editor.html?id=${post.id}`);
+
+  const pubRes  = await fetch(`/api/publish/${post.id}`, { method: 'POST' });
+  const pubData = await pubRes.json();
+
+  document.getElementById('btn-publish').disabled = false;
+  if (pubData.ok) {
+    document.getElementById('save-status').textContent = '';
+    document.getElementById('pub-status').innerHTML =
+      `<span class="badge badge-published"><span class="badge-dot"></span>Published</span>`;
+    const sites = pubData.published.map(p => p.site).join(', ');
+    showToast(`Published to: ${sites}`);
+    document.getElementById('post-info').style.display = 'block';
+    document.getElementById('info-published').textContent = fmtDate(new Date().toISOString());
+    document.getElementById('info-slug').textContent = pubData.post?.slug || '';
+  } else {
+    showToast(pubData.error || 'Error publishing', true);
+  }
+};
+
+// Auto-save on title change (debounced)
+let autoTimer;
+document.getElementById('post-title').addEventListener('input', () => {
+  clearTimeout(autoTimer);
+  autoTimer = setTimeout(() => {
+    document.getElementById('save-status').textContent = '';
+  }, 300);
+});
+
+function esc(s)  { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmtDate(d) {
+  if (!d) return '–';
+  return new Date(d).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
+}
+
+let toastTimer;
+function showToast(msg, isError=false, loading=false) {
+  const t = document.getElementById('toast');
+  t.textContent = loading ? '⏳ ' + msg : (isError ? '❌ ' : '✅ ') + msg;
+  t.className   = 'show' + (isError ? ' error' : '');
+  clearTimeout(toastTimer);
+  if (!loading) toastTimer = setTimeout(() => t.className = '', 4000);
+}
+
+loadPost();
+</script>
+</body>
+</html>
