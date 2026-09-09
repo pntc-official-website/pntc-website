@@ -36,6 +36,26 @@ async function ghGetFile(filePath) {
   return res.json();
 }
 
+async function ghDeleteFile(filePath, sha) {
+  const encoded = filePath.split('/').map(p => encodeURIComponent(p)).join('/');
+  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${encoded}`;
+  const res = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${GH_TOKEN}`,
+      'Accept': 'application/vnd.github+json',
+      'Content-Type': 'application/json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    },
+    body: JSON.stringify({ message: `Remove: ${filePath.split('/').pop()}`, sha, branch: GH_BRANCH })
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`GitHub DELETE ${res.status}: ${err}`);
+  }
+  return res.json();
+}
+
 async function ghPutFile(filePath, content, message, sha) {
   const encoded = filePath.split('/').map(p => encodeURIComponent(p)).join('/');
   const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${encoded}`;
@@ -440,18 +460,51 @@ app.post('/api/images/github/:site/replace', replaceUpload.single('image'), asyn
     return res.status(400).json({ error: 'Need image file and filePath' });
   }
   try {
-    const existing = await ghGetFile(req.body.filePath);
-    const encPath  = req.body.filePath.split('/').map(encodeURIComponent).join('/');
-    const body     = { message: `Update image: ${req.body.filePath.split('/').pop()}`, content: req.file.buffer.toString('base64'), branch: GH_BRANCH };
-    if (existing?.sha) body.sha = existing.sha;
-    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${encPath}`, {
+    const oldPath   = req.body.filePath;
+    const oldExt    = path.extname(oldPath).toLowerCase();
+    const newExt    = path.extname(req.file.originalname).toLowerCase();
+    const extChange = newExt && newExt !== oldExt;
+    const targetPath = extChange
+      ? oldPath.slice(0, oldPath.length - oldExt.length) + newExt
+      : oldPath;
+
+    // Upload new file (binary — use base64 directly, not ghPutFile which assumes utf8 text)
+    const encTarget = targetPath.split('/').map(encodeURIComponent).join('/');
+    const existingTarget = extChange ? null : await ghGetFile(oldPath);
+    const putBody = {
+      message: `Update image: ${targetPath.split('/').pop()}`,
+      content: req.file.buffer.toString('base64'),
+      branch:  GH_BRANCH
+    };
+    if (existingTarget?.sha) putBody.sha = existingTarget.sha;
+    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${encTarget}`, {
       method: 'PUT',
       headers: { Authorization: `Bearer ${GH_TOKEN}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json', 'X-GitHub-Api-Version': '2022-11-28' },
-      body: JSON.stringify(body)
+      body: JSON.stringify(putBody)
     });
     if (!r.ok) { const e = await r.text(); throw new Error(`GitHub ${r.status}: ${e.slice(0, 200)}`); }
     const d = await r.json();
-    res.json({ ok: true, sha: d.content?.sha });
+
+    if (extChange) {
+      // Delete old file
+      const oldFile = await ghGetFile(oldPath);
+      if (oldFile?.sha) await ghDeleteFile(oldPath, oldFile.sha).catch(() => {});
+
+      // Update references in the site's index.html
+      const oldFilename = oldPath.split('/').pop();
+      const newFilename = targetPath.split('/').pop();
+      const indexPath   = `${site.dir}/index.html`;
+      const indexFile   = await ghGetFile(indexPath);
+      if (indexFile) {
+        const html    = Buffer.from(indexFile.content, 'base64').toString('utf8');
+        const updated = html.split(oldFilename).join(newFilename);
+        if (updated !== html) {
+          await ghPutFile(indexPath, updated, `Update image reference: ${oldFilename} → ${newFilename}`, indexFile.sha);
+        }
+      }
+    }
+
+    res.json({ ok: true, sha: d.content?.sha, newPath: targetPath, newFilename: targetPath.split('/').pop(), renamed: extChange });
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 

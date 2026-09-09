@@ -228,7 +228,7 @@
       <div class="replace-zone" id="replace-zone">
         <div style="font-size:1.4rem">🔄</div>
         <p><strong>Click or drag a new file to replace this image</strong></p>
-        <p id="replace-sub">Saves to GitHub &amp; triggers Vercel redeploy (~30 sec)</p>
+        <p id="replace-sub">WebP, JPG, PNG, SVG — saves to GitHub &amp; triggers Vercel redeploy (~30 sec)</p>
         <input type="file" id="replace-input" accept="image/*" style="display:none">
       </div>
 
@@ -465,9 +465,13 @@ async function doReplace(file) {
     }
     const data = await res.json();
     if (data.ok) {
-      const msg = selectedImg.source === 'github'
+      let msg = selectedImg.source === 'github'
         ? 'Image updated! Vercel is redeploying — live in ~30 seconds.'
         : 'Image replaced. Pages using it now show the new version.';
+      if (data.renamed) {
+        msg = `Replaced as ${data.newFilename} (WebP). HTML references updated. Vercel redeploying — live in ~30 sec.`;
+        if (selectedImg) selectedImg.path = data.newPath;
+      }
       showToast(msg);
       // Show new file immediately in the modal
       document.getElementById('modal-preview').src = URL.createObjectURL(file);
