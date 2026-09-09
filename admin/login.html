@@ -290,8 +290,7 @@ body {
       });
 
       if (res.ok) {
-        // Redirect to admin console
-        window.location.href = '/index.html';
+        window.location.href = '/admin/';
       } else {
         const data = await res.json().catch(() => ({}));
         showError(data.error || 'Invalid email or password. Please try again.');
