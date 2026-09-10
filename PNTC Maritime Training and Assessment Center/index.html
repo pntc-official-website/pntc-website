@@ -53,8 +53,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
 .hdr-logo{display:flex;align-items:center;gap:.9rem;flex-shrink:0}
 .hdr-logo-icon{
-  height:40px;width:auto;flex-shrink:0;
-  filter:brightness(0) invert(1);
+  height:40px;width:auto;flex-shrink:0;border-radius:4px;
 }
 .hdr-wordmark{line-height:1.15}
 .hdr-wordmark strong{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase}
@@ -333,7 +332,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
    FACILITIES
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #facilities{
-  background:var(--ocean);
+  background:var(--ink);
   padding:clamp(5rem,9vw,8rem) clamp(2rem,6vw,5rem);
   position:relative;
   clip-path:polygon(0 52px,100% 0,100% 100%,0 100%);
@@ -417,7 +416,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
    ENROLLMENT CTA BANNER
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #enroll{
-  background:linear-gradient(135deg,#0B2A6B 0%,#083152 50%,#051223 100%);
+  background:var(--ink);
   padding:clamp(4rem,8vw,7rem) clamp(2rem,6vw,5rem);
   text-align:center;position:relative;overflow:hidden;
 }
@@ -499,7 +498,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
    CONTACT / FOOTER
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #contact{
-  background:var(--deep);
+  background:var(--ink);
   padding:clamp(4rem,8vw,7rem) clamp(2rem,6vw,5rem) 0;
 }
 .contact-grid{
@@ -595,6 +594,23 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 #courses .section-head p,#why .section-head p,#voices .section-head p{color:rgba(6,12,25,.52)}
 #courses .courses-cta{border-top-color:rgba(11,42,107,.1)}
 #courses .courses-cta p{color:rgba(6,12,25,.45)}
+
+/* Cards on light sections */
+#courses .course-card,#why .why-card,#voices .voice-card{
+  background:#fff;
+  border:1px solid rgba(11,42,107,.12);
+  filter:drop-shadow(0 4px 16px rgba(11,42,107,.10));
+}
+#courses .course-card:hover{background:#f4f7ff;border-color:rgba(200,150,12,.35)}
+#why .why-card:hover{background:#f4f7ff;border-color:rgba(200,150,12,.35);transform:translateY(-4px)}
+#voices .voice-card:hover{background:#f4f7ff;border-color:rgba(200,150,12,.35)}
+#courses .course-name,#why .why-h,#voices .voice-name{color:var(--ink)}
+#courses .course-desc,#why .why-p{color:rgba(6,12,25,.52)}
+#courses .course-meta{border-top-color:rgba(11,42,107,.08)}
+#courses .course-meta-item{color:rgba(6,12,25,.4)}
+#why .why-num{color:rgba(11,42,107,.1)}
+#voices .voice-quote{color:rgba(6,12,25,.55)}
+#voices .voice-rank{color:rgba(6,12,25,.35)}
 </style>
 </head>
 <body>
