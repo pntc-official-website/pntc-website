@@ -503,7 +503,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 }
 .contact-grid{
   display:grid;grid-template-columns:1.2fr 1fr;
-  gap:clamp(3rem,6vw,7rem);align-items:start;
+  gap:clamp(3rem,6vw,7rem);align-items:stretch;
   max-width:1200px;margin:0 auto;
 }
 .contact-left h2{
@@ -533,7 +533,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
 /* Map placeholder */
 .contact-map{
-  position:relative;height:360px;
+  position:relative;height:100%;min-height:380px;
   background:linear-gradient(135deg,rgba(11,42,107,.4),rgba(5,18,35,.6));
   border:1px solid rgba(200,150,12,.15);
   clip-path:polygon(0 0,calc(100% - 24px) 0,100% 24px,100% 100%,0 100%);
@@ -595,15 +595,13 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 #courses .courses-cta{border-top-color:rgba(11,42,107,.1)}
 #courses .courses-cta p{color:rgba(6,12,25,.45)}
 
-/* Cards on light sections — dark ink cards */
-#courses .course-card,#why .why-card,#voices .voice-card{
-  background:var(--ink);
-  border:1px solid rgba(200,150,12,.14);
-  filter:drop-shadow(0 4px 20px rgba(6,12,25,.18));
-}
-#courses .course-card:hover{background:#0a1020;border-color:rgba(200,150,12,.3)}
-#why .why-card:hover{background:#0a1020;border-color:rgba(200,150,12,.3);transform:translateY(-4px)}
-#voices .voice-card:hover{background:#0a1020;border-color:rgba(200,150,12,.3)}
+/* Cards on light sections — same navy as dark section cards */
+#courses .course-card{background:rgba(11,42,107,.2);border-color:var(--border)}
+#courses .course-card:hover{background:rgba(18,68,184,.22);border-color:rgba(200,150,12,.3)}
+#why .why-card{background:rgba(11,42,107,.18);border-color:rgba(200,150,12,.12)}
+#why .why-card:hover{background:rgba(18,68,184,.2);border-color:rgba(200,150,12,.28);transform:translateY(-4px)}
+#voices .voice-card{background:rgba(11,42,107,.22);border-color:var(--border)}
+#voices .voice-card:hover{background:rgba(11,42,107,.38);border-color:rgba(200,150,12,.25)}
 </style>
 </head>
 <body>
@@ -1000,7 +998,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
     Enroll<br>in <em>PNTC</em><br>Maritime
   </h2>
   <p class="enroll-sub reveal">
-    Take the next step in your maritime career. Contact our admissions team today â€”
+    Take the next step in your maritime career. Contact our admissions team today &mdash;
     we'll help you choose the right courses and schedule your training.
   </p>
   <div class="enroll-ctas reveal">
@@ -1013,7 +1011,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
       0917 182 9158
     </a>
   </div>
-  <p class="enroll-note">Walk-in inquiries welcome Monday â€“ Saturday, 8:00 AM â€“ 5:30 PM Â· 5th Floor, Intramuros Corporate Plaza, Manila</p>
+  <p class=”enroll-note”>Walk-in inquiries welcome Monday &ndash; Saturday, 8:00 AM &ndash; 5:30 PM &middot; 5th Floor, Intramuros Corporate Plaza, Manila</p>
 </section>
 
 <!-- â•â•â• TESTIMONIALS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
@@ -1049,8 +1047,8 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   <div class="contact-grid">
     <div class="reveal">
       <div class="eyebrow" style="margin-bottom:1rem">Get In Touch</div>
-      <h2><em>Contact</em><br>Our Team</h2>
-      <p>Our admissions staff are ready to assist you. Visit us in person or reach out through any of the channels below â€” we typically respond within the same business day.</p>
+      <h2><em>Contact</em> Our Team</h2>
+      <p>Our admissions staff are ready to assist you. Visit us in person or reach out through any of the channels below &mdash; we typically respond within the same business day.</p>
       <div class="contact-items">
         <div class="contact-item">
           <div class="contact-item-icon">
@@ -1085,7 +1083,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
           </div>
           <div>
             <div class="contact-item-label">Office Hours</div>
-            <div class="contact-item-val">Monday â€“ Saturday, 8:00 AM â€“ 5:30 PM</div>
+            <div class=”contact-item-val”>Monday &ndash; Saturday, 8:00 AM &ndash; 5:30 PM</div>
           </div>
         </div>
       </div>
@@ -1103,7 +1101,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   </div>
 
   <div class="contact-footer">
-    <div>Â© 2025 PNTC Maritime Training and Assessment Center. All rights reserved.</div>
+    <div>&copy; 2025 PNTC Maritime Training and Assessment Center. All rights reserved.</div>
     <div class="footer-badge">
       <div class="footer-dot"></div>
       Part of the PNTC Education Group
