@@ -714,11 +714,18 @@ async function requireAuth(req, res, next) {
 
 // Visitor: start / resume session
 app.post('/api/chat/session', async (req, res) => {
-  const { site, visitorName } = req.body;
+  const { site, visitorName, visitorEmail, visitorContact, concernType, concernBackground } = req.body;
   try {
     const { data, error } = await supabase
       .from('chat_sessions')
-      .insert({ site: site || 'main', visitor_name: visitorName || 'Visitor' })
+      .insert({
+        site: site || 'main',
+        visitor_name: visitorName || 'Visitor',
+        visitor_email: visitorEmail || null,
+        visitor_contact: visitorContact || null,
+        concern_type: concernType || null,
+        concern_background: concernBackground || null
+      })
       .select('id,visitor_name,site').single();
     if (error) throw error;
     res.json({ sessionId: data.id, visitorName: data.visitor_name });
@@ -757,7 +764,7 @@ app.get('/api/chat/sessions', requireAuth, async (req, res) => {
   try {
     const { data: sessions, error } = await supabase
       .from('chat_sessions')
-      .select('id,visitor_name,visitor_email,site,status,created_at,updated_at')
+      .select('id,visitor_name,visitor_email,visitor_contact,concern_type,concern_background,site,status,created_at,updated_at')
       .order('updated_at', { ascending: false });
     if (error) throw error;
     const result = await Promise.all((sessions || []).map(async s => {

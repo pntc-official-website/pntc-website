@@ -139,8 +139,17 @@
             <p id="convo-site">—</p>
           </div>
           <div class="convo-header-actions">
+            <button class="btn-sm" id="info-btn" title="Visitor info">ℹ️ Info</button>
             <button class="btn-sm danger" id="close-btn">Close Chat</button>
           </div>
+        </div>
+        <!-- Visitor info panel (toggled) -->
+        <div id="visitor-info-panel" style="display:none;background:#F8F9FC;border-bottom:1px solid #E2E6F0;padding:10px 18px;font-size:.78rem;color:#444;display:grid;grid-template-columns:1fr 1fr;gap:6px 16px">
+          <div><span style="font-weight:600;color:#0B2A6B">Email:</span> <span id="vi-email">—</span></div>
+          <div><span style="font-weight:600;color:#0B2A6B">Contact:</span> <span id="vi-contact">—</span></div>
+          <div><span style="font-weight:600;color:#0B2A6B">Enquiry:</span> <span id="vi-concern"></span></div>
+          <div><span style="font-weight:600;color:#0B2A6B">Site:</span> <span id="vi-site-full">—</span></div>
+          <div style="grid-column:1/-1"><span style="font-weight:600;color:#0B2A6B">Background:</span> <span id="vi-bg" style="white-space:pre-wrap">—</span></div>
         </div>
         <div class="messages-area" id="messages-area"></div>
         <div class="reply-area">
@@ -174,6 +183,16 @@
   var convoView    = document.getElementById('convo-view');
   var convoName    = document.getElementById('convo-name');
   var convoSite    = document.getElementById('convo-site');
+  var infoBtn      = document.getElementById('info-btn');
+  var infoPanel    = document.getElementById('visitor-info-panel');
+  var viEmail      = document.getElementById('vi-email');
+  var viContact    = document.getElementById('vi-contact');
+  var viConcern    = document.getElementById('vi-concern');
+  var viSiteFull   = document.getElementById('vi-site-full');
+  var viBg         = document.getElementById('vi-bg');
+  var infoPanelOpen = false;
+
+  var CONCERN_LABELS = { admission:'Admission', registrar:'Registrar', finance:'Finance', academics:'Academics', other:'Other / General' };
   var messagesArea = document.getElementById('messages-area');
   var replyInput   = document.getElementById('reply-input');
   var sendBtn      = document.getElementById('send-reply-btn');
@@ -282,10 +301,19 @@
     convoView.style.overflow = 'hidden';
     convoView.style.flex = '1';
 
+    infoPanelOpen = false;
+    infoPanel.style.display = 'none';
+
     var s = sessions[id];
     if (s) {
       convoName.textContent = s.visitor_name || 'Visitor';
-      convoSite.textContent = (SITE_LABELS[s.site] || s.site) + ' · ' + new Date(s.created_at).toLocaleDateString();
+      var concernLabel = CONCERN_LABELS[s.concern_type] || s.concern_type || '—';
+      convoSite.textContent = (SITE_LABELS[s.site] || s.site) + ' · ' + concernLabel;
+      viEmail.textContent    = s.visitor_email   || '—';
+      viContact.textContent  = s.visitor_contact || '—';
+      viConcern.textContent  = concernLabel;
+      viSiteFull.textContent = SITE_LABELS[s.site] || s.site;
+      viBg.textContent       = s.concern_background || '—';
       updateConvoStatus(s.status);
     }
 
@@ -388,6 +416,12 @@
     await loadSessions();
     await fetchMessages();
   }
+
+  infoBtn.addEventListener('click', function () {
+    infoPanelOpen = !infoPanelOpen;
+    infoPanel.style.display = infoPanelOpen ? 'grid' : 'none';
+    infoBtn.textContent = infoPanelOpen ? '✕ Info' : 'ℹ️ Info';
+  });
 
   closeBtn.addEventListener('click', function () {
     if (confirm('Close this chat session?')) setStatus('closed');
