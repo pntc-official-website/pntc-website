@@ -79,17 +79,6 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 }
 .hdr-enroll:hover{background:var(--gold-lt)}
 
-.hdr-back{
-  display:inline-flex;align-items:center;gap:.4rem;
-  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;
-  letter-spacing:.1em;text-transform:uppercase;
-  color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.15);
-  padding:.38rem .9rem;border-radius:2px;flex-shrink:0;
-  transition:color .2s,border-color .2s;
-}
-.hdr-back svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2;flex-shrink:0}
-.hdr-back:hover{color:var(--gold);border-color:rgba(200,150,12,.4)}
-
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;margin-left:auto}
 .hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:1px;transition:transform .3s,opacity .3s}
 
@@ -630,15 +619,12 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   </a>
 
   <nav class="hdr-nav">
+    <a href="/" style="color:rgba(200,150,12,.85)">&#8592; PNTC Network</a>
     <a href="#courses">Courses</a>
     <a href="#facilities">Facilities</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
-  <a href="/" class="hdr-back">
-    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-    PNTC Colleges
-  </a>
   <a href="#enroll" class="hdr-enroll">Enroll Now</a>
 
   <button class="hamburger" id="mob-toggle" aria-label="Menu">
@@ -648,6 +634,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
 <div id="mob-menu">
   <button class="mob-close" id="mob-close">&times;</button>
+  <a href="/" class="mob-link" style="color:var(--gold);opacity:.9;font-size:.8rem">&#8592; PNTC Network</a>
   <a href="#courses" class="mob-link">Courses</a>
   <a href="#facilities" class="mob-link">Facilities</a>
   <a href="#about" class="mob-link">About</a>
@@ -1129,7 +1116,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 </section>
 
 
-<script src="/chat-widget.js" data-site="maritime" data-name="PNTC Maritime" data-color="#C8960C" defer></script>
+<script src="/admin/chat-widget.js" data-site="maritime" data-name="PNTC Maritime" data-color="#C8960C" defer></script>
 <script>
 /* â”€â”€ Header scroll â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const hdr = document.getElementById('header');
