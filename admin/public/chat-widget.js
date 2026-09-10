@@ -158,9 +158,9 @@
 }
 .pw-label .pw-req{color:#e04}
 .pw-input{
-  width:100%;height:46px;
+  width:100%;height:48px;
   border:1.5px solid #e4e9f4;border-radius:10px;
-  padding:0 14px;font-size:.875rem;color:#1a1a2e;
+  padding:0 18px;font-size:.875rem;color:#1a1a2e;
   background:#FAFBFF;outline:none;
   box-sizing:border-box;
   transition:border-color .18s,box-shadow .18s,background .18s
@@ -188,7 +188,7 @@
 .pw-textarea{
   width:100%;
   border:1.5px solid #e4e9f4;border-radius:10px;
-  padding:12px 14px;font-size:.875rem;color:#1a1a2e;
+  padding:14px 18px;font-size:.875rem;color:#1a1a2e;
   background:#FAFBFF;outline:none;resize:none;
   line-height:1.65;font-family:inherit;
   box-sizing:border-box;
@@ -237,8 +237,8 @@
 .pw-msg-wrap.s{align-self:center;align-items:center;max-width:100%}
 .pw-agent-lbl{font-size:.65rem;font-weight:600;color:#0B2A6B;margin-bottom:2px;padding-left:1px}
 .pw-bubble{
-  padding:9px 13px;border-radius:12px;
-  font-size:.82rem;line-height:1.6;word-break:break-word
+  padding:11px 16px;border-radius:14px;
+  font-size:.84rem;line-height:1.65;word-break:break-word
 }
 .pw-bubble.v{background:#0B2A6B;color:#fff;border-bottom-right-radius:3px}
 .pw-bubble.a{background:#fff;color:#1a1a1a;border-bottom-left-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
