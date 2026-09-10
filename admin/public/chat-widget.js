@@ -215,7 +215,10 @@
 #pw-send:hover{background:#0f3d9e}
 #pw-send:disabled{background:#c0c4d0;cursor:not-allowed}
 #pw-send svg{width:14px;height:14px;fill:#fff}
-#pw-hint-txt{font-size:.63rem;color:#ccc;padding:0 13px 8px;text-align:right}
+#pw-hint-txt{font-size:.63rem;color:#ccc;padding:0 13px 6px;text-align:right}
+#pw-end-bar{padding:0 13px 10px;text-align:right}
+#pw-end-btn{background:none;border:none;font-size:.68rem;color:#bbb;cursor:pointer;padding:0;font-family:inherit;text-decoration:underline;text-underline-offset:2px;transition:color .14s}
+#pw-end-btn:hover{color:#c00}
 #pw-closed-note{padding:12px 14px;text-align:center;font-size:.76rem;color:#999;background:#F8F9FC}
 
 @media(max-width:440px){
@@ -310,6 +313,7 @@
       </button>
     </div>
     <div id="pw-hint-txt">Enter to send &nbsp;&middot;&nbsp; Shift+Enter for new line</div>
+    <div id="pw-end-bar"><button id="pw-end-btn">End chat</button></div>
     <div id="pw-closed-note" style="display:none">This chat session has been closed.</div>
   </div>
 </div>`;
@@ -335,6 +339,8 @@
   var inputEl  = document.getElementById('pw-input');
   var sendEl   = document.getElementById('pw-send');
   var closedNote = document.getElementById('pw-closed-note');
+  var endBar   = document.getElementById('pw-end-bar');
+  var endBtn   = document.getElementById('pw-end-btn');
   var badge    = document.getElementById('pw-badge');
 
   var chosen = null;
@@ -474,11 +480,26 @@
     resetActivity();
   }
   function showClosed() {
-    inputEl.disabled        = true;
-    sendEl.disabled         = true;
+    inputEl.disabled = true;
+    sendEl.disabled  = true;
     document.getElementById('pw-hint-txt').style.display = 'none';
+    endBar.style.display   = 'none';
     closedNote.style.display = 'block';
   }
+
+  endBtn.addEventListener('click', async function () {
+    if (!sessionId || isClosed) return;
+    if (!confirm('Are you sure you want to end this chat?')) return;
+    isClosed = true;
+    stopPoll();
+    clearTimeout(warnTimer);
+    clearTimeout(timeoutTimer);
+    warnBar.style.display = 'none';
+    renderMsg({ id:'sys_end', sender:'system', message:'You have ended this chat session.', created_at:new Date().toISOString() });
+    showClosed();
+    try { await fetch(API+'/session/'+sessionId+'/status',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:'closed'})}); } catch(e){}
+    try { sessionStorage.removeItem('pntc_chat_'+SITE); } catch(e){}
+  });
 
   /* ─── Intake submit ──────────────────────────────────────── */
   submitEl.addEventListener('click', async function () {
