@@ -13,7 +13,7 @@
   .sidebar-logo { padding: 22px 18px 16px; font-size: 1.05rem; font-weight: 700; letter-spacing: .01em; border-bottom: 1px solid rgba(255,255,255,.1); }
   .sidebar-logo span { color: #C8960C; }
   .sidebar-nav { flex: 1; padding: 10px 0; }
-  .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 18px; color: rgba(255,255,255,.72); text-decoration: none; font-size: .84rem; transition: background .15s, color .15s; cursor: pointer; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 18px; color: rgba(255,255,255,.72); text-decoration: none; font-size: .84rem; transition: background .15s, color .15s; }
   .nav-item:hover, .nav-item.active { background: rgba(255,255,255,.12); color: #fff; }
   .nav-icon { font-size: 1rem; width: 20px; text-align: center; }
   .sidebar-footer { padding: 14px 18px; border-top: 1px solid rgba(255,255,255,.1); font-size: .75rem; color: rgba(255,255,255,.4); }
@@ -21,8 +21,13 @@
   /* ── Main ── */
   .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
   .topbar { background: #fff; padding: 14px 24px; border-bottom: 1px solid #E2E6F0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .topbar-left { display: flex; align-items: center; gap: 10px; }
   .topbar-title { font-size: 1.05rem; font-weight: 700; color: #0B2A6B; }
-  #unread-total { background: #C8960C; color: #fff; font-size: .72rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: 8px; display: none; }
+  #unread-total { background: #C8960C; color: #fff; font-size: .72rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; display: none; }
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
+  #agent-chip { display: flex; align-items: center; gap: 6px; background: #EEF2FB; border-radius: 20px; padding: 5px 12px 5px 8px; font-size: .78rem; color: #0B2A6B; font-weight: 600; cursor: pointer; border: 1.5px solid #D0DAFB; transition: background .15s; }
+  #agent-chip:hover { background: #D9E4FC; }
+  #agent-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; }
   .topbar-status { font-size: .78rem; color: #888; }
 
   /* ── Chat layout ── */
@@ -39,52 +44,103 @@
   .session-item { padding: 12px 14px; border-bottom: 1px solid #F0F2F8; cursor: pointer; transition: background .12s; display: flex; gap: 10px; align-items: flex-start; }
   .session-item:hover { background: #F8F9FC; }
   .session-item.active { background: #EEF2FB; }
-  .session-avatar { width: 36px; height: 36px; border-radius: 50%; background: #0B2A6B; color: #fff; display: flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 700; flex-shrink: 0; }
+  .session-avatar { width: 38px; height: 38px; border-radius: 50%; background: #0B2A6B; color: #fff; display: flex; align-items: center; justify-content: center; font-size: .84rem; font-weight: 700; flex-shrink: 0; }
   .session-info { flex: 1; min-width: 0; }
   .session-info-top { display: flex; justify-content: space-between; align-items: center; gap: 4px; }
   .session-name { font-size: .82rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .session-time { font-size: .68rem; color: #aaa; flex-shrink: 0; }
-  .session-site { font-size: .68rem; color: #888; margin: 1px 0; }
-  .session-preview { font-size: .75rem; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; justify-content: space-between; }
+  .session-tags { display: flex; gap: 4px; margin: 2px 0; flex-wrap: wrap; }
+  .session-tag { font-size: .63rem; padding: 1px 7px; border-radius: 10px; background: #EEF2FB; color: #0B2A6B; font-weight: 600; }
+  .session-tag.closed { background: #F5F5F5; color: #888; }
+  .session-preview { font-size: .74rem; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; justify-content: space-between; align-items: center; }
   .session-badge { background: #C8960C; color: #fff; font-size: .65rem; font-weight: 700; min-width: 16px; height: 16px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; padding: 0 4px; flex-shrink: 0; }
-  .session-closed .session-avatar { background: #aaa; }
+  .session-closed .session-avatar { background: #bbb; }
   #sessions-empty { padding: 40px 20px; text-align: center; color: #aaa; font-size: .84rem; display: none; }
 
   /* Conversation panel */
   .convo-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
   .convo-empty { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; color: #bbb; }
-  .convo-empty-icon { font-size: 2.5rem; }
-  .convo-header { padding: 12px 20px; background: #fff; border-bottom: 1px solid #E2E6F0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-  .convo-header-info h3 { font-size: .92rem; font-weight: 700; }
-  .convo-header-info p { font-size: .74rem; color: #888; margin-top: 2px; }
-  .convo-header-actions { display: flex; gap: 8px; }
-  .btn-sm { font-size: .75rem; padding: 5px 12px; border-radius: 6px; border: 1.5px solid #dde; background: transparent; cursor: pointer; color: #555; transition: background .15s; }
+  .convo-empty-icon { font-size: 2.8rem; }
+  .convo-empty p { font-size: .84rem; }
+
+  .convo-header { padding: 11px 18px; background: #fff; border-bottom: 1px solid #E2E6F0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; gap: 12px; }
+  .convo-header-info { min-width: 0; flex: 1; }
+  .convo-header-info h3 { font-size: .92rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .convo-header-info p { font-size: .73rem; color: #888; margin-top: 2px; }
+  .convo-header-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+  .btn-sm { font-size: .74rem; padding: 5px 12px; border-radius: 6px; border: 1.5px solid #dde; background: transparent; cursor: pointer; color: #555; transition: background .15s; white-space: nowrap; }
   .btn-sm:hover { background: #F0F2F8; }
+  .btn-sm.warn { color: #b45309; border-color: #fde68a; background: #fffbeb; }
+  .btn-sm.warn:hover { background: #fef3c7; }
   .btn-sm.danger { color: #c00; border-color: #f8c8c8; }
   .btn-sm.danger:hover { background: #fff0f0; }
   .btn-sm.primary { background: #0B2A6B; color: #fff; border-color: #0B2A6B; }
   .btn-sm.primary:hover { background: #1244B8; }
-  .messages-area { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+
+  /* Visitor info panel */
+  .visitor-info-panel { display: none; background: #F8F9FC; border-bottom: 1px solid #E2E6F0; padding: 10px 18px; font-size: .78rem; color: #444; grid-template-columns: 1fr 1fr; gap: 6px 20px; flex-shrink: 0; }
+  .visitor-info-panel.open { display: grid; }
+  .vi-row { display: flex; flex-direction: column; gap: 1px; }
+  .vi-label { font-weight: 700; font-size: .67rem; text-transform: uppercase; letter-spacing: .04em; color: #0B2A6B; }
+  .vi-val { color: #333; font-size: .78rem; }
+  .vi-full { grid-column: 1 / -1; }
+  .concern-badge { display: inline-block; padding: 2px 9px; border-radius: 12px; background: #EEF2FB; color: #0B2A6B; font-weight: 700; font-size: .72rem; }
+
+  /* Banners */
+  #closed-banner { background: #FFF3CD; color: #7D5A00; font-size: .79rem; padding: 8px 16px; display: none; align-items: center; gap: 8px; border-bottom: 1px solid #FFE082; flex-shrink: 0; }
+  #terminated-banner { background: #FFE4E4; color: #8B0000; font-size: .79rem; padding: 8px 16px; display: none; align-items: center; gap: 8px; border-bottom: 1px solid #FFAAAA; flex-shrink: 0; }
+
+  /* Messages */
+  .messages-area { flex: 1; overflow-y: auto; padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; background: #F4F6FA; }
   .messages-area::-webkit-scrollbar { width: 4px; }
-  .messages-area::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
-  .msg { max-width: 72%; display: flex; flex-direction: column; }
-  .msg.visitor { align-self: flex-start; }
-  .msg.agent { align-self: flex-end; }
-  .msg-bubble { padding: 9px 13px; border-radius: 12px; font-size: .83rem; line-height: 1.55; word-break: break-word; }
-  .msg.visitor .msg-bubble { background: #F1F3F9; color: #222; border-bottom-left-radius: 3px; }
-  .msg.agent .msg-bubble { background: #0B2A6B; color: #fff; border-bottom-right-radius: 3px; }
+  .messages-area::-webkit-scrollbar-thumb { background: #ccd; border-radius: 2px; }
+
+  .msg-wrap { display: flex; flex-direction: column; max-width: 70%; }
+  .msg-wrap.visitor { align-self: flex-start; }
+  .msg-wrap.agent { align-self: flex-end; }
+  .msg-sender-name { font-size: .67rem; font-weight: 700; color: #0B2A6B; margin-bottom: 2px; padding-left: 2px; }
+  .msg-wrap.agent .msg-sender-name { text-align: right; padding-left: 0; padding-right: 2px; color: #555; }
+  .msg-bubble { padding: 9px 13px; border-radius: 14px; font-size: .83rem; line-height: 1.55; word-break: break-word; }
+  .msg-wrap.visitor .msg-bubble { background: #fff; color: #222; border-bottom-left-radius: 3px; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+  .msg-wrap.agent .msg-bubble { background: #0B2A6B; color: #fff; border-bottom-right-radius: 3px; }
+  .msg-bubble.system { background: transparent; color: #999; font-size: .74rem; font-style: italic; box-shadow: none; text-align: center; padding: 4px 8px; }
+  .msg-wrap.system { align-self: center; max-width: 90%; }
   .msg-meta { font-size: .65rem; color: #aaa; margin-top: 3px; }
-  .msg.agent .msg-meta { text-align: right; }
-  .msg-date-divider { text-align: center; font-size: .7rem; color: #bbb; padding: 6px 0; }
-  .reply-area { padding: 12px 16px; background: #fff; border-top: 1px solid #E2E6F0; flex-shrink: 0; }
-  .reply-area textarea { width: 100%; border: 1.5px solid #dde; border-radius: 8px; padding: 9px 12px; font-size: .83rem; resize: none; outline: none; font-family: inherit; line-height: 1.5; }
-  .reply-area textarea:focus { border-color: #0B2A6B; }
-  .reply-actions { display: flex; justify-content: flex-end; margin-top: 8px; gap: 8px; }
-  #reply-char { font-size: .72rem; color: #aaa; align-self: center; flex: 1; }
-  #closed-banner { background: #FFF3CD; color: #7D5A00; font-size: .8rem; padding: 8px 16px; text-align: center; border-bottom: 1px solid #FFE082; display: none; }
+  .msg-wrap.agent .msg-meta { text-align: right; }
+  .msg-date-divider { align-self: center; font-size: .7rem; color: #bbb; padding: 4px 12px; background: #E8EBF4; border-radius: 10px; }
+
+  /* Reply area */
+  .reply-area { padding: 10px 16px 12px; background: #fff; border-top: 1px solid #E2E6F0; flex-shrink: 0; }
+  .reply-agent-label { font-size: .7rem; color: #888; margin-bottom: 6px; }
+  .reply-agent-label strong { color: #0B2A6B; }
+  .reply-area textarea { width: 100%; border: 1.5px solid #dde; border-radius: 8px; padding: 9px 12px; font-size: .83rem; resize: none; outline: none; font-family: inherit; line-height: 1.5; background: #fafbff; transition: border-color .15s; }
+  .reply-area textarea:focus { border-color: #0B2A6B; background: #fff; }
+  .reply-actions { display: flex; align-items: center; margin-top: 8px; gap: 8px; }
+  #reply-char { font-size: .72rem; color: #bbb; flex: 1; }
+
+  /* Agent name modal */
+  #agent-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 9999; display: flex; align-items: center; justify-content: center; }
+  #agent-modal { background: #fff; border-radius: 14px; padding: 32px 28px; width: 380px; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
+  #agent-modal h2 { font-size: 1.1rem; color: #0B2A6B; margin-bottom: 6px; }
+  #agent-modal p { font-size: .82rem; color: #666; margin-bottom: 20px; line-height: 1.55; }
+  #agent-modal input { width: 100%; border: 1.5px solid #dde; border-radius: 8px; padding: 10px 12px; font-size: .9rem; outline: none; font-family: inherit; margin-bottom: 14px; }
+  #agent-modal input:focus { border-color: #0B2A6B; }
+  #agent-modal button { width: 100%; padding: 11px; background: #0B2A6B; color: #fff; border: none; border-radius: 8px; font-size: .9rem; font-weight: 700; cursor: pointer; }
+  #agent-modal button:hover { background: #1244B8; }
 </style>
 </head>
 <body>
+
+<!-- Agent name modal -->
+<div id="agent-modal-overlay">
+  <div id="agent-modal">
+    <h2>👋 Welcome to Live Chat</h2>
+    <p>Enter your name before you start. This is the name visitors will see when you reply to them.</p>
+    <input id="agent-name-input" placeholder="Your name (e.g. Maria)" maxlength="60" autocomplete="off">
+    <button id="agent-name-btn">Enter Live Chat</button>
+  </div>
+</div>
 
 <!-- Sidebar -->
 <aside class="sidebar">
@@ -102,11 +158,17 @@
 <!-- Main -->
 <div class="main">
   <div class="topbar">
-    <div style="display:flex;align-items:center">
+    <div class="topbar-left">
       <span class="topbar-title">Live Chat</span>
       <span id="unread-total"></span>
     </div>
-    <span class="topbar-status" id="poll-status">Connecting…</span>
+    <div class="topbar-right">
+      <div id="agent-chip" title="Click to change name">
+        <span class="dot"></span>
+        <span id="agent-chip-name">Agent</span>
+      </div>
+      <span class="topbar-status" id="poll-status">Connecting…</span>
+    </div>
   </div>
 
   <div class="chat-layout">
@@ -125,34 +187,66 @@
     </div>
 
     <!-- Conversation panel -->
-    <div class="convo-panel" id="convo-panel">
+    <div class="convo-panel">
       <div class="convo-empty" id="convo-empty">
         <div class="convo-empty-icon">💬</div>
-        <div>Select a conversation to reply</div>
+        <p>Select a conversation to reply</p>
       </div>
 
-      <div id="convo-view" style="display:none;flex:1;flex-direction:column;overflow:hidden;display:none">
-        <div id="closed-banner">This conversation is closed. <button class="btn-sm primary" id="reopen-btn" style="margin-left:8px">Reopen</button></div>
+      <div id="convo-view" style="display:none;flex:1;flex-direction:column;overflow:hidden">
+        <!-- Banners -->
+        <div id="closed-banner">
+          <span>⚠️ This conversation is closed.</span>
+          <button class="btn-sm primary" id="reopen-btn">Reopen</button>
+        </div>
+        <div id="terminated-banner">
+          <span>🚫 This chat was terminated by an agent.</span>
+          <button class="btn-sm primary" id="reopen-terminated-btn">Reopen</button>
+        </div>
+
+        <!-- Header -->
         <div class="convo-header">
           <div class="convo-header-info">
             <h3 id="convo-name">—</h3>
-            <p id="convo-site">—</p>
+            <p id="convo-subtitle">—</p>
           </div>
           <div class="convo-header-actions">
-            <button class="btn-sm" id="info-btn" title="Visitor info">ℹ️ Info</button>
-            <button class="btn-sm danger" id="close-btn">Close Chat</button>
+            <button class="btn-sm" id="info-btn">ℹ️ Info</button>
+            <button class="btn-sm warn" id="terminate-btn">🚫 Terminate</button>
+            <button class="btn-sm danger" id="close-btn">Close</button>
           </div>
         </div>
-        <!-- Visitor info panel (toggled) -->
-        <div id="visitor-info-panel" style="display:none;background:#F8F9FC;border-bottom:1px solid #E2E6F0;padding:10px 18px;font-size:.78rem;color:#444;display:grid;grid-template-columns:1fr 1fr;gap:6px 16px">
-          <div><span style="font-weight:600;color:#0B2A6B">Email:</span> <span id="vi-email">—</span></div>
-          <div><span style="font-weight:600;color:#0B2A6B">Contact:</span> <span id="vi-contact">—</span></div>
-          <div><span style="font-weight:600;color:#0B2A6B">Enquiry:</span> <span id="vi-concern"></span></div>
-          <div><span style="font-weight:600;color:#0B2A6B">Site:</span> <span id="vi-site-full">—</span></div>
-          <div style="grid-column:1/-1"><span style="font-weight:600;color:#0B2A6B">Background:</span> <span id="vi-bg" style="white-space:pre-wrap">—</span></div>
+
+        <!-- Visitor info panel -->
+        <div class="visitor-info-panel" id="visitor-info-panel">
+          <div class="vi-row">
+            <span class="vi-label">Email</span>
+            <span class="vi-val" id="vi-email">—</span>
+          </div>
+          <div class="vi-row">
+            <span class="vi-label">Contact</span>
+            <span class="vi-val" id="vi-contact">—</span>
+          </div>
+          <div class="vi-row">
+            <span class="vi-label">Enquiry</span>
+            <span class="vi-val" id="vi-concern">—</span>
+          </div>
+          <div class="vi-row">
+            <span class="vi-label">Site</span>
+            <span class="vi-val" id="vi-site-full">—</span>
+          </div>
+          <div class="vi-row vi-full">
+            <span class="vi-label">Background</span>
+            <span class="vi-val" id="vi-bg" style="white-space:pre-wrap">—</span>
+          </div>
         </div>
+
+        <!-- Messages -->
         <div class="messages-area" id="messages-area"></div>
-        <div class="reply-area">
+
+        <!-- Reply -->
+        <div class="reply-area" id="reply-area">
+          <div class="reply-agent-label">Replying as <strong id="reply-agent-name">—</strong></div>
           <textarea id="reply-input" rows="3" placeholder="Type your reply… (Enter to send, Shift+Enter for new line)" maxlength="1000"></textarea>
           <div class="reply-actions">
             <span id="reply-char">0 / 1000</span>
@@ -167,70 +261,110 @@
 <script>
 (function () {
   var API = '/api/chat';
-  var activeId = null;
-  var knownMsgIds = {};
-  var sessions = {};
-  var filterMode = 'open';
-  var pollTimer = null;
-  var totalUnread = 0;
-
-  var SITE_LABELS = { colleges: 'PNTC Colleges', shs: 'Senior High School', maritime: 'Maritime Training Center', aman: 'Aman Sinaya', main: 'PNTC Main' };
-
-  // ── Refs ──
-  var sessionsList = document.getElementById('sessions-list');
-  var sessionsEmpty = document.getElementById('sessions-empty');
-  var convoEmpty   = document.getElementById('convo-empty');
-  var convoView    = document.getElementById('convo-view');
-  var convoName    = document.getElementById('convo-name');
-  var convoSite    = document.getElementById('convo-site');
-  var infoBtn      = document.getElementById('info-btn');
-  var infoPanel    = document.getElementById('visitor-info-panel');
-  var viEmail      = document.getElementById('vi-email');
-  var viContact    = document.getElementById('vi-contact');
-  var viConcern    = document.getElementById('vi-concern');
-  var viSiteFull   = document.getElementById('vi-site-full');
-  var viBg         = document.getElementById('vi-bg');
+  var activeId     = null;
+  var knownMsgIds  = {};
+  var sessions     = {};
+  var filterMode   = 'open';
+  var pollTimer    = null;
+  var totalUnread  = 0;
+  var agentName    = '';
   var infoPanelOpen = false;
+  var lastMsgDate  = null;
 
+  var SITE_LABELS    = { colleges: 'PNTC Colleges', shs: 'Senior High School', maritime: 'Maritime Training Center', aman: 'Aman Sinaya', main: 'PNTC Main' };
   var CONCERN_LABELS = { admission:'Admission', registrar:'Registrar', finance:'Finance', academics:'Academics', other:'Other / General' };
-  var messagesArea = document.getElementById('messages-area');
-  var replyInput   = document.getElementById('reply-input');
-  var sendBtn      = document.getElementById('send-reply-btn');
-  var closeBtn     = document.getElementById('close-btn');
-  var reopenBtn    = document.getElementById('reopen-btn');
-  var closedBanner = document.getElementById('closed-banner');
-  var pollStatus   = document.getElementById('poll-status');
-  var unreadTotal  = document.getElementById('unread-total');
-  var replyChar    = document.getElementById('reply-char');
 
-  // ── Helpers ──
-  function fmtTime(iso) {
-    var d = new Date(iso);
-    return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  // ── Agent name modal ──────────────────────────────────────────
+  var agentModal   = document.getElementById('agent-modal-overlay');
+  var agentInput   = document.getElementById('agent-name-input');
+  var agentNameBtn = document.getElementById('agent-name-btn');
+  var agentChip    = document.getElementById('agent-chip');
+  var agentChipName = document.getElementById('agent-chip-name');
+  var replyAgentName = document.getElementById('reply-agent-name');
+
+  try { agentName = localStorage.getItem('pntc_agent_name') || ''; } catch (e) {}
+
+  function applyAgentName(name) {
+    agentName = name;
+    agentChipName.textContent = name;
+    replyAgentName.textContent = name;
+    try { localStorage.setItem('pntc_agent_name', name); } catch (e) {}
   }
+
+  if (agentName) {
+    agentModal.style.display = 'none';
+    applyAgentName(agentName);
+    startPolling();
+  } else {
+    agentInput.focus();
+  }
+
+  agentNameBtn.addEventListener('click', function () {
+    var name = agentInput.value.trim();
+    if (!name) { agentInput.focus(); return; }
+    applyAgentName(name);
+    agentModal.style.display = 'none';
+    startPolling();
+  });
+  agentInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') agentNameBtn.click();
+  });
+
+  // Click chip to change name
+  agentChip.addEventListener('click', function () {
+    agentInput.value = agentName;
+    agentModal.style.display = 'flex';
+    agentInput.focus();
+  });
+
+  // ── Refs ──────────────────────────────────────────────────────
+  var sessionsList  = document.getElementById('sessions-list');
+  var sessionsEmpty = document.getElementById('sessions-empty');
+  var convoEmpty    = document.getElementById('convo-empty');
+  var convoView     = document.getElementById('convo-view');
+  var convoName     = document.getElementById('convo-name');
+  var convoSubtitle = document.getElementById('convo-subtitle');
+  var infoBtn       = document.getElementById('info-btn');
+  var infoPanel     = document.getElementById('visitor-info-panel');
+  var viEmail       = document.getElementById('vi-email');
+  var viContact     = document.getElementById('vi-contact');
+  var viConcern     = document.getElementById('vi-concern');
+  var viSiteFull    = document.getElementById('vi-site-full');
+  var viBg          = document.getElementById('vi-bg');
+  var messagesArea  = document.getElementById('messages-area');
+  var replyArea     = document.getElementById('reply-area');
+  var replyInput    = document.getElementById('reply-input');
+  var sendBtn       = document.getElementById('send-reply-btn');
+  var terminateBtn  = document.getElementById('terminate-btn');
+  var closeBtn      = document.getElementById('close-btn');
+  var reopenBtn     = document.getElementById('reopen-btn');
+  var reopenTermBtn = document.getElementById('reopen-terminated-btn');
+  var closedBanner  = document.getElementById('closed-banner');
+  var terminatedBanner = document.getElementById('terminated-banner');
+  var pollStatus    = document.getElementById('poll-status');
+  var unreadTotal   = document.getElementById('unread-total');
+  var replyChar     = document.getElementById('reply-char');
+
+  // ── Helpers ───────────────────────────────────────────────────
+  function fmtTime(iso) { return new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); }
   function fmtDate(iso) {
-    var d = new Date(iso);
-    var today = new Date();
+    var d = new Date(iso), today = new Date();
     if (d.toDateString() === today.toDateString()) return 'Today';
-    var yesterday = new Date(today); yesterday.setDate(today.getDate() - 1);
-    if (d.toDateString() === yesterday.toDateString()) return 'Yesterday';
+    var y = new Date(today); y.setDate(today.getDate() - 1);
+    if (d.toDateString() === y.toDateString()) return 'Yesterday';
     return d.toLocaleDateString([], { month: 'short', day: 'numeric' });
   }
   function fmtAgo(iso) {
     var diff = Date.now() - new Date(iso).getTime();
     if (diff < 60000) return 'just now';
-    if (diff < 3600000) return Math.floor(diff / 60000) + 'm ago';
-    if (diff < 86400000) return Math.floor(diff / 3600000) + 'h ago';
-    return Math.floor(diff / 86400000) + 'd ago';
+    if (diff < 3600000) return Math.floor(diff/60000) + 'm ago';
+    if (diff < 86400000) return Math.floor(diff/3600000) + 'h ago';
+    return Math.floor(diff/86400000) + 'd ago';
   }
-  function avatar(name) {
-    return (name || 'V').charAt(0).toUpperCase();
-  }
-  function escHtml(s) {
-    return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
-  }
+  function avatar(n) { return (n || 'V').charAt(0).toUpperCase(); }
+  function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
 
-  // ── Session list ──
+  // ── Session list ──────────────────────────────────────────────
   async function loadSessions() {
     try {
       var r = await fetch(API + '/sessions');
@@ -241,37 +375,34 @@
       list.forEach(function (s) { sessions[s.id] = s; });
       renderSessionList();
       updateUnreadTotal();
-      pollStatus.textContent = 'Live · ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    } catch (e) {
-      pollStatus.textContent = 'Connection error';
-    }
+      pollStatus.textContent = 'Live · ' + new Date().toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
+    } catch (e) { pollStatus.textContent = 'Connection error'; }
   }
 
   function renderSessionList() {
     var filtered = Object.values(sessions).filter(function (s) {
-      if (filterMode === 'open') return s.status === 'open';
+      if (filterMode === 'open')   return s.status === 'open';
       if (filterMode === 'closed') return s.status === 'closed';
       return true;
-    });
-    filtered.sort(function (a, b) { return new Date(b.updated_at) - new Date(a.updated_at); });
+    }).sort(function (a, b) { return new Date(b.updated_at) - new Date(a.updated_at); });
 
     sessionsList.innerHTML = '';
-    if (filtered.length === 0) {
-      sessionsEmpty.style.display = 'block';
-      return;
-    }
-    sessionsEmpty.style.display = 'none';
+    sessionsEmpty.style.display = filtered.length === 0 ? 'block' : 'none';
 
     filtered.forEach(function (s) {
+      var concernLabel = CONCERN_LABELS[s.concern_type] || s.concern_type || '';
       var div = document.createElement('div');
-      div.className = 'session-item' + (s.status === 'closed' ? ' session-closed' : '') + (s.id === activeId ? ' active' : '');
+      div.className = 'session-item' + (s.status==='closed' ? ' session-closed' : '') + (s.id===activeId ? ' active' : '');
       div.dataset.id = s.id;
-      div.innerHTML = '<div class="session-avatar">' + avatar(s.visitor_name) + '</div>'
+      div.innerHTML =
+        '<div class="session-avatar">' + avatar(s.visitor_name) + '</div>'
         + '<div class="session-info">'
-        + '<div class="session-info-top"><span class="session-name">' + escHtml(s.visitor_name || 'Visitor') + '</span>'
-        + '<span class="session-time">' + fmtAgo(s.updated_at) + '</span></div>'
-        + '<div class="session-site">' + (SITE_LABELS[s.site] || s.site) + '</div>'
-        + '<div class="session-preview"><span>' + escHtml((s.last_message || '').slice(0, 60)) + '</span>'
+        + '<div class="session-info-top"><span class="session-name">' + esc(s.visitor_name||'Visitor') + '</span><span class="session-time">' + fmtAgo(s.updated_at) + '</span></div>'
+        + '<div class="session-tags">'
+        + '<span class="session-tag' + (s.status==='closed'?' closed':'') + '">' + (SITE_LABELS[s.site]||s.site) + '</span>'
+        + (concernLabel ? '<span class="session-tag' + (s.status==='closed'?' closed':'') + '">' + esc(concernLabel) + '</span>' : '')
+        + '</div>'
+        + '<div class="session-preview"><span>' + esc((s.last_message||'').slice(0,60)) + '</span>'
         + (s.unread_count > 0 ? '<span class="session-badge">' + s.unread_count + '</span>' : '')
         + '</div></div>';
       div.addEventListener('click', function () { openSession(s.id); });
@@ -280,59 +411,59 @@
   }
 
   function updateUnreadTotal() {
-    totalUnread = Object.values(sessions).reduce(function (n, s) { return n + (s.unread_count || 0); }, 0);
-    if (totalUnread > 0) {
-      unreadTotal.textContent = totalUnread;
-      unreadTotal.style.display = 'inline';
-    } else {
-      unreadTotal.style.display = 'none';
-    }
+    totalUnread = Object.values(sessions).reduce(function (n, s) { return n + (s.unread_count||0); }, 0);
+    if (totalUnread > 0) { unreadTotal.textContent = totalUnread; unreadTotal.style.display = 'inline'; }
+    else { unreadTotal.style.display = 'none'; }
   }
 
-  // ── Open session ──
+  // ── Open session ──────────────────────────────────────────────
   async function openSession(id) {
-    activeId = id;
-    knownMsgIds = {};
-    messagesArea.innerHTML = '';
+    activeId = id; knownMsgIds = {}; messagesArea.innerHTML = ''; lastMsgDate = null;
     renderSessionList();
     convoEmpty.style.display = 'none';
     convoView.style.display = 'flex';
     convoView.style.flexDirection = 'column';
     convoView.style.overflow = 'hidden';
     convoView.style.flex = '1';
-
     infoPanelOpen = false;
-    infoPanel.style.display = 'none';
+    infoPanel.classList.remove('open');
+    infoBtn.textContent = 'ℹ️ Info';
 
     var s = sessions[id];
     if (s) {
       convoName.textContent = s.visitor_name || 'Visitor';
-      var concernLabel = CONCERN_LABELS[s.concern_type] || s.concern_type || '—';
-      convoSite.textContent = (SITE_LABELS[s.site] || s.site) + ' · ' + concernLabel;
-      viEmail.textContent    = s.visitor_email   || '—';
-      viContact.textContent  = s.visitor_contact || '—';
-      viConcern.textContent  = concernLabel;
+      var cLabel = CONCERN_LABELS[s.concern_type] || s.concern_type || '—';
+      convoSubtitle.textContent = (SITE_LABELS[s.site]||s.site) + ' · ' + cLabel;
+      viEmail.textContent   = s.visitor_email   || '—';
+      viContact.textContent = s.visitor_contact || '—';
+      viConcern.innerHTML   = '<span class="concern-badge">' + esc(cLabel) + '</span>';
       viSiteFull.textContent = SITE_LABELS[s.site] || s.site;
-      viBg.textContent       = s.concern_background || '—';
+      viBg.textContent      = s.concern_background || '—';
       updateConvoStatus(s.status);
     }
-
     await fetchMessages();
   }
 
   function updateConvoStatus(status) {
+    closedBanner.style.display     = 'none';
+    terminatedBanner.style.display = 'none';
+    terminateBtn.style.display     = '';
+    closeBtn.style.display         = '';
+
     if (status === 'closed') {
-      closedBanner.style.display = 'block';
-      closeBtn.style.display = 'none';
-      replyInput.disabled = true;
-      sendBtn.disabled = true;
-      replyInput.placeholder = 'This chat is closed.';
+      closedBanner.style.display = 'flex';
+      terminateBtn.style.display = 'none';
+      closeBtn.style.display     = 'none';
+      replyArea.style.display    = 'none';
+    } else if (status === 'terminated') {
+      terminatedBanner.style.display = 'flex';
+      terminateBtn.style.display     = 'none';
+      closeBtn.style.display         = 'none';
+      replyArea.style.display        = 'none';
     } else {
-      closedBanner.style.display = 'none';
-      closeBtn.style.display = '';
+      replyArea.style.display = 'block';
       replyInput.disabled = false;
-      sendBtn.disabled = false;
-      replyInput.placeholder = 'Type your reply… (Enter to send, Shift+Enter for new line)';
+      sendBtn.disabled    = false;
     }
   }
 
@@ -342,115 +473,153 @@
       var r = await fetch(API + '/session/' + activeId);
       var d = await r.json();
       if (d.session) {
-        sessions[activeId] = Object.assign(sessions[activeId] || {}, d.session, { unread_count: 0 });
+        sessions[activeId] = Object.assign(sessions[activeId]||{}, d.session, { unread_count: 0 });
         updateConvoStatus(d.session.status);
-        renderSessionList();
-        updateUnreadTotal();
+        renderSessionList(); updateUnreadTotal();
       }
       if (Array.isArray(d.messages)) renderMessages(d.messages);
     } catch (e) {}
   }
 
-  var lastMsgDate = null;
   function renderMessages(msgs) {
     msgs.forEach(function (m) {
       if (knownMsgIds[m.id]) return;
       knownMsgIds[m.id] = true;
+
       var msgDate = fmtDate(m.created_at);
       if (msgDate !== lastMsgDate) {
         lastMsgDate = msgDate;
         var div = document.createElement('div');
-        div.className = 'msg-date-divider';
-        div.textContent = msgDate;
+        div.className = 'msg-date-divider'; div.textContent = msgDate;
         messagesArea.appendChild(div);
       }
-      var div = document.createElement('div');
-      div.className = 'msg ' + m.sender;
-      div.innerHTML = '<div class="msg-bubble">' + escHtml(m.message) + '</div>'
-        + '<div class="msg-meta">' + fmtTime(m.created_at) + '</div>';
-      messagesArea.appendChild(div);
+
+      if (m.sender === 'system') {
+        var sd = document.createElement('div');
+        sd.className = 'msg-wrap system';
+        sd.innerHTML = '<div class="msg-bubble system">' + esc(m.message) + '</div>';
+        messagesArea.appendChild(sd);
+        messagesArea.scrollTop = messagesArea.scrollHeight;
+        return;
+      }
+
+      var wrap = document.createElement('div');
+      wrap.className = 'msg-wrap ' + m.sender;
+
+      var senderDisplay = m.sender === 'agent'
+        ? (m.agent_name || 'Agent')
+        : (sessions[activeId] && sessions[activeId].visitor_name ? sessions[activeId].visitor_name : 'Visitor');
+
+      var nameEl = document.createElement('div');
+      nameEl.className = 'msg-sender-name'; nameEl.textContent = senderDisplay;
+      wrap.appendChild(nameEl);
+
+      var bubble = document.createElement('div');
+      bubble.className = 'msg-bubble'; bubble.innerHTML = esc(m.message);
+      wrap.appendChild(bubble);
+
+      var meta = document.createElement('div');
+      meta.className = 'msg-meta'; meta.textContent = fmtTime(m.created_at);
+      wrap.appendChild(meta);
+
+      messagesArea.appendChild(wrap);
     });
     messagesArea.scrollTop = messagesArea.scrollHeight;
   }
 
-  // ── Reply ──
-  async function sendReply() {
-    var text = replyInput.value.trim();
-    if (!text || !activeId) return;
-    sendBtn.disabled = true;
-    sendBtn.textContent = 'Sending…';
+  // ── Reply ─────────────────────────────────────────────────────
+  async function sendReply(text, opts) {
+    opts = opts || {};
+    if (!text || !activeId) return false;
+    sendBtn.disabled = true; sendBtn.textContent = 'Sending…';
     try {
       var r = await fetch(API + '/session/' + activeId + '/reply', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text })
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, agentName: opts.agentName !== undefined ? opts.agentName : agentName })
       });
       if (r.ok) {
-        replyInput.value = '';
-        replyChar.textContent = '0 / 1000';
-        await fetchMessages();
-        await loadSessions();
+        replyInput.value = ''; replyChar.textContent = '0 / 1000';
+        await fetchMessages(); await loadSessions();
+        return true;
       }
     } finally {
-      sendBtn.disabled = false;
-      sendBtn.textContent = 'Send Reply';
+      sendBtn.disabled = false; sendBtn.textContent = 'Send Reply';
     }
+    return false;
   }
 
-  sendBtn.addEventListener('click', sendReply);
+  sendBtn.addEventListener('click', function () {
+    var text = replyInput.value.trim();
+    if (text) sendReply(text);
+  });
   replyInput.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendReply(); }
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); var text = replyInput.value.trim(); if (text) sendReply(text); }
   });
   replyInput.addEventListener('input', function () {
     replyChar.textContent = this.value.length + ' / 1000';
   });
 
-  // ── Close / Reopen ──
+  // ── Status helpers ────────────────────────────────────────────
   async function setStatus(status) {
     if (!activeId) return;
     await fetch(API + '/session/' + activeId + '/status', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: status })
     });
-    await loadSessions();
-    await fetchMessages();
+    await loadSessions(); await fetchMessages();
   }
 
+  // ── Terminate ─────────────────────────────────────────────────
+  terminateBtn.addEventListener('click', async function () {
+    if (!activeId) return;
+    if (!confirm('Terminate this chat? A closing message will be sent to the visitor.')) return;
+    terminateBtn.disabled = true;
+    await sendReply(
+      'This chat session has been ended by a support agent. Thank you for contacting ' +
+      (sessions[activeId] ? (({ colleges:'PNTC Colleges', shs:'PNTC SHS', main:'PNTC', maritime:'Maritime Training Center', aman:'Aman Sinaya' })[sessions[activeId].site] || 'PNTC') : 'PNTC') +
+      '. For further assistance, please feel free to reach us again.',
+      { agentName: agentName }
+    );
+    await setStatus('closed');
+    terminateBtn.disabled = false;
+  });
+
+  // ── Close / Reopen ────────────────────────────────────────────
+  closeBtn.addEventListener('click', function () {
+    if (confirm('Close this chat session? No message will be sent to the visitor.')) setStatus('closed');
+  });
+  reopenBtn.addEventListener('click', function () { setStatus('open'); });
+  reopenTermBtn.addEventListener('click', function () { setStatus('open'); });
+
+  // ── Info panel ────────────────────────────────────────────────
   infoBtn.addEventListener('click', function () {
     infoPanelOpen = !infoPanelOpen;
-    infoPanel.style.display = infoPanelOpen ? 'grid' : 'none';
+    infoPanel.classList.toggle('open', infoPanelOpen);
     infoBtn.textContent = infoPanelOpen ? '✕ Info' : 'ℹ️ Info';
   });
 
-  closeBtn.addEventListener('click', function () {
-    if (confirm('Close this chat session?')) setStatus('closed');
-  });
-  reopenBtn.addEventListener('click', function () { setStatus('open'); });
-
-  // ── Filter buttons ──
+  // ── Filter buttons ────────────────────────────────────────────
   document.querySelectorAll('.filter-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
       document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
       btn.classList.add('active');
       filterMode = btn.dataset.filter;
-      activeId = null;
+      activeId = null; lastMsgDate = null;
       convoEmpty.style.display = 'flex';
-      convoView.style.display = 'none';
+      convoView.style.display  = 'none';
       renderSessionList();
     });
   });
 
-  // ── Polling ──
+  // ── Polling ───────────────────────────────────────────────────
   function startPolling() {
+    if (pollTimer) return;
     loadSessions();
     pollTimer = setInterval(function () {
       loadSessions();
       if (activeId) fetchMessages();
     }, 5000);
   }
-
-  startPolling();
 })();
 </script>
 </body>

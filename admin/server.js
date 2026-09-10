@@ -796,11 +796,12 @@ app.get('/api/chat/session/:id', requireAuth, async (req, res) => {
 
 // Admin: send reply
 app.post('/api/chat/session/:id/reply', requireAuth, async (req, res) => {
-  const { message } = req.body;
+  const { message, agentName } = req.body;
   if (!message?.trim()) return res.status(400).json({ error: 'Empty message' });
   try {
     const { error } = await supabase.from('chat_messages').insert({
-      session_id: req.params.id, sender: 'agent', message: message.trim(), read: true
+      session_id: req.params.id, sender: 'agent', message: message.trim(),
+      agent_name: agentName?.trim() || null, read: true
     });
     if (error) throw error;
     await supabase.from('chat_sessions').update({ updated_at: new Date().toISOString() }).eq('id', req.params.id);
