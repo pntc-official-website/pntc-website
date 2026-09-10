@@ -37,7 +37,35 @@ footer strong{color:var(--accent)}
   <a href="../index.html#contact" class="nav-cta">Inquire Now</a>
 </nav>
 <div class="page-hero"><div class="eyebrow">Latest Updates</div><h1 class="page-title">News &amp; Blog</h1></div>
-<div class="grid"></div>
-<div class="empty">No posts yet. Check back soon!</div>
+<div class="grid" id="blog-grid"></div>
+<div class="empty" id="blog-empty" hidden>No posts yet. Check back soon!</div>
 <footer><strong>PNTC Colleges</strong><br>Dasmariñas, Cavite, Philippines<br><br>&copy; 2026 PNTC. All rights reserved.</footer>
+<script>
+(function(){
+  function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  fetch('/api/public/posts?site=colleges&limit=50')
+    .then(function(r){return r.json();})
+    .then(function(posts){
+      var grid=document.getElementById('blog-grid');
+      var empty=document.getElementById('blog-empty');
+      if(!Array.isArray(posts)||!posts.length){empty.hidden=false;return;}
+      grid.innerHTML=posts.map(function(p){
+        var date=new Date(p.publishedAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+        var img=p.featuredImage?'background-image:url('+esc(p.featuredImage)+');background-size:cover;background-position:center':'';
+        var imgClass=p.featuredImage?'card-img':'card-img card-img-placeholder';
+        return '<a class="card" href="'+esc(p.slug)+'.html">'
+          +'<div class="'+imgClass+'" style="'+img+'"></div>'
+          +'<div class="card-body">'
+          +(p.category?'<div class="card-cat">'+esc(p.category)+'</div>':'')
+          +'<div class="card-title">'+esc(p.title)+'</div>'
+          +(p.excerpt?'<div class="card-excerpt">'+esc(p.excerpt)+'</div>':'')
+          +'<div class="card-meta">'+date+'</div>'
+          +'</div></a>';
+      }).join('');
+    })
+    .catch(function(){
+      document.getElementById('blog-empty').hidden=false;
+    });
+})();
+</script>
 </body></html>

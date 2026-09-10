@@ -739,7 +739,19 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .news-head h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2rem,4vw,3rem);text-transform:uppercase}
 .news-head h2 span{color:var(--gold)}
 
-.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1200px;margin:0 auto}
+.news-carousel-wrap{max-width:1200px;margin:0 auto;position:relative}
+.news-viewport{overflow:hidden;padding-bottom:.5rem}
+.news-track{display:flex;gap:1.5rem;transition:transform .55s cubic-bezier(.22,.61,.36,1);will-change:transform}
+.nc-slide{flex:0 0 calc(33.333% - 1rem);min-width:0}
+.nc-arrow{position:absolute;top:92px;transform:translateY(-50%);width:42px;height:42px;background:rgba(6,12,25,.8);border:1px solid rgba(200,150,12,.35);border-radius:50%;color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,opacity .2s;z-index:5}
+.nc-arrow:hover{background:rgba(200,150,12,.15)}
+.nc-arrow:disabled{opacity:.25;cursor:default;pointer-events:none}
+.nc-prev{left:-21px}.nc-next{right:-21px}
+.nc-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1.75rem}
+.nc-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18);border:none;cursor:pointer;padding:0;transition:background .25s,width .25s,border-radius .25s}
+.nc-dot.active{background:var(--gold);width:24px;border-radius:4px}
+@media(max-width:900px){.nc-slide{flex:0 0 calc(50% - .75rem)}}
+@media(max-width:600px){.nc-slide{flex:0 0 100%}}
 .news-card{
   position:relative;
   background:rgba(11,42,107,.18);
@@ -1387,29 +1399,65 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     <p>Announcements, achievements, and milestones from the PNTC community — stay connected with what's happening on campus and beyond.</p>
   </div>
   <!-- PNTC_NEWS_START -->
-  <div id="pntc-news-dynamic" class="news-grid"></div>
+  <div class="news-carousel-wrap">
+    <div class="news-viewport">
+      <div class="news-track" id="nc-track"></div>
+    </div>
+    <button class="nc-arrow nc-prev" id="nc-prev" aria-label="Previous">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="nc-arrow nc-next" id="nc-next" aria-label="Next">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="nc-dots" id="nc-dots"></div>
+  </div>
+  <div style="text-align:center;margin-top:2.5rem">
+    <a href="blog/" class="slide-btn">View All Posts <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="10 4 14 8 10 12"/></svg></a>
+  </div>
   <script>
   (function(){
-    var SVG='<svg stroke="currentColor" stroke-width="1.5" fill="none" viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg>';
+    var LSVG='<svg stroke="currentColor" stroke-width="1.5" fill="none" viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg>';
     function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-    fetch('/api/public/posts?site=colleges&limit=3')
+    var perView=window.innerWidth>=900?3:window.innerWidth>=600?2:1;
+    var idx=0,total=0,auto;
+    var track=document.getElementById('nc-track');
+    var prevBtn=document.getElementById('nc-prev');
+    var nextBtn=document.getElementById('nc-next');
+    fetch('/api/public/posts?site=colleges&limit=20')
       .then(function(r){return r.json();})
       .then(function(posts){
         if(!Array.isArray(posts)||!posts.length)return;
-        var el=document.getElementById('pntc-news-dynamic');
-        if(!el)return;
-        el.innerHTML=posts.map(function(p,i){
+        total=posts.length;
+        track.innerHTML=posts.map(function(p){
           var date=new Date(p.publishedAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
           var thumb=p.featuredImage
-            ?'<div class="news-thumb"><img src="'+esc(p.featuredImage)+'" alt="'+esc(p.title)+'" style="object-position:center top"></div>'
+            ?'<div class="news-thumb"><img src="'+esc(p.featuredImage)+'" alt="'+esc(p.title)+'" loading="lazy"></div>'
             :'<div class="news-thumb" style="background:linear-gradient(135deg,#0B2A6B,#061c4a)"></div>';
-          var delay=i>0?' style="transition-delay:'+(i*0.1)+'s"':'';
           var tag=p.category?'<span class="news-tag">'+esc(p.category)+'</span>':'';
-          return '<article class="news-card reveal"'+delay+'>'+thumb+'<div class="news-body">'+tag+'<div class="news-date">'+esc(date)+'</div><h3>'+esc(p.title)+'</h3><p>'+esc(p.excerpt||'')+'</p><a href="blog/'+esc(p.slug)+'.html" class="news-link">Read More '+SVG+'</a></div></article>';
+          return '<article class="news-card nc-slide">'+thumb+'<div class="news-body">'+tag+'<div class="news-date">'+esc(date)+'</div><h3>'+esc(p.title)+'</h3><p>'+esc(p.excerpt||'')+'</p><a href="blog/'+esc(p.slug)+'.html" class="news-link">Read More '+LSVG+'</a></div></article>';
         }).join('');
-        el.querySelectorAll('.reveal').forEach(function(c){c.classList.add('visible');});
-      })
-      .catch(function(){});
+        buildDots();move(0);startAuto();
+      }).catch(function(){});
+    function buildDots(){
+      var dotsEl=document.getElementById('nc-dots');if(!dotsEl)return;
+      var pages=Math.ceil(total/perView);
+      dotsEl.innerHTML=Array.from({length:pages},function(_,i){return'<button class="nc-dot'+(i===0?' active':'')+'" aria-label="Page '+(i+1)+'"></button>';}).join('');
+      dotsEl.querySelectorAll('.nc-dot').forEach(function(d,i){d.addEventListener('click',function(){move(i*perView);resetAuto();});});
+    }
+    function move(to){
+      idx=Math.max(0,Math.min(to,total-perView));
+      var slides=track.querySelectorAll('.nc-slide');if(!slides.length)return;
+      var gap=24,cardW=slides[0].offsetWidth;
+      track.style.transform='translateX(-'+((cardW+gap)*idx)+'px)';
+      var page=Math.floor(idx/perView);
+      document.querySelectorAll('.nc-dot').forEach(function(d,i){d.classList.toggle('active',i===page);});
+      if(prevBtn)prevBtn.disabled=idx===0;
+      if(nextBtn)nextBtn.disabled=idx>=total-perView;
+    }
+    function startAuto(){auto=setInterval(function(){move(idx+1>total-perView?0:idx+1);},6000);}
+    function resetAuto(){clearInterval(auto);startAuto();}
+    if(prevBtn)prevBtn.addEventListener('click',function(){move(idx-1);resetAuto();});
+    if(nextBtn)nextBtn.addEventListener('click',function(){move(idx+1);resetAuto();});
   })();
   </script>
   <!-- PNTC_NEWS_END -->
