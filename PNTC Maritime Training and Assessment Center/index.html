@@ -588,6 +588,31 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   .voices-grid{grid-template-columns:1fr}
   .why-grid{grid-template-columns:1fr}
 }
+
+/* ── ALTERNATING LIGHT SECTIONS ─────────────────── */
+#courses,#why,#voices{background:#EEF2FA}
+#courses .section-head h2,#why .section-head h2,#voices .section-head h2{color:var(--ink)}
+#courses .section-head p,#why .section-head p,#voices .section-head p{color:rgba(6,12,25,.5)}
+
+#courses .course-card{background:#fff;border-color:rgba(11,42,107,.1);filter:drop-shadow(0 2px 10px rgba(11,42,107,.1))}
+#courses .course-card:hover{background:#f4f7ff;border-color:rgba(200,150,12,.3);filter:drop-shadow(0 8px 24px rgba(11,42,107,.18))}
+#courses .course-name{color:var(--ink)}
+#courses .course-desc{color:rgba(6,12,25,.5)}
+#courses .course-meta-item{color:rgba(6,12,25,.35)}
+#courses .courses-cta{border-top-color:rgba(11,42,107,.1)}
+#courses .courses-cta p{color:rgba(6,12,25,.45)}
+
+#why .why-card{background:#fff;border-color:rgba(11,42,107,.1)}
+#why .why-card:hover{background:#f4f7ff;border-color:rgba(200,150,12,.3)}
+#why .why-num{color:rgba(11,42,107,.1)}
+#why .why-h{color:var(--ink)}
+#why .why-p{color:rgba(6,12,25,.48)}
+
+#voices .voice-card{background:#fff;border-color:rgba(11,42,107,.1);filter:drop-shadow(0 2px 10px rgba(11,42,107,.1))}
+#voices .voice-card:hover{background:#f4f7ff;border-color:rgba(200,150,12,.25)}
+#voices .voice-quote{color:rgba(6,12,25,.55)}
+#voices .voice-name{color:var(--ink)}
+#voices .voice-rank{color:rgba(6,12,25,.3)}
 </style>
 </head>
 <body>
@@ -926,6 +951,13 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
       <div class="fac-caption">
         <div class="fac-tag">Campus</div>
         <h3>Open Training Grounds</h3>
+      </div>
+    </div>
+    <div class="fac-card fac-wide" onclick="openLightbox(this)" style="min-height:280px">
+      <img class="fac-photo" src="/maritime/Facility - Training Vessel Aman Sinaya.jpg" alt="Training Vessel Aman Sinaya" style="object-position:center 40%">
+      <div class="fac-caption">
+        <div class="fac-tag">Training Vessel</div>
+        <h3>MV Aman Sinaya — Live Onboard Training</h3>
       </div>
     </div>
   </div>
