@@ -446,7 +446,7 @@
   async function createSession(f) {
     var r = await fetch(API+'/session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({site:SITE,visitorName:f.name,visitorEmail:f.email,visitorContact:f.phone,concernType:f.concern,concernBackground:f.bg})});
     var d = await r.json();
-    if (!d.sessionId) throw new Error('fail');
+    if (!d.sessionId) throw new Error(d.error || 'Session creation failed');
     sessionId = d.sessionId;
     try { sessionStorage.setItem('pntc_chat_'+SITE, sessionId); } catch(e){}
   }
@@ -521,7 +521,7 @@
       await poll();
     } catch(e) {
       submitEl.disabled = false; submitEl.textContent = 'Start Chat';
-      showErr('Could not connect. Please try again.');
+      showErr(e.message && e.message.length < 200 ? e.message : 'Could not connect. Please try again.');
     }
   });
 
