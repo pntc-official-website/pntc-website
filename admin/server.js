@@ -821,17 +821,20 @@ app.post('/api/chat/session/:id/status', requireAuth, async (req, res) => {
 });
 
 // Agent heartbeat — called every 60s while admin has chat.html open
-app.post('/api/chat/agent-heartbeat', requireAuth, async (req, res) => {
+app.post('/api/chat/agent-heartbeat', async (req, res) => {
   const { agentName } = req.body;
   if (!agentName?.trim()) return res.status(400).json({ error: 'Name required' });
   try {
-    await supabase.from('agent_status').upsert({ agent_name: agentName.trim(), last_seen: new Date().toISOString() });
+    const { error } = await supabase
+      .from('agent_status')
+      .upsert({ agent_name: agentName.trim(), last_seen: new Date().toISOString() }, { onConflict: 'agent_name' });
+    if (error) return res.status(500).json({ error: error.message });
     res.json({ ok: true });
-  } catch (e) { res.json({ ok: true }); }
+  } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 // Agent going offline
-app.post('/api/chat/agent-offline', requireAuth, async (req, res) => {
+app.post('/api/chat/agent-offline', async (req, res) => {
   const { agentName } = req.body;
   try {
     if (agentName?.trim()) await supabase.from('agent_status').delete().eq('agent_name', agentName.trim());

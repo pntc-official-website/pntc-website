@@ -384,7 +384,9 @@
     fetch(API + '/agent-heartbeat', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ agentName: agentName })
-    }).catch(function () {});
+    }).then(function(r) { return r.json(); })
+      .then(function(d) { if (!d.ok) console.warn('[heartbeat]', d); })
+      .catch(function(e) { console.warn('[heartbeat error]', e); });
   }
   function startHeartbeat() {
     sendHeartbeat();
