@@ -289,6 +289,7 @@
     agentChipName.textContent = name;
     replyAgentName.textContent = name;
     try { localStorage.setItem('pntc_agent_name', name); } catch (e) {}
+    startHeartbeat();
   }
 
   if (agentName) {
@@ -364,6 +365,43 @@
   function avatar(n) { return (n || 'V').charAt(0).toUpperCase(); }
   function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
 
+  // ── Notification sound ────────────────────────────────────────
+  function playNotifSound() {
+    try {
+      var ctx = new (window.AudioContext || window.webkitAudioContext)();
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, ctx.currentTime);
+      osc.frequency.setValueAtTime(1100, ctx.currentTime + 0.12);
+      gain.gain.setValueAtTime(0, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.22, ctx.currentTime + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.45);
+    } catch (e) {}
+  }
+
+  // ── Agent heartbeat ───────────────────────────────────────────
+  var heartbeatTimer = null;
+  function sendHeartbeat() {
+    if (!agentName) return;
+    fetch(API + '/agent-heartbeat', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ agentName: agentName })
+    }).catch(function () {});
+  }
+  function startHeartbeat() {
+    sendHeartbeat();
+    if (!heartbeatTimer) heartbeatTimer = setInterval(sendHeartbeat, 60000);
+  }
+  window.addEventListener('beforeunload', function () {
+    if (agentName) {
+      navigator.sendBeacon(API + '/agent-offline', new Blob([JSON.stringify({ agentName: agentName })], { type: 'application/json' }));
+    }
+  });
+
   // ── Session list ──────────────────────────────────────────────
   async function loadSessions() {
     try {
@@ -371,8 +409,15 @@
       if (r.status === 401) { pollStatus.textContent = 'Not authenticated'; return; }
       var list = await r.json();
       if (!Array.isArray(list)) return;
+      var prevUnread = {};
+      Object.keys(sessions).forEach(function (id) { prevUnread[id] = sessions[id].unread_count || 0; });
       sessions = {};
-      list.forEach(function (s) { sessions[s.id] = s; });
+      var hasNewUnread = false;
+      list.forEach(function (s) {
+        sessions[s.id] = s;
+        if (s.id !== activeId && (s.unread_count || 0) > (prevUnread[s.id] || 0)) hasNewUnread = true;
+      });
+      if (hasNewUnread) playNotifSound();
       renderSessionList();
       updateUnreadTotal();
       pollStatus.textContent = 'Live · ' + new Date().toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
@@ -485,6 +530,7 @@
     msgs.forEach(function (m) {
       if (knownMsgIds[m.id]) return;
       knownMsgIds[m.id] = true;
+      if (m.sender === 'visitor') playNotifSound();
 
       var msgDate = fmtDate(m.created_at);
       if (msgDate !== lastMsgDate) {

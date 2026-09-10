@@ -820,6 +820,43 @@ app.post('/api/chat/session/:id/status', requireAuth, async (req, res) => {
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
+// Agent heartbeat — called every 60s while admin has chat.html open
+app.post('/api/chat/agent-heartbeat', requireAuth, async (req, res) => {
+  const { agentName } = req.body;
+  if (!agentName?.trim()) return res.status(400).json({ error: 'Name required' });
+  try {
+    await supabase.from('agent_status').upsert({ agent_name: agentName.trim(), last_seen: new Date().toISOString() });
+    res.json({ ok: true });
+  } catch (e) { res.json({ ok: true }); }
+});
+
+// Agent going offline
+app.post('/api/chat/agent-offline', requireAuth, async (req, res) => {
+  const { agentName } = req.body;
+  try {
+    if (agentName?.trim()) await supabase.from('agent_status').delete().eq('agent_name', agentName.trim());
+    res.json({ ok: true });
+  } catch (e) { res.json({ ok: true }); }
+});
+
+// Public: any agent online in last 3 minutes?
+app.get('/api/chat/agent-status', async (req, res) => {
+  try {
+    const cutoff = new Date(Date.now() - 3 * 60 * 1000).toISOString();
+    const { data } = await supabase
+      .from('agent_status')
+      .select('agent_name, last_seen')
+      .gt('last_seen', cutoff)
+      .order('last_seen', { ascending: false })
+      .limit(1);
+    if (data && data.length > 0) {
+      res.json({ online: true, agentName: data[0].agent_name });
+    } else {
+      res.json({ online: false });
+    }
+  } catch (e) { res.json({ online: false }); }
+});
+
 // ══════════════════════════════════════════════════════════════
 //  HTML Generators (output identical to original)
 // ══════════════════════════════════════════════════════════════

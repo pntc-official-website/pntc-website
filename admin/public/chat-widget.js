@@ -27,6 +27,32 @@
 #pw{all:initial}
 #pw *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
 
+/* Agent online label */
+#pw-agent-label{
+  position:fixed;bottom:36px;right:92px;z-index:99999;
+  background:#fff;border-radius:50px;
+  padding:11px 18px 11px 14px;
+  box-shadow:0 4px 20px rgba(0,0,0,.14),0 1px 4px rgba(0,0,0,.06);
+  display:flex;align-items:center;gap:9px;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:.82rem;font-weight:600;color:#1a2040;
+  white-space:nowrap;cursor:pointer;
+  border:1px solid rgba(11,42,107,.07);
+  opacity:0;pointer-events:none;
+  transform:translateX(10px);
+  transition:opacity .3s ease,transform .3s ease
+}
+#pw-agent-label.show{opacity:1;pointer-events:all;transform:translateX(0)}
+#pw-al-dot{
+  width:9px;height:9px;border-radius:50%;
+  background:#4ade80;flex-shrink:0;
+  animation:pw-pulse 2.2s ease-in-out infinite
+}
+@keyframes pw-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,.55)}
+  60%{box-shadow:0 0 0 5px rgba(74,222,128,0)}
+}
+
 /* Bubble */
 #pw-bubble{
   position:fixed;bottom:28px;right:28px;z-index:99999;
@@ -276,6 +302,10 @@
   var root = document.createElement('div');
   root.id = 'pw';
   root.innerHTML = `
+<div id="pw-agent-label">
+  <span id="pw-al-dot"></span>
+  <span><span id="pw-al-name">Agent</span> is online</span>
+</div>
 <button id="pw-bubble" aria-label="Chat with us">
   <svg viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 00-2 2v18l4-4h14a2 2 0 002-2V4a2 2 0 00-2-2z"/></svg>
   <i class="pw-x">&#x2715;</i>
@@ -369,6 +399,8 @@
   document.body.appendChild(root);
 
   /* ─── Refs ───────────────────────────────────────────────── */
+  var agentLabel     = document.getElementById('pw-agent-label');
+  var agentLabelName = document.getElementById('pw-al-name');
   var bubble   = document.getElementById('pw-bubble');
   var panel    = document.getElementById('pw-panel');
   var maxBtn   = document.getElementById('pw-max-btn');
@@ -574,11 +606,30 @@
     }
   });
 
+  /* ─── Agent online label ─────────────────────────────────── */
+  function checkAgentOnline() {
+    fetch(API + '/agent-status')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.online && d.agentName && !isOpen) {
+          agentLabelName.textContent = d.agentName;
+          agentLabel.classList.add('show');
+        } else {
+          agentLabel.classList.remove('show');
+        }
+      })
+      .catch(function () {});
+  }
+  agentLabel.addEventListener('click', function () { if (!isOpen) openPanel(); });
+  checkAgentOnline();
+  setInterval(checkAgentOnline, 90000);
+
   /* ─── Panel open / close ─────────────────────────────────── */
   function openPanel() {
     isOpen = true;
     panel.classList.add('open');
     bubble.classList.add('open');
+    agentLabel.classList.remove('show');
     unread = 0; setBadge();
     msgs.scrollTop = msgs.scrollHeight;
     if (sessionId && !isClosed) startPoll();
@@ -588,6 +639,7 @@
     panel.classList.remove('open');
     bubble.classList.remove('open');
     stopPoll();
+    checkAgentOnline();
   }
   bubble.addEventListener('click', function () { if (isOpen) closePanel(); else openPanel(); });
 
