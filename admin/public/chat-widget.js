@@ -53,9 +53,9 @@
 /* Panel */
 #pw-panel{
   position:fixed;bottom:90px;right:28px;z-index:99998;
-  width:360px;height:620px;
-  background:#fff;border-radius:16px;
-  box-shadow:0 12px 48px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.08);
+  width:370px;height:660px;
+  background:#fff;border-radius:18px;
+  box-shadow:0 16px 56px rgba(0,0,0,.16),0 2px 8px rgba(0,0,0,.06);
   display:flex;flex-direction:column;overflow:hidden;
   opacity:0;pointer-events:none;
   transform:translateY(10px) scale(.97);
@@ -64,7 +64,7 @@
 #pw-panel.open{opacity:1;pointer-events:all;transform:translateY(0) scale(1)}
 #pw-panel.max{
   width:min(640px,calc(100vw - 40px));
-  height:min(720px,calc(100vh - 110px));
+  height:min(760px,calc(100vh - 110px));
   bottom:20px;right:20px
 }
 
@@ -95,66 +95,70 @@
 /* Intake form */
 #pw-form{
   flex:1;overflow-y:auto;
-  padding:22px 20px 20px;
+  padding:26px 22px 22px;
   display:flex;flex-direction:column;gap:0
 }
 #pw-form::-webkit-scrollbar{width:3px}
 #pw-form::-webkit-scrollbar-thumb{background:#e0e0e0;border-radius:2px}
 .pw-intro{
-  font-size:.78rem;line-height:1.7;color:#555;
-  padding:12px 14px;background:#F5F7FF;
-  border-radius:8px;border-left:2px solid #0B2A6B;
-  margin-bottom:22px
+  font-size:.79rem;line-height:1.75;color:#556;
+  padding:14px 16px;background:#F4F6FF;
+  border-radius:10px;border-left:3px solid #0B2A6B;
+  margin-bottom:28px
 }
-.pw-field{margin-bottom:18px}
+.pw-field{margin-bottom:24px}
 .pw-label{
-  display:block;font-size:.68rem;font-weight:700;
-  color:#999;letter-spacing:.07em;text-transform:uppercase;
-  margin-bottom:7px
+  display:block;font-size:.7rem;font-weight:700;
+  color:#888;letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:9px
 }
 .pw-label .pw-req{color:#c44}
 .pw-input{
-  width:100%;height:41px;
-  border:1.5px solid #E8EBF2;border-radius:8px;
-  padding:0 12px;font-size:.84rem;color:#1a1a1a;
+  width:100%;height:46px;
+  border:1.5px solid #E4E8F2;border-radius:10px;
+  padding:0 14px;font-size:.86rem;color:#1a1a1a;
   background:#FAFBFE;outline:none;
-  transition:border-color .15s,background .15s
+  box-sizing:border-box;
+  transition:border-color .15s,background .15s,box-shadow .15s
 }
-.pw-input:focus{border-color:#0B2A6B;background:#fff}
-.pw-hint{font-size:.68rem;color:#bbb;margin-top:6px;line-height:1.5}
-.pw-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.pw-input:focus{border-color:#0B2A6B;background:#fff;box-shadow:0 0 0 3px rgba(11,42,107,.08)}
+.pw-hint{font-size:.7rem;color:#b0b8c8;margin-top:8px;line-height:1.55}
+.pw-chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:6px}
 .pw-chip{
-  padding:7px 16px;border-radius:6px;
-  border:1.5px solid #E8EBF2;
-  background:#FAFBFE;font-size:.77rem;
-  color:#555;cursor:pointer;
+  padding:9px 18px;border-radius:8px;
+  border:1.5px solid #E4E8F2;
+  background:#FAFBFE;font-size:.78rem;
+  color:#556;cursor:pointer;
   transition:all .14s;font-family:inherit;line-height:1.4
 }
-.pw-chip:hover{border-color:#0B2A6B;color:#0B2A6B}
+.pw-chip:hover{border-color:#0B2A6B;color:#0B2A6B;background:#F0F3FF}
 .pw-chip.on{background:#0B2A6B;color:#fff;border-color:#0B2A6B}
 .pw-textarea{
   width:100%;
-  border:1.5px solid #E8EBF2;border-radius:8px;
-  padding:10px 12px;font-size:.84rem;color:#1a1a1a;
+  border:1.5px solid #E4E8F2;border-radius:10px;
+  padding:12px 14px;font-size:.86rem;color:#1a1a1a;
   background:#FAFBFE;outline:none;resize:none;
-  line-height:1.6;font-family:inherit;
-  transition:border-color .15s,background .15s
+  line-height:1.65;font-family:inherit;
+  box-sizing:border-box;
+  transition:border-color .15s,background .15s,box-shadow .15s
 }
-.pw-textarea:focus{border-color:#0B2A6B;background:#fff}
+.pw-textarea:focus{border-color:#0B2A6B;background:#fff;box-shadow:0 0 0 3px rgba(11,42,107,.08)}
 #pw-err{
   font-size:.74rem;color:#b00;
-  background:#FFF0F0;border-radius:6px;
-  padding:8px 11px;margin-bottom:12px;display:none
+  background:#FFF0F0;border-radius:8px;
+  padding:10px 13px;margin-bottom:14px;display:none;
+  line-height:1.5
 }
 #pw-submit{
-  width:100%;height:44px;
+  width:100%;height:50px;
   background:#0B2A6B;color:#fff;border:none;
-  border-radius:8px;font-size:.85rem;font-weight:600;
-  cursor:pointer;letter-spacing:.01em;
-  transition:background .15s;margin-top:6px
+  border-radius:10px;font-size:.88rem;font-weight:600;
+  cursor:pointer;letter-spacing:.02em;
+  transition:background .15s,transform .1s;margin-top:16px
 }
-#pw-submit:hover{background:#0f3d9e}
-#pw-submit:disabled{background:#9aa;cursor:not-allowed}
+#pw-submit:hover{background:#0f3d9e;transform:translateY(-1px)}
+#pw-submit:active{transform:translateY(0)}
+#pw-submit:disabled{background:#9aa;cursor:not-allowed;transform:none}
 
 /* Messages */
 #pw-msgs{
