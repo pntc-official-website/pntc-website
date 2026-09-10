@@ -70,117 +70,130 @@
 
 /* Header */
 #pw-hdr{
-  background:#0B2A6B;
-  padding:16px 16px 14px;
-  display:flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg,#0B2A6B 0%,#163d8f 100%);
+  padding:18px 16px 16px;
+  display:flex;align-items:center;gap:13px;
   flex-shrink:0
 }
-#pw-hdr-text{flex:1;min-width:0}
-#pw-hdr-title{color:#fff;font-size:.875rem;font-weight:600;letter-spacing:-.01em}
-#pw-hdr-sub{
-  color:rgba(255,255,255,.5);font-size:.72rem;
-  margin-top:3px;display:flex;align-items:center;gap:6px
+#pw-avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;border:2px solid rgba(255,255,255,.25)
 }
-#pw-online-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;flex-shrink:0}
+#pw-avatar svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#pw-hdr-text{flex:1;min-width:0}
+#pw-hdr-title{color:#fff;font-size:.92rem;font-weight:700;letter-spacing:-.01em}
+#pw-hdr-sub{
+  color:rgba(255,255,255,.65);font-size:.73rem;
+  margin-top:4px;display:flex;align-items:center;gap:6px
+}
+#pw-online-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0;box-shadow:0 0 0 2px rgba(74,222,128,.3)}
 .pw-hdr-btn{
   background:transparent;border:none;
-  width:28px;height:28px;border-radius:6px;
-  cursor:pointer;color:rgba(255,255,255,.55);
+  width:30px;height:30px;border-radius:8px;
+  cursor:pointer;color:rgba(255,255,255,.6);
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;transition:color .15s,background .15s
 }
-.pw-hdr-btn:hover{color:#fff;background:rgba(255,255,255,.1)}
+.pw-hdr-btn:hover{color:#fff;background:rgba(255,255,255,.12)}
 .pw-hdr-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* Intake form */
 #pw-form{
   flex:1;overflow-y:auto;
-  padding:28px 24px 24px;
-  display:flex;flex-direction:column;
-  background:#fff
+  padding:16px 14px 18px;
+  display:flex;flex-direction:column;gap:12px;
+  background:#EEF2FA
 }
 #pw-form::-webkit-scrollbar{width:4px}
-#pw-form::-webkit-scrollbar-thumb{background:#dde;border-radius:4px}
+#pw-form::-webkit-scrollbar-thumb{background:#c8d0e0;border-radius:4px}
 .pw-intro{
-  font-size:.8rem;line-height:1.8;color:#444e6e;
-  padding:16px 18px;
-  background:linear-gradient(135deg,#EEF2FF 0%,#F5F7FF 100%);
-  border-radius:12px;border-left:4px solid #0B2A6B;
-  margin-bottom:32px;flex-shrink:0
+  font-size:.79rem;line-height:1.75;color:#3a4a6b;
+  padding:14px 16px;
+  background:#fff;
+  border-radius:12px;
+  border-left:3px solid #0B2A6B;
+  box-shadow:0 1px 4px rgba(11,42,107,.08)
 }
-.pw-field{margin-bottom:28px;flex-shrink:0}
+.pw-section{
+  background:#fff;
+  border-radius:14px;
+  padding:20px 18px;
+  box-shadow:0 1px 6px rgba(11,42,107,.08);
+  display:flex;flex-direction:column;gap:0
+}
+.pw-field{margin-bottom:20px}
+.pw-field:last-child{margin-bottom:0}
 .pw-label{
-  display:block;font-size:.71rem;font-weight:700;
-  color:#7b85a0;letter-spacing:.09em;text-transform:uppercase;
-  margin-bottom:10px
+  display:block;font-size:.69rem;font-weight:700;
+  color:#8896b0;letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:8px
 }
 .pw-label .pw-req{color:#e04}
 .pw-input{
-  width:100%;height:48px;
-  border:1.5px solid #dde3f0;border-radius:10px;
-  padding:0 16px;font-size:.875rem;color:#1a1a2e;
-  background:#fff;outline:none;
+  width:100%;height:46px;
+  border:1.5px solid #e4e9f4;border-radius:10px;
+  padding:0 14px;font-size:.875rem;color:#1a1a2e;
+  background:#FAFBFF;outline:none;
   box-sizing:border-box;
-  box-shadow:0 1px 4px rgba(11,42,107,.06);
-  transition:border-color .18s,box-shadow .18s
+  transition:border-color .18s,box-shadow .18s,background .18s
 }
 .pw-input:focus{
-  border-color:#0B2A6B;
-  box-shadow:0 0 0 4px rgba(11,42,107,.1)
+  border-color:#0B2A6B;background:#fff;
+  box-shadow:0 0 0 3px rgba(11,42,107,.1)
 }
 .pw-hint{
-  font-size:.71rem;color:#a0aac0;
-  margin-top:9px;line-height:1.6;
+  font-size:.7rem;color:#a0aec0;
+  margin-top:7px;line-height:1.55;
   padding-left:2px
 }
-.pw-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.pw-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .pw-chip{
-  padding:10px 20px;border-radius:50px;
-  border:1.5px solid #dde3f0;
-  background:#fff;font-size:.79rem;
+  padding:9px 16px;border-radius:50px;
+  border:1.5px solid #e4e9f4;
+  background:#FAFBFF;font-size:.77rem;
   color:#4a5470;cursor:pointer;
   font-family:inherit;font-weight:500;
-  box-shadow:0 1px 3px rgba(0,0,0,.06);
-  transition:all .16s
+  transition:all .15s
 }
-.pw-chip:hover{border-color:#0B2A6B;color:#0B2A6B;box-shadow:0 2px 8px rgba(11,42,107,.12)}
-.pw-chip.on{background:#0B2A6B;color:#fff;border-color:#0B2A6B;box-shadow:0 2px 8px rgba(11,42,107,.25)}
+.pw-chip:hover{border-color:#0B2A6B;color:#0B2A6B;background:#EEF2FF}
+.pw-chip.on{background:#0B2A6B;color:#fff;border-color:#0B2A6B;box-shadow:0 2px 8px rgba(11,42,107,.22)}
 .pw-textarea{
   width:100%;
-  border:1.5px solid #dde3f0;border-radius:10px;
-  padding:14px 16px;font-size:.875rem;color:#1a1a2e;
-  background:#fff;outline:none;resize:none;
-  line-height:1.7;font-family:inherit;
+  border:1.5px solid #e4e9f4;border-radius:10px;
+  padding:12px 14px;font-size:.875rem;color:#1a1a2e;
+  background:#FAFBFF;outline:none;resize:none;
+  line-height:1.65;font-family:inherit;
   box-sizing:border-box;
-  box-shadow:0 1px 4px rgba(11,42,107,.06);
-  transition:border-color .18s,box-shadow .18s
+  transition:border-color .18s,box-shadow .18s,background .18s
 }
 .pw-textarea:focus{
-  border-color:#0B2A6B;
-  box-shadow:0 0 0 4px rgba(11,42,107,.1)
+  border-color:#0B2A6B;background:#fff;
+  box-shadow:0 0 0 3px rgba(11,42,107,.1)
 }
 #pw-err{
-  font-size:.75rem;color:#c00;
+  font-size:.74rem;color:#c00;
   background:#fff0f0;border-radius:8px;
   border:1px solid #fcc;
-  padding:11px 14px;margin-bottom:16px;display:none;
+  padding:10px 13px;margin-top:4px;margin-bottom:0;display:none;
   line-height:1.55
 }
 #pw-submit{
-  width:100%;height:52px;
+  width:100%;height:50px;
   background:#0B2A6B;color:#fff;border:none;
-  border-radius:12px;font-size:.9rem;font-weight:600;
-  cursor:pointer;letter-spacing:.03em;
-  box-shadow:0 4px 16px rgba(11,42,107,.3);
+  border-radius:12px;font-size:.88rem;font-weight:700;
+  cursor:pointer;letter-spacing:.04em;text-transform:uppercase;
+  box-shadow:0 4px 16px rgba(11,42,107,.32);
   transition:background .18s,transform .12s,box-shadow .18s;
-  margin-top:20px;flex-shrink:0
+  flex-shrink:0
 }
 #pw-submit:hover{
   background:#0d35a0;
   transform:translateY(-2px);
-  box-shadow:0 6px 20px rgba(11,42,107,.4)
+  box-shadow:0 6px 22px rgba(11,42,107,.42)
 }
-#pw-submit:active{transform:translateY(0);box-shadow:0 2px 8px rgba(11,42,107,.25)}
+#pw-submit:active{transform:translateY(0);box-shadow:0 2px 8px rgba(11,42,107,.2)}
 #pw-submit:disabled{background:#b0bdd0;cursor:not-allowed;transform:none;box-shadow:none}
 
 /* Messages */
@@ -272,6 +285,9 @@
 <div id="pw-panel" role="dialog" aria-label="Live chat">
 
   <div id="pw-hdr">
+    <div id="pw-avatar">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
     <div id="pw-hdr-text">
       <div id="pw-hdr-title">${LABEL} Support</div>
       <div id="pw-hdr-sub">
@@ -291,33 +307,39 @@
   <div id="pw-form">
     <p class="pw-intro">Please fill in your details before we start. In case we get disconnected, we will contact you immediately.</p>
 
-    <div class="pw-field">
-      <label class="pw-label">Full Name <span class="pw-req">*</span></label>
-      <input class="pw-input" id="pw-name" placeholder="Juan dela Cruz" maxlength="80" autocomplete="name">
-    </div>
-    <div class="pw-field">
-      <label class="pw-label">Email <span class="pw-req">*</span></label>
-      <input class="pw-input" id="pw-email" type="email" placeholder="juan@email.com" maxlength="120" autocomplete="email">
-    </div>
-    <div class="pw-field">
-      <label class="pw-label">Contact Number <span class="pw-req">*</span></label>
-      <input class="pw-input" id="pw-phone" type="tel" placeholder="09XX XXX XXXX" maxlength="20" autocomplete="tel">
-      <p class="pw-hint">We will call you if the chat is disconnected.</p>
-    </div>
-    <div class="pw-field">
-      <label class="pw-label">Enquiry Type <span class="pw-req">*</span></label>
-      <div class="pw-chips" id="pw-chips">
-        <button class="pw-chip" data-v="admission">Admission</button>
-        <button class="pw-chip" data-v="registrar">Registrar</button>
-        <button class="pw-chip" data-v="finance">Finance</button>
-        <button class="pw-chip" data-v="academics">Academics</button>
-        <button class="pw-chip" data-v="other">Other</button>
+    <div class="pw-section">
+      <div class="pw-field">
+        <label class="pw-label">Full Name <span class="pw-req">*</span></label>
+        <input class="pw-input" id="pw-name" placeholder="Juan dela Cruz" maxlength="80" autocomplete="name">
+      </div>
+      <div class="pw-field">
+        <label class="pw-label">Email <span class="pw-req">*</span></label>
+        <input class="pw-input" id="pw-email" type="email" placeholder="juan@email.com" maxlength="120" autocomplete="email">
+      </div>
+      <div class="pw-field">
+        <label class="pw-label">Contact Number <span class="pw-req">*</span></label>
+        <input class="pw-input" id="pw-phone" type="tel" placeholder="09XX XXX XXXX" maxlength="20" autocomplete="tel">
+        <p class="pw-hint">We will call you if the chat is disconnected.</p>
       </div>
     </div>
-    <div class="pw-field">
-      <label class="pw-label">Concern <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#bbb;font-size:.68rem">(optional)</span></label>
-      <textarea class="pw-textarea" id="pw-bg" rows="2" placeholder="Briefly describe your concern…" maxlength="400"></textarea>
+
+    <div class="pw-section">
+      <div class="pw-field">
+        <label class="pw-label">Enquiry Type <span class="pw-req">*</span></label>
+        <div class="pw-chips" id="pw-chips">
+          <button class="pw-chip" data-v="admission">Admission</button>
+          <button class="pw-chip" data-v="registrar">Registrar</button>
+          <button class="pw-chip" data-v="finance">Finance</button>
+          <button class="pw-chip" data-v="academics">Academics</button>
+          <button class="pw-chip" data-v="other">Other</button>
+        </div>
+      </div>
+      <div class="pw-field">
+        <label class="pw-label">Concern <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#b0bdd0;font-size:.68rem">(optional)</span></label>
+        <textarea class="pw-textarea" id="pw-bg" rows="3" placeholder="Briefly describe your concern…" maxlength="400"></textarea>
+      </div>
     </div>
+
     <div id="pw-err"></div>
     <button id="pw-submit">Start Chat</button>
   </div>
