@@ -110,7 +110,7 @@
 #pw-form::-webkit-scrollbar-thumb{background:#c8d0e0;border-radius:4px}
 .pw-intro{
   font-size:.79rem;line-height:1.75;color:#3a4a6b;
-  padding:14px 16px;
+  padding:14px 18px 14px 20px;
   background:#fff;
   border-radius:12px;
   border-left:3px solid #0B2A6B;
@@ -119,12 +119,12 @@
 .pw-section{
   background:#fff;
   border-radius:14px;
-  padding:20px 18px;
+  padding:24px 22px 20px;
   box-shadow:0 1px 6px rgba(11,42,107,.08);
   display:flex;flex-direction:column;gap:0
 }
-.pw-field{margin-bottom:20px}
-.pw-field:last-child{margin-bottom:0}
+.pw-field{margin-bottom:22px}
+.pw-field:last-child{margin-bottom:4px}
 .pw-label{
   display:block;font-size:.69rem;font-weight:700;
   color:#8896b0;letter-spacing:.08em;text-transform:uppercase;
