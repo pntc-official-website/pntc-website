@@ -94,20 +94,18 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .mob-close{position:absolute;top:1.5rem;right:1.8rem;font-size:2.2rem;color:rgba(255,255,255,.4);line-height:1}
 
 /* ═══════════════════════════════════════════════════
-   HERO — Full-bleed crossfade slides
+   HERO — Single static image
 ═══════════════════════════════════════════════════ */
 #hero{position:relative;height:100svh;min-height:600px;overflow:hidden;background:var(--deep)}
 
-.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s var(--ease)}
-.slide.active{opacity:1;z-index:1}
-
-.slide-img{
+.hero-bg-img{
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:center;
-  transform:scale(1.04);transition:transform 7s linear;
-  filter:brightness(.55) saturate(1.1);
+  filter:brightness(.48) saturate(1.15);
+  transform:scale(1.03);
+  animation:heroZoom 12s ease-out forwards;
 }
-.slide.active .slide-img{transform:scale(1)}
+@keyframes heroZoom{from{transform:scale(1.06)}to{transform:scale(1)}}
 
 /* Overlay gradient */
 .hero-vig{
@@ -181,21 +179,6 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 }
 .btn-ghost-hero:hover{border-color:rgba(200,150,12,.6);color:var(--gold);background:rgba(200,150,12,.06)}
 .btn-ghost-hero svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.5;fill:none}
-
-/* Slide dots */
-.hero-dots{
-  position:absolute;right:clamp(1.5rem,3vw,2.5rem);top:50%;transform:translateY(-50%);
-  z-index:10;display:flex;flex-direction:column;gap:.7rem;
-}
-.hero-dot{
-  width:3px;height:28px;background:rgba(255,255,255,.15);border-radius:2px;
-  cursor:pointer;transition:background .3s;position:relative;overflow:hidden;
-}
-.hero-dot.active{background:rgba(255,255,255,.2)}
-.hero-dot-fill{
-  position:absolute;bottom:0;left:0;right:0;height:0;
-  background:var(--gold);transition:height linear;
-}
 
 /* Scroll cue */
 .scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:.4rem}
@@ -651,18 +634,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 <section id="hero">
   <div class="hero-bar"></div>
 
-  <!-- Slide 1 -->
-  <div class="slide active" data-slide="0">
-    <img class="slide-img" src="Hero Section Slideshow1.jpg" alt="PNTC Maritime Training" loading="eager">
-  </div>
-  <!-- Slide 2 -->
-  <div class="slide" data-slide="1">
-    <img class="slide-img" src="Hero Section Slideshow2.jpg" alt="Maritime Training Vessel" loading="eager">
-  </div>
-  <!-- Slide 3 -->
-  <div class="slide" data-slide="2">
-    <img class="slide-img" src="Tanza - Boat Deck.JPG" alt="Tanza Boat Deck Training" loading="lazy">
-  </div>
+  <img class="hero-bg-img" src="622354603_923200480276445_5033862586898146347_n (1).jpg" alt="Onward PNTC — Maritime Training and Assessment Center" loading="eager">
 
   <div class="hero-vig"></div>
 
@@ -683,13 +655,6 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
         How to Enroll
       </a>
     </div>
-  </div>
-
-  <!-- Slide nav dots -->
-  <div class="hero-dots" role="tablist">
-    <div class="hero-dot active" data-idx="0" role="tab"><div class="hero-dot-fill"></div></div>
-    <div class="hero-dot" data-idx="1" role="tab"><div class="hero-dot-fill"></div></div>
-    <div class="hero-dot" data-idx="2" role="tab"><div class="hero-dot-fill"></div></div>
   </div>
 
   <div class="scroll-cue">
@@ -1126,39 +1091,6 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 ></script>
 
 <script>
-/* ── Slide show ─────────────────────────────────── */
-const slides     = document.querySelectorAll('.slide');
-const dots       = document.querySelectorAll('.hero-dot');
-const fillEls    = document.querySelectorAll('.hero-dot-fill');
-const INTERVAL   = 5500;
-let cur = 0, timer, fillAnim;
-
-function goTo(idx) {
-  slides[cur].classList.remove('active');
-  dots[cur].classList.remove('active');
-  if (fillEls[cur]) { fillEls[cur].style.transition = 'none'; fillEls[cur].style.height = '0'; }
-  cur = (idx + slides.length) % slides.length;
-  slides[cur].classList.add('active');
-  dots[cur].classList.add('active');
-  if (fillEls[cur]) {
-    fillEls[cur].style.transition = 'none';
-    fillEls[cur].style.height = '0';
-    requestAnimationFrame(() => {
-      fillEls[cur].style.transition = `height ${INTERVAL}ms linear`;
-      fillEls[cur].style.height = '100%';
-    });
-  }
-}
-
-function startSlideshow() {
-  clearInterval(timer);
-  goTo(cur);
-  timer = setInterval(() => goTo(cur + 1), INTERVAL);
-}
-
-dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.idx); clearInterval(timer); timer = setInterval(() => goTo(cur + 1), INTERVAL); }));
-startSlideshow();
-
 /* ── Header scroll ───────────────────────────────── */
 const hdr = document.getElementById('header');
 window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 40), { passive: true });
