@@ -145,23 +145,23 @@
 .pw-section{
   background:#fff;
   border-radius:14px;
-  padding:24px 22px 20px;
+  padding:22px 20px 22px;
   box-shadow:0 1px 6px rgba(11,42,107,.08);
   display:flex;flex-direction:column;gap:0
 }
-.pw-field{margin-bottom:22px}
-.pw-field:last-child{margin-bottom:4px}
+.pw-field{margin-bottom:20px}
+.pw-field:last-child{margin-bottom:0}
 .pw-label{
   display:block;font-size:.69rem;font-weight:700;
   color:#8896b0;letter-spacing:.08em;text-transform:uppercase;
-  margin-bottom:8px
+  margin-bottom:9px
 }
 .pw-label .pw-req{color:#e04}
 .pw-input{
-  width:100%;height:48px;
-  border:1.5px solid #e4e9f4;border-radius:10px;
-  padding:0 18px;font-size:.875rem;color:#1a1a2e;
-  background:#FAFBFF;outline:none;
+  width:100%;height:52px;
+  border:1.5px solid #d0d8ee;border-radius:10px;
+  padding:0 20px;font-size:.875rem;color:#1a1a2e;
+  background:#F8FAFF;outline:none;
   box-sizing:border-box;
   transition:border-color .18s,box-shadow .18s,background .18s
 }
@@ -171,25 +171,25 @@
 }
 .pw-hint{
   font-size:.7rem;color:#a0aec0;
-  margin-top:7px;line-height:1.55;
+  margin-top:8px;line-height:1.55;
   padding-left:2px
 }
-.pw-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.pw-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .pw-chip{
   padding:9px 16px;border-radius:50px;
-  border:1.5px solid #e4e9f4;
-  background:#FAFBFF;font-size:.77rem;
-  color:#4a5470;cursor:pointer;
-  font-family:inherit;font-weight:500;
+  border:1.5px solid #c4ceea;
+  background:#F4F7FF;font-size:.77rem;
+  color:#3a4a70;cursor:pointer;
+  font-family:inherit;font-weight:600;
   transition:all .15s
 }
 .pw-chip:hover{border-color:#0B2A6B;color:#0B2A6B;background:#EEF2FF}
 .pw-chip.on{background:#0B2A6B;color:#fff;border-color:#0B2A6B;box-shadow:0 2px 8px rgba(11,42,107,.22)}
 .pw-textarea{
   width:100%;
-  border:1.5px solid #e4e9f4;border-radius:10px;
-  padding:14px 18px;font-size:.875rem;color:#1a1a2e;
-  background:#FAFBFF;outline:none;resize:none;
+  border:1.5px solid #d0d8ee;border-radius:10px;
+  padding:16px 20px;font-size:.875rem;color:#1a1a2e;
+  background:#F8FAFF;outline:none;resize:none;
   line-height:1.65;font-family:inherit;
   box-sizing:border-box;
   transition:border-color .18s,box-shadow .18s,background .18s
