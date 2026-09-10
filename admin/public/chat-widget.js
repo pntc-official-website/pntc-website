@@ -53,7 +53,7 @@
 /* Panel */
 #pw-panel{
   position:fixed;bottom:90px;right:28px;z-index:99998;
-  width:360px;height:560px;
+  width:360px;height:620px;
   background:#fff;border-radius:16px;
   box-shadow:0 12px 48px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.08);
   display:flex;flex-direction:column;overflow:hidden;
@@ -95,38 +95,38 @@
 /* Intake form */
 #pw-form{
   flex:1;overflow-y:auto;
-  padding:20px 18px 18px;
+  padding:22px 20px 20px;
   display:flex;flex-direction:column;gap:0
 }
 #pw-form::-webkit-scrollbar{width:3px}
 #pw-form::-webkit-scrollbar-thumb{background:#e0e0e0;border-radius:2px}
 .pw-intro{
-  font-size:.78rem;line-height:1.65;color:#555;
-  padding:11px 13px;background:#F5F7FF;
+  font-size:.78rem;line-height:1.7;color:#555;
+  padding:12px 14px;background:#F5F7FF;
   border-radius:8px;border-left:2px solid #0B2A6B;
-  margin-bottom:18px
+  margin-bottom:22px
 }
-.pw-field{margin-bottom:13px}
+.pw-field{margin-bottom:18px}
 .pw-label{
-  display:block;font-size:.7rem;font-weight:600;
-  color:#888;letter-spacing:.06em;text-transform:uppercase;
-  margin-bottom:5px
+  display:block;font-size:.68rem;font-weight:700;
+  color:#999;letter-spacing:.07em;text-transform:uppercase;
+  margin-bottom:7px
 }
 .pw-label .pw-req{color:#c44}
 .pw-input{
-  width:100%;height:38px;
+  width:100%;height:41px;
   border:1.5px solid #E8EBF2;border-radius:8px;
-  padding:0 11px;font-size:.83rem;color:#1a1a1a;
+  padding:0 12px;font-size:.84rem;color:#1a1a1a;
   background:#FAFBFE;outline:none;
   transition:border-color .15s,background .15s
 }
 .pw-input:focus{border-color:#0B2A6B;background:#fff}
-.pw-hint{font-size:.67rem;color:#aaa;margin-top:4px;line-height:1.5}
-.pw-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.pw-hint{font-size:.68rem;color:#bbb;margin-top:6px;line-height:1.5}
+.pw-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
 .pw-chip{
-  padding:5px 14px;border-radius:6px;
+  padding:7px 16px;border-radius:6px;
   border:1.5px solid #E8EBF2;
-  background:#FAFBFE;font-size:.76rem;
+  background:#FAFBFE;font-size:.77rem;
   color:#555;cursor:pointer;
   transition:all .14s;font-family:inherit;line-height:1.4
 }
@@ -135,23 +135,23 @@
 .pw-textarea{
   width:100%;
   border:1.5px solid #E8EBF2;border-radius:8px;
-  padding:9px 11px;font-size:.83rem;color:#1a1a1a;
+  padding:10px 12px;font-size:.84rem;color:#1a1a1a;
   background:#FAFBFE;outline:none;resize:none;
-  line-height:1.55;font-family:inherit;
+  line-height:1.6;font-family:inherit;
   transition:border-color .15s,background .15s
 }
 .pw-textarea:focus{border-color:#0B2A6B;background:#fff}
 #pw-err{
   font-size:.74rem;color:#b00;
   background:#FFF0F0;border-radius:6px;
-  padding:7px 10px;margin-bottom:10px;display:none
+  padding:8px 11px;margin-bottom:12px;display:none
 }
 #pw-submit{
-  width:100%;height:42px;
+  width:100%;height:44px;
   background:#0B2A6B;color:#fff;border:none;
-  border-radius:8px;font-size:.84rem;font-weight:600;
+  border-radius:8px;font-size:.85rem;font-weight:600;
   cursor:pointer;letter-spacing:.01em;
-  transition:background .15s;margin-top:4px
+  transition:background .15s;margin-top:6px
 }
 #pw-submit:hover{background:#0f3d9e}
 #pw-submit:disabled{background:#9aa;cursor:not-allowed}
