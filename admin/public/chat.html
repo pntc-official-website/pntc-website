@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Chat — PNTC Admin</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #F0F2F8; color: #222; display: flex; height: 100vh; overflow: hidden; }
+
+  /* ── Sidebar ── */
+  .sidebar { width: 220px; min-width: 220px; background: #0B2A6B; color: #fff; display: flex; flex-direction: column; }
+  .sidebar-logo { padding: 22px 18px 16px; font-size: 1.05rem; font-weight: 700; letter-spacing: .01em; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .sidebar-logo span { color: #C8960C; }
+  .sidebar-nav { flex: 1; padding: 10px 0; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 18px; color: rgba(255,255,255,.72); text-decoration: none; font-size: .84rem; transition: background .15s, color .15s; cursor: pointer; }
+  .nav-item:hover, .nav-item.active { background: rgba(255,255,255,.12); color: #fff; }
+  .nav-icon { font-size: 1rem; width: 20px; text-align: center; }
+  .sidebar-footer { padding: 14px 18px; border-top: 1px solid rgba(255,255,255,.1); font-size: .75rem; color: rgba(255,255,255,.4); }
+
+  /* ── Main ── */
+  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .topbar { background: #fff; padding: 14px 24px; border-bottom: 1px solid #E2E6F0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .topbar-title { font-size: 1.05rem; font-weight: 700; color: #0B2A6B; }
+  #unread-total { background: #C8960C; color: #fff; font-size: .72rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: 8px; display: none; }
+  .topbar-status { font-size: .78rem; color: #888; }
+
+  /* ── Chat layout ── */
+  .chat-layout { flex: 1; display: flex; overflow: hidden; }
+
+  /* Session list */
+  .session-list { width: 280px; min-width: 280px; background: #fff; border-right: 1px solid #E2E6F0; display: flex; flex-direction: column; }
+  .session-list-header { padding: 12px 16px; border-bottom: 1px solid #E2E6F0; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .session-list-header h2 { font-size: .88rem; font-weight: 700; flex: 1; }
+  .filter-btns { display: flex; gap: 4px; }
+  .filter-btn { font-size: .72rem; padding: 3px 9px; border-radius: 12px; border: 1.5px solid #dde; background: transparent; cursor: pointer; color: #666; transition: background .15s, color .15s; }
+  .filter-btn.active { background: #0B2A6B; color: #fff; border-color: #0B2A6B; }
+  .sessions { flex: 1; overflow-y: auto; }
+  .session-item { padding: 12px 14px; border-bottom: 1px solid #F0F2F8; cursor: pointer; transition: background .12s; display: flex; gap: 10px; align-items: flex-start; }
+  .session-item:hover { background: #F8F9FC; }
+  .session-item.active { background: #EEF2FB; }
+  .session-avatar { width: 36px; height: 36px; border-radius: 50%; background: #0B2A6B; color: #fff; display: flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 700; flex-shrink: 0; }
+  .session-info { flex: 1; min-width: 0; }
+  .session-info-top { display: flex; justify-content: space-between; align-items: center; gap: 4px; }
+  .session-name { font-size: .82rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .session-time { font-size: .68rem; color: #aaa; flex-shrink: 0; }
+  .session-site { font-size: .68rem; color: #888; margin: 1px 0; }
+  .session-preview { font-size: .75rem; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; justify-content: space-between; }
+  .session-badge { background: #C8960C; color: #fff; font-size: .65rem; font-weight: 700; min-width: 16px; height: 16px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; padding: 0 4px; flex-shrink: 0; }
+  .session-closed .session-avatar { background: #aaa; }
+  #sessions-empty { padding: 40px 20px; text-align: center; color: #aaa; font-size: .84rem; display: none; }
+
+  /* Conversation panel */
+  .convo-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .convo-empty { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; color: #bbb; }
+  .convo-empty-icon { font-size: 2.5rem; }
+  .convo-header { padding: 12px 20px; background: #fff; border-bottom: 1px solid #E2E6F0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .convo-header-info h3 { font-size: .92rem; font-weight: 700; }
+  .convo-header-info p { font-size: .74rem; color: #888; margin-top: 2px; }
+  .convo-header-actions { display: flex; gap: 8px; }
+  .btn-sm { font-size: .75rem; padding: 5px 12px; border-radius: 6px; border: 1.5px solid #dde; background: transparent; cursor: pointer; color: #555; transition: background .15s; }
+  .btn-sm:hover { background: #F0F2F8; }
+  .btn-sm.danger { color: #c00; border-color: #f8c8c8; }
+  .btn-sm.danger:hover { background: #fff0f0; }
+  .btn-sm.primary { background: #0B2A6B; color: #fff; border-color: #0B2A6B; }
+  .btn-sm.primary:hover { background: #1244B8; }
+  .messages-area { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .messages-area::-webkit-scrollbar { width: 4px; }
+  .messages-area::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+  .msg { max-width: 72%; display: flex; flex-direction: column; }
+  .msg.visitor { align-self: flex-start; }
+  .msg.agent { align-self: flex-end; }
+  .msg-bubble { padding: 9px 13px; border-radius: 12px; font-size: .83rem; line-height: 1.55; word-break: break-word; }
+  .msg.visitor .msg-bubble { background: #F1F3F9; color: #222; border-bottom-left-radius: 3px; }
+  .msg.agent .msg-bubble { background: #0B2A6B; color: #fff; border-bottom-right-radius: 3px; }
+  .msg-meta { font-size: .65rem; color: #aaa; margin-top: 3px; }
+  .msg.agent .msg-meta { text-align: right; }
+  .msg-date-divider { text-align: center; font-size: .7rem; color: #bbb; padding: 6px 0; }
+  .reply-area { padding: 12px 16px; background: #fff; border-top: 1px solid #E2E6F0; flex-shrink: 0; }
+  .reply-area textarea { width: 100%; border: 1.5px solid #dde; border-radius: 8px; padding: 9px 12px; font-size: .83rem; resize: none; outline: none; font-family: inherit; line-height: 1.5; }
+  .reply-area textarea:focus { border-color: #0B2A6B; }
+  .reply-actions { display: flex; justify-content: flex-end; margin-top: 8px; gap: 8px; }
+  #reply-char { font-size: .72rem; color: #aaa; align-self: center; flex: 1; }
+  #closed-banner { background: #FFF3CD; color: #7D5A00; font-size: .8rem; padding: 8px 16px; text-align: center; border-bottom: 1px solid #FFE082; display: none; }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-logo">PNTC <span>Admin</span></div>
+  <nav class="sidebar-nav">
+    <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span> Dashboard</a>
+    <a class="nav-item" href="posts.html"><span class="nav-icon">📝</span> Posts &amp; Blog</a>
+    <a class="nav-item" href="images.html"><span class="nav-icon">🖼️</span> Image Manager</a>
+    <a class="nav-item" href="landing.html"><span class="nav-icon">🏛️</span> Landing Page</a>
+    <a class="nav-item active" href="chat.html"><span class="nav-icon">💬</span> Live Chat</a>
+  </nav>
+  <div class="sidebar-footer">PNTC CMS v1.0</div>
+</aside>
+
+<!-- Main -->
+<div class="main">
+  <div class="topbar">
+    <div style="display:flex;align-items:center">
+      <span class="topbar-title">Live Chat</span>
+      <span id="unread-total"></span>
+    </div>
+    <span class="topbar-status" id="poll-status">Connecting…</span>
+  </div>
+
+  <div class="chat-layout">
+    <!-- Session list -->
+    <div class="session-list">
+      <div class="session-list-header">
+        <h2>Conversations</h2>
+        <div class="filter-btns">
+          <button class="filter-btn active" data-filter="open">Open</button>
+          <button class="filter-btn" data-filter="closed">Closed</button>
+          <button class="filter-btn" data-filter="all">All</button>
+        </div>
+      </div>
+      <div class="sessions" id="sessions-list"></div>
+      <div id="sessions-empty">No conversations yet.</div>
+    </div>
+
+    <!-- Conversation panel -->
+    <div class="convo-panel" id="convo-panel">
+      <div class="convo-empty" id="convo-empty">
+        <div class="convo-empty-icon">💬</div>
+        <div>Select a conversation to reply</div>
+      </div>
+
+      <div id="convo-view" style="display:none;flex:1;flex-direction:column;overflow:hidden;display:none">
+        <div id="closed-banner">This conversation is closed. <button class="btn-sm primary" id="reopen-btn" style="margin-left:8px">Reopen</button></div>
+        <div class="convo-header">
+          <div class="convo-header-info">
+            <h3 id="convo-name">—</h3>
+            <p id="convo-site">—</p>
+          </div>
+          <div class="convo-header-actions">
+            <button class="btn-sm danger" id="close-btn">Close Chat</button>
+          </div>
+        </div>
+        <div class="messages-area" id="messages-area"></div>
+        <div class="reply-area">
+          <textarea id="reply-input" rows="3" placeholder="Type your reply… (Enter to send, Shift+Enter for new line)" maxlength="1000"></textarea>
+          <div class="reply-actions">
+            <span id="reply-char">0 / 1000</span>
+            <button class="btn-sm primary" id="send-reply-btn">Send Reply</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var API = '/api/chat';
+  var activeId = null;
+  var knownMsgIds = {};
+  var sessions = {};
+  var filterMode = 'open';
+  var pollTimer = null;
+  var totalUnread = 0;
+
+  var SITE_LABELS = { colleges: 'PNTC Colleges', shs: 'Senior High School', maritime: 'Maritime Training Center', aman: 'Aman Sinaya', main: 'PNTC Main' };
+
+  // ── Refs ──
+  var sessionsList = document.getElementById('sessions-list');
+  var sessionsEmpty = document.getElementById('sessions-empty');
+  var convoEmpty   = document.getElementById('convo-empty');
+  var convoView    = document.getElementById('convo-view');
+  var convoName    = document.getElementById('convo-name');
+  var convoSite    = document.getElementById('convo-site');
+  var messagesArea = document.getElementById('messages-area');
+  var replyInput   = document.getElementById('reply-input');
+  var sendBtn      = document.getElementById('send-reply-btn');
+  var closeBtn     = document.getElementById('close-btn');
+  var reopenBtn    = document.getElementById('reopen-btn');
+  var closedBanner = document.getElementById('closed-banner');
+  var pollStatus   = document.getElementById('poll-status');
+  var unreadTotal  = document.getElementById('unread-total');
+  var replyChar    = document.getElementById('reply-char');
+
+  // ── Helpers ──
+  function fmtTime(iso) {
+    var d = new Date(iso);
+    return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+  function fmtDate(iso) {
+    var d = new Date(iso);
+    var today = new Date();
+    if (d.toDateString() === today.toDateString()) return 'Today';
+    var yesterday = new Date(today); yesterday.setDate(today.getDate() - 1);
+    if (d.toDateString() === yesterday.toDateString()) return 'Yesterday';
+    return d.toLocaleDateString([], { month: 'short', day: 'numeric' });
+  }
+  function fmtAgo(iso) {
+    var diff = Date.now() - new Date(iso).getTime();
+    if (diff < 60000) return 'just now';
+    if (diff < 3600000) return Math.floor(diff / 60000) + 'm ago';
+    if (diff < 86400000) return Math.floor(diff / 3600000) + 'h ago';
+    return Math.floor(diff / 86400000) + 'd ago';
+  }
+  function avatar(name) {
+    return (name || 'V').charAt(0).toUpperCase();
+  }
+  function escHtml(s) {
+    return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+  }
+
+  // ── Session list ──
+  async function loadSessions() {
+    try {
+      var r = await fetch(API + '/sessions');
+      if (r.status === 401) { pollStatus.textContent = 'Not authenticated'; return; }
+      var list = await r.json();
+      if (!Array.isArray(list)) return;
+      sessions = {};
+      list.forEach(function (s) { sessions[s.id] = s; });
+      renderSessionList();
+      updateUnreadTotal();
+      pollStatus.textContent = 'Live · ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    } catch (e) {
+      pollStatus.textContent = 'Connection error';
+    }
+  }
+
+  function renderSessionList() {
+    var filtered = Object.values(sessions).filter(function (s) {
+      if (filterMode === 'open') return s.status === 'open';
+      if (filterMode === 'closed') return s.status === 'closed';
+      return true;
+    });
+    filtered.sort(function (a, b) { return new Date(b.updated_at) - new Date(a.updated_at); });
+
+    sessionsList.innerHTML = '';
+    if (filtered.length === 0) {
+      sessionsEmpty.style.display = 'block';
+      return;
+    }
+    sessionsEmpty.style.display = 'none';
+
+    filtered.forEach(function (s) {
+      var div = document.createElement('div');
+      div.className = 'session-item' + (s.status === 'closed' ? ' session-closed' : '') + (s.id === activeId ? ' active' : '');
+      div.dataset.id = s.id;
+      div.innerHTML = '<div class="session-avatar">' + avatar(s.visitor_name) + '</div>'
+        + '<div class="session-info">'
+        + '<div class="session-info-top"><span class="session-name">' + escHtml(s.visitor_name || 'Visitor') + '</span>'
+        + '<span class="session-time">' + fmtAgo(s.updated_at) + '</span></div>'
+        + '<div class="session-site">' + (SITE_LABELS[s.site] || s.site) + '</div>'
+        + '<div class="session-preview"><span>' + escHtml((s.last_message || '').slice(0, 60)) + '</span>'
+        + (s.unread_count > 0 ? '<span class="session-badge">' + s.unread_count + '</span>' : '')
+        + '</div></div>';
+      div.addEventListener('click', function () { openSession(s.id); });
+      sessionsList.appendChild(div);
+    });
+  }
+
+  function updateUnreadTotal() {
+    totalUnread = Object.values(sessions).reduce(function (n, s) { return n + (s.unread_count || 0); }, 0);
+    if (totalUnread > 0) {
+      unreadTotal.textContent = totalUnread;
+      unreadTotal.style.display = 'inline';
+    } else {
+      unreadTotal.style.display = 'none';
+    }
+  }
+
+  // ── Open session ──
+  async function openSession(id) {
+    activeId = id;
+    knownMsgIds = {};
+    messagesArea.innerHTML = '';
+    renderSessionList();
+    convoEmpty.style.display = 'none';
+    convoView.style.display = 'flex';
+    convoView.style.flexDirection = 'column';
+    convoView.style.overflow = 'hidden';
+    convoView.style.flex = '1';
+
+    var s = sessions[id];
+    if (s) {
+      convoName.textContent = s.visitor_name || 'Visitor';
+      convoSite.textContent = (SITE_LABELS[s.site] || s.site) + ' · ' + new Date(s.created_at).toLocaleDateString();
+      updateConvoStatus(s.status);
+    }
+
+    await fetchMessages();
+  }
+
+  function updateConvoStatus(status) {
+    if (status === 'closed') {
+      closedBanner.style.display = 'block';
+      closeBtn.style.display = 'none';
+      replyInput.disabled = true;
+      sendBtn.disabled = true;
+      replyInput.placeholder = 'This chat is closed.';
+    } else {
+      closedBanner.style.display = 'none';
+      closeBtn.style.display = '';
+      replyInput.disabled = false;
+      sendBtn.disabled = false;
+      replyInput.placeholder = 'Type your reply… (Enter to send, Shift+Enter for new line)';
+    }
+  }
+
+  async function fetchMessages() {
+    if (!activeId) return;
+    try {
+      var r = await fetch(API + '/session/' + activeId);
+      var d = await r.json();
+      if (d.session) {
+        sessions[activeId] = Object.assign(sessions[activeId] || {}, d.session, { unread_count: 0 });
+        updateConvoStatus(d.session.status);
+        renderSessionList();
+        updateUnreadTotal();
+      }
+      if (Array.isArray(d.messages)) renderMessages(d.messages);
+    } catch (e) {}
+  }
+
+  var lastMsgDate = null;
+  function renderMessages(msgs) {
+    msgs.forEach(function (m) {
+      if (knownMsgIds[m.id]) return;
+      knownMsgIds[m.id] = true;
+      var msgDate = fmtDate(m.created_at);
+      if (msgDate !== lastMsgDate) {
+        lastMsgDate = msgDate;
+        var div = document.createElement('div');
+        div.className = 'msg-date-divider';
+        div.textContent = msgDate;
+        messagesArea.appendChild(div);
+      }
+      var div = document.createElement('div');
+      div.className = 'msg ' + m.sender;
+      div.innerHTML = '<div class="msg-bubble">' + escHtml(m.message) + '</div>'
+        + '<div class="msg-meta">' + fmtTime(m.created_at) + '</div>';
+      messagesArea.appendChild(div);
+    });
+    messagesArea.scrollTop = messagesArea.scrollHeight;
+  }
+
+  // ── Reply ──
+  async function sendReply() {
+    var text = replyInput.value.trim();
+    if (!text || !activeId) return;
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Sending…';
+    try {
+      var r = await fetch(API + '/session/' + activeId + '/reply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text })
+      });
+      if (r.ok) {
+        replyInput.value = '';
+        replyChar.textContent = '0 / 1000';
+        await fetchMessages();
+        await loadSessions();
+      }
+    } finally {
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Send Reply';
+    }
+  }
+
+  sendBtn.addEventListener('click', sendReply);
+  replyInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendReply(); }
+  });
+  replyInput.addEventListener('input', function () {
+    replyChar.textContent = this.value.length + ' / 1000';
+  });
+
+  // ── Close / Reopen ──
+  async function setStatus(status) {
+    if (!activeId) return;
+    await fetch(API + '/session/' + activeId + '/status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: status })
+    });
+    await loadSessions();
+    await fetchMessages();
+  }
+
+  closeBtn.addEventListener('click', function () {
+    if (confirm('Close this chat session?')) setStatus('closed');
+  });
+  reopenBtn.addEventListener('click', function () { setStatus('open'); });
+
+  // ── Filter buttons ──
+  document.querySelectorAll('.filter-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      filterMode = btn.dataset.filter;
+      activeId = null;
+      convoEmpty.style.display = 'flex';
+      convoView.style.display = 'none';
+      renderSessionList();
+    });
+  });
+
+  // ── Polling ──
+  function startPolling() {
+    loadSessions();
+    pollTimer = setInterval(function () {
+      loadSessions();
+      if (activeId) fetchMessages();
+    }, 5000);
+  }
+
+  startPolling();
+})();
+</script>
+</body>
+</html>

@@ -695,6 +695,123 @@ app.post('/api/auth/logout', async (req, res) => {
 
 app.get('/', (_req, res) => res.redirect('/index.html'));
 
+// ── Auth middleware for protected admin routes ──────────────────
+async function requireAuth(req, res, next) {
+  const token = getSessionToken(req.headers.cookie);
+  if (!token) return res.status(401).json({ error: 'Not authenticated' });
+  try {
+    const r = await fetch(`${GOTRUE_URL}/user`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${token}` }
+    });
+    if (!r.ok) return res.status(401).json({ error: 'Not authenticated' });
+    next();
+  } catch { res.status(401).json({ error: 'Auth error' }); }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  Live Chat API
+// ══════════════════════════════════════════════════════════════
+
+// Visitor: start / resume session
+app.post('/api/chat/session', async (req, res) => {
+  const { site, visitorName } = req.body;
+  try {
+    const { data, error } = await supabase
+      .from('chat_sessions')
+      .insert({ site: site || 'main', visitor_name: visitorName || 'Visitor' })
+      .select('id,visitor_name,site').single();
+    if (error) throw error;
+    res.json({ sessionId: data.id, visitorName: data.visitor_name });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+// Visitor: send message
+app.post('/api/chat/session/:id/message', async (req, res) => {
+  const { message } = req.body;
+  if (!message?.trim()) return res.status(400).json({ error: 'Empty message' });
+  try {
+    const { error } = await supabase.from('chat_messages').insert({
+      session_id: req.params.id, sender: 'visitor', message: message.trim()
+    });
+    if (error) throw error;
+    await supabase.from('chat_sessions').update({ updated_at: new Date().toISOString() }).eq('id', req.params.id);
+    res.json({ ok: true });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+// Visitor: poll for new messages
+app.get('/api/chat/session/:id/messages', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('chat_messages')
+      .select('id,sender,message,created_at')
+      .eq('session_id', req.params.id)
+      .order('created_at', { ascending: true });
+    if (error) throw error;
+    res.json(data || []);
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+// Admin: list all sessions with last message
+app.get('/api/chat/sessions', requireAuth, async (req, res) => {
+  try {
+    const { data: sessions, error } = await supabase
+      .from('chat_sessions')
+      .select('id,visitor_name,visitor_email,site,status,created_at,updated_at')
+      .order('updated_at', { ascending: false });
+    if (error) throw error;
+    const result = await Promise.all((sessions || []).map(async s => {
+      const { data: lm } = await supabase.from('chat_messages')
+        .select('message,sender,created_at').eq('session_id', s.id)
+        .order('created_at', { ascending: false }).limit(1).maybeSingle();
+      const { count } = await supabase.from('chat_messages')
+        .select('id', { count: 'exact', head: true })
+        .eq('session_id', s.id).eq('sender', 'visitor').eq('read', false);
+      return { ...s, lastMessage: lm || null, unread: count || 0 };
+    }));
+    res.json(result);
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+// Admin: get session detail + messages
+app.get('/api/chat/session/:id', requireAuth, async (req, res) => {
+  try {
+    const [{ data: session }, { data: messages }] = await Promise.all([
+      supabase.from('chat_sessions').select('*').eq('id', req.params.id).single(),
+      supabase.from('chat_messages').select('*').eq('session_id', req.params.id).order('created_at', { ascending: true })
+    ]);
+    // Mark visitor messages as read
+    await supabase.from('chat_messages').update({ read: true })
+      .eq('session_id', req.params.id).eq('sender', 'visitor').eq('read', false);
+    res.json({ session: session || null, messages: messages || [] });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+// Admin: send reply
+app.post('/api/chat/session/:id/reply', requireAuth, async (req, res) => {
+  const { message } = req.body;
+  if (!message?.trim()) return res.status(400).json({ error: 'Empty message' });
+  try {
+    const { error } = await supabase.from('chat_messages').insert({
+      session_id: req.params.id, sender: 'agent', message: message.trim(), read: true
+    });
+    if (error) throw error;
+    await supabase.from('chat_sessions').update({ updated_at: new Date().toISOString() }).eq('id', req.params.id);
+    res.json({ ok: true });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+// Admin: close or reopen session
+app.post('/api/chat/session/:id/status', requireAuth, async (req, res) => {
+  const { status } = req.body;
+  if (!['open', 'closed'].includes(status)) return res.status(400).json({ error: 'Invalid status' });
+  try {
+    const { error } = await supabase.from('chat_sessions').update({ status }).eq('id', req.params.id);
+    if (error) throw error;
+    res.json({ ok: true });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
 // ══════════════════════════════════════════════════════════════
 //  HTML Generators (output identical to original)
 // ══════════════════════════════════════════════════════════════
