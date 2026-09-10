@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ── TOKENS ──────────────────────────────────────── */
+/* â”€â”€ TOKENS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 :root{
   --ink:#060c19;
   --navy:#0B2A6B;
@@ -24,7 +24,7 @@
   --header-h:72px;
   --ease:cubic-bezier(.22,.61,.36,1);
 }
-/* ── RESET ───────────────────────────────────────── */
+/* â”€â”€ RESET â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Montserrat',sans-serif;background:var(--ink);color:var(--white);overflow-x:hidden;line-height:1.6}
@@ -34,14 +34,14 @@ ul{list-style:none}
 button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .eyebrow{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold)}
 
-/* ── REVEAL ──────────────────────────────────────── */
+/* â”€â”€ REVEAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
 .reveal.visible{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 
-/* ═══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    HEADER
-═══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #header{
   position:fixed;top:0;left:0;right:0;z-index:900;
   height:var(--header-h);
@@ -93,9 +93,9 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 #mob-menu a:hover{color:var(--gold)}
 .mob-close{position:absolute;top:1.5rem;right:1.8rem;font-size:2.2rem;color:rgba(255,255,255,.4);line-height:1}
 
-/* ═══════════════════════════════════════════════════
-   HERO — Single static image
-═══════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   HERO â€” Single static image
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #hero{position:relative;height:100svh;min-height:600px;overflow:hidden;background:var(--deep)}
 
 .hero-bg-img{
@@ -187,9 +187,9 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .scroll-wheel::after{content:'';width:2.5px;height:6px;background:rgba(255,255,255,.4);border-radius:2px;animation:sDot 1.9s infinite}
 @keyframes sDot{0%{transform:translateY(0);opacity:1}75%{transform:translateY(11px);opacity:0}100%{transform:translateY(0);opacity:0}}
 
-/* ═══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    STATS STRIP
-═══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #stats{
   background:var(--gold);
   display:flex;justify-content:center;flex-wrap:wrap;
@@ -203,9 +203,9 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .stat-n{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2rem,4vw,3rem);color:var(--ink);line-height:1}
 .stat-l{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(6,12,25,.55);margin-top:.3rem}
 
-/* ═══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    ABOUT / MISSION
-═══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #about{
   background:var(--ink);
   padding:clamp(5rem,9vw,8rem) clamp(2rem,7vw,6rem);
@@ -259,9 +259,9 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .feat-h{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.25rem}
 .feat-p{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.65}
 
-/* ═══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    COURSES
-═══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #courses{
   background:#080f1e;
   padding:clamp(5rem,9vw,8rem) clamp(2rem,6vw,5rem);
@@ -333,9 +333,9 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 }
 .courses-cta p{font-size:.9rem;color:rgba(255,255,255,.4);margin-bottom:1.2rem}
 
-/* ═══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    FACILITIES
-═══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #facilities{
   background:var(--ocean);
   padding:clamp(5rem,9vw,8rem) clamp(2rem,6vw,5rem);
@@ -389,9 +389,9 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 #lightbox-close{position:absolute;top:1.5rem;right:1.8rem;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08);border-radius:50%;font-size:1.2rem;color:rgba(255,255,255,.6);cursor:pointer;transition:background .2s}
 #lightbox-close:hover{background:rgba(255,255,255,.16);color:var(--white)}
 
-/* ═══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    WHY CHOOSE US
-═══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #why{
   background:var(--ink);
   padding:clamp(5rem,9vw,8rem) clamp(2rem,6vw,5rem);
@@ -417,9 +417,9 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .why-h{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.15rem;text-transform:uppercase;color:var(--white);margin-bottom:.6rem}
 .why-p{font-size:.82rem;color:rgba(255,255,255,.42);line-height:1.7}
 
-/* ═══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    ENROLLMENT CTA BANNER
-═══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #enroll{
   background:linear-gradient(135deg,#0B2A6B 0%,#083152 50%,#051223 100%);
   padding:clamp(4rem,8vw,7rem) clamp(2rem,6vw,5rem);
@@ -472,9 +472,9 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
 .enroll-note{margin-top:1.8rem;font-size:.78rem;color:rgba(255,255,255,.28);letter-spacing:.04em}
 
-/* ═══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    TESTIMONIALS
-═══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #voices{
   background:#080f1e;
   padding:clamp(5rem,9vw,8rem) clamp(2rem,6vw,5rem);
@@ -499,9 +499,9 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .voice-role{font-size:.72rem;color:var(--gold);letter-spacing:.06em;margin-top:.18rem}
 .voice-rank{font-size:.68rem;color:rgba(255,255,255,.3);margin-top:.1rem;letter-spacing:.04em}
 
-/* ═══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CONTACT / FOOTER
-═══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #contact{
   background:var(--deep);
   padding:clamp(4rem,8vw,7rem) clamp(2rem,6vw,5rem) 0;
@@ -568,9 +568,9 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 }
 .footer-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.6}
 
-/* ═══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    RESPONSIVE
-═══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 @media(max-width:900px){
   .about-grid{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
@@ -596,7 +596,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 </head>
 <body>
 
-<!-- ═══ HEADER ═══════════════════════════════════════ -->
+<!-- â•â•â• HEADER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <header id="header">
   <a href="#" class="hdr-logo">
     <div class="hdr-logo-icon">
@@ -630,11 +630,11 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   <a href="#enroll" class="mob-link" style="color:var(--gold)">Enroll Now</a>
 </div>
 
-<!-- ═══ HERO ══════════════════════════════════════════ -->
+<!-- â•â•â• HERO â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section id="hero">
   <div class="hero-bar"></div>
 
-  <img class="hero-bg-img" src="HeroSectionImage.jpg" alt="Onward PNTC — Maritime Training and Assessment Center" loading="eager">
+  <img class="hero-bg-img" src="/maritime/HeroSectionImage.jpg" alt="Onward PNTC â€” Maritime Training and Assessment Center" loading="eager">
 
   <div class="hero-vig"></div>
 
@@ -663,7 +663,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   </div>
 </section>
 
-<!-- ═══ STATS ═════════════════════════════════════════ -->
+<!-- â•â•â• STATS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <div id="stats">
   <div class="stat"><div class="stat-n">30+</div><div class="stat-l">Years of Service</div></div>
   <div class="stat"><div class="stat-n">50,000+</div><div class="stat-l">Trained Seafarers</div></div>
@@ -671,7 +671,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   <div class="stat"><div class="stat-n">MARINA</div><div class="stat-l">Accredited</div></div>
 </div>
 
-<!-- ═══ ABOUT ═════════════════════════════════════════ -->
+<!-- â•â•â• ABOUT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section id="about">
   <div class="about-grid">
     <div class="reveal">
@@ -738,7 +738,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   </div>
 </section>
 
-<!-- ═══ COURSES ════════════════════════════════════════ -->
+<!-- â•â•â• COURSES â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section id="courses">
   <div class="section-head reveal">
     <div class="eyebrow">Programs Offered</div>
@@ -877,7 +877,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   </div>
 </section>
 
-<!-- ═══ FACILITIES ══════════════════════════════════════ -->
+<!-- â•â•â• FACILITIES â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section id="facilities">
   <div class="section-head reveal">
     <div class="eyebrow">Training Facilities</div>
@@ -886,49 +886,49 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   </div>
   <div class="fac-grid">
     <div class="fac-card fac-tall" onclick="openLightbox(this)">
-      <img class="fac-photo" src="Facilities.JPG" alt="Maritime Training">
+      <img class="fac-photo" src="/maritime/Facilities.JPG" alt="Maritime Training">
       <div class="fac-caption">
         <div class="fac-tag">Training Ground</div>
         <h3>Survival &amp; Safety Training</h3>
       </div>
     </div>
     <div class="fac-card fac-wide" onclick="openLightbox(this)">
-      <img class="fac-photo" src="Facilities1.JPG" alt="Tanza Boat Deck">
+      <img class="fac-photo" src="/maritime/Facilities1.JPG" alt="Tanza Boat Deck">
       <div class="fac-caption">
         <div class="fac-tag">Training Vessel</div>
-        <h3>Boat Deck — MV Tanza</h3>
+        <h3>Boat Deck â€” MV Tanza</h3>
       </div>
     </div>
     <div class="fac-card" onclick="openLightbox(this)">
-      <img class="fac-photo" src="Facilities2.jpg" alt="Maritime Training Center">
+      <img class="fac-photo" src="/maritime/Facilities2.jpg" alt="Maritime Training Center">
       <div class="fac-caption">
         <div class="fac-tag">Training Center</div>
         <h3>Training Operations</h3>
       </div>
     </div>
     <div class="fac-card" onclick="openLightbox(this)">
-      <img class="fac-photo" src="Facilities3.jpg" alt="STCW Training">
+      <img class="fac-photo" src="/maritime/Facilities3.jpg" alt="STCW Training">
       <div class="fac-caption">
         <div class="fac-tag">STCW Drills</div>
         <h3>Practical Exercises</h3>
       </div>
     </div>
     <div class="fac-card" onclick="openLightbox(this)">
-      <img class="fac-photo" src="Facilities4.jpeg" alt="Maritime Facilities">
+      <img class="fac-photo" src="/maritime/Facilities4.jpeg" alt="Maritime Facilities">
       <div class="fac-caption">
         <div class="fac-tag">Facilities</div>
         <h3>Modern Equipment</h3>
       </div>
     </div>
     <div class="fac-card fac-wide" onclick="openLightbox(this)">
-      <img class="fac-photo" src="Facilities5.jpg" alt="PNTC Campus">
+      <img class="fac-photo" src="/maritime/Facilities5.jpg" alt="PNTC Campus">
       <div class="fac-caption">
         <div class="fac-tag">Campus</div>
         <h3>Training Complex &amp; Pool</h3>
       </div>
     </div>
     <div class="fac-card" onclick="openLightbox(this)">
-      <img class="fac-photo" src="Facilities6.jpg" alt="PNTC Grounds">
+      <img class="fac-photo" src="/maritime/Facilities6.jpg" alt="PNTC Grounds">
       <div class="fac-caption">
         <div class="fac-tag">Campus</div>
         <h3>Open Training Grounds</h3>
@@ -943,7 +943,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   <img id="lightbox-img" src="" alt="">
 </div>
 
-<!-- ═══ WHY CHOOSE US ══════════════════════════════════ -->
+<!-- â•â•â• WHY CHOOSE US â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section id="why">
   <div class="section-head reveal">
     <div class="eyebrow">Why PNTC Maritime</div>
@@ -974,14 +974,14 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   </div>
 </section>
 
-<!-- ═══ ENROLL CTA ══════════════════════════════════════ -->
+<!-- â•â•â• ENROLL CTA â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section id="enroll">
   <div class="enroll-eyebrow eyebrow">Ready to Advance Your Maritime Career?</div>
   <h2 class="enroll-h2 reveal">
     Enroll<br>in <em>PNTC</em><br>Maritime
   </h2>
   <p class="enroll-sub reveal">
-    Take the next step in your maritime career. Contact our admissions team today —
+    Take the next step in your maritime career. Contact our admissions team today â€”
     we'll help you choose the right courses and schedule your training.
   </p>
   <div class="enroll-ctas reveal">
@@ -994,10 +994,10 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
       0917 182 9158
     </a>
   </div>
-  <p class="enroll-note">Walk-in inquiries welcome Monday – Saturday, 8:00 AM – 5:30 PM · 5th Floor, Intramuros Corporate Plaza, Manila</p>
+  <p class="enroll-note">Walk-in inquiries welcome Monday â€“ Saturday, 8:00 AM â€“ 5:30 PM Â· 5th Floor, Intramuros Corporate Plaza, Manila</p>
 </section>
 
-<!-- ═══ TESTIMONIALS ════════════════════════════════════ -->
+<!-- â•â•â• TESTIMONIALS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section id="voices">
   <div class="section-head reveal">
     <div class="eyebrow">From Our Graduates</div>
@@ -1008,30 +1008,30 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
       <p class="voice-quote">"PNTC gave me the STCW certificates I needed to get hired by a major cruise line. The instructors were very professional and the training was thorough. Highly recommended."</p>
       <div class="voice-name">Ernesto D.</div>
       <div class="voice-role">Certified Ordinary Seaman</div>
-      <div class="voice-rank">MSC Cruises — Mediterranean Route</div>
+      <div class="voice-rank">MSC Cruises â€” Mediterranean Route</div>
     </div>
     <div class="voice-card reveal">
       <p class="voice-quote">"I renewed all my safety certificates here. The schedule was flexible and they processed my documents on time for my deployment. Very organized and efficient staff."</p>
       <div class="voice-name">Mark A.</div>
       <div class="voice-role">Able Bodied Seaman</div>
-      <div class="voice-rank">Maersk Line — Tanker Operations</div>
+      <div class="voice-rank">Maersk Line â€” Tanker Operations</div>
     </div>
     <div class="voice-card reveal">
       <p class="voice-quote">"As an engine cadet, completing BST at PNTC was my first step. The hands-on training with real equipment gave me confidence when I boarded my first vessel."</p>
       <div class="voice-name">Rodrigo M.</div>
       <div class="voice-role">Engine Cadet</div>
-      <div class="voice-rank">NYK Line — Bulk Carrier</div>
+      <div class="voice-rank">NYK Line â€” Bulk Carrier</div>
     </div>
   </div>
 </section>
 
-<!-- ═══ CONTACT / FOOTER ════════════════════════════════ -->
+<!-- â•â•â• CONTACT / FOOTER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section id="contact">
   <div class="contact-grid">
     <div class="reveal">
       <div class="eyebrow" style="margin-bottom:1rem">Get In Touch</div>
       <h2><em>Contact</em><br>Our Team</h2>
-      <p>Our admissions staff are ready to assist you. Visit us in person or reach out through any of the channels below — we typically respond within the same business day.</p>
+      <p>Our admissions staff are ready to assist you. Visit us in person or reach out through any of the channels below â€” we typically respond within the same business day.</p>
       <div class="contact-items">
         <div class="contact-item">
           <div class="contact-item-icon">
@@ -1066,7 +1066,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
           </div>
           <div>
             <div class="contact-item-label">Office Hours</div>
-            <div class="contact-item-val">Monday – Saturday, 8:00 AM – 5:30 PM</div>
+            <div class="contact-item-val">Monday â€“ Saturday, 8:00 AM â€“ 5:30 PM</div>
           </div>
         </div>
       </div>
@@ -1084,7 +1084,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   </div>
 
   <div class="contact-footer">
-    <div>© 2025 PNTC Maritime Training and Assessment Center. All rights reserved.</div>
+    <div>Â© 2025 PNTC Maritime Training and Assessment Center. All rights reserved.</div>
     <div class="footer-badge">
       <div class="footer-dot"></div>
       Part of the PNTC Education Group
@@ -1097,7 +1097,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   </div>
 </section>
 
-<!-- ═══ CHAT WIDGET ════════════════════════════════════ -->
+<!-- â•â•â• CHAT WIDGET â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <script
   src="/chat-widget.js"
   data-site="maritime"
@@ -1107,22 +1107,22 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 ></script>
 
 <script>
-/* ── Header scroll ───────────────────────────────── */
+/* â”€â”€ Header scroll â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const hdr = document.getElementById('header');
 window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 40), { passive: true });
 
-/* ── Mobile menu ─────────────────────────────────── */
+/* â”€â”€ Mobile menu â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 document.getElementById('mob-toggle').addEventListener('click', () => document.getElementById('mob-menu').classList.add('open'));
 document.getElementById('mob-close').addEventListener('click',  () => document.getElementById('mob-menu').classList.remove('open'));
 document.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', () => document.getElementById('mob-menu').classList.remove('open')));
 
-/* ── Reveal on scroll ────────────────────────────── */
+/* â”€â”€ Reveal on scroll â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const revObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); } });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
-/* ── Facilities lightbox ─────────────────────────── */
+/* â”€â”€ Facilities lightbox â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function openLightbox(card) {
   const img = card.querySelector('.fac-photo');
   if (!img) return;
@@ -1141,3 +1141,4 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbo
 </script>
 </body>
 </html>
+
