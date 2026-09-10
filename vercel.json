@@ -9,6 +9,8 @@
     { "source": "/admin",             "destination": "/admin/public/index.html" },
     { "source": "/admin/",            "destination": "/admin/public/index.html" },
     { "source": "/admin/:file*",      "destination": "/admin/public/:file*" },
+    { "source": "/maritime",          "destination": "/PNTC Maritime Training and Assessment Center/index.html" },
+    { "source": "/maritime/:file*",   "destination": "/PNTC Maritime Training and Assessment Center/:file*" },
     { "source": "/:file",             "destination": "/PNTC Main Landing Page/:file" },
     { "source": "/",                  "destination": "/PNTC Main Landing Page/index.html" }
   ]

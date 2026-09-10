@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PNTC Maritime Training and Assessment Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ──────────────────────────────────────── */
+:root{
+  --ink:#060c19;
+  --navy:#0B2A6B;
+  --deep:#051223;
+  --blue:#1244B8;
+  --ocean:#083152;
+  --gold:#C8960C;
+  --gold-lt:#E6AF1A;
+  --gold-dim:rgba(200,150,12,.12);
+  --white:#fff;
+  --muted:rgba(255,255,255,.48);
+  --border:rgba(255,255,255,.08);
+  --header-h:72px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+/* ── RESET ───────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--ink);color:var(--white);overflow-x:hidden;line-height:1.6}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
+.eyebrow{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold)}
+
+/* ── REVEAL ──────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* ═══════════════════════════════════════════════════
+   HEADER
+═══════════════════════════════════════════════════ */
+#header{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  height:var(--header-h);
+  display:flex;align-items:center;
+  padding:0 clamp(1.5rem,4vw,3.5rem);
+  transition:background .4s,box-shadow .4s;
+}
+#header.scrolled{background:rgba(5,18,35,.95);backdrop-filter:blur(18px);box-shadow:0 1px 0 var(--border)}
+
+.hdr-logo{display:flex;align-items:center;gap:.9rem;flex-shrink:0}
+.hdr-logo-icon{
+  width:42px;height:42px;border-radius:4px;
+  background:linear-gradient(135deg,#0B2A6B,#1244B8);
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(200,150,12,.3);
+  flex-shrink:0;
+}
+.hdr-logo-icon svg{width:24px;height:24px;fill:var(--gold)}
+.hdr-wordmark{line-height:1.15}
+.hdr-wordmark strong{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase}
+.hdr-wordmark span{display:block;font-size:.6rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+
+.hdr-nav{display:flex;align-items:center;gap:clamp(.9rem,2.2vw,2.4rem);margin-left:auto;margin-right:clamp(.9rem,2vw,1.8rem)}
+.hdr-nav a{
+  font-family:'Barlow Condensed',sans-serif;font-size:.95rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.62);transition:color .2s;
+  position:relative;
+}
+.hdr-nav a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .2s var(--ease)}
+.hdr-nav a:hover{color:var(--white)}
+.hdr-nav a:hover::after{transform:scaleX(1)}
+
+.hdr-enroll{
+  flex-shrink:0;padding:.6rem 1.6rem;
+  background:var(--gold);color:var(--ink);
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.88rem;letter-spacing:.1em;text-transform:uppercase;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);
+  transition:background .2s;
+}
+.hdr-enroll:hover{background:var(--gold-lt)}
+
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;margin-left:auto}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:1px;transition:transform .3s,opacity .3s}
+
+#mob-menu{display:none;position:fixed;inset:0;z-index:800;background:rgba(5,18,35,.98);flex-direction:column;align-items:center;justify-content:center;gap:2.2rem;opacity:0;transition:opacity .3s}
+#mob-menu.open{display:flex;opacity:1}
+#mob-menu a{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.5rem;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+#mob-menu a:hover{color:var(--gold)}
+.mob-close{position:absolute;top:1.5rem;right:1.8rem;font-size:2.2rem;color:rgba(255,255,255,.4);line-height:1}
+
+/* ═══════════════════════════════════════════════════
+   HERO — Full-bleed crossfade slides
+═══════════════════════════════════════════════════ */
+#hero{position:relative;height:100svh;min-height:600px;overflow:hidden;background:var(--deep)}
+
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s var(--ease)}
+.slide.active{opacity:1;z-index:1}
+
+.slide-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  transform:scale(1.04);transition:transform 7s linear;
+  filter:brightness(.55) saturate(1.1);
+}
+.slide.active .slide-img{transform:scale(1)}
+
+/* Overlay gradient */
+.hero-vig{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    linear-gradient(to right,rgba(5,18,35,.88) 0%,rgba(5,18,35,.4) 55%,rgba(5,18,35,.2) 100%),
+    linear-gradient(to top,rgba(5,18,35,.98) 0%,rgba(5,18,35,.0) 60%);
+}
+
+/* Gold left accent bar */
+.hero-bar{
+  position:absolute;left:0;top:var(--header-h);bottom:0;width:4px;
+  background:linear-gradient(to bottom,var(--gold),rgba(200,150,12,0));
+  z-index:5;
+}
+
+/* Hero content */
+.hero-content{
+  position:absolute;bottom:0;left:0;right:0;z-index:6;
+  padding:0 clamp(2.5rem,7vw,6rem) clamp(3rem,6vh,5rem);
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.75rem;
+  margin-bottom:1rem;
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+}
+.hero-eyebrow::before{content:'';width:36px;height:2px;background:var(--gold)}
+
+.hero-headline{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  font-size:clamp(4rem,12vw,9.5rem);
+  text-transform:uppercase;
+  line-height:.88;
+  letter-spacing:-.02em;
+  margin-bottom:1.4rem;
+  max-width:14ch;
+}
+.hero-headline em{font-style:normal;color:var(--gold)}
+
+.hero-sub{
+  font-size:clamp(.88rem,1.5vw,1.05rem);
+  font-weight:300;
+  color:rgba(255,255,255,.58);
+  line-height:1.75;
+  max-width:44ch;
+  margin-bottom:2.2rem;
+}
+
+.hero-ctas{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.btn-primary-hero{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.88rem 2.4rem;
+  background:var(--gold);color:var(--ink);
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.12em;text-transform:uppercase;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);
+  transition:background .2s,box-shadow .2s;
+  box-shadow:0 6px 24px rgba(200,150,12,.35);
+}
+.btn-primary-hero:hover{background:var(--gold-lt);box-shadow:0 8px 32px rgba(200,150,12,.5)}
+.btn-primary-hero svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.5;fill:none}
+
+.btn-ghost-hero{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.85rem 2rem;
+  border:1.5px solid rgba(255,255,255,.28);color:rgba(255,255,255,.8);
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.1em;text-transform:uppercase;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);
+  transition:border-color .2s,color .2s,background .2s;
+}
+.btn-ghost-hero:hover{border-color:rgba(200,150,12,.6);color:var(--gold);background:rgba(200,150,12,.06)}
+.btn-ghost-hero svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.5;fill:none}
+
+/* Slide dots */
+.hero-dots{
+  position:absolute;right:clamp(1.5rem,3vw,2.5rem);top:50%;transform:translateY(-50%);
+  z-index:10;display:flex;flex-direction:column;gap:.7rem;
+}
+.hero-dot{
+  width:3px;height:28px;background:rgba(255,255,255,.15);border-radius:2px;
+  cursor:pointer;transition:background .3s;position:relative;overflow:hidden;
+}
+.hero-dot.active{background:rgba(255,255,255,.2)}
+.hero-dot-fill{
+  position:absolute;bottom:0;left:0;right:0;height:0;
+  background:var(--gold);transition:height linear;
+}
+
+/* Scroll cue */
+.scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:.4rem}
+.scroll-cue span{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.28)}
+.scroll-wheel{width:20px;height:33px;border:1.5px solid rgba(255,255,255,.18);border-radius:10px;display:flex;align-items:flex-start;justify-content:center;padding-top:4px}
+.scroll-wheel::after{content:'';width:2.5px;height:6px;background:rgba(255,255,255,.4);border-radius:2px;animation:sDot 1.9s infinite}
+@keyframes sDot{0%{transform:translateY(0);opacity:1}75%{transform:translateY(11px);opacity:0}100%{transform:translateY(0);opacity:0}}
+
+/* ═══════════════════════════════════════════════════
+   STATS STRIP
+═══════════════════════════════════════════════════ */
+#stats{
+  background:var(--gold);
+  display:flex;justify-content:center;flex-wrap:wrap;
+  padding:clamp(1.5rem,3vw,2.2rem) clamp(2rem,5vw,4rem);
+}
+.stat{
+  text-align:center;padding:.6rem clamp(2rem,4vw,4rem);
+  border-right:1px solid rgba(6,12,25,.18);
+}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2rem,4vw,3rem);color:var(--ink);line-height:1}
+.stat-l{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(6,12,25,.55);margin-top:.3rem}
+
+/* ═══════════════════════════════════════════════════
+   ABOUT / MISSION
+═══════════════════════════════════════════════════ */
+#about{
+  background:var(--ink);
+  padding:clamp(5rem,9vw,8rem) clamp(2rem,7vw,6rem);
+  position:relative;overflow:hidden;
+}
+#about::before{
+  content:'';position:absolute;top:-1px;left:0;right:0;height:60px;
+  background:var(--gold);
+  clip-path:polygon(0 0,100% 0,100% 100%);
+}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(3rem,6vw,7rem);
+  align-items:center;max-width:1200px;margin:0 auto;
+}
+.about-label{display:flex;align-items:center;gap:.75rem;margin-bottom:1.2rem}
+.about-label::before{content:'';width:36px;height:3px;background:var(--gold)}
+.about-h2{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;
+  font-size:clamp(2.5rem,5vw,4rem);
+  line-height:.9;text-transform:uppercase;margin-bottom:1.5rem;
+}
+.about-h2 em{font-style:normal;color:var(--gold)}
+.about-body{font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.85;margin-bottom:1.8rem}
+.about-link{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--gold);
+  transition:gap .2s;
+}
+.about-link:hover{gap:.8rem}
+.about-link svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.5;fill:none}
+
+.about-features{display:flex;flex-direction:column;gap:1.2rem}
+.about-feat{
+  display:flex;align-items:flex-start;gap:1.2rem;
+  padding:1.4rem 1.6rem;
+  background:rgba(11,42,107,.22);
+  border:1px solid rgba(200,150,12,.12);
+  border-left:3px solid var(--gold);
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);
+  transition:background .3s,border-color .3s;
+}
+.about-feat:hover{background:rgba(18,68,184,.22);border-color:rgba(200,150,12,.28)}
+.feat-icon{
+  width:44px;height:44px;border-radius:8px;
+  background:linear-gradient(135deg,rgba(200,150,12,.18),rgba(200,150,12,.08));
+  border:1px solid rgba(200,150,12,.25);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.feat-icon svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.8}
+.feat-h{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.25rem}
+.feat-p{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.65}
+
+/* ═══════════════════════════════════════════════════
+   COURSES
+═══════════════════════════════════════════════════ */
+#courses{
+  background:#080f1e;
+  padding:clamp(5rem,9vw,8rem) clamp(2rem,6vw,5rem);
+}
+.section-head{max-width:1200px;margin:0 auto clamp(2.5rem,5vw,4rem)}
+.section-head .eyebrow{margin-bottom:1rem}
+.section-head h2{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;
+  font-size:clamp(2.2rem,5vw,3.5rem);text-transform:uppercase;line-height:.92;
+}
+.section-head h2 span{color:var(--gold)}
+.section-head p{font-size:.92rem;color:rgba(255,255,255,.44);line-height:1.8;max-width:58ch;margin-top:.8rem}
+
+.courses-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1.25rem;
+  max-width:1200px;margin:0 auto;
+}
+
+.course-card{
+  background:rgba(11,42,107,.2);
+  border:1px solid var(--border);
+  padding:1.8rem;
+  position:relative;
+  clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,0 100%);
+  filter:drop-shadow(0 4px 16px rgba(0,0,0,.4));
+  transition:background .3s,border-color .3s,transform .3s,filter .3s;
+  cursor:pointer;
+}
+.course-card:hover{
+  background:rgba(18,68,184,.22);
+  border-color:rgba(200,150,12,.3);
+  transform:translateY(-4px);
+  filter:drop-shadow(0 12px 28px rgba(0,0,0,.6)) drop-shadow(0 0 14px rgba(200,150,12,.08));
+}
+.course-card::before{
+  content:'';position:absolute;top:0;right:0;
+  border-top:22px solid var(--gold);
+  border-left:22px solid transparent;
+}
+.course-tag{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;opacity:.75}
+.course-name{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.25rem;
+  text-transform:uppercase;color:var(--white);line-height:1.05;margin-bottom:.65rem;
+}
+.course-desc{font-size:.8rem;color:rgba(255,255,255,.44);line-height:1.68;margin-bottom:1.2rem}
+.course-meta{
+  display:flex;align-items:center;gap:1rem;
+  padding-top:1rem;border-top:1px solid rgba(255,255,255,.07);
+}
+.course-meta-item{display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:rgba(255,255,255,.35)}
+.course-meta-item svg{width:13px;height:13px;stroke:var(--gold);fill:none;stroke-width:2}
+.course-enroll{
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--gold);
+  margin-left:auto;
+}
+.course-enroll svg{width:11px;height:11px;stroke:currentColor;stroke-width:2.5;fill:none}
+.course-enroll:hover{color:var(--gold-lt)}
+
+.courses-cta{
+  text-align:center;
+  margin-top:2.5rem;
+  max-width:1200px;margin-left:auto;margin-right:auto;
+  padding-top:2.5rem;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.courses-cta p{font-size:.9rem;color:rgba(255,255,255,.4);margin-bottom:1.2rem}
+
+/* ═══════════════════════════════════════════════════
+   FACILITIES
+═══════════════════════════════════════════════════ */
+#facilities{
+  background:var(--ocean);
+  padding:clamp(5rem,9vw,8rem) clamp(2rem,6vw,5rem);
+  position:relative;
+  clip-path:polygon(0 52px,100% 0,100% 100%,0 100%);
+  margin-top:-52px;
+}
+.fac-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto auto;
+  gap:1rem;
+  max-width:1200px;margin:0 auto;
+}
+.fac-card{
+  position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%);
+  filter:drop-shadow(0 4px 16px rgba(0,0,0,.45));
+  min-height:220px;
+  cursor:zoom-in;
+}
+.fac-card.fac-wide{grid-column:span 2}
+.fac-card.fac-tall{grid-row:span 2}
+.fac-photo{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  transition:transform .7s var(--ease),filter .4s;
+  filter:brightness(.7) saturate(1.1);
+}
+.fac-card:hover .fac-photo{transform:scale(1.05);filter:brightness(.9) saturate(1.15)}
+.fac-caption{
+  position:absolute;bottom:0;left:0;right:0;z-index:2;
+  padding:2.5rem 1.4rem 1.2rem;
+  background:linear-gradient(to top,rgba(5,18,35,.92) 0%,transparent 100%);
+}
+.fac-tag{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.fac-caption h3{
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.1rem;
+  text-transform:uppercase;color:var(--white);
+}
+.fac-card::after{
+  content:'';position:absolute;top:0;right:0;z-index:3;
+  border-top:18px solid var(--gold);border-left:18px solid transparent;
+}
+
+/* Lightbox */
+#lightbox{display:none;position:fixed;inset:0;z-index:9900;background:rgba(4,10,22,.95);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:1.5rem}
+#lightbox.open{display:flex}
+#lightbox img{max-width:min(1100px,90vw);max-height:87vh;object-fit:contain;border-radius:4px;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+#lightbox-close{position:absolute;top:1.5rem;right:1.8rem;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08);border-radius:50%;font-size:1.2rem;color:rgba(255,255,255,.6);cursor:pointer;transition:background .2s}
+#lightbox-close:hover{background:rgba(255,255,255,.16);color:var(--white)}
+
+/* ═══════════════════════════════════════════════════
+   WHY CHOOSE US
+═══════════════════════════════════════════════════ */
+#why{
+  background:var(--ink);
+  padding:clamp(5rem,9vw,8rem) clamp(2rem,6vw,5rem);
+}
+.why-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:1.25rem;max-width:1200px;margin:0 auto;
+}
+.why-card{
+  padding:2rem 1.75rem;
+  background:rgba(11,42,107,.18);
+  border:1px solid rgba(200,150,12,.12);
+  clip-path:polygon(0 0,calc(100% - 24px) 0,100% 24px,100% 100%,0 100%);
+  transition:background .3s,border-color .3s,transform .3s;
+  position:relative;
+}
+.why-card:hover{background:rgba(18,68,184,.2);border-color:rgba(200,150,12,.28);transform:translateY(-4px)}
+.why-card::before{content:'';position:absolute;top:0;right:0;border-top:24px solid var(--gold);border-left:24px solid transparent}
+.why-num{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:3rem;
+  color:rgba(200,150,12,.12);line-height:1;margin-bottom:.5rem;
+}
+.why-h{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.15rem;text-transform:uppercase;color:var(--white);margin-bottom:.6rem}
+.why-p{font-size:.82rem;color:rgba(255,255,255,.42);line-height:1.7}
+
+/* ═══════════════════════════════════════════════════
+   ENROLLMENT CTA BANNER
+═══════════════════════════════════════════════════ */
+#enroll{
+  background:linear-gradient(135deg,#0B2A6B 0%,#083152 50%,#051223 100%);
+  padding:clamp(4rem,8vw,7rem) clamp(2rem,6vw,5rem);
+  text-align:center;position:relative;overflow:hidden;
+}
+#enroll::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle at 2px 2px,rgba(200,150,12,.06) 1px,transparent 0);
+  background-size:32px 32px;pointer-events:none;
+}
+#enroll::after{
+  content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);
+  width:600px;height:300px;
+  background:radial-gradient(ellipse,rgba(200,150,12,.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.enroll-eyebrow{margin-bottom:1.2rem}
+.enroll-h2{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;
+  font-size:clamp(2.8rem,6vw,5rem);text-transform:uppercase;line-height:.9;
+  margin-bottom:1.2rem;position:relative;z-index:1;
+}
+.enroll-h2 em{font-style:normal;color:var(--gold)}
+.enroll-sub{
+  font-size:clamp(.9rem,1.6vw,1.1rem);color:rgba(255,255,255,.52);
+  line-height:1.7;max-width:52ch;margin:0 auto 2.5rem;position:relative;z-index:1;
+}
+.enroll-ctas{display:flex;justify-content:center;align-items:center;gap:1.25rem;flex-wrap:wrap;position:relative;z-index:1}
+.btn-enroll{
+  display:inline-flex;align-items:center;gap:.65rem;
+  padding:1rem 2.8rem;
+  background:var(--gold);color:var(--ink);
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);
+  box-shadow:0 8px 32px rgba(200,150,12,.4);
+  transition:background .2s,box-shadow .2s;
+}
+.btn-enroll:hover{background:var(--gold-lt);box-shadow:0 12px 40px rgba(200,150,12,.55)}
+.btn-enroll svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5;fill:none}
+.btn-call{
+  display:inline-flex;align-items:center;gap:.65rem;
+  padding:.95rem 2.2rem;
+  border:2px solid rgba(200,150,12,.5);color:var(--gold);
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);
+  transition:border-color .2s,background .2s;
+}
+.btn-call:hover{border-color:var(--gold);background:rgba(200,150,12,.08)}
+.btn-call svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none}
+
+.enroll-note{margin-top:1.8rem;font-size:.78rem;color:rgba(255,255,255,.28);letter-spacing:.04em}
+
+/* ═══════════════════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════════════════ */
+#voices{
+  background:#080f1e;
+  padding:clamp(5rem,9vw,8rem) clamp(2rem,6vw,5rem);
+}
+.voices-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:1.25rem;max-width:1200px;margin:0 auto;
+}
+.voice-card{
+  background:rgba(11,42,107,.22);
+  border:1px solid var(--border);
+  padding:2rem;
+  position:relative;
+  clip-path:polygon(0 0,100% 0,100% 100%,24px 100%,0 calc(100% - 24px));
+  filter:drop-shadow(0 6px 20px rgba(0,0,0,.45));
+  transition:border-color .3s,background .3s;
+}
+.voice-card:hover{border-color:rgba(200,150,12,.25);background:rgba(11,42,107,.38)}
+.voice-card::after{content:'';position:absolute;bottom:0;left:0;border-bottom:24px solid var(--gold);border-right:24px solid transparent}
+.voice-quote{font-size:.88rem;font-weight:300;color:rgba(255,255,255,.55);line-height:1.8;font-style:italic;border-left:2px solid var(--gold);padding-left:1rem;margin-bottom:1.5rem}
+.voice-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;text-transform:uppercase}
+.voice-role{font-size:.72rem;color:var(--gold);letter-spacing:.06em;margin-top:.18rem}
+.voice-rank{font-size:.68rem;color:rgba(255,255,255,.3);margin-top:.1rem;letter-spacing:.04em}
+
+/* ═══════════════════════════════════════════════════
+   CONTACT / FOOTER
+═══════════════════════════════════════════════════ */
+#contact{
+  background:var(--deep);
+  padding:clamp(4rem,8vw,7rem) clamp(2rem,6vw,5rem) 0;
+}
+.contact-grid{
+  display:grid;grid-template-columns:1.2fr 1fr;
+  gap:clamp(3rem,6vw,7rem);align-items:start;
+  max-width:1200px;margin:0 auto;
+}
+.contact-left h2{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;
+  font-size:clamp(2.2rem,4vw,3.2rem);text-transform:uppercase;margin-bottom:.8rem;
+}
+.contact-left h2 em{font-style:normal;color:var(--gold)}
+.contact-left p{font-size:.9rem;color:rgba(255,255,255,.44);line-height:1.8;margin-bottom:2rem}
+
+.contact-items{display:flex;flex-direction:column;gap:1rem}
+.contact-item{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:1.2rem 1.4rem;
+  background:rgba(11,42,107,.18);border:1px solid rgba(255,255,255,.07);
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);
+}
+.contact-item-icon{
+  width:40px;height:40px;border-radius:6px;
+  background:rgba(200,150,12,.12);border:1px solid rgba(200,150,12,.2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.contact-item-icon svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:2}
+.contact-item-label{font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.2rem}
+.contact-item-val{font-size:.92rem;font-weight:600;line-height:1.45}
+.contact-item-val a{color:var(--white);transition:color .2s}
+.contact-item-val a:hover{color:var(--gold)}
+
+/* Map placeholder */
+.contact-map{
+  position:relative;height:360px;
+  background:linear-gradient(135deg,rgba(11,42,107,.4),rgba(5,18,35,.6));
+  border:1px solid rgba(200,150,12,.15);
+  clip-path:polygon(0 0,calc(100% - 24px) 0,100% 24px,100% 100%,0 100%);
+  overflow:hidden;display:flex;align-items:center;justify-content:center;
+}
+.map-placeholder{text-align:center;position:relative;z-index:2}
+.map-placeholder svg{width:40px;height:40px;stroke:var(--gold);fill:none;stroke-width:1.5;margin:0 auto .8rem}
+.map-placeholder p{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.contact-map::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 2px 2px,rgba(200,150,12,.05) 1px,transparent 0);background-size:28px 28px}
+
+.contact-footer{
+  margin-top:4rem;
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:2rem 0;
+  max-width:1200px;margin-left:auto;margin-right:auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+  font-size:.72rem;color:rgba(255,255,255,.28);
+}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{color:rgba(255,255,255,.3);transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.28);
+}
+.footer-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.6}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════ */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .fac-grid{grid-template-columns:1fr 1fr}
+  .fac-card.fac-tall{grid-row:span 1}
+}
+@media(max-width:720px){
+  .hdr-nav{display:none}
+  .hdr-enroll{display:none}
+  .hamburger{display:flex}
+  #stats{gap:0}.stat{border-right:none;border-bottom:1px solid rgba(6,12,25,.18);padding:.8rem 2rem}
+  .stat:last-child{border-bottom:none}
+  .fac-grid{grid-template-columns:1fr}.fac-card.fac-wide{grid-column:span 1}
+  .hero-ctas{flex-direction:column;align-items:flex-start}
+  .enroll-ctas{flex-direction:column}
+}
+@media(max-width:480px){
+  .courses-grid{grid-template-columns:1fr}
+  .voices-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══════════════════════════════════════ -->
+<header id="header">
+  <a href="#" class="hdr-logo">
+    <div class="hdr-logo-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <div class="hdr-wordmark">
+      <strong>PNTC Maritime</strong>
+      <span>Training &amp; Assessment Center</span>
+    </div>
+  </a>
+
+  <nav class="hdr-nav">
+    <a href="#courses">Courses</a>
+    <a href="#facilities">Facilities</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a href="#enroll" class="hdr-enroll">Enroll Now</a>
+
+  <button class="hamburger" id="mob-toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div id="mob-menu">
+  <button class="mob-close" id="mob-close">&times;</button>
+  <a href="#courses" class="mob-link">Courses</a>
+  <a href="#facilities" class="mob-link">Facilities</a>
+  <a href="#about" class="mob-link">About</a>
+  <a href="#contact" class="mob-link">Contact</a>
+  <a href="#enroll" class="mob-link" style="color:var(--gold)">Enroll Now</a>
+</div>
+
+<!-- ═══ HERO ══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bar"></div>
+
+  <!-- Slide 1 -->
+  <div class="slide active" data-slide="0">
+    <img class="slide-img" src="Hero Section Slideshow1.jpg" alt="PNTC Maritime Training" loading="eager">
+  </div>
+  <!-- Slide 2 -->
+  <div class="slide" data-slide="1">
+    <img class="slide-img" src="Hero Section Slideshow2.jpg" alt="Maritime Training Vessel" loading="eager">
+  </div>
+  <!-- Slide 3 -->
+  <div class="slide" data-slide="2">
+    <img class="slide-img" src="Tanza - Boat Deck.JPG" alt="Tanza Boat Deck Training" loading="lazy">
+  </div>
+
+  <div class="hero-vig"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">PNTC Maritime Training &amp; Assessment Center</div>
+    <h1 class="hero-headline">Chart<br>Your<br><em>Course</em></h1>
+    <p class="hero-sub">
+      World-class STCW-compliant maritime training for Filipino seafarers.
+      Build the credentials that open doors to global shipping companies.
+    </p>
+    <div class="hero-ctas">
+      <a href="#courses" class="btn-primary-hero">
+        View Courses
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a href="#enroll" class="btn-ghost-hero">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        How to Enroll
+      </a>
+    </div>
+  </div>
+
+  <!-- Slide nav dots -->
+  <div class="hero-dots" role="tablist">
+    <div class="hero-dot active" data-idx="0" role="tab"><div class="hero-dot-fill"></div></div>
+    <div class="hero-dot" data-idx="1" role="tab"><div class="hero-dot-fill"></div></div>
+    <div class="hero-dot" data-idx="2" role="tab"><div class="hero-dot-fill"></div></div>
+  </div>
+
+  <div class="scroll-cue">
+    <div class="scroll-wheel"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ═══ STATS ═════════════════════════════════════════ -->
+<div id="stats">
+  <div class="stat"><div class="stat-n">30+</div><div class="stat-l">Years of Service</div></div>
+  <div class="stat"><div class="stat-n">50,000+</div><div class="stat-l">Trained Seafarers</div></div>
+  <div class="stat"><div class="stat-n">20+</div><div class="stat-l">STCW Courses</div></div>
+  <div class="stat"><div class="stat-n">MARINA</div><div class="stat-l">Accredited</div></div>
+</div>
+
+<!-- ═══ ABOUT ═════════════════════════════════════════ -->
+<section id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="about-label">
+        <span class="eyebrow">Who We Are</span>
+      </div>
+      <h2 class="about-h2">
+        Training<br>Seafarers<br>for <em>the World</em>
+      </h2>
+      <p class="about-body">
+        PNTC Maritime Training and Assessment Center is one of the Philippines' premier
+        institutions for maritime education and training. We are fully accredited by
+        MARINA (Maritime Industry Authority) and compliant with the International
+        Convention on Standards of Training, Certification and Watchkeeping (STCW).
+        <br><br>
+        Whether you are a new cadet starting your maritime career or an experienced
+        officer renewing your certifications, our state-of-the-art training facilities
+        and experienced maritime instructors will prepare you for safe and successful
+        service at sea.
+      </p>
+      <a href="#courses" class="about-link">
+        Explore Our Courses
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    </div>
+    <div class="about-features reveal">
+      <div class="about-feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+          <div class="feat-h">MARINA Accredited</div>
+          <p class="feat-p">Fully licensed by the Maritime Industry Authority of the Philippines to conduct STCW training and assessment.</p>
+        </div>
+      </div>
+      <div class="about-feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <div class="feat-h">STCW Compliant</div>
+          <p class="feat-p">All programs follow the International STCW Convention, ensuring your certificates are recognized worldwide.</p>
+        </div>
+      </div>
+      <div class="about-feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div>
+          <div class="feat-h">Practical Training</div>
+          <p class="feat-p">Hands-on drills aboard our training vessel with life-saving equipment, fire-fighting simulators, and survival craft.</p>
+        </div>
+      </div>
+      <div class="about-feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div>
+          <div class="feat-h">Expert Instructors</div>
+          <p class="feat-p">Our trainers are experienced maritime officers and certified competence assessors with years of sea service.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COURSES ════════════════════════════════════════ -->
+<section id="courses">
+  <div class="section-head reveal">
+    <div class="eyebrow">Programs Offered</div>
+    <h2>Our <span>STCW</span> Courses</h2>
+    <p>Internationally recognized certifications required for seafarers. All courses are conducted by MARINA-accredited instructors and assessors.</p>
+  </div>
+  <div class="courses-grid">
+
+    <div class="course-card reveal">
+      <div class="course-tag">STCW Basic Safety</div>
+      <div class="course-name">Basic Safety Training (BST)</div>
+      <div class="course-desc">The foundational maritime safety certification required for all seafarers. Covers personal survival techniques, fire prevention, elementary first aid, and personal safety.</div>
+      <div class="course-meta">
+        <span class="course-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          4 Days
+        </span>
+        <a href="#enroll" class="course-enroll">
+          Enroll <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-tag">STCW Regulation VI/2</div>
+      <div class="course-name">Proficiency in Survival Craft &amp; Rescue Boats (PSCRB)</div>
+      <div class="course-desc">Training in the operation of lifeboats, rescue boats, and marine evacuation systems. Required for officers and ratings in charge of survival craft.</div>
+      <div class="course-meta">
+        <span class="course-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          3 Days
+        </span>
+        <a href="#enroll" class="course-enroll">
+          Enroll <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-tag">STCW Regulation VI/3</div>
+      <div class="course-name">Advanced Fire Fighting (AFF)</div>
+      <div class="course-desc">Advanced techniques in fire fighting at sea including coordinating fire-fighting operations, shipboard fire-fighting organization, hazards and damage control.</div>
+      <div class="course-meta">
+        <span class="course-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          2.5 Days
+        </span>
+        <a href="#enroll" class="course-enroll">
+          Enroll <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-tag">STCW Regulation VI/4-1</div>
+      <div class="course-name">Medical First Aid (MFA)</div>
+      <div class="course-desc">Training in providing first aid aboard ships including assessment of injured persons, life-saving techniques, and using medical supplies and equipment.</div>
+      <div class="course-meta">
+        <span class="course-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          3 Days
+        </span>
+        <a href="#enroll" class="course-enroll">
+          Enroll <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-tag">STCW Regulation VI/6</div>
+      <div class="course-name">Security Awareness Training (SAT)</div>
+      <div class="course-desc">Mandatory training on maritime security threats and awareness, shipboard security procedures, and responding to security incidents under the ISPS Code.</div>
+      <div class="course-meta">
+        <span class="course-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          1 Day
+        </span>
+        <a href="#enroll" class="course-enroll">
+          Enroll <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-tag">STCW Regulation V/1-1</div>
+      <div class="course-name">Crowd &amp; Crisis Management (CCM)</div>
+      <div class="course-desc">Training for passenger ship personnel in managing crowd situations, handling passengers in distress, and emergency response communication.</div>
+      <div class="course-meta">
+        <span class="course-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          1 Day
+        </span>
+        <a href="#enroll" class="course-enroll">
+          Enroll <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-tag">STCW Regulation VI/2-2</div>
+      <div class="course-name">Proficiency in Fast Rescue Boats (PFRB)</div>
+      <div class="course-desc">Specialized training in the handling and operation of fast rescue boats for search and rescue operations at sea.</div>
+      <div class="course-meta">
+        <span class="course-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          2 Days
+        </span>
+        <a href="#enroll" class="course-enroll">
+          Enroll <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-tag">STCW Regulation VI/4-2</div>
+      <div class="course-name">Medical Care (MC)</div>
+      <div class="course-desc">In-depth training for seafarers designated to provide medical care aboard ship, including diagnosing illness, medical treatment, and emergency response.</div>
+      <div class="course-meta">
+        <span class="course-meta-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          5 Days
+        </span>
+        <a href="#enroll" class="course-enroll">
+          Enroll <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <div class="courses-cta reveal">
+    <p>Looking for a specific certification or refresher course? Our admissions team will guide you.</p>
+    <a href="tel:+639XXXXXXXXX" class="btn-enroll">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.37 9.55a19.79 19.79 0 01-3.07-8.67A2 2 0 012.28 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006 6l1.27-.52a2 2 0 012.11.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Call for Course Info
+    </a>
+  </div>
+</section>
+
+<!-- ═══ FACILITIES ══════════════════════════════════════ -->
+<section id="facilities">
+  <div class="section-head reveal">
+    <div class="eyebrow">Training Facilities</div>
+    <h2>World-Class <span>Maritime</span> Facilities</h2>
+    <p>Our training center features modern equipment and realistic scenarios to prepare you for real-world conditions at sea.</p>
+  </div>
+  <div class="fac-grid">
+    <div class="fac-card fac-tall" onclick="openLightbox(this)">
+      <img class="fac-photo" src="_1016035 (1).JPG" alt="Maritime Training">
+      <div class="fac-caption">
+        <div class="fac-tag">Training Ground</div>
+        <h3>Survival &amp; Safety Training</h3>
+      </div>
+    </div>
+    <div class="fac-card fac-wide" onclick="openLightbox(this)">
+      <img class="fac-photo" src="Tanza - Boat Deck.JPG" alt="Tanza Boat Deck">
+      <div class="fac-caption">
+        <div class="fac-tag">Training Vessel</div>
+        <h3>Boat Deck — MV Tanza</h3>
+      </div>
+    </div>
+    <div class="fac-card" onclick="openLightbox(this)">
+      <img class="fac-photo" src="622354603_923200480276445_5033862586898146347_n (1).jpg" alt="Maritime Training Center">
+      <div class="fac-caption">
+        <div class="fac-tag">Training Center</div>
+        <h3>Training Operations</h3>
+      </div>
+    </div>
+    <div class="fac-card" onclick="openLightbox(this)">
+      <img class="fac-photo" src="622383980_923200553609771_4282784235023244876_n.jpg" alt="STCW Training">
+      <div class="fac-caption">
+        <div class="fac-tag">STCW Drills</div>
+        <h3>Practical Exercises</h3>
+      </div>
+    </div>
+    <div class="fac-card" onclick="openLightbox(this)">
+      <img class="fac-photo" src="622865392_923200413609785_2046929828634539220_n.jpg" alt="Maritime Facilities">
+      <div class="fac-caption">
+        <div class="fac-tag">Facilities</div>
+        <h3>Modern Equipment</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()">&#10005;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<!-- ═══ WHY CHOOSE US ══════════════════════════════════ -->
+<section id="why">
+  <div class="section-head reveal">
+    <div class="eyebrow">Why PNTC Maritime</div>
+    <h2>Your <span>Competitive</span> Advantage</h2>
+    <p>What sets our training apart and why top shipping companies trust PNTC graduates.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-num">01</div>
+      <div class="why-h">Globally Recognized</div>
+      <p class="why-p">Our certificates are accepted by international shipping companies and port state authorities worldwide, from Europe to Asia to the Americas.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-num">02</div>
+      <div class="why-h">Flexible Schedules</div>
+      <p class="why-p">We offer weekday and weekend training sessions to accommodate working seafarers and those on vacation leave from their vessel.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-num">03</div>
+      <div class="why-h">Fast Processing</div>
+      <p class="why-p">We process training certificates quickly so you don't miss your sign-on date. Contact us and we'll work around your deployment schedule.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-num">04</div>
+      <div class="why-h">Affordable Rates</div>
+      <p class="why-p">Competitive training fees without compromising the quality of instruction. Package deals available for complete STCW Basic Safety Training bundle.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ENROLL CTA ══════════════════════════════════════ -->
+<section id="enroll">
+  <div class="enroll-eyebrow eyebrow">Ready to Advance Your Maritime Career?</div>
+  <h2 class="enroll-h2 reveal">
+    Enroll<br>in <em>PNTC</em><br>Maritime
+  </h2>
+  <p class="enroll-sub reveal">
+    Take the next step in your maritime career. Contact our admissions team today —
+    we'll help you choose the right courses and schedule your training.
+  </p>
+  <div class="enroll-ctas reveal">
+    <a href="mailto:admissions@mypntc.edu.ph" class="btn-enroll">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Email Admissions
+    </a>
+    <a href="tel:+63469919135" class="btn-call">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.37 9.55a19.79 19.79 0 01-3.07-8.67A2 2 0 012.28 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006 6l1.27-.52a2 2 0 012.11.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      (046) 991-9135
+    </a>
+  </div>
+  <p class="enroll-note">Walk-in inquiries welcome Monday – Saturday, 8:00 AM – 5:00 PM</p>
+</section>
+
+<!-- ═══ TESTIMONIALS ════════════════════════════════════ -->
+<section id="voices">
+  <div class="section-head reveal">
+    <div class="eyebrow">From Our Graduates</div>
+    <h2>Seafarers Who <span>Trained</span> With Us</h2>
+  </div>
+  <div class="voices-grid">
+    <div class="voice-card reveal">
+      <p class="voice-quote">"PNTC gave me the STCW certificates I needed to get hired by a major cruise line. The instructors were very professional and the training was thorough. Highly recommended."</p>
+      <div class="voice-name">Ernesto D.</div>
+      <div class="voice-role">Certified Ordinary Seaman</div>
+      <div class="voice-rank">MSC Cruises — Mediterranean Route</div>
+    </div>
+    <div class="voice-card reveal">
+      <p class="voice-quote">"I renewed all my safety certificates here. The schedule was flexible and they processed my documents on time for my deployment. Very organized and efficient staff."</p>
+      <div class="voice-name">Mark A.</div>
+      <div class="voice-role">Able Bodied Seaman</div>
+      <div class="voice-rank">Maersk Line — Tanker Operations</div>
+    </div>
+    <div class="voice-card reveal">
+      <p class="voice-quote">"As an engine cadet, completing BST at PNTC was my first step. The hands-on training with real equipment gave me confidence when I boarded my first vessel."</p>
+      <div class="voice-name">Rodrigo M.</div>
+      <div class="voice-role">Engine Cadet</div>
+      <div class="voice-rank">NYK Line — Bulk Carrier</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT / FOOTER ════════════════════════════════ -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="eyebrow" style="margin-bottom:1rem">Get In Touch</div>
+      <h2><em>Contact</em><br>Our Team</h2>
+      <p>Our admissions staff are ready to assist you. Visit us in person or reach out through any of the channels below — we typically respond within the same business day.</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Address</div>
+            <div class="contact-item-val">Governor's Drive, Tanza, Cavite 4108, Philippines</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.37 9.55a19.79 19.79 0 01-3.07-8.67A2 2 0 012.28 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006 6l1.27-.52a2 2 0 012.11.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Phone</div>
+            <div class="contact-item-val"><a href="tel:+63469919135">(046) 991-9135</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-val"><a href="mailto:admissions@mypntc.edu.ph">admissions@mypntc.edu.ph</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Office Hours</div>
+            <div class="contact-item-val">Monday – Saturday, 8:00 AM – 5:00 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="contact-map">
+        <div class="map-placeholder">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p>Governor's Drive,<br>Tanza, Cavite</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-footer">
+    <div>© 2025 PNTC Maritime Training and Assessment Center. All rights reserved.</div>
+    <div class="footer-badge">
+      <div class="footer-dot"></div>
+      Part of the PNTC Education Group
+    </div>
+    <div class="footer-links">
+      <a href="/admin">Admin</a>
+      <a href="mailto:admissions@mypntc.edu.ph">Contact</a>
+      <a href="#">Privacy</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHAT WIDGET ════════════════════════════════════ -->
+<script
+  src="/chat-widget.js"
+  data-site="maritime"
+  data-name="PNTC Maritime"
+  data-color="#C8960C"
+  defer
+></script>
+
+<script>
+/* ── Slide show ─────────────────────────────────── */
+const slides     = document.querySelectorAll('.slide');
+const dots       = document.querySelectorAll('.hero-dot');
+const fillEls    = document.querySelectorAll('.hero-dot-fill');
+const INTERVAL   = 5500;
+let cur = 0, timer, fillAnim;
+
+function goTo(idx) {
+  slides[cur].classList.remove('active');
+  dots[cur].classList.remove('active');
+  if (fillEls[cur]) { fillEls[cur].style.transition = 'none'; fillEls[cur].style.height = '0'; }
+  cur = (idx + slides.length) % slides.length;
+  slides[cur].classList.add('active');
+  dots[cur].classList.add('active');
+  if (fillEls[cur]) {
+    fillEls[cur].style.transition = 'none';
+    fillEls[cur].style.height = '0';
+    requestAnimationFrame(() => {
+      fillEls[cur].style.transition = `height ${INTERVAL}ms linear`;
+      fillEls[cur].style.height = '100%';
+    });
+  }
+}
+
+function startSlideshow() {
+  clearInterval(timer);
+  goTo(cur);
+  timer = setInterval(() => goTo(cur + 1), INTERVAL);
+}
+
+dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.idx); clearInterval(timer); timer = setInterval(() => goTo(cur + 1), INTERVAL); }));
+startSlideshow();
+
+/* ── Header scroll ───────────────────────────────── */
+const hdr = document.getElementById('header');
+window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+/* ── Mobile menu ─────────────────────────────────── */
+document.getElementById('mob-toggle').addEventListener('click', () => document.getElementById('mob-menu').classList.add('open'));
+document.getElementById('mob-close').addEventListener('click',  () => document.getElementById('mob-menu').classList.remove('open'));
+document.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', () => document.getElementById('mob-menu').classList.remove('open')));
+
+/* ── Reveal on scroll ────────────────────────────── */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+/* ── Facilities lightbox ─────────────────────────── */
+function openLightbox(card) {
+  const img = card.querySelector('.fac-photo');
+  if (!img) return;
+  document.getElementById('lightbox-img').src = img.src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
