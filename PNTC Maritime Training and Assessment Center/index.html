@@ -643,6 +643,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .hdr-nav a.is-current{color:var(--white)}
 .hdr-nav a.is-current::after{transform:scaleX(1)}
 #mob-menu{overflow-y:auto}
+@media(max-width:1320px) and (min-width:721px){.hdr-nav{display:none}.hamburger{display:flex}.hdr-enroll{margin-left:auto;margin-right:1rem}}
 #courses .courses-grid .course-card:nth-child(n+5){display:none}
 </style>
 <script src="/global-nav.js" data-area="training"></script>
@@ -651,13 +652,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
 <!-- â•â•â• HEADER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <header id="header">
-  <a href="/training/" class="hdr-logo">
-    <img class="hdr-logo-icon" src="/maritime/Logo.png" alt="PNTC Colleges Crest">
-    <div class="hdr-wordmark">
-      <strong>PNTC Maritime</strong>
-      <span>Training &amp; Assessment Center</span>
-    </div>
-  </a>
+  <a class="pntc-area" href="/training/"><span class="pa-top">PNTC Colleges</span><span class="pa-name">Maritime Training and Assessment Center</span></a>
 
   <nav class="hdr-nav">
     <a href="/training/maritime-courses">Maritime Courses</a>

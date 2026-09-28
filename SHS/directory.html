@@ -1024,7 +1024,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 @media(max-width:960px){.research-grid,.pubs-row{grid-template-columns:1fr}.dir-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.dir-grid{grid-template-columns:1fr}}
 .nav-links a.is-current{color:#FFCC00}
-@media(max-width:1100px) and (min-width:769px){
+@media(max-width:1320px) and (min-width:769px){
   .nav-right{display:none}.hamburger{display:flex}
   .nav-links{display:none;position:fixed;top:calc(80px + var(--gnav-h,0px));left:0;right:0;background:var(--navy);flex-direction:column;padding:24px 20px;gap:22px;align-items:flex-start;border-top:1px solid rgba(255,255,255,.08);box-shadow:0 8px 32px rgba(0,0,0,.3);z-index:190}
   #nav-toggle:checked ~ * .nav-links,#nav-toggle:checked + .nav .nav-links{display:flex}
@@ -1038,7 +1038,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 <!-- NAV -->
 <input type="checkbox" id="nav-toggle" hidden>
 <nav class="nav">
-  <a href="/shs/" style="display:flex"><img class="nav-logo" src="PNTC White Horizontal.png" alt="PNTC Colleges"></a>
+  <a class="pntc-area" href="/shs/" style="--pa-accent:#FFCC00"><span class="pa-top">PNTC Colleges</span><span class="pa-name">Senior High School</span></a>
   <label class="hamburger" for="nav-toggle" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </label>

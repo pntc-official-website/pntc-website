@@ -30,6 +30,11 @@
     '#pntc-gnav a.gn-brand::after{display:none}',
     '#pntc-gnav .gn-brand img{height:22px;width:auto;display:block}',
     '#mob-menu{z-index:1100!important}',
+    '.pntc-area{display:flex;flex-direction:column;justify-content:center;min-width:0;flex-shrink:1;margin-right:1.5rem;text-decoration:none}',
+    '.pntc-area .pa-top{font:700 .58rem/1 Montserrat,system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--pa-accent,#C8960C);margin-bottom:.4rem}',
+    '.pntc-area .pa-name{font:800 1rem/1.15 Montserrat,system-ui,sans-serif;letter-spacing:.03em;text-transform:uppercase;color:#fff}',
+    '@media(min-width:721px){.pntc-area{flex-shrink:0}.pntc-area .pa-name{white-space:nowrap}}',
+    '@media(max-width:720px){.pntc-area .pa-name{font-size:.8rem}.pntc-area .pa-top{font-size:.5rem;margin-bottom:.3rem}}',
     '@media(max-width:720px){#pntc-gnav .gn-brand img{height:18px}#pntc-gnav .gn-list{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent);padding-right:2rem}}'
   ].join('');
 
