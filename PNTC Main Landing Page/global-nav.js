@@ -30,6 +30,14 @@
     '#pntc-gnav a.gn-brand::after{display:none}',
     '#pntc-gnav .gn-brand img{height:22px;width:auto;display:block}',
     '#mob-menu{z-index:1100!important}',
+    /* Area navbar: one format everywhere (College style) */
+    '.hdr-nav a,#nav .nav-links a,nav.nav .nav-links a{font-family:"Barlow Condensed",sans-serif!important;font-size:.85rem!important;font-weight:700!important;letter-spacing:.12em!important;text-transform:uppercase!important;color:rgba(255,255,255,.6)!important;transition:color .2s}',
+    '.hdr-nav a:hover,#nav .nav-links a:hover,nav.nav .nav-links a:hover,.hdr-nav a.is-current,#nav .nav-links a.is-current,nav.nav .nav-links a.is-current{color:#C8960C!important}',
+    '.hdr-nav a::after,#nav .nav-links a::after,nav.nav .nav-links a::after{display:none!important}',
+    '.hdr-apply,.hdr-enroll,#nav .nav-cta,nav.nav .nav-enroll-btn{padding:.52rem 1.4rem!important;background:#C8960C!important;color:#060c19!important;font-family:"Barlow Condensed",sans-serif!important;font-weight:800!important;font-size:.85rem!important;letter-spacing:.1em!important;text-transform:uppercase!important;border:0!important;border-radius:0!important;box-shadow:none!important;transform:none!important;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);transition:background .2s}',
+    '.hdr-apply:hover,.hdr-enroll:hover,#nav .nav-cta:hover,nav.nav .nav-enroll-btn:hover{background:#E6AF1A!important}',
+    '#nav .nav-login{padding:.5rem 1.2rem!important;border:1.5px solid rgba(255,255,255,.3)!important;border-radius:0!important;color:rgba(255,255,255,.75)!important;font-family:"Barlow Condensed",sans-serif!important;font-weight:700!important;font-size:.85rem!important;letter-spacing:.1em!important;text-transform:uppercase!important}',
+    '#nav .nav-login:hover{border-color:#C8960C!important;color:#C8960C!important}',
     '.pntc-area{display:flex;flex-direction:column;justify-content:center;min-width:0;flex-shrink:1;margin-right:1.5rem;text-decoration:none}',
     '.pntc-area .pa-top{font:700 .58rem/1 Montserrat,system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--pa-accent,#C8960C);margin-bottom:.4rem}',
     '.pntc-area .pa-name{font:800 1rem/1.15 Montserrat,system-ui,sans-serif;letter-spacing:.03em;text-transform:uppercase;color:#fff}',
@@ -37,6 +45,13 @@
     '@media(max-width:720px){.pntc-area .pa-name{font-size:.8rem}.pntc-area .pa-top{font-size:.5rem;margin-bottom:.3rem}}',
     '@media(max-width:720px){#pntc-gnav .gn-brand img{height:18px}#pntc-gnav .gn-list{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent);padding-right:2rem}}'
   ].join('');
+
+  if (!document.querySelector('link[href*="Barlow+Condensed"]')) {
+    var font = document.createElement('link');
+    font.rel = 'stylesheet';
+    font.href = 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&display=swap';
+    document.head.appendChild(font);
+  }
 
   var style = document.createElement('style');
   style.textContent = css;
