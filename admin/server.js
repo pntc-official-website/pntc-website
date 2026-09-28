@@ -880,10 +880,10 @@ function buildPostHTML(post, site) {
     .toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   const isSHS       = site.id === 'shs';
   const fonts       = isSHS
-    ? `<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">`
+    ? `<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">`
     : `<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">`;
-  const titleFont   = isSHS ? `'Alfa Slab One', serif`   : `'Barlow Condensed', sans-serif`;
-  const bodyFont    = isSHS ? `'Inter', sans-serif`       : `'Montserrat', sans-serif`;
+  const titleFont   = isSHS ? `'Barlow Condensed', sans-serif`   : `'Barlow Condensed', sans-serif`;
+  const bodyFont    = isSHS ? `'Montserrat', sans-serif`       : `'Montserrat', sans-serif`;
   const titleWeight = isSHS ? `400` : `900`;
   const titleSize   = isSHS ? `clamp(1.8rem,4vw,3.2rem)` : `clamp(2rem,5vw,3.8rem)`;
   const logoPath    = '../PNTC White Horizontal.png';
@@ -977,10 +977,10 @@ ${tags?`<div class="tags">${tags}</div>`:''}
 function buildBlogIndex(posts, site) {
   const published = posts.filter(p=>p.status==='published').sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
   const isSHS    = site.id==='shs';
-  const titleFont= isSHS?`'Alfa Slab One', serif`:`'Barlow Condensed', sans-serif`;
-  const bodyFont = isSHS?`'Inter', sans-serif`:`'Montserrat', sans-serif`;
+  const titleFont= isSHS?`'Barlow Condensed', sans-serif`:`'Barlow Condensed', sans-serif`;
+  const bodyFont = isSHS?`'Montserrat', sans-serif`:`'Montserrat', sans-serif`;
   const fonts    = isSHS
-    ?`<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">`
+    ?`<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">`
     :`<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">`;
   const cards = published.map(p=>{
     const date=new Date(p.publishedAt).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});
