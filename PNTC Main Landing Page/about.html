@@ -748,6 +748,27 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .pntc-soon-btn{display:inline-block;margin-top:2rem;font-family:'Montserrat',system-ui,sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#08142A;background:#D4A017;padding:.8rem 1.8rem;text-decoration:none}
 .nav-links a.is-current{color:#fff}
 .nav-links a.is-current::after{transform:scaleX(1)}
+
+.pv-statement{font-size:1.05rem!important;font-weight:600;color:var(--text)!important;line-height:1.7!important}
+.pv-more{display:inline-block;margin-top:1.2rem;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.pv-commit-lbl{font-size:.8rem;font-weight:700;color:var(--text);margin:1.3rem 0 .8rem}
+.pv-wrap{max-width:1240px;margin:0 auto}
+.pv-h2{font-weight:800;font-size:clamp(1.6rem,3.2vw,2.5rem);line-height:1.15;color:var(--text);letter-spacing:-.02em}
+.pv-vivid{background:var(--bg-2);padding:6rem clamp(1.5rem,4vw,3rem)}
+.pv-vision{max-width:760px;margin:1rem 0 3rem;font-size:1.05rem;font-style:italic;color:var(--text-muted);line-height:1.7}
+.pv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.1rem}
+.pv-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem 1.5rem 1.5rem 1.4rem;display:flex;gap:1rem}
+.pv-num{flex-shrink:0;font-weight:800;font-size:.8rem;color:var(--gold);padding-top:.15rem}
+.pv-card p{font-size:.86rem;line-height:1.7;color:var(--text)}
+.pv-units{background:var(--navy-deep);padding:6rem clamp(1.5rem,4vw,3rem)}
+.pv-unit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.25rem;margin-top:2.5rem}
+.pv-unit{border:1px solid rgba(255,255,255,.08);border-radius:var(--r);background:rgba(255,255,255,.03);padding:1.9rem}
+.pv-unit-ico{font-size:1.4rem;margin-bottom:.9rem}
+.pv-unit h3{font-size:1.02rem;font-weight:800;color:#fff;line-height:1.3;margin-bottom:.8rem}
+.pv-unit p{font-size:.84rem;line-height:1.72;color:rgba(255,255,255,.55);margin-top:.7rem}
+.pv-unit p.pv-unit-lead{color:#fff;font-weight:600;margin-top:0}
+.pv-source{margin-top:2.5rem;font-size:.72rem;color:rgba(255,255,255,.38);line-height:1.6}
+@media(max-width:600px){.pv-unit-grid,.pv-grid{grid-template-columns:1fr}}
 </style>
 <script src="/global-nav.js" data-area="about"></script>
 </head>
@@ -804,32 +825,31 @@ h1.hero-h1 span.gold { color:var(--gold); }
 
     <div class="about-right reveal">
       <div class="tab-nav">
-        
-        <button class="tab-btn active" onclick="openTab('mission',this)">Mission</button>
-        <button class="tab-btn" onclick="openTab('vision',this)">Vision</button>
+        <button class="tab-btn active" onclick="openTab('vision',this)">Vision</button>
+        <button class="tab-btn" onclick="openTab('mission',this)">Mission</button>
         <button class="tab-btn" onclick="openTab('values',this)">Values</button>
       </div>
 
-      <div class="tab-panel active" id="tab-mission">
-        <h3 class="tab-h3">Our Mission</h3>
-        <p class="tab-p">To provide quality maritime and business education, training, and assessment anchored on virtue and excellence — developing globally competent professionals who serve their industries, communities, and country with integrity.</p>
-        <ul class="pill-list" style="margin-top:1.4rem;">
-          <li>Deliver world-class maritime education meeting international STCW standards</li>
-          <li>Cultivate professional excellence, integrity, and service among our students</li>
-          <li>Equip graduates with competencies demanded by global maritime and business industries</li>
-          <li>Provide accessible, connected pathways from secondary to professional-level education</li>
-          <li>Foster meaningful partnerships with the shipping industry and government agencies</li>
-        </ul>
+      <div class="tab-panel active" id="tab-vision">
+        <h3 class="tab-h3">Our Vision</h3>
+        <p class="tab-p pv-statement">To be the leading educational institution that inspires globally successful learners of competence and character at every phase of their development.</p>
+        <a class="pv-more" href="#vivid">Read our Vivid Descriptions &rarr;</a>
       </div>
 
-      <div class="tab-panel" id="tab-vision">
-        <h3 class="tab-h3">Our Vision</h3>
-        <p class="tab-p">To be the leading maritime and business institution in the Philippines and Southeast Asia — recognized for producing globally competent professionals who exemplify virtue, quality, and excellence in every field they serve.</p>
-        <ul class="pill-list" style="margin-top:1.4rem;">
-          <li>Premier maritime education institution in the Asia-Pacific region</li>
-          <li>Internationally recognized for STCW-compliant training and fair assessment</li>
-          <li>A complete educational continuum from K–12 through professional certification</li>
-          <li>Model institution for character formation alongside academic and technical mastery</li>
+      <div class="tab-panel" id="tab-mission">
+        <h3 class="tab-h3">Our Mission</h3>
+        <p class="tab-p pv-statement">Our mission is to educate and inspire through academic programs that develop competencies and build character to prepare our students for global success.</p>
+        <p class="pv-commit-lbl">To achieve our mission, we are committed to:</p>
+        <ul class="pill-list">
+          <li>Teaching with dedication through curricula, methodologies, and practices that advance students' competencies and character, while enhancing their micro-credentials and soft skills.</li>
+          <li>Providing students with real-world experience in their chosen fields through practical and training-focused final years.</li>
+          <li>Ensuring that our education is accessible to all by removing physical, financial, social, or other barriers.</li>
+          <li>Engaging only qualified, competent, and inspiring faculty, and ensuring that our staff are competent, friendly, and supportive.</li>
+          <li>Delivering a complete college experience with access to comprehensive services, including library resources, guidance counseling, career and alumni services, sports and arts programs, healthcare, nutrition, student organizations, safety and security, dormitories, and other facilities.</li>
+          <li>Providing a safe, inclusive, and engaging learning environment equipped with advanced technologies.</li>
+          <li>Streamlining registration, enrollment, payment, and other processes for the ease and convenience of our students.</li>
+          <li>Maintaining rigorous compliance with government regulations and industry standards.</li>
+          <li>Contributing to the knowledge and advancement of industries through innovation and research.</li>
         </ul>
       </div>
 
@@ -849,6 +869,77 @@ h1.hero-h1 span.gold { color:var(--gold); }
 </section>
 
 <!-- ===================== ACCREDITATIONS ===================== -->
+<!-- VIVID DESCRIPTIONS -->
+<section id="vivid" class="pv-vivid">
+  <div class="pv-wrap">
+    <div class="reveal">
+      <p class="eyebrow" style="margin-bottom:.8rem">Our Vision</p>
+      <h2 class="pv-h2">Vivid Descriptions</h2>
+      <p class="pv-vision">&ldquo;To be the leading educational institution that inspires globally successful learners of competence and character at every phase of their development.&rdquo;</p>
+    </div>
+    <div class="pv-grid">
+      <div class="pv-card reveal"><span class="pv-num">01</span><p>We are a university where our educational programs, training courses, applied learning initiatives, and general services are recognized for their superior quality.</p></div>
+      <div class="pv-card reveal"><span class="pv-num">02</span><p>Education and inspiration are our cores. We educate through curricula, methodologies, and practices that build competencies and character to prepare learners for global success. We inspire by giving hope and nurturing ambitions to ignite a lifelong passion for learning.</p></div>
+      <div class="pv-card reveal"><span class="pv-num">03</span><p>Our graduates are highly sought after by international and local institutions for their competence and character.</p></div>
+      <div class="pv-card reveal"><span class="pv-num">04</span><p>We maintain top-of-mind awareness in the fields of training and education among stakeholders, the market, and our partners.</p></div>
+      <div class="pv-card reveal"><span class="pv-num">05</span><p>We love PNTC. Our community is driven by an intense desire to be part of the organization, with every member dedicated to realizing our vision and fulfilling our mission.</p></div>
+      <div class="pv-card reveal"><span class="pv-num">06</span><p>We provide a conducive learning environment with modern infrastructure and advanced technologies to ensure a safe, inclusive, and engaging space that fosters both competency and character growth.</p></div>
+      <div class="pv-card reveal"><span class="pv-num">07</span><p>We uphold robust internal systems that ensure compliance with standards, thorough risk assessments, and effective governance, fostering transparency and accountability.</p></div>
+      <div class="pv-card reveal"><span class="pv-num">08</span><p>We ensure sustainable growth and practice sound financial management. We reinvest profits into human and capital development for the institution’s advancement.</p></div>
+      <div class="pv-card reveal"><span class="pv-num">09</span><p>We are the showcase university. We are the driver of change. We are the forerunners of true quality and set a no-compromise policy as the standard for teaching.</p></div>
+      <div class="pv-card reveal"><span class="pv-num">10</span><p>Our relationship with the government is a true partnership, not merely regulatory compliance. They acknowledge our commitment to compliance and seek our community for consultation and advice.</p></div>
+      <div class="pv-card reveal"><span class="pv-num">11</span><p>We are accessible to all members of our community. Our services are free from physical, financial, social, or any other barriers and are available to everyone with the drive to learn.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION STATEMENTS OF THE COLLEGES AND BASIC EDUCATION -->
+<section id="unit-missions" class="pv-units">
+  <div class="pv-wrap">
+    <div class="reveal">
+      <p class="eyebrow" style="margin-bottom:.8rem">Mission Statements</p>
+      <h2 class="pv-h2" style="color:#fff">Our Colleges and Basic Education</h2>
+    </div>
+    <div class="pv-unit-grid">
+      <article class="pv-unit reveal">
+        <div class="pv-unit-ico">⚓</div>
+        <h3>College of Maritime Education</h3>
+        <p class="pv-unit-lead">Our mission is to educate and inspire through programs that prepare students for the global maritime industry.</p>
+        <p>The College of Maritime Education is committed to instilling discipline, developing maritime competencies, and cultivating skills, soft skills, and micro-skills to produce seafarers who survive and thrive in the global maritime industry.</p>
+        <p>Our students will gain practical experience through rigorous training in our training center, onboard our dedicated training vessel, or through partnerships with local and international maritime entities.</p>
+      </article>
+      <article class="pv-unit reveal">
+        <div class="pv-unit-ico">📦</div>
+        <h3>College of Customs and Business Management Education</h3>
+        <p class="pv-unit-lead">Our mission is to educate and inspire through programs that prepare students for global trade and business.</p>
+        <p>The College of Customs and Business Management Education is committed to instilling innovation, developing business competencies, and cultivating skills, soft skills, and micro-skills to produce professionals who drive success in global trade, medical, legal, and business operations.</p>
+        <p>Our students will gain practical experience through rigorous training in our training center, on-the-job training, startup incubators, simulation labs, or partnerships with local and international businesses.</p>
+      </article>
+      <article class="pv-unit reveal">
+        <div class="pv-unit-ico">✈️</div>
+        <h3>College of International Tourism</h3>
+        <p class="pv-unit-lead">Our mission is to educate and inspire through programs that prepare students for the global tourism and hospitality industries.</p>
+        <p>The College of International Tourism is committed to instilling professionalism, developing hospitality competencies, and cultivating skills, soft skills, and micro-skills to produce professionals who deliver exceptional services, adapt to industry challenges, and lead with integrity.</p>
+        <p>Our students will gain practical experience through rigorous training in our training center, on-the-job training, real-world hotel and restaurant training, or partnerships with local and international entities.</p>
+      </article>
+      <article class="pv-unit reveal">
+        <div class="pv-unit-ico">⚖️</div>
+        <h3>College of Criminology</h3>
+        <p class="pv-unit-lead">Our mission is to educate and inspire through programs that prepare students for the global criminal justice, law enforcement, and public safety sectors.</p>
+        <p>The College of Criminology is committed to instilling courage, developing criminology competencies, and cultivating skills, soft skills, and micro-skills to produce officers in the public safety sector who provide services in crime prevention, crime detection and investigation, and law enforcement while leading with unwavering integrity and expertise.</p>
+        <p>Our students will gain practical experience through rigorous training in our training center, on-the-job training, real world law enforcement scenarios, and partnerships with local and international entities.</p>
+      </article>
+      <article class="pv-unit reveal">
+        <div class="pv-unit-ico">📘</div>
+        <h3>Basic Education Department</h3>
+        <p class="pv-unit-lead">Our mission is to educate and inspire through programs that prepare students for success in further studies, careers, and life.</p>
+        <p>The Basic Education Department is dedicated to developing well-rounded individuals who demonstrate intellectual growth, nationalism, social competence, physical well-being, integrity, responsibility, and emotional maturity.</p>
+      </article>
+    </div>
+    <p class="pv-source">Vision, Vivid Descriptions, and Mission Statements as approved by the PNTC Colleges, Inc. Board of Directors on 28 June 2025 (BOD-RES-EXT Nos. 2025-001, 2025-002, and 2025-004).</p>
+  </div>
+</section>
+
 
 
 <!-- ===================== FOOTER ===================== -->

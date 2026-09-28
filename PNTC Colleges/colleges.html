@@ -1080,6 +1080,21 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .hdr-nav a.is-current{color:var(--gold)}
 @media(max-width:1180px){.hdr-nav{display:none}.hamburger{display:flex}}
 #mob-menu{overflow-y:auto;justify-content:flex-start;padding:5rem 1.5rem 3rem;gap:1.4rem}
+
+.pc-cols{background:#080f1e;padding:clamp(4rem,8vw,6.5rem) clamp(1.5rem,6vw,5rem)}
+.pc-cols-in{max-width:1200px;margin:0 auto}
+.pc-cols-eyebrow{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.pc-cols-h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2rem,4vw,3rem);text-transform:uppercase;line-height:1}
+.pc-cols-h2 span{color:var(--gold)}
+.pc-cols-mission{max-width:720px;margin:1rem 0 2.75rem;color:rgba(255,255,255,.55);font-size:.95rem;line-height:1.75}
+.pc-cols-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.pc-col{background:rgba(11,42,107,.18);border:1px solid var(--border);border-left:3px solid var(--gold);padding:2rem;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,0 100%)}
+.pc-col-ico{font-size:1.5rem;margin-bottom:.9rem}
+.pc-col h3{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.45rem;text-transform:uppercase;line-height:1.05;margin-bottom:.9rem}
+.pc-col p{font-size:.84rem;line-height:1.72;color:rgba(255,255,255,.5);margin-top:.7rem}
+.pc-col p.pc-col-lead{color:#fff;font-weight:600;margin-top:0}
+.pc-cols-src{margin-top:2.5rem;font-size:.72rem;color:rgba(255,255,255,.35)}
+@media(max-width:860px){.pc-cols-grid{grid-template-columns:1fr}}
 </style>
 <script src="/global-nav.js" data-area="college"></script>
 </head>
@@ -1130,13 +1145,43 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
   </div>
 </section>
 
-<section id="coming-soon" class="pntc-soon">
-  <div class="pntc-soon-box">
-    <div class="pntc-soon-ico">⚓</div>
-    <h2>Coming Soon</h2>
-    <p>We're preparing this page. Please check back soon.</p>
-    <div class="pntc-soon-chips"><span>Our Colleges</span><span>Deans and Faculty</span></div>
-    <a class="pntc-soon-btn" href="/college/">Back to College</a>
+<!-- OUR COLLEGES -->
+<section id="colleges" class="pc-cols">
+  <div class="pc-cols-in">
+    <p class="pc-cols-eyebrow reveal">Mission Statements</p>
+    <h2 class="pc-cols-h2 reveal">Our <span>Colleges</span></h2>
+    <p class="pc-cols-mission reveal">Our mission is to educate and inspire through academic programs that develop competencies and build character to prepare our students for global success.</p>
+    <div class="pc-cols-grid">
+      <article class="pc-col reveal">
+        <div class="pc-col-ico">⚓</div>
+        <h3>College of Maritime Education</h3>
+        <p class="pc-col-lead">Our mission is to educate and inspire through programs that prepare students for the global maritime industry.</p>
+        <p>The College of Maritime Education is committed to instilling discipline, developing maritime competencies, and cultivating skills, soft skills, and micro-skills to produce seafarers who survive and thrive in the global maritime industry.</p>
+        <p>Our students will gain practical experience through rigorous training in our training center, onboard our dedicated training vessel, or through partnerships with local and international maritime entities.</p>
+      </article>
+      <article class="pc-col reveal">
+        <div class="pc-col-ico">📦</div>
+        <h3>College of Customs and Business Management Education</h3>
+        <p class="pc-col-lead">Our mission is to educate and inspire through programs that prepare students for global trade and business.</p>
+        <p>The College of Customs and Business Management Education is committed to instilling innovation, developing business competencies, and cultivating skills, soft skills, and micro-skills to produce professionals who drive success in global trade, medical, legal, and business operations.</p>
+        <p>Our students will gain practical experience through rigorous training in our training center, on-the-job training, startup incubators, simulation labs, or partnerships with local and international businesses.</p>
+      </article>
+      <article class="pc-col reveal">
+        <div class="pc-col-ico">✈️</div>
+        <h3>College of International Tourism</h3>
+        <p class="pc-col-lead">Our mission is to educate and inspire through programs that prepare students for the global tourism and hospitality industries.</p>
+        <p>The College of International Tourism is committed to instilling professionalism, developing hospitality competencies, and cultivating skills, soft skills, and micro-skills to produce professionals who deliver exceptional services, adapt to industry challenges, and lead with integrity.</p>
+        <p>Our students will gain practical experience through rigorous training in our training center, on-the-job training, real-world hotel and restaurant training, or partnerships with local and international entities.</p>
+      </article>
+      <article class="pc-col reveal">
+        <div class="pc-col-ico">⚖️</div>
+        <h3>College of Criminology</h3>
+        <p class="pc-col-lead">Our mission is to educate and inspire through programs that prepare students for the global criminal justice, law enforcement, and public safety sectors.</p>
+        <p>The College of Criminology is committed to instilling courage, developing criminology competencies, and cultivating skills, soft skills, and micro-skills to produce officers in the public safety sector who provide services in crime prevention, crime detection and investigation, and law enforcement while leading with unwavering integrity and expertise.</p>
+        <p>Our students will gain practical experience through rigorous training in our training center, on-the-job training, real world law enforcement scenarios, and partnerships with local and international entities.</p>
+      </article>
+    </div>
+    <p class="pc-cols-src">Mission statements adopted by the PNTC Colleges, Inc. Board of Directors on 28 June 2025 (BOD-RES-EXT No. 2025-004).</p>
   </div>
 </section>
 
