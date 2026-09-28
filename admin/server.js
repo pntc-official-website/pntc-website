@@ -593,7 +593,7 @@ const LANDING_TARGETS = {
   research:    ['PNTC Colleges/research.html'],
   careers:     ['PNTC Main Landing Page/careers.html'],
   directory:   ['PNTC Colleges/directory.html', 'SHS/directory.html'],
-  merchandise: ['PNTC Main Landing Page/index.html']
+  merchandise: ['PNTC Colleges/merchandise.html']
 };
 
 app.get('/api/landing/:type', async (req, res) => {

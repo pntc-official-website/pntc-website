@@ -1080,7 +1080,17 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .pntc-news-date{font-family:'Montserrat',sans-serif;font-size:.68rem;color:rgba(255,255,255,.35);margin-bottom:.35rem}
 .pntc-news-body h3{font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:1.15rem;line-height:1.15;color:#fff;margin:0}
 .hdr-nav a.is-current{color:var(--gold)}
-@media(max-width:1320px){.hdr-nav{display:none}.hamburger{display:flex}}
+@media(max-width:1320px){.hdr-nav{display:none}.hamburger{display:flex;margin-left:1rem}.hdr-apply{margin-left:auto}}
+.hdr-dd{position:relative;display:flex;align-items:center}
+.hdr-dd::after{content:'';position:absolute;top:100%;left:-10px;right:-10px;height:18px}
+.hdr-dd-btn{display:flex;align-items:center;gap:.4rem;padding:0;border:0;background:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);transition:color .2s}
+.hdr-dd-btn svg{width:10px;height:6px;fill:none;stroke:currentColor;stroke-width:1.8;transition:transform .2s}
+.hdr-dd:hover .hdr-dd-btn,.hdr-dd:focus-within .hdr-dd-btn,.hdr-dd.open .hdr-dd-btn,.hdr-dd-btn.is-current{color:var(--gold)}
+.hdr-dd:hover .hdr-dd-btn svg,.hdr-dd:focus-within .hdr-dd-btn svg,.hdr-dd.open .hdr-dd-btn svg{transform:rotate(180deg)}
+.hdr-dd-menu{position:absolute;top:calc(100% + 16px);right:-1rem;min-width:200px;display:flex;flex-direction:column;padding:.5rem 0;background:rgba(6,12,25,.97);border:1px solid rgba(200,150,12,.18);border-top:2px solid var(--gold);box-shadow:0 14px 36px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .18s,transform .18s,visibility .18s;z-index:950}
+.hdr-dd:hover .hdr-dd-menu,.hdr-dd:focus-within .hdr-dd-menu,.hdr-dd.open .hdr-dd-menu{opacity:1;visibility:visible;transform:none}
+.hdr-nav .hdr-dd-menu a{padding:.65rem 1.2rem}
+.hdr-nav .hdr-dd-menu a:hover{background:rgba(200,150,12,.08)}
 #mob-menu{overflow-y:auto;justify-content:flex-start;padding:5rem 1.5rem 3rem;gap:1.4rem}
 </style>
 <meta name="description" content="Six degree programs in Dasmariñas, Cavite, in Marine Transportation, Marine Engineering, Tourism Management, Criminology, Customs, and Office Administration.">
@@ -1108,9 +1118,8 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     <a href="/college/scholarships">Scholarships</a>
     <a href="/college/student-life">Student Life</a>
     <a href="/college/research">Research</a>
-    <a href="/college/calendar">Calendar</a>
-    <a href="/college/directory">Directory</a>
     <a href="/college/resources">Resources</a>
+    <div class="hdr-dd"><button type="button" class="hdr-dd-btn" aria-haspopup="true" aria-expanded="false" onclick="var d=this.parentElement;d.classList.toggle('open');this.setAttribute('aria-expanded',d.classList.contains('open'))">More<svg viewBox="0 0 10 6" aria-hidden="true"><polyline points="1 1 5 5 9 1"/></svg></button><div class="hdr-dd-menu"><a href="/college/calendar">Calendar</a><a href="/college/directory">Directory</a><a href="/college/merchandise">Merchandise</a></div></div>
   </nav>
   <a href="/college/#cta" class="hdr-apply">Apply Now</a>
   <button class="hamburger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -1124,9 +1133,10 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     <a href="/college/scholarships" class="mm">Scholarships</a>
     <a href="/college/student-life" class="mm">Student Life</a>
     <a href="/college/research" class="mm">Research</a>
+    <a href="/college/resources" class="mm">Resources</a>
     <a href="/college/calendar" class="mm">Calendar</a>
     <a href="/college/directory" class="mm">Directory</a>
-    <a href="/college/resources" class="mm">Resources</a>
+    <a href="/college/merchandise" class="mm">Merchandise</a>
   <a href="/college/#cta" class="mm" style="color:var(--gold)">Apply Now →</a>
 </div>
 

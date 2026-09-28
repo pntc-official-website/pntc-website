@@ -45,6 +45,7 @@
     { "source": "/college/research",      "destination": "/PNTC Colleges/research.html" },
     { "source": "/college/calendar",      "destination": "/PNTC Colleges/calendar.html" },
     { "source": "/college/directory",     "destination": "/PNTC Colleges/directory.html" },
+    { "source": "/college/merchandise",   "destination": "/PNTC Colleges/merchandise.html" },
     { "source": "/college/resources",     "destination": "/PNTC Colleges/resources.html" },
     { "source": "/college/blog/",         "destination": "/PNTC Colleges/blog/index.html" },
     { "source": "/college/:file*",        "destination": "/PNTC Colleges/:file*" },

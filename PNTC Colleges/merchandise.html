@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>College Admissions 2026-2027 | PNTC Colleges Dasmariñas, Cavite</title>
+<title>Official PNTC Merchandise | PNTC Colleges Dasmariñas, Cavite</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -1079,6 +1079,93 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .pntc-news-tag{display:inline-block;font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8960C;background:rgba(200,150,12,.12);padding:.2rem .6rem;margin-bottom:.5rem}
 .pntc-news-date{font-family:'Montserrat',sans-serif;font-size:.68rem;color:rgba(255,255,255,.35);margin-bottom:.35rem}
 .pntc-news-body h3{font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:1.15rem;line-height:1.15;color:#fff;margin:0}
+
+#research,#directory,#merchandise{--bg:#F0F4FA;--navy-deep:#08142A;--navy:#0D2454;--gold:#B8860B;--gold-dim:rgba(184,134,11,.13);--bg-2:#F0F4FA;--surface:#fff;--text:#0D1F4F;--text-muted:rgba(13,31,79,.52);--border:rgba(13,31,79,.09);--r:12px;--r-sm:6px;--font:'Montserrat',system-ui,sans-serif}
+#research .eyebrow,#directory .eyebrow,#merchandise .eyebrow{font-family:var(--font);font-weight:700;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+#research .reveal,#directory .reveal,#merchandise .reveal{opacity:1;transform:none}
+#merchandise { background:var(--bg); padding:7rem clamp(1.5rem,4vw,3rem); }
+.merch-wrap { max-width:1240px; margin:0 auto; }
+.merch-intro { font-family:var(--font); font-weight:400; color:var(--text-muted); font-size:.9rem; max-width:500px; margin-top:-.5rem; }
+
+.merch-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1.4rem; margin-top:2.5rem;
+}
+.merch-card {
+  border-radius:var(--r); overflow:hidden;
+  border:1px solid var(--border); background:var(--surface);
+  transition:transform .22s, box-shadow .22s;
+}
+.merch-card:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(13,31,79,.08); }
+.merch-img { height:172px; display:flex; align-items:center; justify-content:center; font-size:3rem; }
+.mi-navy  { background:linear-gradient(135deg,#0A1628,#1B4BD8); }
+.mi-gold  { background:linear-gradient(135deg,#5A3D00,#B8860B); }
+.mi-cream { background:linear-gradient(135deg,#C8C2AE,#E8E3D3); }
+.mi-green { background:linear-gradient(135deg,#002D18,#00925D); }
+.mi-dark  { background:linear-gradient(135deg,#0A1628,#1C1A16); }
+.mi-ocean { background:linear-gradient(135deg,#042030,#0891B2); }
+
+.merch-body { padding:1.2rem; }
+.merch-cat {
+  font-family:var(--font); font-weight:700;
+  font-size:.63rem; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--text-muted); margin-bottom:.2rem;
+}
+.merch-name { font-family:var(--font); font-weight:700; font-size:.9rem; color:var(--text); line-height:1.35; }
+.merch-note { font-family:var(--font); font-weight:400; font-size:.78rem; color:var(--text-muted); margin-top:.3rem; line-height:1.55; }
+.merch-price { font-family:var(--font); font-weight:800; font-size:.97rem; color:var(--navy); margin-top:.6rem; }
+.merch-btn {
+  display:block; width:100%; margin-top:.9rem;
+  padding:.55rem; text-align:center;
+  font-family:var(--font); font-weight:700; font-size:.73rem;
+  letter-spacing:.1em; text-transform:uppercase;
+  border:1.5px solid var(--border); border-radius:var(--r-sm);
+  color:var(--text); cursor:pointer;
+  transition:background .18s, border-color .18s, color .18s;
+}
+.merch-btn:hover { background:var(--gold-dim); border-color:var(--gold); color:#6B4E00; }
+#merchandise .sec-link {
+  font-family:var(--font); font-weight:700;
+  font-size:.76rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--gold); display:flex; align-items:center; gap:.4rem;
+  border-bottom:1.5px solid transparent; transition:border-color .18s; white-space:nowrap;
+}
+#merchandise .sec-link:hover { border-bottom-color:var(--gold); }
+#merchandise{padding:6rem clamp(1.5rem,4vw,3rem)}
+@media(max-width:960px){.merch-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.merch-grid{grid-template-columns:1fr}}
+
+#directory .sec-header,#merchandise .sec-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem}
+#directory .sec-h2,#merchandise .sec-h2{font-family:var(--font);font-weight:800;font-size:clamp(1.6rem,3.2vw,2.5rem);line-height:1.15;color:var(--text);letter-spacing:-.02em}
+#research{background:var(--navy-deep);padding:6rem clamp(1.5rem,4vw,3rem)}
+.research-wrap{max-width:1240px;margin:0 auto}
+.research-h2{font-family:var(--font);font-weight:800;font-size:clamp(1.6rem,3.2vw,2.5rem);color:#fff;line-height:1.15;margin-bottom:.9rem;letter-spacing:-.02em}
+.research-sub{font-family:var(--font);font-size:.9rem;color:rgba(255,255,255,.46);max-width:520px;line-height:1.78;margin-bottom:3rem}
+.research-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.research-card{padding:1.85rem;border:1px solid rgba(255,255,255,.07);border-radius:var(--r);background:rgba(255,255,255,.03);transition:background .22s,border-color .22s}
+.research-card:hover{background:rgba(255,255,255,.055);border-color:rgba(184,134,11,.25)}
+.rc-icon{font-size:1.4rem;margin-bottom:.85rem}
+.rc-title{font-family:var(--font);font-weight:700;font-size:.95rem;color:#fff;margin-bottom:.5rem;line-height:1.38}
+.rc-body{font-family:var(--font);font-size:.84rem;color:rgba(255,255,255,.46);line-height:1.74}
+.rc-year{font-family:var(--font);font-size:.68rem;font-weight:600;letter-spacing:.1em;color:var(--gold);margin-top:.75rem}
+.pubs-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.75rem}
+.pub-item{padding:1.2rem 1.2rem 1.2rem 1.4rem;border-top:2px solid rgba(184,134,11,.3);background:rgba(255,255,255,.02);border-radius:0 0 var(--r-sm) var(--r-sm)}
+.pub-title{font-family:var(--font);font-weight:600;font-size:.84rem;color:#fff;line-height:1.55;margin-bottom:.45rem}
+.pub-meta{font-family:var(--font);font-size:.7rem;font-weight:500;color:rgba(255,255,255,.36);letter-spacing:.06em}
+#directory{background:var(--bg-2);padding:6rem clamp(1.5rem,4vw,3rem)}
+.directory-wrap{max-width:1240px;margin:0 auto}
+.dir-intro{font-family:var(--font);color:var(--text-muted);font-size:.9rem;max-width:520px;margin-bottom:2.5rem}
+.dir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.dir-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.65rem;transition:box-shadow .22s,transform .22s}
+.dir-card:hover{box-shadow:0 8px 28px rgba(13,31,79,.07);transform:translateY(-2px)}
+.dir-ico{width:42px;height:42px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;margin-bottom:.9rem;background:var(--gold-dim)}
+.dir-name{font-family:var(--font);font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
+.dir-desc{font-family:var(--font);font-size:.8rem;color:var(--text-muted);line-height:1.65;margin-bottom:1rem}
+.dir-contacts{font-family:var(--font);font-size:.78rem;color:var(--text-muted)}
+.dir-contacts a{display:block;color:var(--navy);font-weight:600;transition:color .15s;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dir-contacts a:hover{color:var(--gold)}
+@media(max-width:960px){.research-grid,.pubs-row{grid-template-columns:1fr}.dir-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.dir-grid{grid-template-columns:1fr}}
 .hdr-nav a.is-current{color:var(--gold)}
 @media(max-width:1320px){.hdr-nav{display:none}.hamburger{display:flex;margin-left:1rem}.hdr-apply{margin-left:auto}}
 .hdr-dd{position:relative;display:flex;align-items:center}
@@ -1093,18 +1180,17 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .hdr-nav .hdr-dd-menu a:hover{background:rgba(200,150,12,.08)}
 #mob-menu{overflow-y:auto;justify-content:flex-start;padding:5rem 1.5rem 3rem;gap:1.4rem}
 </style>
-<meta name="robots" content="noindex, follow">
-<meta name="description" content="How to apply to PNTC Colleges in Dasmariñas, Cavite for school year 2026-2027, including admission requirements, the application process, and enrollment.">
-<link rel="canonical" href="https://www.pntc.edu.ph/college/admissions">
+<meta name="description" content="Official PNTC merchandise for students, alumni, and supporters, including polo shirts, caps, planners, and bags. Inquire by email or visit the Campus Store in Dasmariñas.">
+<link rel="canonical" href="https://www.pntc.edu.ph/college/merchandise">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PNTC Colleges, Inc.">
 <meta property="og:locale" content="en_PH">
-<meta property="og:title" content="College Admissions 2026-2027 | PNTC Colleges Dasmariñas, Cavite">
-<meta property="og:description" content="How to apply to PNTC Colleges in Dasmariñas, Cavite for school year 2026-2027, including admission requirements, the application process, and enrollment.">
-<meta property="og:url" content="https://www.pntc.edu.ph/college/admissions">
+<meta property="og:title" content="Official PNTC Merchandise | PNTC Colleges Dasmariñas, Cavite">
+<meta property="og:description" content="Official PNTC merchandise for students, alumni, and supporters, including polo shirts, caps, planners, and bags. Inquire by email or visit the Campus Store in Dasmariñas.">
+<meta property="og:url" content="https://www.pntc.edu.ph/college/merchandise">
 <meta property="og:image" content="https://www.pntc.edu.ph/Hero%20Section%20Slideshow1.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"EducationalOrganization","@id":"https://www.pntc.edu.ph/#organization","name":"PNTC Colleges, Inc.","alternateName":["PNTC","PNTC Colleges","Philippine Nautical and Technological College"],"url":"https://www.pntc.edu.ph/","description":"Maritime and business education institution established in 1994, with campuses and facilities in Dasmariñas (Cavite), Intramuros (Manila), and Tanza (Cavite).","location":[{"@type":"Place","name":"PNTC Colleges Dasmariñas Campus","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"}},{"@type":"Place","name":"PNTC Maritime Training and Assessment Center, Intramuros","address":{"@type":"PostalAddress","streetAddress":"5th Floor, Intramuros Corporate Plaza, Recoletos Street, Intramuros","addressLocality":"Manila","addressRegion":"Metro Manila","postalCode":"1002","addressCountry":"PH"}},{"@type":"Place","name":"PNTC Tanza Training Center","address":{"@type":"PostalAddress","addressLocality":"Tanza","addressRegion":"Cavite","addressCountry":"PH"}}],"logo":"https://www.pntc.edu.ph/SHS/PNTC%20White%20Horizontal.png","foundingDate":"1994","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"},"telephone":"+63-46-438-8835","email":"info@pntc.edu.ph","sameAs":["https://www.facebook.com/pntccolleges"]},{"@type":"CollegeOrUniversity","@id":"https://www.pntc.edu.ph/college/#college","name":"PNTC Colleges Dasmariñas","url":"https://www.pntc.edu.ph/college/","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"},"telephone":"+63-917-159-4966","email":"admissions@mypntc.edu.ph","parentOrganization":{"@id":"https://www.pntc.edu.ph/#organization"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"17:00"}]},{"@type":"WebPage","@id":"https://www.pntc.edu.ph/college/admissions","url":"https://www.pntc.edu.ph/college/admissions","name":"College Admissions 2026-2027 | PNTC Colleges Dasmariñas, Cavite","description":"How to apply to PNTC Colleges in Dasmariñas, Cavite for school year 2026-2027, including admission requirements, the application process, and enrollment.","inLanguage":"en-PH","isPartOf":{"@type":"WebSite","name":"PNTC Colleges, Inc.","url":"https://www.pntc.edu.ph/"},"about":{"@id":"https://www.pntc.edu.ph/college/#college"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.pntc.edu.ph/"},{"@type":"ListItem","position":2,"name":"College","item":"https://www.pntc.edu.ph/college/"},{"@type":"ListItem","position":3,"name":"Admissions","item":"https://www.pntc.edu.ph/college/admissions"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"EducationalOrganization","@id":"https://www.pntc.edu.ph/#organization","name":"PNTC Colleges, Inc.","alternateName":["PNTC","PNTC Colleges","Philippine Nautical and Technological College"],"url":"https://www.pntc.edu.ph/","description":"Maritime and business education institution established in 1994, with campuses and facilities in Dasmariñas (Cavite), Intramuros (Manila), and Tanza (Cavite).","location":[{"@type":"Place","name":"PNTC Colleges Dasmariñas Campus","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"}},{"@type":"Place","name":"PNTC Maritime Training and Assessment Center, Intramuros","address":{"@type":"PostalAddress","streetAddress":"5th Floor, Intramuros Corporate Plaza, Recoletos Street, Intramuros","addressLocality":"Manila","addressRegion":"Metro Manila","postalCode":"1002","addressCountry":"PH"}},{"@type":"Place","name":"PNTC Tanza Training Center","address":{"@type":"PostalAddress","addressLocality":"Tanza","addressRegion":"Cavite","addressCountry":"PH"}}],"logo":"https://www.pntc.edu.ph/SHS/PNTC%20White%20Horizontal.png","foundingDate":"1994","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"},"telephone":"+63-46-438-8835","email":"info@pntc.edu.ph","sameAs":["https://www.facebook.com/pntccolleges"]},{"@type":"CollegeOrUniversity","@id":"https://www.pntc.edu.ph/college/#college","name":"PNTC Colleges Dasmariñas","url":"https://www.pntc.edu.ph/college/","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"},"telephone":"+63-917-159-4966","email":"admissions@mypntc.edu.ph","parentOrganization":{"@id":"https://www.pntc.edu.ph/#organization"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"17:00"}]},{"@type":"WebPage","@id":"https://www.pntc.edu.ph/college/merchandise","url":"https://www.pntc.edu.ph/college/merchandise","name":"Official PNTC Merchandise | PNTC Colleges Dasmariñas, Cavite","description":"Official PNTC merchandise for students, alumni, and supporters, including polo shirts, caps, planners, and bags. Inquire by email or visit the Campus Store in Dasmariñas.","inLanguage":"en-PH","isPartOf":{"@type":"WebSite","name":"PNTC Colleges, Inc.","url":"https://www.pntc.edu.ph/"},"about":{"@id":"https://www.pntc.edu.ph/college/#college"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.pntc.edu.ph/"},{"@type":"ListItem","position":2,"name":"College","item":"https://www.pntc.edu.ph/college/"},{"@type":"ListItem","position":3,"name":"Merchandise","item":"https://www.pntc.edu.ph/college/merchandise"}]}]}</script>
 <script src="/global-nav.js" data-area="college"></script>
 </head>
 <body>
@@ -1114,13 +1200,13 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
   <a class="pntc-area" href="/college/"><span class="pa-name">PNTC Colleges</span></a>
   <nav class="hdr-nav">
     <a href="/college/programs">Programs</a>
-    <a href="/college/admissions" class="is-current" aria-current="page">Admissions</a>
+    <a href="/college/admissions">Admissions</a>
     <a href="/college/colleges">Colleges</a>
     <a href="/college/scholarships">Scholarships</a>
     <a href="/college/student-life">Student Life</a>
     <a href="/college/research">Research</a>
     <a href="/college/resources">Resources</a>
-    <div class="hdr-dd"><button type="button" class="hdr-dd-btn" aria-haspopup="true" aria-expanded="false" onclick="var d=this.parentElement;d.classList.toggle('open');this.setAttribute('aria-expanded',d.classList.contains('open'))">More<svg viewBox="0 0 10 6" aria-hidden="true"><polyline points="1 1 5 5 9 1"/></svg></button><div class="hdr-dd-menu"><a href="/college/calendar">Calendar</a><a href="/college/directory">Directory</a><a href="/college/merchandise">Merchandise</a></div></div>
+    <div class="hdr-dd"><button type="button" class="hdr-dd-btn is-current" aria-haspopup="true" aria-expanded="false" onclick="var d=this.parentElement;d.classList.toggle('open');this.setAttribute('aria-expanded',d.classList.contains('open'))">More<svg viewBox="0 0 10 6" aria-hidden="true"><polyline points="1 1 5 5 9 1"/></svg></button><div class="hdr-dd-menu"><a href="/college/calendar">Calendar</a><a href="/college/directory">Directory</a><a href="/college/merchandise" class="is-current" aria-current="page">Merchandise</a></div></div>
   </nav>
   <a href="/college/#cta" class="hdr-apply">Apply Now</a>
   <button class="hamburger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -1129,7 +1215,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 <div id="mob-menu">
   <button class="mob-close" id="closeBtn">✕</button>
   <a href="/college/programs" class="mm">Programs</a>
-    <a href="/college/admissions" class="mm is-current" aria-current="page">Admissions</a>
+    <a href="/college/admissions" class="mm">Admissions</a>
     <a href="/college/colleges" class="mm">Colleges</a>
     <a href="/college/scholarships" class="mm">Scholarships</a>
     <a href="/college/student-life" class="mm">Student Life</a>
@@ -1137,7 +1223,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     <a href="/college/resources" class="mm">Resources</a>
     <a href="/college/calendar" class="mm">Calendar</a>
     <a href="/college/directory" class="mm">Directory</a>
-    <a href="/college/merchandise" class="mm">Merchandise</a>
+    <a href="/college/merchandise" class="mm is-current" aria-current="page">Merchandise</a>
   <a href="/college/#cta" class="mm" style="color:var(--gold)">Apply Now →</a>
 </div>
 
@@ -1146,18 +1232,32 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 <section id="page-banner" class="pntc-sub">
   <div class="pntc-sub-in">
     <p class="pntc-sub-eyebrow">College</p>
-    <h1>Admissions</h1>
-    <p class="pntc-sub-lead">Admission requirements, application steps, and enrollment information for PNTC Colleges in Dasmariñas, Cavite.</p>
+    <h1>Merchandise</h1>
+    <p class="pntc-sub-lead">Official PNTC merchandise for students, alumni, and supporters, available through the Campus Store at our Dasmariñas, Cavite campus.</p>
   </div>
 </section>
 
-<section id="coming-soon" class="pntc-soon">
-  <div class="pntc-soon-box">
-    <div class="pntc-soon-ico">⚓</div>
-    <h2>Coming Soon</h2>
-    <p>We're preparing this page. Please check back soon.</p>
-    <div class="pntc-soon-chips"><span>Admission Requirements</span><span>Application Process</span><span>Enrollment Information</span></div>
-    <a class="pntc-soon-btn" href="/college/">Back to College</a>
+<section id="merchandise">
+  <div class="merch-wrap">
+    <div class="sec-header reveal">
+      <div>
+        <p class="eyebrow" style="margin-bottom:.5rem;">Official Store</p>
+        <h2 class="sec-h2">PNTC Merchandise</h2>
+      </div>
+      <a href="mailto:info@pntc.edu.ph?subject=Merchandise%20Inquiry" class="sec-link">Full Catalog →</a>
+    </div>
+    <p class="merch-intro reveal">Official PNTC branded merchandise for students, alumni, and supporters. Inquire via email or visit the Campus Store.</p>
+
+    <!-- PNTC_MERCH_START -->
+    <div class="merch-grid">
+      <div class="merch-card reveal"><div class="merch-img mi-navy">👕</div><div class="merch-body"><div class="merch-cat">Apparel</div><div class="merch-name">PNTC Classic Polo Shirt</div><p class="merch-note">Embroidered crest. Navy &amp; white. Sizes XS–3XL.</p><div class="merch-price">₱ 450</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - Polo Shirt'">Inquire</button></div></div>
+      <div class="merch-card reveal"><div class="merch-img mi-gold">🧢</div><div class="merch-body"><div class="merch-cat">Accessories</div><div class="merch-name">PNTC Snapback Cap</div><p class="merch-note">Embroidered crest. Navy with gold trim. Adjustable.</p><div class="merch-price">₱ 380</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - Cap'">Inquire</button></div></div>
+      <div class="merch-card reveal"><div class="merch-img mi-cream">📓</div><div class="merch-body"><div class="merch-cat">Academic</div><div class="merch-name">PNTC Academic Planner 2026-2027</div><p class="merch-note">Full academic-year planner with nautical design elements.</p><div class="merch-price">₱ 250</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - Planner'">Inquire</button></div></div>
+      <div class="merch-card reveal"><div class="merch-img mi-dark">🎒</div><div class="merch-body"><div class="merch-cat">Bags</div><div class="merch-name">PNTC Canvas Tote Bag</div><p class="merch-note">Heavy-duty cotton canvas, screen-printed logo. Navy &amp; cream.</p><div class="merch-price">₱ 320</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - Tote Bag'">Inquire</button></div></div>
+      <div class="merch-card reveal"><div class="merch-img mi-green">☂️</div><div class="merch-body"><div class="merch-cat">Accessories</div><div class="merch-name">PNTC Windproof Umbrella</div><p class="merch-note">Full-length, wind-resistant frame with PNTC crest charm.</p><div class="merch-price">₱ 520</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - Umbrella'">Inquire</button></div></div>
+      <div class="merch-card reveal"><div class="merch-img mi-ocean">🔑</div><div class="merch-body"><div class="merch-cat">Accessories</div><div class="merch-name">PNTC Lanyard &amp; ID Holder</div><p class="merch-note">Sublimated lanyard, metal clasp, clear ID holder. Navy/gold.</p><div class="merch-price">₱ 150</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - Lanyard'">Inquire</button></div></div>
+    </div>
+    <!-- PNTC_MERCH_END -->
   </div>
 </section>
 
