@@ -598,7 +598,7 @@
       await createSession({name,email,phone,concern:chosen,bg});
       showChatUI(name);
       var label = {admission:'Admission',registrar:'Registrar',finance:'Finance',academics:'Academics',other:'General Enquiry'}[chosen]||chosen;
-      await sendMsg('Enquiry type: '+label+(bg?'\n\n'+bg:''));
+      await sendMsg('Inquiry about '+label+(bg?'\n\n'+bg:''));
       await poll();
     } catch(e) {
       submitEl.disabled = false; submitEl.textContent = 'Start Chat';

@@ -938,7 +938,7 @@ function buildPostHTML(post, site) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${escHtml(post.title)} – ${escHtml(site.name)}</title>
+<title>${escHtml(post.title)} | ${escHtml(site.name)}</title>
 <meta name="description" content="${escHtml(post.excerpt || post.title)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1038,7 +1038,7 @@ function buildBlogIndex(posts, site) {
   }).join('');
   return `<!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>News &amp; Blog – ${escHtml(site.name)}</title>
+<title>News &amp; Blog | ${escHtml(site.name)}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 ${fonts}
 <style>
