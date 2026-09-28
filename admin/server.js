@@ -182,6 +182,45 @@ app.get('/api/posts/:id', async (req, res) => {
 });
 
 // ── Shared publish logic ───────────────────────────────────────
+// ── Sitemap: keep blog entries in sync with published posts ─────
+const SITE_URL     = 'https://www.pntc.edu.ph';
+const SITEMAP_PATH = 'PNTC Main Landing Page/sitemap.xml';
+const BLOG_BASE    = { colleges: '/college/blog/', shs: '/shs/blog/', maritime: '/training/blog/' };
+
+function sitemapEntry(url, lastmod) {
+  return `  <url><loc>${SITE_URL}${encodeURI(url)}</loc><lastmod>${String(lastmod || new Date().toISOString()).slice(0, 10)}</lastmod></url>`;
+}
+
+async function updateSitemap() {
+  const existing = await ghGetFile(SITEMAP_PATH);
+  if (!existing) return;
+  const xml = Buffer.from(existing.content, 'base64').toString('utf8');
+  const blogPrefixes = Object.values(BLOG_BASE).map(b => SITE_URL + b);
+  const pageEntries = [...xml.matchAll(/ *<url>[\s\S]*?<\/url>/g)].map(m => m[0].replace(/^ */, '  '))
+    .filter(e => !blogPrefixes.some(p => ((e.match(/<loc>([^<]+)<\/loc>/) || [])[1] || '').startsWith(p)));
+
+  const { data: posts, error } = await supabase
+    .from('posts').select('slug, sites, updatedAt, publishedAt').eq('status', 'published');
+  if (error) throw error;
+
+  const blogEntries = [];
+  for (const [siteId, base] of Object.entries(BLOG_BASE)) {
+    const sitePosts = (posts || []).filter(p => (p.sites || []).includes(siteId));
+    if (!sitePosts.length) continue;
+    const dates = sitePosts.map(p => p.updatedAt || p.publishedAt).sort();
+    blogEntries.push(sitemapEntry(base, dates[dates.length - 1]));
+    for (const p of sitePosts) blogEntries.push(sitemapEntry(`${base}${p.slug}.html`, p.updatedAt || p.publishedAt));
+  }
+
+  const out = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    [...pageEntries, ...blogEntries].join('\n') + '\n</urlset>\n';
+  if (out !== xml) await ghPutFile(SITEMAP_PATH, out, 'Update sitemap', existing.sha);
+}
+
+async function updateSitemapSafely() {
+  try { await updateSitemap(); } catch (e) { console.error('Sitemap update failed:', e.message); }
+}
+
 async function publishPostToGitHub(post) {
   const results = [];
   for (const siteId of (post.sites || [])) {
@@ -211,6 +250,7 @@ async function publishPostToGitHub(post) {
 
     results.push({ site: site.name, file: postFilePath });
   }
+  await updateSitemapSafely();
   return results;
 }
 
@@ -282,6 +322,7 @@ app.put('/api/posts/:id', async (req, res) => {
         return res.json({ ...data, _publishError: pubErr.message });
       }
     }
+    if (current.status === 'published') await updateSitemapSafely();
     res.json(data);
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
@@ -290,6 +331,7 @@ app.delete('/api/posts/:id', async (req, res) => {
   try {
     const { error } = await supabase.from('posts').delete().eq('id', req.params.id);
     if (error) throw error;
+    await updateSitemapSafely();
     res.json({ ok: true });
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
@@ -942,6 +984,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.45);text-align:center;padd
 footer strong{color:var(--accent)}
 </style>
 ${gnavTag(site)}
+${BLOG_BASE[site.id] ? `<link rel="canonical" href="${SITE_URL}${BLOG_BASE[site.id]}${post.slug}.html">` : ''}
 </head>
 <body>
 <nav class="nav">
