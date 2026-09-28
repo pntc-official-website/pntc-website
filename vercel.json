@@ -3,15 +3,64 @@
   "functions": {
     "api/index.js": { "maxDuration": 30, "memory": 512 }
   },
+  "redirects": [
+    { "source": "/maritime",     "destination": "/training/",     "permanent": false },
+    { "source": "/maritime/",    "destination": "/training/",     "permanent": false },
+    { "source": "/training",     "destination": "/training/",     "permanent": false },
+    { "source": "/college",      "destination": "/college/",      "permanent": false },
+    { "source": "/college/blog", "destination": "/college/blog/", "permanent": false },
+    { "source": "/shs",          "destination": "/shs/",          "permanent": false },
+    { "source": "/shs/blog",     "destination": "/shs/blog/",     "permanent": false }
+  ],
   "rewrites": [
     { "source": "/api/:path*",        "destination": "/api/index.js" },
     { "source": "/site-files/:path*", "destination": "/:path*" },
     { "source": "/admin",             "destination": "/admin/public/index.html" },
     { "source": "/admin/",            "destination": "/admin/public/index.html" },
     { "source": "/admin/:file*",      "destination": "/admin/public/:file*" },
-    { "source": "/maritime",          "destination": "/PNTC Maritime Training and Assessment Center/index.html" },
-    { "source": "/maritime/:file*",   "destination": "/PNTC Maritime Training and Assessment Center/:file*" },
-    { "source": "/:file",             "destination": "/PNTC Main Landing Page/:file" },
-    { "source": "/",                  "destination": "/PNTC Main Landing Page/index.html" }
+
+    { "source": "/about",                          "destination": "/PNTC Main Landing Page/about.html" },
+    { "source": "/about/history",                  "destination": "/PNTC Main Landing Page/about-history.html" },
+    { "source": "/about/leadership",               "destination": "/PNTC Main Landing Page/about-leadership.html" },
+    { "source": "/careers",                        "destination": "/PNTC Main Landing Page/careers.html" },
+    { "source": "/philnautical",                   "destination": "/PNTC Main Landing Page/philnautical.html" },
+    { "source": "/philnautical/onboard-training",  "destination": "/PNTC Main Landing Page/philnautical-onboard-training.html" },
+
+    { "source": "/training/",                  "destination": "/PNTC Maritime Training and Assessment Center/index.html" },
+    { "source": "/training/maritime-courses",  "destination": "/PNTC Maritime Training and Assessment Center/maritime-courses.html" },
+    { "source": "/training/assessment",        "destination": "/PNTC Maritime Training and Assessment Center/assessment.html" },
+    { "source": "/training/review-app",        "destination": "/PNTC Maritime Training and Assessment Center/review-app.html" },
+    { "source": "/training/corporate",         "destination": "/PNTC Maritime Training and Assessment Center/corporate.html" },
+    { "source": "/training/tesda",             "destination": "/PNTC Maritime Training and Assessment Center/tesda.html" },
+    { "source": "/training/blog/",             "destination": "/PNTC Maritime Training and Assessment Center/blog/index.html" },
+    { "source": "/training/:file*",            "destination": "/PNTC Maritime Training and Assessment Center/:file*" },
+    { "source": "/maritime/:file*",            "destination": "/PNTC Maritime Training and Assessment Center/:file*" },
+
+    { "source": "/college/",              "destination": "/PNTC Colleges/index.html" },
+    { "source": "/college/programs",      "destination": "/PNTC Colleges/programs.html" },
+    { "source": "/college/admissions",    "destination": "/PNTC Colleges/admissions.html" },
+    { "source": "/college/colleges",      "destination": "/PNTC Colleges/colleges.html" },
+    { "source": "/college/scholarships",  "destination": "/PNTC Colleges/scholarships.html" },
+    { "source": "/college/student-life",  "destination": "/PNTC Colleges/student-life.html" },
+    { "source": "/college/research",      "destination": "/PNTC Colleges/research.html" },
+    { "source": "/college/calendar",      "destination": "/PNTC Colleges/calendar.html" },
+    { "source": "/college/directory",     "destination": "/PNTC Colleges/directory.html" },
+    { "source": "/college/resources",     "destination": "/PNTC Colleges/resources.html" },
+    { "source": "/college/blog/",         "destination": "/PNTC Colleges/blog/index.html" },
+    { "source": "/college/:file*",        "destination": "/PNTC Colleges/:file*" },
+
+    { "source": "/shs/",              "destination": "/SHS/index.html" },
+    { "source": "/shs/strands",       "destination": "/SHS/strands.html" },
+    { "source": "/shs/admissions",    "destination": "/SHS/admissions.html" },
+    { "source": "/shs/scholarships",  "destination": "/SHS/scholarships.html" },
+    { "source": "/shs/student-life",  "destination": "/SHS/student-life.html" },
+    { "source": "/shs/calendar",      "destination": "/SHS/calendar.html" },
+    { "source": "/shs/directory",     "destination": "/SHS/directory.html" },
+    { "source": "/shs/resources",     "destination": "/SHS/resources.html" },
+    { "source": "/shs/blog/",         "destination": "/SHS/blog/index.html" },
+    { "source": "/shs/:file*",        "destination": "/SHS/:file*" },
+
+    { "source": "/:file", "destination": "/PNTC Main Landing Page/:file" },
+    { "source": "/",      "destination": "/PNTC Main Landing Page/index.html" }
   ]
 }

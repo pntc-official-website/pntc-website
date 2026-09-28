@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PNTC Colleges – Senior High School</title>
+<title>Directory – PNTC Senior High School</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Albert+Sans:wght@400;500;600&family=Inter:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -988,6 +988,41 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .pntc-news-tag{display:inline-block;font-family:inherit;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#FFCC00;background:rgba(200,150,12,.12);padding:.2rem .6rem;margin-bottom:.5rem}
 .pntc-news-date{font-family:inherit;font-size:.68rem;color:rgba(255,255,255,.35);margin-bottom:.35rem}
 .pntc-news-body h3{font-family:'Alfa Slab One',serif;font-weight:400;text-transform:uppercase;font-size:1.15rem;line-height:1.15;color:#fff;margin:0}
+
+#research,#directory{--navy-deep:#08142A;--navy:#0D2454;--gold:#B8860B;--gold-dim:rgba(184,134,11,.13);--bg-2:#F0F4FA;--surface:#fff;--text:#0D1F4F;--text-muted:rgba(13,31,79,.52);--border:rgba(13,31,79,.09);--r:12px;--r-sm:6px;--font:inherit}
+#research .eyebrow,#directory .eyebrow{font-family:var(--font);font-weight:700;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+#research .reveal,#directory .reveal{opacity:1;transform:none}
+#directory .sec-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem}
+#directory .sec-h2{font-family:var(--font);font-weight:800;font-size:clamp(1.6rem,3.2vw,2.5rem);line-height:1.15;color:var(--text);letter-spacing:-.02em}
+#research{background:var(--navy-deep);padding:6rem clamp(1.5rem,4vw,3rem)}
+.research-wrap{max-width:1240px;margin:0 auto}
+.research-h2{font-family:var(--font);font-weight:800;font-size:clamp(1.6rem,3.2vw,2.5rem);color:#fff;line-height:1.15;margin-bottom:.9rem;letter-spacing:-.02em}
+.research-sub{font-family:var(--font);font-size:.9rem;color:rgba(255,255,255,.46);max-width:520px;line-height:1.78;margin-bottom:3rem}
+.research-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.research-card{padding:1.85rem;border:1px solid rgba(255,255,255,.07);border-radius:var(--r);background:rgba(255,255,255,.03);transition:background .22s,border-color .22s}
+.research-card:hover{background:rgba(255,255,255,.055);border-color:rgba(184,134,11,.25)}
+.rc-icon{font-size:1.4rem;margin-bottom:.85rem}
+.rc-title{font-family:var(--font);font-weight:700;font-size:.95rem;color:#fff;margin-bottom:.5rem;line-height:1.38}
+.rc-body{font-family:var(--font);font-size:.84rem;color:rgba(255,255,255,.46);line-height:1.74}
+.rc-year{font-family:var(--font);font-size:.68rem;font-weight:600;letter-spacing:.1em;color:var(--gold);margin-top:.75rem}
+.pubs-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.75rem}
+.pub-item{padding:1.2rem 1.2rem 1.2rem 1.4rem;border-top:2px solid rgba(184,134,11,.3);background:rgba(255,255,255,.02);border-radius:0 0 var(--r-sm) var(--r-sm)}
+.pub-title{font-family:var(--font);font-weight:600;font-size:.84rem;color:#fff;line-height:1.55;margin-bottom:.45rem}
+.pub-meta{font-family:var(--font);font-size:.7rem;font-weight:500;color:rgba(255,255,255,.36);letter-spacing:.06em}
+#directory{background:var(--bg-2);padding:6rem clamp(1.5rem,4vw,3rem)}
+.directory-wrap{max-width:1240px;margin:0 auto}
+.dir-intro{font-family:var(--font);color:var(--text-muted);font-size:.9rem;max-width:520px;margin-bottom:2.5rem}
+.dir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.dir-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.65rem;transition:box-shadow .22s,transform .22s}
+.dir-card:hover{box-shadow:0 8px 28px rgba(13,31,79,.07);transform:translateY(-2px)}
+.dir-ico{width:42px;height:42px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;margin-bottom:.9rem;background:var(--gold-dim)}
+.dir-name{font-family:var(--font);font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
+.dir-desc{font-family:var(--font);font-size:.8rem;color:var(--text-muted);line-height:1.65;margin-bottom:1rem}
+.dir-contacts{font-family:var(--font);font-size:.78rem;color:var(--text-muted)}
+.dir-contacts a{display:block;color:var(--navy);font-weight:600;transition:color .15s;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dir-contacts a:hover{color:var(--gold)}
+@media(max-width:960px){.research-grid,.pubs-row{grid-template-columns:1fr}.dir-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.dir-grid{grid-template-columns:1fr}}
 .nav-links a.is-current{color:#FFCC00}
 @media(max-width:1100px) and (min-width:769px){
   .nav-right{display:none}.hamburger{display:flex}
@@ -1013,7 +1048,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
     <a href="/shs/scholarships">Scholarships</a>
     <a href="/shs/student-life">Student Life</a>
     <a href="/shs/calendar">Calendar</a>
-    <a href="/shs/directory">Directory</a>
+    <a href="/shs/directory" class="is-current" aria-current="page">Directory</a>
     <a href="/shs/resources">Resources</a>
   </div>
   <div class="nav-right">
@@ -1022,196 +1057,27 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="hero">
-  <img class="hero-photo" src="herobanner.png" alt="PNTC SHS Students">
-  <div class="hero-fade"></div>
-  <span class="hero-spread">Spread Your Strands</span>
-  <div class="hero-text">
-    <div class="hero-tag">Senior High School</div>
-    <h1 class="hero-h1">BE PART OF OUR<br>GROWING COMMUNITY<br><em>#ONWARDPNTC!</em></h1>
-    <p class="hero-desc">PNTC Colleges Senior High School prepares future leaders through quality education, innovative learning, and values formation. Join thousands of students who chose PNTC as their path to success.</p>
-    <div class="hero-btns">
-      <button class="btn-enroll">Enroll Today</button>
-      <button class="btn-learn">Learn more</button>
-    </div>
-  </div>
-  <button class="hero-arrow" aria-label="Next">›</button>
-</section>
-
-<!-- SHS SECTION (2nd viewport — Programs) -->
-<section class="shs-section" id="shs-section">
-  <div class="shs-img-wrap">
-    <div class="shs-rect-bg"></div>
-    <img class="shs-img-blur-l" src="SHS_MALE&amp;FEMALE.jpg" alt="">
-    <img class="shs-img-blur-r" src="SHS_MALE&amp;FEMALE.jpg" alt="">
-    <img class="shs-img-main"   src="SHS_MALE&amp;FEMALE.jpg" alt="PNTC SHS Students">
-  </div>
-  <div class="shs-text">
-    <div class="shs-label">Our Program</div>
-    <h2 class="shs-h2">SENIOR HIGH SCHOOL</h2>
-    <p class="shs-body">PNTC Colleges Senior High School offers nine specialized programs across two tracks — Academic and Technical-Professional — all designed to bridge classroom learning with real-world career readiness. Whether you're eyeing a maritime career, engineering, tourism, uniformed service, or the sciences, there is a PNTC SHS program built exactly for that path. With a faculty shaped by 25+ years of maritime and business education, every graduate leaves confident, skilled, and career-ready from day one.</p>
-    <div class="shs-strands">
-      <a href="#modal-academic" class="strand-chip">ADSC</a>
-      <a href="#modal-academic" class="strand-chip">ADT</a>
-      <a href="#modal-academic" class="strand-chip">ADMarE</a>
-      <a href="#modal-academic" class="strand-chip">ADMT</a>
-      <a href="#modal-academic" class="strand-chip">AESH</a>
-      <a href="#modal-academic" class="strand-chip">ASTEM</a>
-      <a href="#modal-academic" class="strand-chip">AUP</a>
-      <a href="#modal-techpro" class="strand-chip strand-chip-techpro">TPDM</a>
-      <a href="#modal-techpro" class="strand-chip strand-chip-techpro">TPM</a>
-    </div>
-    <div class="shs-actions">
-      <a href="/shs/admissions#admission" class="shs-btn-primary">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Enroll Now
-      </a>
-      <a href="#usp-section" class="shs-btn-outline">
-        Why PNTC?
-      </a>
-    </div>
+<!-- PAGE BANNER -->
+<section id="page-banner" class="pntc-sub">
+  <div class="pntc-sub-in">
+    <p class="pntc-sub-eyebrow">Senior High School</p>
+    <h1>Directory</h1>
   </div>
 </section>
 
-<!-- USP SECTION (3rd viewport — Physical card stacks) -->
-<section class="usp-section" id="usp-section">
-
-  <div class="usp-intro">
-    <div>
-      <p class="usp-eyebrow">Why Choose PNTC</p>
-      <h2 class="usp-heading">Built for the<br><em>Future You.</em></h2>
-      <p class="usp-sub">More than a diploma — PNTC gives you direction, skills, and a community that pushes you forward every step of the way.</p>
-    </div>
-    <a href="#" class="usp-cta-btn">
-      Enroll Today
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
-  </div>
-
-  <div class="usp-cards-grid">
-
-    <div class="usp-stack usp-c1">
-      <div class="stack-face">
-        <span class="stack-num">01 — Curriculum</span>
-        <div class="stack-content">
-          <h3 class="stack-title">Industry-Aligned Curriculum</h3>
-          <p class="stack-body">Our STEM, Maritime, and TVL tracks are built in step with real industry standards — so students graduate with a genuine head start, not a catch-up game.</p>
-        </div>
+<section id="directory">
+  <div class="directory-wrap">
+    <div class="sec-header reveal">
+      <div>
+        <p class="eyebrow" style="margin-bottom:.5rem;">Contact &amp; Directory</p>
+        <h2 class="sec-h2">PNTC Directory</h2>
       </div>
     </div>
+    <p class="dir-intro reveal">All offices are at the PNTC Colleges campus, Dasmariñas, Cavite. Open Monday–Friday, 7:00 AM–4:00 PM.</p>
 
-    <div class="usp-stack usp-c2">
-      <div class="stack-face">
-        <span class="stack-num">02 — Maritime</span>
-        <div class="stack-content">
-          <h3 class="stack-title">Maritime Excellence</h3>
-          <p class="stack-body">PNTC is a maritime institution at its core — no other SHS matches our depth in Pre-Baccalaureate and TVL Maritime specializations. It's not just a program, it's our DNA.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="usp-stack usp-c3">
-      <div class="stack-face">
-        <span class="stack-num">03 — Career</span>
-        <div class="stack-content">
-          <h3 class="stack-title">Career-Ready from Day One</h3>
-          <p class="stack-body">Internship pathways, career counseling, and real-world projects mean PNTC graduates walk out prepared — not just certified. The workforce or university, we get you ready for both.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="usp-stack usp-c4">
-      <div class="stack-face">
-        <span class="stack-num">04 — Community</span>
-        <div class="stack-content">
-          <h3 class="stack-title">A Community That Has Your Back</h3>
-          <p class="stack-body">Active student orgs, school-wide events, and leadership programs build connections that outlast the classroom. Once a PNTCian, always a PNTCian.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="usp-stack usp-c5">
-      <div class="stack-face">
-        <span class="stack-num">05 — Faculty</span>
-        <div class="stack-content">
-          <h3 class="stack-title">Teachers Who Actually Get It</h3>
-          <p class="stack-body">Our educators bring real industry experience into every lesson — mentoring students in academics, character, and the mindset to thrive not just in school, but anywhere they go.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="usp-stack usp-c6">
-      <div class="stack-face">
-        <span class="stack-num">06 — Growth</span>
-        <div class="stack-content">
-          <h3 class="stack-title">Holistic Growth, Not Just Grades</h3>
-          <p class="stack-body">Leadership programs, values formation, and character-building activities shape graduates who are not just smart — but good. PNTC develops the whole person, not just the student.</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="usp-stats">
-    <div class="usp-stat">
-      <div class="usp-stat-num">9</div>
-      <div class="usp-stat-label">Specialized Programs</div>
-    </div>
-    <div class="usp-stat">
-      <div class="usp-stat-num">500+</div>
-      <div class="usp-stat-label">SHS Graduates</div>
-    </div>
-    <div class="usp-stat">
-      <div class="usp-stat-num">25+</div>
-      <div class="usp-stat-label">Years of Excellence</div>
-    </div>
-    <div class="usp-stat">
-      <div class="usp-stat-num">98%</div>
-      <div class="usp-stat-label">Graduate Employment</div>
-    </div>
-  </div>
-
-</section>
-
-<!-- EVENT WALL -->
-<section class="events-section" id="events-section">
-  <div class="events-header">
-    <div>
-      <h2 class="events-h2">EVENTS</h2>
-      <p class="events-sub">Ensuring every student connects and grows. Be a PNTCian — Come and Join Us!</p>
-    </div>
-    <a href="blog/index.html" class="events-view-all">View all posts</a>
-  </div>
-
-  <!-- PNTC_NEWS_START -->
-  <div class="events-grid" style="margin-bottom:1rem">
-    <div class="events-row">
-      <a href="blog/enrollment-now-open-for-s-y-2026-2027.html" class="ev-card" style="text-decoration:none;color:inherit;cursor:pointer">
-        <div class="ev-thumb-wrap" style="background:linear-gradient(135deg,#181D71,#0d1245)"></div>
-        <div class="ev-body-wrap">
-          <div class="ev-date">Sep 9, 2026</div>
-          <div class="ev-title">Enrollment Now Open for S.Y. 2026–2027</div>
-          <div class="ev-text">PNTC is now accepting enrollees for the new school year. Slots are limited — secure your spot today!</div>
-          <span class="ev-tag">Announcement</span>
-        </div>
-      </a>
-    </div>
-  </div>
-  <div style="text-align:right;padding:0 0 16px">
-    <a href="blog/index.html" style="font-size:13px;font-weight:700;color:#181D71;letter-spacing:.06em;text-transform:uppercase">See all posts →</a>
-  </div>
-  <!-- PNTC_NEWS_END -->
-</section>
-
-<!-- ADMISSION PROCESS -->
-<!-- ACCREDITATIONS -->
-<section id="accreds" class="pntc-acc">
-  <div class="pntc-acc-in">
-    <p class="pntc-acc-lbl">Accreditations &amp; Regulatory Compliance</p>
-    <div class="pntc-acc-row">
-      <div class="pntc-acc-item"><div class="pntc-acc-ico" style="background:rgba(255,204,0,.12);color:#FFCC00">📘</div><div><div class="pntc-acc-name">DepEd</div><div class="pntc-acc-sub">K–12 SHS Recognized</div></div></div>
-      <div class="pntc-acc-item"><div class="pntc-acc-ico" style="background:rgba(184,134,11,.14);color:#E6AF1A">✓</div><div><div class="pntc-acc-name">ISO 9001</div><div class="pntc-acc-sub">2015 QMS Certified</div></div></div>
-    </div>
+    <!-- PNTC_DIRECTORY_START -->
+    <div class="dir-grid"><div class="dir-card reveal"><div class="dir-ico">📝</div><div class="dir-name">Admissions and Aid Office</div><p class="dir-desc">Enrollment inquiries, application requirements, and admission schedules for all PNTC programs.</p><div class="dir-contacts"><a href="mailto:admissions@mypntc.edu.ph">admissions@mypntc.edu.ph</a><a href="tel:+639171594966">0917-159-4966</a><a href="tel:+63464388835">(046) 438-8835 Loc. 101</a></div></div><div class="dir-card reveal"><div class="dir-ico">📋</div><div class="dir-name">Registrar's Office</div><p class="dir-desc">Academic records, transcript requests, enrollment certificates, and authentication of scholastic documents.</p><div class="dir-contacts"><a href="mailto:registration.dasma@mypntc.edu.ph">registration.dasma@mypntc.edu.ph</a><a href="tel:+63464388835">(046) 438-8835 Loc. 102</a></div></div><div class="dir-card reveal"><div class="dir-ico">💳</div><div class="dir-name">Finance Office</div><p class="dir-desc">Tuition and fee schedules, payment arrangements, scholarship programs, and financial assistance.</p><div class="dir-contacts"><a href="mailto:finance.dasma@mypntc.edu.ph">finance.dasma@mypntc.edu.ph</a><a href="tel:+63464388835">(046) 438-8835 Loc. 105</a></div></div><div class="dir-card reveal"><div class="dir-ico">🌐</div><div class="dir-name">ICT Office</div><p class="dir-desc">Student email account, quipper account, portal processing, Issuance of ID, and online advising.</p><div class="dir-contacts"><a href="mailto:ict.dasma@mypntc.edu.ph">ict.dasma@mypntc.edu.ph</a><a href="tel:+63464388835">(046) 438-8835 Loc. 114</a></div></div><div class="dir-card reveal"><div class="dir-ico">👜</div><div class="dir-name">Commissary </div><p class="dir-desc">Storing, selling, and distributing of official PNTC school uniforms.</p><div class="dir-contacts"><a href="mailto:commissary@mypntc.edu.ph">commissary@mypntc.edu.ph</a><a href="tel:+63464388835">(046) 438-8835 Loc. 106</a></div></div><div class="dir-card reveal"><div class="dir-ico">🗣️</div><div class="dir-name">Guidance Office</div><p class="dir-desc">Supporting students' mental health, emotional well-being, personal development, and future academic or career planning</p><div class="dir-contacts"><a href="mailto:guidance@mypntc.edu.ph">guidance@mypntc.edu.ph</a><a href="tel:+63464388835">(046) 438-8835 Loc. 109</a></div></div><div class="dir-card reveal"><div class="dir-ico">🤝</div><div class="dir-name">Office of Student Affairs</div><p class="dir-desc">Student organizations, guidance and counseling, discipline, and co-curricular activities management.</p><div class="dir-contacts"><a href="mailto:osa.dasma@mypntc.edu.ph">osa.dasma@mypntc.edu.ph</a><a href="tel:+63464388835">(046) 438-8835 Loc. 115</a></div></div><div class="dir-card reveal"><div class="dir-ico">🚢</div><div class="dir-name">Onboard Training Office</div><p class="dir-desc">Connects maritime students with shipping companies and crewing agencies. Verifies students' medical clearances, safety certifications (e.g., STCW courses), seaman’s books, and passports prior to boarding a vessel.</p><div class="dir-contacts"><a href="mailto:onboardtraining@mypntc.edu.ph">onboardtraining@mypntc.edu.ph</a><a href="tel:+63464388835">(046) 438-8835 Loc. 104</a></div></div><div class="dir-card reveal"><div class="dir-ico">⚕️</div><div class="dir-name">School Clinic</div><p class="dir-desc">Providing basic healthcare, first aid, and health monitoring for students, teachers, and staff</p><div class="dir-contacts"><a href="mailto:clinic.dasma@mypntc.edu.ph">clinic.dasma@mypntc.edu.ph</a><a href="tel:+63464388835">(046) 438-8835 Loc. 108</a></div></div><div class="dir-card reveal"><div class="dir-ico">📖</div><div class="dir-name">School Library</div><p class="dir-desc">Students and teachers access books, digital resources, and quiet areas for reading, study, and research.</p><div class="dir-contacts"><a href="mailto:library@mypntc.edu.ph">library@mypntc.edu.ph</a><a href="tel:+63464388835">(046) 438-8835 Loc. 110</a></div></div><div class="dir-card reveal"><div class="dir-ico">✈️</div><div class="dir-name">College of International Tourism Management</div><p class="dir-desc">Tourism Management can lead to careers in airlines, cruise lines, events, destination marketing, hospitality, travel technology, tourism development.</p><div class="dir-contacts"><a href="mailto:tourism@mypntc.edu.ph">tourism@mypntc.edu.ph</a><a href="tel:+63464388835">(046) 438-8835 Loc. 119</a></div></div><div class="dir-card reveal"><div class="dir-ico">⚖️</div><div class="dir-name">College of Criminal Justice Education</div><p class="dir-desc">Criminology program designed to equip student with real-world skills and modern expertise, focuses on the study of crime, criminal behavior, law enforcement, crime scene investigation, and the justice system.</p><div class="dir-contacts"><a href="tel:+63464388835">(046) 438-8835</a></div></div><div class="dir-card reveal"><div class="dir-ico">🛞</div><div class="dir-name">College of Maritime Education</div><p class="dir-desc">Maritime course is a specialized degree program designed to train students for professional careers at sea on merchant ships, cargo vessels, passenger liners, and offshore platforms.</p><div class="dir-contacts"><a href="mailto:maritime@mypntc.edu.ph">maritime@mypntc.edu.ph</a><a href="tel:+63464388835">BS Marine Transportation (046) 438-8835 Loc. 117</a><a href="tel:+63464388835">BS Marine Engineering (046) 438-8835 Loc. 121</a></div></div><div class="dir-card reveal"><div class="dir-ico">📜</div><div class="dir-name">College of Business and Management Education</div><p class="dir-desc">Business and Management Education is a field of study that teaches students how organizations operate, make profits, manage people, and grow in competitive markets. </p><div class="dir-contacts"><a href="mailto:gened@mypntc.edu.ph">gened@mypntc.edu.ph</a><a href="tel:+63464388835">(046) 438-8835 Loc. 118</a><a href="tel:+63464388835">BS Office Administration (046) 438-8835 Loc. 122</a></div></div><div class="dir-card reveal"><div class="dir-ico">⚓</div><div class="dir-name">Maritime Training and Assessment Center</div><p class="dir-desc">Maritime Training Institution and Assessment Center providing seafarers with basic and specialized STCW-mandatory and in-house training courses.</p><div class="dir-contacts"><a href="mailto:mtac.marketing@mypntc.edu.ph">mtac.marketing@mypntc.edu.ph</a><a href="tel:+63285262068">(02) 8 526-2068</a></div></div></div>
+    <!-- PNTC_DIRECTORY_END -->
   </div>
 </section>
 
@@ -1238,11 +1104,11 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
     <div class="footer-links-group">
       <div class="footer-col">
         <h4>Navigate</h4>
-        <a href="#hero">Home</a>
-        <a href="#shs-section">Our Program</a>
-        <a href="#usp-section">Why PNTC</a>
+        <a href="/shs/#hero">Home</a>
+        <a href="/shs/#shs-section">Our Program</a>
+        <a href="/shs/#usp-section">Why PNTC</a>
         <a href="/shs/student-life#event-wall">Event Wall</a>
-        <a href="#events-section">What's New</a>
+        <a href="/shs/#events-section">What's New</a>
         <a href="/shs/admissions#admission">How to Enroll</a>
       </div>
       <div class="footer-col">
@@ -1276,7 +1142,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 <!-- Academic Track Modal -->
 <div class="strand-modal" id="modal-academic">
-  <a href="#shs-section" class="modal-overlay"></a>
+  <a href="/shs/#shs-section" class="modal-overlay"></a>
   <div class="modal-card modal-card-wide">
     <div class="modal-head modal-head-stem">
       <div class="modal-head-inner">
@@ -1284,7 +1150,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
         <h3 class="modal-title">Academic Programs</h3>
         <p class="modal-subtitle">7 Programs Available</p>
       </div>
-      <a href="#shs-section" class="modal-close" aria-label="Close">
+      <a href="/shs/#shs-section" class="modal-close" aria-label="Close">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </a>
     </div>
@@ -1356,7 +1222,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 <!-- Technical-Professional Track Modal -->
 <div class="strand-modal" id="modal-techpro">
-  <a href="#shs-section" class="modal-overlay"></a>
+  <a href="/shs/#shs-section" class="modal-overlay"></a>
   <div class="modal-card modal-card-wide">
     <div class="modal-head modal-head-tvl">
       <div class="modal-head-inner">
@@ -1364,7 +1230,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
         <h3 class="modal-title">Tech-Pro Programs</h3>
         <p class="modal-subtitle">2 Programs Available</p>
       </div>
-      <a href="#shs-section" class="modal-close" aria-label="Close">
+      <a href="/shs/#shs-section" class="modal-close" aria-label="Close">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </a>
     </div>

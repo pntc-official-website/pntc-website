@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PNTC Colleges</title>
+<title>Leadership – PNTC</title>
 <meta name="description" content="PNTC Colleges, Inc. — the Philippines' foremost maritime and business education ecosystem. Four institutions. One vision.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -749,7 +749,7 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .nav-links a.is-current{color:#fff}
 .nav-links a.is-current::after{transform:scaleX(1)}
 </style>
-<script src="/global-nav.js" data-area="home"></script>
+<script src="/global-nav.js" data-area="about"></script>
 </head>
 <body>
 
@@ -759,10 +759,12 @@ h1.hero-h1 span.gold { color:var(--gold); }
     <img src="/SHS/PNTC White Horizontal.png" alt="PNTC Colleges">
   </a>
   <div class="nav-links">
-    
+    <a href="/about">About PNTC</a>
+    <a href="/about/history">History</a>
+    <a href="/about/leadership" class="is-current" aria-current="page">Leadership</a>
   </div>
   <a href="/admin/login.html" class="nav-login" aria-label="Staff login">Login</a>
-  <a href="#cta" class="nav-cta">Enroll Now</a>
+  <a href="/#cta" class="nav-cta">Enroll Now</a>
   <button class="hamburger" id="mob-toggle" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
@@ -770,159 +772,32 @@ h1.hero-h1 span.gold { color:var(--gold); }
 
 <div id="mob-menu" role="dialog" aria-modal="true" aria-label="Navigation">
   <button class="mob-x" id="mob-close" aria-label="Close menu">&times;</button>
-  
-  <a href="#cta" style="color:var(--gold);">Enroll Now</a>
+  <a href="/about">About PNTC</a>
+    <a href="/about/history">History</a>
+    <a href="/about/leadership" class="is-current" aria-current="page">Leadership</a>
+  <a href="/#cta" style="color:var(--gold);">Enroll Now</a>
 </div>
 
 <!-- ===================== HERO ===================== -->
-<section id="hero">
-
-  <!-- Slideshow backgrounds -->
-  <div class="hero-slides" aria-hidden="true">
-    <div class="hero-slide active" style="background-image:url('/Hero Section Slideshow1.jpg')"></div>
-    <div class="hero-slide"        style="background-image:url('/Hero Section Slideshow2.jpg')"></div>
-    <div class="hero-slide"        style="background-image:url('/Hero Section Slideshow3.jpg')"></div>
-    <div class="hero-slide"        style="background-image:url('/Hero Section Slideshow4.JPG')"></div>
-  </div>
-
-  <div class="hero-vig"></div>
-
-  <!-- Content -->
-  <div class="hero-inner">
-    <div class="hero-pill">
-      <span class="hero-pill-dot"></span>
-      Est. 1994 &nbsp;·&nbsp; Dasmariñas, Cavite
-    </div>
-    <h1 class="hero-h1">
-      One Institution.<br>
-      <span class="gold">Four Pathways</span><br>
-      to Excellence.
-    </h1>
-    <p class="hero-sub">
-      PNTC Colleges, Inc. is the Philippines' foremost maritime and business education ecosystem — uniting senior high school, collegiate programs, professional training, and live vessel experience under one unified institution with over 30 years of excellence.
-    </p>
-    <div class="hero-btns">
-      <a href="#network" class="btn-gold">Explore Our Network ↓</a>
-      <a href="#cta"     class="btn-outline-white">Apply for 2026–2027 →</a>
-    </div>
-  </div>
-
-  <!-- Slide dots -->
-  <div class="hero-dots" aria-label="Slideshow navigation">
-    <button class="hero-dot active" aria-label="Slide 1: SHS"></button>
-    <button class="hero-dot"        aria-label="Slide 2: PNTC Colleges"></button>
-    <button class="hero-dot"        aria-label="Slide 3: Maritime Training Center"></button>
-    <button class="hero-dot"        aria-label="Slide 4: Aman Sinaya"></button>
-  </div>
-
-  <!-- Current slide name -->
-  <div class="hero-slide-label" id="hero-label" aria-live="polite">Senior High School</div>
-
-  <span class="hero-scroll" aria-hidden="true">Scroll to explore</span>
-</section>
-
-<!-- ===================== NETWORK ===================== -->
-<section id="network">
-  <div class="network-hd reveal">
-    <p class="eyebrow">The PNTC Network</p>
-    <h2>Four Institutions. One Vision.</h2>
-    <p>Each arm of PNTC serves a distinct stage of your maritime and business journey — from Grade 11 through professional seafarer certification.</p>
-  </div>
-
-  <div class="net-grid">
-    <a href="/shs/" class="net-card nc-shs reveal">
-      <div class="nc-bg"></div><div class="nc-overlay"></div><div class="nc-accent-bar"></div>
-      <div class="nc-body">
-        <div class="nc-tag">Senior High School</div>
-        <div class="nc-title">PNTC Colleges – SHS</div>
-        <p class="nc-desc">K–12 senior high school programs aligned with our maritime and business collegiate pathways. STEM, Pre-Baccalaureate Maritime, and TVL tracks available.</p>
-        <span class="nc-link">Visit SHS →</span>
-      </div>
-    </a>
-
-    <a href="/college/" class="net-card nc-college reveal">
-      <div class="nc-bg"></div><div class="nc-overlay"></div><div class="nc-accent-bar"></div>
-      <div class="nc-body">
-        <div class="nc-tag">Higher Education</div>
-        <div class="nc-title">PNTC Colleges Dasmariñas</div>
-        <p class="nc-desc">CHED-supervised undergraduate programs in BS Maritime Transportation, BS Criminology, BS Tourism Management, and BS Customs Administration.</p>
-        <span class="nc-link">Visit College →</span>
-      </div>
-    </a>
-
-    <a href="/training/" class="net-card nc-mtc reveal">
-      <div class="nc-bg"></div><div class="nc-overlay"></div><div class="nc-accent-bar"></div>
-      <div class="nc-body">
-        <div class="nc-tag">Professional Training</div>
-        <div class="nc-title">PNTC Maritime Training Center</div>
-        <p class="nc-desc">MARINA-accredited, IMO-compliant, ISO 9001:2015 certified. Delivering STCW-mandatory and in-house training and assessment to Filipino seafarers.</p>
-        <span class="nc-link">Visit MTC →</span>
-      </div>
-    </a>
-
-    <a href="/training/#facilities" class="net-card nc-vessel reveal">
-      <div class="nc-bg"></div><div class="nc-overlay"></div><div class="nc-accent-bar"></div>
-      <div class="nc-body">
-        <div class="nc-tag">Live Vessel Experience</div>
-        <div class="nc-title">Training Vessel Aman Sinaya</div>
-        <p class="nc-desc">Real onboard maritime experience bridging classroom learning and professional seafaring — giving students the edge that simulators alone cannot provide.</p>
-        <span class="nc-link">Learn More →</span>
-      </div>
-    </a>
+<!-- PAGE BANNER -->
+<section id="page-banner" class="pntc-sub">
+  <div class="pntc-sub-in">
+    <p class="pntc-sub-eyebrow">About PNTC</p>
+    <h1>Leadership</h1>
   </div>
 </section>
 
-<!-- ===================== ABOUT ===================== -->
-<section id="accreds">
-  <div class="accreds-wrap">
-    <p class="accreds-lbl">Accreditations &amp; Regulatory Compliance</p>
-    <div class="accreds-row">
-      <div class="accred-item"><div class="accred-ico" style="background:rgba(184,134,11,.15);color:var(--gold);">🎓</div><div class="accred-name">CHED</div><div class="accred-sub">Higher Education Supervised</div></div>
-      <div class="accred-item"><div class="accred-ico" style="background:rgba(0,146,93,.12);color:#4DD9A0;">⚓</div><div class="accred-name">MARINA</div><div class="accred-sub">Accredited MTI &amp; AC</div></div>
-      <div class="accred-item"><div class="accred-ico" style="background:rgba(27,75,216,.12);color:#7BA8FF;">🌐</div><div class="accred-name">IMO</div><div class="accred-sub">IMO-Compliant Training</div></div>
-      <div class="accred-item"><div class="accred-ico" style="background:rgba(184,134,11,.12);color:var(--gold);">✓</div><div class="accred-name">ISO 9001</div><div class="accred-sub">2015 QMS Certified</div></div>
-      <div class="accred-item"><div class="accred-ico" style="background:rgba(8,145,178,.12);color:#5BCFEA;">⛵</div><div class="accred-name">STCW</div><div class="accred-sub">Convention Compliant</div></div>
-      <div class="accred-item"><div class="accred-ico" style="background:rgba(255,204,0,.1);color:#BBAA00;">📘</div><div class="accred-name">DepEd</div><div class="accred-sub">K–12 SHS Recognized</div></div>
-    </div>
+<section id="coming-soon" class="pntc-soon">
+  <div class="pntc-soon-box">
+    <div class="pntc-soon-ico">⚓</div>
+    <h2>Coming Soon</h2>
+    <p>We're preparing this page. Please check back soon.</p>
+    <div class="pntc-soon-chips"><span>Executive Leadership</span><span>Academic Leadership</span><span>Administrative Leadership</span></div>
+    <a class="pntc-soon-btn" href="/about">Back to About PNTC</a>
   </div>
 </section>
 
-<!-- ===================== CAREERS ===================== -->
-<section id="merchandise">
-  <div class="merch-wrap">
-    <div class="sec-header reveal">
-      <div>
-        <p class="eyebrow" style="margin-bottom:.5rem;">Official Store</p>
-        <h2 class="sec-h2">PNTC Merchandise</h2>
-      </div>
-      <a href="mailto:info@pntc.edu.ph?subject=Merchandise%20Inquiry" class="sec-link">Full Catalog →</a>
-    </div>
-    <p class="merch-intro reveal">Official PNTC branded merchandise for students, alumni, and supporters. Inquire via email or visit the Campus Store.</p>
 
-    <!-- PNTC_MERCH_START -->
-    <div class="merch-grid">
-      <div class="merch-card reveal"><div class="merch-img mi-navy">👕</div><div class="merch-body"><div class="merch-cat">Apparel</div><div class="merch-name">PNTC Classic Polo Shirt</div><p class="merch-note">Embroidered crest. Navy &amp; white. Sizes XS–3XL.</p><div class="merch-price">₱ 450</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - Polo Shirt'">Inquire</button></div></div>
-      <div class="merch-card reveal"><div class="merch-img mi-gold">🧢</div><div class="merch-body"><div class="merch-cat">Accessories</div><div class="merch-name">PNTC Snapback Cap</div><p class="merch-note">Embroidered crest. Navy with gold trim. Adjustable.</p><div class="merch-price">₱ 380</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - Cap'">Inquire</button></div></div>
-      <div class="merch-card reveal"><div class="merch-img mi-cream">📓</div><div class="merch-body"><div class="merch-cat">Academic</div><div class="merch-name">PNTC Academic Planner 2026–2027</div><p class="merch-note">Full academic-year planner with nautical design elements.</p><div class="merch-price">₱ 250</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - Planner'">Inquire</button></div></div>
-      <div class="merch-card reveal"><div class="merch-img mi-dark">🎒</div><div class="merch-body"><div class="merch-cat">Bags</div><div class="merch-name">PNTC Canvas Tote Bag</div><p class="merch-note">Heavy-duty cotton canvas, screen-printed logo. Navy &amp; cream.</p><div class="merch-price">₱ 320</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - Tote Bag'">Inquire</button></div></div>
-      <div class="merch-card reveal"><div class="merch-img mi-green">☂️</div><div class="merch-body"><div class="merch-cat">Accessories</div><div class="merch-name">PNTC Windproof Umbrella</div><p class="merch-note">Full-length, wind-resistant frame with PNTC crest charm.</p><div class="merch-price">₱ 520</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - Umbrella'">Inquire</button></div></div>
-      <div class="merch-card reveal"><div class="merch-img mi-ocean">🔑</div><div class="merch-body"><div class="merch-cat">Accessories</div><div class="merch-name">PNTC Lanyard &amp; ID Holder</div><p class="merch-note">Sublimated lanyard, metal clasp, clear ID holder. Navy/gold.</p><div class="merch-price">₱ 150</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - Lanyard'">Inquire</button></div></div>
-    </div>
-    <!-- PNTC_MERCH_END -->
-  </div>
-</section>
-
-<!-- ===================== RESEARCH & RECOGNITION ===================== -->
-<section id="cta">
-  <p class="eyebrow cta-eyebrow">Your Journey Begins Here</p>
-  <h2 class="cta-h2">Ready to Become Part of<br>the <span class="gold">PNTC Community?</span></h2>
-  <p class="cta-sub">Enrollment is open for Academic Year 2026–2027. Whether you're a Grade 10 graduate, a student pursuing a degree, or a seafarer seeking certification — PNTC has a place for you.</p>
-  <div class="cta-btns">
-    <a href="/college/" class="btn-gold">Apply to College →</a>
-    <a href="/shs/"           class="btn-outline-white">Apply to SHS →</a>
-    <a href="/training/" class="btn-outline-white">MTC Training Rates →</a>
-  </div>
-</section>
 
 <!-- ===================== FOOTER ===================== -->
 <footer id="footer">
@@ -941,9 +816,9 @@ h1.hero-h1 span.gold { color:var(--gold); }
       <div class="footer-col">
         <h4>Quick Links</h4>
         <a href="/about#about">About PNTC</a>
-        <a href="#network">Our Network</a>
+        <a href="/#network">Our Network</a>
         <a href="/careers#careers">Careers</a>
-        <a href="#merchandise">Merchandise</a>
+        <a href="/#merchandise">Merchandise</a>
         <a href="/college/research#research">Research</a>
         <a href="/college/directory#directory">Directory</a>
         <a href="/admin">Admin Console</a>

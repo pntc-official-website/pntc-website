@@ -33,7 +33,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 const SITES = {
   shs:      { id:'shs',      name:'PNTC Senior High School',          short:'SHS',        dir:'SHS',                      color:'#181D71', accent:'#FFCC00' },
   colleges: { id:'colleges', name:'PNTC Colleges',                    short:'Colleges',   dir:'PNTC Colleges',            color:'#0B2A6B', accent:'#C8960C' },
-  maritime: { id:'maritime', name:'PNTC Maritime Training Center',    short:'Maritime',   dir:'Maritime Training Center', color:'#0D1B3E', accent:'#C8960C' },
+  maritime: { id:'maritime', name:'PNTC Maritime Training Center',    short:'Maritime',   dir:'PNTC Maritime Training and Assessment Center', color:'#0D1B3E', accent:'#C8960C' },
   aman:     { id:'aman',     name:'Training Vessel Aman Sinaya',      short:'Aman Sinaya',dir:'Aman Sinaya',              color:'#0A1F35', accent:'#C8960C' }
 };
 
@@ -99,6 +99,9 @@ function toSiteRelPath(url, site) {
   return url;
 }
 
+const GNAV_AREA = { colleges: 'college', shs: 'shs', maritime: 'training', aman: 'training' };
+function gnavTag(site) { return '<script src="/global-nav.js" data-area="' + (GNAV_AREA[site.id] || '') + '"></scr' + 'ipt>'; }
+
 function buildPostHTML(post, site) {
   const date = new Date(post.publishedAt || post.createdAt)
     .toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
@@ -163,6 +166,7 @@ img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
 footer{background:var(--navy);color:rgba(255,255,255,.45);text-align:center;padding:2.5rem 1.5rem;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
 footer strong{color:var(--accent)}
 </style>
+${gnavTag(site)}
 </head>
 <body>
 <nav class="nav">
@@ -247,7 +251,7 @@ img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
 .empty{text-align:center;color:#999;padding:5rem 2rem;font-size:1rem}
 footer{background:var(--navy);color:rgba(255,255,255,.4);text-align:center;padding:2.5rem 1.5rem;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
 footer strong{color:var(--accent)}
-</style></head><body>
+</style>${gnavTag(site)}</head><body>
 <nav class="nav">
   <img src="../PNTC White Horizontal.png" alt="PNTC" class="nav-logo">
   <div class="nav-links"><a href="../index.html">Home</a></div>

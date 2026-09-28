@@ -94,7 +94,7 @@ const SITES = {
   },
   maritime: {
     id: 'maritime', name: 'PNTC Maritime Training Center', short: 'Maritime',
-    dir: 'Maritime Training Center', color: '#0D1B3E', accent: '#C8960C', font: 'barlow'
+    dir: 'PNTC Maritime Training and Assessment Center', color: '#0D1B3E', accent: '#C8960C', font: 'barlow'
   },
   aman: {
     id: 'aman', name: 'Training Vessel Aman Sinaya', short: 'Aman Sinaya',
@@ -547,6 +547,13 @@ const LANDING_MARKERS = {
   merchandise: { start: '<!-- PNTC_MERCH_START -->',     end: '<!-- PNTC_MERCH_END -->'     }
 };
 
+const LANDING_TARGETS = {
+  research:    ['PNTC Colleges/research.html'],
+  careers:     ['PNTC Main Landing Page/careers.html'],
+  directory:   ['PNTC Colleges/directory.html', 'SHS/directory.html'],
+  merchandise: ['PNTC Main Landing Page/index.html']
+};
+
 app.get('/api/landing/:type', async (req, res) => {
   const { type } = req.params;
   if (!LANDING_TABLE_MAP[type]) return res.status(404).json({ error: 'Unknown type' });
@@ -602,21 +609,23 @@ app.post('/api/landing/:type/publish', async (req, res) => {
       .order('createdAt', { ascending: true });
     if (error) throw error;
 
-    const cfg         = LANDING_MARKERS[type];
-    const landingPath = 'PNTC Main Landing Page/index.html';
-    const existing    = await ghGetFile(landingPath);
-    if (!existing) return res.status(404).json({ error: 'Landing page not found in repo' });
-
-    let html = Buffer.from(existing.content, 'base64').toString('utf8');
-    const si = html.indexOf(cfg.start);
-    const ei = html.indexOf(cfg.end);
-    if (si === -1 || ei === -1) return res.status(500).json({ error: 'Markers not found' });
-
+    const cfg   = LANDING_MARKERS[type];
     const block = buildLandingBlock(type, items || []);
-    html = html.slice(0, si) + cfg.start + '\n' + block + '\n    ' + cfg.end + html.slice(ei + cfg.end.length);
+    const files = [];
+    for (const landingPath of LANDING_TARGETS[type]) {
+      const existing = await ghGetFile(landingPath);
+      if (!existing) return res.status(404).json({ error: `Page not found in repo: ${landingPath}` });
 
-    await ghPutFile(landingPath, html, `Update landing ${type}`, existing.sha);
-    res.json({ ok: true, type, count: (items || []).length });
+      let html = Buffer.from(existing.content, 'base64').toString('utf8');
+      const si = html.indexOf(cfg.start);
+      const ei = html.indexOf(cfg.end);
+      if (si === -1 || ei === -1) return res.status(500).json({ error: `Markers not found in ${landingPath}` });
+
+      html = html.slice(0, si) + cfg.start + '\n' + block + '\n    ' + cfg.end + html.slice(ei + cfg.end.length);
+      await ghPutFile(landingPath, html, `Update ${type}`, existing.sha);
+      files.push(landingPath);
+    }
+    res.json({ ok: true, type, count: (items || []).length, files });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -863,6 +872,9 @@ app.get('/api/chat/agent-status', async (req, res) => {
 // ══════════════════════════════════════════════════════════════
 //  HTML Generators (output identical to original)
 // ══════════════════════════════════════════════════════════════
+const GNAV_AREA = { colleges: 'college', shs: 'shs', maritime: 'training', aman: 'training' };
+function gnavTag(site) { return '<script src="/global-nav.js" data-area="' + (GNAV_AREA[site.id] || '') + '"></scr' + 'ipt>'; }
+
 function buildPostHTML(post, site) {
   const date = new Date(post.publishedAt || post.createdAt)
     .toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -929,6 +941,7 @@ img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
 footer{background:var(--navy);color:rgba(255,255,255,.45);text-align:center;padding:2.5rem 1.5rem;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
 footer strong{color:var(--accent)}
 </style>
+${gnavTag(site)}
 </head>
 <body>
 <nav class="nav">
@@ -1012,7 +1025,7 @@ img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
 .empty{text-align:center;color:#999;padding:5rem 2rem;font-size:1rem}
 footer{background:var(--navy);color:rgba(255,255,255,.4);text-align:center;padding:2.5rem 1.5rem;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
 footer strong{color:var(--accent)}
-</style></head><body>
+</style>${gnavTag(site)}</head><body>
 <nav class="nav">
   <img src="../PNTC White Horizontal.png" alt="PNTC" class="nav-logo">
   <div class="nav-links"><a href="../index.html">Home</a></div>
@@ -1116,7 +1129,7 @@ function buildCareersBlock(items){
   return`    <div class="jobs-grid">${items.map(i=>`<div class="job-card reveal"><div class="job-dept">${escHtml(i.department)}</div><div class="job-title">${escHtml(i.title)}</div><div class="job-meta"><span>📍 ${escHtml(i.location||'Dasmariñas, Cavite')}</span></div><p class="job-desc">${escHtml(i.description)}</p><span class="job-badge ${i.badgeType==='Part-Time'?'b-pt':'b-ft'}">${escHtml(i.badgeType||'Full-Time')}</span></div>`).join('')}</div>`;
 }
 function buildDirectoryBlock(items){
-  return`    <div class="dir-grid">${items.map(i=>{const contacts=(i.contacts||[]).map(c=>{if(c.startsWith('mailto:')||c.startsWith('http')||c.startsWith('tel:'))return`<a href="${escHtml(c)}">${escHtml(c.replace(/^(mailto:|tel:)/,''))}</a>`;return`<a href="mailto:${escHtml(c)}">${escHtml(c)}</a>`;}).join('');return`<div class="dir-card reveal"><div class="dir-ico">${escHtml(i.icon||'📋')}</div><div class="dir-name">${escHtml(i.name)}</div><p class="dir-desc">${escHtml(i.description)}</p><div class="dir-contacts">${contacts}</div></div>`;}).join('')}</div>`;
+  return`    <div class="dir-grid">${items.map(i=>{const contacts=(i.contacts||[]).map(c=>{if(c.startsWith('mailto:')||c.startsWith('http')||c.startsWith('tel:'))return`<a href="${escHtml(c)}">${escHtml(c.replace(/^(mailto:|tel:)/,''))}</a>`;if(!c.includes('@')&&/\d/.test(c)){const n=((c.match(/\(?0\d[\d\s()\-]{6,}\d/)||[c])[0]).replace(/\D/g,'');return`<a href="tel:${n.startsWith('0')?'+63'+n.slice(1):n}">${escHtml(c)}</a>`;}return`<a href="mailto:${escHtml(c)}">${escHtml(c)}</a>`;}).join('');return`<div class="dir-card reveal"><div class="dir-ico">${escHtml(i.icon||'📋')}</div><div class="dir-name">${escHtml(i.name)}</div><p class="dir-desc">${escHtml(i.description)}</p><div class="dir-contacts">${contacts}</div></div>`;}).join('')}</div>`;
 }
 function buildMerchandiseBlock(items){
   return`    <div class="merch-grid">${items.map(i=>`<div class="merch-card reveal"><div class="merch-img ${escHtml(i.imgClass||'mi-navy')}">${escHtml(i.icon||'🛍️')}</div><div class="merch-body"><div class="merch-cat">${escHtml(i.category)}</div><div class="merch-name">${escHtml(i.name)}</div><p class="merch-note">${escHtml(i.note)}</p><div class="merch-price">${escHtml(i.price)}</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - ${encodeURIComponent(i.name||'')}'">Inquire</button></div></div>`).join('')}</div>`;
