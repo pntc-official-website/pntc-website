@@ -1241,6 +1241,38 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #accreds .pntc-acc-sub{color:rgba(255,255,255,.7)!important}
 #accreds .pntc-acc-ico{color:#F3CF33!important;background:rgba(243,207,51,.15)!important}
 
+#values{position:relative;padding:clamp(5rem,9vw,7.5rem) clamp(1.25rem,5vw,4rem)!important}
+#values::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(40% 45% at 12% 10%,rgba(243,207,51,.12),transparent 70%),radial-gradient(40% 50% at 92% 90%,rgba(80,66,200,.45),transparent 70%)}
+#values::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(rgba(255,255,255,.12) 1.2px,transparent 1.6px) 0 0/22px 22px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 35%);mask-image:linear-gradient(180deg,#000,transparent 35%)}
+#values>*{position:relative;z-index:1}
+#values .values-head{padding:0!important;max-width:1200px;margin:0 auto clamp(2.2rem,4vw,3rem)!important;text-align:center}
+#values .values-head h2{font-size:clamp(2.4rem,5vw,3.8rem)!important}
+#values .values-head h2 span{position:relative;display:inline-block}
+#values .vb-swoosh{position:absolute;left:0;bottom:-.1em;width:100%;height:.22em;overflow:visible;fill:none;stroke:#F3CF33;stroke-width:5;stroke-linecap:round;opacity:.85}
+#values .values-head p{max-width:620px;margin:0 auto;color:rgba(255,255,255,.75)!important}
+#values .vb-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.8rem,1.5vw,1.2rem)}
+#values .vb-card{--mx:50%;--my:0%;position:relative;overflow:hidden;border-radius:22px;padding:clamp(1.5rem,2.4vw,2rem);min-height:250px;display:flex;flex-direction:column;background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.12);transition:transform .4s cubic-bezier(.2,.7,.2,1),border-color .3s,box-shadow .4s}
+#values .vb-card::before{content:'';position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx) var(--my),rgba(243,207,51,.16),transparent 70%);opacity:0;transition:opacity .3s;pointer-events:none}
+#values .vb-card:hover{transform:translateY(-6px);border-color:rgba(243,207,51,.55);box-shadow:0 30px 50px -28px rgba(0,0,0,.8)}
+#values .vb-card:hover::before{opacity:1}
+#values .vb-card:nth-child(1),#values .vb-card:nth-child(6){grid-column:span 2}
+#values .vb-card:nth-child(1){background:linear-gradient(150deg,#F3CF33 0%,#FFE57A 100%);border-color:transparent}
+#values .vb-card:nth-child(1) .vb-name,#values .vb-card:nth-child(1) .vb-desc{color:#1C1650!important}
+#values .vb-card:nth-child(1) .vb-ico{background:#1C1650;color:#F3CF33}
+#values .vb-card:nth-child(1) .vb-num{-webkit-text-stroke-color:rgba(28,22,80,.35)}
+#values .vb-card:nth-child(1)::before{background:radial-gradient(260px circle at var(--mx) var(--my),rgba(255,255,255,.45),transparent 70%)}
+#values .vb-num{position:absolute;top:1rem;right:1.3rem;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.6rem,4vw,3.6rem);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.22);transition:-webkit-text-stroke-color .3s}
+#values .vb-card:hover .vb-num{-webkit-text-stroke-color:rgba(243,207,51,.7)}
+#values .vb-ico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:rgba(243,207,51,.14);color:#F3CF33;margin-bottom:auto;transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+#values .vb-card:hover .vb-ico{transform:rotate(-8deg) scale(1.08)}
+#values .vb-ico svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#values .vb-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2rem,3vw,2.6rem);line-height:1;text-transform:uppercase;color:#fff;margin:1.6rem 0 .55rem}
+#values .vb-card:nth-child(1) .vb-name,#values .vb-card:nth-child(6) .vb-name{font-size:clamp(2.4rem,4vw,3.4rem)}
+#values .vb-desc{font-size:.88rem;line-height:1.65;color:rgba(255,255,255,.78)!important;margin:0;max-width:520px}
+@media(max-width:1000px){#values .vb-grid{grid-template-columns:repeat(2,1fr)}#values .vb-card:nth-child(6){grid-column:span 2}}
+@media(max-width:600px){#values .vb-grid{grid-template-columns:1fr}#values .vb-card,#values .vb-card:nth-child(n){grid-column:auto;min-height:0}#values .vb-ico{margin-bottom:0}}
+@media(prefers-reduced-motion:reduce){#values .vb-card,#values .vb-ico{transition:none}}
+
 /* Brand guide: gold on navy, navy on white */
 #directory,#merchandise,#mission,#programs{--gold:#1C1650;--gold-lt:#2B2275;--gold-dim:rgba(28,22,80,.08)}
 .nav-cta,.btn-gold,.hdr-apply,.hdr-enroll,.btn-enroll,.btn-primary-hero,.slide-btn,.pntc-soon-btn{color:#1C1650!important}
@@ -1416,47 +1448,48 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 <section id="values">
   <div class="values-head reveal">
     <div class="eyebrow" style="margin-bottom:.6rem">The Values of PNTC</div>
-    <h2>What We <span>Stand For</span></h2>
+    <h2>What We <span>Stand For<svg class="vb-swoosh" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 15 C 80 4, 200 3, 297 11"/></svg></span></h2>
     <p>Six principles that guide every graduate, every class, and every decision at PNTC Colleges, from the first day to graduation.</p>
   </div>
-  <div class="values-track" id="valTrack">
-    <div class="val-card">
-      <div class="val-label">The Values of PNTC</div>
-      <div class="val-name">Virtus</div>
-      <p class="val-desc">Virtue is the foundation of everything we do. We cultivate integrity, moral character, and a strong sense of personal honor in every student.</p>
-      <a href="#" class="val-link">Discover More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a>
-    </div>
-    <div class="val-card">
-      <div class="val-label">The Values of PNTC</div>
-      <div class="val-name">Qualitas</div>
-      <p class="val-desc">Quality drives every outcome. Our ISO-certified processes and CHED-recognized programs set the standard for Philippine professional education.</p>
-      <a href="#" class="val-link">Discover More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a>
-    </div>
-    <div class="val-card">
-      <div class="val-label">The Values of PNTC</div>
-      <div class="val-name">Discipline</div>
-      <p class="val-desc">A structured, regimented environment builds the work ethic and professional conduct employers demand in maritime, law enforcement, and business.</p>
-      <a href="#" class="val-link">Discover More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a>
-    </div>
-    <div class="val-card">
-      <div class="val-label">The Values of PNTC</div>
-      <div class="val-name">Service</div>
-      <p class="val-desc">We train students to serve their communities, their country, and their industry with competence, humility, and commitment.</p>
-      <a href="#" class="val-link">Discover More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a>
-    </div>
-    <div class="val-card">
-      <div class="val-label">The Values of PNTC</div>
-      <div class="val-name">Excellence</div>
-      <p class="val-desc">We believe every student can succeed. Our faculty and facilities are committed to unlocking each student's full professional potential.</p>
-      <a href="#" class="val-link">Discover More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a>
-    </div>
-    <div class="val-card">
-      <div class="val-label">The Values of PNTC</div>
-      <div class="val-name">Innovation</div>
-      <p class="val-desc">From ship simulation labs to modern business training, we continuously evolve our curriculum to meet the demands of today's industries.</p>
-      <a href="#" class="val-link">Discover More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a>
-    </div>
+  <div class="vb-grid" id="vbGrid">
+    <article class="vb-card reveal" style="transition-delay:0s">
+      <span class="vb-num" aria-hidden="true">01</span>
+      <span class="vb-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      <h3 class="vb-name">Virtus</h3>
+      <p class="vb-desc">Virtue is the foundation of everything we do. We cultivate integrity, moral character, and a strong sense of personal honor in every student.</p>
+    </article>
+    <article class="vb-card reveal" style="transition-delay:0.08s">
+      <span class="vb-num" aria-hidden="true">02</span>
+      <span class="vb-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg></span>
+      <h3 class="vb-name">Qualitas</h3>
+      <p class="vb-desc">Quality drives every outcome. Our ISO-certified processes and CHED-recognized programs set the standard for Philippine professional education.</p>
+    </article>
+    <article class="vb-card reveal" style="transition-delay:0.16s">
+      <span class="vb-num" aria-hidden="true">03</span>
+      <span class="vb-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+      <h3 class="vb-name">Discipline</h3>
+      <p class="vb-desc">A structured, regimented environment builds the work ethic and professional conduct employers demand in maritime, law enforcement, and business.</p>
+    </article>
+    <article class="vb-card reveal" style="transition-delay:0s">
+      <span class="vb-num" aria-hidden="true">04</span>
+      <span class="vb-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/></svg></span>
+      <h3 class="vb-name">Service</h3>
+      <p class="vb-desc">We train students to serve their communities, their country, and their industry with competence, humility, and commitment.</p>
+    </article>
+    <article class="vb-card reveal" style="transition-delay:0.08s">
+      <span class="vb-num" aria-hidden="true">05</span>
+      <span class="vb-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+      <h3 class="vb-name">Excellence</h3>
+      <p class="vb-desc">We believe every student can succeed. Our faculty and facilities are committed to unlocking each student's full professional potential.</p>
+    </article>
+    <article class="vb-card reveal" style="transition-delay:0.16s">
+      <span class="vb-num" aria-hidden="true">06</span>
+      <span class="vb-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></span>
+      <h3 class="vb-name">Innovation</h3>
+      <p class="vb-desc">From ship simulation labs to modern business training, we continuously evolve our curriculum to meet the demands of today's industries.</p>
+    </article>
   </div>
+  <script>(function(){var g=document.getElementById('vbGrid');if(!g||!window.matchMedia('(hover:hover)').matches)return;g.addEventListener('pointermove',function(e){var c=e.target.closest('.vb-card');if(!c)return;var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')})})();</script>
 </section>
 
 <!-- ══════ PROGRAMS ══════ -->
