@@ -1093,6 +1093,53 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .hdr-nav .hdr-dd-menu a:hover{background:rgba(243,207,51,.08)}
 #mob-menu{overflow-y:auto;justify-content:flex-start;padding:5rem 1.5rem 3rem;gap:1.4rem}
 
+.pd{padding:clamp(4rem,8vw,6.5rem) clamp(1.5rem,6vw,5rem);scroll-margin-top:110px}
+.pd-dark{background:#1C1650}
+.pd-light{background:#fff}
+.pd-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:5fr 7fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.pd-flip .pd-media{order:2}
+.pd-media{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5;max-height:540px;box-shadow:0 28px 56px -24px rgba(0,0,0,.55)}
+.pd-media::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.12) 1.2px,transparent 1.5px);background-size:18px 18px;-webkit-mask-image:linear-gradient(to bottom,#000,transparent 70%);mask-image:linear-gradient(to bottom,#000,transparent 70%)}
+.pd-media img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:94%;width:auto;max-width:none;filter:drop-shadow(0 14px 28px rgba(0,0,0,.35));transition:transform .6s var(--ease)}
+.pd-media:hover img{transform:translateX(-50%) scale(1.03)}
+.pd-abbr{position:absolute;top:1.1rem;left:1.1rem;z-index:2;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.05rem;letter-spacing:.12em;color:#1C1650;background:#F3CF33;padding:.4rem .85rem;border-radius:8px;transform:rotate(-3deg);box-shadow:3px 3px 0 rgba(0,0,0,.25)}
+.pd-eyebrow{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin:0 0 .7rem}
+.pd-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.2rem,4vw,3.3rem);line-height:.95;text-transform:uppercase;margin:0 0 1rem}
+.pd-tagline{font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.6;margin:0 0 1.6rem;max-width:52ch}
+.pd-points{list-style:none;margin:0 0 1.8rem;padding:0;display:grid;gap:.85rem}
+.pd-points li{display:flex;gap:.8rem;align-items:flex-start;font-size:.92rem;line-height:1.6}
+.pd-check{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:#F3CF33;display:flex;align-items:center;justify-content:center;margin-top:.05rem}
+.pd-check svg{width:14px;height:14px;fill:none;stroke:#1C1650;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.pd-label{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin:0 0 .7rem}
+.pd-careers{list-style:none;display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 1.6rem;padding:0}
+.pd-careers li{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.42rem 1rem;box-shadow:3px 3px 0 #F3CF33}
+.pd-careers li:nth-child(odd){transform:rotate(-1.2deg)}
+.pd-careers li:nth-child(even){transform:rotate(1deg)}
+.pd-earn{border-left:4px solid #F3CF33;padding:.9rem 1.1rem;border-radius:0 12px 12px 0;margin:0 0 1.8rem;max-width:56ch}
+.pd-earn .pd-label{margin-bottom:.35rem}
+.pd-earn p:last-child{margin:0;font-size:.95rem;line-height:1.55;font-weight:600}
+.pd-cta{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:.1em;text-transform:uppercase;background:#F3CF33;color:#1C1650;padding:.85rem 1.8rem;text-decoration:none;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);transition:background .2s,transform .2s}
+.pd-cta:hover{background:#FFF09B;transform:translateY(-2px)}
+.pd-note{margin:1.6rem 0 0;font-size:.74rem}
+.pd-dark .pd-eyebrow,.pd-dark .pd-label{color:#F3CF33}
+.pd-dark .pd-title{color:#fff}
+.pd-dark .pd-tagline,.pd-dark .pd-points li,.pd-dark .pd-earn p:last-child,.pd-dark .pd-note{color:rgba(255,255,255,.88)}
+.pd-dark .pd-careers li{color:#fff;border:1.5px solid rgba(255,255,255,.85);background:transparent}
+.pd-dark .pd-earn{background:rgba(255,255,255,.06)}
+.pd-light .pd-eyebrow,.pd-light .pd-label{color:rgba(28,22,80,.72)}
+.pd-light .pd-title{color:#1C1650}
+.pd-light .pd-tagline,.pd-light .pd-points li,.pd-light .pd-note{color:rgba(28,22,80,.8)}
+.pd-light .pd-earn p:last-child{color:#1C1650}
+.pd-light .pd-careers li{color:#1C1650;border:1.5px solid #1C1650;background:#fff}
+.pd-light .pd-earn{background:rgba(243,207,51,.16)}
+#programs .prog-cta{text-decoration:none;cursor:pointer}
+@media(max-width:900px){
+  .pd-in{grid-template-columns:1fr}
+  .pd-flip .pd-media{order:0}
+  .pd-media{aspect-ratio:4/3;max-height:400px}
+}
+@media(prefers-reduced-motion:reduce){.pd-media img,.pd-cta{transition:none}}
+
 /* Brand guide: gold on navy, navy on white */
 #directory,#merchandise,#mission,#programs{--gold:#1C1650;--gold-lt:#2B2275;--gold-dim:rgba(28,22,80,.08)}
 .nav-cta,.btn-gold,.hdr-apply,.hdr-enroll,.btn-enroll,.btn-primary-hero,.slide-btn,.pntc-soon-btn{color:#1C1650!important}
@@ -1190,7 +1237,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
         <div class="prog-abbr">BSMT</div>
         <div class="prog-name">BS Marine<br>Transportation</div>
         <p class="prog-desc">Instilling discipline and developing maritime competencies to produce deck officers who survive and thrive in the global maritime industry.</p>
-        <div class="prog-cta">Discover BSMT <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></div>
+        <a class="prog-cta" href="#prog-bsmt">Discover BSMT <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a>
       </div>
     </div>
     <!-- Marine Engineering -->
@@ -1202,7 +1249,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
         <div class="prog-abbr">BSMarE</div>
         <div class="prog-name">BS Marine<br>Engineering</div>
         <p class="prog-desc">Instilling engineering excellence and developing technical competencies to produce marine engineers who operate and maintain shipboard machinery to international standards.</p>
-        <div class="prog-cta">Discover BSMarE <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></div>
+        <a class="prog-cta" href="#prog-bsmare">Discover BSMarE <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a>
       </div>
     </div>
     <!-- Tourism -->
@@ -1214,7 +1261,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
         <div class="prog-abbr">BSTM</div>
         <div class="prog-name">BS Tourism<br>Management</div>
         <p class="prog-desc">Instilling professionalism and developing hospitality competencies to produce professionals who deliver exceptional service and lead with integrity.</p>
-        <div class="prog-cta">Discover BSTM <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></div>
+        <a class="prog-cta" href="#prog-bstm">Discover BSTM <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a>
       </div>
     </div>
     <!-- Criminology -->
@@ -1226,7 +1273,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
         <div class="prog-abbr">BSCrim</div>
         <div class="prog-name">BS<br>Criminology</div>
         <p class="prog-desc">Instilling courage and developing criminology competencies to produce officers serving in crime prevention, investigation, and law enforcement with unwavering integrity.</p>
-        <div class="prog-cta">Discover BSCrim <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></div>
+        <a class="prog-cta" href="#prog-bscrim">Discover BSCrim <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a>
       </div>
     </div>
     <!-- Customs -->
@@ -1238,7 +1285,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
         <div class="prog-abbr">BSCusAd</div>
         <div class="prog-name">BS Customs<br>Administration</div>
         <p class="prog-desc">Instilling innovation and developing business competencies to produce professionals who drive success in global trade, customs, and business operations.</p>
-        <div class="prog-cta">Discover BSCusAd <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></div>
+        <a class="prog-cta" href="#prog-bscusad">Discover BSCusAd <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a>
       </div>
     </div>
     <!-- Office Admin -->
@@ -1250,13 +1297,139 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
         <div class="prog-abbr">BSOA</div>
         <div class="prog-name">BS Office<br>Administration</div>
         <p class="prog-desc">Cultivating skills and micro-skills to produce professionals who drive success in legal, medical, and business operations.</p>
-        <div class="prog-cta">Discover BSOA <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></div>
+        <a class="prog-cta" href="#prog-bsoa">Discover BSOA <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ══════ VOICES ══════ -->
+<!-- PROGRAM BSMT -->
+<section id="prog-bsmt" class="pd pd-dark">
+  <div class="pd-in">
+    <div class="pd-media reveal" style="background:linear-gradient(160deg,#040e24 0%,#0b2870 60%,#1244B8 100%)">
+      <span class="pd-abbr">BSMT</span>
+      <img src="Maritime Female (3).png" alt="PNTC Colleges BS Marine Transportation student" loading="lazy">
+    </div>
+    <div class="pd-body reveal" style="transition-delay:.1s">
+      <p class="pd-eyebrow">College of Maritime Education</p>
+      <h2 class="pd-title">BS Marine Transportation</h2>
+      <p class="pd-tagline">Become a Licensed Marine Officer with an international career at sea.</p>
+      <ul class="pd-points"><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Prepares you for the board exam that earns the Licensed Marine Officer title, recognized by shipping employers worldwide.</span></li><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Hands-on training on bridge simulators that work like the real thing, so you are ready from your first day on board.</span></li><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Study close to home in Dasmariñas, Cavite, and graduate into a career that takes you around the world.</span></li></ul>
+      <p class="pd-label">Career Paths</p>
+      <ul class="pd-careers"><li>Deck Officer</li><li>Chief Mate</li><li>Ship Captain</li></ul>
+      <div class="pd-earn"><p class="pd-label">Earning Potential</p><p>Entry-level officers on international ships typically earn USD 2,000 to 3,500 a month.</p></div>
+      <a class="pd-cta" href="/college/#cta">Inquire about BSMT</a>
+      
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM BSMarE -->
+<section id="prog-bsmare" class="pd pd-light pd-flip">
+  <div class="pd-in">
+    <div class="pd-media reveal" style="background:linear-gradient(160deg,#0f1a5c 0%,#1e2ea8 60%,#4169E1 100%)">
+      <span class="pd-abbr">BSMarE</span>
+      <img src="Maritime (Program Section).png" alt="PNTC Colleges BS Marine Engineering student" loading="lazy">
+    </div>
+    <div class="pd-body reveal" style="transition-delay:.1s">
+      <p class="pd-eyebrow">College of Maritime Education</p>
+      <h2 class="pd-title">BS Marine Engineering</h2>
+      <p class="pd-tagline">Become a Licensed Marine Engineer in one of the most in-demand maritime careers.</p>
+      <ul class="pd-points"><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Built around preparing you to pass the board exam for the Licensed Marine Engineer title.</span></li><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Train on ship-grade equipment and our engine room simulator before you step on a real vessel.</span></li><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Your skills also open careers on land in ports, shipyards, power plants, and heavy industry.</span></li></ul>
+      <p class="pd-label">Career Paths</p>
+      <ul class="pd-careers"><li>Marine Engineer</li><li>Chief Engineer</li><li>Port and Shipyard Engineer</li></ul>
+      <div class="pd-earn"><p class="pd-label">Earning Potential</p><p>Entry-level engineers on international vessels typically earn USD 2,200 to 4,000 a month.</p></div>
+      <a class="pd-cta" href="/college/#cta">Inquire about BSMarE</a>
+      
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM BSTM -->
+<section id="prog-bstm" class="pd pd-dark">
+  <div class="pd-in">
+    <div class="pd-media reveal" style="background:linear-gradient(160deg,#071a07 0%,#143d12 60%,#1d661d 100%)">
+      <span class="pd-abbr">BSTM</span>
+      <img src="Tourism.png" alt="PNTC Colleges BS Tourism Management student" loading="lazy">
+    </div>
+    <div class="pd-body reveal" style="transition-delay:.1s">
+      <p class="pd-eyebrow">College of International Tourism</p>
+      <h2 class="pd-title">BS Tourism Management</h2>
+      <p class="pd-tagline">A tourism degree from a maritime institution, opening doors to cruise ships, hotels, and events.</p>
+      <ul class="pd-points"><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Train with the discipline and international service standards that cruise lines and global hotels look for.</span></li><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Practice real hospitality skills in our tourism laboratory, from front desk work to tour and event operations.</span></li><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>One degree with many paths in hotels, cruise ships, travel agencies, events, and your own business.</span></li></ul>
+      <p class="pd-label">Career Paths</p>
+      <ul class="pd-careers"><li>Cruise Ship Hospitality</li><li>Hotel Supervisor</li><li>Events Coordinator</li></ul>
+      <div class="pd-earn"><p class="pd-label">Earning Potential</p><p>Cruise ship roles typically pay USD 1,200 to 3,000 a month, with accommodation and meals included.</p></div>
+      <a class="pd-cta" href="/college/#cta">Inquire about BSTM</a>
+      
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM BSCrim -->
+<section id="prog-bscrim" class="pd pd-light pd-flip">
+  <div class="pd-in">
+    <div class="pd-media reveal" style="background:linear-gradient(160deg,#180606 0%,#5c1212 60%,#8a1818 100%)">
+      <span class="pd-abbr">BSCrim</span>
+      <img src="Criminology1.png" alt="PNTC Colleges BS Criminology student" loading="lazy">
+    </div>
+    <div class="pd-body reveal" style="transition-delay:.1s">
+      <p class="pd-eyebrow">College of Criminology</p>
+      <h2 class="pd-title">BS Criminology</h2>
+      <p class="pd-tagline">Earn your Criminologist License and serve in law enforcement and public safety.</p>
+      <ul class="pd-points"><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Prepares you for the Criminologist Licensure Examination, the credential for careers in the PNP, NBI, and forensics.</span></li><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>As a maritime school, PNTC also opens career options in port and maritime security.</span></li><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Professional bearing and discipline built from day one, qualities valued in every law enforcement recruitment.</span></li></ul>
+      <p class="pd-label">Career Paths</p>
+      <ul class="pd-careers"><li>Police Officer</li><li>NBI Investigator</li><li>Maritime Security Officer</li></ul>
+      <div class="pd-earn"><p class="pd-label">Earning Potential</p><p>Entry-level police officers earn about PHP 34,000 to 47,000 a month, plus government benefits.</p></div>
+      <a class="pd-cta" href="/college/#cta">Inquire about BSCrim</a>
+      
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM BSCusAd -->
+<section id="prog-bscusad" class="pd pd-dark">
+  <div class="pd-in">
+    <div class="pd-media reveal" style="background:linear-gradient(160deg,#090614 0%,#1c1c50 60%,#2a2a80 100%)">
+      <span class="pd-abbr">BSCusAd</span>
+      <img src="Custom Administration (Program Section).png" alt="PNTC Colleges BS Customs Administration student" loading="lazy">
+    </div>
+    <div class="pd-body reveal" style="transition-delay:.1s">
+      <p class="pd-eyebrow">College of Customs and Business Management Education</p>
+      <h2 class="pd-title">BS Customs Administration</h2>
+      <p class="pd-tagline">Become a Licensed Customs Broker, the professional every import and export needs.</p>
+      <ul class="pd-points"><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Prepares you for the Customs Broker Licensure Examination.</span></li><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Learn customs work inside a maritime institution that understands ports and international shipping.</span></li><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Work for the Bureau of Customs, logistics and trading companies, or build your own brokerage practice.</span></li></ul>
+      <p class="pd-label">Career Paths</p>
+      <ul class="pd-careers"><li>Licensed Customs Broker</li><li>Customs Officer</li><li>Logistics Specialist</li></ul>
+      <div class="pd-earn"><p class="pd-label">Earning Potential</p><p>Licensed customs brokers in private logistics typically earn PHP 35,000 to 70,000 a month.</p></div>
+      <a class="pd-cta" href="/college/#cta">Inquire about BSCusAd</a>
+      
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM BSOA -->
+<section id="prog-bsoa" class="pd pd-light pd-flip">
+  <div class="pd-in">
+    <div class="pd-media reveal" style="background:linear-gradient(160deg,#0a1018 0%,#1a3a5c 60%,#1244B8 100%)">
+      <span class="pd-abbr">BSOA</span>
+      <img src="Office Administration (Program Section).png" alt="PNTC Colleges BS Office Administration student" loading="lazy">
+    </div>
+    <div class="pd-body reveal" style="transition-delay:.1s">
+      <p class="pd-eyebrow">College of Customs and Business Management Education</p>
+      <h2 class="pd-title">BS Office Administration</h2>
+      <p class="pd-tagline">The professional who keeps every office running, in business, government, and BPO.</p>
+      <ul class="pd-points"><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Learn the real tools of the modern office, from professional writing to records management and office software.</span></li><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>A clear path to supervisor and executive assistant roles, including BPO team leadership.</span></li><li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>Qualifies you for civil service positions in local and national government offices.</span></li></ul>
+      <p class="pd-label">Career Paths</p>
+      <ul class="pd-careers"><li>Executive Assistant</li><li>BPO Team Leader</li><li>Government Administrative Officer</li></ul>
+      <div class="pd-earn"><p class="pd-label">Earning Potential</p><p>Executive assistants typically earn PHP 35,000 to 65,000 a month after a few years of experience.</p></div>
+      <a class="pd-cta" href="/college/#cta">Inquire about BSOA</a>
+      <p class="pd-note">Earnings are typical industry ranges and vary by employer, role, and experience.</p>
+    </div>
+  </div>
+</section>
+
 
 
 <!-- ══════ FOOTER ══════ -->
