@@ -10,7 +10,7 @@
     { id: 'about',       label: 'About PNTC',            href: '/about' },
     { id: 'careers',     label: 'Careers',               href: '/careers' }
   ];
-  var H = 38;
+  var H = 46;
 
   var css = [
     ':root{--gnav-h:' + H + 'px}',
@@ -25,10 +25,10 @@
     '#pntc-gnav a:hover{color:#fff}',
     '#pntc-gnav a.active{color:#E6AF1A}',
     '#pntc-gnav a.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:#C8960C}',
-    '#pntc-gnav a.gn-brand{margin-right:clamp(1rem,2.5vw,2.5rem);flex-shrink:0;opacity:.9}',
+    '#pntc-gnav a.gn-brand{margin-right:clamp(1rem,2.5vw,2.5rem);flex-shrink:0;transition:transform .25s}',
     '#pntc-gnav a.gn-brand:hover{opacity:1}',
     '#pntc-gnav a.gn-brand::after{display:none}',
-    '#pntc-gnav .gn-brand img{height:22px;width:auto;display:block}',
+    '#pntc-gnav .gn-brand img{height:38px;width:auto;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}','#pntc-gnav a.gn-brand:hover{transform:scale(1.06)}',
     '#mob-menu{z-index:1100!important}',
     /* Area navbar: one format everywhere (College style) */
     '.hdr-nav a,#nav .nav-links a,nav.nav .nav-links a{font-family:"Barlow Condensed",sans-serif!important;font-size:.85rem!important;font-weight:700!important;letter-spacing:.12em!important;text-transform:uppercase!important;color:rgba(255,255,255,.6)!important;transition:color .2s}',
@@ -43,7 +43,7 @@
     '.pntc-area .pa-name{font:800 1rem/1.15 Montserrat,system-ui,sans-serif;letter-spacing:.03em;text-transform:uppercase;color:#fff}',
     '@media(min-width:721px){.pntc-area{flex-shrink:0}.pntc-area .pa-name{white-space:nowrap}}',
     '@media(max-width:720px){.pntc-area .pa-name{font-size:.8rem}.pntc-area .pa-top{font-size:.5rem;margin-bottom:.3rem}}',
-    '@media(max-width:720px){#pntc-gnav .gn-brand img{height:18px}#pntc-gnav .gn-list{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent);padding-right:2rem}}'
+    '@media(max-width:720px){#pntc-gnav .gn-brand img{height:34px}#pntc-gnav .gn-list{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent);padding-right:2rem}}'
   ].join('');
 
   // PNTC brand guide colors everywhere except Senior High School, which keeps its own palette
@@ -66,7 +66,7 @@
   var bar = document.createElement('nav');
   bar.id = 'pntc-gnav';
   bar.setAttribute('aria-label', 'PNTC network');
-  bar.innerHTML = '<a class="gn-brand' + (AREA === 'home' ? ' active' : '') + '" href="/" aria-label="PNTC home"><img src="/SHS/PNTC%20White%20Horizontal.png" alt="PNTC"></a><ul class="gn-list">' + ITEMS.map(function (it) {
+  bar.innerHTML = '<a class="gn-brand' + (AREA === 'home' ? ' active' : '') + '" href="/" aria-label="PNTC home"><img src="/PNTC%20Crest.png" alt="PNTC Colleges crest"></a><ul class="gn-list">' + ITEMS.map(function (it) {
     return '<li><a href="' + it.href + '"' + (it.id === AREA ? ' class="active" aria-current="page"' : '') + '>' +
       it.label.replace('&', '&amp;') + '</a></li>';
   }).join('') + '</ul>';
