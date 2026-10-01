@@ -806,6 +806,68 @@ h1.hero-h1 span.gold { color:var(--gold); }
   #network .net-card,#network .net-card:nth-child(n){grid-column:auto;min-height:340px}
 }
 @media(prefers-reduced-motion:reduce){#network::before,#network::after{animation:none}#network .net-card,#network .nc-bg,#network .nc-desc,#network .nc-link{transition:none}}
+
+#hero{background:#1C1650!important}
+#hero .hero-slide{transform:scale(1.1);transition:opacity 1.4s ease,transform 7s cubic-bezier(.2,.6,.3,1)}
+#hero .hero-slide.active{transform:scale(1)}
+#hero .hero-vig{background:linear-gradient(100deg,rgba(16,11,51,.95) 0%,rgba(16,11,51,.78) 36%,rgba(16,11,51,.25) 68%,rgba(16,11,51,.05) 100%),linear-gradient(to top,rgba(16,11,51,.85) 0%,transparent 42%)!important}
+#hero .hero-vig::before{content:'';position:absolute;left:-10%;bottom:-30%;width:70%;height:80%;background:radial-gradient(closest-side,rgba(243,207,51,.18),transparent);animation:hh-glow 9s ease-in-out infinite alternate}
+#hero .hero-vig::after{content:'';position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,.14) 1.2px,transparent 1.6px) 0 0/22px 22px;-webkit-mask-image:linear-gradient(100deg,#000 0%,transparent 45%);mask-image:linear-gradient(100deg,#000 0%,transparent 45%)}
+#hero::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:56px;background:#fff;clip-path:polygon(0 100%,100% 0,100% 100%);z-index:2;pointer-events:none}
+#hero .hero-inner{padding-bottom:11rem}
+#hero .hero-pill{color:#fff!important;background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.22)!important;border-radius:999px!important;padding:.5rem 1.1rem!important;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);letter-spacing:.18em}
+#hero .hero-pill-dot{position:relative;background:#F3CF33}
+#hero .hero-pill-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid #F3CF33;animation:hh-ping 2s ease-out infinite}
+#hero h1.hero-h1{font-weight:900;letter-spacing:-.025em;line-height:1.06!important;margin-bottom:1.6rem}
+#hero .hl{display:block;overflow:hidden;padding:.04em 0 .12em}
+#hero .hl>span{display:inline-block;animation:hh-rise .9s cubic-bezier(.2,.7,.2,1) both}
+#hero .hl:nth-child(2)>span{animation-delay:.12s}
+#hero .hl:nth-child(3)>span{animation-delay:.24s}
+#hero .hl:nth-child(4)>span{animation-delay:.36s}
+#hero .hl .gold{position:relative;color:#F3CF33!important}
+#hero .hl-swoosh{position:absolute;left:0;bottom:-.16em;width:100%;height:.3em;overflow:visible;fill:none;stroke:#F3CF33;stroke-width:5;stroke-linecap:round;stroke-dasharray:320;stroke-dashoffset:320;animation:hh-draw 1s .9s ease-out forwards;opacity:.85}
+#hero .hero-sub{color:rgba(255,255,255,.82)!important;max-width:560px;animation:hh-fade .9s .5s both}
+#hero .hero-pill{animation:hh-fade .8s both}
+#hero .hero-btns{animation:hh-fade .9s .65s both}
+#hero .hero-btns a{border-radius:999px!important;padding:.95rem 1.9rem!important;font-weight:800}
+#hero .btn-gold{background:#F3CF33!important;color:#1C1650!important;box-shadow:0 14px 30px -12px rgba(243,207,51,.65)!important}
+#hero .btn-gold:hover{background:#FFF09B!important}
+#hero .btn-outline-white{color:#fff!important;border:1.5px solid rgba(255,255,255,.45)!important;background:rgba(255,255,255,.06);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+#hero .btn-outline-white:hover{background:#fff;color:#1C1650!important;border-color:#fff!important}
+#hero .hero-slide-label{display:none}
+#hero .hero-dots{left:auto;right:clamp(1.5rem,4vw,3rem);bottom:5.2rem;gap:1.1rem;animation:hh-fade .9s .8s both}
+#hero .hero-dot{all:unset;box-sizing:border-box;position:relative;cursor:pointer;width:clamp(120px,11vw,160px);padding-top:.8rem;border-top:2px solid rgba(255,255,255,.28);display:flex;flex-direction:column;gap:.2rem;transition:border-color .3s}
+#hero .hero-dot:focus-visible{outline:2px solid #F3CF33;outline-offset:4px}
+#hero .hd-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.95rem;color:rgba(255,255,255,.55);transition:color .3s}
+#hero .hd-name{font-family:var(--font);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);transition:color .3s}
+#hero .hd-bar{position:absolute;top:-2px;left:0;height:2px;width:0;background:#F3CF33}
+#hero .hero-dot.active .hd-bar{animation:hh-fill 5s linear forwards}
+#hero .hero-dot.active .hd-num{color:#F3CF33}
+#hero .hero-dot.active .hd-name,#hero .hero-dot:hover .hd-name{color:#fff}
+#hero .hero-scroll{bottom:5.2rem;color:rgba(255,255,255,.6)!important;z-index:3}
+#hero .hero-scroll::before{background:#F3CF33!important;animation:hh-line 2s ease-in-out infinite;transform-origin:left}
+@keyframes hh-rise{from{transform:translateY(105%)}to{transform:none}}
+@keyframes hh-fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes hh-draw{to{stroke-dashoffset:0}}
+@keyframes hh-fill{to{width:100%}}
+@keyframes hh-ping{from{transform:scale(.6);opacity:.9}to{transform:scale(2);opacity:0}}
+@keyframes hh-glow{to{transform:translate(12%,-8%) scale(1.1)}}
+@keyframes hh-line{0%,100%{transform:scaleX(.4)}50%{transform:scaleX(1)}}
+@media(max-width:860px){
+  #hero .hero-dots{left:clamp(1.5rem,4vw,3rem);right:auto;bottom:4.4rem;gap:.6rem}
+  #hero .hero-dot{width:44px}
+  #hero .hd-name{display:none}
+  #hero .hero-scroll{display:none}
+  #hero::after{height:32px}
+  #hero .hl-swoosh{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  #hero .hero-slide,#hero .hero-slide.active{transform:none;transition:opacity .6s}
+  #hero .hl>span,#hero .hero-sub,#hero .hero-pill,#hero .hero-btns,#hero .hero-dots{animation:none}
+  #hero .hl-swoosh{animation:none;stroke-dashoffset:0}
+  #hero .hero-vig::before,#hero .hero-pill-dot::after,#hero .hero-scroll::before{animation:none}
+  #hero .hero-dot.active .hd-bar{animation:none;width:100%}
+}
 .hero-inner{max-width:1040px!important}
 h1.hero-h1{font-size:clamp(2rem,5vw,4.2rem)!important}
 
@@ -894,9 +956,9 @@ h1.hero-h1{font-size:clamp(2rem,5vw,4.2rem)!important}
       Est. 1994 &nbsp;·&nbsp; Dasmariñas &nbsp;·&nbsp; Intramuros &nbsp;·&nbsp; Tanza
     </div>
     <h1 class="hero-h1">
-      <span class="sr-only">PNTC Colleges, Inc. </span>Built for Competence<br>
-      <span class="gold">Driven by Character</span><br>
-      Ready for the World
+      <span class="sr-only">PNTC Colleges, Inc. </span><span class="hl"><span>Built for Competence</span></span>
+      <span class="hl"><span class="gold">Driven by Character<svg class="hl-swoosh" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 15 C 80 4, 200 3, 297 11"/></svg></span></span>
+      <span class="hl"><span>Ready for the World</span></span>
     </h1>
     <p class="hero-sub">
       Since 1994, PNTC Colleges, Inc. has prepared maritime and business professionals through senior high school, college degree programs, and MARINA-accredited seafarer training at our campuses and facilities in Dasmariñas and Tanza, Cavite, and Intramuros, Manila.
@@ -909,10 +971,10 @@ h1.hero-h1{font-size:clamp(2rem,5vw,4.2rem)!important}
 
   <!-- Slide dots -->
   <div class="hero-dots" aria-label="Slideshow navigation">
-    <button class="hero-dot active" aria-label="Slide 1, SHS"></button>
-    <button class="hero-dot"        aria-label="Slide 2, PNTC Colleges"></button>
-    <button class="hero-dot"        aria-label="Slide 3, Maritime Training Center"></button>
-    <button class="hero-dot"        aria-label="Slide 4, Aman Sinaya"></button>
+    <button class="hero-dot active" aria-label="Slide 1, Senior High School"><span class="hd-num">01</span><span class="hd-name">Senior High School</span><span class="hd-bar"></span></button>
+    <button class="hero-dot" aria-label="Slide 2, PNTC Colleges"><span class="hd-num">02</span><span class="hd-name">PNTC Colleges</span><span class="hd-bar"></span></button>
+    <button class="hero-dot" aria-label="Slide 3, Maritime Training Center"><span class="hd-num">03</span><span class="hd-name">Maritime Training Center</span><span class="hd-bar"></span></button>
+    <button class="hero-dot" aria-label="Slide 4, Aman Sinaya"><span class="hd-num">04</span><span class="hd-name">Aman Sinaya</span><span class="hd-bar"></span></button>
   </div>
 
   <!-- Current slide name -->
