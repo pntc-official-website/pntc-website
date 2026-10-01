@@ -1169,6 +1169,48 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 @media(max-width:1100px){.usp-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.usp-grid{grid-template-columns:1fr}}
 
+#mission::after{background:#1C1650!important}
+#mission::before{content:'';position:absolute;top:-170px;right:-150px;width:540px;height:540px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(243,207,51,.55),rgba(255,240,155,.28) 45%,transparent 70%);filter:blur(30px);animation:pntcFloat 14s ease-in-out infinite;pointer-events:none;z-index:0}
+#mission .mission-top,#mission .usp-grid,#mission .mission-divider{position:relative;z-index:2}
+#mission .mission-top::before{content:'';position:absolute;left:-200px;bottom:-280px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(43,34,117,.2),transparent 70%);filter:blur(20px);animation:pntcFloat 18s ease-in-out infinite reverse;pointer-events:none;z-index:-1}
+#mission .mission-left{position:relative}
+#mission .mission-left::before{content:'';position:absolute;top:-28px;left:-34px;width:170px;height:120px;background-image:radial-gradient(rgba(28,22,80,.22) 1.4px,transparent 1.7px);background-size:14px 14px;-webkit-mask-image:linear-gradient(135deg,#000 25%,transparent 80%);mask-image:linear-gradient(135deg,#000 25%,transparent 80%);z-index:-1;pointer-events:none}
+#mission .mission-left h2{position:relative;display:inline-block}
+#mission .mission-left h2 em{display:inline-block;transform:rotate(-2.5deg);border-radius:6px;box-shadow:5px 5px 0 #1C1650;margin:.08em 0;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+#mission .mission-left h2 em:hover{transform:rotate(1.5deg) scale(1.05)}
+#mission .swoosh{position:relative;display:inline-block}
+#mission .swoosh svg{position:absolute;left:-2%;bottom:-.32em;width:104%;height:.42em;overflow:visible}
+#mission .swoosh path{fill:none;stroke:#F3CF33;stroke-width:7;stroke-linecap:round;stroke-dasharray:220;stroke-dashoffset:220}
+#mission .mission-left.visible .swoosh path{animation:pntcDraw .9s .5s cubic-bezier(.65,0,.35,1) forwards}
+#mission .sparkle{position:absolute;top:-.25em;right:-.7em;width:.55em;height:.55em;fill:#F3CF33;animation:pntcTwinkle 2.6s ease-in-out infinite}
+#mission .mission-lead strong,#mission .usp-text strong{background:linear-gradient(transparent 58%,rgba(243,207,51,.6) 58%) no-repeat 0 0/0% 100%;transition:background-size .9s cubic-bezier(.65,0,.35,1);padding:0 .08em}
+#mission .mission-right.visible .mission-lead strong,#mission .usp-grid.visible .usp-text strong{background-size:100% 100%}
+#mission .mission-lead strong:nth-of-type(2){transition-delay:0.15s}
+#mission .mission-lead strong:nth-of-type(3){transition-delay:0.3s}
+#mission .mission-lead strong:nth-of-type(4){transition-delay:0.44999999999999996s}
+#mission .mission-lead strong:nth-of-type(5){transition-delay:0.6s}
+#mission .mission-lead strong:nth-of-type(6){transition-delay:0.75s}
+#mission .mission-lead strong:nth-of-type(7){transition-delay:0.8999999999999999s}
+#mission .usp::before{content:'';position:absolute;inset:0;border-radius:16px;padding:1.5px;background:linear-gradient(135deg,#F3CF33,#2B2275 50%,#F3CF33);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s;pointer-events:none}
+#mission .usp:hover::before{opacity:1}
+#mission .usp-ico{background:linear-gradient(135deg,#1C1650,#3B2F9E);transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+#mission .usp:hover .usp-ico{transform:rotate(-8deg) scale(1.1)}
+#mission .usp-num{transition:color .4s,transform .4s}
+#mission .usp:hover .usp-num{color:rgba(243,207,51,.75);transform:translateY(-4px)}
+#mission .usp-grid.visible .usp{animation:pntcPop .7s cubic-bezier(.34,1.56,.64,1) both}
+#mission .usp-grid.visible .usp:nth-child(2){animation-delay:0.12s}
+#mission .usp-grid.visible .usp:nth-child(3){animation-delay:0.24s}
+#mission .usp-grid.visible .usp:nth-child(4){animation-delay:0.36s}
+@keyframes pntcFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,26px) scale(1.08)}}
+@keyframes pntcDraw{to{stroke-dashoffset:0}}
+@keyframes pntcTwinkle{0%,100%{transform:scale(.8) rotate(0);opacity:.75}50%{transform:scale(1.15) rotate(45deg);opacity:1}}
+@keyframes pntcPop{from{opacity:0;transform:translateY(22px) scale(.97)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  #mission *,#mission::before,#mission .mission-top::before{animation:none!important;transition:none!important}
+  #mission .swoosh path{stroke-dashoffset:0}
+  #mission .mission-lead strong,#mission .usp-text strong{background-size:100% 100%}
+}
+
 #mission .mission-left h2 em{color:#1C1650!important;background:#F3CF33;padding:0 .14em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 #mission .mission-lead strong,#mission .usp-text strong{color:#1C1650;font-weight:700}
 /* Sections alternate blue and white; stats band and Begin Your Journey are yellow; accreditations blue */
@@ -1329,7 +1371,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
   <div class="mission-top">
     <div class="mission-left reveal">
       <div class="eyebrow">Why Choose PNTC?</div>
-      <h2>Not Just<br><em>A Degree.</em><br>A Career.</h2>
+      <h2>Not Just<br><em>A Degree.</em><br><span class="swoosh">A Career.<svg viewBox="0 0 200 22" preserveAspectRatio="none" aria-hidden="true"><path d="M4 15 C 55 4, 130 3, 196 12"/></svg></span><svg class="sparkle" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0 L14.6 9.4 L24 12 L14.6 14.6 L12 24 L9.4 14.6 L0 12 L9.4 9.4 Z"/></svg></h2>
     </div>
     <div class="mission-right reveal" style="transition-delay:.12s">
       <p class="mission-lead">Choosing a school is one of the most important decisions a family makes, and we take that responsibility seriously. <strong>Founded in 1994</strong>, PNTC Colleges now has campuses in <strong>Dasmariñas, Cavite</strong> and <strong>Intramuros, Manila</strong>, and has spent <strong>over 30 years</strong> building its reputation in maritime education. Our graduates serve in <strong>international fleets, government agencies, and global industries</strong>. This record is the result of high standards, investment in real facilities, and qualified faculty in every classroom. Today, as a <strong>CHED-recognized, MARINA-accredited, and ISO 9001:2015-certified</strong> institution, we apply the same proven system to Tourism, Criminology, Customs Administration, and Office Administration, because every student in every field deserves the same level of excellence. We also work to keep this education <strong>affordable</strong>.</p>
