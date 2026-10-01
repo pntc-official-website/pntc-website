@@ -1093,6 +1093,35 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .hdr-nav .hdr-dd-menu a:hover{background:rgba(243,207,51,.08)}
 #mob-menu{overflow-y:auto;justify-content:flex-start;padding:5rem 1.5rem 3rem;gap:1.4rem}
 
+.ap{background:#fff;padding:clamp(4rem,8vw,6.5rem) clamp(1.25rem,5vw,4rem)}
+.ap-in{max-width:1200px;margin:0 auto}
+.ap-head{max-width:760px;margin-bottom:clamp(2.5rem,5vw,3.5rem)}
+.ap-eyebrow{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(28,22,80,.7);margin:0 0 .7rem}
+.ap-head h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.2rem,4.5vw,3.4rem);line-height:.95;text-transform:uppercase;color:#1C1650;margin:0 0 1rem}
+.ap-head h2 span{background:linear-gradient(transparent 62%,rgba(243,207,51,.65) 62%);padding:0 .1em}
+.ap-head p{color:rgba(28,22,80,.75);font-size:.98rem;line-height:1.75;margin:0}
+.ap-head a{color:#1C1650;font-weight:700}
+.ap-phase{margin-top:clamp(2rem,4vw,3rem)}
+.ap-phase-head{display:flex;align-items:center;gap:.9rem;margin-bottom:1.4rem}
+.ap-phase-tag{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;background:#F3CF33;color:#1C1650;padding:.35rem .8rem;border-radius:8px;transform:rotate(-2deg);box-shadow:3px 3px 0 #1C1650}
+.ap-phase-head h3{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.4rem,2.4vw,1.8rem);text-transform:uppercase;color:#1C1650;margin:0}
+.ap-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.1rem}
+.ap-step{position:relative;background:#fff;border:1px solid #E6E7E8;border-radius:16px;padding:1.6rem 1.5rem 1.4rem 1.5rem;box-shadow:0 10px 26px -18px rgba(16,11,51,.35);transition:transform .35s var(--ease),box-shadow .35s,border-color .35s;display:flex;flex-direction:column}
+.ap-step:hover{transform:translateY(-4px);box-shadow:0 22px 40px -20px rgba(16,11,51,.45);border-color:rgba(243,207,51,.7)}
+.ap-num{position:absolute;top:1.1rem;right:1.2rem;width:44px;height:44px;border-radius:50%;background:#1C1650;color:#F3CF33;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.15rem;display:flex;align-items:center;justify-content:center}
+.ap-office{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;line-height:1.1;text-transform:uppercase;color:#1C1650;margin:0 3.4rem .9rem 0}
+.ap-tasks{margin:0 0 1rem;padding:0 0 0 1.1rem;color:rgba(28,22,80,.82);font-size:.9rem;line-height:1.6}
+.ap-tasks li{margin-bottom:.35rem}
+.ap-tasks li::marker{color:#F3CF33}
+.ap-note{margin:0 0 1rem;font-size:.82rem;font-style:italic;color:rgba(28,22,80,.65)}
+.ap-contact{margin-top:auto;padding-top:1rem;border-top:1px dashed rgba(28,22,80,.18);display:grid;gap:.55rem}
+.ap-contact a,.ap-contact p{display:flex;align-items:flex-start;gap:.55rem;margin:0;font-size:.82rem;line-height:1.45;color:rgba(28,22,80,.8);word-break:break-word}
+.ap-contact a{color:#1C1650;font-weight:700;text-decoration:none}
+.ap-contact a:hover span{text-decoration:underline}
+.ap-contact svg{flex-shrink:0;width:16px;height:16px;fill:none;stroke:#1C1650;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:.1rem}
+.ap-contact strong{color:#1C1650}
+@media(max-width:600px){.ap-steps{grid-template-columns:1fr}}
+
 /* Brand guide: gold on navy, navy on white */
 #directory,#merchandise,#mission,#programs{--gold:#1C1650;--gold-lt:#2B2275;--gold-dim:rgba(28,22,80,.08)}
 .nav-cta,.btn-gold,.hdr-apply,.hdr-enroll,.btn-enroll,.btn-primary-hero,.slide-btn,.pntc-soon-btn{color:#1C1650!important}
@@ -1117,7 +1146,6 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .pv-units .pv-source{color:rgba(28,22,80,.5)!important}
 .pv-unit{background:#1C1650!important;border-color:#1C1650!important}
 </style>
-<meta name="robots" content="noindex, follow">
 <meta name="description" content="How to apply to PNTC Colleges in Dasmariñas, Cavite for school year 2026-2027, including admission requirements, the application process, and enrollment.">
 <link rel="canonical" href="https://www.pntc.edu.ph/college/admissions">
 <meta property="og:type" content="website">
@@ -1175,13 +1203,125 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
   </div>
 </section>
 
-<section id="coming-soon" class="pntc-soon">
-  <div class="pntc-soon-box">
-    <div class="pntc-soon-ico">⚓</div>
-    <h2>Coming Soon</h2>
-    <p>We're preparing this page. Please check back soon.</p>
-    <div class="pntc-soon-chips"><span>Admission Requirements</span><span>Application Process</span><span>Enrollment Information</span></div>
-    <a class="pntc-soon-btn" href="/college/">Back to College</a>
+<!-- ADMISSION AND ENROLLMENT PROCESS -->
+<section id="admission-process" class="ap">
+  <div class="ap-in">
+    <div class="ap-head reveal">
+      <p class="ap-eyebrow">For All Incoming New Students</p>
+      <h2>Admission and <span>Enrollment Process</span></h2>
+      <p>Follow these steps in order, from your application to your first day as a PNTCian. For questions, email the office listed in each step or reach our Admissions and Aid Office at <a href="mailto:admissions@mypntc.edu.ph">admissions@mypntc.edu.ph</a>.</p>
+    </div>
+    <div class="ap-phase">
+      <div class="ap-phase-head"><span class="ap-phase-tag">Phase 1</span><h3>Apply and Get Assessed</h3></div>
+      <ol class="ap-steps" start="1">
+        <li class="ap-step reveal">
+          <span class="ap-num" aria-hidden="true">01</span>
+          <p class="ap-office">Admissions and Aid Office</p>
+          <ul class="ap-tasks"><li>Fill out the Student Application Form through OrangeApps.</li><li>Fill out the Application Form for Loyalty Discount (for SHS graduates of PNTC Colleges only).</li></ul>
+          
+          <div class="ap-contact">
+            <a href="mailto:admissions@mypntc.edu.ph"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span>admissions@mypntc.edu.ph</span></a>
+            <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span>Follow <strong>PNTC Colleges</strong> for announcements</span></p>
+          </div>
+        </li>
+        <li class="ap-step reveal">
+          <span class="ap-num" aria-hidden="true">02</span>
+          <p class="ap-office">School Clinic</p>
+          <ul class="ap-tasks"><li>Take the free initial Ishihara test for color vision (for Criminology and Maritime applicants only).</li></ul>
+          
+          <div class="ap-contact">
+            <a href="mailto:clinic.dasma@mypntc.edu.ph"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span>clinic.dasma@mypntc.edu.ph</span></a>
+            <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span>Follow <strong>PNTC School Clinic</strong> for announcements</span></p>
+          </div>
+        </li>
+        <li class="ap-step reveal">
+          <span class="ap-num" aria-hidden="true">03</span>
+          <p class="ap-office">Guidance and Counseling Office</p>
+          <ul class="ap-tasks"><li>Take the free admission and psychological test (schedule to be announced).</li></ul>
+          
+          <div class="ap-contact">
+            <a href="mailto:guidance@mypntc.edu.ph"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span>guidance@mypntc.edu.ph</span></a>
+            <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span>Follow <strong>PNTC Guidance and Counseling Office</strong> for announcements</span></p>
+          </div>
+        </li>
+        <li class="ap-step reveal">
+          <span class="ap-num" aria-hidden="true">04</span>
+          <p class="ap-office">Admissions and Aid Office</p>
+          <ul class="ap-tasks"><li>Wait for your test result.</li></ul>
+          
+          
+        </li>
+        <li class="ap-step reveal">
+          <span class="ap-num" aria-hidden="true">05</span>
+          <p class="ap-office">Office of Student Affairs</p>
+          <ul class="ap-tasks"><li>Attend the interview.</li></ul>
+          
+          <div class="ap-contact">
+            <a href="mailto:osa.dasma@mypntc.edu.ph"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span>osa.dasma@mypntc.edu.ph</span></a>
+            <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span>Follow <strong>PNTC Colleges Office of Student Affairs</strong> for announcements</span></p>
+          </div>
+        </li>
+        <li class="ap-step reveal">
+          <span class="ap-num" aria-hidden="true">06</span>
+          <p class="ap-office">School Clinic</p>
+          <ul class="ap-tasks"><li>Get a Medical Waiver.</li><li>Get a School Medical Clearance.</li></ul>
+          <p class="ap-note">Available during the enrollment period only.</p>
+          
+        </li>
+      </ol>
+    </div>
+    <div class="ap-phase">
+      <div class="ap-phase-head"><span class="ap-phase-tag">Phase 2</span><h3>Enroll</h3></div>
+      <ol class="ap-steps" start="7">
+        <li class="ap-step reveal">
+          <span class="ap-num" aria-hidden="true">07</span>
+          <p class="ap-office">Registrar's Office</p>
+          <ul class="ap-tasks"><li>Log your details in the log sheet.</li><li>Submit your enrollment requirements at Window 1 during the enrollment period.</li><li>Fill out the Admission Slip and Data Privacy Waiver.</li><li>Fill out the Note of Undertaking (for applicants with incomplete requirements).</li><li>Choose an available schedule and section.</li></ul>
+          
+          <div class="ap-contact">
+            <a href="mailto:registration.dasma@mypntc.edu.ph"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span>registration.dasma@mypntc.edu.ph</span></a>
+            <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span>Follow <strong>PNTC Colleges Office of the Registrar</strong> for announcements</span></p>
+          </div>
+        </li>
+        <li class="ap-step reveal">
+          <span class="ap-num" aria-hidden="true">08</span>
+          <p class="ap-office">Finance Office</p>
+          <ul class="ap-tasks"><li>Submit the downpayment for your tuition and uniform fees.</li></ul>
+          
+          <div class="ap-contact">
+            <a href="mailto:finance.dasma@mypntc.edu.ph"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span>finance.dasma@mypntc.edu.ph</span></a>
+            
+          </div>
+        </li>
+        <li class="ap-step reveal">
+          <span class="ap-num" aria-hidden="true">09</span>
+          <p class="ap-office">Commissary</p>
+          <ul class="ap-tasks"><li>Get fitted for your uniform.</li><li>Claim your checklist.</li></ul>
+          
+          <div class="ap-contact">
+            <a href="mailto:commissary@mypntc.edu.ph"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span>commissary@mypntc.edu.ph</span></a>
+            <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span>Follow <strong>PNTC Commissary Dasmariñas</strong> for uniform claiming announcements</span></p>
+          </div>
+        </li>
+        <li class="ap-step reveal">
+          <span class="ap-num" aria-hidden="true">10</span>
+          <p class="ap-office">Registrar's Office</p>
+          <ul class="ap-tasks"><li>Claim your Certificate of Registration (COR) at Window 2.</li></ul>
+          
+          
+        </li>
+        <li class="ap-step reveal">
+          <span class="ap-num" aria-hidden="true">11</span>
+          <p class="ap-office">ICT Office</p>
+          <ul class="ap-tasks"><li>Create your school email account.</li><li>Check your school email regularly for announcements on Freshmen Orientation, your Student ID, the Student Handbook, and guides for the Student Portal and Quipper account.</li></ul>
+          
+          <div class="ap-contact">
+            <a href="mailto:ict.dasma@mypntc.edu.ph"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span>ict.dasma@mypntc.edu.ph</span></a>
+            <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span>Follow <strong>PNTC Colleges Dasma ICT Office</strong> for announcements</span></p>
+          </div>
+        </li>
+      </ol>
+    </div>
   </div>
 </section>
 
