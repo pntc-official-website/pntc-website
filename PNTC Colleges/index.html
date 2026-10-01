@@ -1280,40 +1280,41 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #news .news-head h2 span{position:relative;display:inline-block}
 #news .vb-swoosh{position:absolute;left:0;bottom:-.1em;width:100%;height:.22em;overflow:visible;fill:none;stroke:#F3CF33;stroke-width:5;stroke-linecap:round;opacity:.85}
 #news .news-head p{color:rgba(255,255,255,.75)!important;max-width:600px}
-#news .news-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);grid-template-rows:1fr 1fr;gap:clamp(.9rem,1.6vw,1.25rem);padding:0!important}
-#news .news-card{position:relative;display:flex;overflow:hidden;clip-path:none!important;filter:none!important;border-radius:22px;background:#fff;border:0!important;box-shadow:0 26px 50px -30px rgba(0,0,0,.8);transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s;min-width:0}
-#news .news-card:hover{transform:translateY(-6px);box-shadow:0 36px 60px -28px rgba(0,0,0,.9)}
-#news .news-thumb{position:relative;overflow:hidden;flex:0 0 42%;height:auto!important;aspect-ratio:auto!important;margin:0!important;border-radius:0!important}
+
+#news .news-grid{--gap:clamp(.9rem,1.6vw,1.25rem);max-width:1200px;margin:0 auto;display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 2 * var(--gap)) / 3);grid-template-columns:none;grid-template-rows:none;gap:var(--gap);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:.5rem .2rem 1.6rem!important;outline:none}
+#news .news-grid::-webkit-scrollbar{display:none}
+#news .news-card{scroll-snap-align:start;position:relative;display:flex;flex-direction:column;overflow:hidden;clip-path:none!important;filter:none!important;border-radius:22px;background:#fff;border:0!important;box-shadow:0 22px 40px -26px rgba(0,0,0,.8);transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s;min-width:0;opacity:1!important}
+#news .news-card:hover{transform:translateY(-6px);box-shadow:0 30px 50px -24px rgba(0,0,0,.9)}
+#news .news-thumb{position:relative;overflow:hidden;aspect-ratio:16/10!important;height:auto!important;margin:0!important;border-radius:0!important;flex:none}
 #news .news-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 #news .news-card:hover .news-thumb img{transform:scale(1.07)}
-#news .news-body{display:flex;flex-direction:column;align-items:flex-start;padding:clamp(1.1rem,2vw,1.5rem)!important;min-width:0;flex:1}
-#news .news-tag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;background:#F3CF33!important;color:#1C1650!important;border:0!important;padding:.3rem .75rem!important;border-radius:999px!important;margin-bottom:.6rem}
+#news .news-tag{position:absolute;top:.9rem;left:.9rem;z-index:2;display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;background:#F3CF33!important;color:#1C1650!important;border:0!important;padding:.32rem .8rem!important;border-radius:999px!important;margin:0!important;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
+#news .news-body{display:flex;flex-direction:column;align-items:flex-start;padding:1.2rem 1.35rem 1.4rem!important;min-width:0;flex:1}
 #news .news-date{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(28,22,80,.6)!important;margin-bottom:.45rem}
-#news .news-card h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(1.15rem,1.6vw,1.35rem);line-height:1.15;color:#1C1650!important;margin:0 0 .5rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-#news .news-card p{font-size:.84rem;line-height:1.6;color:rgba(28,22,80,.72)!important;margin:0 0 .9rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#news .news-card h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(1.2rem,1.6vw,1.4rem);line-height:1.15;color:#1C1650!important;margin:0 0 .55rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+#news .news-card p{font-size:.84rem;line-height:1.6;color:rgba(28,22,80,.72)!important;margin:0 0 1rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 #news .news-link{margin-top:auto;display:inline-flex;align-items:center;gap:.5rem;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:#1C1650!important}
 #news .news-link svg{width:12px;height:12px;stroke:currentColor;stroke-width:2;fill:none;transition:transform .25s}
 #news .news-card:hover .news-link svg{transform:translateX(4px)}
 #news .news-link::after{content:'';position:absolute;inset:0}
-/* Featured: latest post fills the left column, text over the photo */
-#news .news-card:first-child{grid-row:span 2;flex-direction:column;justify-content:flex-end;min-height:clamp(420px,42vw,540px);background:#1C1650}
-#news .news-card:first-child .news-thumb{position:absolute;inset:0;flex:none}
-#news .news-card:first-child .news-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(16,11,51,.95) 0%,rgba(16,11,51,.6) 40%,rgba(16,11,51,0) 70%)}
-#news .news-card:first-child .news-body{position:relative;z-index:1;flex:none;width:100%;box-sizing:border-box;padding:clamp(1.5rem,3vw,2.2rem)!important}
-#news .news-card:first-child .news-date{color:rgba(255,255,255,.75)!important}
-#news .news-card:first-child h3{color:#fff!important;font-size:clamp(1.6rem,2.8vw,2.3rem);max-width:28ch}
-#news .news-card:first-child p{color:rgba(255,255,255,.82)!important;-webkit-line-clamp:3;max-width:60ch}
-#news .news-card:first-child .news-link{color:#F3CF33!important}
-#news .news-all{text-align:center;margin-top:clamp(2rem,4vw,2.8rem)}
-@media(max-width:900px){
-  #news .news-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:none}
-  #news .news-card:first-child{grid-row:auto;min-height:420px}
+#news .news-ctrl{max-width:1200px;margin:1rem auto 0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem}
+#news .news-dots{display:flex;gap:.45rem}
+#news .news-dots span{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.3);transition:width .3s,background .3s}
+#news .news-dots span.on{width:28px;background:#F3CF33}
+#news .news-arrows{display:flex;gap:.6rem;justify-self:end}
+#news .news-arrow{all:unset;box-sizing:border-box;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;cursor:pointer;border:1.5px solid rgba(255,255,255,.4);color:#fff;transition:background .25s,color .25s,border-color .25s,opacity .25s}
+#news .news-arrow svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+#news .news-arrow:hover:not(:disabled){background:#F3CF33;border-color:#F3CF33;color:#1C1650}
+#news .news-arrow:focus-visible{outline:2px solid #F3CF33;outline-offset:3px}
+#news .news-arrow:disabled{opacity:.3;cursor:default}
+#news .news-ctrl.single .news-dots,#news .news-ctrl.single .news-arrows{visibility:hidden}
+@media(max-width:1000px){#news .news-grid{grid-auto-columns:calc((100% - var(--gap)) / 2)}}
+@media(max-width:640px){
+  #news .news-grid{grid-auto-columns:86%}
+  #news .news-ctrl{grid-template-columns:1fr auto}
+  #news .news-allbtn{grid-column:1 / -1;grid-row:2;justify-self:center}
 }
-@media(max-width:560px){
-  #news .news-card{flex-direction:column}
-  #news .news-card:not(:first-child) .news-thumb{flex:none;aspect-ratio:16/9!important}
-}
-@media(prefers-reduced-motion:reduce){#news .news-card,#news .news-thumb img{transition:none}}
+@media(prefers-reduced-motion:reduce){#news .news-grid{scroll-behavior:auto}#news .news-card,#news .news-thumb img{transition:none}}
 
 /* Brand guide: gold on navy, navy on white */
 #directory,#merchandise,#mission,#programs{--gold:#1C1650;--gold-lt:#2B2275;--gold-dim:rgba(28,22,80,.08)}
@@ -1597,7 +1598,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     <p>Announcements, achievements, and milestones from the PNTC community. Stay informed about news on campus and beyond.</p>
   </div>
   <!-- PNTC_NEWS_START -->
-  <div class="news-grid" id="news-grid"><article class="news-card reveal"><div class="news-thumb"><img src="https://midwnqxghejnkzagnnjp.supabase.co/storage/v1/object/public/site-images/PNTC%20Colleges/uploads/featured/1790640037122-kalo.jpg" alt="Mabuhay Festival 2026: Celebrating World Tourism Day at PNTC Colleges" loading="lazy"></div><div class="news-body"><span class="news-tag">Events</span><div class="news-date">September 29, 2026</div><h3>Mabuhay Festival 2026: Celebrating World Tourism Day at PNTC Colleges</h3><p>PNTC Colleges, College of International Tourism Management (CITHM) celebrated World Tourism Day on September 27 with the Mabuhay Festival 2026, an immersive campus event organized by Bachelor of Science in Tourism Management (BSTM) students.
+  <div class="news-grid" id="news-grid" tabindex="0" aria-label="Latest posts"><article class="news-card reveal"><div class="news-thumb"><img src="https://midwnqxghejnkzagnnjp.supabase.co/storage/v1/object/public/site-images/PNTC%20Colleges/uploads/featured/1790640037122-kalo.jpg" alt="Mabuhay Festival 2026: Celebrating World Tourism Day at PNTC Colleges" loading="lazy"></div><div class="news-body"><span class="news-tag">Events</span><div class="news-date">September 29, 2026</div><h3>Mabuhay Festival 2026: Celebrating World Tourism Day at PNTC Colleges</h3><p>PNTC Colleges, College of International Tourism Management (CITHM) celebrated World Tourism Day on September 27 with the Mabuhay Festival 2026, an immersive campus event organized by Bachelor of Science in Tourism Management (BSTM) students.
 
 Designed to highlight Philippine heritage and sustainable travel, the festival featured regional cultural dance performances, interactive culinary and artisan booths, and a curated Philippine Culture &amp; Tourism Gallery in the Front Office Laboratory. The event serves as a hands-on launchpad for future tourism leaders, blending cultural preservation with practical event management skills to prepare students for global hospitality careers.</p><a href="blog/mabuhay-festival-2026-celebrating-world-tourism-day-at-pntc-colleges.html" class="news-link">Read More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a></div></article>
 <article class="news-card reveal" style="transition-delay:0.1s"><div class="news-thumb"><img src="https://midwnqxghejnkzagnnjp.supabase.co/storage/v1/object/public/site-images/PNTC%20Colleges/uploads/featured/1789947629538-2h3j.jfif" alt="Celebrating Excellence and Endurance: PNTC Colleges Honors the Class of Talitha at Ringhop 2026" loading="lazy"></div><div class="news-body"><span class="news-tag">Events</span><div class="news-date">September 21, 2026</div><h3>Celebrating Excellence and Endurance: PNTC Colleges Honors the Class of Talitha at Ringhop 2026</h3><p>PNTC Colleges celebrated the Ringhop Ceremony for the Class of Talitha, honoring graduating students as they create a symbolic transition from rigorous academic and practical training to professional careers.
@@ -1605,20 +1606,75 @@ Designed to highlight Philippine heritage and sustainable travel, the festival f
 Highlighting years of discipline and determination across its programs, the traditional ceremony centered on the presentation of class rings—symbolizing resilience, pride, and institutional excellence. Stepping through the ring represents the official completion of their studies and the beginning of their journey into their respective industries.</p><a href="blog/celebrating-excellence-and-endurance-pntc-colleges-honors-the-class-of-talitha-at-ringhop-2026.html" class="news-link">Read More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a></div></article>
 <article class="news-card reveal" style="transition-delay:0.2s"><div class="news-thumb"><img src="https://midwnqxghejnkzagnnjp.supabase.co/storage/v1/object/public/site-images/PNTC%20Colleges/uploads/featured/1789091316210-55nw.jpg" alt="Bridging Education and Industry Excellence: PNTC Colleges Partners with Acacia Hotel Manila" loading="lazy"></div><div class="news-body"><span class="news-tag">Announcements</span><div class="news-date">September 11, 2026</div><h3>Bridging Education and Industry Excellence: PNTC Colleges Partners with Acacia Hotel Manila</h3><p>PNTC Colleges has officially partnered with Acacia Hotel Manila, a five-star luxury hotel, to bridge academic education with industry-level hospitality standards for its students and faculty.
 
-The strategic collaboration provides students with hands-on On-the-Job Training (OJT) across guest relations, front office, culinary, and event operations, alongside direct career pathways in luxury hospitality. Additionally, the partnership includes dynamic training and development programs for faculty to keep classroom instruction aligned with current global industry trends.</p><a href="blog/bridging-education-and-industry-excellence-pntc-colleges-partners-with-acacia-hotel-manila.html" class="news-link">Read More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a></div></article></div>
-  <div class="news-all"><a href="blog/" class="slide-btn">View All Posts <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a></div>
+The strategic collaboration provides students with hands-on On-the-Job Training (OJT) across guest relations, front office, culinary, and event operations, alongside direct career pathways in luxury hospitality. Additionally, the partnership includes dynamic training and development programs for faculty to keep classroom instruction aligned with current global industry trends.</p><a href="blog/bridging-education-and-industry-excellence-pntc-colleges-partners-with-acacia-hotel-manila.html" class="news-link">Read More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a></div></article>
+<article class="news-card reveal" style="transition-delay:0.30000000000000004s"><div class="news-thumb"><img src="https://midwnqxghejnkzagnnjp.supabase.co/storage/v1/object/public/site-images/PNTC%20Colleges/uploads/featured/1789011696692-8xdj.png" alt="Chart Your Course: PNTC Colleges Introduces BS Criminology and BS Tourism Management" loading="lazy"></div><div class="news-body"><span class="news-tag">Announcements</span><div class="news-date">September 10, 2026</div><h3>Chart Your Course: PNTC Colleges Introduces BS Criminology and BS Tourism Management</h3><p>PNTC Colleges has expanded its academic offerings beyond its core maritime and business programs with the official launch of two degree programs: Bachelor of Science in Criminology and Bachelor of Science in Tourism Management.
+
+Designed with hands-on, industry-aligned curricula, the programs prepare students for specialized career pathways:
+
+BS Criminology: Focuses on forensic science, law enforcement, criminal jurisprudence, and crime detection, preparing graduates for roles in the PNP, BFP, BJMP, forensic investigation, and risk management.
+
+BS Tourism Management: Emphasizes destination marketing, sustainable tourism, travel operations, and event management, opening pathways toward flight crew, resort management, tour operations, and MICE event planning.</p><a href="blog/chart-your-course-pntc-colleges-introduces-bs-criminology-and-bs-tourism-management.html" class="news-link">Read More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a></div></article>
+<article class="news-card reveal" style="transition-delay:0.4s"><div class="news-thumb"><img src="https://midwnqxghejnkzagnnjp.supabase.co/storage/v1/object/public/site-images/PNTC%20Colleges/uploads/featured/1788998757594-3fd3.jpg" alt="ONCE A PNTCIAN, ALWAYS A PNTCIAN: CELEBRATING MEMORIES, CONNECTION, AND COMMUNITY AT THE PNTC ALUMNI HOMECOMING" loading="lazy"></div><div class="news-body"><span class="news-tag">Events</span><div class="news-date">September 10, 2026</div><h3>ONCE A PNTCIAN, ALWAYS A PNTCIAN: CELEBRATING MEMORIES, CONNECTION, AND COMMUNITY AT THE PNTC ALUMNI HOMECOMING</h3><p>PNTC Colleges hosted its recent Alumni Homecoming, bringing former students back to campus to celebrate their professional journeys and reconnect with the academic community.
+
+The event featured alumni sharing real-world industry insights, career achievements, and practical lessons with faculty, staff, and current students. Serving as a platform to inspire the next generation of PNTCians, the gathering highlighted the enduring bond and shared legacy of excellence within the institution's global alumni network.</p><a href="blog/once-a-pntcian-always-a-pntcian-celebrating-memories-connection-and-community-at-the-pntc-alumni-homecoming.html" class="news-link">Read More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a></div></article>
+<article class="news-card reveal" style="transition-delay:0.5s"><div class="news-thumb"><img src="https://midwnqxghejnkzagnnjp.supabase.co/storage/v1/object/public/site-images/PNTC%20Colleges/uploads/featured/1788940680971-5fmx.jpg" alt="Sealing Partnerships, Shaping Global Seafarers: PNTC Colleges Partners with Union Marine Management Services" loading="lazy"></div><div class="news-body"><span class="news-tag">Events</span><div class="news-date">September 9, 2026</div><h3>Sealing Partnerships, Shaping Global Seafarers: PNTC Colleges Partners with Union Marine Management Services</h3><p>PNTC Colleges has entered into a Memorandum of Agreement (MOA) with Union Marine Management Services (UMMS) to enhance training and career pathways for its maritime cadets.
+
+The strategic alliance aims to bridge academic instruction with international shipping standards by providing cadets with:
+
+Direct Fleet Placement: Streamlined access to hands-on shipboard training aboard global vessels.
+
+Industry-Aligned Training: Practical exposure tailored to modern safety, environmental, and technological shipping standards.
+
+Career Growth Pathways: Long-term development and employment opportunities within UMMS's global fleet network.</p><a href="blog/sealing-partnerships-shaping-global-seafarers-pntc-colleges-partners-with-union-marine-management-services.html" class="news-link">Read More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a></div></article>
+<article class="news-card reveal" style="transition-delay:0.6000000000000001s"><div class="news-thumb"><img src="https://midwnqxghejnkzagnnjp.supabase.co/storage/v1/object/public/site-images/PNTC%20Colleges/uploads/featured/1788940347745-tlgk.jpg" alt="Welcome to the Pack: Highlights from PNTC Colleges’ Freshman Fiesta 2026! ⚓" loading="lazy"></div><div class="news-body"><span class="news-tag">Events</span><div class="news-date">September 9, 2026</div><h3>Welcome to the Pack: Highlights from PNTC Colleges’ Freshman Fiesta 2026! ⚓</h3><p>PNTC Colleges officially kicked off Academic Year 2026-2027 with Freshman Fiesta 2026, welcoming its newest batch of students across Maritime, Criminology, Customs Administration, Tourism, and Office Administration programs.
+
+The campus came alive with an interactive Org Fair featuring snack stations, a karaoke hub, and a pop-up cinema, culminating in a main stage showcase and student concert. Setting an energetic tone for the year ahead, the event gave incoming freshmen the chance to connect with faculty, meet fellow batchmates, and step confidently into their college journey.</p><a href="blog/welcome-to-the-pack-highlights-from-pntc-colleges-freshman-fiesta-2026-1.html" class="news-link">Read More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a></div></article>
+<article class="news-card reveal" style="transition-delay:0.7000000000000001s"><div class="news-thumb"><img src="/site-files/SHS/uploads/featured/1788918747943-ycjn.png" alt="Navigating the Future: 3 Trends Reshaping Modern Maritime Logistics" loading="lazy"></div><div class="news-body"><span class="news-tag">Announcement</span><div class="news-date">September 9, 2026</div><h3>Navigating the Future: 3 Trends Reshaping Modern Maritime Logistics</h3><p>The global maritime industry, which carries over 80% of world trade, is undergoing its most significant transformation since the invention of the shipping container. Driven by environmental regulations, technological breakthroughs, and geopolitical shifts, modern ocean freight is rapidly evolving across three major fronts:
+
+Decarbonization &amp; Green Transition: Moving toward net-zero emissions through alternative fuels like green methanol, wind-assisted propulsion, and speed reduction strategies.
+
+Smart Ships &amp; Digitalization: Leveraging IoT sensors, AI route optimization, and digital documentation to enhance visibility, predict delays, and streamline customs clearance.
+
+Supply Chain Resilience: Shifting from pure cost optimization to risk mitigation through nearshoring, carrier diversification, and &quot;Just-in-Case&quot; inventory models.
+
+As green mandates and digital integration redefine the seas, early adopters prioritizing sustainability and data intelligence are positioning themselves to lead the next era of global commerce.</p><a href="blog/navigating-the-future-3-trends-reshaping-modern-maritime-logistics.html" class="news-link">Read More <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a></div></article></div>
+  <div class="news-ctrl">
+    <div class="news-dots" id="news-dots" aria-hidden="true"></div>
+    <a href="blog/" class="slide-btn news-allbtn">View All Posts <svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg></a>
+    <div class="news-arrows"><button class="news-arrow" id="news-prev" aria-label="Previous posts"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button><button class="news-arrow" id="news-next" aria-label="Next posts"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+  </div>
   <script>
   (function(){
-    var g=document.getElementById('news-grid');if(!g||!window.fetch)return;
+    var g=document.getElementById('news-grid');if(!g)return;
+    var dots=document.getElementById('news-dots'),prev=document.getElementById('news-prev'),next=document.getElementById('news-next');
     var L='<svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg>';
     function e(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-    fetch('/api/public/posts?site=colleges&limit=3').then(function(r){return r.json();}).then(function(posts){
+    function step(){var c=g.querySelector('.news-card');if(!c)return g.clientWidth;var gap=parseFloat(getComputedStyle(g).columnGap)||0;return c.getBoundingClientRect().width+gap;}
+    function perView(){return Math.max(1,Math.round((g.clientWidth+1)/step()));}
+    function pages(){return Math.max(1,g.children.length-perView()+1);}
+    function cur(){return Math.round(g.scrollLeft/step());}
+    function paint(){
+      var n=pages(),i=Math.min(cur(),n-1),k;
+      if(dots.children.length!==n){dots.innerHTML='';for(k=0;k<n;k++)dots.appendChild(document.createElement('span'));}
+      for(k=0;k<n;k++)dots.children[k].className=k===i?'on':'';
+      prev.disabled=g.scrollLeft<4;next.disabled=g.scrollLeft+g.clientWidth>=g.scrollWidth-4;
+      dots.parentNode.classList.toggle('single',n<2);
+    }
+    function go(i){g.scrollTo({left:Math.max(0,i)*step(),behavior:'smooth'});}
+    prev.addEventListener('click',function(){go(cur()-1);});
+    next.addEventListener('click',function(){go(cur()+1);});
+    var t;g.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(paint,60);},{passive:true});
+    window.addEventListener('resize',paint);
+    paint();
+    if(!window.fetch)return;
+    fetch('/api/public/posts?site=colleges&limit=20').then(function(r){return r.json();}).then(function(posts){
       if(!Array.isArray(posts)||!posts.length)return;
-      g.innerHTML=posts.slice(0,3).map(function(p){
+      g.innerHTML=posts.map(function(p){
         var d=new Date(p.publishedAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'Asia/Manila'});
-        var t=p.featuredImage?'<div class="news-thumb"><img src="'+e(p.featuredImage)+'" alt="'+e(p.title)+'" loading="lazy"></div>':'<div class="news-thumb" style="background:linear-gradient(135deg,#1C1650,#120D3A)"></div>';
-        return '<article class="news-card visible">'+t+'<div class="news-body">'+(p.category?'<span class="news-tag">'+e(p.category)+'</span>':'')+'<div class="news-date">'+e(d)+'</div><h3>'+e(p.title)+'</h3><p>'+e(p.excerpt)+'</p><a href="blog/'+e(p.slug)+'.html" class="news-link">Read More '+L+'</a></div></article>';
+        var th=p.featuredImage?'<div class="news-thumb"><img src="'+e(p.featuredImage)+'" alt="'+e(p.title)+'" loading="lazy"></div>':'<div class="news-thumb" style="background:linear-gradient(135deg,#1C1650,#120D3A)"></div>';
+        return '<article class="news-card visible">'+th+'<div class="news-body">'+(p.category?'<span class="news-tag">'+e(p.category)+'</span>':'')+'<div class="news-date">'+e(d)+'</div><h3>'+e(p.title)+'</h3><p>'+e(p.excerpt)+'</p><a href="blog/'+e(p.slug)+'.html" class="news-link">Read More '+L+'</a></div></article>';
       }).join('');
+      g.scrollLeft=0;paint();
     }).catch(function(){});
   })();
   </script>
