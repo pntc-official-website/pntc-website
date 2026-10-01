@@ -646,6 +646,49 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .hdr-nav a.is-current::after{transform:scaleX(1)}
 #mob-menu{overflow-y:auto}
 @media(max-width:1320px) and (min-width:721px){.hdr-nav{display:none}.hamburger{display:flex}.hdr-enroll{margin-left:auto;margin-right:1rem}}
+
+#hero{background:#1C1650!important}
+#hero .hero-bg-img{filter:brightness(.9) saturate(1.05)}
+#hero .hero-vig{background:linear-gradient(100deg,rgba(16,11,51,.92) 0%,rgba(16,11,51,.62) 38%,rgba(16,11,51,.12) 70%,rgba(16,11,51,0) 100%),linear-gradient(to top,rgba(16,11,51,.9) 0%,transparent 48%)!important}
+#hero .hero-vig::before{content:'';position:absolute;left:-10%;bottom:-30%;width:70%;height:80%;background:radial-gradient(closest-side,rgba(243,207,51,.18),transparent);animation:th-glow 9s ease-in-out infinite alternate}
+#hero .hero-vig::after{content:'';position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,.14) 1.2px,transparent 1.6px) 0 0/22px 22px;-webkit-mask-image:linear-gradient(100deg,#000 0%,transparent 45%);mask-image:linear-gradient(100deg,#000 0%,transparent 45%)}
+#hero::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:56px;background:#F3CF33;clip-path:polygon(0 100%,100% 0,100% 100%);z-index:7;pointer-events:none}
+#hero .hero-bar{display:none}
+#hero .hero-content{padding-bottom:calc(clamp(3rem,6vh,5rem) + 40px)}
+#hero .th-pill{display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1.4rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:.5rem 1.1rem;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);animation:th-fade .8s both}
+#hero .th-pill-dot{position:relative;width:6px;height:6px;border-radius:50%;background:#F3CF33}
+#hero .th-pill-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid #F3CF33;animation:th-ping 2s ease-out infinite}
+#hero .hero-headline .hl{display:block;overflow:hidden;padding:.02em 0 .1em}
+#hero .hero-headline .hl>span{display:inline-block;animation:th-rise .9s cubic-bezier(.2,.7,.2,1) both}
+#hero .hero-headline .hl:nth-child(3)>span{animation-delay:.12s}
+#hero .hero-headline .hl:nth-child(4)>span{animation-delay:.24s}
+#hero .hero-headline em{position:relative;display:inline-block;color:#F3CF33}
+#hero .hl-swoosh{position:absolute;left:0;bottom:-.08em;width:100%;height:.16em;overflow:visible;fill:none;stroke:#F3CF33;stroke-width:5;stroke-linecap:round;stroke-dasharray:320;stroke-dashoffset:320;animation:th-draw 1s .9s ease-out forwards;opacity:.85}
+#hero .hero-headline .hl:last-child{overflow:visible}
+#hero .hero-sub{color:rgba(255,255,255,.82)!important;font-weight:400!important;animation:th-fade .9s .5s both}
+#hero .hero-ctas{animation:th-fade .9s .65s both}
+#hero .btn-primary-hero,#hero .btn-ghost-hero{clip-path:none!important;border-radius:999px!important;padding:.95rem 1.9rem!important}
+#hero .btn-primary-hero{background:#F3CF33!important;color:#1C1650!important;box-shadow:0 14px 30px -12px rgba(243,207,51,.65)!important}
+#hero .btn-primary-hero:hover{background:#FFF09B!important}
+#hero .btn-ghost-hero{color:#fff!important;border:1.5px solid rgba(255,255,255,.45)!important;background:rgba(255,255,255,.06);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+#hero .btn-ghost-hero:hover{background:#fff!important;color:#1C1650!important;border-color:#fff!important}
+#hero .scroll-cue{bottom:4.2rem;left:auto;right:clamp(2.5rem,7vw,6rem);transform:none}
+#hero .scroll-wheel{border-color:rgba(255,255,255,.5)}
+#hero .scroll-wheel::after{background:#F3CF33}
+@keyframes th-rise{from{transform:translateY(105%)}to{transform:none}}
+@keyframes th-fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes th-draw{to{stroke-dashoffset:0}}
+@keyframes th-ping{from{transform:scale(.6);opacity:.9}to{transform:scale(2);opacity:0}}
+@keyframes th-glow{to{transform:translate(12%,-8%) scale(1.1)}}
+@media(max-width:860px){
+  #hero::after{height:32px}
+  #hero .scroll-cue{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  #hero .hero-headline .hl>span,#hero .hero-sub,#hero .th-pill,#hero .hero-ctas{animation:none}
+  #hero .hl-swoosh{animation:none;stroke-dashoffset:0}
+  #hero .hero-vig::before,#hero .th-pill-dot::after{animation:none}
+}
 .hero-headline{font-size:clamp(3rem,min(12vw,15vh),9.5rem)!important}
 #courses .courses-grid .course-card:nth-child(n+5){display:none}
 
@@ -726,7 +769,8 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
   <div class="hero-content">
     
-    <h1 class="hero-headline"><span class="sr-only">PNTC Maritime Training and Assessment Center, Intramuros, Manila. </span>Chart<br>Your<br><em>Course</em></h1>
+    <div class="th-pill"><span class="th-pill-dot"></span>MARINA Accredited &nbsp;·&nbsp; Intramuros, Manila</div>
+    <h1 class="hero-headline"><span class="sr-only">PNTC Maritime Training and Assessment Center, Intramuros, Manila. </span><span class="hl"><span>Chart</span></span><span class="hl"><span>Your</span></span><span class="hl"><span><em>Course<svg class="hl-swoosh" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 15 C 80 4, 200 3, 297 11"/></svg></em></span></span></h1>
     <p class="hero-sub">
       MARINA-accredited, STCW-compliant maritime training for Filipino seafarers in Intramuros, Manila. Build the credentials that open doors to global shipping companies.
     </p>
