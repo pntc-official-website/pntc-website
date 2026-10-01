@@ -1093,6 +1093,68 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .hdr-nav .hdr-dd-menu a:hover{background:rgba(243,207,51,.08)}
 #mob-menu{overflow-y:auto;justify-content:flex-start;padding:5rem 1.5rem 3rem;gap:1.4rem}
 
+#facilities{background:#fff!important;padding:clamp(4.5rem,8vw,7rem) clamp(1.25rem,5vw,4rem)!important}
+#facilities .fac-head{max-width:1200px;margin:0 auto clamp(2rem,4vw,3rem)}
+#facilities .fac-head .eyebrow{color:#1C1650!important}
+#facilities .fac-head h2{color:#1C1650}
+#facilities .fac-head h2 span{color:#1C1650;background:linear-gradient(transparent 64%,rgba(243,207,51,.6) 64%);padding:0 .1em}
+#facilities .fac-head p{color:rgba(28,22,80,.65)!important}
+#facilities .fac-grid{grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(3,clamp(190px,17vw,250px));grid-auto-rows:auto;gap:clamp(.75rem,1.4vw,1.1rem)}
+#facilities .fac-card{grid-column:span 4;min-height:0;border:0;border-radius:16px;clip-path:none;filter:none;box-shadow:0 10px 30px -14px rgba(16,11,51,.35);transition:transform .45s var(--ease),box-shadow .45s}
+#facilities .fac-card::after{display:none}
+
+/* Photo tiles */
+#facilities .fac-card.has-photo:nth-child(1){grid-column:span 7;grid-row:span 2}
+#facilities .fac-card.has-photo:nth-child(2),#facilities .fac-card.has-photo:nth-child(3){grid-column:span 5}
+#facilities .fac-card.has-photo:nth-child(4){grid-column:span 6}
+#facilities .fac-card.has-photo:nth-child(5),#facilities .fac-card.has-photo:nth-child(6){grid-column:span 3}
+#facilities .has-photo .fac-photo{filter:none!important;transition:transform .8s var(--ease)}
+#facilities .has-photo:hover{transform:translateY(-4px);box-shadow:0 24px 48px -16px rgba(16,11,51,.5)}
+#facilities .has-photo:hover .fac-photo{transform:scale(1.06)!important;filter:saturate(1.08)!important}
+#facilities .fac-img-overlay{background:linear-gradient(to top,rgba(16,11,51,.9) 0%,rgba(16,11,51,.45) 32%,rgba(16,11,51,0) 62%)!important}
+#facilities .has-photo .fac-content{padding:clamp(1.1rem,2vw,1.75rem);transition:transform .45s var(--ease)}
+#facilities .has-photo:hover .fac-content{transform:translateY(-3px)}
+#facilities .has-photo .fac-tag{display:inline-block;opacity:1;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:.34rem .75rem;border-radius:999px;font-size:.6rem;letter-spacing:.16em;margin-bottom:.75rem}
+#facilities .has-photo .fac-name{font-size:clamp(1.2rem,1.8vw,1.55rem);margin-bottom:.35rem;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+#facilities .has-photo:nth-child(1) .fac-name{font-size:clamp(1.8rem,3vw,2.6rem)}
+#facilities .has-photo .fac-status{color:rgba(255,255,255,.88)!important}
+#facilities .fac-status::before{opacity:1!important;background:#F3CF33!important}
+#facilities .has-photo::before{content:'';position:absolute;top:1rem;right:1rem;width:40px;height:40px;border-radius:50%;z-index:3;background:rgba(255,255,255,.18) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7'/%3E%3C/svg%3E") center/17px no-repeat;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3);opacity:0;transform:scale(.85);transition:opacity .3s,transform .3s}
+#facilities .has-photo:hover::before,#facilities .has-photo:focus-within::before{opacity:1;transform:none}
+
+/* Info cards (no photo) */
+#facilities .fac-card:not(.has-photo){grid-column:span 3;background:#fff!important;border:1px solid #E6E7E8;padding:1.9rem 1.5rem 1.6rem;box-shadow:0 8px 24px -16px rgba(16,11,51,.3)}
+#facilities .fac-card:not(.has-photo):hover{transform:translateY(-4px);box-shadow:0 20px 40px -18px rgba(16,11,51,.4);border-color:rgba(243,207,51,.7)}
+#facilities .fac-card-bg{inset:0 0 auto 0!important;height:4px;opacity:1!important}
+#facilities .fac-icon{width:44px;height:44px;border:0;border-radius:12px;clip-path:none;background:rgba(243,207,51,.28)}
+#facilities .fac-icon svg{stroke:#1C1650}
+#facilities .fac-card:not(.has-photo) .fac-tag{color:#1C1650;opacity:.6}
+#facilities .fac-card:not(.has-photo) .fac-name{color:#1C1650}
+#facilities .fac-card:not(.has-photo) .fac-desc{color:rgba(28,22,80,.7)!important}
+#facilities .fac-card:not(.has-photo) .fac-status{color:rgba(28,22,80,.6)!important}
+
+/* Accreditors strip on white */
+#facilities .fac-partners{border-top-color:#E6E7E8}
+#facilities .fac-partners-label{color:rgba(28,22,80,.55)!important}
+#facilities .fac-ptile{background:#fff;border-color:#E6E7E8}
+#facilities .fac-ptile:hover{background:#fff;border-color:#F3CF33}
+#facilities .fac-ptile svg{stroke:#1C1650}
+#facilities .fac-ptile span{color:#1C1650!important}
+
+@media(max-width:900px){
+  #facilities .fac-grid{grid-template-columns:repeat(6,1fr);grid-template-rows:none;grid-auto-rows:auto}
+  #facilities .fac-card.has-photo{min-height:230px}
+  #facilities .fac-card.has-photo:nth-child(1){grid-column:span 6;grid-row:auto;min-height:320px}
+  #facilities .fac-card.has-photo:nth-child(2),#facilities .fac-card.has-photo:nth-child(3),#facilities .fac-card.has-photo:nth-child(5),#facilities .fac-card.has-photo:nth-child(6),#facilities .fac-card:not(.has-photo){grid-column:span 3}
+  #facilities .fac-card.has-photo:nth-child(4){grid-column:span 6}
+}
+@media(max-width:560px){
+  #facilities .fac-grid{grid-template-columns:1fr}
+  #facilities .fac-card.has-photo,#facilities .fac-card:not(.has-photo){grid-column:1/-1!important}
+  #facilities .fac-card.has-photo:nth-child(1){min-height:280px}
+  #facilities .has-photo::before{opacity:1;transform:none}
+}
+
 /* Brand guide: gold on navy, navy on white */
 #directory,#merchandise,#mission,#programs{--gold:#1C1650;--gold-lt:#2B2275;--gold-dim:rgba(28,22,80,.08)}
 .nav-cta,.btn-gold,.hdr-apply,.hdr-enroll,.btn-enroll,.btn-primary-hero,.slide-btn,.pntc-soon-btn{color:#1C1650!important}
@@ -1272,7 +1334,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     </div>
     <!-- Training Center Swimming Pool — icon card -->
     <div class="fac-card reveal" style="transition-delay:.17s">
-      <div class="fac-card-bg" style="background:linear-gradient(135deg,#0D0930,#1C1650)"></div>
+      <div class="fac-card-bg" style="background:linear-gradient(135deg,#040e24,#0b2870)"></div>
       <div class="fac-icon"><svg viewBox="0 0 24 24"><path d="M2 12c1.5-1.5 3-2 4.5-2s3 .5 4.5 2 3 2 4.5 2 3-.5 4.5-2"/><path d="M2 17c1.5-1.5 3-2 4.5-2s3 .5 4.5 2 3 2 4.5 2 3-.5 4.5-2"/><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="10"/></svg></div>
       <div class="fac-tag">Sports & Wellness</div>
       <div class="fac-name">Training Center Swimming Pool</div>
