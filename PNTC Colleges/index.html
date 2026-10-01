@@ -1183,14 +1183,17 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #mission .swoosh path{fill:none;stroke:#F3CF33;stroke-width:7;stroke-linecap:round;stroke-dasharray:220;stroke-dashoffset:220}
 #mission .mission-left.visible .swoosh path{animation:pntcDraw .9s .5s cubic-bezier(.65,0,.35,1) forwards}
 #mission .sparkle{position:absolute;top:-.25em;right:-.7em;width:.55em;height:.55em;fill:#F3CF33;animation:pntcTwinkle 2.6s ease-in-out infinite}
-#mission .mission-lead strong,#mission .usp-text strong{background:linear-gradient(transparent 58%,rgba(243,207,51,.6) 58%) no-repeat 0 0/0% 100%;transition:background-size .9s cubic-bezier(.65,0,.35,1);padding:0 .08em}
-#mission .mission-right.visible .mission-lead strong,#mission .usp-grid.visible .usp-text strong{background-size:100% 100%}
-#mission .mission-lead strong:nth-of-type(2){transition-delay:0.15s}
-#mission .mission-lead strong:nth-of-type(3){transition-delay:0.3s}
-#mission .mission-lead strong:nth-of-type(4){transition-delay:0.44999999999999996s}
-#mission .mission-lead strong:nth-of-type(5){transition-delay:0.6s}
-#mission .mission-lead strong:nth-of-type(6){transition-delay:0.75s}
-#mission .mission-lead strong:nth-of-type(7){transition-delay:0.8999999999999999s}
+#mission .mission-chips{list-style:none;display:flex;flex-wrap:wrap;gap:.75rem .7rem;margin:1.6rem 0 0;padding:0}
+#mission .mission-chips li{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#1C1650;background:#fff;border:1.5px solid #1C1650;border-radius:999px;padding:.45rem 1rem;box-shadow:3px 3px 0 #F3CF33;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s;cursor:default}
+#mission .mission-chips li:nth-child(odd){transform:rotate(-1.5deg)}
+#mission .mission-chips li:nth-child(even){transform:rotate(1.2deg)}
+#mission .mission-chips li:hover{transform:translateY(-3px) rotate(0);box-shadow:5px 5px 0 #F3CF33}
+#mission .mission-right.visible .mission-chips li{animation:pntcPop .6s cubic-bezier(.34,1.56,.64,1) both}
+#mission .mission-right.visible .mission-chips li:nth-child(1){animation-delay:0.33s}
+#mission .mission-right.visible .mission-chips li:nth-child(2){animation-delay:0.41000000000000003s}
+#mission .mission-right.visible .mission-chips li:nth-child(3){animation-delay:0.49s}
+#mission .mission-right.visible .mission-chips li:nth-child(4){animation-delay:0.5700000000000001s}
+#mission .mission-right.visible .mission-chips li:nth-child(5){animation-delay:0.65s}
 #mission .usp::before{content:'';position:absolute;inset:0;border-radius:16px;padding:1.5px;background:linear-gradient(135deg,#F3CF33,#2B2275 50%,#F3CF33);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s;pointer-events:none}
 #mission .usp:hover::before{opacity:1}
 #mission .usp-ico{background:linear-gradient(135deg,#1C1650,#3B2F9E);transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
@@ -1208,11 +1211,9 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 @media(prefers-reduced-motion:reduce){
   #mission *,#mission::before,#mission .mission-top::before{animation:none!important;transition:none!important}
   #mission .swoosh path{stroke-dashoffset:0}
-  #mission .mission-lead strong,#mission .usp-text strong{background-size:100% 100%}
 }
 
 #mission .mission-left h2 em{color:#1C1650!important;background:#F3CF33;padding:0 .14em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-#mission .mission-lead strong,#mission .usp-text strong{color:#1C1650;font-weight:700}
 /* Sections alternate blue and white; stats band and Begin Your Journey are yellow; accreditations blue */
 #values{background:#1C1650!important}
 #uniforms{background:#fff!important}
@@ -1374,7 +1375,8 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
       <h2>Not Just<br><em>A Degree.</em><br><span class="swoosh">A Career.<svg viewBox="0 0 200 22" preserveAspectRatio="none" aria-hidden="true"><path d="M4 15 C 55 4, 130 3, 196 12"/></svg></span><svg class="sparkle" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0 L14.6 9.4 L24 12 L14.6 14.6 L12 24 L9.4 14.6 L0 12 L9.4 9.4 Z"/></svg></h2>
     </div>
     <div class="mission-right reveal" style="transition-delay:.12s">
-      <p class="mission-lead">Choosing a school is one of the most important decisions a family makes, and we take that responsibility seriously. <strong>Founded in 1994</strong>, PNTC Colleges now has campuses in <strong>Dasmariñas, Cavite</strong> and <strong>Intramuros, Manila</strong>, and has spent <strong>over 30 years</strong> building its reputation in maritime education. Our graduates serve in <strong>international fleets, government agencies, and global industries</strong>. This record is the result of high standards, investment in real facilities, and qualified faculty in every classroom. Today, as a <strong>CHED-recognized, MARINA-accredited, and ISO 9001:2015-certified</strong> institution, we apply the same proven system to Tourism, Criminology, Customs Administration, and Office Administration, because every student in every field deserves the same level of excellence. We also work to keep this education <strong>affordable</strong>.</p>
+      <p class="mission-lead">Choosing a school is one of the most important decisions a family makes, and we take that responsibility seriously. Founded in 1994, PNTC Colleges now has campuses in Dasmariñas, Cavite and Intramuros, Manila, and has spent over 30 years building its reputation in maritime education. Our graduates serve in international fleets, government agencies, and global industries. This record is the result of high standards, investment in real facilities, and qualified faculty in every classroom. Today, as a CHED-recognized, MARINA-accredited, and ISO 9001:2015-certified institution, we apply the same proven system to Tourism, Criminology, Customs Administration, and Office Administration, because every student in every field deserves the same level of excellence. We also work to keep this education affordable.</p>
+      <ul class="mission-chips" aria-label="PNTC at a glance"><li>Since 1994</li><li>30+ Years in Maritime Education</li><li>CHED Recognized</li><li>MARINA Accredited</li><li>ISO 9001:2015 Certified</li></ul>
     </div>
   </div>
   <div class="mission-divider reveal"></div>
@@ -1384,28 +1386,28 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
       <div class="usp-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="3"/><path d="M12 8v14M5 12H2a10 10 0 0 0 20 0h-3"/></svg></div>
       <p class="usp-tag">Our Story</p>
       <h3 class="usp-title">Built on Maritime. Proven Across Every Field.</h3>
-      <p class="usp-text">For <strong>over 30 years</strong>, we have focused on producing maritime graduates who are <strong>ready for the demands of the industry</strong>. The same discipline, rigor, and standards now guide every program we offer.</p>
+      <p class="usp-text">For over 30 years, we have focused on producing maritime graduates who are ready for the demands of the industry. The same discipline, rigor, and standards now guide every program we offer.</p>
     </article>
     <article class="usp">
       <span class="usp-num" aria-hidden="true">02</span>
       <div class="usp-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
       <p class="usp-tag">Our Facilities</p>
       <h3 class="usp-title">Equipped So Our Students Are Ready</h3>
-      <p class="usp-text"><strong>Ship bridge and engine room simulators</strong>, a <strong>live training vessel</strong>, campus swimming pools, and criminology and tourism laboratories allow every student in every program to train in an environment that reflects the real world they are preparing for.</p>
+      <p class="usp-text">Ship bridge and engine room simulators, a live training vessel, campus swimming pools, and criminology and tourism laboratories allow every student in every program to train in an environment that reflects the real world they are preparing for.</p>
     </article>
     <article class="usp">
       <span class="usp-num" aria-hidden="true">03</span>
       <div class="usp-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
       <p class="usp-tag">Our People</p>
       <h3 class="usp-title">Experienced Deans and Program Heads</h3>
-      <p class="usp-text">Our deans and program heads bring <strong>industry experience</strong> and <strong>academic leadership</strong> to every program they lead. Students learn from people with real experience in their fields.</p>
+      <p class="usp-text">Our deans and program heads bring industry experience and academic leadership to every program they lead. Students learn from people with real experience in their fields.</p>
     </article>
     <article class="usp">
       <span class="usp-num" aria-hidden="true">04</span>
       <div class="usp-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
       <p class="usp-tag">Our Promise</p>
       <h3 class="usp-title">Quality Education at an Affordable Cost</h3>
-      <p class="usp-text"><strong>CHED-recognized, MARINA-accredited, and ISO 9001:2015-certified.</strong> Families should not have to choose between quality education and financial stability. At PNTC, we work to keep <strong>quality education affordable</strong>.</p>
+      <p class="usp-text">CHED-recognized, MARINA-accredited, and ISO 9001:2015-certified. Families should not have to choose between quality education and financial stability. At PNTC, we work to keep quality education affordable.</p>
     </article>
   </div>
 </section>
