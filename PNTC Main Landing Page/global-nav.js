@@ -46,6 +46,12 @@
     '@media(max-width:720px){#pntc-gnav .gn-brand img{height:18px}#pntc-gnav .gn-list{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent);padding-right:2rem}}'
   ].join('');
 
+  // PNTC brand guide colors everywhere except Senior High School, which keeps its own palette
+  var P = AREA === 'shs'
+    ? { bg: '#050a15', gold: '#C8960C', goldLt: '#E6AF1A', ink: '#060c19' }
+    : { bg: '#0D0930', gold: '#F3CF33', goldLt: '#FFF09B', ink: '#1C1650' };
+  css = css.replace(/#050a15/g, P.bg).replace(/#C8960C/g, P.gold).replace(/#E6AF1A/g, P.goldLt).replace(/#060c19/g, P.ink);
+
   if (!document.querySelector('link[href*="Barlow+Condensed"]')) {
     var font = document.createElement('link');
     font.rel = 'stylesheet';
