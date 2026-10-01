@@ -6,7 +6,7 @@
 <title>PNTC Colleges, Inc. | Maritime &amp; Business School in Cavite and Manila</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Barlow+Condensed:wght@800;900&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════
    TOKENS — light theme only, navy + gold
@@ -782,15 +782,21 @@ h1.hero-h1 span.gold { color:var(--gold); }
 #network .nc-link::after{content:'';width:22px;height:22px;border-radius:50%;background:#1C1650 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F3CF33' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/13px no-repeat;transition:transform .25s}
 #network .net-card:hover .nc-link{background:#FFF09B;gap:.85rem}
 #network .net-card:hover .nc-link::after{transform:translateX(2px)}
-#cta{background:linear-gradient(160deg,#F4F5FA 0%,#E6E7E8 55%,#FFF7D1 100%)!important;border-top:1px solid #E6E7E8}
-#cta::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(40% 60% at 85% 100%,rgba(243,207,51,.25),transparent 70%),radial-gradient(35% 55% at 10% 0%,rgba(28,22,80,.06),transparent 70%)}
+/* CTA matches the College "Begin Your Journey" band: yellow, slanted edges, condensed headline */
+#cta{background:#F3CF33!important;padding:clamp(4.5rem,9vw,7rem) clamp(1.5rem,6vw,5rem)!important;clip-path:polygon(0 44px,100% 0,100% calc(100% - 44px),0 100%);margin:-44px 0;z-index:2;position:relative}
+#cta::before{display:none}
 #cta>*{position:relative;z-index:1}
-#cta .cta-eyebrow{color:rgba(28,22,80,.7)!important}
-#cta .cta-h2{color:#1C1650!important}
-#cta .cta-h2 span.gold{color:#1C1650!important;background:linear-gradient(transparent 60%,rgba(243,207,51,.8) 60%);padding:0 .12em}
-#cta .cta-sub{color:rgba(28,22,80,.75)!important}
-#cta .btn-outline-white{border-color:#1C1650!important;color:#1C1650!important}
+#cta .cta-eyebrow{color:#1C1650!important;opacity:.6;margin-bottom:.75rem}
+#cta .cta-h2{font-family:'Barlow Condensed',sans-serif!important;font-weight:900;font-size:clamp(2.8rem,7vw,5.5rem)!important;text-transform:uppercase;letter-spacing:0!important;line-height:.92!important;color:#1C1650!important;margin-bottom:1.1rem}
+#cta .cta-h2 span.gold{color:#1C1650!important}
+#cta .cta-sub{color:rgba(16,11,51,.62)!important;font-size:.95rem!important;max-width:52ch!important}
+#cta .cta-btns a{font-family:'Barlow Condensed',sans-serif!important;font-weight:800!important;font-size:.95rem!important;letter-spacing:.12em!important;border-radius:0!important;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));padding:.95rem 2.4rem!important;transition:background .2s,color .2s}
+#cta .btn-gold{background:#1C1650!important;color:#fff!important;border:0!important;box-shadow:none!important}
+#cta .btn-gold:hover{background:#2B2275!important}
+#cta .btn-outline-white{background:rgba(255,255,255,.35)!important;border:0!important;color:#1C1650!important}
 #cta .btn-outline-white:hover{background:#1C1650!important;color:#fff!important}
+#footer{position:relative;z-index:1}
+@media(max-width:768px){#cta{clip-path:polygon(0 24px,100% 0,100% calc(100% - 24px),0 100%);margin:-24px 0}}
 @media(hover:hover) and (min-width:961px){
   #network .nc-desc{max-height:0;opacity:0;margin-bottom:0;overflow:hidden;transform:translateY(8px);transition:max-height .5s ease,opacity .35s ease,transform .45s ease,margin .45s ease}
   #network .net-card:hover .nc-desc,#network .net-card:focus-visible .nc-desc{max-height:7.5rem;opacity:1;margin-bottom:1.2rem;transform:none}
