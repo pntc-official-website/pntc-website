@@ -997,6 +997,46 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   #nav-toggle:checked ~ * .nav-links,#nav-toggle:checked + .nav .nav-links{display:flex}
 }
 @media(max-width:768px){#nav-toggle:checked + .nav .nav-links{display:flex}}
+
+#hero.hero::before{animation:sh-glow 10s ease-in-out infinite alternate}
+#hero .hero-fade::before{content:'';position:absolute;right:-8%;top:-20%;width:55%;height:75%;background:radial-gradient(closest-side,rgba(255,204,0,.16),transparent);animation:sh-glow2 9s ease-in-out infinite alternate}
+#hero .hero-fade::after{content:'';position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,.13) 1.2px,transparent 1.6px) 0 0/22px 22px;-webkit-mask-image:linear-gradient(260deg,#000 0%,transparent 50%);mask-image:linear-gradient(260deg,#000 0%,transparent 50%)}
+#hero.hero::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:56px;background:#F5F7FF;clip-path:polygon(0 100%,100% 0,100% 100%);z-index:5;pointer-events:none}
+#hero .hero-photo{animation:sh-photo 1.2s cubic-bezier(.2,.7,.2,1) both}
+#hero .hero-tag{display:inline-flex;align-items:center;gap:.6rem;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);box-shadow:none;padding:.5rem 1.1rem;border-radius:999px;letter-spacing:.16em;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);animation:sh-fade .8s both}
+#hero .sh-dot{position:relative;width:6px;height:6px;border-radius:50%;background:#FFCC00}
+#hero .sh-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid #FFCC00;animation:sh-ping 2s ease-out infinite}
+#hero .hero-h1{font-size:clamp(2.4rem,3.6vw,3.5rem);white-space:nowrap;line-height:1.02;letter-spacing:-.01em}
+#hero .hero-h1 .hl{display:block;overflow:hidden;padding:.02em 0 .1em}
+#hero .hero-h1 .hl>span{display:inline-block;animation:sh-rise .9s cubic-bezier(.2,.7,.2,1) both}
+#hero .hero-h1 .hl:nth-child(3)>span{animation-delay:.12s}
+#hero .hero-h1 .hl:nth-child(4)>span{animation-delay:.24s}
+#hero .hero-h1 .hl:last-child{overflow:visible}
+#hero .hero-h1 em{position:relative;display:inline-block}
+#hero .hl-swoosh{position:absolute;left:0;bottom:-.1em;width:100%;height:.22em;overflow:visible;fill:none;stroke:#FFCC00;stroke-width:5;stroke-linecap:round;stroke-dasharray:320;stroke-dashoffset:320;animation:sh-draw 1s .9s ease-out forwards;opacity:.85}
+#hero .hero-desc{animation:sh-fade .9s .5s both}
+#hero .hero-btns{animation:sh-fade .9s .65s both}
+#hero .btn-enroll{color:#181D71;font-weight:800;box-shadow:0 14px 30px -12px rgba(255,204,0,.7)}
+#hero .btn-learn{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+#hero .btn-learn:hover{background:#fff;color:#181D71;border-color:#fff}
+#hero .hero-arrow{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+@keyframes sh-rise{from{transform:translateY(105%)}to{transform:none}}
+@keyframes sh-fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes sh-photo{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes sh-draw{to{stroke-dashoffset:0}}
+@keyframes sh-ping{from{transform:scale(.6);opacity:.9}to{transform:scale(2);opacity:0}}
+@keyframes sh-glow{to{transform:translate(4%,-3%) scale(1.06)}}
+@keyframes sh-glow2{to{transform:translate(-10%,10%) scale(1.1)}}
+@media(max-width:768px){
+  #hero.hero{padding-bottom:72px}
+  #hero.hero::after{height:32px}
+  #hero .hero-h1{font-size:34px;white-space:normal}
+}
+@media(prefers-reduced-motion:reduce){
+  #hero.hero::before,#hero .hero-fade::before,#hero .sh-dot::after{animation:none}
+  #hero .hero-photo,#hero .hero-tag,#hero .hero-h1 .hl>span,#hero .hero-desc,#hero .hero-btns{animation:none}
+  #hero .hl-swoosh{animation:none;stroke-dashoffset:0}
+}
 </style>
 <meta name="description" content="PNTC Colleges Senior High School in Dasmariñas, Cavite offers DepEd-recognized Academic and Tech-Pro tracks, including maritime, STEM, tourism, and humanities strands.">
 <link rel="canonical" href="https://www.pntc.edu.ph/shs/">
@@ -1040,8 +1080,8 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   <div class="hero-fade"></div>
   <span class="hero-spread">Spread Your Strands</span>
   <div class="hero-text">
-    <div class="hero-tag">Senior High School</div>
-    <h1 class="hero-h1"><span class="sr-only">PNTC Colleges Senior High School, Dasmariñas, Cavite. </span>BE PART OF OUR<br>GROWING COMMUNITY<br><em>#ONWARDPNTC!</em></h1>
+    <div class="hero-tag"><span class="sh-dot"></span>Senior High School</div>
+    <h1 class="hero-h1"><span class="sr-only">PNTC Colleges Senior High School, Dasmariñas, Cavite. </span><span class="hl"><span>BE PART OF OUR</span></span><span class="hl"><span>GROWING COMMUNITY</span></span><span class="hl"><span><em>#ONWARDPNTC!<svg class="hl-swoosh" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 15 C 80 4, 200 3, 297 11"/></svg></em></span></span></h1>
     <p class="hero-desc">PNTC Colleges Senior High School in Dasmariñas, Cavite prepares future leaders through DepEd-recognized Academic and Tech-Pro tracks, innovative learning, and values formation. Join thousands of students who chose PNTC as their path to success.</p>
     <div class="hero-btns">
       <button class="btn-enroll">Enroll Today</button>
