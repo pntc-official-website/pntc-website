@@ -750,22 +750,23 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .nav-links a.is-current{color:#fff}
 .nav-links a.is-current::after{transform:scaleX(1)}
 
-#network{background:#1C1650!important;padding:clamp(4.5rem,8vw,6.5rem) clamp(1.25rem,4vw,3rem)!important;position:relative;overflow:hidden}
-#network::before{content:'';position:absolute;inset:-20% -10%;z-index:0;pointer-events:none;background:radial-gradient(38% 30% at 50% 6%,rgba(243,207,51,.2),transparent 70%),radial-gradient(30% 34% at 8% 55%,rgba(80,66,200,.6),transparent 70%),radial-gradient(28% 30% at 94% 78%,rgba(243,207,51,.16),transparent 70%),radial-gradient(34% 30% at 88% 22%,rgba(80,66,200,.5),transparent 70%);animation:nw-drift 22s ease-in-out infinite alternate}
-#network::after{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='240' viewBox='0 0 1440 240' fill='none' stroke='%23F3CF33' stroke-opacity='.4' stroke-width='1.8'%3E%3Cpath d='M0 150 C240 90 480 210 720 150 S1200 90 1440 150'/%3E%3Cpath d='M0 185 C240 125 480 245 720 185 S1200 125 1440 185' stroke-opacity='.2'/%3E%3C/svg%3E") bottom center/1440px 240px repeat-x,radial-gradient(rgba(255,255,255,.2) 1.3px,transparent 1.6px) 0 0/22px 22px;-webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 28%,transparent 62%,#000 100%);mask-image:linear-gradient(180deg,#000 0%,transparent 28%,transparent 62%,#000 100%);animation:nw-wave 30s linear infinite}
+#network{background:#fff!important;padding:clamp(4.5rem,8vw,6.5rem) clamp(1.25rem,4vw,3rem)!important;position:relative;overflow:hidden}
+#network::before{content:'';position:absolute;inset:-20% -10%;z-index:0;pointer-events:none;background:radial-gradient(38% 30% at 50% 6%,rgba(243,207,51,.22),transparent 70%),radial-gradient(30% 34% at 8% 55%,rgba(28,22,80,.07),transparent 70%),radial-gradient(28% 30% at 94% 78%,rgba(243,207,51,.2),transparent 70%),radial-gradient(34% 30% at 88% 22%,rgba(28,22,80,.06),transparent 70%);animation:nw-drift 22s ease-in-out infinite alternate}
+#network::after{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='240' viewBox='0 0 1440 240' fill='none' stroke='%231C1650' stroke-opacity='.18' stroke-width='1.8'%3E%3Cpath d='M0 150 C240 90 480 210 720 150 S1200 90 1440 150'/%3E%3Cpath d='M0 185 C240 125 480 245 720 185 S1200 125 1440 185' stroke-opacity='.2'/%3E%3C/svg%3E") bottom center/1440px 240px repeat-x,radial-gradient(rgba(28,22,80,.14) 1.3px,transparent 1.6px) 0 0/22px 22px;-webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 28%,transparent 62%,#000 100%);mask-image:linear-gradient(180deg,#000 0%,transparent 28%,transparent 62%,#000 100%);animation:nw-wave 30s linear infinite}
 #network>*{position:relative;z-index:1}
 @keyframes nw-drift{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(3%,2%,0) scale(1.05)}100%{transform:translate3d(-3%,-1%,0) scale(1)}}
 @keyframes nw-wave{to{background-position:1440px bottom,0 0}}
 #network .network-hd{position:relative;margin-bottom:clamp(2.5rem,5vw,3.5rem)}
-#network .network-hd h2{font-size:clamp(2rem,4.4vw,3.2rem)}
-#network .network-hd h2 span{color:#F3CF33}
-#network .network-hd p{color:rgba(255,255,255,.72)!important;font-size:.98rem;max-width:560px}
+#network .network-hd h2{font-size:clamp(2rem,4.4vw,3.2rem);color:#1C1650!important}
+#network .network-hd .eyebrow{color:rgba(28,22,80,.7)!important}
+#network .network-hd h2 span{color:#1C1650;background:linear-gradient(transparent 60%,rgba(243,207,51,.75) 60%);padding:0 .12em}
+#network .network-hd p{color:rgba(28,22,80,.75)!important;font-size:.98rem;max-width:560px}
 #network .net-grid{grid-template-columns:repeat(12,1fr);gap:clamp(.9rem,1.6vw,1.3rem);max-width:1240px;position:relative}
-#network .net-card{grid-column:span 6;min-height:clamp(340px,34vw,420px);border-radius:24px;isolation:isolate;box-shadow:0 26px 50px -28px rgba(0,0,0,.75);transition:transform .45s var(--ease,cubic-bezier(.22,.61,.36,1)),box-shadow .45s}
+#network .net-card{grid-column:span 6;min-height:clamp(340px,34vw,420px);border-radius:24px;isolation:isolate;box-shadow:0 26px 50px -26px rgba(16,11,51,.45);transition:transform .45s var(--ease,cubic-bezier(.22,.61,.36,1)),box-shadow .45s}
 #network .net-card:nth-child(1),#network .net-card:nth-child(4){grid-column:span 5}
 #network .net-card:nth-child(2),#network .net-card:nth-child(3){grid-column:span 7}
 #network .net-card::after{content:'';position:absolute;inset:0;border-radius:24px;box-shadow:inset 0 0 0 0 #F3CF33;transition:box-shadow .35s;pointer-events:none;z-index:4}
-#network .net-card:hover{transform:translateY(-6px);box-shadow:0 36px 60px -26px rgba(0,0,0,.85)}
+#network .net-card:hover{transform:translateY(-6px);box-shadow:0 36px 60px -24px rgba(16,11,51,.55)}
 #network .net-card:hover::after{box-shadow:inset 0 0 0 2px #F3CF33}
 #network .nc-bg{filter:none;transition:transform .9s var(--ease,cubic-bezier(.22,.61,.36,1))}
 #network .net-card:hover .nc-bg{transform:scale(1.07)}
@@ -781,6 +782,15 @@ h1.hero-h1 span.gold { color:var(--gold); }
 #network .nc-link::after{content:'';width:22px;height:22px;border-radius:50%;background:#1C1650 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F3CF33' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/13px no-repeat;transition:transform .25s}
 #network .net-card:hover .nc-link{background:#FFF09B;gap:.85rem}
 #network .net-card:hover .nc-link::after{transform:translateX(2px)}
+#cta{background:linear-gradient(160deg,#F4F5FA 0%,#E6E7E8 55%,#FFF7D1 100%)!important;border-top:1px solid #E6E7E8}
+#cta::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(40% 60% at 85% 100%,rgba(243,207,51,.25),transparent 70%),radial-gradient(35% 55% at 10% 0%,rgba(28,22,80,.06),transparent 70%)}
+#cta>*{position:relative;z-index:1}
+#cta .cta-eyebrow{color:rgba(28,22,80,.7)!important}
+#cta .cta-h2{color:#1C1650!important}
+#cta .cta-h2 span.gold{color:#1C1650!important;background:linear-gradient(transparent 60%,rgba(243,207,51,.8) 60%);padding:0 .12em}
+#cta .cta-sub{color:rgba(28,22,80,.75)!important}
+#cta .btn-outline-white{border-color:#1C1650!important;color:#1C1650!important}
+#cta .btn-outline-white:hover{background:#1C1650!important;color:#fff!important}
 @media(hover:hover) and (min-width:961px){
   #network .nc-desc{max-height:0;opacity:0;margin-bottom:0;overflow:hidden;transform:translateY(8px);transition:max-height .5s ease,opacity .35s ease,transform .45s ease,margin .45s ease}
   #network .net-card:hover .nc-desc,#network .net-card:focus-visible .nc-desc{max-height:7.5rem;opacity:1;margin-bottom:1.2rem;transform:none}
