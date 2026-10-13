@@ -938,6 +938,7 @@ h1.hero-h1{font-size:clamp(2rem,5vw,4.2rem)!important}
 #hero .hc-tag{position:absolute;right:clamp(1.2rem,3vw,3.2rem);bottom:5.2rem;z-index:6;display:inline-flex;align-items:center;gap:.7rem;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(.95rem,1.25vw,1.2rem);letter-spacing:.16em;text-transform:uppercase;color:#fff;background:rgba(16,11,51,.62);border:1px solid rgba(255,255,255,.28);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);padding:.7rem 1.3rem;border-radius:999px;box-shadow:0 18px 34px -16px rgba(0,0,0,.8);opacity:0;animation:hc-tag .8s cubic-bezier(.2,.9,.25,1.2) both;animation-delay:calc(.9s + 21 * .14s)}
 #hero .hc-tag i{width:9px;height:9px;border-radius:50%;background:#F3CF33;box-shadow:0 0 0 5px rgba(243,207,51,.28)}
 #hero .hc-wall.wait .hc-tile,#hero .hc-wall.wait .hc-tag,#hero .hc-wall.wait .hc-track{animation-play-state:paused}
+#hero .hc-live .hc-tile{animation:none;opacity:1}
 @keyframes hc-rise{0%{opacity:0;transform:translateY(90px) scale(.72);filter:blur(10px) brightness(1.6)}60%{opacity:1;filter:blur(0) brightness(1.1)}100%{opacity:1;transform:none;filter:none}}
 @keyframes hc-up{from{transform:translateY(0)}to{transform:translateY(calc(-33.3333% - clamp(.7rem,1.2vw,1.2rem) / 3))}}
 @keyframes hc-down{from{transform:translateY(calc(-33.3333% - clamp(.7rem,1.2vw,1.2rem) / 3))}to{transform:translateY(0)}}
@@ -997,6 +998,30 @@ h1.hero-h1{font-size:clamp(2rem,5vw,4.2rem)!important}
     <span class="hc-tag"><i></i>The Family We Are Building</span>
   </div>
   <script>(function(){var w=document.querySelector('.hc-wall');if(!w||!('IntersectionObserver' in window))return;var r=w.getBoundingClientRect();if(r.top<window.innerHeight*.8&&r.bottom>0)return;w.classList.add('wait');var io=new IntersectionObserver(function(es){if(es.some(function(e){return e.isIntersecting})){w.classList.remove('wait');io.disconnect();}},{threshold:.2});io.observe(w);})();</script>
+  <script>
+  /* Photos added later: the wall looks for the next numbers (hero-collage-22.jpg, 23 ...) and adds them.
+     Uploading the next number in the admin image manager is all it takes. */
+  (function(){
+    var w=document.querySelector('.hc-wall');if(!w)return;
+    var tracks=[].slice.call(w.querySelectorAll('.hc-track'));
+    function own(t){return [].slice.call(t.querySelectorAll('.hc-tile:not([aria-hidden])'));}
+    var n=tracks.reduce(function(a,t){return a+own(t).length;},0);
+    function add(src){
+      var t=tracks.slice().sort(function(a,b){return own(a).length-own(b).length;})[0];
+      var srcs=own(t).map(function(f){return f.querySelector('img').getAttribute('src');});srcs.push(src);
+      var one=srcs.map(function(s,i){return '<figure class="hc-tile"><img src="'+s+'" alt="" width="720" height="480" decoding="async"></figure>';}).join('');
+      t.innerHTML=one+one.replace(/class="hc-tile"/g,'class="hc-tile" aria-hidden="true"')+one.replace(/class="hc-tile"/g,'class="hc-tile" aria-hidden="true"');
+      t.classList.add('hc-live');
+    }
+    function probe(i){
+      if(i>80)return;
+      var src='/hero-collage-'+(i<10?'0':'')+i+'.jpg',im=new Image();
+      im.onload=function(){add(src);probe(i+1);};
+      im.src=src;
+    }
+    window.addEventListener('load',function(){setTimeout(function(){probe(n+1);},4000);});
+  })();
+  </script>
 
   <div class="hero-vig"></div>
 

@@ -90,16 +90,23 @@ const SITES = {
   },
   colleges: {
     id: 'colleges', name: 'PNTC Colleges', short: 'Colleges',
-    dir: 'PNTC Colleges', color: '#0B2A6B', accent: '#C8960C', font: 'barlow'
+    dir: 'PNTC Colleges', color: '#1C1650', accent: '#F3CF33', font: 'barlow'
   },
   maritime: {
     id: 'maritime', name: 'PNTC Maritime Training Center', short: 'Maritime',
-    dir: 'PNTC Maritime Training and Assessment Center', color: '#0D1B3E', accent: '#C8960C', font: 'barlow'
+    dir: 'PNTC Maritime Training and Assessment Center', color: '#1C1650', accent: '#F3CF33', font: 'barlow'
   },
   aman: {
     id: 'aman', name: 'Training Vessel Aman Sinaya', short: 'Aman Sinaya',
-    dir: 'Aman Sinaya', color: '#0A1F35', accent: '#C8960C', font: 'barlow'
+    dir: 'Aman Sinaya', color: '#1C1650', accent: '#F3CF33', font: 'barlow'
   }
+};
+
+// The image manager also covers the main landing page (hero photo wall and shared images).
+// It is not a place to publish posts, so it stays out of SITES.
+const IMAGE_SITES = {
+  ...SITES,
+  main: { id: 'main', name: 'PNTC Main Site', short: 'Main Site', dir: 'PNTC Main Landing Page' }
 };
 
 // ── Middleware ─────────────────────────────────────────────────
@@ -397,7 +404,7 @@ app.post('/api/upload/featured', (req, res) => {
 //  API — Images per site (from Supabase Storage)
 // ══════════════════════════════════════════════════════════════
 app.get('/api/images/:site', async (req, res) => {
-  const site = SITES[req.params.site];
+  const site = IMAGE_SITES[req.params.site];
   if (!site) return res.status(404).json({ error: 'Unknown site' });
 
   try {
@@ -435,7 +442,7 @@ app.get('/api/images/:site', async (req, res) => {
 });
 
 app.post('/api/images/:site/replace', replaceUpload.single('image'), async (req, res) => {
-  const site = SITES[req.params.site];
+  const site = IMAGE_SITES[req.params.site];
   if (!site || !req.file || !req.body.relPath) {
     return res.status(400).json({ error: 'Invalid request' });
   }
@@ -459,7 +466,7 @@ app.post('/api/images/:site/replace', replaceUpload.single('image'), async (req,
 //  GitHub Site Images (list, replace, upload)
 // ══════════════════════════════════════════════════════════════
 app.get('/api/images/github/:site', async (req, res) => {
-  const site = SITES[req.params.site];
+  const site = IMAGE_SITES[req.params.site];
   if (!site) return res.status(404).json({ error: 'Unknown site' });
   if (!GH_TOKEN) return res.status(503).json({ error: 'GitHub token not configured' });
   try {
@@ -497,7 +504,7 @@ app.get('/api/images/github/:site', async (req, res) => {
 });
 
 app.post('/api/images/github/:site/replace', replaceUpload.single('image'), async (req, res) => {
-  const site = SITES[req.params.site];
+  const site = IMAGE_SITES[req.params.site];
   if (!site || !req.file || !req.body.filePath) {
     return res.status(400).json({ error: 'Need image file and filePath' });
   }
@@ -551,7 +558,7 @@ app.post('/api/images/github/:site/replace', replaceUpload.single('image'), asyn
 });
 
 app.post('/api/images/github/:site/upload', replaceUpload.single('image'), async (req, res) => {
-  const site = SITES[req.params.site];
+  const site = IMAGE_SITES[req.params.site];
   if (!site || !req.file) return res.status(400).json({ error: 'No image provided' });
   try {
     const safeName = (req.file.originalname || 'image').replace(/[^a-zA-Z0-9._\- ]/g, '').trim()
@@ -1110,7 +1117,8 @@ async function updateWhatsNewGitHub(allPosts,site){
   const END='<!-- PNTC_NEWS_END -->';
   const si=html.indexOf(START),ei=html.indexOf(END);
   if(si===-1||ei===-1)return;
-  const published=allPosts.slice().sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt)).slice(0,3);
+  // The College page shows a carousel, so it gets more posts than the three card grids of the other sites
+  const published=allPosts.slice().sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt)).slice(0,site.id==='colleges'?12:3);
   let block;
   if(site.id==='shs')block=buildSHSNewsBlock(published,site);
   else if(site.id==='colleges')block=buildCollegesNewsBlock(published,site);
@@ -1131,17 +1139,20 @@ function buildSHSNewsBlock(posts,site){
   <div style="text-align:right;padding:0 0 16px"><a href="blog/index.html" style="font-size:13px;font-weight:700;color:#181D71;letter-spacing:.06em;text-transform:uppercase">See all posts →</a></div>`;
 }
 
+// Controls and script of the College "What's New" carousel. Kept identical to the block on the page.
+const COLLEGES_NEWS_TAIL = "  <div class=\"news-ctrl\">\n    <div class=\"news-dots\" id=\"news-dots\" aria-hidden=\"true\"></div>\n    <a href=\"blog/\" class=\"slide-btn news-allbtn\">View All Posts <svg viewBox=\"0 0 12 12\"><line x1=\"2\" y1=\"6\" x2=\"10\" y2=\"6\"/><polyline points=\"7 3 10 6 7 9\"/></svg></a>\n    <div class=\"news-arrows\"><button class=\"news-arrow\" id=\"news-prev\" aria-label=\"Previous posts\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><polyline points=\"15 18 9 12 15 6\"/></svg></button><button class=\"news-arrow\" id=\"news-next\" aria-label=\"Next posts\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><polyline points=\"9 18 15 12 9 6\"/></svg></button></div>\n  </div>\n  <script>\n  (function(){\n    var g=document.getElementById('news-grid');if(!g)return;\n    var dots=document.getElementById('news-dots'),prev=document.getElementById('news-prev'),next=document.getElementById('news-next');\n    var L='<svg viewBox=\"0 0 12 12\"><line x1=\"2\" y1=\"6\" x2=\"10\" y2=\"6\"/><polyline points=\"7 3 10 6 7 9\"/></svg>';\n    function e(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;');}\n    function step(){var c=g.querySelector('.news-card');if(!c)return g.clientWidth;var gap=parseFloat(getComputedStyle(g).columnGap)||0;return c.getBoundingClientRect().width+gap;}\n    function perView(){return Math.max(1,Math.round((g.clientWidth+1)/step()));}\n    function pages(){return Math.max(1,g.children.length-perView()+1);}\n    function cur(){return Math.round(g.scrollLeft/step());}\n    function paint(){\n      var n=pages(),i=Math.min(cur(),n-1),k;\n      if(dots.children.length!==n){dots.innerHTML='';for(k=0;k<n;k++)dots.appendChild(document.createElement('span'));}\n      for(k=0;k<n;k++)dots.children[k].className=k===i?'on':'';\n      prev.disabled=g.scrollLeft<4;next.disabled=g.scrollLeft+g.clientWidth>=g.scrollWidth-4;\n      dots.parentNode.classList.toggle('single',n<2);\n    }\n    function go(i){g.scrollTo({left:Math.max(0,i)*step(),behavior:'smooth'});}\n    prev.addEventListener('click',function(){go(cur()-1);});\n    next.addEventListener('click',function(){go(cur()+1);});\n    var t;g.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(paint,60);},{passive:true});\n    window.addEventListener('resize',paint);\n    paint();\n    if(!window.fetch)return;\n    fetch('/api/public/posts?site=colleges&limit=20').then(function(r){return r.json();}).then(function(posts){\n      if(!Array.isArray(posts)||!posts.length)return;\n      g.innerHTML=posts.map(function(p){\n        var d=new Date(p.publishedAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'Asia/Manila'});\n        var th=p.featuredImage?'<div class=\"news-thumb\"><img src=\"'+e(p.featuredImage)+'\" alt=\"'+e(p.title)+'\" loading=\"lazy\"></div>':'<div class=\"news-thumb\" style=\"background:linear-gradient(135deg,#1C1650,#120D3A)\"></div>';\n        return '<article class=\"news-card visible\">'+th+'<div class=\"news-body\">'+(p.category?'<span class=\"news-tag\">'+e(p.category)+'</span>':'')+'<div class=\"news-date\">'+e(d)+'</div><h3>'+e(p.title)+'</h3><p>'+e(p.excerpt)+'</p><a href=\"blog/'+e(p.slug)+'.html\" class=\"news-link\">Read More '+L+'</a></div></article>';\n      }).join('');\n      g.scrollLeft=0;paint();\n    }).catch(function(){});\n  })();\n  </script>";
+
 function buildCollegesNewsBlock(posts,site){
   if(!posts.length)return'';
   const SVG=`<svg viewBox="0 0 12 12"><line x1="2" y1="6" x2="10" y2="6"/><polyline points="7 3 10 6 7 9"/></svg>`;
   const cards=posts.map((p,i)=>{
-    const date=new Date(p.publishedAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    const date=new Date(p.publishedAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'Asia/Manila'});
     const img=toSiteRelPath(p.featuredImage,site);
-    const thumb=img?`<div class="news-thumb"><img src="${img}" alt="${escHtml(p.title)}" style="object-position:center top"></div>`:`<div class="news-thumb" style="background:linear-gradient(135deg,#0B2A6B,#061c4a)"></div>`;
-    const delay=i>0?` style="transition-delay:${i*0.1}s"`:'';
+    const thumb=img?`<div class="news-thumb"><img src="${escHtml(img)}" alt="${escHtml(p.title)}" loading="lazy"></div>`:`<div class="news-thumb" style="background:linear-gradient(135deg,#1C1650,#120D3A)"></div>`;
+    const delay=i>0?` style="transition-delay:${Math.min(i,6)*0.1}s"`:'';
     return`<article class="news-card reveal"${delay}>${thumb}<div class="news-body">${p.category?`<span class="news-tag">${escHtml(p.category)}</span>`:''}<div class="news-date">${escHtml(date)}</div><h3>${escHtml(p.title)}</h3><p>${escHtml(p.excerpt||'')}</p><a href="blog/${p.slug}.html" class="news-link">Read More ${SVG}</a></div></article>`;
   }).join('\n');
-  return`  <div class="news-grid">${cards}</div>`;
+  return`  <div class="news-grid" id="news-grid" tabindex="0" aria-label="Latest posts">${cards}</div>\n${COLLEGES_NEWS_TAIL}`;
 }
 
 function buildDefaultNewsBlock(posts,site){
@@ -1171,8 +1182,26 @@ function buildResearchBlock(items){
 function buildCareersBlock(items){
   return`    <div class="jobs-grid">${items.map(i=>`<div class="job-card reveal"><div class="job-dept">${escHtml(i.department)}</div><div class="job-title">${escHtml(i.title)}</div><div class="job-meta"><span>📍 ${escHtml(i.location||'Dasmariñas, Cavite')}</span></div><p class="job-desc">${escHtml(i.description)}</p><span class="job-badge ${i.badgeType==='Part-Time'?'b-pt':'b-ft'}">${escHtml(i.badgeType||'Full-Time')}</span></div>`).join('')}</div>`;
 }
+// One contact line from the admin form becomes one link or label on the directory pages.
+// Accepted: an email, a phone number, a tel:/mailto:/https: link, or "Facebook: Page Name" (add " | https://facebook.com/..." to make it clickable).
+function dirContact(raw){
+  const c=String(raw||'').trim();
+  if(!c)return'';
+  const fb=c.match(/^facebook\s*:?\s*(.*)$/i);
+  if(fb){
+    const parts=fb[1].split('|').map(x=>x.trim());
+    const url=parts.find(x=>/^https?:\/\//i.test(x));
+    const name=parts.find(x=>x&&!/^https?:\/\//i.test(x))||'Facebook page';
+    return url?`<a class="dir-fb" href="${escHtml(url)}" target="_blank" rel="noopener">${escHtml(name)}</a>`:`<span class="dir-fb">${escHtml(name)}</span>`;
+  }
+  if(/^https?:\/\/(www\.|m\.)?(facebook|fb)\.com/i.test(c))return`<a class="dir-fb" href="${escHtml(c)}" target="_blank" rel="noopener">Facebook page</a>`;
+  if(c.startsWith('mailto:')||c.startsWith('http')||c.startsWith('tel:'))return`<a href="${escHtml(c)}">${escHtml(c.replace(/^(mailto:|tel:)/,''))}</a>`;
+  if(!c.includes('@')&&/\d/.test(c)){const n=((c.match(/\(?0\d[\d\s()\-]{6,}\d/)||[c])[0]).replace(/\D/g,'');return`<a href="tel:${n.startsWith('0')?'+63'+n.slice(1):n}">${escHtml(c)}</a>`;}
+  if(c.includes('@'))return`<a href="mailto:${escHtml(c)}">${escHtml(c)}</a>`;
+  return`<span>${escHtml(c)}</span>`;
+}
 function buildDirectoryBlock(items){
-  return`    <div class="dir-grid">${items.map(i=>{const contacts=(i.contacts||[]).map(c=>{if(c.startsWith('mailto:')||c.startsWith('http')||c.startsWith('tel:'))return`<a href="${escHtml(c)}">${escHtml(c.replace(/^(mailto:|tel:)/,''))}</a>`;if(!c.includes('@')&&/\d/.test(c)){const n=((c.match(/\(?0\d[\d\s()\-]{6,}\d/)||[c])[0]).replace(/\D/g,'');return`<a href="tel:${n.startsWith('0')?'+63'+n.slice(1):n}">${escHtml(c)}</a>`;}return`<a href="mailto:${escHtml(c)}">${escHtml(c)}</a>`;}).join('');return`<div class="dir-card reveal"><div class="dir-ico">${escHtml(i.icon||'📋')}</div><div class="dir-name">${escHtml(i.name)}</div><p class="dir-desc">${escHtml(i.description)}</p><div class="dir-contacts">${contacts}</div></div>`;}).join('')}</div>`;
+  return`    <div class="dir-grid">${items.map(i=>`<div class="dir-card reveal"><div class="dir-ico">${escHtml(i.icon||'📋')}</div><div class="dir-name">${escHtml(i.name)}</div><p class="dir-desc">${escHtml(i.description)}</p><div class="dir-contacts">${(i.contacts||[]).map(dirContact).join('')}</div></div>`).join('')}</div>`;
 }
 function buildMerchandiseBlock(items){
   return`    <div class="merch-grid">${items.map(i=>`<div class="merch-card reveal"><div class="merch-img ${escHtml(i.imgClass||'mi-navy')}">${escHtml(i.icon||'🛍️')}</div><div class="merch-body"><div class="merch-cat">${escHtml(i.category)}</div><div class="merch-name">${escHtml(i.name)}</div><p class="merch-note">${escHtml(i.note)}</p><div class="merch-price">${escHtml(i.price)}</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - ${encodeURIComponent(i.name||'')}'">Inquire</button></div></div>`).join('')}</div>`;

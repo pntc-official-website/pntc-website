@@ -335,14 +335,15 @@ function selectBadge(el) {
 function formDirectory(item) {
   const contacts = item?.contacts || [''];
   const rows = contacts.map((c,i) => `<div class="contact-row" id="cr-${i}">
-    <input class="form-input" id="contact-${i}" value="${esc(c)}" placeholder="email@pntc.edu.ph or tel:+63...">
+    <input class="form-input" id="contact-${i}" value="${esc(c)}" placeholder="email, phone number, or Facebook: Page Name">
     <button class="btn" style="padding:.35rem .65rem;font-size:.78rem" onclick="removeContact(${i})">✕</button>
   </div>`).join('');
   return fi('Icon (Emoji)', 'f-icon', item?.icon, '📋')
        + fi('Office / Department Name', 'f-name', item?.name, 'e.g. Admissions Office')
        + ta('Description', 'f-description', item?.description, 'Brief description of this office...')
        + `<div class="form-group">
-    <label class="form-label">Contact Links (email, tel:, or URL)</label>
+    <label class="form-label">Contacts (one per line)</label>
+    <p style="font-size:.76rem;line-height:1.5;opacity:.75;margin:0 0 .5rem">Type an email, a phone number such as (046) 438-8835 Loc. 101, or a Facebook page as <strong>Facebook: Page Name</strong>. To make the Facebook page clickable, add its link after a bar, for example <strong>Facebook: PNTC Colleges | https://facebook.com/yourpage</strong>. This list is published to both the College and Senior High School directory pages.</p>
     <div class="contacts-list" id="contacts-list">${rows}</div>
     <button class="btn" style="font-size:.78rem;padding:.3rem .75rem;margin-top:.4rem" onclick="addContact()">+ Add Contact</button>
   </div>`;
@@ -356,7 +357,7 @@ function addContact() {
   const div = document.createElement('div');
   div.className = 'contact-row';
   div.id = 'cr-' + id;
-  div.innerHTML = `<input class="form-input" id="contact-${id}" placeholder="email@pntc.edu.ph or tel:+63...">
+  div.innerHTML = `<input class="form-input" id="contact-${id}" placeholder="email, phone number, or Facebook: Page Name">
     <button class="btn" style="padding:.35rem .65rem;font-size:.78rem" onclick="this.parentElement.remove()">✕</button>`;
   list.appendChild(div);
 }
