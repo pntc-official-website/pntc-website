@@ -108,21 +108,14 @@ const ORG = {
   evp: { id: 'evp', name: 'Office of the Executive Vice President' },
   treasurer: { id: 'treasurer', name: 'Office of the Corporate Treasurer' },
   departments: [
-    { n: '01', id: 'mtac', name: 'Maritime Training and Assessment Center', lead: 'vp-training', committees: [], offices: [
-      { id: 'training-registrar', name: "Training Registrar's Office" }, { id: 'training-office', name: 'Training Office' }, { id: 'assessment', name: 'Maritime Assessment Center' }] },
-    { n: '02', id: 'academic', name: 'Academic Affairs Department', lead: 'vp-acad', offLabel: 'Colleges and Offices',
-      committees: [{ name: 'Academic Council' }, { name: 'Discipline Committee', sub: true }, { name: 'Gender and Development Committee', sub: true }, { name: 'Educational Materials Committee', sub: true }],
-      offices: [
-        { id: 'maritime', name: 'College of Maritime Education', lead: 'dean-maritime' }, { id: 'customs', name: 'College of Customs and Business Mgt. Education', lead: 'dean-business' },
-        { id: 'shs', name: 'Senior High School' }, { id: 'acad-registrar', name: "Academic Registrar's Office" }, { id: 'osa', name: 'Office of Student Affairs', lead: 'dean-osa' }] },
-    { n: '03', id: 'quality', name: 'Quality Department', committees: [], offices: [] },
-    { n: '04', id: 'marketing', name: 'Marketing Department', lead: ['mgr-college', 'mgr-mtc'], committees: [], offices: [
-      { id: 'client-relations', name: 'Client Relations Office' }, { id: 'admissions-aid', name: 'Admissions and Aid Office' }] },
-    { n: '05', id: 'finance', name: 'Finance Department', committees: [], offices: [
-      { id: 'fin-reporting', name: 'Financial Reporting Office' }, { id: 'fin-services', name: 'Financial Services Office' }, { id: 'payroll', name: 'Payroll, Tax, and Contributions Office' }, { id: 'purchasing', name: 'Purchasing Office' }] },
-    { n: '06', id: 'admin', name: 'Administration Department', lead: 'vp-admin',
-      committees: [{ name: 'Data Privacy Committee' }, { name: 'Committee on Decorum and Investigation' }, { name: 'Occupational Safety and Health Committee' }],
-      offices: [{ id: 'hrdm', name: 'H.R.D.M. Office' }, { id: 'ict', name: 'I.C.T. Office' }, { id: 'facilities', name: 'Facilities Office' }, { id: 'library', name: 'Library' }, { id: 'clinic', name: 'Clinic' }] },
+    { n: '01', id: 'mtac', name: 'Maritime Training and Assessment Center', lead: 'vp-training', offices: [] },
+    { n: '02', id: 'academic', name: 'Academic Affairs Department', lead: 'vp-acad', offLabel: 'Deans', offices: [
+      { id: 'maritime', name: 'College of Maritime Education', lead: 'dean-maritime' }, { id: 'customs', name: 'College of Customs and Business Mgt. Education', lead: 'dean-business' },
+      { id: 'osa', name: 'Office of Student Affairs', lead: 'dean-osa' }] },
+    { n: '03', id: 'quality', name: 'Quality Department', offices: [] },
+    { n: '04', id: 'marketing', name: 'Marketing Department', lead: ['mgr-college', 'mgr-mtc'], offices: [] },
+    { n: '05', id: 'finance', name: 'Finance Department', offices: [] },
+    { n: '06', id: 'admin', name: 'Administration Department', lead: 'vp-admin', offices: [] },
   ],
 };
 const ORG_BLANKS = [ORG.secretary, ORG.evp, ORG.treasurer, ...ORG.departments.flatMap(d => [d, ...d.offices])].filter(u => !u.lead);
@@ -159,14 +152,14 @@ const GROUPS = [
       L(`history.e${n}.tags`, `Chapter ${n}: small tags (one per line, may be empty)`, '<li>{}</li>'),
     ]),
   ] },
-  { id: 'main-leaders', site: 'Main Site', title: 'Leadership page: leaders', note: 'A name changed here also changes on the organization chart below the leaders.', files: ['PNTC Main Landing Page/about-leadership.html'], fields: [
+  { id: 'main-leaders', site: 'Main Site', title: 'Leadership page: leaders', note: 'A name changed here also changes on the structure below the leaders.', files: ['PNTC Main Landing Page/about-leadership.html'], fields: [
     T('lead.eyebrow', 'Small label'), T('lead.mark', 'Heading, underlined words'), T('lead.rest', 'Heading, rest of the line'),
     ...LEADERS.flatMap(p => [
       T(`lead.${p.id}.name`, `${p.role}${p.unit ? ' (' + p.unit + ')' : ''}: name`), T(`lead.${p.id}.role`, `${p.role}${p.unit ? ' (' + p.unit + ')' : ''}: title`),
       ...(p.unit ? [T(`lead.${p.id}.unit`, `${p.role} (${p.unit}): unit tag`)] : []),
     ]),
   ] },
-  { id: 'main-org-chart', site: 'Main Site', title: 'Leadership page: organization chart names', note: 'Leave a name empty to keep it blank on the page.', files: ['PNTC Main Landing Page/about-leadership.html'], fields: [
+  { id: 'main-org-chart', site: 'Main Site', title: 'Leadership page: structure names', note: 'Leave a name empty to keep it blank on the page.', files: ['PNTC Main Landing Page/about-leadership.html'], fields: [
     T('org.eyebrow', 'Small label'), T('org.title', 'Heading'),
     ...ORG_BLANKS.map(u => T(`org.${u.id}.head`, `${u.name}: name of the head`, { optional: true })),
   ] },

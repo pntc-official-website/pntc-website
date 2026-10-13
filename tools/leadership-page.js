@@ -39,8 +39,7 @@ const unit = (u, cls = '') => `<div class="og-box ${cls}"><strong>${esc(u.name)}
 const office = u => `<li><strong>${esc(u.name)}</strong>${head(u)}</li>`;
 const dept = d => `<article class="og-dept reveal">
           <header><span class="og-n">${d.n}</span><div><h3>${esc(d.name)}</h3>${head(d)}</div></header>
-          ${d.committees.length ? `<div class="og-coms"><p class="og-lbl">Committees</p><ul>${d.committees.map(c => `<li${c.sub ? ' class="og-sub"' : ''}>${esc(c.name)}</li>`).join('')}</ul></div>` : ''}
-          ${d.offices.length ? `<div class="og-offs"><p class="og-lbl">${d.offLabel || 'Offices'}</p><ul>${d.offices.map(office).join('')}</ul></div>` : '<p class="og-none">Reports to the Office of the Executive Vice President</p>'}
+          ${d.offices.length ? `<div class="og-offs"><p class="og-lbl">${d.offLabel || 'Offices'}</p><ul>${d.offices.map(office).join('')}</ul></div>` : ''}
         </article>`;
 
 const O = C.ORG;
@@ -68,9 +67,8 @@ const section = `<section id="leadership" class="ld">
     <div class="og-headline reveal">
       <div>
         <p class="eyebrow">${slot('org.eyebrow', 'Organization')}</p>
-        <h2 class="ld-h2 ld-h2-sm">${slot('org.title', 'Departments, Offices, and Committees')}</h2>
+        <h2 class="ld-h2 ld-h2-sm">${slot('org.title', 'Leadership Structure')}</h2>
       </div>
-      <div class="og-legend"><span class="og-k1">Office</span><span class="og-k2">Committee</span></div>
     </div>
 
     <div class="og-tree reveal">
@@ -81,7 +79,7 @@ const section = `<section id="leadership" class="ld">
         ${unit(O.evp, 'og-evp')}
         ${unit(O.treasurer)}
       </div>
-      <div class="og-stem" aria-hidden="true"><span class="og-com">Executive Committee</span></div>
+      <div class="og-stem" aria-hidden="true"></div>
     </div>
 
     <div class="og-depts">
@@ -112,5 +110,6 @@ h = h.slice(0, start) + section + h.slice(end);
 h = h.replace(/<style id="leaders-modern">[\s\S]*?<\/script>\n/, '');
 h = h.replace('<meta name="description"', `<style id="leaders-modern">\n${CSS}\n</style>\n${SCRIPT}\n<meta name="description"`);
 h = C.preserveSlots(before, h);
+if (C.getSlot(h, 'org.title') === 'Departments, Offices, and Committees') h = C.setSlot(h, 'org.title', 'Leadership Structure');
 fs.writeFileSync(FILE, h);
 console.log('leadership page built:', PEOPLE.length, 'leaders,', O.departments.length, 'departments');

@@ -848,7 +848,7 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .og-row::before{content:'';position:absolute;top:0;left:calc(16.666% - .42rem);right:calc(16.666% - .42rem);height:2px;background:#1C1650}
 .og-row .og-box{position:relative}
 .og-row .og-box::before{content:'';position:absolute;left:50%;top:-27.5px;width:2px;height:26px;margin-left:-1px;background:#1C1650}
-.og-stem{width:2px;height:74px;background:#1C1650;position:relative}
+.og-stem{width:2px;height:44px;background:#1C1650;position:relative}
 .og-com{position:absolute;left:34px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:.78rem;font-weight:700;color:#1C1650;background:#fff;border:1.5px dashed rgba(28,22,80,.55);border-radius:10px;padding:.5rem .9rem}
 .og-com::before{content:'';position:absolute;right:100%;top:50%;width:33px;border-top:1.5px dashed rgba(28,22,80,.55)}
 
@@ -862,6 +862,7 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .og-dept h3{font-size:1.02rem;font-weight:800;color:#fff;line-height:1.3}
 .og-dept header .og-head{color:#F3CF33;font-weight:700}
 .og-dept header .og-head:empty{border-bottom-color:rgba(255,255,255,.4)}
+.og-dept header:last-child{border-radius:21px}
 .og-coms,.og-offs{padding:1.2rem 1.4rem 0}
 .og-offs{padding-bottom:1.5rem}
 .og-coms:last-child{padding-bottom:1.5rem}
@@ -897,7 +898,7 @@ h1.hero-h1 span.gold { color:var(--gold); }
   .og-row{grid-template-columns:1fr;gap:.6rem;padding-top:0;max-width:340px}
   .og-row::before,.og-row .og-box::before{display:none}
   .og-row .og-evp{order:1}
-  .og-stem{height:96px}
+  .og-stem{height:30px}
   .og-com{left:18px}
   .og-com::before{width:17px}
   .og-depts{grid-template-columns:1fr;padding-top:0;gap:1rem}
@@ -1085,9 +1086,8 @@ document.addEventListener('DOMContentLoaded',function(){
     <div class="og-headline reveal">
       <div>
         <p class="eyebrow"><!--c:org.eyebrow-->Organization<!--/c--></p>
-        <h2 class="ld-h2 ld-h2-sm"><!--c:org.title-->Departments, Offices, and Committees<!--/c--></h2>
+        <h2 class="ld-h2 ld-h2-sm"><!--c:org.title-->Leadership Structure<!--/c--></h2>
       </div>
-      <div class="og-legend"><span class="og-k1">Office</span><span class="og-k2">Committee</span></div>
     </div>
 
     <div class="og-tree reveal">
@@ -1098,39 +1098,33 @@ document.addEventListener('DOMContentLoaded',function(){
         <div class="og-box og-evp"><strong>Office of the Executive Vice President</strong><span class="og-head"><!--c:org.evp.head--><!--/c--></span></div>
         <div class="og-box "><strong>Office of the Corporate Treasurer</strong><span class="og-head"><!--c:org.treasurer.head--><!--/c--></span></div>
       </div>
-      <div class="og-stem" aria-hidden="true"><span class="og-com">Executive Committee</span></div>
+      <div class="og-stem" aria-hidden="true"></div>
     </div>
 
     <div class="og-depts">
         <article class="og-dept reveal">
           <header><span class="og-n">01</span><div><h3>Maritime Training and Assessment Center</h3><span class="og-head"><!--c:lead.vp-training.name-->Jane Romero<!--/c--></span></div></header>
           
-          <div class="og-offs"><p class="og-lbl">Offices</p><ul><li><strong>Training Registrar's Office</strong><span class="og-head"><!--c:org.training-registrar.head--><!--/c--></span></li><li><strong>Training Office</strong><span class="og-head"><!--c:org.training-office.head--><!--/c--></span></li><li><strong>Maritime Assessment Center</strong><span class="og-head"><!--c:org.assessment.head--><!--/c--></span></li></ul></div>
         </article>
         <article class="og-dept reveal">
           <header><span class="og-n">02</span><div><h3>Academic Affairs Department</h3><span class="og-head"><!--c:lead.vp-acad.name-->Dr. Nerissa Flores<!--/c--></span></div></header>
-          <div class="og-coms"><p class="og-lbl">Committees</p><ul><li>Academic Council</li><li class="og-sub">Discipline Committee</li><li class="og-sub">Gender and Development Committee</li><li class="og-sub">Educational Materials Committee</li></ul></div>
-          <div class="og-offs"><p class="og-lbl">Colleges and Offices</p><ul><li><strong>College of Maritime Education</strong><span class="og-head"><!--c:lead.dean-maritime.name-->C/E Jeynard Mowler Tan<!--/c--></span></li><li><strong>College of Customs and Business Mgt. Education</strong><span class="og-head"><!--c:lead.dean-business.name-->Dr. Zarny Zaragoza<!--/c--></span></li><li><strong>Senior High School</strong><span class="og-head"><!--c:org.shs.head--><!--/c--></span></li><li><strong>Academic Registrar's Office</strong><span class="og-head"><!--c:org.acad-registrar.head--><!--/c--></span></li><li><strong>Office of Student Affairs</strong><span class="og-head"><!--c:lead.dean-osa.name-->Dr. Celso Servas<!--/c--></span></li></ul></div>
+          <div class="og-offs"><p class="og-lbl">Deans</p><ul><li><strong>College of Maritime Education</strong><span class="og-head"><!--c:lead.dean-maritime.name-->C/E Jeynard Mowler Tan<!--/c--></span></li><li><strong>College of Customs and Business Mgt. Education</strong><span class="og-head"><!--c:lead.dean-business.name-->Dr. Zarny Zaragoza<!--/c--></span></li><li><strong>Office of Student Affairs</strong><span class="og-head"><!--c:lead.dean-osa.name-->Dr. Celso Servas<!--/c--></span></li></ul></div>
         </article>
         <article class="og-dept reveal">
           <header><span class="og-n">03</span><div><h3>Quality Department</h3><span class="og-head"><!--c:org.quality.head--><!--/c--></span></div></header>
           
-          <p class="og-none">Reports to the Office of the Executive Vice President</p>
         </article>
         <article class="og-dept reveal">
           <header><span class="og-n">04</span><div><h3>Marketing Department</h3><span class="og-head"><!--c:lead.mgr-college.name-->Jayson Samson<!--/c--></span><span class="og-head"><!--c:lead.mgr-mtc.name-->Mariness Uy-Oco<!--/c--></span></div></header>
           
-          <div class="og-offs"><p class="og-lbl">Offices</p><ul><li><strong>Client Relations Office</strong><span class="og-head"><!--c:org.client-relations.head--><!--/c--></span></li><li><strong>Admissions and Aid Office</strong><span class="og-head"><!--c:org.admissions-aid.head--><!--/c--></span></li></ul></div>
         </article>
         <article class="og-dept reveal">
           <header><span class="og-n">05</span><div><h3>Finance Department</h3><span class="og-head"><!--c:org.finance.head--><!--/c--></span></div></header>
           
-          <div class="og-offs"><p class="og-lbl">Offices</p><ul><li><strong>Financial Reporting Office</strong><span class="og-head"><!--c:org.fin-reporting.head--><!--/c--></span></li><li><strong>Financial Services Office</strong><span class="og-head"><!--c:org.fin-services.head--><!--/c--></span></li><li><strong>Payroll, Tax, and Contributions Office</strong><span class="og-head"><!--c:org.payroll.head--><!--/c--></span></li><li><strong>Purchasing Office</strong><span class="og-head"><!--c:org.purchasing.head--><!--/c--></span></li></ul></div>
         </article>
         <article class="og-dept reveal">
           <header><span class="og-n">06</span><div><h3>Administration Department</h3><span class="og-head"><!--c:lead.vp-admin.name-->Atty. Krisha Fabia-Quiazon<!--/c--></span></div></header>
-          <div class="og-coms"><p class="og-lbl">Committees</p><ul><li>Data Privacy Committee</li><li>Committee on Decorum and Investigation</li><li>Occupational Safety and Health Committee</li></ul></div>
-          <div class="og-offs"><p class="og-lbl">Offices</p><ul><li><strong>H.R.D.M. Office</strong><span class="og-head"><!--c:org.hrdm.head--><!--/c--></span></li><li><strong>I.C.T. Office</strong><span class="og-head"><!--c:org.ict.head--><!--/c--></span></li><li><strong>Facilities Office</strong><span class="og-head"><!--c:org.facilities.head--><!--/c--></span></li><li><strong>Library</strong><span class="og-head"><!--c:org.library.head--><!--/c--></span></li><li><strong>Clinic</strong><span class="og-head"><!--c:org.clinic.head--><!--/c--></span></li></ul></div>
+          
         </article>
     </div>
   </div>
