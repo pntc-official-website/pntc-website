@@ -843,18 +843,11 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .lt-under{margin-left:1.6rem;padding-left:1.1rem;border-left:2px solid rgba(28,22,80,.18);display:flex;flex-direction:column;gap:.8rem}
 .lt-group{margin-top:.9rem;border-top:1px dashed rgba(28,22,80,.2);padding-top:1.2rem}
 .lt-lbl{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:#1C1650;padding:.42rem .85rem;border-radius:999px;margin-bottom:.9rem}
-.lt-maritime .lt-lbl{background:#1244B8}
-.lt-cards{display:grid;gap:.8rem}
-.lt-group>.lt-under{margin-top:.8rem}
-.lt-l2>.lt-dept>.lt-body{padding:1.3rem}
-.lt-l2>.lt-dept>.lt-body>.lt-group:first-of-type{margin-top:.6rem}
-.lt-c4{grid-template-columns:repeat(4,minmax(0,1fr))}
-.lt-c3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.lt-c4 .ld-card{flex-direction:column;align-items:flex-start}
-.lt-maritime>.lt-cards>.ld-card{background:#1244B8;border-color:#1244B8}
-.lt-maritime>.lt-cards>.ld-card .ld-av{background:#fff;color:#1244B8}
-.lt-maritime>.lt-cards>.ld-card .ld-role{color:rgba(255,255,255,.8)}
-.lt-maritime>.lt-cards>.ld-card .ld-name{color:#fff}
+.lt-col .lt-lbl{background:var(--gc)}
+.lt-col>.lt-cards>.ld-card{background:var(--gc);border-color:var(--gc)}
+.lt-col>.lt-cards>.ld-card .ld-av{background:#fff;color:var(--gc)}
+.lt-col>.lt-cards>.ld-card .ld-role{color:rgba(255,255,255,.8)}
+.lt-col>.lt-cards>.ld-card .ld-name{color:#fff}
 
 /* departments side by side, all at one level */
 .lt-note{font-size:.84rem;font-weight:600;color:rgba(28,22,80,.65);margin:-.6rem 0 1.6rem}
@@ -1006,7 +999,7 @@ document.addEventListener('DOMContentLoaded',function(){
               
             </div>
           </article>
-          <div class="lt-group lt-maritime">
+          <div class="lt-group lt-col" style="--gc:#1244B8">
             <p class="lt-lbl">College of Maritime Education</p>
             <div class="lt-cards">
           <article class="ld-card " style="--ac:#1244B8">
@@ -1045,8 +1038,8 @@ document.addEventListener('DOMContentLoaded',function(){
           </article>
           </div>
           </div>
-          <div class="lt-group ">
-            <p class="lt-lbl">Deans</p>
+          <div class="lt-group lt-col" style="--gc:#3d2f9e">
+            <p class="lt-lbl">College of Business and Management</p>
             <div class="lt-cards">
           <article class="ld-card " style="--ac:#3d2f9e">
             <span class="ld-av" aria-hidden="true"></span>
@@ -1056,6 +1049,12 @@ document.addEventListener('DOMContentLoaded',function(){
               
             </div>
           </article>
+            </div>
+            
+          </div>
+          <div class="lt-group lt-col" style="--gc:#8a1818">
+            <p class="lt-lbl">College of Criminal Justice</p>
+            <div class="lt-cards">
           <article class="ld-card " style="--ac:#8a1818">
             <span class="ld-av" aria-hidden="true"></span>
             <div class="ld-info">
@@ -1064,6 +1063,12 @@ document.addEventListener('DOMContentLoaded',function(){
               
             </div>
           </article>
+            </div>
+            
+          </div>
+          <div class="lt-group ">
+            <p class="lt-lbl">Student Affairs</p>
+            <div class="lt-cards">
           <article class="ld-card ">
             <span class="ld-av" aria-hidden="true"></span>
             <div class="ld-info">

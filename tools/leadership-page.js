@@ -76,8 +76,10 @@ const section = `<section id="leadership" class="ld">
       <p class="lt-note reveal">${slot('lead.level', 'Academic Affairs and Administration stand at the same level.')}</p>
       <div class="lt-depts lt-level lt-l2">
         ${big('Academic Affairs Department', 'vp-acad', [
-          group('College of Maritime Education', ['dean-maritime'], 'lt-maritime', ['head-bsmt', 'head-bsmare', 'head-obt']),
-          group('Deans', ['dean-business', 'dean-crim', 'dean-osa']),
+          group('College of Maritime Education', ['dean-maritime'], 'lt-col" style="--gc:#1244B8', ['head-bsmt', 'head-bsmare', 'head-obt']),
+          group('College of Business and Management', ['dean-business'], 'lt-col" style="--gc:#3d2f9e'),
+          group('College of Criminal Justice', ['dean-crim'], 'lt-col" style="--gc:#8a1818'),
+          group('Student Affairs', ['dean-osa']),
           group('Heads', ['head-gened', 'head-research', 'head-registrar']),
         ])}
         ${big('Administration Department', 'vp-admin', [
