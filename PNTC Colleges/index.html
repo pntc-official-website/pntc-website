@@ -1355,12 +1355,13 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 <style id="hx-hero">
 /* College hero: copy on white, one college card at a time on navy */
 #header{background:rgba(18,13,58,.97)}
-#hero.hx{height:auto;min-height:100svh;padding-top:var(--header-h);background:#fff;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);overflow:hidden}
-#hero.hx .hx-copy{position:relative;align-self:center;padding:clamp(2.5rem,6vh,4.5rem) clamp(1.5rem,3vw,3rem) clamp(2.5rem,6vh,4.5rem) clamp(1.5rem,6vw,5.5rem);z-index:3}
+#hero.hx{--sh:clamp(440px,74vh,740px);height:auto;min-height:100svh;padding-top:var(--header-h);background:linear-gradient(160deg,#FFFBEA 0%,#F4F5FA 55%,#ECEBF7 100%);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);overflow:hidden}
+#hero.hx::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:64px;background:#fff;clip-path:polygon(0 100%,100% 0,100% 100%);z-index:6;pointer-events:none}
+#hero.hx .hx-copy{position:relative;align-self:center;padding:clamp(2.5rem,6vh,4.5rem) calc(var(--sh) * .22 + 1rem) clamp(4.5rem,10vh,6.5rem) clamp(1.5rem,6vw,5.5rem);z-index:3}
 #hero.hx .hx-pill{display:inline-flex;align-items:center;gap:.6rem;margin:0 0 1.3rem;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#1C1650;background:rgba(243,207,51,.22);border:1px solid rgba(243,207,51,.9);padding:.5rem 1.05rem;border-radius:999px;animation:hx-fade .8s 1.5s both}
 #hero.hx .hx-pill-dot{position:relative;width:7px;height:7px;border-radius:50%;background:#1C1650}
 #hero.hx .hx-pill-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid #1C1650;animation:hx-ping 2s ease-out infinite}
-#hero.hx .hx-h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.9rem,5.3vw,5.2rem);line-height:.98;text-transform:uppercase;letter-spacing:-.01em;color:#1C1650;margin:0 0 1.3rem}
+#hero.hx .hx-h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.8rem,4.7vw,5rem);line-height:.98;text-transform:uppercase;letter-spacing:-.01em;color:#1C1650;margin:0 0 1.3rem}
 #hero.hx .hl{display:block;overflow:hidden;padding:.06em 0 .1em;white-space:nowrap}
 #hero.hx .hl>span{display:inline-block;position:relative;animation:hx-rise .9s cubic-bezier(.2,.7,.2,1) 1.55s both}
 #hero.hx .hl:nth-child(3)>span{animation-delay:1.67s}
@@ -1377,7 +1378,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #hero.hx .hx-play svg{width:18px;height:18px;fill:none;stroke:#1C1650;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 #hero.hx .hx-btn-ghost:hover .hx-play{transform:translateX(4px)}
 #hero.hx .hx-proof{display:flex;align-items:center;gap:1rem;animation:hx-fade .9s 2.3s both}
-#hero.hx .hx-proof p{margin:0;font-size:.92rem;line-height:1.3;color:rgba(28,22,80,.8);max-width:9ch}
+#hero.hx .hx-proof p{margin:0;font-size:.92rem;line-height:1.3;color:rgba(28,22,80,.8);max-width:10ch}
 #hero.hx .hx-proof strong{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.7rem;line-height:1;color:#1C1650}
 #hero.hx .hx-faces{display:flex}
 #hero.hx .hx-face{width:50px;height:50px;border-radius:50%;overflow:hidden;border:3px solid #fff;margin-left:-12px;box-shadow:0 6px 14px -6px rgba(28,22,80,.5);position:relative}
@@ -1386,15 +1387,15 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #hero.hx .hx-f1{background:#0b2870}#hero.hx .hx-f2{background:#143d12}#hero.hx .hx-f3{background:#5c1212}#hero.hx .hx-f4{background:#1c1c50}
 #hero.hx .hx-f1 img{left:48%;top:-62%}
 #hero.hx .hx-doodle{position:absolute;fill:none;stroke:#F3CF33;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
-#hero.hx .hx-d1{width:58px;top:clamp(1.2rem,5vh,3.2rem);right:8%;animation:hx-float 6s ease-in-out infinite}
-#hero.hx .hx-d2{width:76px;right:10%;bottom:clamp(2.5rem,13vh,7rem);animation:hx-float 7s ease-in-out infinite reverse}
-#hero.hx .hx-side{position:relative;clip-path:inset(0 0 0 -200px);background:#1C1650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4rem;padding:clamp(1.5rem,4vh,3rem) clamp(1.5rem,4vw,4rem) clamp(1.5rem,4vh,2.5rem) 0}
+#hero.hx .hx-d1{width:58px;top:clamp(1.2rem,5vh,3.2rem);right:24%;animation:hx-float 6s ease-in-out infinite}
+#hero.hx .hx-d2{width:76px;right:26%;bottom:clamp(4.5rem,15vh,8rem);animation:hx-float 7s ease-in-out infinite reverse}
+#hero.hx .hx-side{position:relative;z-index:4;clip-path:inset(0 0 0 -400px);background:#1C1650;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:1.4rem;padding:clamp(1.5rem,4vh,3rem) clamp(1.5rem,4vw,4rem) clamp(4.5rem,9vh,6rem) 0}
 #hero.hx .hx-side::before{content:'';position:absolute;inset:0;background:radial-gradient(40% 40% at 85% 10%,rgba(243,207,51,.16),transparent 70%),radial-gradient(45% 45% at 20% 95%,rgba(80,66,200,.5),transparent 70%);pointer-events:none}
 #hero.hx .hx-side::after{content:'';position:absolute;right:-70px;bottom:-70px;width:230px;height:230px;border-radius:50%;background:repeating-linear-gradient(135deg,rgba(243,207,51,.5) 0 3px,transparent 3px 11px);pointer-events:none}
 #hero.hx .hx-d3{width:120px;top:9%;right:6%;stroke:rgba(255,255,255,.35);stroke-width:2}
 #hero.hx .hx-ring{position:absolute;left:38%;top:5%;width:16px;height:16px;border-radius:50%;border:3px solid #F3CF33;animation:hx-float 5s ease-in-out infinite}
 /* One college card at a time. Each card keeps its own college color, photo, name, programs and value */
-#hero.hx .hx-stage{--sh:clamp(400px,66vh,600px);position:relative;z-index:2;width:min(100%,460px);height:var(--sh);margin-left:clamp(-90px,-6vw,-40px);animation:hx-fade 1s 1.6s both}
+#hero.hx .hx-stage{position:relative;z-index:2;width:calc(var(--sh) * .8);height:var(--sh);margin-left:calc(var(--sh) * -.22);animation:hx-fade 1s 1.6s both}
 #hero.hx .hx-stage::before{content:'';position:absolute;inset:0;border-radius:30px;background:#F3CF33;transform:rotate(-5deg) translate(-10px,8px);opacity:.9}
 #hero.hx .hc-panel{position:absolute;inset:0;top:0;bottom:0;left:0;width:auto;clip-path:none;animation:none;z-index:1;border-radius:30px;overflow:hidden;opacity:0;visibility:hidden;transform:scale(.96) translateX(26px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1),visibility 0s .8s;box-shadow:0 34px 60px -30px rgba(0,0,0,.85)}
 #hero.hx .hc-panel.on{opacity:1;visibility:visible;transform:none;z-index:2;transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1),visibility 0s}
@@ -1410,7 +1411,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #hero.hx .hco-abbr{font-size:.8rem;letter-spacing:.2em;background:#F3CF33;color:#1C1650;padding:.28rem .7rem;border-radius:999px;margin-bottom:.35rem}
 #hero.hx .hco-keyword{font-size:clamp(2.2rem,3.4vw,3.1rem);line-height:.92}
 #hero.hx .hco-name{font-size:.82rem;font-weight:600;letter-spacing:.1em;color:rgba(255,255,255,.82)}
-#hero.hx .hx-tabs{position:relative;z-index:2;display:flex;gap:.7rem;margin-left:clamp(-90px,-6vw,-40px);animation:hx-fade .9s 2s both}
+#hero.hx .hx-tabs{position:relative;z-index:2;display:flex;gap:.7rem;margin-left:clamp(1.2rem,2.5vw,2.5rem);animation:hx-fade .9s 2s both}
 #hero.hx .hx-tab{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:.35rem;width:clamp(56px,6vw,84px);padding-top:.2rem}
 #hero.hx .hx-tab:focus-visible{outline:2px solid #F3CF33;outline-offset:5px;border-radius:4px}
 #hero.hx .hx-tab-n{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.95rem;color:rgba(255,255,255,.55);transition:color .3s}
@@ -1425,14 +1426,15 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 @keyframes hx-ping{from{transform:scale(.6);opacity:.9}to{transform:scale(2);opacity:0}}
 @keyframes hx-float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(6deg)}}
 @media(max-width:960px){
-  #hero.hx{grid-template-columns:minmax(0,1fr);min-height:0}
-  #hero.hx .hx-copy{padding:2.6rem 1.4rem 2.4rem}
+  #hero.hx{--sh:clamp(380px,112vw,520px);grid-template-columns:minmax(0,1fr);min-height:0}
   #hero.hx .hx-h1{font-size:clamp(2.5rem,11.5vw,4.4rem)}
   #hero.hx .hx-d2{display:none}
   #hero.hx .hx-d1{right:5%;top:1.2rem;width:44px}
-  #hero.hx .hx-side{padding:2.6rem 1.4rem 2.4rem}
-  #hero.hx .hx-stage{--sh:clamp(380px,112vw,520px);margin-left:0;width:min(100%,400px)}
+  #hero.hx .hx-copy{padding:2.6rem 1.4rem 2.4rem}
+  #hero.hx .hx-side{align-items:center;padding:2.6rem 1.4rem 4rem}
+  #hero.hx .hx-stage{margin-left:0;width:min(100%,400px)}
   #hero.hx .hx-tabs{margin-left:0}
+  #hero.hx::after{height:32px}
 }
 @media(prefers-reduced-motion:reduce){
   #hero.hx .hl>span,#hero.hx .hx-pill,#hero.hx .hx-sub,#hero.hx .hx-btns,#hero.hx .hx-proof,#hero.hx .hx-stage,#hero.hx .hx-tabs{animation:none}
@@ -1495,7 +1497,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     </div>
     <div class="hx-proof">
       <div class="hx-faces" aria-hidden="true"><span class="hx-face hx-f1"><img src="Maritime Female (3).png" alt=""></span><span class="hx-face hx-f2"><img src="Tourism.png" alt=""></span><span class="hx-face hx-f3"><img src="Criminology1.png" alt=""></span><span class="hx-face hx-f4"><img src="Custom Administration (Program Section).png" alt=""></span></div>
-      <p><strong>10K+</strong> Alumni Worldwide</p>
+      <p><strong>30+</strong> Years of Excellence</p>
     </div>
     <svg class="hx-doodle hx-d2" viewBox="0 0 80 70" aria-hidden="true"><path d="M6 60c6-24 24-40 52-44"/><path d="M46 6l14 10-12 12"/></svg>
   </div>
