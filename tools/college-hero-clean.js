@@ -10,7 +10,8 @@ const CSS = `<style id="hx-clean">
 #hero.hx .hx-copy .hx-doodle,#hero.hx .hx-ghost,#hero.hx .hx-copy::before{display:none!important}
 #hero.hx .hx-copy::after{right:auto;left:-12%;top:auto;bottom:-30%;width:70%;background:radial-gradient(closest-side,rgba(243,207,51,.2),transparent);animation:none}
 #hero.hx .hx-pill{margin-bottom:1.6rem;background:#fff;border-color:rgba(28,22,80,.16);box-shadow:0 10px 22px -16px rgba(28,22,80,.5)}
-#hero.hx .hx-h1{line-height:1.02;margin-bottom:1.5rem}
+#hero.hx .hx-h1{line-height:1.04;margin-bottom:1.5rem;font-size:clamp(2.2rem,min(4.9vw,calc((55.5vw - 6vw - var(--sh) * .22 - 1.5rem) / 10.4)),5.4rem)}
+@media(max-width:980px){#hero.hx .hx-h1{font-size:clamp(2.1rem,9.6vw,3.6rem)}#hero.hx .hl{white-space:normal}}
 #hero.hx .hx-h1 em{transform:none;border-radius:.16em;padding:0 .18em .04em;margin-right:.1em}
 #hero.hx .hx-sub{max-width:33rem;margin-bottom:2rem}
 #hero.hx .hx-btns{gap:.8rem;margin-bottom:0}
