@@ -23,7 +23,7 @@ const head = `<section id="directory">
   <div class="directory-wrap">
     <div class="dx-facts">
       <div class="dx-fact">${svg('pin')}<div><span>Where</span><strong>PNTC Colleges campus, Dasmariñas, Cavite</strong></div></div>
-      <div class="dx-fact">${svg('clock')}<div><span>Office Hours</span><strong>Monday to Friday, 7:00 AM to 4:00 PM</strong></div></div>
+      <div class="dx-fact">${svg('clock')}<div><span>Office Hours</span><strong>Monday to Friday, 7:00 AM to 5:30 PM</strong></div></div>
       <div class="dx-fact">${svg('phone')}<div><span>Trunk Line</span><strong><a href="tel:+63464388835">(046) 438-8835</a></strong></div></div>
     </div>
     <div class="dx-bar">
