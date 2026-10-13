@@ -55,7 +55,14 @@ const section = `<section id="leadership" class="ld">
       <span class="lt-v" aria-hidden="true"></span>
     </div>
 
-    <div class="lt-depts">
+    <nav class="lt-jump reveal" aria-label="Jump to a tree">
+      <a href="#tree-colleges">${slot('lead.tree1', 'PNTC Colleges')}</a>
+      <a href="#tree-training">${slot('lead.tree2', 'Maritime Training Center')}</a>
+    </nav>
+
+    <div class="lt-tree" id="tree-colleges">
+      <div class="lt-tree-head reveal"><span class="lt-tree-n">Tree 1</span><h3>${slot('lead.tree1', 'PNTC Colleges')}</h3></div>
+      <div class="lt-depts">
         <section class="lt-dept lt-wide reveal">
           <header><span class="lt-n">01</span><h3>Academic Affairs Department</h3></header>
           <div class="lt-body">
@@ -65,11 +72,19 @@ const section = `<section id="leadership" class="ld">
           ${group('Heads', ['head-gened', 'head-research', 'head-registrar'])}
           </div>
         </section>
-        ${dept('02', 'Maritime Training and Assessment Center', ['vp-training'])}
-        ${dept('03', 'Quality Department', ['head-quality'])}
-        ${dept('04', 'Marketing Department', ['mgr-college', 'mgr-mtc'])}
+        ${dept('02', 'Administration Department', ['vp-admin'], ['sup-hrdm'], 'lt-half')}
+        ${dept('03', 'Marketing Department', ['mgr-college'], [], 'lt-half')}
+        ${dept('04', 'Quality Department', ['head-quality'], [], 'lt-half')}
         ${dept('05', 'Finance Department', ['sup-finance'], [], 'lt-half')}
-        ${dept('06', 'Administration Department', ['vp-admin'], ['sup-hrdm'], 'lt-half')}
+      </div>
+    </div>
+
+    <div class="lt-tree lt-tree-b" id="tree-training">
+      <div class="lt-tree-head reveal"><span class="lt-tree-n">Tree 2</span><h3>${slot('lead.tree2', 'Maritime Training Center')}</h3></div>
+      <div class="lt-depts">
+        ${dept('01', 'Maritime Training and Assessment Center', ['vp-training'], [], 'lt-half')}
+        ${dept('02', 'Marketing Department', ['mgr-mtc'], [], 'lt-half')}
+      </div>
     </div>
   </div>
 </section>`;

@@ -31,6 +31,16 @@
 .ld-big .ld-name{color:#fff;font-size:clamp(1.3rem,2.2vw,1.7rem);margin-top:.35rem}
 .ld-big .ld-info{position:relative;z-index:1}
 
+/* the two trees */
+.lt-jump{display:flex;justify-content:center;flex-wrap:wrap;gap:.6rem}
+.lt-jump a{font-size:.8rem;font-weight:800;color:#1C1650;text-decoration:none;padding:.65rem 1.2rem;border-radius:999px;background:#fff;border:1.5px solid #1C1650;transition:background .2s,color .2s,transform .2s}
+.lt-jump a:hover{background:#1C1650;color:#F3CF33;transform:translateY(-2px)}
+.lt-tree{margin-top:2.6rem;scroll-margin-top:140px;border:2px solid #1C1650;border-radius:30px;padding:clamp(1rem,2.2vw,1.8rem);background:#fff;position:relative}
+.lt-tree-b{border-color:#F3CF33;margin-top:3rem}
+.lt-tree-head{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;margin-bottom:1.4rem}
+.lt-tree-n{font-size:.68rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#1C1650;background:#F3CF33;padding:.45rem .85rem;border-radius:999px}
+.lt-tree-head h3{font-size:clamp(1.4rem,2.6vw,2.1rem);font-weight:800;letter-spacing:-.02em;color:#1C1650;line-height:1.15}
+
 /* departments */
 .lt-depts{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1.25rem;align-items:start}
 .lt-dept{grid-column:span 2;background:#F7F7FB;border:1px solid rgba(28,22,80,.08);border-radius:24px;min-width:0}
