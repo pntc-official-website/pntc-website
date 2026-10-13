@@ -22,6 +22,7 @@ const SWAPS = [
 const CSS = `<style id="fac-more-photos">
 /* extra photo tiles after the first six keep the same height as a grid row */
 #facilities .fac-card.has-photo:nth-child(n+7){min-height:clamp(190px,17vw,250px)}
+@media(min-width:1025px){#facilities .fac-card.has-photo:nth-child(n+7){grid-column:span 3}}
 /* the one card left without a photo runs the full width as a band */
 @media(min-width:1025px){#facilities .fac-card:not(.has-photo):last-child{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:1.4rem}#facilities .fac-card:not(.has-photo):last-child .fac-icon{grid-row:1/4;margin:0}#facilities .fac-card:not(.has-photo):last-child .fac-status{grid-column:3;grid-row:1/4;margin:0}#facilities .fac-card:not(.has-photo):last-child .fac-tag,#facilities .fac-card:not(.has-photo):last-child .fac-name,#facilities .fac-card:not(.has-photo):last-child .fac-desc{grid-column:2;margin-bottom:.2rem;max-width:none}}
 </style>
@@ -31,6 +32,13 @@ for (const name of ['index.html', 'student-life.html']) {
   let h = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
   let n = 0;
   for (const [re, html] of SWAPS) if (re.test(h)) { h = h.replace(re, html); n++; }
+  // Perseverance Building goes in after the laboratories
+  if (!h.includes('Facility - Perseverance Building.jpg')) {
+    const at = h.indexOf('<!-- Campus Gymnasium');
+    if (at < 0) throw new Error('gymnasium card not found in ' + name);
+    h = h.slice(0, at) + photo('Perseverance Building — real photo', 'Facility - Perseverance Building.jpg', 'Perseverance Building', 'Campus Building', 'Perseverance Building', '', '.24s') + '\n    ' + h.slice(at);
+    n++;
+  }
   h = h.replace(/<style id="fac-more-photos">[\s\S]*?<\/style>\n/, '');
   h = h.replace('</head>', CSS + '</head>');
   fs.writeFileSync(file, h);
