@@ -200,8 +200,8 @@ const GROUPS = [
     fields: [P('shs.track.techpro.desc', 'Track description'), ...STRANDS.filter(s => s[2] === 'techpro').map(strandFields).flat()] },
   { id: 'training-hero', site: 'Training Center', title: 'Training Center hero', files: ['PNTC Maritime Training and Assessment Center/index.html'], fields: [
     T('training.hero.pill', 'Small tag above the headline'),
-    T('training.hero.line1', 'Headline, line 1'), T('training.hero.line2', 'Headline, line 2'), T('training.hero.line3', 'Headline, line 3 (gold)'),
-    P('training.hero.sub', 'Description'),
+    T('training.hero.line1', 'Headline, line 1 (white)'), T('training.hero.line3', 'Headline, line 2 (gold)'),
+    P('training.hero.sub', 'Description'), T('training.hero.bold', 'Bold ending of the description'),
     T('training.hero.btn1', 'First button, text'), H('training.hero.btn1.href', 'First button, link'),
     T('training.hero.btn2', 'Second button, text'), H('training.hero.btn2.href', 'Second button, link'),
   ] },

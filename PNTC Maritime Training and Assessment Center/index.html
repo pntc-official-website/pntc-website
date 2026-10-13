@@ -985,11 +985,12 @@ document.addEventListener('DOMContentLoaded',function(){
 <style id="th-action">
 /* Training Center action hero */
 #hero{height:auto!important;min-height:max(100svh,660px)!important;display:flex;align-items:center;padding:calc(var(--ta-nav,120px) + 2.2rem) 0 calc(56px + 3.2rem)}
-#hero .hero-content{position:relative!important;inset:auto!important;width:100%;max-width:min(50%,44rem);padding:0 0 0 clamp(1.5rem,6vw,6rem)!important;z-index:6}
+#hero .hero-content{position:relative!important;inset:auto!important;width:100%;max-width:min(54%,54rem);padding:0 0 0 clamp(1.5rem,6vw,6rem)!important;z-index:6}
 #hero .th-pill{margin-bottom:1.2rem}
-#hero .hero-headline{font-size:clamp(2.9rem,min(7.6vw,15vh),7.4rem)!important;line-height:.92!important;margin-bottom:1.3rem}
-#hero .hero-headline .hl{display:inline-block!important;vertical-align:top;margin-right:.22em}
-#hero .hero-headline .hl:last-child{display:block!important;margin-right:0}
+#hero .hero-headline{font-size:clamp(2.5rem,min(4.3vw,12vh),4.5rem)!important;line-height:1!important;margin-bottom:1.5rem;max-width:none!important}
+#hero .hero-headline .hl{display:block!important;padding:.04em 0 .12em!important}
+#hero .hero-headline .hl:last-child>span{animation-delay:.14s!important}
+#hero .hero-sub .th-onward{font-weight:800;color:#fff}
 #hero .hero-sub{max-width:34rem;margin-bottom:1.8rem}
 #hero .scroll-cue{display:none}
 #hero .hero-vig{background:linear-gradient(96deg,#1C1650 0%,rgba(28,22,80,.96) 30%,rgba(28,22,80,.6) 52%,rgba(28,22,80,.25) 100%),linear-gradient(to top,rgba(16,11,51,.55) 0%,rgba(16,11,51,0) 18%)!important}
@@ -1000,7 +1001,7 @@ document.addEventListener('DOMContentLoaded',function(){
 .ta-bg span.on{opacity:1}
 .ta-glow{position:absolute;right:4%;bottom:-26%;width:62%;height:96%;background:radial-gradient(closest-side,rgba(255,120,10,.6),rgba(255,70,0,.22) 55%,transparent);mix-blend-mode:screen;animation:ta-flicker 3.4s ease-in-out infinite;z-index:1}
 /* card stack */
-.ta-stack{position:absolute;z-index:4;right:clamp(2rem,7vw,7.5rem);top:calc(50% + var(--ta-nav,120px)/2 - 44px);width:clamp(330px,38vw,620px);aspect-ratio:3/2;transform:translateY(-50%);perspective:1400px}
+.ta-stack{position:absolute;z-index:4;right:clamp(2rem,6vw,6.5rem);top:calc(50% + var(--ta-nav,120px)/2 - 44px);width:clamp(320px,34vw,580px);aspect-ratio:3/2;transform:translateY(-50%);perspective:1400px}
 .ta-card{position:absolute;inset:0;margin:0;border-radius:26px;overflow:hidden;border:5px solid #fff;background:#120D3A;box-shadow:0 44px 70px -30px rgba(0,0,0,.75),0 0 60px -6px rgba(255,120,10,.5);opacity:0;transform:translate3d(18%,10%,0) rotate(12deg) scale(.7);transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .6s ease;will-change:transform}
 .ta-card img{width:100%;height:100%;object-fit:cover;display:block}
 .ta-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(255,96,0,.3),rgba(255,96,0,0) 42%);pointer-events:none}
@@ -1010,7 +1011,7 @@ document.addEventListener('DOMContentLoaded',function(){
 .ta-card.p2{opacity:1;z-index:3;transform:translate3d(17%,-17%,0) rotate(9deg) scale(.86);filter:brightness(.56)}
 .ta-card.out{opacity:0;z-index:6;transform:translate3d(-58%,14%,0) rotate(-22deg) scale(.96);transition:transform .75s cubic-bezier(.5,0,.8,.4),opacity .7s ease .1s}
 /* counter, progress, thumbnails */
-.ta-hud{position:absolute;z-index:5;right:clamp(2rem,7vw,7.5rem);bottom:calc(56px + 1.9rem);width:clamp(330px,38vw,620px);display:flex;align-items:center;gap:1rem}
+.ta-hud{position:absolute;z-index:5;right:clamp(2rem,6vw,6.5rem);bottom:calc(56px + 1.9rem);width:clamp(320px,34vw,580px);display:flex;align-items:center;gap:1rem}
 .ta-count{display:flex;align-items:baseline;gap:.35rem;color:#fff;font-family:'Barlow Condensed','Montserrat',sans-serif}
 .ta-count b{font-size:2.3rem;font-weight:800;line-height:1;color:#F3CF33}
 .ta-count i{font-style:normal;font-size:.95rem;font-weight:700;letter-spacing:.08em;opacity:.7}
@@ -1044,7 +1045,7 @@ document.addEventListener('DOMContentLoaded',function(){
 @media(max-width:900px){
   #hero{display:block;padding-bottom:calc(32px + 2.6rem)}
   #hero .hero-content{max-width:100%;padding:0 1.4rem!important;margin-top:calc(min(78vw,420px)*.667 + 5.4rem)}
-  #hero .hero-headline{font-size:clamp(2.8rem,15vw,5rem)!important}
+  #hero .hero-headline{font-size:clamp(2.2rem,10.4vw,4rem)!important}
   #hero .th-pill{font-size:.54rem!important;letter-spacing:.1em!important;padding-left:.8rem;padding-right:.9rem;max-width:100%}
   #hero .hero-sub{max-width:100%}
   #hero .hero-vig{background:linear-gradient(to top,#1C1650 0%,rgba(28,22,80,.95) 46%,rgba(28,22,80,.5) 78%,rgba(28,22,80,.35) 100%)!important}
@@ -1147,9 +1148,9 @@ document.addEventListener('DOMContentLoaded',function(){
   <div class="hero-content">
     
     <div class="th-pill"><span class="th-pill-dot"></span><!--c:training.hero.pill-->MARINA Accredited &nbsp;·&nbsp; Intramuros, Manila<!--/c--></div>
-    <h1 class="hero-headline"><span class="sr-only">PNTC Maritime Training and Assessment Center, Intramuros, Manila. </span><span class="hl"><span><!--c:training.hero.line1-->Chart<!--/c--></span></span><span class="hl"><span><!--c:training.hero.line2-->Your<!--/c--></span></span><span class="hl"><span><em><!--c:training.hero.line3-->Course<!--/c--><svg class="hl-swoosh" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 15 C 80 4, 200 3, 297 11"/></svg></em></span></span></h1>
+    <h1 class="hero-headline"><span class="sr-only">PNTC Maritime Training and Assessment Center, Intramuros, Manila. </span><span class="hl"><span><!--c:training.hero.line1-->Train with Purpose.<!--/c--></span></span><span class="hl"><span><em><!--c:training.hero.line3-->Certify with Confidence.<!--/c--><svg class="hl-swoosh" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 15 C 80 4, 200 3, 297 11"/></svg></em></span></span></h1>
     <p class="hero-sub">
-      <!--c:training.hero.sub-->MARINA-accredited, STCW-compliant maritime training for Filipino seafarers in Intramuros, Manila. Build the credentials that open doors to global shipping companies.<!--/c-->
+      <!--c:training.hero.sub-->PNTC Training Center delivers industry-standard courses built for professionals who take their craft seriously. Whether you’re starting out or moving up, we give you the training that actually prepares you.<!--/c--> <strong class="th-onward"><!--c:training.hero.bold-->Onward PNTC.<!--/c--></strong>
     </p>
     <div class="hero-ctas">
       <a data-c="training.hero.btn1.href" href="#courses" class="btn-primary-hero">
