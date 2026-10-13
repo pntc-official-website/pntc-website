@@ -1444,6 +1444,18 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
   #hero.hx .hx-tab.on .hx-tab-bar i{animation:none;width:100%}
 }
 </style>
+<style id="uni-duo">
+/* Wear the Uniform: male and female sliders side by side. The female one shows once its photos exist */
+#uniforms .uni-duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1rem,2.5vw,2rem);max-width:980px;margin:0 auto}
+#uniforms .uni-duo .uni-stage{max-width:none;margin:0}
+#uniforms .uni-who{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;text-align:center;color:#1C1650;margin-bottom:.7rem}
+#uniforms .uni-who::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:#F3CF33;margin-right:.6rem;vertical-align:middle}
+#uniforms .uni-col[hidden]{display:none}
+#uniforms .uni-duo.solo{grid-template-columns:minmax(0,1fr);max-width:560px}
+#uniforms .uni-duo.solo .uni-who{display:none}
+#uniforms .uni-duo:not(.solo) + .uni-info,#uniforms .uni-duo:not(.solo) ~ .uni-info{max-width:980px}
+@media(max-width:700px){#uniforms .uni-duo{grid-template-columns:minmax(0,1fr);max-width:560px}}
+</style>
 </head>
 <body>
 
@@ -1679,19 +1691,37 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     <button class="uni-prog-tab" data-prog="3">Criminology</button>
   </div>
 
-  <div class="uni-stage" id="uniStage">
-    <img class="uni-img uni-img-left" id="uniLeft"
-      src="Maritime Uniform1.jpeg" alt="Maritime Uniform">
-    <img class="uni-img uni-img-right" id="uniRight"
-      src="Maritime Uniform2.jpeg" alt="Maritime Uniform">
-    <div class="uni-label uni-label-left" id="uniLabelLeft">Maritime</div>
-    <div class="uni-label uni-label-right" id="uniLabelRight">Tourism</div>
-    <div class="uni-handle" id="uniHandle">
-      <div class="uni-grip" id="uniGrip">
-        <svg viewBox="0 0 18 18"><path d="M6 4l-4 5 4 5M12 4l4 5-4 5"/></svg>
+  <div class="uni-duo solo" id="uniDuo">
+    <div class="uni-col" data-who="male">
+      <div class="uni-who">Male</div>
+      <div class="uni-stage" id="uniStage">
+        <img class="uni-img uni-img-left" src="Maritime Uniform1.jpeg" alt="">
+        <img class="uni-img uni-img-right" src="Maritime Uniform2.jpeg" alt="">
+        <div class="uni-label uni-label-left"></div>
+        <div class="uni-label uni-label-right"></div>
+        <div class="uni-handle">
+          <div class="uni-grip">
+            <svg viewBox="0 0 18 18"><path d="M6 4l-4 5 4 5M12 4l4 5-4 5"/></svg>
+          </div>
+        </div>
+        <div class="uni-badge">Slide to Reveal</div>
       </div>
     </div>
-    <div class="uni-badge" id="uniBadge">Slide to Reveal</div>
+    <div class="uni-col" data-who="female" hidden>
+      <div class="uni-who">Female</div>
+      <div class="uni-stage">
+        <img class="uni-img uni-img-left" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
+        <img class="uni-img uni-img-right" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
+        <div class="uni-label uni-label-left"></div>
+        <div class="uni-label uni-label-right"></div>
+        <div class="uni-handle">
+          <div class="uni-grip">
+            <svg viewBox="0 0 18 18"><path d="M6 4l-4 5 4 5M12 4l4 5-4 5"/></svg>
+          </div>
+        </div>
+        <div class="uni-badge">Slide to Reveal</div>
+      </div>
+    </div>
   </div>
 
 
@@ -2091,82 +2121,119 @@ document.querySelectorAll('.mm').forEach(a => a.addEventListener('click', closeM
     },
   ];
 
+  /* Female photos are found by file name, so uploading them is all it takes.
+     Name them like the male photos with "Female" before the number, for example
+     "Maritime Uniform Female1.jpeg" and "Maritime Uniform Female2.jpeg".
+     A program with one female photo can use "Female" or "Female1". */
+  const EXTS = ['jpeg','jpg','png','webp'];
+  const femaleCache = {};
+
+  const duo = document.getElementById('uniDuo');
+  if(!duo) return;
+  const tabs    = document.querySelectorAll('.uni-prog-tab');
+  const abbrEl  = document.getElementById('uniAbbr');
+  const nameEl  = document.getElementById('uniName');
+  const descEl  = document.getElementById('uniDesc');
+  const prevBtn = document.getElementById('uniPrev');
+  const nextBtn = document.getElementById('uniNext');
   let progIdx = 0;
-  let pct = 50;
-  let dragging = false;
 
-  const stage    = document.getElementById('uniStage');
-  if(!stage) return;
-  const imgLeft  = document.getElementById('uniLeft');
-  const imgRight = document.getElementById('uniRight');
-  const handle   = document.getElementById('uniHandle');
-  const grip     = document.getElementById('uniGrip');
-  const badge    = document.getElementById('uniBadge');
-  const lblL     = document.getElementById('uniLabelLeft');
-  const lblR     = document.getElementById('uniLabelRight');
-  const tabs     = document.querySelectorAll('.uni-prog-tab');
-  const abbrEl   = document.getElementById('uniAbbr');
-  const nameEl   = document.getElementById('uniName');
-  const descEl   = document.getElementById('uniDesc');
-  const prevBtn  = document.getElementById('uniPrev');
-  const nextBtn  = document.getElementById('uniNext');
+  function makeSlider(col){
+    const stage = col.querySelector('.uni-stage');
+    const imgLeft = stage.querySelector('.uni-img-left'), imgRight = stage.querySelector('.uni-img-right');
+    const handle = stage.querySelector('.uni-handle'), grip = stage.querySelector('.uni-grip'), badge = stage.querySelector('.uni-badge');
+    const lblL = stage.querySelector('.uni-label-left'), lblR = stage.querySelector('.uni-label-right');
+    let dragging = false;
 
-  function setSlider(p, animate){
-    pct = Math.max(2, Math.min(98, p));
-    imgRight.classList.toggle('animate', animate);
-    imgRight.style.clipPath = `inset(0 0 0 ${pct}%)`;
-    handle.style.left = pct + '%';
-    if(!animate) badge.classList.add('hidden');
+    function setSlider(p, animate){
+      const pct = Math.max(2, Math.min(98, p));
+      imgRight.classList.toggle('animate', animate);
+      imgRight.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
+      handle.style.left = pct + '%';
+      if(!animate) badge.classList.add('hidden');
+    }
+    function show(files, labels, alt){
+      const single = files.length === 1;
+      imgLeft.src = files[0];
+      imgLeft.alt = alt + ' ' + labels[0];
+      imgRight.src = single ? files[0] : files[1];
+      imgRight.alt = alt + ' ' + (single ? labels[0] : labels[1]);
+      lblL.textContent = labels[0];
+      lblR.textContent = single ? '' : labels[1];
+      if(single){
+        handle.style.display = 'none'; lblL.style.display = 'none'; badge.style.display = 'none';
+        imgRight.style.transition = 'none';
+        imgRight.style.clipPath = 'inset(0 0 0 0%)';
+      } else {
+        handle.style.display = ''; lblL.style.display = ''; badge.style.display = '';
+        imgRight.style.transition = '';
+        badge.classList.remove('hidden');
+        setSlider(50, true);
+      }
+    }
+    function pctOf(e){ const r = stage.getBoundingClientRect(); return (((e.touches ? e.touches[0].clientX : e.clientX) - r.left) / r.width) * 100 }
+    stage.addEventListener('mousedown',  e=>{ if(handle.style.display==='none') return; dragging=true; grip.classList.add('dragging'); setSlider(pctOf(e),false); e.preventDefault() });
+    window.addEventListener('mousemove', e=>{ if(dragging) setSlider(pctOf(e),false) });
+    window.addEventListener('mouseup',   ()=>{ dragging=false; grip.classList.remove('dragging') });
+    stage.addEventListener('touchstart', e=>{ if(handle.style.display==='none') return; dragging=true; setSlider(pctOf(e),false) },{passive:true});
+    window.addEventListener('touchmove', e=>{ if(dragging) setSlider(pctOf(e),false) },{passive:true});
+    window.addEventListener('touchend',  ()=>{ dragging=false });
+    return { show };
+  }
+
+  const maleCol = duo.querySelector('[data-who="male"]'), femaleCol = duo.querySelector('[data-who="female"]');
+  const male = makeSlider(maleCol), female = makeSlider(femaleCol);
+
+  function exists(src){
+    return new Promise(res=>{ const im = new Image(); im.onload = ()=>res(im.naturalWidth > 1); im.onerror = ()=>res(false); im.src = src; });
+  }
+  async function firstThatExists(names){
+    for(const n of names){ for(const x of EXTS){ const f = n + '.' + x; if(await exists(f)) return f; } }
+    return null;
+  }
+  // "Maritime Uniform1.jpeg" gives the base "Maritime Uniform"
+  function baseOf(file){ return file.replace(/\.[a-z]+$/i,'').replace(/\s*\d+$/,''); }
+  function findFemale(idx){
+    if(!femaleCache[idx]) femaleCache[idx] = (async ()=>{
+      const base = baseOf(programs[idx].uniforms[0]);
+      const a = await firstThatExists([base + ' Female1', base + ' Female']);
+      if(!a) return [];
+      const b = await firstThatExists([base + ' Female2']);
+      return b ? [a, b] : [a];
+    })();
+    return femaleCache[idx];
+  }
+
+  function showFemale(files, prog){
+    const has = files.length > 0;
+    duo.classList.toggle('solo', !has);
+    femaleCol.hidden = !has;
+    if(has) female.show(files, files.length === 1 ? ['Official Uniform'] : ['Uniform A','Uniform B'], prog.label + ' Female');
   }
 
   function switchProg(idx){
     progIdx = idx;
     const prog = programs[idx];
-    const single = prog.uniforms.length === 1;
-
-    imgLeft.src  = prog.uniforms[0];
-    imgLeft.alt  = prog.label + ' ' + prog.uniLabels[0];
-    imgRight.src = single ? prog.uniforms[0] : prog.uniforms[1];
-    imgRight.alt = prog.label + ' ' + (single ? prog.uniLabels[0] : prog.uniLabels[1]);
-
-    lblL.textContent = prog.uniLabels[0];
-    lblR.textContent = single ? '' : prog.uniLabels[1];
-
+    male.show(prog.uniforms, prog.uniLabels, prog.label);
     abbrEl.textContent = prog.abbr;
     nameEl.textContent = prog.name;
     descEl.textContent = prog.desc;
-
-    if(single){
-      handle.style.display   = 'none';
-      lblL.style.display     = 'none';
-      badge.style.display    = 'none';
-      imgRight.style.transition = 'none';
-      imgRight.style.clipPath   = 'inset(0 0 0 0%)';
-    } else {
-      handle.style.display   = '';
-      lblL.style.display     = '';
-      badge.style.display    = '';
-      imgRight.style.transition = '';
-      badge.classList.remove('hidden');
-      setSlider(50, true);
-    }
-
     tabs.forEach(t => t.classList.toggle('active', +t.dataset.prog === idx));
+    if(femaleCache[idx] === undefined){ duo.classList.add('solo'); femaleCol.hidden = true; }
+    if(near) findFemale(idx).then(files => { if(progIdx === idx) showFemale(files, prog); });
   }
 
   tabs.forEach(t => t.addEventListener('click', () => switchProg(+t.dataset.prog)));
   prevBtn.addEventListener('click', () => switchProg((progIdx - 1 + programs.length) % programs.length));
   nextBtn.addEventListener('click', () => switchProg((progIdx + 1) % programs.length));
 
-  function pctOf(e){ const r=stage.getBoundingClientRect(); return (((e.touches?e.touches[0].clientX:e.clientX)-r.left)/r.width)*100 }
-  stage.addEventListener('mousedown',  e=>{ if(handle.style.display==='none') return; dragging=true; grip.classList.add('dragging'); setSlider(pctOf(e),false); e.preventDefault() });
-  window.addEventListener('mousemove', e=>{ if(dragging) setSlider(pctOf(e),false) });
-  window.addEventListener('mouseup',   ()=>{ dragging=false; grip.classList.remove('dragging') });
-  stage.addEventListener('touchstart', e=>{ if(handle.style.display==='none') return; dragging=true; setSlider(pctOf(e),false) },{passive:true});
-  window.addEventListener('touchmove', e=>{ if(dragging) setSlider(pctOf(e),false) },{passive:true});
-  window.addEventListener('touchend',  ()=>{ dragging=false });
-
+  // Look for female photos only once the section is close to view
+  let near = !('IntersectionObserver' in window);
   switchProg(0);
+  if(!near){
+    const io = new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ near = true; io.disconnect(); switchProg(progIdx); } }, {rootMargin:'600px'});
+    io.observe(duo);
+  }
 })();
 
 /* ── DRAG SCROLL for values track ── */
