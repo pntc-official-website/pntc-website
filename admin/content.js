@@ -1,0 +1,152 @@
+// Site Content: the texts on the pages that the admin console can edit.
+//
+// How it works. Each editable text in a page sits between two comment markers:
+//     <!--c:college.hero.sub-->PNTC Colleges Dasmariñas trains ...<!--/c-->
+// Links carry a data-c attribute on the tag instead (data-c="college.hero.btn1.href").
+// The admin reads the current values straight from the live page, and saving writes them back.
+// The pages are the single source of truth, so there is no separate database to keep in sync.
+//
+// This module is shared by the admin server and by the scripts in /tools, which use
+// preserveSlots() so rebuilding a section never throws away something edited in the admin.
+
+const escHtml = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const decode = s => String(s || '').replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+const slotRe = key => new RegExp('<!--c:' + reEsc(key) + '-->([\\s\\S]*?)<!--/c-->');
+const tagRe = key => new RegExp('<[a-zA-Z][^>]*\\sdata-c="' + reEsc(key) + '"[^>]*>');
+
+function getSlot(html, key) { const m = slotRe(key).exec(html); return m ? m[1] : null; }
+function setSlot(html, key, inner) { return html.replace(new RegExp(slotRe(key).source, 'g'), () => `<!--c:${key}-->${inner}<!--/c-->`); }
+function getAttr(html, key, attr = 'href') { const t = tagRe(key).exec(html); if (!t) return null; const m = new RegExp('\\s' + attr + '="([^"]*)"').exec(t[0]); return m ? decode(m[1]) : ''; }
+function setAttr(html, key, value, attr = 'href') {
+  return html.replace(tagRe(key), tag => new RegExp('\\s' + attr + '="[^"]*"').test(tag)
+    ? tag.replace(new RegExp('(\\s' + attr + '=")[^"]*(")'), (_, a, b) => a + escHtml(value) + b)
+    : tag.replace(/>$/, ` ${attr}="${escHtml(value)}">`));
+}
+
+// ── field types ──
+// text   one line or a paragraph of plain text
+// list   one item per line; "tpl" is the HTML around each item, with {} where the text goes
+// href   a link address, stored on the tag that carries data-c
+// email  an address shown as text, which also sets the mailto: link on its tag
+function readField(html, f) {
+  if (f.type === 'href') return getAttr(html, f.key);
+  const inner = getSlot(html, f.key);
+  if (inner === null) return null;                       // not on this page
+  if (f.type === 'list') return (inner.match(/<li[\s\S]*?<\/li>/g) || []).map(decode).join('\n');
+  return decode(inner);
+}
+function writeField(html, f, value) {
+  if (value == null) return html;
+  if (f.type === 'href') return tagRe(f.key).test(html) ? setAttr(html, f.key, String(value).trim()) : html;
+  if (getSlot(html, f.key) === null) return html;
+  if (f.type === 'list') {
+    const items = String(value).split(/\r?\n/).map(x => x.trim()).filter(Boolean);
+    return setSlot(html, f.key, items.map(x => (f.tpl || '<li>{}</li>').replace('{}', () => escHtml(x))).join(''));
+  }
+  const v = String(value).replace(/\s+/g, ' ').trim();
+  // a middle dot between words keeps its non-breaking spaces, so tags like 'Est. 1994 · Tanza' never split around the dot
+  html = setSlot(html, f.key, (f.pre || '') + escHtml(v).replace(/ · /g, ' &nbsp;·&nbsp; ') + (f.post || ''));
+  if (f.type === 'email' && tagRe(f.key).test(html)) html = setAttr(html, f.key, 'mailto:' + v);
+  return html;
+}
+
+function readGroup(html, group) { const out = {}; for (const f of group.fields) { const v = readField(html, f); if (v !== null) out[f.key] = v; } return out; }
+function writeGroup(html, group, values) { for (const f of group.fields) if (Object.prototype.hasOwnProperty.call(values, f.key)) html = writeField(html, f, values[f.key]); return html; }
+
+// Copy every slot value and data-c link from an older version of a page into a freshly built one.
+function preserveSlots(oldHtml, newHtml) {
+  newHtml = newHtml.replace(/<!--c:([\w.\-]+)-->[\s\S]*?<!--\/c-->/g, (m, key) => { const old = getSlot(oldHtml, key); return old === null ? m : `<!--c:${key}-->${old}<!--/c-->`; });
+  return newHtml.replace(/<[a-zA-Z][^>]*\sdata-c="([\w.\-]+)"[^>]*>/g, (tag, key) => { const old = getAttr(oldHtml, key); return old === null || old === '' ? tag : setAttr(tag, key, old); });
+}
+
+// ── what can be edited ──
+const T = (key, label, extra) => Object.assign({ key, label, type: 'text' }, extra);
+const P = (key, label, extra) => Object.assign({ key, label, type: 'text', long: true }, extra);
+const L = (key, label, tpl, extra) => Object.assign({ key, label, type: 'list', tpl }, extra);
+const H = (key, label) => ({ key, label, type: 'href', hint: 'A page address such as /college/admissions, or a full https link.' });
+const CHECK = '<li><span class="pd-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12.5 10 17 19 7"/></svg></span><span>{}</span></li>';
+
+const PROGRAMS = [['bsmt', 'BS Marine Transportation'], ['bsmare', 'BS Marine Engineering'], ['bstm', 'BS Tourism Management'], ['bscrim', 'BS Criminology'], ['bscusad', 'BS Customs Administration'], ['bsoa', 'BS Office Administration']];
+const VALUES = 6, STEPS = 11;
+const STRANDS = [['adsc', 'ADSC', 'academic'], ['adt', 'ADT', 'academic'], ['admare', 'ADMarE', 'academic'], ['admt', 'ADMT', 'academic'], ['aesh', 'AESH', 'academic'], ['astem', 'ASTEM', 'academic'], ['aup', 'AUP', 'academic'], ['tpdm', 'TPDM', 'techpro'], ['tpm', 'TPM', 'techpro']];
+
+const stepFields = n => [
+  T(`college.adm.step${n}.short`, `Step ${n}: short name in the overview`),
+  T(`college.adm.step${n}.office`, `Step ${n}: office`),
+  L(`college.adm.step${n}.tasks`, `Step ${n}: what to do (one per line)`, '<li>{}</li>'),
+  T(`college.adm.step${n}.note`, `Step ${n}: note`),
+  { key: `college.adm.step${n}.email`, label: `Step ${n}: office email`, type: 'email' },
+  T(`college.adm.step${n}.follow`, `Step ${n}: Facebook page to follow`),
+];
+const strandFields = ([id, code]) => [
+  T(`shs.strand.${id}.name`, `${code}: full name`),
+  P(`shs.strand.${id}.desc`, `${code}: description`),
+  L(`shs.strand.${id}.focus`, `${code}: what you focus on (one per line)`, '<li>{}</li>'),
+  L(`shs.strand.${id}.leads`, `${code}: where it leads (one per line)`, '<li>{}</li>'),
+];
+
+const GROUPS = [
+  { id: 'main-hero', site: 'Main Site', title: 'Home page hero', files: ['PNTC Main Landing Page/index.html'], fields: [
+    T('main.hero.pill', 'Small tag above the headline'),
+    T('main.hero.line1', 'Headline, line 1'), T('main.hero.line2', 'Headline, line 2 (gold)'), T('main.hero.line3', 'Headline, line 3'),
+    P('main.hero.sub', 'Description'),
+    T('main.hero.btn1', 'First button, text'), H('main.hero.btn1.href', 'First button, link'),
+    T('main.hero.btn2', 'Second button, text'), H('main.hero.btn2.href', 'Second button, link'),
+    T('main.hero.wall', 'Caption on the photo wall'),
+  ] },
+  { id: 'main-cta', site: 'Main Site', title: 'Home page yellow call to action', files: ['PNTC Main Landing Page/index.html'], fields: [
+    T('main.cta.eyebrow', 'Small label'), T('main.cta.line1', 'Heading, line 1'), T('main.cta.line2', 'Heading, line 2'),
+    P('main.cta.sub', 'Description'),
+    T('main.cta.btn1', 'Button 1, text'), H('main.cta.btn1.href', 'Button 1, link'),
+    T('main.cta.btn2', 'Button 2, text'), H('main.cta.btn2.href', 'Button 2, link'),
+    T('main.cta.btn3', 'Button 3, text'), H('main.cta.btn3.href', 'Button 3, link'),
+  ] },
+  { id: 'college-hero', site: 'Colleges', title: 'College hero', files: ['PNTC Colleges/index.html'], fields: [
+    T('college.hero.pill', 'Small tag above the headline'),
+    T('college.hero.mark', 'Headline, highlighted word'), T('college.hero.line1', 'Headline, rest of line 1'), T('college.hero.line2', 'Headline, line 2'),
+    P('college.hero.sub', 'Description'), T('college.hero.bold', 'Bold ending of the description'),
+    T('college.hero.btn1', 'First button, text'), H('college.hero.btn1.href', 'First button, link'),
+    T('college.hero.btn2', 'Second button, text'), H('college.hero.btn2.href', 'Second button, link'),
+    T('college.hero.proofn', 'Proof line, number'), T('college.hero.proof', 'Proof line, text'),
+  ] },
+  { id: 'college-values', site: 'Colleges', title: 'What We Stand For', files: ['PNTC Colleges/index.html'],
+    fields: Array.from({ length: VALUES }, (_, i) => [T(`college.value${i + 1}.name`, `Value ${i + 1}: name`), P(`college.value${i + 1}.desc`, `Value ${i + 1}: description`)]).flat() },
+  ...PROGRAMS.map(([id, name]) => ({ id: 'college-program-' + id, site: 'Colleges', title: 'Program details: ' + name, files: ['PNTC Colleges/programs.html'], fields: [
+    T(`college.prog.${id}.college`, 'College'), T(`college.prog.${id}.name`, 'Program name'), P(`college.prog.${id}.tagline`, 'Tagline'),
+    L(`college.prog.${id}.points`, 'Selling points (one per line)', CHECK),
+    L(`college.prog.${id}.careers`, 'Career paths (one per line)', '<li>{}</li>'),
+    P(`college.prog.${id}.now`, 'Why Now'),
+    T(`college.prog.${id}.cta`, 'Button text'), H(`college.prog.${id}.cta.href`, 'Button link'),
+  ] })),
+  { id: 'college-admissions-intro', site: 'Colleges', title: 'Admissions: heading and phases', files: ['PNTC Colleges/admissions.html'], fields: [
+    T('college.adm.eyebrow', 'Small label'), T('college.adm.h1', 'Heading, first part'), T('college.adm.h2', 'Heading, highlighted part'),
+    T('college.adm.phase1', 'Phase 1 title'), T('college.adm.phase2', 'Phase 2 title'), T('college.adm.finish', 'Closing line'),
+  ] },
+  { id: 'college-admissions-phase1', site: 'Colleges', title: 'Admissions: steps 1 to 6', files: ['PNTC Colleges/admissions.html'], fields: [1, 2, 3, 4, 5, 6].map(stepFields).flat() },
+  { id: 'college-admissions-phase2', site: 'Colleges', title: 'Admissions: steps 7 to 11', files: ['PNTC Colleges/admissions.html'], fields: [7, 8, 9, 10, 11].map(stepFields).flat() },
+  { id: 'directory-facts', site: 'Colleges and SHS', title: 'Directory: hours, address and trunk line', note: 'Saved to both the College and the Senior High School directory pages.',
+    files: ['PNTC Colleges/directory.html', 'SHS/directory.html'], fields: [
+      T('dir.where', 'Where'), T('dir.hours', 'Office hours'), T('dir.phone', 'Trunk line, as shown'),
+      { key: 'dir.phone.href', label: 'Trunk line, number to dial', type: 'href', hint: 'Start with tel: and the country code, for example tel:+63464388835.' },
+    ] },
+  { id: 'shs-hero', site: 'Senior High School', title: 'SHS hero', files: ['SHS/index.html'], fields: [
+    T('shs.hero.tag', 'Small tag above the headline'),
+    T('shs.hero.line1', 'Headline, line 1'), T('shs.hero.line2', 'Headline, line 2'), T('shs.hero.line3', 'Headline, line 3 (yellow)'),
+    P('shs.hero.desc', 'Description'), T('shs.hero.btn1', 'First button, text'), T('shs.hero.btn2', 'Second button, text'),
+  ] },
+  { id: 'shs-strands-academic', site: 'Senior High School', title: 'Strand guide: Academic Track', files: ['SHS/strands.html'],
+    fields: [P('shs.track.academic.desc', 'Track description'), ...STRANDS.filter(s => s[2] === 'academic').map(strandFields).flat()] },
+  { id: 'shs-strands-techpro', site: 'Senior High School', title: 'Strand guide: Tech-Pro Track', files: ['SHS/strands.html'],
+    fields: [P('shs.track.techpro.desc', 'Track description'), ...STRANDS.filter(s => s[2] === 'techpro').map(strandFields).flat()] },
+  { id: 'training-hero', site: 'Training Center', title: 'Training Center hero', files: ['PNTC Maritime Training and Assessment Center/index.html'], fields: [
+    T('training.hero.pill', 'Small tag above the headline'),
+    T('training.hero.line1', 'Headline, line 1'), T('training.hero.line2', 'Headline, line 2'), T('training.hero.line3', 'Headline, line 3 (gold)'),
+    P('training.hero.sub', 'Description'),
+    T('training.hero.btn1', 'First button, text'), H('training.hero.btn1.href', 'First button, link'),
+    T('training.hero.btn2', 'Second button, text'), H('training.hero.btn2.href', 'Second button, link'),
+  ] },
+];
+
+module.exports = { GROUPS, escHtml, decode, getSlot, setSlot, getAttr, setAttr, readField, writeField, readGroup, writeGroup, preserveSlots, CHECK };

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PNTC Admin – Site Content</title>
+<link rel="stylesheet" href="admin.css">
+<style>
+.sc-wrap { display:grid; grid-template-columns:280px minmax(0,1fr); gap:1.5rem; align-items:start; }
+.sc-menu { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:.75rem; position:sticky; top:1rem; max-height:calc(100vh - 6rem); overflow:auto; }
+.sc-site { font-size:.66rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:.9rem .5rem .35rem; }
+.sc-site:first-child { margin-top:.2rem; }
+.sc-item { display:block; width:100%; text-align:left; background:none; border:0; color:var(--text); font:inherit; font-size:.84rem; padding:.5rem .6rem; border-radius:6px; cursor:pointer; }
+.sc-item:hover { background:rgba(255,255,255,.05); }
+.sc-item.active { background:rgba(200,150,12,.14); color:var(--gold); font-weight:700; }
+.sc-panel { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:1.5rem; min-height:300px; }
+.sc-head { display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:1rem; margin-bottom:1.25rem; padding-bottom:1rem; border-bottom:1px solid var(--border); }
+.sc-head h2 { font-size:1.15rem; margin:0 0 .25rem; }
+.sc-head p { margin:0; font-size:.8rem; color:var(--muted); line-height:1.5; }
+.sc-head a { color:var(--gold); }
+.sc-field { margin-bottom:1.1rem; }
+.sc-field label { display:block; font-size:.78rem; font-weight:700; margin-bottom:.35rem; }
+.sc-field small { display:block; font-size:.72rem; color:var(--muted); margin-top:.3rem; line-height:1.45; }
+.sc-field textarea.form-input { min-height:5.5rem; line-height:1.5; resize:vertical; }
+.sc-status { font-size:.82rem; margin-top:1rem; min-height:1.2rem; }
+.sc-status.ok { color:#4ade80; } .sc-status.err { color:#f87171; }
+.sc-empty { color:var(--muted); font-size:.9rem; padding:2rem 0; text-align:center; }
+.sc-grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 1.25rem; }
+/* calendar editor */
+.cal-top { display:grid; grid-template-columns:200px minmax(0,1fr); gap:1rem 1.5rem; margin-bottom:1.5rem; }
+.cal-h { font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:1.5rem 0 .6rem; }
+.cal-row { display:grid; gap:.5rem; margin-bottom:.5rem; align-items:center; }
+.cal-ov { grid-template-columns:1fr 1.4fr 1fr 34px; }
+.cal-ev { grid-template-columns:120px 130px minmax(0,1fr) 170px 86px 34px; }
+.cal-row .form-input { padding:.45rem .6rem; font-size:.82rem; }
+.cal-x { background:rgba(248,113,113,.1); color:#f87171; border:1px solid rgba(248,113,113,.25); border-radius:6px; height:34px; cursor:pointer; font-weight:700; }
+.cal-months { display:flex; flex-wrap:wrap; gap:.35rem; margin-bottom:.9rem; }
+.cal-months button { background:transparent; border:1px solid var(--border); color:var(--muted); border-radius:6px; padding:.35rem .7rem; font-size:.76rem; font-weight:700; cursor:pointer; }
+.cal-months button.active { background:var(--gold); color:#111; border-color:var(--gold); }
+.cal-hl { display:flex; align-items:center; gap:.35rem; font-size:.74rem; color:var(--muted); }
+.cal-legend { font-size:.74rem; color:var(--muted); line-height:1.6; margin:.4rem 0 1rem; }
+.cal-legend code { background:rgba(255,255,255,.07); padding:.05rem .35rem; border-radius:4px; }
+@media (max-width:980px){ .sc-wrap{grid-template-columns:1fr} .sc-menu{position:static;max-height:none} .sc-grid2{grid-template-columns:1fr} .cal-ev{grid-template-columns:1fr 1fr} .cal-ov{grid-template-columns:1fr} .cal-top{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <img src="/site-files/SHS/PNTC White Horizontal.png" alt="PNTC" onerror="this.style.display='none'">
+    <div class="sidebar-brand-sub">Admin Console</div>
+  </div>
+  <div class="sidebar-section-label">Navigation</div>
+  <nav class="sidebar-nav">
+    <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span> Dashboard</a>
+    <a class="nav-item" href="posts.html"><span class="nav-icon">📝</span> Posts &amp; Blog</a>
+    <a class="nav-item" href="images.html"><span class="nav-icon">🖼️</span> Image Manager</a>
+    <a class="nav-item" href="landing.html"><span class="nav-icon">🏛️</span> Landing Page</a>
+    <a class="nav-item active" href="content.html"><span class="nav-icon">✏️</span> Site Content</a>
+    <a class="nav-item" href="chat.html"><span class="nav-icon">💬</span> Live Chat</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <strong>PNTC Admin</strong>
+    admissions@mypntc.edu.ph
+    <button onclick="logout()" style="margin-top:.6rem;width:100%;padding:.45rem;background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.25);border-radius:5px;font-size:.75rem;font-weight:700;cursor:pointer">Sign out</button>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <span class="topbar-title">Site Content</span>
+    <span class="topbar-sub">Edit the words on the pages. Saving publishes to the live site in about 30 seconds.</span>
+  </div>
+
+  <div class="page-content">
+    <div class="sc-wrap">
+      <div class="sc-menu" id="menu"><div class="sc-empty">Loading…</div></div>
+      <div class="sc-panel" id="panel"><div class="sc-empty">Choose a section on the left to edit it.</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const $ = id => document.getElementById(id);
+const LIVE = {
+  'PNTC Main Landing Page/index.html':'/', 'PNTC Colleges/index.html':'/college/', 'PNTC Colleges/programs.html':'/college/programs',
+  'PNTC Colleges/admissions.html':'/college/admissions', 'PNTC Colleges/directory.html':'/college/directory', 'PNTC Colleges/calendar.html':'/college/calendar',
+  'SHS/index.html':'/shs/', 'SHS/strands.html':'/shs/strands', 'SHS/directory.html':'/shs/directory',
+  'PNTC Maritime Training and Assessment Center/index.html':'/training/'
+};
+let current = null, dirty = false;
+
+async function api(url, opts) {
+  const r = await fetch(url, opts);
+  if (r.status === 401) { location.href = '/admin/login.html'; throw new Error('Please sign in again.'); }
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(d.error || 'Something went wrong.');
+  return d;
+}
+function status(msg, kind) { const s = $('status'); if (s) { s.textContent = msg; s.className = 'sc-status ' + (kind || ''); } }
+window.addEventListener('beforeunload', e => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+
+// ── menu ──
+async function loadMenu() {
+  try {
+    const groups = await api('/api/content/groups');
+    let html = '', site = '';
+    for (const g of groups) {
+      if (g.site !== site) { site = g.site; html += `<div class="sc-site">${esc(site)}</div>`; }
+      html += `<button class="sc-item" data-id="${esc(g.id)}">${esc(g.title)}</button>`;
+      if (g.id === 'college-admissions-phase2') html += `<button class="sc-item" data-id="@calendar">Academic Calendar</button>`;
+    }
+    $('menu').innerHTML = html;
+    $('menu').addEventListener('click', e => {
+      const b = e.target.closest('.sc-item'); if (!b) return;
+      if (dirty && !confirm('You have changes that are not saved. Leave this section anyway?')) return;
+      document.querySelectorAll('.sc-item').forEach(x => x.classList.toggle('active', x === b));
+      b.dataset.id === '@calendar' ? openCalendar() : openGroup(b.dataset.id);
+    });
+  } catch (e) { $('menu').innerHTML = `<div class="sc-empty">${esc(e.message)}</div>`; }
+}
+
+// ── a section of texts ──
+async function openGroup(id) {
+  dirty = false; current = null;
+  $('panel').innerHTML = '<div class="sc-empty">Reading the live page…</div>';
+  try {
+    const g = await api('/api/content/' + encodeURIComponent(id));
+    current = g;
+    const links = g.files.map(f => LIVE[f] ? `<a href="${LIVE[f]}" target="_blank" rel="noopener">${esc(LIVE[f])}</a>` : esc(f)).join(', ');
+    const short = g.fields.filter(f => !f.long && f.type !== 'list').length > 6;
+    const field = f => {
+      const v = g.values[f.key], id = 'f-' + f.key;
+      const big = f.long || f.type === 'list';
+      const input = big
+        ? `<textarea class="form-input" id="${esc(id)}" rows="${f.type === 'list' ? Math.max(3, String(v).split('\n').length + 1) : 3}">${esc(v)}</textarea>`
+        : `<input class="form-input" id="${esc(id)}" type="text" value="${esc(v)}">`;
+      const hint = f.hint || (f.type === 'list' ? 'One item per line.' : '');
+      return `<div class="sc-field"${big ? ' style="grid-column:1 / -1"' : ''}><label for="${esc(id)}">${esc(f.label)}</label>${input}${hint ? `<small>${esc(hint)}</small>` : ''}</div>`;
+    };
+    $('panel').innerHTML = `
+      <div class="sc-head">
+        <div><h2>${esc(g.title)}</h2><p>${esc(g.site)} · shown on ${links}${g.note ? '<br>' + esc(g.note) : ''}</p></div>
+        <button class="btn btn-primary" id="save">Save and publish</button>
+      </div>
+      <div class="${short ? 'sc-grid2' : ''}">${g.fields.map(field).join('')}</div>
+      <button class="btn btn-primary" id="save2">Save and publish</button>
+      <div class="sc-status" id="status"></div>`;
+    $('panel').addEventListener('input', () => { dirty = true; }, { once: false });
+    $('save').onclick = $('save2').onclick = saveGroup;
+  } catch (e) { $('panel').innerHTML = `<div class="sc-empty">${esc(e.message)}</div>`; }
+}
+async function saveGroup() {
+  if (!current) return;
+  const values = {};
+  for (const f of current.fields) { const el = $('f-' + f.key); if (el) values[f.key] = el.value; }
+  status('Publishing…');
+  try {
+    const r = await api('/api/content/' + encodeURIComponent(current.id), { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ values }) });
+    dirty = false;
+    status(r.changed.length ? 'Published. The live site updates in about 30 seconds.' : 'Nothing changed, so nothing was published.', 'ok');
+  } catch (e) { status(e.message, 'err'); }
+}
+
+// ── academic calendar ──
+let cal = null, cats = {}, calMonth = 'all';
+const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const mlabel = ym => MON[+ym.slice(5) - 1] + ' ' + ym.slice(0, 4);
+function monthList() {
+  const set = new Set(cal.events.map(e => e.month)); const all = [...set].sort();
+  const [y0, m0] = (all[0] || '2026-07').split('-').map(Number), [y1, m1] = (all[all.length - 1] || '2027-07').split('-').map(Number);
+  const out = []; let y = y0, m = m0 - 1; if (m < 1) { m = 12; y--; }
+  const endY = m1 + 1 > 12 ? y1 + 1 : y1, endM = m1 + 1 > 12 ? 1 : m1 + 1;
+  while (y < endY || (y === endY && m <= endM)) { out.push(y + '-' + String(m).padStart(2, '0')); m++; if (m > 12) { m = 1; y++; } }
+  return out;
+}
+async function openCalendar() {
+  dirty = false; current = null;
+  $('panel').innerHTML = '<div class="sc-empty">Reading the calendar…</div>';
+  try { const r = await api('/api/calendar'); cal = r.data; cats = r.cats; cal.events.forEach((e, i) => e._i = i); calMonth = 'all'; renderCalendar(); }
+  catch (e) { $('panel').innerHTML = `<div class="sc-empty">${esc(e.message)}</div>`; }
+}
+function renderCalendar() {
+  const months = monthList();
+  const opts = sel => months.map(ym => `<option value="${ym}"${ym === sel ? ' selected' : ''}>${mlabel(ym)}</option>`).join('');
+  const copts = sel => Object.entries(cats).map(([k, l]) => `<option value="${k}"${k === sel ? ' selected' : ''}>${esc(l)}</option>`).join('');
+  const shown = cal.events.filter(e => calMonth === 'all' || e.month === calMonth);
+  $('panel').innerHTML = `
+    <div class="sc-head">
+      <div><h2>Academic Calendar</h2><p>Colleges · shown on <a href="/college/calendar" target="_blank" rel="noopener">/college/calendar</a><br>${cal.events.length} dates in total. Saving rebuilds the calendar page.</p></div>
+      <button class="btn btn-primary" id="calsave">Save and publish</button>
+    </div>
+    <div class="cal-top">
+      <div class="sc-field"><label for="cal-year">Academic year</label><input class="form-input" id="cal-year" value="${esc(cal.year)}"><small>For example 2026-2027.</small></div>
+      <div></div>
+    </div>
+    <div class="cal-h">Year at a glance cards</div>
+    <div id="cal-ov">${cal.overview.map((o, i) => `<div class="cal-row cal-ov" data-i="${i}">
+      <input class="form-input" data-k="title" value="${esc(o.title)}" placeholder="Title">
+      <input class="form-input" data-k="dates" value="${esc(o.dates)}" placeholder="Dates">
+      <input class="form-input" data-k="note" value="${esc(o.note)}" placeholder="Short note">
+      <button class="cal-x" data-del-ov="${i}" title="Remove this card">✕</button></div>`).join('')}</div>
+    <button class="btn" id="cal-add-ov" style="font-size:.78rem">+ Add card</button>
+    <div class="cal-h">Dates</div>
+    <div class="cal-months"><button data-m="all" class="${calMonth === 'all' ? 'active' : ''}">All</button>${months.filter(ym => cal.events.some(e => e.month === ym)).map(ym => `<button data-m="${ym}" class="${calMonth === ym ? 'active' : ''}">${mlabel(ym)}</button>`).join('')}</div>
+    <p class="cal-legend">Days: type one day <code>5</code>, a range <code>14-18</code>, or several <code>19,21-23</code>. For dates that cross into another month, type the full dates, like <code>2026-11-25..2026-12-07</code>. Tick Highlight for the important ones. Faculty and Admin dates are hidden from students unless they choose to see everything.</p>
+    <div id="cal-ev">${shown.map(e => `<div class="cal-row cal-ev" data-i="${e._i}">
+      <select class="form-input" data-k="month">${opts(e.month)}</select>
+      <input class="form-input" data-k="dates" value="${esc(e.dates)}" placeholder="Days">
+      <input class="form-input" data-k="title" value="${esc(e.title)}" placeholder="What is happening">
+      <select class="form-input" data-k="cat">${copts(e.cat)}</select>
+      <label class="cal-hl"><input type="checkbox" data-k="major"${e.major ? ' checked' : ''}> Highlight</label>
+      <button class="cal-x" data-del-ev="${e._i}" title="Remove this date">✕</button></div>`).join('') || '<div class="sc-empty">No dates in this month yet.</div>'}</div>
+    <button class="btn" id="cal-add-ev" style="font-size:.78rem">+ Add date${calMonth === 'all' ? '' : ' in ' + mlabel(calMonth)}</button>
+    <div style="margin-top:1.25rem"><button class="btn btn-primary" id="calsave2">Save and publish</button></div>
+    <div class="sc-status" id="status"></div>`;
+  $('calsave').onclick = $('calsave2').onclick = saveCalendar;
+  $('cal-year').oninput = e => { cal.year = e.target.value; dirty = true; };
+  $('cal-add-ov').onclick = () => { cal.overview.push({ title:'', dates:'', note:'' }); dirty = true; renderCalendar(); };
+  $('cal-add-ev').onclick = () => {
+    const month = calMonth === 'all' ? (monthList().find(ym => cal.events.some(e => e.month === ym)) || monthList()[0]) : calMonth;
+    const e = { month, dates:'', title:'', cat:'event', major:false, _i: Math.max(-1, ...cal.events.map(x => x._i)) + 1 };
+    cal.events.push(e); dirty = true; renderCalendar();
+    const row = document.querySelector(`.cal-ev[data-i="${e._i}"] [data-k="dates"]`); if (row) { row.scrollIntoView({ block:'center' }); row.focus(); }
+  };
+}
+document.addEventListener('click', e => {
+  const m = e.target.closest('.cal-months button'); if (m) { calMonth = m.dataset.m; renderCalendar(); return; }
+  const dv = e.target.closest('[data-del-ev]'); if (dv) { cal.events = cal.events.filter(x => x._i !== +dv.dataset.delEv); dirty = true; renderCalendar(); return; }
+  const dov = e.target.closest('[data-del-ov]'); if (dov) { cal.overview.splice(+dov.dataset.delOv, 1); dirty = true; renderCalendar(); }
+});
+document.addEventListener('input', e => {
+  const k = e.target.dataset && e.target.dataset.k; if (!k || !cal) return;
+  const ev = e.target.closest('.cal-ev'), ov = e.target.closest('.cal-ov');
+  const val = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+  if (ev) { const item = cal.events.find(x => x._i === +ev.dataset.i); if (item) item[k] = val; dirty = true; }
+  else if (ov) { cal.overview[+ov.dataset.i][k] = val; dirty = true; }
+});
+async function saveCalendar() {
+  status('Publishing…');
+  const body = { year: cal.year, overview: cal.overview, events: cal.events.map(({ _i, ...e }) => e) };
+  try {
+    const r = await api('/api/calendar', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+    dirty = false; status(`Published ${r.entries} dates. The live calendar updates in about 30 seconds.`, 'ok');
+  } catch (e) { status(e.message, 'err'); }
+}
+
+async function logout() { await fetch('/api/auth/logout', { method:'POST' }); location.href='/admin/login.html'; }
+fetch('/api/auth/check').then(r=>r.json()).then(d=>{ if(!d.ok) location.href='/admin/login.html'; else loadMenu(); }).catch(() => loadMenu());
+</script>
+</body>
+</html>

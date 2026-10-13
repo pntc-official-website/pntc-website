@@ -1,0 +1,1395 @@
+{
+ "year": "2026-2027",
+ "overview": [
+  {
+   "title": "First Semester",
+   "dates": "Sep 1 to Nov 24, 2026",
+   "note": "12 weeks"
+  },
+  {
+   "title": "Second Semester",
+   "dates": "Dec 9, 2026 to May 7, 2027",
+   "note": "18 weeks"
+  },
+  {
+   "title": "Christmas Vacation",
+   "dates": "Dec 21, 2026 to Jan 1, 2027",
+   "note": "Classes resume Jan 2"
+  },
+  {
+   "title": "Summer Classes",
+   "dates": "May 17 to Jun 28, 2027",
+   "note": "6 weeks"
+  },
+  {
+   "title": "Summer Vacation",
+   "dates": "May 8 to Jul 10, 2027",
+   "note": "64 days"
+  },
+  {
+   "title": "Next School Year",
+   "dates": "Classes start Jul 12, 2027",
+   "note": "AY 2027-2028"
+  }
+ ],
+ "events": [
+  {
+   "month": "2026-07",
+   "dates": "27",
+   "title": "Freshmen Orientation, New Students (Batch 1)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-07",
+   "dates": "28",
+   "title": "Quipper Orientation, New Students (Batch 1)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-07",
+   "dates": "29",
+   "title": "Freshmen Orientation, New Students (Batch 2)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-07",
+   "dates": "30",
+   "title": "Quipper Orientation, New Students (Batch 2)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "3",
+   "title": "Founder's Day",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "3",
+   "title": "Freshmen Orientation, New Students (Batch 3)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "4",
+   "title": "Quipper Orientation, New Students (Batch 3)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "5",
+   "title": "Freshmen Orientation, New Students (Batch 4)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "6",
+   "title": "Quipper Orientation, New Students (Batch 4)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "10",
+   "title": "Freshmen Orientation, New Students (Batch 5)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "11",
+   "title": "Quipper Orientation, New Students (Batch 5)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "12",
+   "title": "Freshmen Orientation, New Students (Batch 6)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "13",
+   "title": "Quipper Orientation, New Students (Batch 6)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "17",
+   "title": "Freshmen Orientation, New Students (Batch 7)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "18",
+   "title": "Quipper Orientation, New Students (Batch 7)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "18-19",
+   "title": "Faculty Onboarding",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "19",
+   "title": "Freshmen Orientation, New Students (Batch 8)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "20",
+   "title": "Quipper Orientation, New Students (Batch 8)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "21",
+   "title": "Ninoy Aquino Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "24",
+   "title": "Faculty General Assembly",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "24",
+   "title": "Freshmen Orientation, New Students (Batch 9)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "25",
+   "title": "Quipper Orientation, New Students (Batch 9)",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "27",
+   "title": "Faculty Member Quipper Refresher Training",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "27",
+   "title": "Faculty Member Onboard Training Assessment",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "31",
+   "title": "National Heroes Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "1",
+   "title": "Start of Classes, 1st Semester",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2026-09",
+   "dates": "1-4,7-11,14-15",
+   "title": "Load Revision Period",
+   "cat": "enroll",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "5",
+   "title": "World Environmental Health Day",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "14-18",
+   "title": "National Seafarers Day Celebration",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "14-18",
+   "title": "MANA MO Celebration",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "14-19",
+   "title": "Submission of Prelim Examination Questionnaire to the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "15",
+   "title": "Last Day of Enrollment",
+   "cat": "enroll",
+   "major": true
+  },
+  {
+   "month": "2026-09",
+   "dates": "19,21-23",
+   "title": "Practical Assessment, Prelim",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-09",
+   "dates": "24-25",
+   "title": "Written Examination, Prelim",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-09",
+   "dates": "26,28",
+   "title": "Special Assessment, Prelim",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-09",
+   "dates": "30",
+   "title": "World Tourism Day Celebration",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "1",
+   "title": "Guidance Wellness Day",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "1-2",
+   "title": "Encoding and Submission of Prelim Grade to the Office of the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "5-7",
+   "title": "Encoding and Submission of Prelim Grade to the Office of the Registrar",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "5-9",
+   "title": "Filing of Candidacy and Election of Student Organization Officers",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "5-9",
+   "title": "School Adjustment and Effective Study Habits Seminar",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "5-9",
+   "title": "TRB Orientation for MT and MarE CCI Students",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "10",
+   "title": "Seminar on Ethical Dilemmas in Trade for BSCA and BSOA",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "12-17",
+   "title": "Submission of Midterm Examination Questionnaire to the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "13",
+   "title": "National Mental Health Week",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "17,19-21",
+   "title": "Practical Assessment, Midterm",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-10",
+   "dates": "21",
+   "title": "Last Day of Filing for Change of Grade for Prelim (1st Semester, AY 2026-2027)",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "22-23",
+   "title": "Written Examination, Midterm",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-10",
+   "dates": "24,26",
+   "title": "Special Assessment, Midterm",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-10",
+   "dates": "27-29",
+   "title": "PNTC Foundation Week Celebration",
+   "cat": "event",
+   "major": true
+  },
+  {
+   "month": "2026-10",
+   "dates": "29-30",
+   "title": "Encoding and Submission of Midterm Grade to the Office of the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "29-31",
+   "title": "Student Organization Recruitment Week",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "30",
+   "title": "World Teacher's Day Celebration",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "1",
+   "title": "All Saints' Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "2",
+   "title": "All Souls' Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "3-5",
+   "title": "Encoding and Submission of Midterm Grade to the Office of the Registrar",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "7",
+   "title": "Industry Visit and Familiarization for BSCA and BSOA",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "9",
+   "title": "Drug Abuse Prevention and Control Week",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "9",
+   "title": "Submission of Course Offerings to the College Deans and Principal for 2nd Semester, AY 2026-2027",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "9-14",
+   "title": "Submission of Final Examination Questionnaire to the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "10-16",
+   "title": "Anger Management and Emotion Regulation Seminar",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "12-13",
+   "title": "Encoding of Class Schedule for 2nd Semester to the School System",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "13",
+   "title": "Tourism In-flight Seminar",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "13-17",
+   "title": "Faculty Evaluation for 1st Semester, AY 2026-2027",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "13-17",
+   "title": "Student Satisfaction Survey, 1st Semester, AY 2026-2027",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "16-19",
+   "title": "Practical Assessment, Finals",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-11",
+   "dates": "19",
+   "title": "Last Day of Filing for Change of Grade, Midterm",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "19",
+   "title": "Submission of Initial Faculty Loading to the OVPAA",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "20-21",
+   "title": "Written Examination, Finals",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-11",
+   "dates": "21",
+   "title": "Last Day of Submission of Completion Form (1st Semester, AY 2025-2026)",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "23-24",
+   "title": "Special Assessment, Finals",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-11",
+   "dates": "2026-11-23..2026-11-28,2026-12-01..2026-12-05,2026-12-07",
+   "title": "MMRP 1 Training (2nd Year, BSMT and BSMarE)",
+   "cat": "class",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "2026-11-23..2026-11-28,2026-12-01..2026-12-05,2026-12-07",
+   "title": "MMRP 2 Training (3rd Year, BSMarE)",
+   "cat": "class",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "2026-11-23..2026-11-28,2026-12-01..2026-12-05,2026-12-07",
+   "title": "Pre-Onboard Training Orientation for BSMarE 3rd Year",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "24-25",
+   "title": "Encoding and Submission of Final Grade to the Office of the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "2026-11-25..2026-12-07",
+   "title": "Semestral Break",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2026-11",
+   "dates": "26",
+   "title": "Paru-Paro Festival",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "27",
+   "title": "Oath Taking Ceremony for Newly Elected Organization Officers",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "27-28",
+   "title": "Encoding and Submission of Final Grade to the Office of the Registrar",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "27-28",
+   "title": "Signing of Faculty Clearance",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "30",
+   "title": "Bonifacio Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "1",
+   "title": "Viewing of Grades",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "1-4",
+   "title": "Culture and Arts Week",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "1-7",
+   "title": "Enrollment Period for 2nd Semester, AY 2026-2027",
+   "cat": "enroll",
+   "major": true
+  },
+  {
+   "month": "2026-12",
+   "dates": "7",
+   "title": "Celebrating Differences, Disability Awareness and Inclusion Month Seminar",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "8",
+   "title": "Feast of the Immaculate Conception",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "9",
+   "title": "Start of Classes, 2nd Semester",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2026-12",
+   "dates": "9",
+   "title": "Encoding and Submission of Final Grade for MMRP 1",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "9-22",
+   "title": "Load Revision Period",
+   "cat": "enroll",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "15",
+   "title": "World AIDS Day",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "17",
+   "title": "Student Christmas Party and Team Building",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "19",
+   "title": "Start of Students' Christmas Break",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2026-12",
+   "dates": "22",
+   "title": "Last Day of Enrollment",
+   "cat": "enroll",
+   "major": true
+  },
+  {
+   "month": "2026-12",
+   "dates": "24",
+   "title": "Christmas Eve",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "25",
+   "title": "Christmas Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "30",
+   "title": "Rizal Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "31",
+   "title": "New Year's Eve",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-01",
+   "dates": "1",
+   "title": "New Year's Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-01",
+   "dates": "2",
+   "title": "Resumption of Classes",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2027-01",
+   "dates": "11-16",
+   "title": "Submission of Prelim Examination Questionnaire to the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-01",
+   "dates": "12",
+   "title": "Liver Cancer and Viral Hepatitis Control and Prevention Month Seminar",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-01",
+   "dates": "20-23,25-26",
+   "title": "Practical Assessment, Prelim",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-01",
+   "dates": "27-29",
+   "title": "Written Examination, Prelim",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-01",
+   "dates": "30",
+   "title": "Joint Opening Collar and Recognition of Cadet Officers",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-01",
+   "dates": "2027-01-30,2027-02-01..2027-02-02",
+   "title": "Special Assessment, Prelim",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-02",
+   "dates": "3-5",
+   "title": "Tourism Students' Ilocos Tour",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-02",
+   "dates": "6",
+   "title": "Chinese New Year",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-02",
+   "dates": "8-9",
+   "title": "Encoding and Submission of Prelim Grade to the Office of the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-02",
+   "dates": "9",
+   "title": "World Heart Day",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-02",
+   "dates": "10-12",
+   "title": "Encoding and Submission of Prelim Grade to the Office of the Registrar",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-02",
+   "dates": "13",
+   "title": "Mock Board Exam for BSCA 4th Year Students",
+   "cat": "exam",
+   "major": false
+  },
+  {
+   "month": "2027-02",
+   "dates": "19",
+   "title": "International Tourist Guide Day, CITM",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-02",
+   "dates": "22-26",
+   "title": "Anti-Hazing Prevention Week Seminar",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-02",
+   "dates": "25",
+   "title": "People Power Anniversary",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-02",
+   "dates": "26",
+   "title": "Last Day of Filing for Change of Grade for Prelim (2nd Semester, AY 2026-2027)",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2027-02",
+   "dates": "27-28",
+   "title": "National Arts and English Week",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "1",
+   "title": "Submission of Course Offerings to the College Deans and Principal for 1st Semester, AY 2027-2028",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "1-6",
+   "title": "Submission of Midterm Examination Questionnaire to the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "2",
+   "title": "World Tuberculosis Day",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "5-6,10-12",
+   "title": "Practical Assessment, Midterm",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-03",
+   "dates": "9",
+   "title": "End of Ramadan (Eid al-Fitr)",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "13,15-16",
+   "title": "Written Assessment, Midterm",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-03",
+   "dates": "15-31",
+   "title": "Student Satisfaction Survey for 2nd Semester, AY 2026-2027",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "15-31",
+   "title": "Faculty Evaluation for 2nd Semester, AY 2026-2027",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "17-19",
+   "title": "Special Assessment, Midterm",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-03",
+   "dates": "18",
+   "title": "Encoding of Class Schedule for 1st Semester, AY 2027-2028 in the School System",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "19",
+   "title": "Gender and Development Program Workshop",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "22",
+   "title": "Cavite Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "23",
+   "title": "Submission of Course Offerings to the College Deans for Summer Classes",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "25",
+   "title": "Maundy Thursday",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "26",
+   "title": "Good Friday",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "27",
+   "title": "Black Saturday",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "29",
+   "title": "Start of Enrollment for 1st Semester, AY 2027-2028 (SHS, Freshmen and Transferees)",
+   "cat": "enroll",
+   "major": true
+  },
+  {
+   "month": "2027-03",
+   "dates": "29-30",
+   "title": "Career Guidance Orientation, Maritime",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "1-2",
+   "title": "Encoding and Submission of Midterm Grade to the Office of the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "5-7",
+   "title": "Encoding and Submission of Midterm Grade to the Office of the Registrar",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "7-8",
+   "title": "World Blood Donor's Day",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "9",
+   "title": "The Day of Valor",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "12-16",
+   "title": "Sports Fest 2027",
+   "cat": "event",
+   "major": true
+  },
+  {
+   "month": "2027-04",
+   "dates": "19-23",
+   "title": "Resilience, Developing Coping Skills during Adversity Seminar",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "19-24",
+   "title": "Submission of Final Examination Questionnaire to the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "21",
+   "title": "Last Day of Filing for Change of Grade for Midterm (2nd Semester, AY 2026-2027)",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "23-24,26-29",
+   "title": "Practical Assessment, Finals",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-04",
+   "dates": "26",
+   "title": "Encoding of Class Schedule for Summer Term 2027 in the School System",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "2027-04-30,2027-05-03..2027-05-04",
+   "title": "Written Assessment, Finals",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-05",
+   "dates": "1",
+   "title": "Labor Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "3-21",
+   "title": "Community Extension Program to Adopted Barangay Residents",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "4",
+   "title": "Last Day of Submission of Completion Form (2nd Semester, AY 2025-2026)",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "5-7",
+   "title": "Special Assessment, Finals",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-05",
+   "dates": "5-18",
+   "title": "MMRP 2, BSMT 3rd Year",
+   "cat": "class",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "5-18",
+   "title": "Pre-Onboard Training Orientation for BSMT 3rd Year",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "7",
+   "title": "Career Guidance Orientation, BS Customs Administration",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "7-8",
+   "title": "Encoding and Submission of Final Grade to the Office of the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "8-15",
+   "title": "Semestral Break",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2027-05",
+   "dates": "10-12",
+   "title": "Encoding and Submission of Final Grade to the Office of the Registrar",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "10-12",
+   "title": "Signing of Faculty Clearance",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "13-14",
+   "title": "Viewing of Grades",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "13-14",
+   "title": "Enrollment for Summer Classes",
+   "cat": "enroll",
+   "major": true
+  },
+  {
+   "month": "2027-05",
+   "dates": "16",
+   "title": "Feast of Sacrifice (Eid al-Adha)",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "17",
+   "title": "Start of Summer Classes",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2027-05",
+   "dates": "20",
+   "title": "Encoding and Submission of MMRP 2 Final Grade to the Office of the Registrar",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "21",
+   "title": "Last Day of Enrollment and Load Revision, Summer Classes",
+   "cat": "enroll",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "24",
+   "title": "Submission of Prelim Examination Questionnaire to the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "24-25",
+   "title": "Community Immersion, NSTP",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "26-27",
+   "title": "Practical Assessment, Prelim (Summer)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-05",
+   "dates": "27",
+   "title": "Deliberation of Candidates for Graduation and Ring Hop",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "28",
+   "title": "Written Assessment, Prelim (Summer)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-05",
+   "dates": "29",
+   "title": "Special Assessment, Prelim (Summer)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-06",
+   "dates": "1-2",
+   "title": "Encoding and Submission of Prelim Grade to the Office of the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-06",
+   "dates": "3-4",
+   "title": "Encoding and Submission of Prelim Grade to the Office of the Registrar",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-06",
+   "dates": "7",
+   "title": "Submission of Midterm Examination Questionnaire to the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-06",
+   "dates": "7",
+   "title": "Closing Ceremony of NSTP and Turn Over of Leadership of Student Organizations",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-06",
+   "dates": "9-10",
+   "title": "Practical Assessment, Midterm (Summer)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-06",
+   "dates": "11",
+   "title": "Written Assessment, Midterm (Summer)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-06",
+   "dates": "11",
+   "title": "Last Day of Filing for Change of Grade, Prelim (Summer)",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2027-06",
+   "dates": "12",
+   "title": "Independence Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-06",
+   "dates": "14",
+   "title": "Special Assessment, Midterm (Summer)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-06",
+   "dates": "14",
+   "title": "Last Day of Filing of Completion Form for Summer (2025-2026)",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2027-06",
+   "dates": "15-16",
+   "title": "Encoding and Submission of Midterm Grade to the Office of the College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-06",
+   "dates": "17-18",
+   "title": "Encoding and Submission of Midterm Grade to the Office of the Registrar",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-06",
+   "dates": "18",
+   "title": "22nd Commencement Exercises",
+   "cat": "event",
+   "major": true
+  },
+  {
+   "month": "2027-06",
+   "dates": "21",
+   "title": "Submission of Final Examination Questionnaire to the Office of College Deans",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-06",
+   "dates": "24-25",
+   "title": "Practical Assessment, Finals (Summer)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-06",
+   "dates": "25",
+   "title": "Last Day of Filing for Change of Grade, Midterm (Summer)",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2027-06",
+   "dates": "26",
+   "title": "Written Assessment, Finals (Summer)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-06",
+   "dates": "28",
+   "title": "Special Assessment, Finals (Summer)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-06",
+   "dates": "28",
+   "title": "End of Summer Classes",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2027-06",
+   "dates": "29-30",
+   "title": "Encoding and Submission of Final Grade to the Office of the Dean",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-06",
+   "dates": "2027-06-29..2027-07-10",
+   "title": "Summer Break",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2027-07",
+   "dates": "1-2,5",
+   "title": "Encoding and Submission of Final Grade to the Office of the Registrar",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-07",
+   "dates": "6-9",
+   "title": "Enrollment for 1st Semester, AY 2027-2028 (Continuing Students with Summer Classes)",
+   "cat": "enroll",
+   "major": true
+  },
+  {
+   "month": "2027-07",
+   "dates": "9",
+   "title": "Last Day of Filing for Change of Grade, Finals (Summer)",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2027-07",
+   "dates": "12",
+   "title": "Start of Classes, AY 2027-2028",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2027-07",
+   "dates": "30",
+   "title": "21st Ring Hop Ceremony",
+   "cat": "event",
+   "major": true
+  }
+ ]
+}

@@ -4,6 +4,7 @@
 // Rerunnable:  node tools/college-directory.js
 const fs = require('fs');
 const path = require('path');
+const C = require('../admin/content.js');
 
 const PAGES = [
   { file: 'PNTC Colleges/directory.html', navy: '#1C1650', gold: '#F3CF33' },
@@ -24,9 +25,9 @@ const svg = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
 const head = `<section id="directory">
   <div class="directory-wrap">
     <div class="dx-facts">
-      <div class="dx-fact">${svg('pin')}<div><span>Where</span><strong>PNTC Colleges campus, Dasmariñas, Cavite</strong></div></div>
-      <div class="dx-fact">${svg('clock')}<div><span>Office Hours</span><strong>${HOURS}</strong></div></div>
-      <div class="dx-fact">${svg('phone')}<div><span>Trunk Line</span><strong><a href="tel:+63464388835">(046) 438-8835</a></strong></div></div>
+      <div class="dx-fact">${svg('pin')}<div><span>Where</span><strong><!--c:dir.where-->PNTC Colleges campus, Dasmariñas, Cavite<!--/c--></strong></div></div>
+      <div class="dx-fact">${svg('clock')}<div><span>Office Hours</span><strong><!--c:dir.hours-->${HOURS}<!--/c--></strong></div></div>
+      <div class="dx-fact">${svg('phone')}<div><span>Trunk Line</span><strong><a data-c="dir.phone.href" href="tel:+63464388835"><!--c:dir.phone-->(046) 438-8835<!--/c--></a></strong></div></div>
     </div>
     <div class="dx-bar">
       <div>
@@ -133,6 +134,7 @@ const css = (N, GOLD) => `<style id="dir-modern">
 for (const p of PAGES) {
   const FILE = path.join(__dirname, '..', p.file);
   let h = fs.readFileSync(FILE, 'utf8');
+  const before = h;
   const secStart = h.indexOf('<section id="directory">'), marker = h.indexOf('<!-- PNTC_DIRECTORY_START -->');
   if (secStart < 0 || marker < secStart) throw new Error('directory section or marker not found in ' + p.file);
   h = h.slice(0, secStart) + head + h.slice(marker);
@@ -140,6 +142,7 @@ for (const p of PAGES) {
   h = h.replace('</body>', SCRIPT + '</body>');
   h = h.replace(/<style id="dir-modern">[\s\S]*?<\/style>\n?/, '');
   h = h.replace('</head>', css(p.navy, p.gold) + '</head>');
+  h = C.preserveSlots(before, h);   // keep hours, address and trunk line edited in the admin
   fs.writeFileSync(FILE, h);
   console.log('directory updated:', p.file);
 }

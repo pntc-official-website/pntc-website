@@ -1010,6 +1010,16 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"EducationalOrganization","@id":"https://www.pntc.edu.ph/#organization","name":"PNTC Colleges, Inc.","alternateName":["PNTC","PNTC Colleges","Philippine Nautical and Technological College"],"url":"https://www.pntc.edu.ph/","description":"Maritime and business education institution established in 1994, with campuses and facilities in Dasmariñas (Cavite), Intramuros (Manila), and Tanza (Cavite).","location":[{"@type":"Place","name":"PNTC Colleges Dasmariñas Campus","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"}},{"@type":"Place","name":"PNTC Maritime Training and Assessment Center, Intramuros","address":{"@type":"PostalAddress","streetAddress":"5th Floor, Intramuros Corporate Plaza, Recoletos Street, Intramuros","addressLocality":"Manila","addressRegion":"Metro Manila","postalCode":"1002","addressCountry":"PH"}},{"@type":"Place","name":"PNTC Tanza Training Center","address":{"@type":"PostalAddress","addressLocality":"Tanza","addressRegion":"Cavite","addressCountry":"PH"}}],"logo":"https://www.pntc.edu.ph/SHS/PNTC%20White%20Horizontal.png","foundingDate":"1994","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"},"telephone":"+63-46-438-8835","email":"info@pntc.edu.ph","sameAs":["https://www.facebook.com/pntccolleges"]},{"@type":"HighSchool","@id":"https://www.pntc.edu.ph/shs/#shs","name":"PNTC Colleges Senior High School","url":"https://www.pntc.edu.ph/shs/","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"},"telephone":"+63-917-159-4966","email":"admissions@mypntc.edu.ph","parentOrganization":{"@id":"https://www.pntc.edu.ph/#organization"}},{"@type":"WebPage","@id":"https://www.pntc.edu.ph/shs/strands","url":"https://www.pntc.edu.ph/shs/strands","name":"SHS Strands in Dasmariñas, Cavite | Maritime, STEM, Tourism","description":"Senior high school strands in Dasmariñas, Cavite, including Marine Transportation, Marine Engineering, STEM, Tourism, Humanities, and Tech-Pro Maritime.","inLanguage":"en-PH","isPartOf":{"@type":"WebSite","name":"PNTC Colleges, Inc.","url":"https://www.pntc.edu.ph/"},"about":{"@id":"https://www.pntc.edu.ph/shs/#shs"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.pntc.edu.ph/"},{"@type":"ListItem","position":2,"name":"Senior High School","item":"https://www.pntc.edu.ph/shs/"},{"@type":"ListItem","position":3,"name":"SHS Strands","item":"https://www.pntc.edu.ph/shs/strands"}]}]}</script>
 <script src="/global-nav.js" data-area="shs"></script>
+<style id="shs-img-fix">
+/* Phone fix: the stacked photo was laid out with fixed pixel positions for a 510px frame and pushed the page wider than the screen */
+@media (max-width: 768px){
+  .shs-img-wrap{height:auto;aspect-ratio:510/380}
+  .shs-rect-bg{height:83%;top:7.9%;border-radius:12% / 16%}
+  .shs-img-blur-l{width:35.9%;height:60.3%;left:2.35%;top:15.8%}
+  .shs-img-blur-r{width:35.9%;height:60.3%;left:60.2%;top:15.8%}
+  .shs-img-main{width:57%;height:95.8%;left:23.9%;top:0}
+}
+</style>
 <style id="strand-guide-css">
 /* SHS strands page: clearer intro heading and the detailed strand guide */
 #shs-section .shs-h2{color:#181D71;text-shadow:none}
@@ -1061,16 +1071,6 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 @media(max-width:1000px){.sg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sg-track-head{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:640px){.sg-grid,.sg-t-techpro .sg-grid{grid-template-columns:minmax(0,1fr)}.sg-chips{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -1.1rem;padding:0 1.1rem .3rem}.sg-chips::-webkit-scrollbar{display:none}.sg-chip{flex:none}.sg-head{text-align:left}}
 @media(prefers-reduced-motion:reduce){.sg-card,.sg-chip,.sg-btn{transition:none}}
-</style>
-<style id="shs-img-fix">
-/* Phone fix: the stacked photo was laid out with fixed pixel positions for a 510px frame and pushed the page wider than the screen */
-@media (max-width: 768px){
-  .shs-img-wrap{height:auto;aspect-ratio:510/380}
-  .shs-rect-bg{height:83%;top:7.9%;border-radius:12% / 16%}
-  .shs-img-blur-l{width:35.9%;height:60.3%;left:2.35%;top:15.8%}
-  .shs-img-blur-r{width:35.9%;height:60.3%;left:60.2%;top:15.8%}
-  .shs-img-main{width:57%;height:95.8%;left:23.9%;top:0}
-}
 </style>
 </head>
 <body>
@@ -1158,80 +1158,80 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
     <div class="sg-track sg-t-academic" data-track="academic">
       <div class="sg-track-head">
         <div><p class="sg-kicker">7 Programs</p><h2>Academic Track</h2></div>
-        <p>PNTC's Academic Track prepares students for college and university. Each program is designed around a specific career path.</p>
+        <p><!--c:shs.track.academic.desc-->PNTC's Academic Track prepares students for college and university. Each program is designed around a specific career path.<!--/c--></p>
       </div>
       <div class="sg-grid">
         <article class="sg-card sg-academic" id="strand-adsc" data-tags="maritime tourism">
           <header><span class="sg-code">ADSC</span><span class="sg-num" aria-hidden="true">01</span></header>
-          <h3>Doorway to Ship's Catering</h3>
-          <p class="sg-desc">Culinary arts foundation tailored for careers in ship's catering and maritime hospitality aboard merchant vessels.</p>
-          <div class="sg-row"><span>What you focus on</span><ul><li>Culinary Arts</li></ul></div>
-          <div class="sg-row sg-leads"><span>Where it leads</span><ul><li>Ship's Catering</li><li>Maritime Hospitality</li></ul></div>
+          <h3><!--c:shs.strand.adsc.name-->Doorway to Ship's Catering<!--/c--></h3>
+          <p class="sg-desc"><!--c:shs.strand.adsc.desc-->Culinary arts foundation tailored for careers in ship's catering and maritime hospitality aboard merchant vessels.<!--/c--></p>
+          <div class="sg-row"><span>What you focus on</span><ul><!--c:shs.strand.adsc.focus--><li>Culinary Arts</li><!--/c--></ul></div>
+          <div class="sg-row sg-leads"><span>Where it leads</span><ul><!--c:shs.strand.adsc.leads--><li>Ship's Catering</li><li>Maritime Hospitality</li><!--/c--></ul></div>
         </article>
         <article class="sg-card sg-academic" id="strand-adt" data-tags="tourism">
           <header><span class="sg-code">ADT</span><span class="sg-num" aria-hidden="true">02</span></header>
-          <h3>Doorway to Tourism</h3>
-          <p class="sg-desc">A foundation in hospitality, travel management, and tourism operations, suited for degrees in Hotel and Restaurant Management or Tourism.</p>
-          <div class="sg-row"><span>What you focus on</span><ul><li>Hospitality</li><li>Travel Management</li><li>Tourism Operations</li></ul></div>
-          <div class="sg-row sg-leads"><span>Where it leads</span><ul><li>Hotel and Restaurant Management</li><li>Tourism</li></ul></div>
+          <h3><!--c:shs.strand.adt.name-->Doorway to Tourism<!--/c--></h3>
+          <p class="sg-desc"><!--c:shs.strand.adt.desc-->A foundation in hospitality, travel management, and tourism operations, suited for degrees in Hotel and Restaurant Management or Tourism.<!--/c--></p>
+          <div class="sg-row"><span>What you focus on</span><ul><!--c:shs.strand.adt.focus--><li>Hospitality</li><li>Travel Management</li><li>Tourism Operations</li><!--/c--></ul></div>
+          <div class="sg-row sg-leads"><span>Where it leads</span><ul><!--c:shs.strand.adt.leads--><li>Hotel and Restaurant Management</li><li>Tourism</li><!--/c--></ul></div>
         </article>
         <article class="sg-card sg-academic" id="strand-admare" data-tags="maritime science">
           <header><span class="sg-code">ADMarE</span><span class="sg-num" aria-hidden="true">03</span></header>
-          <h3>Doorway to Marine Engineering</h3>
-          <p class="sg-desc">A pre-engineering track designed to give students a strong foundation before entering BS Marine Engineering at PNTC Colleges.</p>
-          <div class="sg-row"><span>What you focus on</span><ul><li>Pre-Engineering</li></ul></div>
-          <div class="sg-row sg-leads"><span>Where it leads</span><ul><li>BS Marine Engineering</li></ul></div>
+          <h3><!--c:shs.strand.admare.name-->Doorway to Marine Engineering<!--/c--></h3>
+          <p class="sg-desc"><!--c:shs.strand.admare.desc-->A pre-engineering track designed to give students a strong foundation before entering BS Marine Engineering at PNTC Colleges.<!--/c--></p>
+          <div class="sg-row"><span>What you focus on</span><ul><!--c:shs.strand.admare.focus--><li>Pre-Engineering</li><!--/c--></ul></div>
+          <div class="sg-row sg-leads"><span>Where it leads</span><ul><!--c:shs.strand.admare.leads--><li>BS Marine Engineering</li><!--/c--></ul></div>
           <a class="sg-next" href="/college/programs#prog-bsmare">Continue to BS Marine Engineering at PNTC Colleges <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </article>
         <article class="sg-card sg-academic" id="strand-admt" data-tags="maritime">
           <header><span class="sg-code">ADMT</span><span class="sg-num" aria-hidden="true">04</span></header>
-          <h3>Doorway to Marine Transportation</h3>
-          <p class="sg-desc">A pre-maritime deck track for aspiring ship officers and the direct academic path to PNTC's BS Marine Transportation program.</p>
-          <div class="sg-row"><span>What you focus on</span><ul><li>Pre-Maritime Deck</li></ul></div>
-          <div class="sg-row sg-leads"><span>Where it leads</span><ul><li>Ship Officer</li><li>BS Marine Transportation</li></ul></div>
+          <h3><!--c:shs.strand.admt.name-->Doorway to Marine Transportation<!--/c--></h3>
+          <p class="sg-desc"><!--c:shs.strand.admt.desc-->A pre-maritime deck track for aspiring ship officers and the direct academic path to PNTC's BS Marine Transportation program.<!--/c--></p>
+          <div class="sg-row"><span>What you focus on</span><ul><!--c:shs.strand.admt.focus--><li>Pre-Maritime Deck</li><!--/c--></ul></div>
+          <div class="sg-row sg-leads"><span>Where it leads</span><ul><!--c:shs.strand.admt.leads--><li>Ship Officer</li><li>BS Marine Transportation</li><!--/c--></ul></div>
           <a class="sg-next" href="/college/programs#prog-bsmt">Continue to BS Marine Transportation at PNTC Colleges <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </article>
         <article class="sg-card sg-academic" id="strand-aesh" data-tags="humanities">
           <header><span class="sg-code">AESH</span><span class="sg-num" aria-hidden="true">05</span></header>
-          <h3>English, Social Sciences and Humanities</h3>
-          <p class="sg-desc">A humanities track that develops communication, critical thinking, and social science skills, suited for studies in law, communication, psychology, and education.</p>
-          <div class="sg-row"><span>What you focus on</span><ul><li>Communication</li><li>Critical Thinking</li><li>Social Science</li></ul></div>
-          <div class="sg-row sg-leads"><span>Where it leads</span><ul><li>Law</li><li>Communication</li><li>Psychology</li><li>Education</li></ul></div>
+          <h3><!--c:shs.strand.aesh.name-->English, Social Sciences and Humanities<!--/c--></h3>
+          <p class="sg-desc"><!--c:shs.strand.aesh.desc-->A humanities track that develops communication, critical thinking, and social science skills, suited for studies in law, communication, psychology, and education.<!--/c--></p>
+          <div class="sg-row"><span>What you focus on</span><ul><!--c:shs.strand.aesh.focus--><li>Communication</li><li>Critical Thinking</li><li>Social Science</li><!--/c--></ul></div>
+          <div class="sg-row sg-leads"><span>Where it leads</span><ul><!--c:shs.strand.aesh.leads--><li>Law</li><li>Communication</li><li>Psychology</li><li>Education</li><!--/c--></ul></div>
         </article>
         <article class="sg-card sg-academic" id="strand-astem" data-tags="science">
           <header><span class="sg-code">ASTEM</span><span class="sg-num" aria-hidden="true">06</span></header>
-          <h3>Science, Technology, Engineering and Mathematics</h3>
-          <p class="sg-desc">A strong STEM foundation in physics, chemistry, biology, and advanced mathematics that prepares students for degrees in engineering, medicine, and technology.</p>
-          <div class="sg-row"><span>What you focus on</span><ul><li>Physics</li><li>Chemistry</li><li>Biology</li><li>Advanced Mathematics</li></ul></div>
-          <div class="sg-row sg-leads"><span>Where it leads</span><ul><li>Engineering</li><li>Medicine</li><li>Technology</li></ul></div>
+          <h3><!--c:shs.strand.astem.name-->Science, Technology, Engineering and Mathematics<!--/c--></h3>
+          <p class="sg-desc"><!--c:shs.strand.astem.desc-->A strong STEM foundation in physics, chemistry, biology, and advanced mathematics that prepares students for degrees in engineering, medicine, and technology.<!--/c--></p>
+          <div class="sg-row"><span>What you focus on</span><ul><!--c:shs.strand.astem.focus--><li>Physics</li><li>Chemistry</li><li>Biology</li><li>Advanced Mathematics</li><!--/c--></ul></div>
+          <div class="sg-row sg-leads"><span>Where it leads</span><ul><!--c:shs.strand.astem.leads--><li>Engineering</li><li>Medicine</li><li>Technology</li><!--/c--></ul></div>
         </article>
         <article class="sg-card sg-academic" id="strand-aup" data-tags="uniformed">
           <header><span class="sg-code">AUP</span><span class="sg-num" aria-hidden="true">07</span></header>
-          <h3>Uniformed Personnel</h3>
-          <p class="sg-desc">Structured academic track for students pursuing careers in the military, police, coast guard, fire protection, or other government uniformed services.</p>
-          <div class="sg-row sg-leads"><span>Where it leads</span><ul><li>Military</li><li>Police</li><li>Coast Guard</li><li>Fire Protection</li></ul></div>
+          <h3><!--c:shs.strand.aup.name-->Uniformed Personnel<!--/c--></h3>
+          <p class="sg-desc"><!--c:shs.strand.aup.desc-->Structured academic track for students pursuing careers in the military, police, coast guard, fire protection, or other government uniformed services.<!--/c--></p>
+          <div class="sg-row sg-leads"><span>Where it leads</span><ul><!--c:shs.strand.aup.leads--><li>Military</li><li>Police</li><li>Coast Guard</li><li>Fire Protection</li><!--/c--></ul></div>
         </article>
       </div>
     </div>
     <div class="sg-track sg-t-techpro" data-track="techpro">
       <div class="sg-track-head">
         <div><p class="sg-kicker">2 Programs</p><h2>Technical-Professional Track</h2></div>
-        <p>The Technical-Professional Track gives students practical maritime skills recognized by TESDA and STCW, preparing them for employment in the maritime industry after graduation.</p>
+        <p><!--c:shs.track.techpro.desc-->The Technical-Professional Track gives students practical maritime skills recognized by TESDA and STCW, preparing them for employment in the maritime industry after graduation.<!--/c--></p>
       </div>
       <div class="sg-grid">
         <article class="sg-card sg-techpro" id="strand-tpdm" data-tags="maritime">
           <header><span class="sg-code">TPDM</span><span class="sg-num" aria-hidden="true">08</span></header>
-          <h3>Doorway to Maritime</h3>
-          <p class="sg-desc">An introductory technical maritime program covering basic seamanship, deck operations, and safety protocols. It prepares students for maritime careers or advanced Tech-Pro studies.</p>
-          <div class="sg-row"><span>What you focus on</span><ul><li>Basic Seamanship</li><li>Deck Operations</li><li>Safety Protocols</li></ul></div>
-          <div class="sg-row sg-leads"><span>Where it leads</span><ul><li>Ordinary Seaman</li><li>Entry-Level Maritime</li></ul></div>
+          <h3><!--c:shs.strand.tpdm.name-->Doorway to Maritime<!--/c--></h3>
+          <p class="sg-desc"><!--c:shs.strand.tpdm.desc-->An introductory technical maritime program covering basic seamanship, deck operations, and safety protocols. It prepares students for maritime careers or advanced Tech-Pro studies.<!--/c--></p>
+          <div class="sg-row"><span>What you focus on</span><ul><!--c:shs.strand.tpdm.focus--><li>Basic Seamanship</li><li>Deck Operations</li><li>Safety Protocols</li><!--/c--></ul></div>
+          <div class="sg-row sg-leads"><span>Where it leads</span><ul><!--c:shs.strand.tpdm.leads--><li>Ordinary Seaman</li><li>Entry-Level Maritime</li><!--/c--></ul></div>
         </article>
         <article class="sg-card sg-techpro" id="strand-tpm" data-tags="maritime">
           <header><span class="sg-code">TPM</span><span class="sg-num" aria-hidden="true">09</span></header>
-          <h3>Maritime (Tech-Pro)</h3>
-          <p class="sg-desc">Full technical maritime training with STCW certifications and TESDA NC qualifications. Graduates are qualified to work as Able Seamen or Engine Cadets in international shipping fleets.</p>
-          <div class="sg-row"><span>What you focus on</span><ul><li>STCW Certified</li><li>TESDA Certified</li></ul></div>
-          <div class="sg-row sg-leads"><span>Where it leads</span><ul><li>Able Seaman</li><li>Engine Cadet</li></ul></div>
+          <h3><!--c:shs.strand.tpm.name-->Maritime (Tech-Pro)<!--/c--></h3>
+          <p class="sg-desc"><!--c:shs.strand.tpm.desc-->Full technical maritime training with STCW certifications and TESDA NC qualifications. Graduates are qualified to work as Able Seamen or Engine Cadets in international shipping fleets.<!--/c--></p>
+          <div class="sg-row"><span>What you focus on</span><ul><!--c:shs.strand.tpm.focus--><li>STCW Certified</li><li>TESDA Certified</li><!--/c--></ul></div>
+          <div class="sg-row sg-leads"><span>Where it leads</span><ul><!--c:shs.strand.tpm.leads--><li>Able Seaman</li><li>Engine Cadet</li><!--/c--></ul></div>
         </article>
       </div>
     </div>

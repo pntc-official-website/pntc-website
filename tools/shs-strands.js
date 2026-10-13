@@ -4,6 +4,9 @@
 // Rerunnable:  node tools/shs-strands.js
 const fs = require('fs');
 const FILE = require('path').join(__dirname, '..', 'SHS', 'strands.html');
+const C = require('../admin/content.js');
+const slot = (key, inner) => '<!--c:' + key + '-->' + inner + '<!--/c-->';
+const sid = c => 'shs.strand.' + c.toLowerCase() + '.';
 const NAVY = '#181D71', YEL = '#FFCC00', GREEN = '#00925D';
 
 const TRACKS = {
@@ -48,9 +51,9 @@ const ARROW = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 
 
 const card = (s, n) => `        <article class="sg-card sg-${s.track}" id="${id(s.code)}" data-tags="${s.tags.join(' ')}">
           <header><span class="sg-code">${esc(s.code)}</span><span class="sg-num" aria-hidden="true">${String(n).padStart(2, '0')}</span></header>
-          <h3>${esc(s.name)}</h3>
-          <p class="sg-desc">${esc(s.desc)}</p>
-${s.focus.length ? `          <div class="sg-row"><span>What you focus on</span><ul>${s.focus.map(f => `<li>${esc(f)}</li>`).join('')}</ul></div>\n` : ''}          <div class="sg-row sg-leads"><span>Where it leads</span><ul>${s.leads.map(f => `<li>${esc(f)}</li>`).join('')}</ul></div>
+          <h3>${slot(sid(s.code) + 'name', esc(s.name))}</h3>
+          <p class="sg-desc">${slot(sid(s.code) + 'desc', esc(s.desc))}</p>
+${s.focus.length ? `          <div class="sg-row"><span>What you focus on</span><ul>${slot(sid(s.code) + 'focus', s.focus.map(f => `<li>${esc(f)}</li>`).join(''))}</ul></div>\n` : ''}          <div class="sg-row sg-leads"><span>Where it leads</span><ul>${slot(sid(s.code) + 'leads', s.leads.map(f => `<li>${esc(f)}</li>`).join(''))}</ul></div>
 ${s.next ? `          <a class="sg-next" href="${s.next[1]}">Continue to ${esc(s.next[0])} ${ARROW}</a>\n` : ''}        </article>`;
 
 let n = 0;
@@ -59,7 +62,7 @@ const trackBlock = key => {
   return `    <div class="sg-track sg-t-${key}" data-track="${key}">
       <div class="sg-track-head">
         <div><p class="sg-kicker">${list.length} Programs</p><h2>${TRACKS[key].name}</h2></div>
-        <p>${esc(TRACKS[key].desc)}</p>
+        <p>${slot('shs.track.' + key + '.desc', esc(TRACKS[key].desc))}</p>
       </div>
       <div class="sg-grid">
 ${list.map(s => card(s, ++n)).join('\n')}
@@ -156,6 +159,7 @@ const CSS = `<style id="strand-guide-css">
 `;
 
 let h = fs.readFileSync(FILE, 'utf8');
+const before = h;
 if (h.includes('<section id="strand-guide"')) {
   const a = h.indexOf('<section id="strand-guide"'), b = h.indexOf('</section>', h.indexOf('</script>', a)) + '</section>'.length;
   h = h.slice(0, a) + section + h.slice(b);
@@ -172,5 +176,6 @@ for (const s of STRANDS) {
 }
 h = h.replace(/<style id="strand-guide-css">[\s\S]*?<\/style>\n?/, '');
 h = h.replace('</head>', CSS + '</head>');
+h = C.preserveSlots(before, h);   // keep strand texts edited in the admin
 fs.writeFileSync(FILE, h);
 console.log('strand guide built with', STRANDS.length, 'strands');

@@ -1207,6 +1207,9 @@ function buildMerchandiseBlock(items){
   return`    <div class="merch-grid">${items.map(i=>`<div class="merch-card reveal"><div class="merch-img ${escHtml(i.imgClass||'mi-navy')}">${escHtml(i.icon||'🛍️')}</div><div class="merch-body"><div class="merch-cat">${escHtml(i.category)}</div><div class="merch-name">${escHtml(i.name)}</div><p class="merch-note">${escHtml(i.note)}</p><div class="merch-price">${escHtml(i.price)}</div><button class="merch-btn" onclick="location.href='mailto:info@pntc.edu.ph?subject=Merchandise - ${encodeURIComponent(i.name||'')}'">Inquire</button></div></div>`).join('')}</div>`;
 }
 
+// ── Site Content and Academic Calendar (texts on the pages, edited in the admin) ──
+require('./content-routes')(app, { requireAuth, ghGetFile, ghPutFile });
+
 // ── Start / Export ─────────────────────────────────────────────
 if (require.main === module) {
   app.listen(PORT, () => {

@@ -6,6 +6,7 @@ const fs = require('fs');
 const DIR = require('path').join(__dirname, '..', 'PNTC Main Landing Page');
 const FILE = DIR + '/index.html';
 let h = fs.readFileSync(FILE, 'utf8');
+const before = h;
 
 const files = fs.readdirSync(DIR).filter(f => /^hero-collage-\d+\.jpg$/.test(f)).sort();
 if (files.length < 9) throw new Error('not enough photos: ' + files.length);
@@ -20,7 +21,7 @@ const wall = `<div class="hc-wall" aria-hidden="true">
     <div class="hc-cols">
 ${cols.map((c, i) => `      <div class="hc-col hc-c${i + 1}"><div class="hc-track">${c.map(t => tile(t)).join('')}${c.map(t => tile(t, true)).join('')}${c.map(t => tile(t, true)).join('')}</div></div>`).join('\n')}
     </div>
-    <span class="hc-tag"><i></i>The Family We Are Building</span>
+    <span class="hc-tag"><i></i><!--c:main.hero.wall-->The Family We Are Building<!--/c--></span>
   </div>`;
 const starter = `
   <script>(function(){var w=document.querySelector('.hc-wall');if(!w||!('IntersectionObserver' in window))return;var r=w.getBoundingClientRect();if(r.top<window.innerHeight*.8&&r.bottom>0)return;w.classList.add('wait');var io=new IntersectionObserver(function(es){if(es.some(function(e){return e.isIntersecting})){w.classList.remove('wait');io.disconnect();}},{threshold:.2});io.observe(w);})();</script>
@@ -115,5 +116,6 @@ const CSS = `<style id="hero-collage">
 `;
 h = h.replace(/<style id="hero-collage">[\s\S]*?<\/style>\n?/, '');
 h = h.replace('</head>', CSS + '</head>');
+h = require('../admin/content.js').preserveSlots(before, h);   // keep the caption edited in the admin
 fs.writeFileSync(FILE, h);
 console.log('photo wall applied with', N, 'photos in', COLS, 'columns');
