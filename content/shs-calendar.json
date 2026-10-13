@@ -1,0 +1,619 @@
+{
+ "site": "shs",
+ "year": "2026-2027",
+ "overview": [
+  {
+   "title": "First Term",
+   "dates": "Jun 29 to Sep 25, 2026",
+   "note": "74 school days"
+  },
+  {
+   "title": "Second Term",
+   "dates": "Oct 12, 2026 to Jan 14, 2027",
+   "note": "70 school days"
+  },
+  {
+   "title": "Third Term",
+   "dates": "Jan 25 to Apr 30, 2027",
+   "note": "75 school days"
+  },
+  {
+   "title": "Holiday Break",
+   "dates": "Dec 23, 2026 to Jan 3, 2027",
+   "note": "Classes resume Jan 4"
+  },
+  {
+   "title": "Summer Class",
+   "dates": "May 12 to Jun 23, 2027",
+   "note": "Enrollment on May 10"
+  },
+  {
+   "title": "Recognition and Graduation",
+   "dates": "May 2027",
+   "note": "Dates to be announced"
+  }
+ ],
+ "events": [
+  {
+   "month": "2026-05",
+   "dates": "4",
+   "title": "Enrollment Period for S.Y. 2026-2027 begins",
+   "cat": "enroll",
+   "major": true
+  },
+  {
+   "month": "2026-06",
+   "dates": "29",
+   "title": "Start of Classes, Opening Block",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2026-06",
+   "dates": "29",
+   "title": "Parent-Student Orientation",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2026-06",
+   "dates": "30",
+   "title": "Wellness and Development Program",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-07",
+   "dates": "1",
+   "title": "Leadership and Engagement Seminar",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-07",
+   "dates": "1",
+   "title": "Safety Seminar",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-07",
+   "dates": "2",
+   "title": "Student Organizations General Assembly and Recruitment Day",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-07",
+   "dates": "10",
+   "title": "Last day of Load Revision",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2026-07",
+   "dates": "10",
+   "title": "Last day of Enrollment for Late Enrollees",
+   "cat": "enroll",
+   "major": false
+  },
+  {
+   "month": "2026-07",
+   "dates": "29-30",
+   "title": "Term 1, 1st Monthly Examination (Summative Test)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-08",
+   "dates": "21",
+   "title": "Ninoy Aquino Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-08",
+   "dates": "26-27",
+   "title": "Term 1, 2nd Monthly Examination (Summative Test)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-08",
+   "dates": "31",
+   "title": "National Heroes Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "7-8",
+   "title": "Submission of Term 1 Examination to the Principal",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "7-11",
+   "title": "Faculty Evaluation and Student Satisfaction Survey",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "11",
+   "title": "Submission of Course Offerings to the Deans and Principal (Term 2, SY 2026-2027)",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "15-17",
+   "title": "Term 1 Examination",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-09",
+   "dates": "21-22",
+   "title": "Special Exam, Term 1 Examination",
+   "cat": "exam",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "21-25",
+   "title": "Academic Week",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "21-25",
+   "title": "Co-curricular and Extra-Curricular Week",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "25",
+   "title": "Last day of Term 1",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2026-09",
+   "dates": "28-29",
+   "title": "Submission of Term 1 Grades to the Principal",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-09",
+   "dates": "2026-09-28..2026-10-02",
+   "title": "Students' Wellness Break",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2026-09",
+   "dates": "2026-09-30..2026-10-01",
+   "title": "Encoding and Submission of 1st Quarter Grades to the Office of the Registrar",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "2",
+   "title": "Last Date of Attendance and Clearance for Non-Advisers",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "5",
+   "title": "World Teachers' Day Celebration",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "6",
+   "title": "Last day of filing for Change of Grade",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "9",
+   "title": "Last Date of Attendance and Clearance for Advisers",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "12",
+   "title": "Start of Term 2",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2026-10",
+   "dates": "13-23",
+   "title": "Load Revision Period",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2026-10",
+   "dates": "23",
+   "title": "Last Day of Enrollment for Late Enrollees",
+   "cat": "enroll",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "2",
+   "title": "All Souls' Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "4-5",
+   "title": "Term 2, 3rd Monthly Examination (Summative Test)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-11",
+   "dates": "26",
+   "title": "Paru-Paru Festival",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-11",
+   "dates": "30",
+   "title": "Bonifacio Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "2-3",
+   "title": "Term 2, 4th Monthly Examination (Summative Test)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2026-12",
+   "dates": "2-3",
+   "title": "Submission of Term 2 Examination to the Principal",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "2-3",
+   "title": "Faculty Evaluation and Student Satisfaction Survey",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "3-4",
+   "title": "Submission of Course Offerings for Term 3, SY 2026-2027 to the Deans and Principal",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "23",
+   "title": "Start of Holiday Break",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2026-12",
+   "dates": "25",
+   "title": "Christmas Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2026-12",
+   "dates": "31",
+   "title": "Last Day of the Year",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-01",
+   "dates": "1",
+   "title": "New Year's Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-01",
+   "dates": "4",
+   "title": "Classes Resume",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2027-01",
+   "dates": "5-7",
+   "title": "Term 2 Examination",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-01",
+   "dates": "11-14",
+   "title": "Sportsfest",
+   "cat": "event",
+   "major": true
+  },
+  {
+   "month": "2027-01",
+   "dates": "11-14",
+   "title": "Co-Curricular and Extra-Curricular Week",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-01",
+   "dates": "14",
+   "title": "Last Day of Term 2",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2027-01",
+   "dates": "14-15",
+   "title": "Submission of Term 2 Grades to the Principal",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-01",
+   "dates": "18-19",
+   "title": "Encoding and Submission of Term 2 Grades to the Office of the Registrar",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-01",
+   "dates": "18-22",
+   "title": "Students' Wellness Break and Term Break",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2027-01",
+   "dates": "20",
+   "title": "Last Date of Attendance and Clearance for Non-Advisers",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-01",
+   "dates": "20",
+   "title": "Last day of filing for Change of Grade",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2027-01",
+   "dates": "22",
+   "title": "Last Date of Attendance and Clearance for Advisers",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-01",
+   "dates": "25",
+   "title": "Start of Term 3",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2027-01",
+   "dates": "2027-01-25..2027-02-05",
+   "title": "Load Revision Period",
+   "cat": "deadline",
+   "major": false
+  },
+  {
+   "month": "2027-02",
+   "dates": "5",
+   "title": "Last Day of Enrollment for Late Enrollees",
+   "cat": "enroll",
+   "major": false
+  },
+  {
+   "month": "2027-02",
+   "dates": "6",
+   "title": "Chinese New Year",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-02",
+   "dates": "17-18",
+   "title": "Term 3, 5th Monthly Examination (Summative Test)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-02",
+   "dates": "19",
+   "title": "Work Immersion Orientation",
+   "cat": "orient",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "17",
+   "title": "Term 3, 6th Monthly Examination (Summative Test)",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-03",
+   "dates": "18-19",
+   "title": "Submission of Term 3 Examination to the Principal",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "22",
+   "title": "Cavite Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "25",
+   "title": "Maundy Thursday",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "26",
+   "title": "Good Friday",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-03",
+   "dates": "27",
+   "title": "Black Saturday",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "5-8",
+   "title": "Faculty Evaluation for Term 3",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "9",
+   "title": "Day of Valor",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "13-15",
+   "title": "Term 3 Examination",
+   "cat": "exam",
+   "major": true
+  },
+  {
+   "month": "2027-04",
+   "dates": "19-23",
+   "title": "Co-curricular and Extra-Curricular Week",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "23",
+   "title": "Submission of Course Offerings for Term 1, SY 2027-2028 to the Deans and Principal",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "28",
+   "title": "Submission of Term 3 Grades to the Principal",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "29-30",
+   "title": "Encoding and Submission of Term 3 Grades to the Office of the Registrar",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-04",
+   "dates": "30",
+   "title": "Career Guidance Development Program",
+   "cat": "event",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "1",
+   "title": "Labor Day",
+   "cat": "holiday",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "3",
+   "title": "Start of Summer Vacation",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2027-05",
+   "dates": "3-4",
+   "title": "Submission of Initial Faculty Loading to the OVPAA",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "4",
+   "title": "Last Date of Attendance and Clearance for Non-Advisers",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "10",
+   "title": "Enrollment for Summer Class",
+   "cat": "enroll",
+   "major": true
+  },
+  {
+   "month": "2027-05",
+   "dates": "12",
+   "title": "Start of Summer Classes",
+   "cat": "class",
+   "major": true
+  },
+  {
+   "month": "2027-05",
+   "dates": "14",
+   "title": "Final Deliberation for Grade 11 and 12",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-05",
+   "dates": "14",
+   "title": "Last Date of Attendance and Clearance for Advisers",
+   "cat": "faculty",
+   "major": false
+  },
+  {
+   "month": "2027-06",
+   "dates": "23",
+   "title": "End of Summer Class",
+   "cat": "class",
+   "major": true
+  }
+ ]
+}

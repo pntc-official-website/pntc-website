@@ -999,7 +999,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 @media(max-width:768px){#nav-toggle:checked + .nav .nav-links{display:flex}}
 </style>
 <meta name="robots" content="noindex, follow">
-<meta name="description" content="Academic calendar and important dates for PNTC Colleges Senior High School in Dasmariñas, Cavite.">
+<meta name="description" content="Academic calendar for Academic Year 2026-2027 at PNTC Colleges Senior High School in Dasmariñas, Cavite, with term dates, exam schedules, enrollment periods, holidays and school events.">
 <link rel="canonical" href="https://www.pntc.edu.ph/shs/calendar">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PNTC Colleges, Inc.">
@@ -1011,6 +1011,91 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"EducationalOrganization","@id":"https://www.pntc.edu.ph/#organization","name":"PNTC Colleges, Inc.","alternateName":["PNTC","PNTC Colleges","Philippine Nautical and Technological College"],"url":"https://www.pntc.edu.ph/","description":"Maritime and business education institution established in 1994, with campuses and facilities in Dasmariñas (Cavite), Intramuros (Manila), and Tanza (Cavite).","location":[{"@type":"Place","name":"PNTC Colleges Dasmariñas Campus","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"}},{"@type":"Place","name":"PNTC Maritime Training and Assessment Center, Intramuros","address":{"@type":"PostalAddress","streetAddress":"5th Floor, Intramuros Corporate Plaza, Recoletos Street, Intramuros","addressLocality":"Manila","addressRegion":"Metro Manila","postalCode":"1002","addressCountry":"PH"}},{"@type":"Place","name":"PNTC Tanza Training Center","address":{"@type":"PostalAddress","addressLocality":"Tanza","addressRegion":"Cavite","addressCountry":"PH"}}],"logo":"https://www.pntc.edu.ph/SHS/PNTC%20White%20Horizontal.png","foundingDate":"1994","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"},"telephone":"+63-46-438-8835","email":"info@pntc.edu.ph","sameAs":["https://www.facebook.com/pntccolleges"]},{"@type":"HighSchool","@id":"https://www.pntc.edu.ph/shs/#shs","name":"PNTC Colleges Senior High School","url":"https://www.pntc.edu.ph/shs/","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"},"telephone":"+63-917-159-4966","email":"admissions@mypntc.edu.ph","parentOrganization":{"@id":"https://www.pntc.edu.ph/#organization"}},{"@type":"WebPage","@id":"https://www.pntc.edu.ph/shs/calendar","url":"https://www.pntc.edu.ph/shs/calendar","name":"SHS Academic Calendar | PNTC Senior High School, Dasmariñas","description":"Academic calendar and important dates for PNTC Colleges Senior High School in Dasmariñas, Cavite.","inLanguage":"en-PH","isPartOf":{"@type":"WebSite","name":"PNTC Colleges, Inc.","url":"https://www.pntc.edu.ph/"},"about":{"@id":"https://www.pntc.edu.ph/shs/#shs"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.pntc.edu.ph/"},{"@type":"ListItem","position":2,"name":"Senior High School","item":"https://www.pntc.edu.ph/shs/"},{"@type":"ListItem","position":3,"name":"Academic Calendar","item":"https://www.pntc.edu.ph/shs/calendar"}]}]}</script>
 <script src="/global-nav.js" data-area="shs"></script>
+<style id="acad-cal-css">
+/* College academic calendar */
+.ac{background:#fff;padding:clamp(2.5rem,5vw,4rem) clamp(1rem,4vw,3rem) clamp(4rem,7vw,6rem);color:#181D71;font-family:'Montserrat',sans-serif}
+.ac-in{max-width:1180px;margin:0 auto}
+.ac-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(28,22,80,.65);margin:0 0 .9rem}
+.ac-top{display:grid;gap:clamp(1.2rem,2.5vw,2rem);margin-bottom:clamp(1.8rem,3.5vw,2.6rem)}
+.ac-next{background:#181D71;color:#fff;border-radius:24px;padding:clamp(1.3rem,2.5vw,1.9rem);position:relative;overflow:hidden}
+.ac-next::before{content:'';position:absolute;inset:0;background:radial-gradient(45% 80% at 95% 0%,rgba(243,207,51,.22),transparent 70%);pointer-events:none}
+.ac-next .ac-eyebrow{color:#FFCC00;position:relative}
+.ac-next ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;position:relative}
+.ac-next a{display:flex;flex-direction:column;gap:.35rem;height:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-left:5px solid #FFCC00;border-radius:16px;padding:1rem 1.1rem;color:#fff;text-decoration:none;transition:background .2s,transform .2s}
+.ac-next a:hover{background:rgba(255,255,255,.14);transform:translateY(-3px)}
+.ac-next b{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.7rem;line-height:1;text-transform:uppercase;color:#FFCC00}
+.ac-next span{font-size:.92rem;font-weight:600;line-height:1.4}
+.ac-next em{font-style:normal;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-top:auto}
+.ac-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+.ac-card{border:1px solid #E6E7E8;border-radius:18px;padding:1.1rem 1.2rem;background:linear-gradient(160deg,#fff,#F7F7FB)}
+.ac-card h3{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.25rem;line-height:1.1;text-transform:uppercase;margin:0 0 .35rem;color:#181D71}
+.ac-card p{margin:0 0 .5rem;font-size:.92rem;font-weight:600;color:#181D71}
+.ac-card span{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;background:rgba(243,207,51,.4);color:#181D71;padding:.22rem .65rem;border-radius:999px}
+.ac-bar{position:sticky;top:calc(46px + var(--header-h,68px));z-index:20;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid #E6E7E8;margin:0 calc(clamp(1rem,4vw,3rem) * -1) clamp(1.5rem,3vw,2.2rem);padding:.75rem clamp(1rem,4vw,3rem) .6rem}
+.ac-chips{display:flex;gap:.45rem;overflow-x:auto;scrollbar-width:none;padding-bottom:.55rem}
+.ac-chips::-webkit-scrollbar,.ac-months::-webkit-scrollbar{display:none}
+.ac-chip{flex:none;font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;color:#181D71;background:#fff;border:1.5px solid rgba(28,22,80,.2);border-radius:999px;padding:.45rem .95rem;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;transition:background .2s,color .2s,border-color .2s}
+.ac-chip[style]::before{content:'';width:9px;height:9px;border-radius:50%;background:var(--c)}
+.ac-chip:hover{border-color:#181D71}
+.ac-chip.on{background:#181D71;color:#fff;border-color:#181D71}
+.ac-chip.on[style]::before{box-shadow:0 0 0 2px #fff}
+.ac-months{display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none}
+.ac-months a{flex:none;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.92rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:rgba(28,22,80,.7);padding:.3rem .7rem;border-radius:8px;transition:background .2s,color .2s}
+.ac-months small{font-size:.68rem;margin-left:.25rem;opacity:.7}
+.ac-months a:hover{background:rgba(28,22,80,.07);color:#181D71}
+.ac-months a.cur{box-shadow:inset 0 -3px 0 #FFCC00}
+.ac-months a.on{background:#FFCC00;color:#181D71}
+.ac-month{display:grid;grid-template-columns:250px minmax(0,1fr);gap:clamp(1.2rem,3vw,2.6rem);padding:0 0 clamp(2rem,4vw,3rem);scroll-margin-top:calc(46px + var(--header-h,68px) + 120px)}
+.ac-side{position:sticky;top:calc(46px + var(--header-h,68px) + 118px);align-self:start}
+.ac-side h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.1rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(28,22,80,.6);margin:0 0 .8rem;line-height:1}
+.ac-side h2 span{display:block;font-size:clamp(2.2rem,3.4vw,2.9rem);letter-spacing:0;color:#181D71;margin-bottom:.15rem}
+.ac-mini{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;background:#F7F7FB;border:1px solid #E6E7E8;border-radius:16px;padding:.7rem}
+.ac-dow{font-size:.62rem;font-weight:700;text-align:center;color:rgba(28,22,80,.55);padding-bottom:.2rem}
+.ac-day{all:unset;box-sizing:border-box;aspect-ratio:1;display:grid;place-items:center;font-size:.74rem;font-weight:700;border-radius:8px;color:#181D71;cursor:pointer;background:rgba(28,22,80,.1);transition:transform .15s,box-shadow .15s}
+.ac-day.ac-off{background:none;color:rgba(28,22,80,.45);font-weight:500;cursor:default}
+.ac-day[data-top="exam"]{background:#B4232A;color:#fff}
+.ac-day[data-top="holiday"]{background:#FFCC00;color:#181D71}
+.ac-day[data-top="class"]{background:#181D71;color:#fff}
+.ac-day.ac-dim{background:none;color:rgba(28,22,80,.45);font-weight:500}
+.ac-day[data-cats]:hover{transform:scale(1.12)}
+.ac-day:focus-visible,.ac-day.ac-sel{box-shadow:0 0 0 2px #fff,0 0 0 4px #181D71}
+.ac-day.ac-today{box-shadow:0 0 0 2px #fff,0 0 0 4px #FFCC00}
+.ac-list{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+.ac-ev{display:grid;grid-template-columns:128px minmax(0,1fr);gap:1rem;align-items:center;background:#fff;border:1px solid #E6E7E8;border-left:6px solid var(--c);border-radius:14px;padding:.8rem 1rem;transition:box-shadow .2s,transform .2s,opacity .2s}
+.ac-ev[hidden]{display:none}
+.ac-ev:hover{box-shadow:0 14px 26px -18px rgba(28,22,80,.55);transform:translateX(3px)}
+.ac-date strong{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.35rem;line-height:1.05;color:#181D71}
+.ac-date span{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(28,22,80,.6)}
+.ac-what{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.4rem 1rem}
+.ac-what p{margin:0;font-size:.95rem;font-weight:500;line-height:1.45;color:#181D71;flex:1 1 260px}
+.ac-tag{flex:none;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c);border:1.5px solid var(--c);border-radius:999px;padding:.2rem .6rem;white-space:nowrap}
+.ac-major{background:linear-gradient(90deg,color-mix(in srgb,var(--c) 9%,#fff),#fff 70%)}
+.ac-major .ac-what p{font-weight:800}
+.ac-past{opacity:.5}
+.ac-past:hover{opacity:1}
+.ac-now{box-shadow:0 0 0 2px #FFCC00;background:#FFFBE6}
+.ac-now .ac-date span::after{content:' · Now';color:#B4232A}
+.ac-hit{box-shadow:0 0 0 3px #181D71}
+.ac-none{font-size:.9rem;color:rgba(28,22,80,.6);border:1px dashed rgba(28,22,80,.25);border-radius:14px;padding:.9rem 1rem}
+.ac-src{margin:1rem 0 0;font-size:.78rem;line-height:1.6;color:rgba(28,22,80,.6)}
+@media(max-width:900px){
+  .ac-next ul{grid-template-columns:1fr}
+  .ac-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ac-month{grid-template-columns:minmax(0,1fr)}
+  .ac-side{position:static;display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:1rem;align-items:end}
+  .ac-side h2{margin:0}
+}
+@media(max-width:560px){
+  .ac-cards{grid-template-columns:1fr}
+  .ac-side{grid-template-columns:minmax(0,1fr) 150px}
+  .ac-mini{padding:.45rem;gap:2px}
+  .ac-day{font-size:.62rem;border-radius:6px}
+  .ac-ev{grid-template-columns:minmax(0,1fr);gap:.35rem;padding:.75rem .9rem}
+  .ac-date{display:flex;align-items:baseline;gap:.6rem}
+}
+@media(prefers-reduced-motion:reduce){.ac-ev,.ac-day,.ac-next a{transition:none}}
+@media print{.ac-bar,.ac-next,.ac-mini{display:none}.ac-month{grid-template-columns:1fr}.ac-side{position:static}.ac-ev{break-inside:avoid}.ac-past{opacity:1}}
+</style>
 </head>
 <body>
 
@@ -1041,18 +1126,582 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   <div class="pntc-sub-in">
     <p class="pntc-sub-eyebrow">Senior High School</p>
     <h1>Academic Calendar</h1>
-    <p class="pntc-sub-lead">The academic calendar and important dates for PNTC Colleges Senior High School.</p>
+    <p class="pntc-sub-lead">Key dates for Academic Year 2026-2027 at PNTC Colleges Senior High School. See when each term starts, when exams are scheduled, and when the breaks and holidays fall.</p>
   </div>
 </section>
 
-<section id="coming-soon" class="pntc-soon">
-  <div class="pntc-soon-box">
-    <div class="pntc-soon-ico">⚓</div>
-    <h2>Coming Soon</h2>
-    <p>We're preparing this page. Please check back soon.</p>
-    <div class="pntc-soon-chips"><span>Academic Calendar</span><span>Important Academic Dates</span></div>
-    <a class="pntc-soon-btn" href="/shs/">Back to Senior High School</a>
+<section id="acad-cal" class="ac">
+  <div class="ac-in">
+    <div class="ac-top">
+      <div class="ac-next" id="acNext" hidden>
+        <p class="ac-eyebrow">Coming Up</p>
+        <ul id="acNextList"></ul>
+      </div>
+      <div class="ac-over">
+        <p class="ac-eyebrow">Academic Year 2026-2027 at a Glance</p>
+        <div class="ac-cards">
+          <div class="ac-card"><h3>First Term</h3><p>Jun 29 to Sep 25, 2026</p><span>74 school days</span></div>
+          <div class="ac-card"><h3>Second Term</h3><p>Oct 12, 2026 to Jan 14, 2027</p><span>70 school days</span></div>
+          <div class="ac-card"><h3>Third Term</h3><p>Jan 25 to Apr 30, 2027</p><span>75 school days</span></div>
+          <div class="ac-card"><h3>Holiday Break</h3><p>Dec 23, 2026 to Jan 3, 2027</p><span>Classes resume Jan 4</span></div>
+          <div class="ac-card"><h3>Summer Class</h3><p>May 12 to Jun 23, 2027</p><span>Enrollment on May 10</span></div>
+          <div class="ac-card"><h3>Recognition and Graduation</h3><p>May 2027</p><span>Dates to be announced</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ac-bar" id="acBar">
+      <div class="ac-chips" role="group" aria-label="Show">
+        <button type="button" class="ac-chip on" data-f="student">Student View</button>
+        <button type="button" class="ac-chip" data-f="class" style="--c:#1C1650">Classes and Breaks</button>
+        <button type="button" class="ac-chip" data-f="exam" style="--c:#B4232A">Exams</button>
+        <button type="button" class="ac-chip" data-f="orient" style="--c:#0E7C86">Orientation</button>
+        <button type="button" class="ac-chip" data-f="event" style="--c:#6B3FA0">Events and Seminars</button>
+        <button type="button" class="ac-chip" data-f="holiday" style="--c:#9A6B00">Holidays</button>
+        <button type="button" class="ac-chip" data-f="enroll" style="--c:#1B7F3B">Enrollment</button>
+        <button type="button" class="ac-chip" data-f="deadline" style="--c:#B45309">Student Deadlines</button>
+        <button type="button" class="ac-chip" data-f="faculty" style="--c:#5B6072">Faculty and Admin</button>
+        <button type="button" class="ac-chip" data-f="all">Everything</button>
+      </div>
+      <nav class="ac-months" aria-label="Jump to month">
+        <a href="#m-2026-05" data-ym="2026-05">May<small>26</small></a>
+        <a href="#m-2026-06" data-ym="2026-06">Jun<small>26</small></a>
+        <a href="#m-2026-07" data-ym="2026-07">Jul<small>26</small></a>
+        <a href="#m-2026-08" data-ym="2026-08">Aug<small>26</small></a>
+        <a href="#m-2026-09" data-ym="2026-09">Sep<small>26</small></a>
+        <a href="#m-2026-10" data-ym="2026-10">Oct<small>26</small></a>
+        <a href="#m-2026-11" data-ym="2026-11">Nov<small>26</small></a>
+        <a href="#m-2026-12" data-ym="2026-12">Dec<small>26</small></a>
+        <a href="#m-2027-01" data-ym="2027-01">Jan<small>27</small></a>
+        <a href="#m-2027-02" data-ym="2027-02">Feb<small>27</small></a>
+        <a href="#m-2027-03" data-ym="2027-03">Mar<small>27</small></a>
+        <a href="#m-2027-04" data-ym="2027-04">Apr<small>27</small></a>
+        <a href="#m-2027-05" data-ym="2027-05">May<small>27</small></a>
+        <a href="#m-2027-06" data-ym="2027-06">Jun<small>27</small></a>
+      </nav>
+    </div>
+
+    <div class="ac-body" id="acBody" data-f="student">
+    <section class="ac-month" id="m-2026-05" data-ym="2026-05">
+      <div class="ac-side">
+        <h2><span>May</span> 2026</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span></span><span></span><span></span><span></span><span></span><span class="ac-day ac-off" data-d="2026-05-01">1</span><span class="ac-day ac-off" data-d="2026-05-02">2</span><span class="ac-day ac-off" data-d="2026-05-03">3</span><button type="button" class="ac-day" data-d="2026-05-04" data-cats="enroll" aria-label="May 4">4</button><span class="ac-day ac-off" data-d="2026-05-05">5</span><span class="ac-day ac-off" data-d="2026-05-06">6</span><span class="ac-day ac-off" data-d="2026-05-07">7</span><span class="ac-day ac-off" data-d="2026-05-08">8</span><span class="ac-day ac-off" data-d="2026-05-09">9</span><span class="ac-day ac-off" data-d="2026-05-10">10</span><span class="ac-day ac-off" data-d="2026-05-11">11</span><span class="ac-day ac-off" data-d="2026-05-12">12</span><span class="ac-day ac-off" data-d="2026-05-13">13</span><span class="ac-day ac-off" data-d="2026-05-14">14</span><span class="ac-day ac-off" data-d="2026-05-15">15</span><span class="ac-day ac-off" data-d="2026-05-16">16</span><span class="ac-day ac-off" data-d="2026-05-17">17</span><span class="ac-day ac-off" data-d="2026-05-18">18</span><span class="ac-day ac-off" data-d="2026-05-19">19</span><span class="ac-day ac-off" data-d="2026-05-20">20</span><span class="ac-day ac-off" data-d="2026-05-21">21</span><span class="ac-day ac-off" data-d="2026-05-22">22</span><span class="ac-day ac-off" data-d="2026-05-23">23</span><span class="ac-day ac-off" data-d="2026-05-24">24</span><span class="ac-day ac-off" data-d="2026-05-25">25</span><span class="ac-day ac-off" data-d="2026-05-26">26</span><span class="ac-day ac-off" data-d="2026-05-27">27</span><span class="ac-day ac-off" data-d="2026-05-28">28</span><span class="ac-day ac-off" data-d="2026-05-29">29</span><span class="ac-day ac-off" data-d="2026-05-30">30</span><span class="ac-day ac-off" data-d="2026-05-31">31</span></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev ac-major" data-cat="enroll" data-s="2026-05-04" data-e="2026-05-04" data-days="2026-05-04" style="--c:#1B7F3B">
+          <div class="ac-date"><strong>4</strong><span>Mon</span></div>
+          <div class="ac-what"><p>Enrollment Period for S.Y. 2026-2027 begins</p><span class="ac-tag">Enrollment</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for May.</li>
+      </ul>
+    </section>
+    <section class="ac-month" id="m-2026-06" data-ym="2026-06">
+      <div class="ac-side">
+        <h2><span>June</span> 2026</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span></span><span class="ac-day ac-off" data-d="2026-06-01">1</span><span class="ac-day ac-off" data-d="2026-06-02">2</span><span class="ac-day ac-off" data-d="2026-06-03">3</span><span class="ac-day ac-off" data-d="2026-06-04">4</span><span class="ac-day ac-off" data-d="2026-06-05">5</span><span class="ac-day ac-off" data-d="2026-06-06">6</span><span class="ac-day ac-off" data-d="2026-06-07">7</span><span class="ac-day ac-off" data-d="2026-06-08">8</span><span class="ac-day ac-off" data-d="2026-06-09">9</span><span class="ac-day ac-off" data-d="2026-06-10">10</span><span class="ac-day ac-off" data-d="2026-06-11">11</span><span class="ac-day ac-off" data-d="2026-06-12">12</span><span class="ac-day ac-off" data-d="2026-06-13">13</span><span class="ac-day ac-off" data-d="2026-06-14">14</span><span class="ac-day ac-off" data-d="2026-06-15">15</span><span class="ac-day ac-off" data-d="2026-06-16">16</span><span class="ac-day ac-off" data-d="2026-06-17">17</span><span class="ac-day ac-off" data-d="2026-06-18">18</span><span class="ac-day ac-off" data-d="2026-06-19">19</span><span class="ac-day ac-off" data-d="2026-06-20">20</span><span class="ac-day ac-off" data-d="2026-06-21">21</span><span class="ac-day ac-off" data-d="2026-06-22">22</span><span class="ac-day ac-off" data-d="2026-06-23">23</span><span class="ac-day ac-off" data-d="2026-06-24">24</span><span class="ac-day ac-off" data-d="2026-06-25">25</span><span class="ac-day ac-off" data-d="2026-06-26">26</span><span class="ac-day ac-off" data-d="2026-06-27">27</span><span class="ac-day ac-off" data-d="2026-06-28">28</span><button type="button" class="ac-day" data-d="2026-06-29" data-cats="class orient" aria-label="June 29">29</button><button type="button" class="ac-day" data-d="2026-06-30" data-cats="event" aria-label="June 30">30</button></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev ac-major" data-cat="class" data-s="2026-06-29" data-e="2026-06-29" data-days="2026-06-29" style="--c:#1C1650">
+          <div class="ac-date"><strong>29</strong><span>Mon</span></div>
+          <div class="ac-what"><p>Start of Classes, Opening Block</p><span class="ac-tag">Classes and Breaks</span></div>
+        </li>
+        <li class="ac-ev" data-cat="orient" data-s="2026-06-29" data-e="2026-06-29" data-days="2026-06-29" style="--c:#0E7C86">
+          <div class="ac-date"><strong>29</strong><span>Mon</span></div>
+          <div class="ac-what"><p>Parent-Student Orientation</p><span class="ac-tag">Orientation</span></div>
+        </li>
+        <li class="ac-ev" data-cat="event" data-s="2026-06-30" data-e="2026-06-30" data-days="2026-06-30" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>30</strong><span>Tue</span></div>
+          <div class="ac-what"><p>Wellness and Development Program</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for June.</li>
+      </ul>
+    </section>
+    <section class="ac-month" id="m-2026-07" data-ym="2026-07">
+      <div class="ac-side">
+        <h2><span>July</span> 2026</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span></span><span></span><span></span><button type="button" class="ac-day" data-d="2026-07-01" data-cats="event" aria-label="July 1">1</button><button type="button" class="ac-day" data-d="2026-07-02" data-cats="event" aria-label="July 2">2</button><span class="ac-day ac-off" data-d="2026-07-03">3</span><span class="ac-day ac-off" data-d="2026-07-04">4</span><span class="ac-day ac-off" data-d="2026-07-05">5</span><span class="ac-day ac-off" data-d="2026-07-06">6</span><span class="ac-day ac-off" data-d="2026-07-07">7</span><span class="ac-day ac-off" data-d="2026-07-08">8</span><span class="ac-day ac-off" data-d="2026-07-09">9</span><button type="button" class="ac-day" data-d="2026-07-10" data-cats="deadline enroll" aria-label="July 10">10</button><span class="ac-day ac-off" data-d="2026-07-11">11</span><span class="ac-day ac-off" data-d="2026-07-12">12</span><span class="ac-day ac-off" data-d="2026-07-13">13</span><span class="ac-day ac-off" data-d="2026-07-14">14</span><span class="ac-day ac-off" data-d="2026-07-15">15</span><span class="ac-day ac-off" data-d="2026-07-16">16</span><span class="ac-day ac-off" data-d="2026-07-17">17</span><span class="ac-day ac-off" data-d="2026-07-18">18</span><span class="ac-day ac-off" data-d="2026-07-19">19</span><span class="ac-day ac-off" data-d="2026-07-20">20</span><span class="ac-day ac-off" data-d="2026-07-21">21</span><span class="ac-day ac-off" data-d="2026-07-22">22</span><span class="ac-day ac-off" data-d="2026-07-23">23</span><span class="ac-day ac-off" data-d="2026-07-24">24</span><span class="ac-day ac-off" data-d="2026-07-25">25</span><span class="ac-day ac-off" data-d="2026-07-26">26</span><span class="ac-day ac-off" data-d="2026-07-27">27</span><span class="ac-day ac-off" data-d="2026-07-28">28</span><button type="button" class="ac-day" data-d="2026-07-29" data-cats="exam" aria-label="July 29">29</button><button type="button" class="ac-day" data-d="2026-07-30" data-cats="exam" aria-label="July 30">30</button><span class="ac-day ac-off" data-d="2026-07-31">31</span></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev" data-cat="event" data-s="2026-07-01" data-e="2026-07-01" data-days="2026-07-01" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>1</strong><span>Wed</span></div>
+          <div class="ac-what"><p>Leadership and Engagement Seminar</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-ev" data-cat="event" data-s="2026-07-01" data-e="2026-07-01" data-days="2026-07-01" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>1</strong><span>Wed</span></div>
+          <div class="ac-what"><p>Safety Seminar</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-ev" data-cat="event" data-s="2026-07-02" data-e="2026-07-02" data-days="2026-07-02" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>2</strong><span>Thu</span></div>
+          <div class="ac-what"><p>Student Organizations General Assembly and Recruitment Day</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-ev" data-cat="deadline" data-s="2026-07-10" data-e="2026-07-10" data-days="2026-07-10" style="--c:#B45309">
+          <div class="ac-date"><strong>10</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Last day of Load Revision</p><span class="ac-tag">Student Deadlines</span></div>
+        </li>
+        <li class="ac-ev" data-cat="enroll" data-s="2026-07-10" data-e="2026-07-10" data-days="2026-07-10" style="--c:#1B7F3B">
+          <div class="ac-date"><strong>10</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Last day of Enrollment for Late Enrollees</p><span class="ac-tag">Enrollment</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="exam" data-s="2026-07-29" data-e="2026-07-30" data-days="2026-07-29 2026-07-30" style="--c:#B4232A">
+          <div class="ac-date"><strong>29 to 30</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Term 1, 1st Monthly Examination (Summative Test)</p><span class="ac-tag">Exams</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for July.</li>
+      </ul>
+    </section>
+    <section class="ac-month" id="m-2026-08" data-ym="2026-08">
+      <div class="ac-side">
+        <h2><span>August</span> 2026</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span></span><span></span><span></span><span></span><span></span><span></span><span class="ac-day ac-off" data-d="2026-08-01">1</span><span class="ac-day ac-off" data-d="2026-08-02">2</span><span class="ac-day ac-off" data-d="2026-08-03">3</span><span class="ac-day ac-off" data-d="2026-08-04">4</span><span class="ac-day ac-off" data-d="2026-08-05">5</span><span class="ac-day ac-off" data-d="2026-08-06">6</span><span class="ac-day ac-off" data-d="2026-08-07">7</span><span class="ac-day ac-off" data-d="2026-08-08">8</span><span class="ac-day ac-off" data-d="2026-08-09">9</span><span class="ac-day ac-off" data-d="2026-08-10">10</span><span class="ac-day ac-off" data-d="2026-08-11">11</span><span class="ac-day ac-off" data-d="2026-08-12">12</span><span class="ac-day ac-off" data-d="2026-08-13">13</span><span class="ac-day ac-off" data-d="2026-08-14">14</span><span class="ac-day ac-off" data-d="2026-08-15">15</span><span class="ac-day ac-off" data-d="2026-08-16">16</span><span class="ac-day ac-off" data-d="2026-08-17">17</span><span class="ac-day ac-off" data-d="2026-08-18">18</span><span class="ac-day ac-off" data-d="2026-08-19">19</span><span class="ac-day ac-off" data-d="2026-08-20">20</span><button type="button" class="ac-day" data-d="2026-08-21" data-cats="holiday" aria-label="August 21">21</button><span class="ac-day ac-off" data-d="2026-08-22">22</span><span class="ac-day ac-off" data-d="2026-08-23">23</span><span class="ac-day ac-off" data-d="2026-08-24">24</span><span class="ac-day ac-off" data-d="2026-08-25">25</span><button type="button" class="ac-day" data-d="2026-08-26" data-cats="exam" aria-label="August 26">26</button><button type="button" class="ac-day" data-d="2026-08-27" data-cats="exam" aria-label="August 27">27</button><span class="ac-day ac-off" data-d="2026-08-28">28</span><span class="ac-day ac-off" data-d="2026-08-29">29</span><span class="ac-day ac-off" data-d="2026-08-30">30</span><button type="button" class="ac-day" data-d="2026-08-31" data-cats="holiday" aria-label="August 31">31</button></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev" data-cat="holiday" data-s="2026-08-21" data-e="2026-08-21" data-days="2026-08-21" style="--c:#9A6B00">
+          <div class="ac-date"><strong>21</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Ninoy Aquino Day</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="exam" data-s="2026-08-26" data-e="2026-08-27" data-days="2026-08-26 2026-08-27" style="--c:#B4232A">
+          <div class="ac-date"><strong>26 to 27</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Term 1, 2nd Monthly Examination (Summative Test)</p><span class="ac-tag">Exams</span></div>
+        </li>
+        <li class="ac-ev" data-cat="holiday" data-s="2026-08-31" data-e="2026-08-31" data-days="2026-08-31" style="--c:#9A6B00">
+          <div class="ac-date"><strong>31</strong><span>Mon</span></div>
+          <div class="ac-what"><p>National Heroes Day</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for August.</li>
+      </ul>
+    </section>
+    <section class="ac-month" id="m-2026-09" data-ym="2026-09">
+      <div class="ac-side">
+        <h2><span>September</span> 2026</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span></span><span></span><span class="ac-day ac-off" data-d="2026-09-01">1</span><span class="ac-day ac-off" data-d="2026-09-02">2</span><span class="ac-day ac-off" data-d="2026-09-03">3</span><span class="ac-day ac-off" data-d="2026-09-04">4</span><span class="ac-day ac-off" data-d="2026-09-05">5</span><span class="ac-day ac-off" data-d="2026-09-06">6</span><button type="button" class="ac-day" data-d="2026-09-07" data-cats="faculty event" aria-label="September 7">7</button><button type="button" class="ac-day" data-d="2026-09-08" data-cats="faculty event" aria-label="September 8">8</button><button type="button" class="ac-day" data-d="2026-09-09" data-cats="event" aria-label="September 9">9</button><button type="button" class="ac-day" data-d="2026-09-10" data-cats="event" aria-label="September 10">10</button><button type="button" class="ac-day" data-d="2026-09-11" data-cats="event faculty" aria-label="September 11">11</button><span class="ac-day ac-off" data-d="2026-09-12">12</span><span class="ac-day ac-off" data-d="2026-09-13">13</span><span class="ac-day ac-off" data-d="2026-09-14">14</span><button type="button" class="ac-day" data-d="2026-09-15" data-cats="exam" aria-label="September 15">15</button><button type="button" class="ac-day" data-d="2026-09-16" data-cats="exam" aria-label="September 16">16</button><button type="button" class="ac-day" data-d="2026-09-17" data-cats="exam" aria-label="September 17">17</button><span class="ac-day ac-off" data-d="2026-09-18">18</span><span class="ac-day ac-off" data-d="2026-09-19">19</span><span class="ac-day ac-off" data-d="2026-09-20">20</span><button type="button" class="ac-day" data-d="2026-09-21" data-cats="exam event" aria-label="September 21">21</button><button type="button" class="ac-day" data-d="2026-09-22" data-cats="exam event" aria-label="September 22">22</button><button type="button" class="ac-day" data-d="2026-09-23" data-cats="event" aria-label="September 23">23</button><button type="button" class="ac-day" data-d="2026-09-24" data-cats="event" aria-label="September 24">24</button><button type="button" class="ac-day" data-d="2026-09-25" data-cats="event class" aria-label="September 25">25</button><span class="ac-day ac-off" data-d="2026-09-26">26</span><span class="ac-day ac-off" data-d="2026-09-27">27</span><button type="button" class="ac-day" data-d="2026-09-28" data-cats="faculty class" aria-label="September 28">28</button><button type="button" class="ac-day" data-d="2026-09-29" data-cats="faculty class" aria-label="September 29">29</button><button type="button" class="ac-day" data-d="2026-09-30" data-cats="class faculty" aria-label="September 30">30</button></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev" data-cat="faculty" data-s="2026-09-07" data-e="2026-09-08" data-days="2026-09-07 2026-09-08" style="--c:#5B6072">
+          <div class="ac-date"><strong>7 to 8</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Submission of Term 1 Examination to the Principal</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev" data-cat="event" data-s="2026-09-07" data-e="2026-09-11" data-days="2026-09-07 2026-09-08 2026-09-09 2026-09-10 2026-09-11" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>7 to 11</strong><span>5 days</span></div>
+          <div class="ac-what"><p>Faculty Evaluation and Student Satisfaction Survey</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2026-09-11" data-e="2026-09-11" data-days="2026-09-11" style="--c:#5B6072">
+          <div class="ac-date"><strong>11</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Submission of Course Offerings to the Deans and Principal (Term 2, SY 2026-2027)</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="exam" data-s="2026-09-15" data-e="2026-09-17" data-days="2026-09-15 2026-09-16 2026-09-17" style="--c:#B4232A">
+          <div class="ac-date"><strong>15 to 17</strong><span>3 days</span></div>
+          <div class="ac-what"><p>Term 1 Examination</p><span class="ac-tag">Exams</span></div>
+        </li>
+        <li class="ac-ev" data-cat="exam" data-s="2026-09-21" data-e="2026-09-22" data-days="2026-09-21 2026-09-22" style="--c:#B4232A">
+          <div class="ac-date"><strong>21 to 22</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Special Exam, Term 1 Examination</p><span class="ac-tag">Exams</span></div>
+        </li>
+        <li class="ac-ev" data-cat="event" data-s="2026-09-21" data-e="2026-09-25" data-days="2026-09-21 2026-09-22 2026-09-23 2026-09-24 2026-09-25" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>21 to 25</strong><span>5 days</span></div>
+          <div class="ac-what"><p>Academic Week</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-ev" data-cat="event" data-s="2026-09-21" data-e="2026-09-25" data-days="2026-09-21 2026-09-22 2026-09-23 2026-09-24 2026-09-25" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>21 to 25</strong><span>5 days</span></div>
+          <div class="ac-what"><p>Co-curricular and Extra-Curricular Week</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="class" data-s="2026-09-25" data-e="2026-09-25" data-days="2026-09-25" style="--c:#1C1650">
+          <div class="ac-date"><strong>25</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Last day of Term 1</p><span class="ac-tag">Classes and Breaks</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2026-09-28" data-e="2026-09-29" data-days="2026-09-28 2026-09-29" style="--c:#5B6072">
+          <div class="ac-date"><strong>28 to 29</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Submission of Term 1 Grades to the Principal</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="class" data-s="2026-09-28" data-e="2026-10-02" data-days="2026-09-28 2026-09-29 2026-09-30 2026-10-01 2026-10-02" style="--c:#1C1650">
+          <div class="ac-date"><strong>Sep 28 to Oct 2</strong><span>5 days</span></div>
+          <div class="ac-what"><p>Students' Wellness Break</p><span class="ac-tag">Classes and Breaks</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2026-09-30" data-e="2026-10-01" data-days="2026-09-30 2026-10-01" style="--c:#5B6072">
+          <div class="ac-date"><strong>Sep 30 to Oct 1</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Encoding and Submission of 1st Quarter Grades to the Office of the Registrar</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for September.</li>
+      </ul>
+    </section>
+    <section class="ac-month" id="m-2026-10" data-ym="2026-10">
+      <div class="ac-side">
+        <h2><span>October</span> 2026</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span></span><span></span><span></span><span></span><button type="button" class="ac-day" data-d="2026-10-01" data-cats="class faculty" aria-label="October 1">1</button><button type="button" class="ac-day" data-d="2026-10-02" data-cats="class faculty" aria-label="October 2">2</button><span class="ac-day ac-off" data-d="2026-10-03">3</span><span class="ac-day ac-off" data-d="2026-10-04">4</span><button type="button" class="ac-day" data-d="2026-10-05" data-cats="event" aria-label="October 5">5</button><button type="button" class="ac-day" data-d="2026-10-06" data-cats="deadline" aria-label="October 6">6</button><span class="ac-day ac-off" data-d="2026-10-07">7</span><span class="ac-day ac-off" data-d="2026-10-08">8</span><button type="button" class="ac-day" data-d="2026-10-09" data-cats="faculty" aria-label="October 9">9</button><span class="ac-day ac-off" data-d="2026-10-10">10</span><span class="ac-day ac-off" data-d="2026-10-11">11</span><button type="button" class="ac-day" data-d="2026-10-12" data-cats="class" aria-label="October 12">12</button><button type="button" class="ac-day" data-d="2026-10-13" data-cats="deadline" aria-label="October 13">13</button><button type="button" class="ac-day" data-d="2026-10-14" data-cats="deadline" aria-label="October 14">14</button><button type="button" class="ac-day" data-d="2026-10-15" data-cats="deadline" aria-label="October 15">15</button><button type="button" class="ac-day" data-d="2026-10-16" data-cats="deadline" aria-label="October 16">16</button><button type="button" class="ac-day" data-d="2026-10-17" data-cats="deadline" aria-label="October 17">17</button><button type="button" class="ac-day" data-d="2026-10-18" data-cats="deadline" aria-label="October 18">18</button><button type="button" class="ac-day" data-d="2026-10-19" data-cats="deadline" aria-label="October 19">19</button><button type="button" class="ac-day" data-d="2026-10-20" data-cats="deadline" aria-label="October 20">20</button><button type="button" class="ac-day" data-d="2026-10-21" data-cats="deadline" aria-label="October 21">21</button><button type="button" class="ac-day" data-d="2026-10-22" data-cats="deadline" aria-label="October 22">22</button><button type="button" class="ac-day" data-d="2026-10-23" data-cats="deadline enroll" aria-label="October 23">23</button><span class="ac-day ac-off" data-d="2026-10-24">24</span><span class="ac-day ac-off" data-d="2026-10-25">25</span><span class="ac-day ac-off" data-d="2026-10-26">26</span><span class="ac-day ac-off" data-d="2026-10-27">27</span><span class="ac-day ac-off" data-d="2026-10-28">28</span><span class="ac-day ac-off" data-d="2026-10-29">29</span><span class="ac-day ac-off" data-d="2026-10-30">30</span><span class="ac-day ac-off" data-d="2026-10-31">31</span></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev" data-cat="faculty" data-s="2026-10-02" data-e="2026-10-02" data-days="2026-10-02" style="--c:#5B6072">
+          <div class="ac-date"><strong>2</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Last Date of Attendance and Clearance for Non-Advisers</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev" data-cat="event" data-s="2026-10-05" data-e="2026-10-05" data-days="2026-10-05" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>5</strong><span>Mon</span></div>
+          <div class="ac-what"><p>World Teachers' Day Celebration</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-ev" data-cat="deadline" data-s="2026-10-06" data-e="2026-10-06" data-days="2026-10-06" style="--c:#B45309">
+          <div class="ac-date"><strong>6</strong><span>Tue</span></div>
+          <div class="ac-what"><p>Last day of filing for Change of Grade</p><span class="ac-tag">Student Deadlines</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2026-10-09" data-e="2026-10-09" data-days="2026-10-09" style="--c:#5B6072">
+          <div class="ac-date"><strong>9</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Last Date of Attendance and Clearance for Advisers</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="class" data-s="2026-10-12" data-e="2026-10-12" data-days="2026-10-12" style="--c:#1C1650">
+          <div class="ac-date"><strong>12</strong><span>Mon</span></div>
+          <div class="ac-what"><p>Start of Term 2</p><span class="ac-tag">Classes and Breaks</span></div>
+        </li>
+        <li class="ac-ev" data-cat="deadline" data-s="2026-10-13" data-e="2026-10-23" data-days="2026-10-13 2026-10-14 2026-10-15 2026-10-16 2026-10-17 2026-10-18 2026-10-19 2026-10-20 2026-10-21 2026-10-22 2026-10-23" style="--c:#B45309">
+          <div class="ac-date"><strong>13 to 23</strong><span>11 days</span></div>
+          <div class="ac-what"><p>Load Revision Period</p><span class="ac-tag">Student Deadlines</span></div>
+        </li>
+        <li class="ac-ev" data-cat="enroll" data-s="2026-10-23" data-e="2026-10-23" data-days="2026-10-23" style="--c:#1B7F3B">
+          <div class="ac-date"><strong>23</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Last Day of Enrollment for Late Enrollees</p><span class="ac-tag">Enrollment</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for October.</li>
+      </ul>
+    </section>
+    <section class="ac-month" id="m-2026-11" data-ym="2026-11">
+      <div class="ac-side">
+        <h2><span>November</span> 2026</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span class="ac-day ac-off" data-d="2026-11-01">1</span><button type="button" class="ac-day" data-d="2026-11-02" data-cats="holiday" aria-label="November 2">2</button><span class="ac-day ac-off" data-d="2026-11-03">3</span><button type="button" class="ac-day" data-d="2026-11-04" data-cats="exam" aria-label="November 4">4</button><button type="button" class="ac-day" data-d="2026-11-05" data-cats="exam" aria-label="November 5">5</button><span class="ac-day ac-off" data-d="2026-11-06">6</span><span class="ac-day ac-off" data-d="2026-11-07">7</span><span class="ac-day ac-off" data-d="2026-11-08">8</span><span class="ac-day ac-off" data-d="2026-11-09">9</span><span class="ac-day ac-off" data-d="2026-11-10">10</span><span class="ac-day ac-off" data-d="2026-11-11">11</span><span class="ac-day ac-off" data-d="2026-11-12">12</span><span class="ac-day ac-off" data-d="2026-11-13">13</span><span class="ac-day ac-off" data-d="2026-11-14">14</span><span class="ac-day ac-off" data-d="2026-11-15">15</span><span class="ac-day ac-off" data-d="2026-11-16">16</span><span class="ac-day ac-off" data-d="2026-11-17">17</span><span class="ac-day ac-off" data-d="2026-11-18">18</span><span class="ac-day ac-off" data-d="2026-11-19">19</span><span class="ac-day ac-off" data-d="2026-11-20">20</span><span class="ac-day ac-off" data-d="2026-11-21">21</span><span class="ac-day ac-off" data-d="2026-11-22">22</span><span class="ac-day ac-off" data-d="2026-11-23">23</span><span class="ac-day ac-off" data-d="2026-11-24">24</span><span class="ac-day ac-off" data-d="2026-11-25">25</span><button type="button" class="ac-day" data-d="2026-11-26" data-cats="holiday" aria-label="November 26">26</button><span class="ac-day ac-off" data-d="2026-11-27">27</span><span class="ac-day ac-off" data-d="2026-11-28">28</span><span class="ac-day ac-off" data-d="2026-11-29">29</span><button type="button" class="ac-day" data-d="2026-11-30" data-cats="holiday" aria-label="November 30">30</button></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev" data-cat="holiday" data-s="2026-11-02" data-e="2026-11-02" data-days="2026-11-02" style="--c:#9A6B00">
+          <div class="ac-date"><strong>2</strong><span>Mon</span></div>
+          <div class="ac-what"><p>All Souls' Day</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="exam" data-s="2026-11-04" data-e="2026-11-05" data-days="2026-11-04 2026-11-05" style="--c:#B4232A">
+          <div class="ac-date"><strong>4 to 5</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Term 2, 3rd Monthly Examination (Summative Test)</p><span class="ac-tag">Exams</span></div>
+        </li>
+        <li class="ac-ev" data-cat="holiday" data-s="2026-11-26" data-e="2026-11-26" data-days="2026-11-26" style="--c:#9A6B00">
+          <div class="ac-date"><strong>26</strong><span>Thu</span></div>
+          <div class="ac-what"><p>Paru-Paru Festival</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-ev" data-cat="holiday" data-s="2026-11-30" data-e="2026-11-30" data-days="2026-11-30" style="--c:#9A6B00">
+          <div class="ac-date"><strong>30</strong><span>Mon</span></div>
+          <div class="ac-what"><p>Bonifacio Day</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for November.</li>
+      </ul>
+    </section>
+    <section class="ac-month" id="m-2026-12" data-ym="2026-12">
+      <div class="ac-side">
+        <h2><span>December</span> 2026</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span></span><span></span><span class="ac-day ac-off" data-d="2026-12-01">1</span><button type="button" class="ac-day" data-d="2026-12-02" data-cats="exam faculty event" aria-label="December 2">2</button><button type="button" class="ac-day" data-d="2026-12-03" data-cats="exam faculty event" aria-label="December 3">3</button><button type="button" class="ac-day" data-d="2026-12-04" data-cats="faculty" aria-label="December 4">4</button><span class="ac-day ac-off" data-d="2026-12-05">5</span><span class="ac-day ac-off" data-d="2026-12-06">6</span><span class="ac-day ac-off" data-d="2026-12-07">7</span><span class="ac-day ac-off" data-d="2026-12-08">8</span><span class="ac-day ac-off" data-d="2026-12-09">9</span><span class="ac-day ac-off" data-d="2026-12-10">10</span><span class="ac-day ac-off" data-d="2026-12-11">11</span><span class="ac-day ac-off" data-d="2026-12-12">12</span><span class="ac-day ac-off" data-d="2026-12-13">13</span><span class="ac-day ac-off" data-d="2026-12-14">14</span><span class="ac-day ac-off" data-d="2026-12-15">15</span><span class="ac-day ac-off" data-d="2026-12-16">16</span><span class="ac-day ac-off" data-d="2026-12-17">17</span><span class="ac-day ac-off" data-d="2026-12-18">18</span><span class="ac-day ac-off" data-d="2026-12-19">19</span><span class="ac-day ac-off" data-d="2026-12-20">20</span><span class="ac-day ac-off" data-d="2026-12-21">21</span><span class="ac-day ac-off" data-d="2026-12-22">22</span><button type="button" class="ac-day" data-d="2026-12-23" data-cats="class" aria-label="December 23">23</button><span class="ac-day ac-off" data-d="2026-12-24">24</span><button type="button" class="ac-day" data-d="2026-12-25" data-cats="holiday" aria-label="December 25">25</button><span class="ac-day ac-off" data-d="2026-12-26">26</span><span class="ac-day ac-off" data-d="2026-12-27">27</span><span class="ac-day ac-off" data-d="2026-12-28">28</span><span class="ac-day ac-off" data-d="2026-12-29">29</span><span class="ac-day ac-off" data-d="2026-12-30">30</span><button type="button" class="ac-day" data-d="2026-12-31" data-cats="holiday" aria-label="December 31">31</button></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev ac-major" data-cat="exam" data-s="2026-12-02" data-e="2026-12-03" data-days="2026-12-02 2026-12-03" style="--c:#B4232A">
+          <div class="ac-date"><strong>2 to 3</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Term 2, 4th Monthly Examination (Summative Test)</p><span class="ac-tag">Exams</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2026-12-02" data-e="2026-12-03" data-days="2026-12-02 2026-12-03" style="--c:#5B6072">
+          <div class="ac-date"><strong>2 to 3</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Submission of Term 2 Examination to the Principal</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev" data-cat="event" data-s="2026-12-02" data-e="2026-12-03" data-days="2026-12-02 2026-12-03" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>2 to 3</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Faculty Evaluation and Student Satisfaction Survey</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2026-12-03" data-e="2026-12-04" data-days="2026-12-03 2026-12-04" style="--c:#5B6072">
+          <div class="ac-date"><strong>3 to 4</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Submission of Course Offerings for Term 3, SY 2026-2027 to the Deans and Principal</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="class" data-s="2026-12-23" data-e="2026-12-23" data-days="2026-12-23" style="--c:#1C1650">
+          <div class="ac-date"><strong>23</strong><span>Wed</span></div>
+          <div class="ac-what"><p>Start of Holiday Break</p><span class="ac-tag">Classes and Breaks</span></div>
+        </li>
+        <li class="ac-ev" data-cat="holiday" data-s="2026-12-25" data-e="2026-12-25" data-days="2026-12-25" style="--c:#9A6B00">
+          <div class="ac-date"><strong>25</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Christmas Day</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-ev" data-cat="holiday" data-s="2026-12-31" data-e="2026-12-31" data-days="2026-12-31" style="--c:#9A6B00">
+          <div class="ac-date"><strong>31</strong><span>Thu</span></div>
+          <div class="ac-what"><p>Last Day of the Year</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for December.</li>
+      </ul>
+    </section>
+    <section class="ac-month" id="m-2027-01" data-ym="2027-01">
+      <div class="ac-side">
+        <h2><span>January</span> 2027</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span></span><span></span><span></span><span></span><span></span><button type="button" class="ac-day" data-d="2027-01-01" data-cats="holiday" aria-label="January 1">1</button><span class="ac-day ac-off" data-d="2027-01-02">2</span><span class="ac-day ac-off" data-d="2027-01-03">3</span><button type="button" class="ac-day" data-d="2027-01-04" data-cats="class" aria-label="January 4">4</button><button type="button" class="ac-day" data-d="2027-01-05" data-cats="exam" aria-label="January 5">5</button><button type="button" class="ac-day" data-d="2027-01-06" data-cats="exam" aria-label="January 6">6</button><button type="button" class="ac-day" data-d="2027-01-07" data-cats="exam" aria-label="January 7">7</button><span class="ac-day ac-off" data-d="2027-01-08">8</span><span class="ac-day ac-off" data-d="2027-01-09">9</span><span class="ac-day ac-off" data-d="2027-01-10">10</span><button type="button" class="ac-day" data-d="2027-01-11" data-cats="event" aria-label="January 11">11</button><button type="button" class="ac-day" data-d="2027-01-12" data-cats="event" aria-label="January 12">12</button><button type="button" class="ac-day" data-d="2027-01-13" data-cats="event" aria-label="January 13">13</button><button type="button" class="ac-day" data-d="2027-01-14" data-cats="event class faculty" aria-label="January 14">14</button><button type="button" class="ac-day" data-d="2027-01-15" data-cats="faculty" aria-label="January 15">15</button><span class="ac-day ac-off" data-d="2027-01-16">16</span><span class="ac-day ac-off" data-d="2027-01-17">17</span><button type="button" class="ac-day" data-d="2027-01-18" data-cats="faculty class" aria-label="January 18">18</button><button type="button" class="ac-day" data-d="2027-01-19" data-cats="faculty class" aria-label="January 19">19</button><button type="button" class="ac-day" data-d="2027-01-20" data-cats="class faculty deadline" aria-label="January 20">20</button><button type="button" class="ac-day" data-d="2027-01-21" data-cats="class" aria-label="January 21">21</button><button type="button" class="ac-day" data-d="2027-01-22" data-cats="class faculty" aria-label="January 22">22</button><span class="ac-day ac-off" data-d="2027-01-23">23</span><span class="ac-day ac-off" data-d="2027-01-24">24</span><button type="button" class="ac-day" data-d="2027-01-25" data-cats="class deadline" aria-label="January 25">25</button><button type="button" class="ac-day" data-d="2027-01-26" data-cats="deadline" aria-label="January 26">26</button><button type="button" class="ac-day" data-d="2027-01-27" data-cats="deadline" aria-label="January 27">27</button><button type="button" class="ac-day" data-d="2027-01-28" data-cats="deadline" aria-label="January 28">28</button><button type="button" class="ac-day" data-d="2027-01-29" data-cats="deadline" aria-label="January 29">29</button><button type="button" class="ac-day" data-d="2027-01-30" data-cats="deadline" aria-label="January 30">30</button><button type="button" class="ac-day" data-d="2027-01-31" data-cats="deadline" aria-label="January 31">31</button></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev" data-cat="holiday" data-s="2027-01-01" data-e="2027-01-01" data-days="2027-01-01" style="--c:#9A6B00">
+          <div class="ac-date"><strong>1</strong><span>Fri</span></div>
+          <div class="ac-what"><p>New Year's Day</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="class" data-s="2027-01-04" data-e="2027-01-04" data-days="2027-01-04" style="--c:#1C1650">
+          <div class="ac-date"><strong>4</strong><span>Mon</span></div>
+          <div class="ac-what"><p>Classes Resume</p><span class="ac-tag">Classes and Breaks</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="exam" data-s="2027-01-05" data-e="2027-01-07" data-days="2027-01-05 2027-01-06 2027-01-07" style="--c:#B4232A">
+          <div class="ac-date"><strong>5 to 7</strong><span>3 days</span></div>
+          <div class="ac-what"><p>Term 2 Examination</p><span class="ac-tag">Exams</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="event" data-s="2027-01-11" data-e="2027-01-14" data-days="2027-01-11 2027-01-12 2027-01-13 2027-01-14" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>11 to 14</strong><span>4 days</span></div>
+          <div class="ac-what"><p>Sportsfest</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-ev" data-cat="event" data-s="2027-01-11" data-e="2027-01-14" data-days="2027-01-11 2027-01-12 2027-01-13 2027-01-14" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>11 to 14</strong><span>4 days</span></div>
+          <div class="ac-what"><p>Co-Curricular and Extra-Curricular Week</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="class" data-s="2027-01-14" data-e="2027-01-14" data-days="2027-01-14" style="--c:#1C1650">
+          <div class="ac-date"><strong>14</strong><span>Thu</span></div>
+          <div class="ac-what"><p>Last Day of Term 2</p><span class="ac-tag">Classes and Breaks</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2027-01-14" data-e="2027-01-15" data-days="2027-01-14 2027-01-15" style="--c:#5B6072">
+          <div class="ac-date"><strong>14 to 15</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Submission of Term 2 Grades to the Principal</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2027-01-18" data-e="2027-01-19" data-days="2027-01-18 2027-01-19" style="--c:#5B6072">
+          <div class="ac-date"><strong>18 to 19</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Encoding and Submission of Term 2 Grades to the Office of the Registrar</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="class" data-s="2027-01-18" data-e="2027-01-22" data-days="2027-01-18 2027-01-19 2027-01-20 2027-01-21 2027-01-22" style="--c:#1C1650">
+          <div class="ac-date"><strong>18 to 22</strong><span>5 days</span></div>
+          <div class="ac-what"><p>Students' Wellness Break and Term Break</p><span class="ac-tag">Classes and Breaks</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2027-01-20" data-e="2027-01-20" data-days="2027-01-20" style="--c:#5B6072">
+          <div class="ac-date"><strong>20</strong><span>Wed</span></div>
+          <div class="ac-what"><p>Last Date of Attendance and Clearance for Non-Advisers</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev" data-cat="deadline" data-s="2027-01-20" data-e="2027-01-20" data-days="2027-01-20" style="--c:#B45309">
+          <div class="ac-date"><strong>20</strong><span>Wed</span></div>
+          <div class="ac-what"><p>Last day of filing for Change of Grade</p><span class="ac-tag">Student Deadlines</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2027-01-22" data-e="2027-01-22" data-days="2027-01-22" style="--c:#5B6072">
+          <div class="ac-date"><strong>22</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Last Date of Attendance and Clearance for Advisers</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="class" data-s="2027-01-25" data-e="2027-01-25" data-days="2027-01-25" style="--c:#1C1650">
+          <div class="ac-date"><strong>25</strong><span>Mon</span></div>
+          <div class="ac-what"><p>Start of Term 3</p><span class="ac-tag">Classes and Breaks</span></div>
+        </li>
+        <li class="ac-ev" data-cat="deadline" data-s="2027-01-25" data-e="2027-02-05" data-days="2027-01-25 2027-01-26 2027-01-27 2027-01-28 2027-01-29 2027-01-30 2027-01-31 2027-02-01 2027-02-02 2027-02-03 2027-02-04 2027-02-05" style="--c:#B45309">
+          <div class="ac-date"><strong>Jan 25 to Feb 5</strong><span>12 days</span></div>
+          <div class="ac-what"><p>Load Revision Period</p><span class="ac-tag">Student Deadlines</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for January.</li>
+      </ul>
+    </section>
+    <section class="ac-month" id="m-2027-02" data-ym="2027-02">
+      <div class="ac-side">
+        <h2><span>February</span> 2027</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span></span><button type="button" class="ac-day" data-d="2027-02-01" data-cats="deadline" aria-label="February 1">1</button><button type="button" class="ac-day" data-d="2027-02-02" data-cats="deadline" aria-label="February 2">2</button><button type="button" class="ac-day" data-d="2027-02-03" data-cats="deadline" aria-label="February 3">3</button><button type="button" class="ac-day" data-d="2027-02-04" data-cats="deadline" aria-label="February 4">4</button><button type="button" class="ac-day" data-d="2027-02-05" data-cats="deadline enroll" aria-label="February 5">5</button><button type="button" class="ac-day" data-d="2027-02-06" data-cats="holiday" aria-label="February 6">6</button><span class="ac-day ac-off" data-d="2027-02-07">7</span><span class="ac-day ac-off" data-d="2027-02-08">8</span><span class="ac-day ac-off" data-d="2027-02-09">9</span><span class="ac-day ac-off" data-d="2027-02-10">10</span><span class="ac-day ac-off" data-d="2027-02-11">11</span><span class="ac-day ac-off" data-d="2027-02-12">12</span><span class="ac-day ac-off" data-d="2027-02-13">13</span><span class="ac-day ac-off" data-d="2027-02-14">14</span><span class="ac-day ac-off" data-d="2027-02-15">15</span><span class="ac-day ac-off" data-d="2027-02-16">16</span><button type="button" class="ac-day" data-d="2027-02-17" data-cats="exam" aria-label="February 17">17</button><button type="button" class="ac-day" data-d="2027-02-18" data-cats="exam" aria-label="February 18">18</button><button type="button" class="ac-day" data-d="2027-02-19" data-cats="orient" aria-label="February 19">19</button><span class="ac-day ac-off" data-d="2027-02-20">20</span><span class="ac-day ac-off" data-d="2027-02-21">21</span><span class="ac-day ac-off" data-d="2027-02-22">22</span><span class="ac-day ac-off" data-d="2027-02-23">23</span><span class="ac-day ac-off" data-d="2027-02-24">24</span><span class="ac-day ac-off" data-d="2027-02-25">25</span><span class="ac-day ac-off" data-d="2027-02-26">26</span><span class="ac-day ac-off" data-d="2027-02-27">27</span><span class="ac-day ac-off" data-d="2027-02-28">28</span></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev" data-cat="enroll" data-s="2027-02-05" data-e="2027-02-05" data-days="2027-02-05" style="--c:#1B7F3B">
+          <div class="ac-date"><strong>5</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Last Day of Enrollment for Late Enrollees</p><span class="ac-tag">Enrollment</span></div>
+        </li>
+        <li class="ac-ev" data-cat="holiday" data-s="2027-02-06" data-e="2027-02-06" data-days="2027-02-06" style="--c:#9A6B00">
+          <div class="ac-date"><strong>6</strong><span>Sat</span></div>
+          <div class="ac-what"><p>Chinese New Year</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="exam" data-s="2027-02-17" data-e="2027-02-18" data-days="2027-02-17 2027-02-18" style="--c:#B4232A">
+          <div class="ac-date"><strong>17 to 18</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Term 3, 5th Monthly Examination (Summative Test)</p><span class="ac-tag">Exams</span></div>
+        </li>
+        <li class="ac-ev" data-cat="orient" data-s="2027-02-19" data-e="2027-02-19" data-days="2027-02-19" style="--c:#0E7C86">
+          <div class="ac-date"><strong>19</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Work Immersion Orientation</p><span class="ac-tag">Orientation</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for February.</li>
+      </ul>
+    </section>
+    <section class="ac-month" id="m-2027-03" data-ym="2027-03">
+      <div class="ac-side">
+        <h2><span>March</span> 2027</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span></span><span class="ac-day ac-off" data-d="2027-03-01">1</span><span class="ac-day ac-off" data-d="2027-03-02">2</span><span class="ac-day ac-off" data-d="2027-03-03">3</span><span class="ac-day ac-off" data-d="2027-03-04">4</span><span class="ac-day ac-off" data-d="2027-03-05">5</span><span class="ac-day ac-off" data-d="2027-03-06">6</span><span class="ac-day ac-off" data-d="2027-03-07">7</span><span class="ac-day ac-off" data-d="2027-03-08">8</span><span class="ac-day ac-off" data-d="2027-03-09">9</span><span class="ac-day ac-off" data-d="2027-03-10">10</span><span class="ac-day ac-off" data-d="2027-03-11">11</span><span class="ac-day ac-off" data-d="2027-03-12">12</span><span class="ac-day ac-off" data-d="2027-03-13">13</span><span class="ac-day ac-off" data-d="2027-03-14">14</span><span class="ac-day ac-off" data-d="2027-03-15">15</span><span class="ac-day ac-off" data-d="2027-03-16">16</span><button type="button" class="ac-day" data-d="2027-03-17" data-cats="exam" aria-label="March 17">17</button><button type="button" class="ac-day" data-d="2027-03-18" data-cats="faculty" aria-label="March 18">18</button><button type="button" class="ac-day" data-d="2027-03-19" data-cats="faculty" aria-label="March 19">19</button><span class="ac-day ac-off" data-d="2027-03-20">20</span><span class="ac-day ac-off" data-d="2027-03-21">21</span><button type="button" class="ac-day" data-d="2027-03-22" data-cats="holiday" aria-label="March 22">22</button><span class="ac-day ac-off" data-d="2027-03-23">23</span><span class="ac-day ac-off" data-d="2027-03-24">24</span><button type="button" class="ac-day" data-d="2027-03-25" data-cats="holiday" aria-label="March 25">25</button><button type="button" class="ac-day" data-d="2027-03-26" data-cats="holiday" aria-label="March 26">26</button><button type="button" class="ac-day" data-d="2027-03-27" data-cats="holiday" aria-label="March 27">27</button><span class="ac-day ac-off" data-d="2027-03-28">28</span><span class="ac-day ac-off" data-d="2027-03-29">29</span><span class="ac-day ac-off" data-d="2027-03-30">30</span><span class="ac-day ac-off" data-d="2027-03-31">31</span></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev ac-major" data-cat="exam" data-s="2027-03-17" data-e="2027-03-17" data-days="2027-03-17" style="--c:#B4232A">
+          <div class="ac-date"><strong>17</strong><span>Wed</span></div>
+          <div class="ac-what"><p>Term 3, 6th Monthly Examination (Summative Test)</p><span class="ac-tag">Exams</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2027-03-18" data-e="2027-03-19" data-days="2027-03-18 2027-03-19" style="--c:#5B6072">
+          <div class="ac-date"><strong>18 to 19</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Submission of Term 3 Examination to the Principal</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev" data-cat="holiday" data-s="2027-03-22" data-e="2027-03-22" data-days="2027-03-22" style="--c:#9A6B00">
+          <div class="ac-date"><strong>22</strong><span>Mon</span></div>
+          <div class="ac-what"><p>Cavite Day</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-ev" data-cat="holiday" data-s="2027-03-25" data-e="2027-03-25" data-days="2027-03-25" style="--c:#9A6B00">
+          <div class="ac-date"><strong>25</strong><span>Thu</span></div>
+          <div class="ac-what"><p>Maundy Thursday</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-ev" data-cat="holiday" data-s="2027-03-26" data-e="2027-03-26" data-days="2027-03-26" style="--c:#9A6B00">
+          <div class="ac-date"><strong>26</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Good Friday</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-ev" data-cat="holiday" data-s="2027-03-27" data-e="2027-03-27" data-days="2027-03-27" style="--c:#9A6B00">
+          <div class="ac-date"><strong>27</strong><span>Sat</span></div>
+          <div class="ac-what"><p>Black Saturday</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for March.</li>
+      </ul>
+    </section>
+    <section class="ac-month" id="m-2027-04" data-ym="2027-04">
+      <div class="ac-side">
+        <h2><span>April</span> 2027</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span></span><span></span><span></span><span></span><span class="ac-day ac-off" data-d="2027-04-01">1</span><span class="ac-day ac-off" data-d="2027-04-02">2</span><span class="ac-day ac-off" data-d="2027-04-03">3</span><span class="ac-day ac-off" data-d="2027-04-04">4</span><button type="button" class="ac-day" data-d="2027-04-05" data-cats="event" aria-label="April 5">5</button><button type="button" class="ac-day" data-d="2027-04-06" data-cats="event" aria-label="April 6">6</button><button type="button" class="ac-day" data-d="2027-04-07" data-cats="event" aria-label="April 7">7</button><button type="button" class="ac-day" data-d="2027-04-08" data-cats="event" aria-label="April 8">8</button><button type="button" class="ac-day" data-d="2027-04-09" data-cats="holiday" aria-label="April 9">9</button><span class="ac-day ac-off" data-d="2027-04-10">10</span><span class="ac-day ac-off" data-d="2027-04-11">11</span><span class="ac-day ac-off" data-d="2027-04-12">12</span><button type="button" class="ac-day" data-d="2027-04-13" data-cats="exam" aria-label="April 13">13</button><button type="button" class="ac-day" data-d="2027-04-14" data-cats="exam" aria-label="April 14">14</button><button type="button" class="ac-day" data-d="2027-04-15" data-cats="exam" aria-label="April 15">15</button><span class="ac-day ac-off" data-d="2027-04-16">16</span><span class="ac-day ac-off" data-d="2027-04-17">17</span><span class="ac-day ac-off" data-d="2027-04-18">18</span><button type="button" class="ac-day" data-d="2027-04-19" data-cats="event" aria-label="April 19">19</button><button type="button" class="ac-day" data-d="2027-04-20" data-cats="event" aria-label="April 20">20</button><button type="button" class="ac-day" data-d="2027-04-21" data-cats="event" aria-label="April 21">21</button><button type="button" class="ac-day" data-d="2027-04-22" data-cats="event" aria-label="April 22">22</button><button type="button" class="ac-day" data-d="2027-04-23" data-cats="event faculty" aria-label="April 23">23</button><span class="ac-day ac-off" data-d="2027-04-24">24</span><span class="ac-day ac-off" data-d="2027-04-25">25</span><span class="ac-day ac-off" data-d="2027-04-26">26</span><span class="ac-day ac-off" data-d="2027-04-27">27</span><button type="button" class="ac-day" data-d="2027-04-28" data-cats="faculty" aria-label="April 28">28</button><button type="button" class="ac-day" data-d="2027-04-29" data-cats="faculty" aria-label="April 29">29</button><button type="button" class="ac-day" data-d="2027-04-30" data-cats="faculty event" aria-label="April 30">30</button></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev" data-cat="event" data-s="2027-04-05" data-e="2027-04-08" data-days="2027-04-05 2027-04-06 2027-04-07 2027-04-08" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>5 to 8</strong><span>4 days</span></div>
+          <div class="ac-what"><p>Faculty Evaluation for Term 3</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-ev" data-cat="holiday" data-s="2027-04-09" data-e="2027-04-09" data-days="2027-04-09" style="--c:#9A6B00">
+          <div class="ac-date"><strong>9</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Day of Valor</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="exam" data-s="2027-04-13" data-e="2027-04-15" data-days="2027-04-13 2027-04-14 2027-04-15" style="--c:#B4232A">
+          <div class="ac-date"><strong>13 to 15</strong><span>3 days</span></div>
+          <div class="ac-what"><p>Term 3 Examination</p><span class="ac-tag">Exams</span></div>
+        </li>
+        <li class="ac-ev" data-cat="event" data-s="2027-04-19" data-e="2027-04-23" data-days="2027-04-19 2027-04-20 2027-04-21 2027-04-22 2027-04-23" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>19 to 23</strong><span>5 days</span></div>
+          <div class="ac-what"><p>Co-curricular and Extra-Curricular Week</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2027-04-23" data-e="2027-04-23" data-days="2027-04-23" style="--c:#5B6072">
+          <div class="ac-date"><strong>23</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Submission of Course Offerings for Term 1, SY 2027-2028 to the Deans and Principal</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2027-04-28" data-e="2027-04-28" data-days="2027-04-28" style="--c:#5B6072">
+          <div class="ac-date"><strong>28</strong><span>Wed</span></div>
+          <div class="ac-what"><p>Submission of Term 3 Grades to the Principal</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2027-04-29" data-e="2027-04-30" data-days="2027-04-29 2027-04-30" style="--c:#5B6072">
+          <div class="ac-date"><strong>29 to 30</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Encoding and Submission of Term 3 Grades to the Office of the Registrar</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev" data-cat="event" data-s="2027-04-30" data-e="2027-04-30" data-days="2027-04-30" style="--c:#6B3FA0">
+          <div class="ac-date"><strong>30</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Career Guidance Development Program</p><span class="ac-tag">Events and Seminars</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for April.</li>
+      </ul>
+    </section>
+    <section class="ac-month" id="m-2027-05" data-ym="2027-05">
+      <div class="ac-side">
+        <h2><span>May</span> 2027</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span></span><span></span><span></span><span></span><span></span><span></span><button type="button" class="ac-day" data-d="2027-05-01" data-cats="holiday" aria-label="May 1">1</button><span class="ac-day ac-off" data-d="2027-05-02">2</span><button type="button" class="ac-day" data-d="2027-05-03" data-cats="class faculty" aria-label="May 3">3</button><button type="button" class="ac-day" data-d="2027-05-04" data-cats="faculty" aria-label="May 4">4</button><span class="ac-day ac-off" data-d="2027-05-05">5</span><span class="ac-day ac-off" data-d="2027-05-06">6</span><span class="ac-day ac-off" data-d="2027-05-07">7</span><span class="ac-day ac-off" data-d="2027-05-08">8</span><span class="ac-day ac-off" data-d="2027-05-09">9</span><button type="button" class="ac-day" data-d="2027-05-10" data-cats="enroll" aria-label="May 10">10</button><span class="ac-day ac-off" data-d="2027-05-11">11</span><button type="button" class="ac-day" data-d="2027-05-12" data-cats="class" aria-label="May 12">12</button><span class="ac-day ac-off" data-d="2027-05-13">13</span><button type="button" class="ac-day" data-d="2027-05-14" data-cats="faculty" aria-label="May 14">14</button><span class="ac-day ac-off" data-d="2027-05-15">15</span><span class="ac-day ac-off" data-d="2027-05-16">16</span><span class="ac-day ac-off" data-d="2027-05-17">17</span><span class="ac-day ac-off" data-d="2027-05-18">18</span><span class="ac-day ac-off" data-d="2027-05-19">19</span><span class="ac-day ac-off" data-d="2027-05-20">20</span><span class="ac-day ac-off" data-d="2027-05-21">21</span><span class="ac-day ac-off" data-d="2027-05-22">22</span><span class="ac-day ac-off" data-d="2027-05-23">23</span><span class="ac-day ac-off" data-d="2027-05-24">24</span><span class="ac-day ac-off" data-d="2027-05-25">25</span><span class="ac-day ac-off" data-d="2027-05-26">26</span><span class="ac-day ac-off" data-d="2027-05-27">27</span><span class="ac-day ac-off" data-d="2027-05-28">28</span><span class="ac-day ac-off" data-d="2027-05-29">29</span><span class="ac-day ac-off" data-d="2027-05-30">30</span><span class="ac-day ac-off" data-d="2027-05-31">31</span></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev" data-cat="holiday" data-s="2027-05-01" data-e="2027-05-01" data-days="2027-05-01" style="--c:#9A6B00">
+          <div class="ac-date"><strong>1</strong><span>Sat</span></div>
+          <div class="ac-what"><p>Labor Day</p><span class="ac-tag">Holidays</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="class" data-s="2027-05-03" data-e="2027-05-03" data-days="2027-05-03" style="--c:#1C1650">
+          <div class="ac-date"><strong>3</strong><span>Mon</span></div>
+          <div class="ac-what"><p>Start of Summer Vacation</p><span class="ac-tag">Classes and Breaks</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2027-05-03" data-e="2027-05-04" data-days="2027-05-03 2027-05-04" style="--c:#5B6072">
+          <div class="ac-date"><strong>3 to 4</strong><span>2 days</span></div>
+          <div class="ac-what"><p>Submission of Initial Faculty Loading to the OVPAA</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2027-05-04" data-e="2027-05-04" data-days="2027-05-04" style="--c:#5B6072">
+          <div class="ac-date"><strong>4</strong><span>Tue</span></div>
+          <div class="ac-what"><p>Last Date of Attendance and Clearance for Non-Advisers</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="enroll" data-s="2027-05-10" data-e="2027-05-10" data-days="2027-05-10" style="--c:#1B7F3B">
+          <div class="ac-date"><strong>10</strong><span>Mon</span></div>
+          <div class="ac-what"><p>Enrollment for Summer Class</p><span class="ac-tag">Enrollment</span></div>
+        </li>
+        <li class="ac-ev ac-major" data-cat="class" data-s="2027-05-12" data-e="2027-05-12" data-days="2027-05-12" style="--c:#1C1650">
+          <div class="ac-date"><strong>12</strong><span>Wed</span></div>
+          <div class="ac-what"><p>Start of Summer Classes</p><span class="ac-tag">Classes and Breaks</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2027-05-14" data-e="2027-05-14" data-days="2027-05-14" style="--c:#5B6072">
+          <div class="ac-date"><strong>14</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Final Deliberation for Grade 11 and 12</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-ev" data-cat="faculty" data-s="2027-05-14" data-e="2027-05-14" data-days="2027-05-14" style="--c:#5B6072">
+          <div class="ac-date"><strong>14</strong><span>Fri</span></div>
+          <div class="ac-what"><p>Last Date of Attendance and Clearance for Advisers</p><span class="ac-tag">Faculty and Admin</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for May.</li>
+      </ul>
+    </section>
+    <section class="ac-month" id="m-2027-06" data-ym="2027-06">
+      <div class="ac-side">
+        <h2><span>June</span> 2027</h2>
+        <div class="ac-mini" aria-hidden="false"><span class="ac-dow">S</span><span class="ac-dow">M</span><span class="ac-dow">T</span><span class="ac-dow">W</span><span class="ac-dow">T</span><span class="ac-dow">F</span><span class="ac-dow">S</span><span></span><span></span><span class="ac-day ac-off" data-d="2027-06-01">1</span><span class="ac-day ac-off" data-d="2027-06-02">2</span><span class="ac-day ac-off" data-d="2027-06-03">3</span><span class="ac-day ac-off" data-d="2027-06-04">4</span><span class="ac-day ac-off" data-d="2027-06-05">5</span><span class="ac-day ac-off" data-d="2027-06-06">6</span><span class="ac-day ac-off" data-d="2027-06-07">7</span><span class="ac-day ac-off" data-d="2027-06-08">8</span><span class="ac-day ac-off" data-d="2027-06-09">9</span><span class="ac-day ac-off" data-d="2027-06-10">10</span><span class="ac-day ac-off" data-d="2027-06-11">11</span><span class="ac-day ac-off" data-d="2027-06-12">12</span><span class="ac-day ac-off" data-d="2027-06-13">13</span><span class="ac-day ac-off" data-d="2027-06-14">14</span><span class="ac-day ac-off" data-d="2027-06-15">15</span><span class="ac-day ac-off" data-d="2027-06-16">16</span><span class="ac-day ac-off" data-d="2027-06-17">17</span><span class="ac-day ac-off" data-d="2027-06-18">18</span><span class="ac-day ac-off" data-d="2027-06-19">19</span><span class="ac-day ac-off" data-d="2027-06-20">20</span><span class="ac-day ac-off" data-d="2027-06-21">21</span><span class="ac-day ac-off" data-d="2027-06-22">22</span><button type="button" class="ac-day" data-d="2027-06-23" data-cats="class" aria-label="June 23">23</button><span class="ac-day ac-off" data-d="2027-06-24">24</span><span class="ac-day ac-off" data-d="2027-06-25">25</span><span class="ac-day ac-off" data-d="2027-06-26">26</span><span class="ac-day ac-off" data-d="2027-06-27">27</span><span class="ac-day ac-off" data-d="2027-06-28">28</span><span class="ac-day ac-off" data-d="2027-06-29">29</span><span class="ac-day ac-off" data-d="2027-06-30">30</span></div>
+      </div>
+      <ul class="ac-list">
+        <li class="ac-ev ac-major" data-cat="class" data-s="2027-06-23" data-e="2027-06-23" data-days="2027-06-23" style="--c:#1C1650">
+          <div class="ac-date"><strong>23</strong><span>Wed</span></div>
+          <div class="ac-what"><p>End of Summer Class</p><span class="ac-tag">Classes and Breaks</span></div>
+        </li>
+        <li class="ac-none" hidden>Nothing in this view for June.</li>
+      </ul>
+    </section>
+    </div>
+
+    <p class="ac-src">Based on the approved Senior High School Calendar of Activities for Academic Year 2026-2027 of PNTC Colleges, Dasmariñas City, Cavite. Dates may change. Please confirm with the Senior High School office.</p>
   </div>
+  <script>
+  (function(){
+    var body=document.getElementById('acBody');if(!body)return;
+    var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var evs=[].slice.call(body.querySelectorAll('.ac-ev'));
+    var chips=[].slice.call(document.querySelectorAll('.ac-chip'));
+    var now=new Date();var today=now.getFullYear()+'-'+('0'+(now.getMonth()+1)).slice(-2)+'-'+('0'+now.getDate()).slice(-2);
+    function shown(e,f){var c=e.getAttribute('data-cat');return f==='all'||(f==='student'?c!=='faculty':c===f);}
+    function apply(f){
+      body.setAttribute('data-f',f);
+      chips.forEach(function(c){c.classList.toggle('on',c.getAttribute('data-f')===f);});
+      evs.forEach(function(e){e.hidden=!shown(e,f);});
+      [].forEach.call(body.querySelectorAll('.ac-month'),function(m){
+        var any=[].some.call(m.querySelectorAll('.ac-ev'),function(e){return !e.hidden;});
+        m.querySelector('.ac-none').hidden=any;
+      });
+      [].forEach.call(body.querySelectorAll('.ac-day[data-cats]'),function(d){
+        var cs=d.getAttribute('data-cats').split(' ');
+        var on=cs.filter(function(c){return f==='all'||(f==='student'?c!=='faculty':c===f);});
+        d.classList.toggle('ac-dim',!on.length);
+        d.setAttribute('data-top',on.indexOf('exam')>=0?'exam':on.indexOf('holiday')>=0?'holiday':on.indexOf('class')>=0?'class':(on[0]||''));
+      });
+    }
+    chips.forEach(function(c){c.addEventListener('click',function(){apply(c.getAttribute('data-f'));});});
+    // past, today, coming up
+    evs.forEach(function(e){
+      if(e.getAttribute('data-e')<today)e.classList.add('ac-past');
+      if((' '+e.getAttribute('data-days')+' ').indexOf(' '+today+' ')>=0)e.classList.add('ac-now');
+    });
+    var t=body.querySelector('.ac-day[data-d="'+today+'"]');if(t)t.classList.add('ac-today');
+    function when(s){var a=new Date(s+'T00:00:00'),b=new Date(today+'T00:00:00');var n=Math.round((a-b)/864e5);return n<=0?'Happening now':n===1?'Tomorrow':'In '+n+' days';}
+    var up=evs.filter(function(e){return e.getAttribute('data-cat')!=='faculty'&&e.getAttribute('data-e')>=today;})
+      .sort(function(a,b){return a.getAttribute('data-s')<b.getAttribute('data-s')?-1:1;}).slice(0,3);
+    if(up.length){
+      document.getElementById('acNextList').innerHTML=up.map(function(e){
+        var s=e.getAttribute('data-s');
+        return '<li style="--c:'+e.style.getPropertyValue('--c')+'"><a href="#m-'+s.slice(0,7)+'"><b>'+MON[+s.slice(5,7)-1]+' '+(+s.slice(8))+'</b><span>'+e.querySelector('.ac-what p').textContent+'</span><em>'+when(s)+'</em></a></li>';
+      }).join('');
+      document.getElementById('acNext').hidden=false;
+    }
+    // month nav: mark the current month, follow the scroll
+    var links=[].slice.call(document.querySelectorAll('.ac-months a'));
+    links.forEach(function(a){if(a.getAttribute('data-ym')===today.slice(0,7))a.classList.add('cur');});
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){var ym=en.target.getAttribute('data-ym');links.forEach(function(a){var on=a.getAttribute('data-ym')===ym;a.classList.toggle('on',on);if(on&&a.scrollIntoView&&a.parentNode.scrollWidth>a.parentNode.clientWidth)a.parentNode.scrollLeft=a.offsetLeft-a.parentNode.clientWidth/2+a.clientWidth/2;});}});},{rootMargin:'-35% 0px -60% 0px'});
+      [].forEach.call(body.querySelectorAll('.ac-month'),function(m){io.observe(m);});
+    }
+    // tap a day on the small calendar to light up what happens that day
+    body.addEventListener('click',function(ev){
+      var d=ev.target.closest('.ac-day[data-cats]');if(!d)return;
+      var id=d.getAttribute('data-d'),first=null;
+      evs.forEach(function(e){var hit=!e.hidden&&(' '+e.getAttribute('data-days')+' ').indexOf(' '+id+' ')>=0;e.classList.toggle('ac-hit',hit);if(hit&&!first)first=e;});
+      [].forEach.call(body.querySelectorAll('.ac-day.ac-sel'),function(x){x.classList.remove('ac-sel');});d.classList.add('ac-sel');
+      if(first&&first.scrollIntoView)first.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+    apply('student');
+  })();
+  </script>
 </section>
 
 

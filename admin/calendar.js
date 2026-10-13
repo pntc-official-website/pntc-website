@@ -1,7 +1,20 @@
 // College academic calendar: turns the calendar data into the page section.
 // Shared by the admin console (Site Content > Academic Calendar) and by tools/college-calendar.js.
 // The data lives in content/college-calendar.json.
-const N = '#1C1650', GOLD = '#F3CF33';
+let N = '#1C1650', GOLD = '#F3CF33';
+
+// Each site that has a calendar: its colours and the sentences that name the school. The data file says which site it is.
+const SITES = {
+  college: { navy: '#1C1650', gold: '#F3CF33',
+    src: y => `Based on the approved Collegiate Calendar for Academic Year ${y} of PNTC Colleges, Inc., Dasmariñas City, Cavite. Dates may change. Please confirm with the Office of the Registrar.`,
+    lead: y => `Key dates for Academic Year ${y} at PNTC Colleges Dasmariñas. See when classes start, when exams are scheduled, and when the breaks and holidays fall.`,
+    meta: y => `Academic calendar for Academic Year ${y} at PNTC Colleges in Dasmariñas, Cavite, with class start dates, exam schedules, enrollment periods, holidays and school events.` },
+  shs: { navy: '#181D71', gold: '#FFCC00',
+    src: y => `Based on the approved Senior High School Calendar of Activities for Academic Year ${y} of PNTC Colleges, Dasmariñas City, Cavite. Dates may change. Please confirm with the Senior High School office.`,
+    lead: y => `Key dates for Academic Year ${y} at PNTC Colleges Senior High School. See when each term starts, when exams are scheduled, and when the breaks and holidays fall.`,
+    meta: y => `Academic calendar for Academic Year ${y} at PNTC Colleges Senior High School in Dasmariñas, Cavite, with term dates, exam schedules, enrollment periods, holidays and school events.` },
+};
+const siteOf = data => SITES[data && data.site] || SITES.college;
 
 // Categories. "faculty" items are hidden in the default student view.
 const CATS = {
@@ -40,6 +53,7 @@ function validate(data) {
 }
 
 function build(data) {
+  const SITE = siteOf(data); N = SITE.navy; GOLD = SITE.gold;
   const YEAR = data.year;
   const DATA = {};
   for (const e of data.events) (DATA[e.month] = DATA[e.month] || []).push([e.dates, e.title, e.cat, e.major]);
@@ -139,7 +153,7 @@ ${months.map(ym => `        <a href="#m-${ym}" data-ym="${ym}">${MON[+ym.slice(5
 ${months.map(monthHtml).join('\n')}
     </div>
 
-    <p class="ac-src">Based on the approved Collegiate Calendar for Academic Year ${YEAR} of PNTC Colleges, Inc., Dasmariñas City, Cavite. Dates may change. Please confirm with the Office of the Registrar.</p>
+    <p class="ac-src">${SITE.src(YEAR)}</p>
   </div>
   <script>
   (function(){
@@ -295,7 +309,7 @@ const CSS = `<style id="acad-cal-css">
 // Puts the built calendar into the calendar page and returns the new page.
 function apply(h, data) {
   const { section, CSS } = build(data);
-  const YEAR = data.year;
+  const YEAR = data.year, SITE = siteOf(data);
 if (h.includes('<section id="acad-cal"')) {
   const a = h.indexOf('<section id="acad-cal"'), b = h.indexOf('</section>', h.indexOf('</script>', a)) + '</section>'.length;
   h = h.slice(0, a) + section + h.slice(b);
@@ -304,12 +318,12 @@ if (h.includes('<section id="acad-cal"')) {
   if (a < 0) throw new Error('placeholder section not found');
   h = h.slice(0, a) + section + h.slice(b);
 }
-h = h.replace(/<p class="pntc-sub-lead">[^<]*<\/p>/, '<p class="pntc-sub-lead">Key dates for Academic Year ' + YEAR + ' at PNTC Colleges Dasmariñas. See when classes start, when exams are scheduled, and when the breaks and holidays fall.</p>');
-h = h.replace(/<meta name="description" content="[^"]*">/, '<meta name="description" content="Academic calendar for Academic Year ' + YEAR + ' at PNTC Colleges in Dasmariñas, Cavite, with class start dates, exam schedules, enrollment periods, holidays and school events.">');
+h = h.replace(/<p class="pntc-sub-lead">[^<]*<\/p>/, '<p class="pntc-sub-lead">' + SITE.lead(YEAR) + '</p>');
+h = h.replace(/<meta name="description" content="[^"]*">/, '<meta name="description" content="' + SITE.meta(YEAR) + '">');
 h = h.replace(/<style id="acad-cal-css">[\s\S]*?<\/style>\n?/, '');
 h = h.replace('</head>', CSS + '</head>');
 
   return h;
 }
 
-module.exports = { CATS, validate, build, apply };
+module.exports = { CATS, SITES, validate, build, apply };

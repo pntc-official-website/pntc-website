@@ -86,7 +86,7 @@ const $ = id => document.getElementById(id);
 const LIVE = {
   'PNTC Main Landing Page/index.html':'/', 'PNTC Colleges/index.html':'/college/', 'PNTC Colleges/programs.html':'/college/programs',
   'PNTC Colleges/admissions.html':'/college/admissions', 'PNTC Colleges/directory.html':'/college/directory', 'PNTC Colleges/calendar.html':'/college/calendar',
-  'SHS/index.html':'/shs/', 'SHS/strands.html':'/shs/strands', 'SHS/directory.html':'/shs/directory',
+  'SHS/index.html':'/shs/', 'SHS/calendar.html':'/shs/calendar', 'SHS/strands.html':'/shs/strands', 'SHS/directory.html':'/shs/directory',
   'PNTC Maritime Training and Assessment Center/index.html':'/training/', 'PNTC Maritime Training and Assessment Center/maritime-courses.html':'/training/maritime-courses',
   'PNTC Main Landing Page/about.html':'/about', 'PNTC Main Landing Page/about-history.html':'/about/history', 'PNTC Main Landing Page/about-leadership.html':'/about/leadership', 'PNTC Main Landing Page/careers.html':'/careers'
 };
@@ -111,6 +111,7 @@ async function loadMenu() {
       if (g.site !== site) { site = g.site; html += `<div class="sc-site">${esc(site)}</div>`; }
       html += `<button class="sc-item" data-id="${esc(g.id)}">${esc(g.title)}</button>`;
       if (g.id === 'college-admissions-phase2') html += `<button class="sc-item" data-id="@calendar">Academic Calendar</button>`;
+      if (g.id === 'shs-why') html += `<button class="sc-item" data-id="@shs-calendar">Academic Calendar</button>`;
       if (g.id === 'training-cta') html += `<button class="sc-item" data-id="@courses">Course list</button>`;
     }
     $('menu').innerHTML = html;
@@ -118,7 +119,7 @@ async function loadMenu() {
       const b = e.target.closest('.sc-item'); if (!b) return;
       if (dirty && !confirm('You have changes that are not saved. Leave this section anyway?')) return;
       document.querySelectorAll('.sc-item').forEach(x => x.classList.toggle('active', x === b));
-      b.dataset.id === '@calendar' ? openCalendar() : b.dataset.id === '@courses' ? openCourses() : openGroup(b.dataset.id);
+      b.dataset.id === '@calendar' ? openCalendar('college') : b.dataset.id === '@shs-calendar' ? openCalendar('shs') : b.dataset.id === '@courses' ? openCourses() : openGroup(b.dataset.id);
     });
   } catch (e) { $('menu').innerHTML = `<div class="sc-empty">${esc(e.message)}</div>`; }
 }
@@ -166,7 +167,8 @@ async function saveGroup() {
 }
 
 // ── academic calendar ──
-let cal = null, cats = {}, calMonth = 'all';
+let cal = null, cats = {}, calMonth = 'all', calWhich = 'college';
+const CALS = { college: { api: '/api/calendar', name: 'Colleges', page: '/college/calendar' }, shs: { api: '/api/shs-calendar', name: 'Senior High School', page: '/shs/calendar' } };
 const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const mlabel = ym => MON[+ym.slice(5) - 1] + ' ' + ym.slice(0, 4);
 function monthList() {
@@ -177,10 +179,11 @@ function monthList() {
   while (y < endY || (y === endY && m <= endM)) { out.push(y + '-' + String(m).padStart(2, '0')); m++; if (m > 12) { m = 1; y++; } }
   return out;
 }
-async function openCalendar() {
+async function openCalendar(which) {
+  calWhich = which || 'college';
   dirty = false; current = null;
   $('panel').innerHTML = '<div class="sc-empty">Reading the calendar…</div>';
-  try { const r = await api('/api/calendar'); cal = r.data; cats = r.cats; cal.events.forEach((e, i) => e._i = i); calMonth = 'all'; renderCalendar(); }
+  try { const r = await api(CALS[calWhich].api); cal = r.data; cats = r.cats; cal.events.forEach((e, i) => e._i = i); calMonth = 'all'; renderCalendar(); }
   catch (e) { $('panel').innerHTML = `<div class="sc-empty">${esc(e.message)}</div>`; }
 }
 function renderCalendar() {
@@ -190,7 +193,7 @@ function renderCalendar() {
   const shown = cal.events.filter(e => calMonth === 'all' || e.month === calMonth);
   $('panel').innerHTML = `
     <div class="sc-head">
-      <div><h2>Academic Calendar</h2><p>Colleges · shown on <a href="/college/calendar" target="_blank" rel="noopener">/college/calendar</a><br>${cal.events.length} dates in total. Saving rebuilds the calendar page.</p></div>
+      <div><h2>Academic Calendar</h2><p>${CALS[calWhich].name} · shown on <a href="${CALS[calWhich].page}" target="_blank" rel="noopener">${CALS[calWhich].page}</a><br>${cal.events.length} dates in total. Saving rebuilds the calendar page.</p></div>
       <button class="btn btn-primary" id="calsave">Save and publish</button>
     </div>
     <div class="cal-top">
@@ -243,7 +246,7 @@ async function saveCalendar() {
   status('Publishing…');
   const body = { year: cal.year, overview: cal.overview, events: cal.events.map(({ _i, ...e }) => e) };
   try {
-    const r = await api('/api/calendar', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+    const r = await api(CALS[calWhich].api, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
     dirty = false; status(`Published ${r.entries} dates. The live calendar updates in about 30 seconds.`, 'ok');
   } catch (e) { status(e.message, 'err'); }
 }

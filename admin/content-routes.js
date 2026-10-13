@@ -61,34 +61,41 @@ module.exports = function contentRoutes(app, { requireAuth, ghGetFile, ghPutFile
     } catch (e) { fail(res, e); }
   });
 
-  // Academic calendar
-  app.get('/api/calendar', requireAuth, async (_req, res) => {
-    try {
-      const file = await ghGetFile(CAL_DATA);
-      if (!file) return res.status(404).json({ error: 'Calendar data not found in the repo.' });
-      res.json({ data: JSON.parse(text(file)), cats: Object.fromEntries(Object.entries(CALENDAR.CATS).map(([k, v]) => [k, v.label])) });
-    } catch (e) { fail(res, e); }
-  });
+  // Academic calendars (College and Senior High School). Same editor, each with its own data file and page.
+  const CALS = [
+    { url: '/api/calendar', site: 'college', data: CAL_DATA, page: CAL_PAGE },
+    { url: '/api/shs-calendar', site: 'shs', data: 'content/shs-calendar.json', page: 'SHS/calendar.html' },
+  ];
+  for (const cal of CALS) {
+    app.get(cal.url, requireAuth, async (_req, res) => {
+      try {
+        const file = await ghGetFile(cal.data);
+        if (!file) return res.status(404).json({ error: 'Calendar data not found in the repo.' });
+        res.json({ data: JSON.parse(text(file)), cats: Object.fromEntries(Object.entries(CALENDAR.CATS).map(([k, v]) => [k, v.label])) });
+      } catch (e) { fail(res, e); }
+    });
 
-  app.post('/api/calendar', requireAuth, async (req, res) => {
-    const b = req.body || {};
-    const data = {
-      year: String(b.year || '').trim(),
-      overview: (Array.isArray(b.overview) ? b.overview : []).slice(0, 12).map(o => ({ title: String(o.title || '').trim(), dates: String(o.dates || '').trim(), note: String(o.note || '').trim() })).filter(o => o.title),
-      events: (Array.isArray(b.events) ? b.events : []).slice(0, 1000).map(e => ({ month: String(e.month || '').trim(), dates: String(e.dates || '').replace(/\s+/g, ''), title: String(e.title || '').replace(/\s+/g, ' ').trim(), cat: String(e.cat || ''), major: !!e.major })),
-    };
-    const errs = CALENDAR.validate(data);
-    if (errs.length) return res.status(400).json({ error: errs.slice(0, 6).join(' ') + (errs.length > 6 ? ` And ${errs.length - 6} more.` : '') });
-    try {
-      const page = await ghGetFile(CAL_PAGE);
-      if (!page) return res.status(404).json({ error: 'Calendar page not found in the repo.' });
-      const html = CALENDAR.apply(text(page), data);            // build first, so a bad build never saves the data
-      const dataFile = await ghGetFile(CAL_DATA);
-      await ghPutFile(CAL_DATA, JSON.stringify(data, null, 1) + '\n', 'Update academic calendar data', dataFile && dataFile.sha);
-      await ghPutFile(CAL_PAGE, html, 'Update academic calendar page', page.sha);
-      res.json({ ok: true, entries: data.events.length });
-    } catch (e) { fail(res, e); }
-  });
+    app.post(cal.url, requireAuth, async (req, res) => {
+      const b = req.body || {};
+      const data = {
+        site: cal.site,
+        year: String(b.year || '').trim(),
+        overview: (Array.isArray(b.overview) ? b.overview : []).slice(0, 12).map(o => ({ title: String(o.title || '').trim(), dates: String(o.dates || '').trim(), note: String(o.note || '').trim() })).filter(o => o.title),
+        events: (Array.isArray(b.events) ? b.events : []).slice(0, 1000).map(e => ({ month: String(e.month || '').trim(), dates: String(e.dates || '').replace(/\s+/g, ''), title: String(e.title || '').replace(/\s+/g, ' ').trim(), cat: String(e.cat || ''), major: !!e.major })),
+      };
+      const errs = CALENDAR.validate(data);
+      if (errs.length) return res.status(400).json({ error: errs.slice(0, 6).join(' ') + (errs.length > 6 ? ` And ${errs.length - 6} more.` : '') });
+      try {
+        const page = await ghGetFile(cal.page);
+        if (!page) return res.status(404).json({ error: 'Calendar page not found in the repo.' });
+        const html = CALENDAR.apply(text(page), data);            // build first, so a bad build never saves the data
+        const dataFile = await ghGetFile(cal.data);
+        await ghPutFile(cal.data, JSON.stringify(data, null, 1) + '\n', 'Update academic calendar data', dataFile && dataFile.sha);
+        await ghPutFile(cal.page, html, 'Update academic calendar page', page.sha);
+        res.json({ ok: true, entries: data.events.length });
+      } catch (e) { fail(res, e); }
+    });
+  }
 
   // Training Center course list
   app.get('/api/training-courses', requireAuth, async (_req, res) => {
