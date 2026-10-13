@@ -868,7 +868,37 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .lt-acad>header h3{color:#1C1650}
 .lt-acad .lt-group:first-child{margin-top:0;border-top:0;padding-top:0}
 
+/* both trees side by side under the President */
+.lt-jump{display:none}
+.lt-trees{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem;align-items:start;position:relative;padding-top:26px}
+.lt-trees::before{content:'';position:absolute;top:0;left:25%;right:25%;height:3px;background:#1C1650}
+.lt-trees>.lt-tree{margin-top:0;padding:1rem;border-radius:24px}
+.lt-trees>.lt-tree::before{content:'';position:absolute;left:50%;top:-27px;width:3px;height:25px;margin-left:-1.5px;background:#1C1650}
+.lt-trees .lt-tree-head{justify-content:center;text-align:center;margin-bottom:.9rem}
+.lt-trees .lt-tree-head h3{font-size:clamp(1.15rem,1.8vw,1.5rem)}
+.lt-trees .lt-note{text-align:center;font-size:.74rem;margin:-.4rem 0 1.2rem}
+.lt-trees .lt-l2{gap:.7rem}
+.lt-trees .lt-level{padding-top:18px}
+.lt-trees .lt-level>.lt-dept::before{top:-17px;height:16px}
+.lt-trees .lt-dept{border-radius:18px}
+.lt-trees .lt-dept>header{border-radius:17px 17px 0 0;min-height:3.6rem;padding:.7rem .85rem}
+.lt-trees .lt-dept>header h3{font-size:.8rem}
+.lt-trees .lt-l2>.lt-dept>.lt-body{padding:.7rem;gap:.6rem}
+.lt-trees .ld-card{padding:.75rem .8rem;gap:.7rem;border-radius:14px}
+.lt-trees .ld-av,.lt-trees .ld-lead .ld-av{flex-basis:40px;width:40px;height:40px;font-size:.78rem;box-shadow:0 0 0 3px rgba(243,207,51,.45)}
+.lt-trees .ld-role{font-size:.56rem;letter-spacing:.08em}
+.lt-trees .ld-name,.lt-trees .ld-lead .ld-name{font-size:.86rem}
+.lt-trees .ld-unit{font-size:.62rem;padding:.2rem .5rem;margin-top:.35rem}
+.lt-trees .lt-lbl{font-size:.56rem;letter-spacing:.12em;padding:.34rem .65rem;margin-bottom:.6rem;line-height:1.4}
+.lt-trees .lt-group{padding-top:.8rem;margin-top:.5rem}
+.lt-trees .lt-cards{gap:.6rem}
+.lt-trees .lt-under{margin-left:.5rem;padding-left:.6rem;gap:.6rem}
+.lt-trees .lt-group>.lt-under{margin-top:.6rem}
+
 @media(max-width:1080px){
+  .lt-jump{display:flex}
+  .lt-trees{grid-template-columns:1fr;padding-top:0;gap:1.6rem;margin-top:2rem}
+  .lt-trees::before,.lt-trees>.lt-tree::before{display:none}
   .lt-l5{grid-template-columns:repeat(3,minmax(0,1fr))}
   .lt-level::before,.lt-level>.lt-dept::before{display:none}
   .lt-level{padding-top:0}
@@ -984,8 +1014,9 @@ document.addEventListener('DOMContentLoaded',function(){
       <a href="#tree-training"><!--c:lead.tree2-->Maritime Training Center<!--/c--></a>
     </nav>
 
+    <div class="lt-trees">
     <div class="lt-tree" id="tree-colleges">
-      <div class="lt-tree-head reveal"><span class="lt-tree-n">Tree 1</span><h3><!--c:lead.tree1-->PNTC Colleges<!--/c--></h3></div>
+      <div class="lt-tree-head reveal"><h3><!--c:lead.tree1-->PNTC Colleges<!--/c--></h3></div>
       <p class="lt-note reveal"><!--c:lead.level-->Academic Affairs and Administration stand at the same level.<!--/c--></p>
       <div class="lt-depts lt-level lt-l2">
         <section class="lt-dept reveal">
@@ -1194,7 +1225,7 @@ document.addEventListener('DOMContentLoaded',function(){
     </div>
 
     <div class="lt-tree lt-tree-b" id="tree-training">
-      <div class="lt-tree-head reveal"><span class="lt-tree-n">Tree 2</span><h3><!--c:lead.tree2-->Maritime Training Center<!--/c--></h3></div>
+      <div class="lt-tree-head reveal"><h3><!--c:lead.tree2-->Maritime Training Center<!--/c--></h3></div>
       <div class="lt-depts lt-level lt-l2">
         <section class="lt-dept  reveal">
           <header><h3>Maritime Training and Assessment Center</h3></header>
@@ -1225,6 +1256,7 @@ document.addEventListener('DOMContentLoaded',function(){
           </div>
         </section>
       </div>
+    </div>
     </div>
   </div>
 </section>

@@ -71,8 +71,9 @@ const section = `<section id="leadership" class="ld">
       <a href="#tree-training">${slot('lead.tree2', 'Maritime Training Center')}</a>
     </nav>
 
+    <div class="lt-trees">
     <div class="lt-tree" id="tree-colleges">
-      <div class="lt-tree-head reveal"><span class="lt-tree-n">Tree 1</span><h3>${slot('lead.tree1', 'PNTC Colleges')}</h3></div>
+      <div class="lt-tree-head reveal"><h3>${slot('lead.tree1', 'PNTC Colleges')}</h3></div>
       <p class="lt-note reveal">${slot('lead.level', 'Academic Affairs and Administration stand at the same level.')}</p>
       <div class="lt-depts lt-level lt-l2">
         ${big('Academic Affairs Department', 'vp-acad', [
@@ -92,11 +93,12 @@ const section = `<section id="leadership" class="ld">
     </div>
 
     <div class="lt-tree lt-tree-b" id="tree-training">
-      <div class="lt-tree-head reveal"><span class="lt-tree-n">Tree 2</span><h3>${slot('lead.tree2', 'Maritime Training Center')}</h3></div>
+      <div class="lt-tree-head reveal"><h3>${slot('lead.tree2', 'Maritime Training Center')}</h3></div>
       <div class="lt-depts lt-level lt-l2">
         ${dept('Maritime Training and Assessment Center', ['vp-training'])}
         ${dept('Marketing Department', ['mgr-mtc'])}
       </div>
+    </div>
     </div>
   </div>
 </section>`;
