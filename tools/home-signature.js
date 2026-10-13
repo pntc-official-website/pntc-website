@@ -16,15 +16,18 @@ h = h.replace(TAG, `<span class="hc-tag hc-sig"><span class="hc-sig-t"><!--c:mai
 const CSS = `<style id="hc-sig">
 /* "Onward PNTC" signature on the photo wall */
 #hero .hc-tag.hc-sig{display:block;right:clamp(4.6rem,6vw,6.5rem);bottom:clamp(2.4rem,6vh,4.2rem);padding:1.1rem 2.2rem 1.5rem 2.6rem;background:radial-gradient(closest-side,rgba(16,11,51,.82),rgba(16,11,51,.55) 62%,rgba(16,11,51,0));border:0;border-radius:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;letter-spacing:0;text-transform:none;transform-origin:60% 60%;rotate:-5deg}
-#hero .hc-sig-t{display:block;font-family:'Kaushan Script','Brush Script MT',cursive;font-weight:400;font-size:clamp(2.3rem,4.3vw,4.2rem);line-height:1.05;color:#F3CF33;white-space:nowrap;text-shadow:0 3px 0 rgba(16,11,51,.55),0 10px 26px rgba(0,0,0,.6)}
-#hero .hc-sig-line{display:block;width:104%;height:.62em;margin:-.05em 0 0 -2%;font-size:clamp(2.3rem,4.3vw,4.2rem);overflow:visible;fill:none;stroke:#fff;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:460;stroke-dashoffset:460;animation:hc-sign 1.3s 2.4s cubic-bezier(.6,0,.3,1) forwards;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}
-#hero .hc-wall.wait .hc-sig-line{animation-play-state:paused}
+#hero .hc-sig-t{display:block;font-family:'Kaushan Script','Brush Script MT',cursive;font-weight:400;font-size:clamp(2.3rem,4.3vw,4.2rem);line-height:1.05;color:#F3CF33;white-space:nowrap;text-shadow:0 3px 0 rgba(16,11,51,.55),0 10px 26px rgba(0,0,0,.6);clip-path:inset(-30% 104% -40% -6%);animation:hc-write 1.7s 2.3s cubic-bezier(.45,.05,.55,.95) forwards}
+#hero .hc-tag.hc-sig::after{content:'';position:absolute;left:2.6rem;top:52%;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 14px 5px rgba(243,207,51,.9);opacity:0;animation:hc-pen 1.7s 2.3s cubic-bezier(.45,.05,.55,.95) forwards}
+#hero .hc-sig-line{display:block;width:104%;height:.62em;margin:-.05em 0 0 -2%;font-size:clamp(2.3rem,4.3vw,4.2rem);overflow:visible;fill:none;stroke:#fff;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:460;stroke-dashoffset:460;animation:hc-sign 1s 4s cubic-bezier(.6,0,.3,1) forwards;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}
+#hero .hc-wall.wait .hc-sig-line,#hero .hc-wall.wait .hc-sig-t,#hero .hc-wall.wait .hc-sig::after{animation-play-state:paused}
 @keyframes hc-sign{to{stroke-dashoffset:0}}
+@keyframes hc-write{to{clip-path:inset(-30% -6% -40% -6%)}}
+@keyframes hc-pen{0%{opacity:0;left:2.6rem;translate:0 6px}6%{opacity:1}25%{translate:0 -8px}50%{translate:0 7px}75%{translate:0 -6px}94%{opacity:1}100%{opacity:0;left:calc(100% - 2.4rem);translate:0 2px}}
 @media(max-width:960px){
   #hero .hc-tag.hc-sig{right:auto;left:50%;bottom:.4rem;translate:-50% 0;padding:.6rem 1.6rem .9rem}
   #hero .hc-sig-t,#hero .hc-sig-line{font-size:clamp(2rem,9vw,2.8rem)}
 }
-@media(prefers-reduced-motion:reduce){#hero .hc-sig-line{animation:none;stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){#hero .hc-sig-line{animation:none;stroke-dashoffset:0}#hero .hc-sig-t{animation:none;clip-path:none}#hero .hc-tag.hc-sig::after{display:none}}
 </style>
 `;
 h = h.replace(/<style id="hc-sig">[\s\S]*?<\/style>\n/, '');
