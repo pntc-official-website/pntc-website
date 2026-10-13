@@ -87,6 +87,46 @@ const strandFields = ([id, code]) => [
   L(`shs.strand.${id}.leads`, `${code}: where it leads (one per line)`, '<li>{}</li>'),
 ];
 
+// ── Leadership page (About > Leadership). Used here for the admin fields and by tools/leadership-page.js for the page.
+const LEADERS = [
+  { id: 'chairman', role: 'Chairman of the Board', name: 'Atty. Hernani N. Fabia' },
+  { id: 'president', role: 'President', name: 'Atty. Francis Lu Fabia' },
+  { id: 'vp-admin', role: 'Vice President for Administration', name: 'Atty. Krisha Fabia-Quiazon' },
+  { id: 'vp-acad', role: 'Vice President for Academic Affairs', name: 'Dr. Nerissa Flores' },
+  { id: 'vp-training', role: 'Vice President for Training', name: 'Jane Romero' },
+  { id: 'dean-maritime', role: 'Dean of the College of Maritime Education', name: 'C/E Jeynard Mowler Tan', accent: '#1244B8' },
+  { id: 'dean-business', role: 'Dean of Business and Management', name: 'Dr. Zarny Zaragoza', accent: '#3d2f9e' },
+  { id: 'dean-crim', role: 'Dean of Criminal Justice', name: 'Dr. Rudy Gahar', accent: '#8a1818' },
+  { id: 'dean-osa', role: 'Dean of Student Affairs', name: 'Dr. Celso Servas' },
+  { id: 'mgr-college', role: 'Manager, Marketing, Admission and Aid Department', name: 'Jayson Samson', unit: 'College' },
+  { id: 'mgr-mtc', role: 'Manager, Marketing, Admission and Aid Department', name: 'Mariness Uy-Oco', unit: 'Maritime Training Center' },
+];
+// Units on the chart. "lead" points to a leader above. Units without one get their own blank name to fill in later.
+const ORG = {
+  president: { id: 'president', name: 'Office of the President', lead: 'president' },
+  secretary: { id: 'secretary', name: 'Office of the Corporate Secretary' },
+  evp: { id: 'evp', name: 'Office of the Executive Vice President' },
+  treasurer: { id: 'treasurer', name: 'Office of the Corporate Treasurer' },
+  departments: [
+    { n: '01', id: 'mtac', name: 'Maritime Training and Assessment Center', lead: 'vp-training', committees: [], offices: [
+      { id: 'training-registrar', name: "Training Registrar's Office" }, { id: 'training-office', name: 'Training Office' }, { id: 'assessment', name: 'Maritime Assessment Center' }] },
+    { n: '02', id: 'academic', name: 'Academic Affairs Department', lead: 'vp-acad', offLabel: 'Colleges and Offices',
+      committees: [{ name: 'Academic Council' }, { name: 'Discipline Committee', sub: true }, { name: 'Gender and Development Committee', sub: true }, { name: 'Educational Materials Committee', sub: true }],
+      offices: [
+        { id: 'maritime', name: 'College of Maritime Education', lead: 'dean-maritime' }, { id: 'customs', name: 'College of Customs and Business Mgt. Education', lead: 'dean-business' },
+        { id: 'shs', name: 'Senior High School' }, { id: 'acad-registrar', name: "Academic Registrar's Office" }, { id: 'osa', name: 'Office of Student Affairs', lead: 'dean-osa' }] },
+    { n: '03', id: 'quality', name: 'Quality Department', committees: [], offices: [] },
+    { n: '04', id: 'marketing', name: 'Marketing Department', lead: ['mgr-college', 'mgr-mtc'], committees: [], offices: [
+      { id: 'client-relations', name: 'Client Relations Office' }, { id: 'admissions-aid', name: 'Admissions and Aid Office' }] },
+    { n: '05', id: 'finance', name: 'Finance Department', committees: [], offices: [
+      { id: 'fin-reporting', name: 'Financial Reporting Office' }, { id: 'fin-services', name: 'Financial Services Office' }, { id: 'payroll', name: 'Payroll, Tax, and Contributions Office' }, { id: 'purchasing', name: 'Purchasing Office' }] },
+    { n: '06', id: 'admin', name: 'Administration Department', lead: 'vp-admin',
+      committees: [{ name: 'Data Privacy Committee' }, { name: 'Committee on Decorum and Investigation' }, { name: 'Occupational Safety and Health Committee' }],
+      offices: [{ id: 'hrdm', name: 'H.R.D.M. Office' }, { id: 'ict', name: 'I.C.T. Office' }, { id: 'facilities', name: 'Facilities Office' }, { id: 'library', name: 'Library' }, { id: 'clinic', name: 'Clinic' }] },
+  ],
+};
+const ORG_BLANKS = [ORG.secretary, ORG.evp, ORG.treasurer, ...ORG.departments.flatMap(d => [d, ...d.offices])].filter(u => !u.lead);
+
 const GROUPS = [
   { id: 'main-hero', site: 'Main Site', title: 'Home page hero', files: ['PNTC Main Landing Page/index.html'], fields: [
     T('main.hero.pill', 'Small tag above the headline'),
@@ -118,6 +158,17 @@ const GROUPS = [
       T(`history.e${n}.year`, `Chapter ${n}: year`), T(`history.e${n}.title`, `Chapter ${n}: title`), P(`history.e${n}.desc`, `Chapter ${n}: description`),
       L(`history.e${n}.tags`, `Chapter ${n}: small tags (one per line, may be empty)`, '<li>{}</li>'),
     ]),
+  ] },
+  { id: 'main-leaders', site: 'Main Site', title: 'Leadership page: leaders', note: 'A name changed here also changes on the organization chart below the leaders.', files: ['PNTC Main Landing Page/about-leadership.html'], fields: [
+    T('lead.eyebrow', 'Small label'), T('lead.mark', 'Heading, underlined words'), T('lead.rest', 'Heading, rest of the line'),
+    ...LEADERS.flatMap(p => [
+      T(`lead.${p.id}.name`, `${p.role}${p.unit ? ' (' + p.unit + ')' : ''}: name`), T(`lead.${p.id}.role`, `${p.role}${p.unit ? ' (' + p.unit + ')' : ''}: title`),
+      ...(p.unit ? [T(`lead.${p.id}.unit`, `${p.role} (${p.unit}): unit tag`)] : []),
+    ]),
+  ] },
+  { id: 'main-org-chart', site: 'Main Site', title: 'Leadership page: organization chart names', note: 'Leave a name empty to keep it blank on the page.', files: ['PNTC Main Landing Page/about-leadership.html'], fields: [
+    T('org.eyebrow', 'Small label'), T('org.title', 'Heading'),
+    ...ORG_BLANKS.map(u => T(`org.${u.id}.head`, `${u.name}: name of the head`, { optional: true })),
   ] },
   { id: 'college-hero', site: 'Colleges', title: 'College hero', files: ['PNTC Colleges/index.html'], fields: [
     T('college.hero.pill', 'Small tag above the headline'),
@@ -165,4 +216,4 @@ const GROUPS = [
   ] },
 ];
 
-module.exports = { GROUPS, escHtml, decode, getSlot, setSlot, getAttr, setAttr, readField, writeField, readGroup, writeGroup, preserveSlots, CHECK };
+module.exports = { GROUPS, LEADERS, ORG, escHtml, decode, getSlot, setSlot, getAttr, setAttr, readField, writeField, readGroup, writeGroup, preserveSlots, CHECK };

@@ -44,7 +44,7 @@ module.exports = function contentRoutes(app, { requireAuth, ghGetFile, ghPutFile
       if (v.length > 4000) return res.status(400).json({ error: `"${f.label}" is too long.` });
       if (f.type === 'href' && v.trim() && !/^(\/|#|https?:\/\/|mailto:|tel:)/i.test(v.trim())) return res.status(400).json({ error: `"${f.label}" should start with /, #, https://, mailto: or tel:.` });
       if (f.type === 'email' && v.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())) return res.status(400).json({ error: `"${f.label}" does not look like an email address.` });
-      if (f.type !== 'href' && f.type !== 'list' && !v.trim()) return res.status(400).json({ error: `"${f.label}" cannot be empty.` });
+      if (f.type !== 'href' && f.type !== 'list' && !f.optional && !v.trim()) return res.status(400).json({ error: `"${f.label}" cannot be empty.` });
     }
     try {
       const changed = [];
