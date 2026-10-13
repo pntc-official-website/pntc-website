@@ -87,7 +87,8 @@ const LIVE = {
   'PNTC Main Landing Page/index.html':'/', 'PNTC Colleges/index.html':'/college/', 'PNTC Colleges/programs.html':'/college/programs',
   'PNTC Colleges/admissions.html':'/college/admissions', 'PNTC Colleges/directory.html':'/college/directory', 'PNTC Colleges/calendar.html':'/college/calendar',
   'SHS/index.html':'/shs/', 'SHS/strands.html':'/shs/strands', 'SHS/directory.html':'/shs/directory',
-  'PNTC Maritime Training and Assessment Center/index.html':'/training/'
+  'PNTC Maritime Training and Assessment Center/index.html':'/training/', 'PNTC Maritime Training and Assessment Center/maritime-courses.html':'/training/maritime-courses',
+  'PNTC Main Landing Page/about.html':'/about', 'PNTC Main Landing Page/about-history.html':'/about/history', 'PNTC Main Landing Page/about-leadership.html':'/about/leadership', 'PNTC Main Landing Page/careers.html':'/careers'
 };
 let current = null, dirty = false;
 
@@ -110,13 +111,14 @@ async function loadMenu() {
       if (g.site !== site) { site = g.site; html += `<div class="sc-site">${esc(site)}</div>`; }
       html += `<button class="sc-item" data-id="${esc(g.id)}">${esc(g.title)}</button>`;
       if (g.id === 'college-admissions-phase2') html += `<button class="sc-item" data-id="@calendar">Academic Calendar</button>`;
+      if (g.id === 'training-cta') html += `<button class="sc-item" data-id="@courses">Course list</button>`;
     }
     $('menu').innerHTML = html;
     $('menu').addEventListener('click', e => {
       const b = e.target.closest('.sc-item'); if (!b) return;
       if (dirty && !confirm('You have changes that are not saved. Leave this section anyway?')) return;
       document.querySelectorAll('.sc-item').forEach(x => x.classList.toggle('active', x === b));
-      b.dataset.id === '@calendar' ? openCalendar() : openGroup(b.dataset.id);
+      b.dataset.id === '@calendar' ? openCalendar() : b.dataset.id === '@courses' ? openCourses() : openGroup(b.dataset.id);
     });
   } catch (e) { $('menu').innerHTML = `<div class="sc-empty">${esc(e.message)}</div>`; }
 }
@@ -243,6 +245,70 @@ async function saveCalendar() {
   try {
     const r = await api('/api/calendar', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
     dirty = false; status(`Published ${r.entries} dates. The live calendar updates in about 30 seconds.`, 'ok');
+  } catch (e) { status(e.message, 'err'); }
+}
+
+// ── Training Center course list ──
+// Each section is a box of lines. One course per line, written as  CODE | Course name | Days
+let crs = null;
+const courseLines = s => (s.courses || []).map(c => [c.code, c.name, c.days].filter((x, i) => i < 2 || x).join(' | ')).join('\n');
+const parseLines = t => String(t).split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(l => { const p = l.split('|').map(x => x.trim()); return { code: p[0] || '', name: p[1] || '', days: p[2] || '' }; });
+
+async function openCourses() {
+  current = null; dirty = false;
+  $('panel').innerHTML = '<div class="sc-empty">Reading the course list…</div>';
+  try { const r = await api('/api/training-courses'); crs = r.data; renderCourses(); }
+  catch (e) { $('panel').innerHTML = `<div class="sc-empty">${esc(e.message)}</div>`; }
+}
+function readCourses() {
+  if (!crs) return;
+  crs.asOf = $('crs-asof').value; crs.note = $('crs-note').value; crs.inclusions = $('crs-incl').value;
+  crs.groups.forEach((g, gi) => {
+    g.title = $(`crs-g${gi}-t`).value; g.short = $(`crs-g${gi}-s`).value;
+    g.sections.forEach((s, si) => { s.title = $(`crs-g${gi}-s${si}-t`).value; s.courses = parseLines($(`crs-g${gi}-s${si}-c`).value); });
+  });
+  crs.requirements.forEach((q, qi) => { q.title = $(`crs-r${qi}-t`).value; q.items = $(`crs-r${qi}-i`).value.split(/\r?\n/).map(x => x.trim()).filter(Boolean); });
+}
+function renderCourses() {
+  const total = crs.groups.reduce((n, g) => n + g.sections.reduce((m, s) => m + s.courses.length, 0), 0);
+  $('panel').innerHTML = `
+    <div class="sc-head">
+      <div><h2>Training Center course list</h2><p>Training Center · shown on <a href="/training/maritime-courses" target="_blank" rel="noopener">/training/maritime-courses</a> and as the course cards on <a href="/training/" target="_blank" rel="noopener">/training/</a><br>${total} courses. Write one course per line as <b>CODE | Course name | Days</b>. Prices are not shown on the site, so leave them out.</p></div>
+      <button class="btn btn-primary" id="crssave">Save and publish</button>
+    </div>
+    <div class="sc-field"><label for="crs-asof">List is as of</label><input class="form-input" id="crs-asof" value="${esc(crs.asOf)}"><small>For example January 2026.</small></div>
+    <div class="sc-field"><label for="crs-note">Note under the search bar</label><input class="form-input" id="crs-note" value="${esc(crs.note)}"></div>
+    <div class="sc-field"><label for="crs-incl">Training inclusions</label><textarea class="form-input" id="crs-incl" rows="2">${esc(crs.inclusions)}</textarea></div>
+    ${crs.groups.map((g, gi) => `
+    <h3 style="margin:1.75rem 0 .5rem;font-size:1rem">Group ${gi + 1}</h3>
+    <div class="sc-field"><label for="crs-g${gi}-t">Group title</label><input class="form-input" id="crs-g${gi}-t" value="${esc(g.title)}"></div>
+    <div class="sc-field"><label for="crs-g${gi}-s">Short name on the filter button</label><input class="form-input" id="crs-g${gi}-s" value="${esc(g.short || '')}"></div>
+    ${g.sections.map((s, si) => `
+    <div class="sc-field" style="border-left:3px solid #F3CF33;padding-left:.9rem">
+      <label for="crs-g${gi}-s${si}-t">Section title</label><input class="form-input" id="crs-g${gi}-s${si}-t" value="${esc(s.title)}">
+      <label for="crs-g${gi}-s${si}-c" style="margin-top:.5rem">Courses, one per line</label>
+      <textarea class="form-input" id="crs-g${gi}-s${si}-c" rows="${Math.max(3, s.courses.length + 1)}" style="font-family:ui-monospace,Consolas,monospace;font-size:.82rem;white-space:pre;overflow-x:auto">${esc(courseLines(s))}</textarea>
+      <small>Empty this box to remove the section.</small>
+    </div>`).join('')}
+    <button class="btn crs-add" data-g="${gi}" style="font-size:.78rem">+ Add a section to this group</button>`).join('')}
+    <h3 style="margin:1.75rem 0 .5rem;font-size:1rem">Requirements</h3>
+    ${crs.requirements.map((q, qi) => `
+    <div class="sc-field"><label for="crs-r${qi}-t">Box title</label><input class="form-input" id="crs-r${qi}-t" value="${esc(q.title)}">
+      <label for="crs-r${qi}-i" style="margin-top:.5rem">Items, one per line</label>
+      <textarea class="form-input" id="crs-r${qi}-i" rows="${Math.max(3, q.items.length + 1)}">${esc(q.items.join('\n'))}</textarea></div>`).join('')}
+    <div style="margin-top:1.25rem"><button class="btn btn-primary" id="crssave2">Save and publish</button></div>
+    <div class="sc-status" id="status"></div>`;
+  $('panel').oninput = () => { dirty = true; };
+  $('crssave').onclick = $('crssave2').onclick = saveCourses;
+  document.querySelectorAll('.crs-add').forEach(b => b.onclick = () => { readCourses(); crs.groups[+b.dataset.g].sections.push({ title: 'New section', courses: [] }); dirty = true; renderCourses(); });
+}
+async function saveCourses() {
+  readCourses();
+  status('Publishing…');
+  try {
+    const r = await api('/api/training-courses', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(crs) });
+    dirty = false; status(`Published ${r.courses} courses. The live pages update in about 30 seconds.`, 'ok');
+    const fresh = await api('/api/training-courses'); crs = fresh.data; renderCourses(); status(`Published ${r.courses} courses. The live pages update in about 30 seconds.`, 'ok');
   } catch (e) { status(e.message, 'err'); }
 }
 

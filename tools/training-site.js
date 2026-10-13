@@ -25,7 +25,8 @@ for (const name of ['index.html', 'maritime-courses.html']) {
   h = h.replace(/<style id="tc-modern">[\s\S]*?<\/style>\n(?:<script id="tc-modern-js">[\s\S]*?<\/script>\n)?/, '');
   const block = `<style id="tc-modern">\n${CSS}\n</style>\n${name === 'index.html' ? SCRIPT + '\n' : ''}`;
   // keep it ahead of the hero block so the hero styles still win
-  h = h.includes('<style id="th-action">') ? h.replace('<style id="th-action">', block + '<style id="th-action">') : h.replace('</head>', block + '</head>');
+  const anchor = ['<style id="tc-courses">', '<style id="th-action">', '</head>'].find(a => h.includes(a));
+  h = h.replace(anchor, block + anchor);
   fs.writeFileSync(file, h);
   console.log('updated', name);
 }

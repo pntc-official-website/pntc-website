@@ -1,0 +1,424 @@
+{
+ "asOf": "January 2026",
+ "note": "Slots are limited and schedules may change without prior notice.",
+ "inclusions": "Training inclusions are a polo shirt, maritime photo, basic medical exam, and transportation to the practicum site for courses with practicum.",
+ "groups": [
+  {
+   "id": "stcw",
+   "title": "STCW Mandatory Training Courses",
+   "short": "STCW Mandatory",
+   "sections": [
+    {
+     "title": "Safety",
+     "courses": [
+      {
+       "code": "BT",
+       "name": "Basic Training (Revised with PSSR)",
+       "days": "10"
+      },
+      {
+       "code": "BT-PSSR",
+       "name": "BT PSSR Updating",
+       "days": "1"
+      },
+      {
+       "code": "ATFF",
+       "name": "Advanced Training in Fire Fighting",
+       "days": "5"
+      },
+      {
+       "code": "SCRB",
+       "name": "Proficiency in Survival Craft and Rescue Boats other than Fast Rescue Boats",
+       "days": "5"
+      },
+      {
+       "code": "FRB",
+       "name": "Proficiency in Fast Rescue Boats",
+       "days": "5"
+      }
+     ]
+    },
+    {
+     "title": "Refresher",
+     "courses": [
+      {
+       "code": "RBT",
+       "name": "Refresher Course on Basic Training",
+       "days": "2.5"
+      },
+      {
+       "code": "RSCRB",
+       "name": "Refresher Training on Proficiency in Survival Craft and Rescue Boats other than Fast Rescue Boats",
+       "days": "1.5"
+      },
+      {
+       "code": "RFRB",
+       "name": "Refresher Training on Proficiency in Fast Rescue Boats",
+       "days": "1.5"
+      },
+      {
+       "code": "RAFF",
+       "name": "Refresher Training on Advanced Fire Fighting",
+       "days": "1.5"
+      },
+      {
+       "code": "RATOT",
+       "name": "Refresher Training on Advanced Training for Oil Tanker Cargo Operations",
+       "days": "4"
+      },
+      {
+       "code": "RATCT",
+       "name": "Refresher Training on Advanced Training for Chemical Tanker Cargo Operations",
+       "days": "4"
+      }
+     ]
+    },
+    {
+     "title": "Security",
+     "courses": [
+      {
+       "code": "SSO",
+       "name": "Ship Security Officers",
+       "days": "3"
+      },
+      {
+       "code": "SDSD-SAT",
+       "name": "Security Awareness Training and Seafarers with Designated Security Duties",
+       "days": "1.5"
+      }
+     ]
+    },
+    {
+     "title": "Medical",
+     "courses": [
+      {
+       "code": "MEFA",
+       "name": "Medical First Aid",
+       "days": "4.5"
+      },
+      {
+       "code": "MECA",
+       "name": "Medical Care",
+       "days": "6"
+      }
+     ]
+    },
+    {
+     "title": "Tanker",
+     "courses": [
+      {
+       "code": "BTOC",
+       "name": "Basic Training for Oil and Chemical Tanker Cargo Operations",
+       "days": "7"
+      },
+      {
+       "code": "BTLG",
+       "name": "Basic Training for Liquefied Gas Tanker Cargo Operations",
+       "days": "5"
+      },
+      {
+       "code": "ATOT",
+       "name": "Advance Training for Oil Tanker Cargo Operations",
+       "days": "8"
+      },
+      {
+       "code": "ATLG",
+       "name": "Advance Training for Liquefied Gas Tanker Cargo Operations",
+       "days": "9"
+      },
+      {
+       "code": "ATCT",
+       "name": "Advance Training for Chemical Tanker Cargo Operations",
+       "days": "8"
+      },
+      {
+       "code": "MARPOL",
+       "name": "Consolidated Marine Pollution 73/78 Annex I-VI",
+       "days": "6"
+      }
+     ]
+    },
+    {
+     "title": "IGF Code",
+     "courses": [
+      {
+       "code": "BTIGF",
+       "name": "Basic Training for Ships Subject to IGF Code",
+       "days": "4"
+      },
+      {
+       "code": "ATIGF",
+       "name": "Advanced Training for Ships Subject to IGF Code",
+       "days": "5"
+      }
+     ]
+    },
+    {
+     "title": "Watchkeeping",
+     "courses": [
+      {
+       "code": "RFPNW",
+       "name": "Ratings Forming Part of a Navigational Watch",
+       "days": "6"
+      },
+      {
+       "code": "RFPEW",
+       "name": "Ratings Forming Part of an Engineering Watch",
+       "days": "6"
+      },
+      {
+       "code": "ABDECK",
+       "name": "Able Body Deck",
+       "days": "8"
+      },
+      {
+       "code": "ABENGINE",
+       "name": "Able Body Engine",
+       "days": "8"
+      }
+     ]
+    },
+    {
+     "title": "Ro-Ro and Passenger Vessel",
+     "courses": [
+      {
+       "code": "STPP",
+       "name": "Safety Training for Personnel Providing Direct Service to Passengers in Passenger Spaces",
+       "days": "1"
+      },
+      {
+       "code": "CROWD",
+       "name": "Passengership Crowd Management Training",
+       "days": "2"
+      },
+      {
+       "code": "CRISIS",
+       "name": "Passengership Crisis Management and Human Behaviour Training",
+       "days": "2.5"
+      },
+      {
+       "code": "CRS-HULL",
+       "name": "Passenger Safety, Cargo Safety and Hull Integrity Training",
+       "days": "2.5"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mlc",
+   "title": "Management Level Courses (Revised)",
+   "short": "Management Level",
+   "sections": [
+    {
+     "title": "Deck Department",
+     "courses": [
+      {
+       "code": "MLC-DF1",
+       "name": "Navigation at the Management Level (F1)",
+       "days": "15"
+      },
+      {
+       "code": "MLC-DF2",
+       "name": "Cargo Handling and Stowage at the Management Level (F2)",
+       "days": "4"
+      },
+      {
+       "code": "MLC-DF3",
+       "name": "Controlling the Operation of the Ship and Care for Persons on Board at the Management Level (F3)",
+       "days": "8"
+      },
+      {
+       "code": "MLC-D",
+       "name": "MLC Deck, All Functions (F1, F2, F3)",
+       "days": "27"
+      }
+     ]
+    },
+    {
+     "title": "Engine Department",
+     "courses": [
+      {
+       "code": "MLC-EF1",
+       "name": "Marine Engineering at the Management Level (F1)",
+       "days": "15.5"
+      },
+      {
+       "code": "MLC-EF2",
+       "name": "Electrical, Electronic, and Control Engineering at the Management Level (F2)",
+       "days": "10"
+      },
+      {
+       "code": "MLC-EF3",
+       "name": "Maintenance and Repair at the Management Level (F3)",
+       "days": "5"
+      },
+      {
+       "code": "MLC-EF4",
+       "name": "Controlling the Operations of the Ship and Care of Persons on Board at the Management Level (F4)",
+       "days": "12.5"
+      },
+      {
+       "code": "MLC-E",
+       "name": "MLC Engine, All Functions (F1, F2, F3, F4)",
+       "days": "43"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "inhouse",
+   "title": "In-House Training Courses",
+   "short": "In-House",
+   "sections": [
+    {
+     "title": "Allied Tankerman's Courses",
+     "courses": [
+      {
+       "code": "COW-IGS",
+       "name": "Crude Oil Washing and Inert Gas System",
+       "days": "1"
+      },
+      {
+       "code": "HAZMAT",
+       "name": "Dangerous, Hazardous and Harmful Cargoes",
+       "days": "2"
+      },
+      {
+       "code": "HAZMATCER",
+       "name": "Dangerous, Hazardous and Harmful Cargoes with Code of Federal Regulation (CFR)",
+       "days": "2"
+      }
+     ]
+    },
+    {
+     "title": "Allied Simulator Courses",
+     "courses": [
+      {
+       "code": "SC-ONE",
+       "name": "Steering Course",
+       "days": "1"
+      },
+      {
+       "code": "ECDIS",
+       "name": "Operational Use of Electronic Chart Display and Information System",
+       "days": "5"
+      },
+      {
+       "code": "BTM",
+       "name": "Bridge Teamwork Management",
+       "days": "2"
+      }
+     ]
+    },
+    {
+     "title": "Allied Security Courses",
+     "courses": [
+      {
+       "code": "MAII",
+       "name": "Marine Accident and Incident Investigation",
+       "days": "1"
+      },
+      {
+       "code": "PADAMS",
+       "name": "Prevention of Alcohol and Drug Abuse in the Maritime Sector Refresher",
+       "days": "1"
+      }
+     ]
+    },
+    {
+     "title": "Allied Refresher Courses",
+     "courses": [
+      {
+       "code": "RMECA",
+       "name": "Medical Care Refresher",
+       "days": "3"
+      },
+      {
+       "code": "RMEFA",
+       "name": "Medical First Aid Refresher",
+       "days": "2"
+      },
+      {
+       "code": "RECDIS",
+       "name": "Operational Use of Electronic Chart Display and Information System Refresher",
+       "days": "2"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "assessment",
+   "title": "Maritime Assessment Center (Practical Assessments)",
+   "short": "Practical Assessments",
+   "sections": [
+    {
+     "title": "Assessment for Able Bodied Seafarers",
+     "courses": [
+      {
+       "code": "A-ABDECK",
+       "name": "Reg II/5, Assessment for Able Bodied (AB) Deck",
+       "days": "2"
+      },
+      {
+       "code": "A-ABENGINE",
+       "name": "Reg III/5, Assessment for Able Bodied (AB) Engine",
+       "days": "2"
+      }
+     ]
+    },
+    {
+     "title": "Assessment for Ratings",
+     "courses": [
+      {
+       "code": "A-RFPNW",
+       "name": "Reg II/4, Assessment for Ratings Forming Part of a Navigational Watch",
+       "days": "2"
+      },
+      {
+       "code": "A-RFPEW",
+       "name": "Reg III/4, Assessment for Ratings Forming Part of an Engineering Watch",
+       "days": "2"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "requirements": [
+  {
+   "title": "General Training Requirements",
+   "items": [
+    "1 valid ID",
+    "Seafarer's Registration Number (SRN)",
+    "Down payment or full payment",
+    "For courses other than BT, see the Additional Training Requirements"
+   ]
+  },
+  {
+   "title": "Additional Training Requirements",
+   "items": [
+    "All courses (except BT) need a BT COP or Training Certificate",
+    "ATCT and ATOT need a BTOC COP or Training Certificate",
+    "ATLG needs a BTLG COP or Training Certificate",
+    "MECA needs a MEFA COP or Training Certificate",
+    "FRB needs a SCRB COP or Training Certificate",
+    "Refresher courses need a valid COP of the training to be revalidated",
+    "AB Deck needs a RFPNW COP and at least 12 months of sea service experience",
+    "AB Engine needs a RFPEW COP and at least 12 months of sea service experience",
+    "CROWD needs a STPP training certificate",
+    "CRISIS needs a STPP training certificate and a CROWD training certificate",
+    "CRS-HULL needs STPP, CROWD, and CRISIS training certificates"
+   ]
+  },
+  {
+   "title": "Practical Assessment Requirements",
+   "items": [
+    "Application Number",
+    "Full payment of assessment fee"
+   ]
+  }
+ ]
+}

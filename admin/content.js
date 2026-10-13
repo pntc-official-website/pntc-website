@@ -205,6 +205,9 @@ const GROUPS = [
     T('training.hero.btn1', 'First button, text'), H('training.hero.btn1.href', 'First button, link'),
     T('training.hero.btn2', 'Second button, text'), H('training.hero.btn2.href', 'Second button, link'),
   ] },
+  { id: 'training-cta', site: 'Training Center', title: 'Training Center name in the contact and enroll bands', note: 'Used in the navy contact band on the Training Center home page and the enroll band on the courses page.', files: ['PNTC Maritime Training and Assessment Center/index.html', 'PNTC Maritime Training and Assessment Center/maritime-courses.html'], fields: [
+    T('training.cta.mark', 'Name, gold part'), T('training.cta.rest', 'Name, white part'),
+  ] },
 ];
 
 module.exports = { GROUPS, LEADERS, escHtml, decode, getSlot, setSlot, getAttr, setAttr, readField, writeField, readGroup, writeGroup, preserveSlots, CHECK };
