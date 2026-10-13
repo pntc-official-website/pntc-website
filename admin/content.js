@@ -105,7 +105,7 @@ const LEADERS = [
   { id: 'head-gened', role: 'Head of General Education', name: 'Engr. Pamela Bautista' },
   { id: 'head-research', role: 'Head, Research and Development', name: 'Dr. Diana Rose Manaligod' },
   { id: 'head-registrar', role: 'Head, Registrar', name: 'Rachel Vicedo', unit: 'Colleges' },
-  { id: 'head-quality', role: 'Head, Quality Assurance', name: 'Raquel Kaye Gannaban' },
+  { id: 'head-quality', role: 'Head, Quality Assurance', name: 'Raquel Kaye Gannaban', unit: 'PNTC Colleges and Maritime Training Center' },
   { id: 'mgr-college', role: 'Manager, Marketing, Admission and Aid Department', name: 'Jayson Samson', unit: 'College' },
   { id: 'sup-marketing', role: 'Supervisor, Marketing', name: 'Emil Fugoso' },
   { id: 'mgr-mtc', role: 'Manager, Marketing, Admission and Aid Department', name: 'Mariness Uy-Oco', unit: 'Maritime Training Center' },
@@ -148,7 +148,7 @@ const GROUPS = [
   { id: 'main-leaders', site: 'Main Site', title: 'Leadership page: leaders', files: ['PNTC Main Landing Page/about-leadership.html'], fields: [
     T('lead.eyebrow', 'Small label'), T('lead.mark', 'Heading, underlined words'), T('lead.rest', 'Heading, rest of the line'),
     T('lead.tree1', 'Name of the first tree'), T('lead.tree2', 'Name of the second tree'),
-    T('lead.level', 'Note above the departments'),
+   
     ...LEADERS.flatMap(p => [
       T(`lead.${p.id}.name`, `${p.role}${p.unit ? ' (' + p.unit + ')' : ''}: name`), T(`lead.${p.id}.role`, `${p.role}${p.unit ? ' (' + p.unit + ')' : ''}: title`),
       ...(p.unit ? [T(`lead.${p.id}.unit`, `${p.role} (${p.unit}): unit tag`)] : []),

@@ -33,21 +33,22 @@ const dept = (name, top, under = [], cls = '') => `<section class="lt-dept ${cls
           ${under.length ? `<div class="lt-under">\n          ${cards(under)}\n          </div>` : ''}
           </div>
         </section>`;
-const group = (label, ids, cls = '', under = []) => `<div class="lt-group ${cls}">
+// A unit under a department head. "w" is how many people stand side by side in it, "color" highlights a college.
+const group = (label, ids, o = {}) => `<div class="lt-group${o.color ? ' lt-col' : ''}" style="--w:${o.w || 1}${o.color ? ';--gc:' + o.color : ''}">
             <p class="lt-lbl">${label}</p>
             <div class="lt-cards">
           ${cards(ids)}
             </div>
-            ${under.length ? `<div class="lt-under">
-          ${cards(under)}
-          </div>` : ''}
+            ${o.under ? `<div class="lt-under">\n          ${cards(o.under)}\n          </div>` : ''}
           </div>`;
-// A department with its head on top and the groups that report to that head
-const big = (name, lead, groups) => `<section class="lt-dept reveal">
+// A department with its head on top and, on one level below, the units that report to that head
+const big = (name, lead, groups) => `<section class="lt-dept lt-big reveal">
           <header><h3>${name}</h3></header>
           <div class="lt-body">
           ${card(lead, 'ld-lead')}
+          <div class="lt-groups">
           ${groups.join('\n          ')}
+          </div>
           </div>
         </section>`;
 
@@ -63,30 +64,36 @@ const section = `<section id="leadership" class="ld">
       ${card('chairman', 'ld-big')}
       <span class="lt-v" aria-hidden="true"></span>
       ${card('president', 'ld-big')}
-      <span class="lt-v" aria-hidden="true"></span>
+      <div class="lt-staff">
+        <span class="lt-v" aria-hidden="true"></span>
+        <div class="lt-staff-box">
+          <p class="lt-lbl">Quality Department</p>
+          ${card('head-quality')}
+        </div>
+      </div>
     </div>
 
     <nav class="lt-jump reveal" aria-label="Jump to a tree">
       <a href="#tree-colleges">${slot('lead.tree1', 'PNTC Colleges')}</a>
       <a href="#tree-training">${slot('lead.tree2', 'Maritime Training Center')}</a>
     </nav>
+  </div>
 
-    <div class="lt-trees">
+  <div class="lt-trees">
     <div class="lt-tree" id="tree-colleges">
       <div class="lt-tree-head reveal"><h3>${slot('lead.tree1', 'PNTC Colleges')}</h3></div>
-      <p class="lt-note reveal">${slot('lead.level', 'Academic Affairs and Administration stand at the same level.')}</p>
-      <div class="lt-depts lt-level lt-l2">
+      <div class="lt-depts lt-level lt-l2 lt-split">
         ${big('Academic Affairs Department', 'vp-acad', [
-          group('College of Maritime Education', ['dean-maritime'], 'lt-col" style="--gc:#1244B8', ['head-bsmt', 'head-bsmare', 'head-obt']),
-          group('College of Business and Management', ['dean-business'], 'lt-col" style="--gc:#3d2f9e'),
-          group('College of Criminal Justice', ['dean-crim'], 'lt-col" style="--gc:#8a1818'),
-          group('Senior High School', ['principal-shs'], 'lt-col" style="--gc:#181D71'),
+          group('College of Maritime Education', ['dean-maritime'], { color: '#1244B8', under: ['head-bsmt', 'head-bsmare', 'head-obt'] }),
+          group('College of Business and Management', ['dean-business'], { color: '#3d2f9e' }),
+          group('College of Criminal Justice', ['dean-crim'], { color: '#8a1818' }),
           group('Student Affairs', ['dean-osa']),
-          group('Heads', ['head-gened', 'head-registrar']),
+          group('Senior High School', ['principal-shs'], { color: '#181D71' }),
+          group('General Education', ['head-gened']),
+          group('Registrar', ['head-registrar']),
         ])}
         ${big('Administration Department', 'vp-admin', [
-          group('Marketing Department', ['mgr-college'], '', ['sup-marketing']),
-          group('Quality Department', ['head-quality']),
+          group('Marketing Department', ['mgr-college'], { under: ['sup-marketing'] }),
           group('Finance Department', ['sup-finance']),
           group('Research and Development', ['head-research']),
           group('HRDM', ['sup-hrdm']),
@@ -100,7 +107,6 @@ const section = `<section id="leadership" class="ld">
         ${dept('Maritime Training and Assessment Center', ['vp-training'])}
         ${dept('Marketing Department', ['mgr-mtc'])}
       </div>
-    </div>
     </div>
   </div>
 </section>`;
