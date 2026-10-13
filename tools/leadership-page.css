@@ -68,7 +68,29 @@
 .lt-maritime .ld-card:first-child .ld-role{color:rgba(255,255,255,.8)}
 .lt-maritime .ld-card:first-child .ld-name{color:#fff}
 
+/* departments side by side, all at one level */
+.lt-note{font-size:.84rem;font-weight:600;color:rgba(28,22,80,.65);margin:-.6rem 0 1.6rem}
+.lt-level{position:relative;padding-top:24px;align-items:stretch}
+.lt-level::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px;background:#1C1650}
+.lt-level>.lt-dept{position:relative;grid-column:auto}
+.lt-level>.lt-dept::before{content:'';position:absolute;left:50%;top:-23px;width:3px;height:22px;margin-left:-1.5px;background:#1C1650}
+.lt-l5{grid-template-columns:repeat(5,minmax(0,1fr));gap:.9rem}
+.lt-l2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.lt-level>.lt-dept>header{min-height:4.4rem;padding:.9rem 1rem}
+.lt-level>.lt-dept>header h3{font-size:.9rem}
+.lt-l5 .lt-body{padding:.8rem}
+.lt-l5 .ld-card{flex-direction:column;align-items:flex-start;padding:1rem}
+.lt-l5 .ld-lead .ld-name{font-size:1rem}
+.lt-l5 .lt-under{margin-left:.5rem;padding-left:.7rem}
+.lt-acad{margin-top:1.25rem}
+.lt-acad>header{background:#F3CF33}
+.lt-acad>header h3{color:#1C1650}
+.lt-acad .lt-group:first-child{margin-top:0;border-top:0;padding-top:0}
+
 @media(max-width:1080px){
+  .lt-l5{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .lt-level::before,.lt-level>.lt-dept::before{display:none}
+  .lt-level{padding-top:0}
   .lt-dept,.lt-dept.lt-half{grid-column:span 3}
   .lt-c4,.lt-c3{grid-template-columns:repeat(2,minmax(0,1fr))}
   .lt-c4 .ld-card{flex-direction:row;align-items:center}
@@ -79,7 +101,9 @@
   #leadership .eyebrow::after{display:none}
   .lt-apex{margin-top:2.4rem}
   .ld-big .ld-av{flex-basis:66px;width:66px;height:66px;font-size:1.25rem}
-  .lt-depts{grid-template-columns:1fr;gap:1rem}
+  .lt-depts,.lt-l5,.lt-l2{grid-template-columns:1fr;gap:1rem}
+  .lt-l5 .ld-card{flex-direction:row;align-items:center}
+  .lt-level>.lt-dept>header{min-height:0}
   .lt-dept,.lt-dept.lt-half,.lt-dept.lt-wide{grid-column:auto}
   .lt-c4,.lt-c3{grid-template-columns:1fr}
   .lt-body,.lt-wide .lt-body{padding:1rem}

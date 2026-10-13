@@ -26,8 +26,8 @@ const card = (id, cls = '') => {
 };
 const cards = (ids, cls) => ids.map(id => card(id, cls)).join('\n          ');
 // A department on the chart: its head first, then the people under that head
-const dept = (n, name, top, under = [], cls = '') => `<section class="lt-dept ${cls} reveal">
-          <header><span class="lt-n">${n}</span><h3>${name}</h3></header>
+const dept = (name, top, under = [], cls = '') => `<section class="lt-dept ${cls} reveal">
+          <header><h3>${name}</h3></header>
           <div class="lt-body">
           ${cards(top, 'ld-lead')}
           ${under.length ? `<div class="lt-under">\n          ${cards(under)}\n          </div>` : ''}
@@ -62,28 +62,29 @@ const section = `<section id="leadership" class="ld">
 
     <div class="lt-tree" id="tree-colleges">
       <div class="lt-tree-head reveal"><span class="lt-tree-n">Tree 1</span><h3>${slot('lead.tree1', 'PNTC Colleges')}</h3></div>
-      <div class="lt-depts">
-        <section class="lt-dept lt-wide reveal">
-          <header><span class="lt-n">01</span><h3>Academic Affairs Department</h3></header>
+      <p class="lt-note reveal">${slot('lead.level', 'These departments stand at the same level.')}</p>
+      <div class="lt-depts lt-level lt-l5">
+        ${dept('Academic Affairs Department', ['vp-acad'])}
+        ${dept('Administration Department', ['vp-admin'], ['sup-hrdm'])}
+        ${dept('Marketing Department', ['mgr-college'])}
+        ${dept('Quality Department', ['head-quality'])}
+        ${dept('Finance Department', ['sup-finance'])}
+      </div>
+      <section class="lt-dept lt-wide lt-acad reveal">
+          <header><h3>${slot('lead.acad', 'Deans and Heads of Academic Affairs')}</h3></header>
           <div class="lt-body">
-          ${card('vp-acad', 'ld-lead')}
           ${group('College of Maritime Education', ['dean-maritime', 'head-bsmt', 'head-bsmare', 'head-obt'], 'lt-maritime')}
           ${group('Deans', ['dean-business', 'dean-crim', 'dean-osa'])}
           ${group('Heads', ['head-gened', 'head-research', 'head-registrar'])}
           </div>
-        </section>
-        ${dept('02', 'Administration Department', ['vp-admin'], ['sup-hrdm'], 'lt-half')}
-        ${dept('03', 'Marketing Department', ['mgr-college'], [], 'lt-half')}
-        ${dept('04', 'Quality Department', ['head-quality'], [], 'lt-half')}
-        ${dept('05', 'Finance Department', ['sup-finance'], [], 'lt-half')}
-      </div>
+      </section>
     </div>
 
     <div class="lt-tree lt-tree-b" id="tree-training">
       <div class="lt-tree-head reveal"><span class="lt-tree-n">Tree 2</span><h3>${slot('lead.tree2', 'Maritime Training Center')}</h3></div>
-      <div class="lt-depts">
-        ${dept('01', 'Maritime Training and Assessment Center', ['vp-training'], [], 'lt-half')}
-        ${dept('02', 'Marketing Department', ['mgr-mtc'], [], 'lt-half')}
+      <div class="lt-depts lt-level lt-l2">
+        ${dept('Maritime Training and Assessment Center', ['vp-training'])}
+        ${dept('Marketing Department', ['mgr-mtc'])}
       </div>
     </div>
   </div>
