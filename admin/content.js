@@ -95,30 +95,21 @@ const LEADERS = [
   { id: 'vp-acad', role: 'Vice President for Academic Affairs', name: 'Dr. Nerissa Flores' },
   { id: 'vp-training', role: 'Vice President for Training', name: 'Jane Romero' },
   { id: 'dean-maritime', role: 'Dean of the College of Maritime Education', name: 'C/E Jeynard Mowler Tan', accent: '#1244B8' },
+  { id: 'head-bsmt', role: 'Head, College of Marine Transportation', name: 'C/M Patrick Del Rosario', accent: '#1244B8' },
+  { id: 'head-bsmare', role: 'Head, College of Marine Engineering', name: '3/E Jercie Dizon', accent: '#1244B8' },
+  { id: 'head-obt', role: 'Head, On Board Training Department', name: 'C/M Adrian Bawag', accent: '#1244B8' },
   { id: 'dean-business', role: 'Dean of Business and Management', name: 'Dr. Zarny Zaragoza', accent: '#3d2f9e' },
   { id: 'dean-crim', role: 'Dean of Criminal Justice', name: 'Dr. Rudy Gahar', accent: '#8a1818' },
   { id: 'dean-osa', role: 'Dean of Student Affairs', name: 'Dr. Celso Servas' },
+  { id: 'head-gened', role: 'Head of General Education', name: 'Engr. Pamela Bautista' },
+  { id: 'head-research', role: 'Head, Research and Development', name: 'Dr. Diana Rose Manaligod' },
+  { id: 'head-registrar', role: 'Head, Registrar', name: 'Rachel Vicedo', unit: 'Colleges' },
+  { id: 'head-quality', role: 'Head, Quality Assurance', name: 'Raquel Kaye Gannaban' },
   { id: 'mgr-college', role: 'Manager, Marketing, Admission and Aid Department', name: 'Jayson Samson', unit: 'College' },
   { id: 'mgr-mtc', role: 'Manager, Marketing, Admission and Aid Department', name: 'Mariness Uy-Oco', unit: 'Maritime Training Center' },
+  { id: 'sup-finance', role: 'Supervisor, Finance', name: 'Genilyn Dela Cruz', unit: 'Colleges' },
+  { id: 'sup-hrdm', role: 'Supervisor, HRDM', name: 'Tracy Lord Rodriguez', unit: 'Colleges' },
 ];
-// Units on the chart. "lead" points to a leader above. Units without one get their own blank name to fill in later.
-const ORG = {
-  president: { id: 'president', name: 'Office of the President', lead: 'president' },
-  secretary: { id: 'secretary', name: 'Office of the Corporate Secretary' },
-  evp: { id: 'evp', name: 'Office of the Executive Vice President' },
-  treasurer: { id: 'treasurer', name: 'Office of the Corporate Treasurer' },
-  departments: [
-    { n: '01', id: 'mtac', name: 'Maritime Training and Assessment Center', lead: 'vp-training', offices: [] },
-    { n: '02', id: 'academic', name: 'Academic Affairs Department', lead: 'vp-acad', offLabel: 'Deans', offices: [
-      { id: 'maritime', name: 'College of Maritime Education', lead: 'dean-maritime' }, { id: 'customs', name: 'College of Customs and Business Mgt. Education', lead: 'dean-business' },
-      { id: 'osa', name: 'Office of Student Affairs', lead: 'dean-osa' }] },
-    { n: '03', id: 'quality', name: 'Quality Department', offices: [] },
-    { n: '04', id: 'marketing', name: 'Marketing Department', lead: ['mgr-college', 'mgr-mtc'], offices: [] },
-    { n: '05', id: 'finance', name: 'Finance Department', offices: [] },
-    { n: '06', id: 'admin', name: 'Administration Department', lead: 'vp-admin', offices: [] },
-  ],
-};
-const ORG_BLANKS = [ORG.secretary, ORG.evp, ORG.treasurer, ...ORG.departments.flatMap(d => [d, ...d.offices])].filter(u => !u.lead);
 
 const GROUPS = [
   { id: 'main-hero', site: 'Main Site', title: 'Home page hero', files: ['PNTC Main Landing Page/index.html'], fields: [
@@ -152,16 +143,12 @@ const GROUPS = [
       L(`history.e${n}.tags`, `Chapter ${n}: small tags (one per line, may be empty)`, '<li>{}</li>'),
     ]),
   ] },
-  { id: 'main-leaders', site: 'Main Site', title: 'Leadership page: leaders', note: 'A name changed here also changes on the structure below the leaders.', files: ['PNTC Main Landing Page/about-leadership.html'], fields: [
+  { id: 'main-leaders', site: 'Main Site', title: 'Leadership page: leaders', files: ['PNTC Main Landing Page/about-leadership.html'], fields: [
     T('lead.eyebrow', 'Small label'), T('lead.mark', 'Heading, underlined words'), T('lead.rest', 'Heading, rest of the line'),
     ...LEADERS.flatMap(p => [
       T(`lead.${p.id}.name`, `${p.role}${p.unit ? ' (' + p.unit + ')' : ''}: name`), T(`lead.${p.id}.role`, `${p.role}${p.unit ? ' (' + p.unit + ')' : ''}: title`),
       ...(p.unit ? [T(`lead.${p.id}.unit`, `${p.role} (${p.unit}): unit tag`)] : []),
     ]),
-  ] },
-  { id: 'main-org-chart', site: 'Main Site', title: 'Leadership page: structure names', note: 'Leave a name empty to keep it blank on the page.', files: ['PNTC Main Landing Page/about-leadership.html'], fields: [
-    T('org.eyebrow', 'Small label'), T('org.title', 'Heading'),
-    ...ORG_BLANKS.map(u => T(`org.${u.id}.head`, `${u.name}: name of the head`, { optional: true })),
   ] },
   { id: 'college-hero', site: 'Colleges', title: 'College hero', files: ['PNTC Colleges/index.html'], fields: [
     T('college.hero.pill', 'Small tag above the headline'),
@@ -209,4 +196,4 @@ const GROUPS = [
   ] },
 ];
 
-module.exports = { GROUPS, LEADERS, ORG, escHtml, decode, getSlot, setSlot, getAttr, setAttr, readField, writeField, readGroup, writeGroup, preserveSlots, CHECK };
+module.exports = { GROUPS, LEADERS, escHtml, decode, getSlot, setSlot, getAttr, setAttr, readField, writeField, readGroup, writeGroup, preserveSlots, CHECK };

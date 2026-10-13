@@ -1,5 +1,6 @@
-// Main site > About > Leadership. Builds the leaders and the organization chart in
-// PNTC Main Landing Page/about-leadership.html.
+// Main site > About > Leadership. Builds the leadership tree in
+// PNTC Main Landing Page/about-leadership.html, following the organizational chart.
+// Only positions with a name are shown. The list of leaders is LEADERS in admin/content.js.
 // Names and titles stay editable in the admin (Site Content). Rebuilding keeps whatever was saved there.
 // Rerunnable:  node tools/leadership-page.js
 const fs = require('fs');
@@ -10,39 +11,35 @@ const FILE = path.join(__dirname, '..', 'PNTC Main Landing Page', 'about-leaders
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const slot = (key, v) => `<!--c:${key}-->${esc(v || '')}<!--/c-->`;
 
-// [id, role, name, unit, accent]
 const PEOPLE = C.LEADERS;
-const person = id => PEOPLE.find(p => p.id === id);
 const card = (id, cls = '') => {
-  const p = person(id);
-  return `<article class="ld-card ${cls} reveal"${p.accent ? ` style="--ac:${p.accent}"` : ''}>
-          <span class="ld-av" aria-hidden="true"></span>
-          <div class="ld-info">
-            <p class="ld-role">${slot(`lead.${id}.role`, p.role)}</p>
-            <h3 class="ld-name">${slot(`lead.${id}.name`, p.name)}</h3>
-            ${p.unit ? `<p class="ld-unit">${slot(`lead.${id}.unit`, p.unit)}</p>` : ''}
-          </div>
-        </article>`;
+  const p = PEOPLE.find(x => x.id === id);
+  if (!p) throw new Error('unknown leader ' + id);
+  return `<article class="ld-card ${cls}"${p.accent ? ` style="--ac:${p.accent}"` : ''}>
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role">${slot(`lead.${id}.role`, p.role)}</p>
+              <h3 class="ld-name">${slot(`lead.${id}.name`, p.name)}</h3>
+              ${p.unit ? `<p class="ld-unit">${slot(`lead.${id}.unit`, p.unit)}</p>` : ''}
+            </div>
+          </article>`;
 };
-const tier = (label, ids, cls) => `<div class="ld-tier">
-        <p class="ld-tier-lbl reveal"><span>${label}</span></p>
-        <div class="ld-grid ${cls}">
-        ${ids.map(id => card(id)).join('\n        ')}
-        </div>
-      </div>`;
+const cards = (ids, cls) => ids.map(id => card(id, cls)).join('\n          ');
+// A department on the chart: its head first, then the people under that head
+const dept = (n, name, top, under = [], cls = '') => `<section class="lt-dept ${cls} reveal">
+          <header><span class="lt-n">${n}</span><h3>${name}</h3></header>
+          <div class="lt-body">
+          ${cards(top, 'ld-lead')}
+          ${under.length ? `<div class="lt-under">\n          ${cards(under)}\n          </div>` : ''}
+          </div>
+        </section>`;
+const group = (label, ids, cls = '') => `<div class="lt-group ${cls}">
+            <p class="lt-lbl">${label}</p>
+            <div class="lt-cards lt-c${ids.length}">
+          ${cards(ids)}
+            </div>
+          </div>`;
 
-// Head of a unit on the chart: a named leader (same text as the card above) or a blank line to fill in later
-const head = u => u.lead
-  ? (Array.isArray(u.lead) ? u.lead : [u.lead]).map(id => `<span class="og-head">${slot(`lead.${id}.name`, person(id).name)}</span>`).join('')
-  : `<span class="og-head">${slot(`org.${u.id}.head`, '')}</span>`;
-const unit = (u, cls = '') => `<div class="og-box ${cls}"><strong>${esc(u.name)}</strong>${head(u)}</div>`;
-const office = u => `<li><strong>${esc(u.name)}</strong>${head(u)}</li>`;
-const dept = d => `<article class="og-dept reveal">
-          <header><span class="og-n">${d.n}</span><div><h3>${esc(d.name)}</h3>${head(d)}</div></header>
-          ${d.offices.length ? `<div class="og-offs"><p class="og-lbl">${d.offLabel || 'Offices'}</p><ul>${d.offices.map(office).join('')}</ul></div>` : ''}
-        </article>`;
-
-const O = C.ORG;
 const section = `<section id="leadership" class="ld">
   <span class="ld-ghost" aria-hidden="true">PNTC</span>
   <div class="ld-wrap">
@@ -51,39 +48,28 @@ const section = `<section id="leadership" class="ld">
       <h2 class="ld-h2"><span class="ld-mark">${slot('lead.mark', 'The People')}<svg viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 10 C 70 2, 190 2, 297 8" fill="none" stroke="#F3CF33" stroke-width="5" stroke-linecap="round"/></svg></span> ${slot('lead.rest', 'Who Lead PNTC')}</h2>
     </div>
 
-    <div class="ld-top">
+    <div class="lt-apex reveal">
       ${card('chairman', 'ld-big')}
-      ${card('president', 'ld-big ld-gold')}
-    </div>
-    ${tier('Vice Presidents', ['vp-admin', 'vp-acad', 'vp-training'], 'ld-g3')}
-    ${tier('Deans', ['dean-maritime', 'dean-business', 'dean-crim', 'dean-osa'], 'ld-g4')}
-    ${tier('Managers', ['mgr-college', 'mgr-mtc'], 'ld-g2')}
-  </div>
-</section>
-
-<!-- ORGANIZATION CHART -->
-<section id="structure" class="og">
-  <div class="ld-wrap">
-    <div class="og-headline reveal">
-      <div>
-        <p class="eyebrow">${slot('org.eyebrow', 'Organization')}</p>
-        <h2 class="ld-h2 ld-h2-sm">${slot('org.title', 'Leadership Structure')}</h2>
-      </div>
+      <span class="lt-v" aria-hidden="true"></span>
+      ${card('president', 'ld-big')}
+      <span class="lt-v" aria-hidden="true"></span>
     </div>
 
-    <div class="og-tree reveal">
-      ${unit(O.president, 'og-pres')}
-      <span class="og-v" aria-hidden="true"></span>
-      <div class="og-row">
-        ${unit(O.secretary)}
-        ${unit(O.evp, 'og-evp')}
-        ${unit(O.treasurer)}
-      </div>
-      <div class="og-stem" aria-hidden="true"></div>
-    </div>
-
-    <div class="og-depts">
-        ${O.departments.map(dept).join('\n        ')}
+    <div class="lt-depts">
+        <section class="lt-dept lt-wide reveal">
+          <header><span class="lt-n">01</span><h3>Academic Affairs Department</h3></header>
+          <div class="lt-body">
+          ${card('vp-acad', 'ld-lead')}
+          ${group('College of Maritime Education', ['dean-maritime', 'head-bsmt', 'head-bsmare', 'head-obt'], 'lt-maritime')}
+          ${group('Deans', ['dean-business', 'dean-crim', 'dean-osa'])}
+          ${group('Heads', ['head-gened', 'head-research', 'head-registrar'])}
+          </div>
+        </section>
+        ${dept('02', 'Maritime Training and Assessment Center', ['vp-training'])}
+        ${dept('03', 'Quality Department', ['head-quality'])}
+        ${dept('04', 'Marketing Department', ['mgr-college', 'mgr-mtc'])}
+        ${dept('05', 'Finance Department', ['sup-finance'], [], 'lt-half')}
+        ${dept('06', 'Administration Department', ['vp-admin'], ['sup-hrdm'], 'lt-half')}
     </div>
   </div>
 </section>`;
@@ -93,7 +79,7 @@ const SCRIPT = `<script id="leaders-js">
 document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('.ld-card').forEach(function(c){
     var n=(c.querySelector('.ld-name').textContent||'').trim();
-    while(/^(Atty\\.|Dr\\.|Engr\\.|Capt\\.|Prof\\.|Mr\\.|Ms\\.|Mrs\\.|C\\/E|C\\/M|2\\/M|3\\/M)\\s+/i.test(n))n=n.replace(/^\\S+\\s+/,'');
+    while(/^([A-Za-z]+\\.|[A-Za-z0-9]{1,2}\\/[A-Za-z]{1,2})\\s+/.test(n))n=n.replace(/^\\S+\\s+/,'');
     var w=n.split(/\\s+/).filter(Boolean);
     c.querySelector('.ld-av').textContent=w.length?(w[0][0]+(w.length>1?w[w.length-1][0]:'')).toUpperCase():'';
   });
@@ -103,13 +89,12 @@ document.addEventListener('DOMContentLoaded',function(){
 const before = fs.readFileSync(FILE, 'utf8').replace(/\r\n/g, '\n');
 let h = before;
 const start = h.search(/<section id="(coming-soon|leadership)"/);
-const lastId = h.includes('<section id="structure"') ? '<section id="structure"' : '<section id="coming-soon"';
-const end = h.indexOf('</section>', h.indexOf(lastId)) + '</section>'.length;
 if (start < 0) throw new Error('leadership section not found');
-h = h.slice(0, start) + section + h.slice(end);
+const end = h.indexOf('<!-- ===================== FOOTER');
+if (end < start) throw new Error('footer marker not found');
+h = h.slice(0, start) + section + '\n\n\n\n' + h.slice(end);
 h = h.replace(/<style id="leaders-modern">[\s\S]*?<\/script>\n/, '');
 h = h.replace('<meta name="description"', `<style id="leaders-modern">\n${CSS}\n</style>\n${SCRIPT}\n<meta name="description"`);
 h = C.preserveSlots(before, h);
-if (C.getSlot(h, 'org.title') === 'Departments, Offices, and Committees') h = C.setSlot(h, 'org.title', 'Leadership Structure');
 fs.writeFileSync(FILE, h);
-console.log('leadership page built:', PEOPLE.length, 'leaders,', O.departments.length, 'departments');
+console.log('leadership page built:', (section.match(/class="ld-card/g) || []).length, 'of', PEOPLE.length, 'leaders placed');
