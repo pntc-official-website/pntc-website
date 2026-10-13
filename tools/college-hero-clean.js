@@ -1,5 +1,5 @@
 // College home page hero: a calmer left side. Removes the doodles, the dot grid and the outlined "PNTC",
-// straightens the highlighted word, drops the second underline and lines the buttons and proof up in one row.
+// straightens the highlighted word, keeps the signature underline and lines the buttons and proof up in one row.
 // Rerunnable:  node tools/college-hero-clean.js
 const fs = require('fs');
 const path = require('path');
@@ -7,7 +7,7 @@ const FILE = path.join(__dirname, '..', 'PNTC Colleges', 'index.html');
 let h = fs.readFileSync(FILE, 'utf8').replace(/\r\n/g, '\n');
 const CSS = `<style id="hx-clean">
 /* College hero: calmer copy side */
-#hero.hx .hx-copy .hx-doodle,#hero.hx .hx-ghost,#hero.hx .hx-copy::before,#hero.hx .hx-swoosh{display:none!important}
+#hero.hx .hx-copy .hx-doodle,#hero.hx .hx-ghost,#hero.hx .hx-copy::before{display:none!important}
 #hero.hx .hx-copy::after{right:auto;left:-12%;top:auto;bottom:-30%;width:70%;background:radial-gradient(closest-side,rgba(243,207,51,.2),transparent);animation:none}
 #hero.hx .hx-pill{margin-bottom:1.6rem;background:#fff;border-color:rgba(28,22,80,.16);box-shadow:0 10px 22px -16px rgba(28,22,80,.5)}
 #hero.hx .hx-h1{line-height:1.02;margin-bottom:1.5rem}
