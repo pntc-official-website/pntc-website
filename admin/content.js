@@ -111,6 +111,14 @@ const GROUPS = [
     P('about.vision', 'Vision statement'), P('about.mission', 'Mission statement'),
     P('about.values.intro', 'Core Values introduction'),
   ] },
+  { id: 'main-history', site: 'Main Site', title: 'History page: timeline', files: ['PNTC Main Landing Page/about-history.html'], fields: [
+    T('history.eyebrow', 'Small label'),
+    T('history.mark', 'Heading, underlined word'), T('history.rest', 'Heading, rest of the line'),
+    ...[1, 2, 3, 4, 5].flatMap(n => [
+      T(`history.e${n}.year`, `Chapter ${n}: year`), T(`history.e${n}.title`, `Chapter ${n}: title`), P(`history.e${n}.desc`, `Chapter ${n}: description`),
+      L(`history.e${n}.tags`, `Chapter ${n}: small tags (one per line, may be empty)`, '<li>{}</li>'),
+    ]),
+  ] },
   { id: 'college-hero', site: 'Colleges', title: 'College hero', files: ['PNTC Colleges/index.html'], fields: [
     T('college.hero.pill', 'Small tag above the headline'),
     T('college.hero.mark', 'Headline, highlighted word'), T('college.hero.line1', 'Headline, rest of line 1'), T('college.hero.line2', 'Headline, line 2'),

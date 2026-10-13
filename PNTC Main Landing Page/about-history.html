@@ -781,6 +781,96 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .pv-units .pv-source{color:rgba(28,22,80,.5)!important}
 .pv-unit{background:#1C1650!important;border-color:#1C1650!important}
 </style>
+<style id="history-modern">
+/* History page, modern timeline */
+#history.hs{background:#fff!important;padding:5.5rem clamp(1.25rem,4vw,3rem) 6rem!important;position:relative;overflow:hidden}
+#history.hs::before{content:'';position:absolute;right:-200px;top:-180px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(243,207,51,.2),transparent 68%);pointer-events:none}
+.hs-ghost{position:absolute;left:-.04em;top:1.2rem;font-size:clamp(9rem,26vw,24rem);font-weight:800;line-height:.8;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.5px rgba(28,22,80,.07);pointer-events:none;user-select:none}
+.hs-wrap{max-width:1120px;margin:0 auto;position:relative}
+.hs-head{text-align:center}
+#history .eyebrow{color:#1C1650!important;display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1rem}
+#history .eyebrow::before,#history .eyebrow::after{content:'';width:26px;height:3px;border-radius:3px;background:#F3CF33}
+.hs-h2{font-weight:800;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.08;letter-spacing:-.03em;color:#1C1650}
+.hs-mark{position:relative;display:inline-block}
+.hs-mark svg{position:absolute;left:0;right:0;bottom:-.14em;width:100%;height:.22em}
+.hs-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;margin-top:2.2rem}
+.hs-nav a{font-size:.82rem;font-weight:800;color:#1C1650;text-decoration:none;padding:.6rem 1.15rem;border-radius:999px;background:#fff;border:1.5px solid rgba(28,22,80,.16);transition:background .2s,color .2s,border-color .2s,transform .2s}
+.hs-nav a:hover{background:#1C1650;border-color:#1C1650;color:#F3CF33;transform:translateY(-2px)}
+.hs-nav a:last-child{background:#F3CF33;border-color:#F3CF33}
+.hs-nav a:last-child:hover{background:#1C1650;border-color:#1C1650}
+
+.hs-line{list-style:none;margin:4rem 0 0;padding:0;position:relative}
+.hs-line::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:4px;margin-left:-2px;border-radius:4px;background:rgba(28,22,80,.1)}
+.hs-fill{position:absolute;left:50%;top:0;width:4px;margin-left:-2px;border-radius:4px;height:0;background:linear-gradient(180deg,#F3CF33,#1C1650);transition:height .15s linear}
+.hs-item{display:grid;grid-template-columns:minmax(0,1fr) 90px minmax(0,1fr);align-items:center;position:relative;padding:1.6rem 0;scroll-margin-top:150px}
+.hs-dot{grid-column:2;grid-row:1;justify-self:center;width:26px;height:26px;border-radius:50%;background:#fff;border:6px solid #1C1650;box-sizing:border-box;position:relative;z-index:2;transition:background .3s,transform .3s,box-shadow .3s}
+.hs-item.lit .hs-dot{background:#F3CF33;transform:scale(1.15);box-shadow:0 0 0 8px rgba(243,207,51,.25)}
+.hs-year{grid-column:1;grid-row:1;text-align:right;font-size:clamp(3.4rem,8vw,6.4rem);font-weight:800;line-height:.9;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:2px #1C1650;transition:color .4s,-webkit-text-stroke-color .4s}
+.hs-item.lit .hs-year{color:#1C1650}
+.hs-card{grid-column:3;grid-row:1;background:#fff;border:1px solid rgba(28,22,80,.1);border-radius:22px;padding:1.8rem 1.8rem 1.9rem;box-shadow:0 22px 46px -32px rgba(28,22,80,.5);position:relative;transition:transform .3s,box-shadow .3s,border-color .3s}
+.hs-card::before{content:'';position:absolute;left:-9px;top:50%;width:16px;height:16px;margin-top:-8px;background:#fff;border-left:1px solid rgba(28,22,80,.1);border-bottom:1px solid rgba(28,22,80,.1);transform:rotate(45deg)}
+.hs-card:hover{transform:translateY(-5px);box-shadow:0 30px 54px -30px rgba(28,22,80,.6);border-color:rgba(28,22,80,.25)}
+.hs-item:nth-child(odd) .hs-year{grid-column:3;text-align:left}
+.hs-item:nth-child(odd) .hs-card{grid-column:1}
+.hs-item:nth-child(odd) .hs-card::before{left:auto;right:-9px;border:0;border-right:1px solid rgba(28,22,80,.1);border-top:1px solid rgba(28,22,80,.1)}
+.hs-step{display:inline-block;font-size:.66rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#1C1650;background:rgba(243,207,51,.4);padding:.4rem .75rem;border-radius:999px}
+.hs-card h3{margin-top:1rem;font-size:clamp(1.15rem,1.9vw,1.45rem);font-weight:800;line-height:1.25;letter-spacing:-.015em;color:#1C1650}
+.hs-yr-in{display:none}
+.hs-card p{margin-top:.7rem;font-size:.93rem;line-height:1.75;color:rgba(28,22,80,.72)}
+.hs-tags{list-style:none;margin:1.1rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.45rem}
+.hs-tags:empty{display:none}
+.hs-tags li{font-size:.74rem;font-weight:700;color:#1C1650;padding:.42rem .8rem;border-radius:999px;background:rgba(28,22,80,.06);border:1px solid rgba(28,22,80,.1)}
+.hs-now .hs-card{background:#1C1650;border-color:#1C1650}
+.hs-now .hs-card::before{background:#1C1650;border-color:#1C1650!important}
+.hs-now .hs-card h3{color:#fff}.hs-now .hs-card p{color:rgba(255,255,255,.78)}
+.hs-now .hs-step{background:#F3CF33}
+.hs-now .hs-tags li{color:#1C1650;background:#F3CF33;border-color:#F3CF33}
+.hs-now .hs-year{-webkit-text-stroke-color:#F3CF33}
+.hs-now.lit .hs-year{color:#F3CF33}
+
+.hs-next{margin-top:4.5rem;display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;background:#F7F7FB;border:1px solid rgba(28,22,80,.08);border-radius:24px;padding:1.6rem clamp(1.4rem,3vw,2.4rem)}
+.hs-next img{width:64px;height:auto;flex:0 0 auto}
+.hs-next>div{flex:1;min-width:200px}
+.hs-next-tag{font-size:.68rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(28,22,80,.6)}
+.hs-next-h{margin-top:.25rem;font-size:clamp(1.15rem,2vw,1.5rem);font-weight:800;color:#1C1650;letter-spacing:-.015em}
+.hs-btn{display:inline-flex;align-items:center;gap:.6rem;background:#F3CF33;color:#1C1650;font-weight:800;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:.95rem 1.6rem;border-radius:999px;transition:gap .25s,box-shadow .25s,transform .25s}
+.hs-btn:hover{gap:.95rem;transform:translateY(-2px);box-shadow:0 14px 26px -12px rgba(28,22,80,.5)}
+
+@media(max-width:820px){
+  #history.hs{padding-top:4rem!important;padding-bottom:4rem!important}
+  .hs-head{text-align:left}
+  #history .eyebrow::after{display:none}
+  .hs-nav{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;margin-right:-1.25rem;padding-right:1.25rem;scrollbar-width:none}
+  .hs-nav::-webkit-scrollbar{display:none}
+  .hs-nav a{white-space:nowrap}
+  .hs-line{margin-top:2.8rem}
+  .hs-line::before,.hs-fill{left:11px}
+  .hs-item,.hs-item:nth-child(odd){grid-template-columns:26px minmax(0,1fr);gap:0 1.1rem;padding:1rem 0;align-items:start}
+  .hs-dot{grid-column:1;margin-top:1.9rem}
+  .hs-year{display:none}
+  .hs-card,.hs-item:nth-child(odd) .hs-card{grid-column:2;padding:1.4rem 1.3rem 1.5rem}
+  .hs-card::before,.hs-item:nth-child(odd) .hs-card::before{left:-9px;right:auto;top:2.6rem;margin-top:-8px;border:0;border-left:1px solid rgba(28,22,80,.1);border-bottom:1px solid rgba(28,22,80,.1)}
+  .hs-yr-in{display:block;font-size:2.6rem;line-height:1;letter-spacing:-.04em;margin-bottom:.35rem}
+  .hs-now .hs-yr-in{color:#F3CF33}
+  .hs-btn{width:100%;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){.hs-fill,.hs-dot,.hs-year,.hs-card{transition:none}}
+</style>
+<script id="history-line">
+document.addEventListener('DOMContentLoaded',function(){
+  var line=document.getElementById('hs-line'),fill=document.getElementById('hs-fill');
+  if(!line||!fill)return;
+  var items=line.querySelectorAll('.hs-item'),tick=false;
+  function draw(){
+    tick=false;
+    var r=line.getBoundingClientRect(),mark=window.innerHeight*.6;
+    fill.style.height=Math.max(0,Math.min(r.height,mark-r.top))+'px';
+    items.forEach(function(it){var d=it.querySelector('.hs-dot').getBoundingClientRect();it.classList.toggle('lit',d.top+d.height/2<=mark);});
+  }
+  function ask(){if(!tick){tick=true;requestAnimationFrame(draw);}}
+  window.addEventListener('scroll',ask,{passive:true});window.addEventListener('resize',ask);draw();
+});
+</script>
 <meta name="description" content="PNTC Colleges began in 1994 as PNTI, became the Philippine Nautical and Technological College in 2001, took its current name in 2004, and opened its SHS in 2016.">
 <link rel="canonical" href="https://www.pntc.edu.ph/about/history">
 <meta property="og:type" content="website">
@@ -829,18 +919,83 @@ h1.hero-h1 span.gold { color:var(--gold); }
   </div>
 </section>
 
-<section id="history" style="background:var(--bg);padding:6rem clamp(1.5rem,4vw,3rem)">
-  <div style="max-width:880px;margin:0 auto">
-    <p class="eyebrow" style="margin-bottom:1rem">PNTC Through the Years</p>
-    <div class="reveal">
-      <h3 class="tab-h3">Foundation and Evolution</h3>
-      <div class="timeline">
-        <div class="tl-row"><div class="tl-yr">1994</div><div class="tl-body"><strong>Established as PNTI</strong>Established to offer maritime training courses aligned with IMO and STCW standards.</div></div>
-        <div class="tl-row"><div class="tl-yr">2001</div><div class="tl-body"><strong>Renamed Philippine Nautical and Technological College (PNTC)</strong>Expanded into a college, training center, and competency assessment center, introducing undergraduate degrees such as BS Marine Transportation (BSMT), BS Marine Engineering (BSMarE), and BS Customs Administration (BSCA).</div></div>
-        <div class="tl-row"><div class="tl-yr">2004</div><div class="tl-body"><strong>Became PNTC Colleges</strong>The name was shortened to PNTC Colleges, the name we carry today.</div></div>
-        <div class="tl-row"><div class="tl-yr">2016</div><div class="tl-body"><strong>Senior High School Opens</strong>PNTC Colleges opened its Senior High School.</div></div>
-        <div class="tl-row"><div class="tl-yr">Today</div><div class="tl-body"><strong>Three Locations</strong>PNTC Colleges operates campuses and facilities in Dasmariñas (Cavite), Intramuros (Manila), and Tanza (Cavite).</div></div>
+<section id="history" class="hs">
+  <span class="hs-ghost" aria-hidden="true"><!--c:history.e1.year-->1994<!--/c--></span>
+  <div class="hs-wrap">
+    <div class="hs-head reveal">
+      <p class="eyebrow"><!--c:history.eyebrow-->PNTC Through the Years<!--/c--></p>
+      <h2 class="hs-h2"><span class="hs-mark"><!--c:history.mark-->Foundation<!--/c--><svg viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 10 C 70 2, 190 2, 297 8" fill="none" stroke="#F3CF33" stroke-width="5" stroke-linecap="round"/></svg></span> <!--c:history.rest-->and Evolution<!--/c--></h2>
+    </div>
+
+    <nav class="hs-nav reveal" aria-label="Jump to a year">
+      <a href="#y1"><!--c:history.e1.year-->1994<!--/c--></a>
+      <a href="#y2"><!--c:history.e2.year-->2001<!--/c--></a>
+      <a href="#y3"><!--c:history.e3.year-->2004<!--/c--></a>
+      <a href="#y4"><!--c:history.e4.year-->2016<!--/c--></a>
+      <a href="#y5"><!--c:history.e5.year-->Today<!--/c--></a>
+    </nav>
+
+    <ol class="hs-line" id="hs-line">
+      <span class="hs-fill" id="hs-fill" aria-hidden="true"></span>
+      <li class="hs-item reveal" id="y1">
+        <span class="hs-dot" aria-hidden="true"></span>
+        <div class="hs-year" aria-hidden="true"><!--c:history.e1.year-->1994<!--/c--></div>
+        <article class="hs-card">
+          <span class="hs-step">Chapter 01</span>
+          <h3><span class="hs-yr-in"><!--c:history.e1.year-->1994<!--/c--></span><!--c:history.e1.title-->Established as PNTI<!--/c--></h3>
+          <p><!--c:history.e1.desc-->Established to offer maritime training courses aligned with IMO and STCW standards.<!--/c--></p>
+          <ul class="hs-tags"><!--c:history.e1.tags--><li>IMO</li><li>STCW</li><!--/c--></ul>
+        </article>
+      </li>
+      <li class="hs-item reveal" id="y2">
+        <span class="hs-dot" aria-hidden="true"></span>
+        <div class="hs-year" aria-hidden="true"><!--c:history.e2.year-->2001<!--/c--></div>
+        <article class="hs-card">
+          <span class="hs-step">Chapter 02</span>
+          <h3><span class="hs-yr-in"><!--c:history.e2.year-->2001<!--/c--></span><!--c:history.e2.title-->Renamed Philippine Nautical and Technological College (PNTC)<!--/c--></h3>
+          <p><!--c:history.e2.desc-->Expanded into a college, training center, and competency assessment center, introducing undergraduate degrees such as BS Marine Transportation (BSMT), BS Marine Engineering (BSMarE), and BS Customs Administration (BSCA).<!--/c--></p>
+          <ul class="hs-tags"><!--c:history.e2.tags--><li>BSMT</li><li>BSMarE</li><li>BSCA</li><!--/c--></ul>
+        </article>
+      </li>
+      <li class="hs-item reveal" id="y3">
+        <span class="hs-dot" aria-hidden="true"></span>
+        <div class="hs-year" aria-hidden="true"><!--c:history.e3.year-->2004<!--/c--></div>
+        <article class="hs-card">
+          <span class="hs-step">Chapter 03</span>
+          <h3><span class="hs-yr-in"><!--c:history.e3.year-->2004<!--/c--></span><!--c:history.e3.title-->Became PNTC Colleges<!--/c--></h3>
+          <p><!--c:history.e3.desc-->The name was shortened to PNTC Colleges, the name we carry today.<!--/c--></p>
+          <ul class="hs-tags"><!--c:history.e3.tags--><!--/c--></ul>
+        </article>
+      </li>
+      <li class="hs-item reveal" id="y4">
+        <span class="hs-dot" aria-hidden="true"></span>
+        <div class="hs-year" aria-hidden="true"><!--c:history.e4.year-->2016<!--/c--></div>
+        <article class="hs-card">
+          <span class="hs-step">Chapter 04</span>
+          <h3><span class="hs-yr-in"><!--c:history.e4.year-->2016<!--/c--></span><!--c:history.e4.title-->Senior High School Opens<!--/c--></h3>
+          <p><!--c:history.e4.desc-->PNTC Colleges opened its Senior High School.<!--/c--></p>
+          <ul class="hs-tags"><!--c:history.e4.tags--><!--/c--></ul>
+        </article>
+      </li>
+      <li class="hs-item hs-now reveal" id="y5">
+        <span class="hs-dot" aria-hidden="true"></span>
+        <div class="hs-year" aria-hidden="true"><!--c:history.e5.year-->Today<!--/c--></div>
+        <article class="hs-card">
+          <span class="hs-step">Chapter 05</span>
+          <h3><span class="hs-yr-in"><!--c:history.e5.year-->Today<!--/c--></span><!--c:history.e5.title-->Three Locations<!--/c--></h3>
+          <p><!--c:history.e5.desc-->PNTC Colleges operates campuses and facilities in Dasmariñas (Cavite), Intramuros (Manila), and Tanza (Cavite).<!--/c--></p>
+          <ul class="hs-tags"><!--c:history.e5.tags--><li>Dasmariñas, Cavite</li><li>Intramuros, Manila</li><li>Tanza, Cavite</li><!--/c--></ul>
+        </article>
+      </li>
+    </ol>
+
+    <div class="hs-next reveal">
+      <img src="/PNTC%20Crest.png" alt="" aria-hidden="true" loading="lazy">
+      <div>
+        <p class="hs-next-tag">About PNTC</p>
+        <p class="hs-next-h">Vision, Mission and Values</p>
       </div>
+      <a class="hs-btn" href="/about">About PNTC <span aria-hidden="true">&rarr;</span></a>
     </div>
   </div>
 </section>
