@@ -1010,6 +1010,124 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"EducationalOrganization","@id":"https://www.pntc.edu.ph/#organization","name":"PNTC Colleges, Inc.","alternateName":["PNTC","PNTC Colleges","Philippine Nautical and Technological College"],"url":"https://www.pntc.edu.ph/","description":"Maritime and business education institution established in 1994, with campuses and facilities in Dasmariñas (Cavite), Intramuros (Manila), and Tanza (Cavite).","location":[{"@type":"Place","name":"PNTC Colleges Dasmariñas Campus","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"}},{"@type":"Place","name":"PNTC Maritime Training and Assessment Center, Intramuros","address":{"@type":"PostalAddress","streetAddress":"5th Floor, Intramuros Corporate Plaza, Recoletos Street, Intramuros","addressLocality":"Manila","addressRegion":"Metro Manila","postalCode":"1002","addressCountry":"PH"}},{"@type":"Place","name":"PNTC Tanza Training Center","address":{"@type":"PostalAddress","addressLocality":"Tanza","addressRegion":"Cavite","addressCountry":"PH"}}],"logo":"https://www.pntc.edu.ph/SHS/PNTC%20White%20Horizontal.png","foundingDate":"1994","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"},"telephone":"+63-46-438-8835","email":"info@pntc.edu.ph","sameAs":["https://www.facebook.com/pntccolleges"]},{"@type":"HighSchool","@id":"https://www.pntc.edu.ph/shs/#shs","name":"PNTC Colleges Senior High School","url":"https://www.pntc.edu.ph/shs/","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"},"telephone":"+63-917-159-4966","email":"admissions@mypntc.edu.ph","parentOrganization":{"@id":"https://www.pntc.edu.ph/#organization"}},{"@type":"WebPage","@id":"https://www.pntc.edu.ph/shs/admissions","url":"https://www.pntc.edu.ph/shs/admissions","name":"How to Enroll in Senior High School | PNTC SHS Dasmariñas, Cavite","description":"How to enroll at PNTC Colleges Senior High School in Dasmariñas, Cavite, including the application form, requirements, and enrollment steps for Grade 11.","inLanguage":"en-PH","isPartOf":{"@type":"WebSite","name":"PNTC Colleges, Inc.","url":"https://www.pntc.edu.ph/"},"about":{"@id":"https://www.pntc.edu.ph/shs/#shs"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.pntc.edu.ph/"},{"@type":"ListItem","position":2,"name":"Senior High School","item":"https://www.pntc.edu.ph/shs/"},{"@type":"ListItem","position":3,"name":"Admissions","item":"https://www.pntc.edu.ph/shs/admissions"}]}]}</script>
 <script src="/global-nav.js" data-area="shs"></script>
+<style id="shs-fresh">
+/* Senior High School: same playful format, with more life. Colours stay SHS (navy #181D71, yellow #FFCC00, green #00925D). */
+
+/* things rise into place as you scroll (only when the script is running) */
+/* uses translate and scale, so cards that are already tilted keep their tilt */
+html.fx-on .fx{opacity:0;translate:0 34px;scale:.97;transition:opacity .6s ease var(--fxd,0s),translate .7s cubic-bezier(.34,1.56,.64,1) var(--fxd,0s),scale .7s cubic-bezier(.34,1.56,.64,1) var(--fxd,0s),transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
+html.fx-on .fx.fx-in{opacity:1;translate:none;scale:none}
+
+/* Our Program */
+.shs-section{position:relative;overflow:hidden}
+.shs-section::after{content:'';position:absolute;right:-120px;top:-140px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,204,0,.28),transparent 68%);pointer-events:none}
+.shs-text{position:relative;z-index:1}
+.shs-h2{font-family:'Barlow Condensed',sans-serif!important;font-weight:800!important;font-size:clamp(46px,5.4vw,76px)!important;line-height:.98!important;letter-spacing:0!important;color:#181D71!important;text-shadow:none!important;position:relative;display:block;width:fit-content;max-width:100%;margin-bottom:24px!important}
+.shs-h2::after{content:'';position:absolute;left:0;right:-2%;bottom:-.14em;height:.2em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M3 14 C 40 4, 70 18, 110 9 S 180 4, 220 12 S 280 8, 297 10' fill='none' stroke='%23FFCC00' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.shs-label{font-weight:800!important;transform:rotate(-2deg)}
+.shs-img-main{transition:box-shadow .3s,transform .45s cubic-bezier(.34,1.56,.64,1)!important}
+.shs-img-wrap:hover .shs-img-main{transform:translateY(-8px) rotate(-2deg)!important}
+.strand-chip{font-weight:800!important;padding:8px 16px!important;transition:transform .25s cubic-bezier(.34,1.56,.64,1),background .2s,color .2s,border-color .2s,box-shadow .2s!important}
+.strand-chip:hover{background:#181D71!important;border-color:#181D71!important;color:#FFCC00!important;transform:translateY(-4px) rotate(-3deg)!important;box-shadow:0 10px 18px -8px rgba(24,29,113,.6)!important}
+.strand-chip:nth-child(even):hover{transform:translateY(-4px) rotate(3deg)!important}
+.strand-chip-techpro:hover{background:#00925D!important;border-color:#00925D!important;color:#fff!important}
+
+/* running strip */
+.shs-ticker-wrap{overflow:hidden;position:relative;z-index:2;padding:22px 0;margin:-36px 0}
+.shs-ticker{background:#181D71;overflow:hidden;transform:rotate(-1.2deg) scale(1.04);box-shadow:0 14px 30px -18px rgba(24,29,113,.7)}
+.shs-ticker-track{display:flex;width:max-content;animation:shs-tick 26s linear infinite}
+.shs-ticker:hover .shs-ticker-track{animation-play-state:paused}
+.shs-ticker span{display:inline-flex;align-items:center;gap:1.4rem;padding:.85rem 0 .85rem 1.4rem;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(1.1rem,2vw,1.6rem);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:#fff}
+.shs-ticker span:nth-child(odd){color:#FFCC00}
+.shs-ticker span::after{content:'';width:.5em;height:.5em;border-radius:50%;background:#00925D;flex:0 0 auto}
+@keyframes shs-tick{to{transform:translateX(-50%)}}
+
+/* Why choose PNTC cards: a loose pile of cards */
+.usp-section{position:relative;overflow:hidden}
+.usp-heading em{position:relative;display:inline-block}
+.usp-heading em::after{content:'';position:absolute;left:0;right:0;bottom:-.1em;height:.16em;border-radius:1em;background:#FFCC00;transform:scaleX(0);transform-origin:left;transition:transform .8s cubic-bezier(.2,.8,.2,1) .3s}
+.usp-intro.fx-in .usp-heading em::after,html:not(.fx-on) .usp-heading em::after{transform:scaleX(1)}
+.usp-cards-grid{counter-reset:usp}
+.usp-stack{counter-increment:usp}
+.usp-stack .stack-face{transition:transform .45s cubic-bezier(.34,1.56,.64,1)!important;background-image:radial-gradient(circle at var(--mx,50%) var(--my,-40%),rgba(255,255,255,.28),rgba(255,255,255,0) 46%)}
+.usp-c1 .stack-face{transform:rotate(-1.6deg)}
+.usp-c2 .stack-face{transform:rotate(1.1deg)}
+.usp-c3 .stack-face{transform:rotate(-.8deg)}
+.usp-c4 .stack-face{transform:rotate(1.4deg)}
+.usp-c5 .stack-face{transform:rotate(-1.2deg)}
+.usp-c6 .stack-face{transform:rotate(.9deg)}
+.usp-stack:hover .stack-face{transform:translateY(-14px) rotate(0deg) scale(1.02)!important}
+.stack-face::after{content:counter(usp,decimal-leading-zero);position:absolute;right:20px;bottom:-14px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:150px;line-height:1;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:2px #fff;opacity:.15;pointer-events:none;transition:transform .5s cubic-bezier(.34,1.56,.64,1),opacity .3s}
+.usp-c1 .stack-face::after,.usp-c6 .stack-face::after{-webkit-text-stroke-color:#181D71}
+.usp-stack:hover .stack-face::after{transform:translate(-6px,-10px) rotate(-6deg);opacity:.38}
+.stack-content{position:relative;z-index:1}
+.stack-title{font-size:26px!important}
+.stack-body{font-size:14.5px!important}
+.stack-num{font-size:12px!important}
+
+/* numbers band */
+.usp-stats{position:relative}
+.usp-stat{transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.usp-stat:hover{transform:translateY(-6px)}
+.usp-stat-num{font-size:clamp(44px,5vw,64px)!important;color:#181D71!important}
+.usp-stat-label{color:rgba(24,29,113,.7)!important;font-weight:800!important}
+
+/* event wall: photos pinned up with tape */
+.ew-photo-card{position:relative;transition:transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .3s!important}
+.ew-photo-card::before{content:'';position:absolute;left:50%;top:-14px;width:108px;height:30px;margin-left:-54px;background:rgba(255,204,0,.85);transform:rotate(-3deg);box-shadow:0 4px 10px rgba(0,0,0,.25);z-index:5;border-left:2px dashed rgba(255,255,255,.5);border-right:2px dashed rgba(255,255,255,.5)}
+.ew-pc-right::before{transform:rotate(4deg);background:rgba(0,146,93,.85)}
+.ew-pc-center::before{transform:rotate(1deg)}
+.ew-title{position:relative;display:inline-block}
+.ew-title::after{content:'';position:absolute;left:8%;right:8%;bottom:-.16em;height:.14em;border-radius:1em;background:#FFCC00}
+
+/* events */
+.ev-card{transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s!important}
+.ev-card:hover{transform:translateY(-6px) rotate(-.6deg)}
+.events-h2{position:relative;display:inline-block}
+.events-h2::after{content:'';position:absolute;left:0;right:-6%;bottom:-.08em;height:.14em;border-radius:1em;background:#FFCC00}
+
+@media(max-width:900px){
+  .shs-ticker-wrap{padding:14px 0;margin:-22px 0}
+  .stack-face::after{font-size:110px}
+  .usp-c1 .stack-face,.usp-c3 .stack-face,.usp-c5 .stack-face{transform:rotate(-1deg)}
+  .usp-c2 .stack-face,.usp-c4 .stack-face,.usp-c6 .stack-face{transform:rotate(1deg)}
+  .shs-h2{font-size:clamp(40px,12vw,58px)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  html.fx-on .fx{opacity:1;translate:none;scale:none;transition:none}
+  .shs-ticker-track{animation:none}
+  .usp-stack .stack-face,.strand-chip,.ew-photo-card,.ev-card,.usp-stat{transition:none!important}
+}
+</style>
+<script id="shs-fresh-js">
+document.addEventListener('DOMContentLoaded',function(){
+  var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  /* buttons in the hero go somewhere */
+  var go={'.hero .btn-enroll':'/shs/admissions#admission','.hero .btn-learn':'#shs-section'};
+  Object.keys(go).forEach(function(s){var b=document.querySelector(s);if(b)b.addEventListener('click',function(){var t=go[s];if(t.charAt(0)==='#'){var e=document.querySelector(t);if(e)e.scrollIntoView({behavior:still?'auto':'smooth'});}else location.href=t;});});
+  var arrow=document.querySelector('.hero-arrow');if(arrow)arrow.addEventListener('click',function(){var e=document.getElementById('shs-section');if(e)e.scrollIntoView({behavior:still?'auto':'smooth'});});
+  if(!('IntersectionObserver' in window))return;
+  /* pop in on scroll */
+  var groups=[['.shs-img-wrap,.shs-label,.shs-h2,.shs-body,.shs-actions',.08],['.shs-strands .strand-chip',.05],['.usp-intro',0],['.usp-stack',.09],['.usp-stats',0],['.ew-header',0],['.ew-photo-card',.12],['.events-header',0],['.ev-card',.08],['.adm-section > *',.06]];
+  var all=[];
+  groups.forEach(function(g){[].forEach.call(document.querySelectorAll(g[0]),function(el,i){el.classList.add('fx');el.style.setProperty('--fxd',(i*g[1]).toFixed(2)+'s');all.push(el);});});
+  document.documentElement.classList.add('fx-on');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('fx-in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  all.forEach(function(el){io.observe(el);});
+  /* safety net: anything on screen is shown even if the observer never fires */
+  function sweep(){all.forEach(function(el){if(el.classList.contains('fx-in'))return;var r=el.getBoundingClientRect();if(r.top<innerHeight*.96&&r.bottom>0)el.classList.add('fx-in');});}
+  setTimeout(sweep,900);window.addEventListener('scroll',sweep,{passive:true});window.addEventListener('load',sweep);
+  /* light follows the pointer across the cards */
+  [].forEach.call(document.querySelectorAll('.stack-face'),function(c){c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');c.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');});});
+  /* numbers count up */
+  var band=document.querySelector('.usp-stats');
+  if(band&&!still){
+    var items=[].slice.call(band.querySelectorAll('.usp-stat-num')).map(function(el){var m=/^([\d,]+)(.*)$/.exec(el.textContent.trim());return m?{el:el,to:parseInt(m[1].replace(/,/g,''),10),tail:m[2]}:null;}).filter(Boolean);
+    var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io2.disconnect();var t0=performance.now();(function tick(now){var p=Math.min(1,(now-t0)/1300),k=1-Math.pow(1-p,3);items.forEach(function(i){i.el.textContent=Math.round(i.to*k)+i.tail;});if(p<1)requestAnimationFrame(tick);})(t0);});},{threshold:.4});
+    io2.observe(band);
+  }
+});
+</script>
 </head>
 <body>
 

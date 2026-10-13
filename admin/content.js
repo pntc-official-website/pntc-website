@@ -197,6 +197,12 @@ const GROUPS = [
     T('shs.hero.line1', 'Headline, line 1'), T('shs.hero.line2', 'Headline, line 2'), T('shs.hero.line3', 'Headline, line 3 (yellow)'),
     P('shs.hero.desc', 'Description'), T('shs.hero.btn1', 'First button, text'), T('shs.hero.btn2', 'Second button, text'),
   ] },
+  { id: 'shs-why', site: 'Senior High School', title: 'SHS home: Why Choose PNTC cards and numbers', files: ['SHS/index.html'], fields: [
+    T('shs.ticker1', 'Running strip, first phrase'), T('shs.ticker2', 'Running strip, second phrase'),
+    T('shs.why.eyebrow', 'Small label'), T('shs.why.line1', 'Heading, line 1'), T('shs.why.line2', 'Heading, line 2 (green)'), P('shs.why.sub', 'Text under the heading'),
+    ...[1, 2, 3, 4, 5, 6].flatMap(n => [T('shs.why' + n + '.title', 'Card ' + n + ': title'), P('shs.why' + n + '.body', 'Card ' + n + ': text')]),
+    ...[1, 2, 3, 4].flatMap(n => [T('shs.stat' + n + '.n', 'Number ' + n + ': big text'), T('shs.stat' + n + '.l', 'Number ' + n + ': label')]),
+  ] },
   { id: 'shs-strands-academic', site: 'Senior High School', title: 'Strand guide: Academic Track', files: ['SHS/strands.html'],
     fields: [P('shs.track.academic.desc', 'Track description'), ...STRANDS.filter(s => s[2] === 'academic').map(strandFields).flat()] },
   { id: 'shs-strands-techpro', site: 'Senior High School', title: 'Strand guide: Tech-Pro Track', files: ['SHS/strands.html'],
