@@ -120,7 +120,7 @@ const GROUPS = [
     P('main.hero.sub', 'Description'),
     T('main.hero.btn1', 'First button, text'), H('main.hero.btn1.href', 'First button, link'),
     T('main.hero.btn2', 'Second button, text'), H('main.hero.btn2.href', 'Second button, link'),
-    T('main.hero.wall', 'Caption on the photo wall'),
+    T('main.hero.wall', 'Signature on the photo wall'),
   ] },
   { id: 'main-cta', site: 'Main Site', title: 'Home page yellow call to action', files: ['PNTC Main Landing Page/index.html'], fields: [
     T('main.cta.eyebrow', 'Small label'), T('main.cta.line1', 'Heading, line 1'), T('main.cta.line2', 'Heading, line 2'),
