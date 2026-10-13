@@ -1463,6 +1463,21 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #uniforms .uni-duo:not(.solo) + .uni-info,#uniforms .uni-duo:not(.solo) ~ .uni-info{max-width:980px}
 @media(max-width:700px){#uniforms .uni-duo{grid-template-columns:minmax(0,1fr);max-width:560px}}
 </style>
+<style id="hx-stack">
+/* College hero: fanned card stack */
+#hero.hx .hx-stage::before{display:none}
+#hero.hx .hc-panel{transform-origin:50% 118%;opacity:0;visibility:hidden;z-index:1;transform:rotate(17deg) scale(.84);filter:brightness(.4);transition:transform .95s cubic-bezier(.2,.8,.2,1),opacity .55s ease,filter .7s ease,visibility 0s .95s;box-shadow:0 34px 60px -30px rgba(0,0,0,.85),0 0 0 4px rgba(255,255,255,.9)}
+#hero.hx .hc-panel.on{opacity:1;visibility:visible;z-index:5;transform:none;filter:none;transition:transform .95s cubic-bezier(.2,.8,.2,1),opacity .55s ease,filter .7s ease,visibility 0s}
+#hero.hx .hc-panel.s1{opacity:1;visibility:visible;z-index:4;transform:rotate(5.5deg) scale(.95);filter:brightness(.74);transition:transform .95s cubic-bezier(.2,.8,.2,1),opacity .55s ease,filter .7s ease,visibility 0s}
+#hero.hx .hc-panel.s2{opacity:1;visibility:visible;z-index:3;transform:rotate(11deg) scale(.9);filter:brightness(.52);transition:transform .95s cubic-bezier(.2,.8,.2,1),opacity .55s ease,filter .7s ease,visibility 0s}
+#hero.hx .hc-panel.out{opacity:0;visibility:visible;z-index:6;transform:translate(-9%,26%) rotate(-13deg) scale(.9);filter:none;transition:transform .7s cubic-bezier(.5,0,.85,.4),opacity .5s ease .15s,visibility 0s .7s}
+#hero.hx .hc-panel.s1,#hero.hx .hc-panel.s2{cursor:pointer}
+@media(max-width:980px){
+  #hero.hx .hc-panel.s1{transform:rotate(3.5deg) scale(.96)}
+  #hero.hx .hc-panel.s2{transform:rotate(7deg) scale(.92)}
+}
+@media(prefers-reduced-motion:reduce){#hero.hx .hc-panel,#hero.hx .hc-panel.on,#hero.hx .hc-panel.s1,#hero.hx .hc-panel.s2,#hero.hx .hc-panel.out{transition:none}}
+</style>
 </head>
 <body>
 
@@ -1576,16 +1591,20 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     var cards=stage.querySelectorAll('.hc-panel'),btns=tabs.querySelectorAll('.hx-tab'),cur=0,timer,DUR=5000;
     var still=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     function show(n){
-      cards[cur].classList.remove('on');btns[cur].classList.remove('on');btns[cur].setAttribute('aria-selected','false');
-      cur=(n+cards.length)%cards.length;
-      cards[cur].classList.add('on');btns[cur].classList.add('on');btns[cur].setAttribute('aria-selected','true');
+      var prev=cur,len=cards.length;
+      btns[cur].classList.remove('on');btns[cur].setAttribute('aria-selected','false');
+      cur=(n+len)%len;
+      btns[cur].classList.add('on');btns[cur].setAttribute('aria-selected','true');
+      cards.forEach(function(c,k){var p=(k-cur+len)%len;c.classList.remove('on','s1','s2','out');
+        if(p===0)c.classList.add('on');else if(k===prev&&prev!==cur)c.classList.add('out');else if(p===1)c.classList.add('s1');else if(p===2)c.classList.add('s2');});
     }
     function start(){if(still)return;clearInterval(timer);timer=setInterval(function(){show(cur+1);},DUR);}
     btns.forEach(function(b,i){b.addEventListener('click',function(){show(i);start();});});
     var x0=null;
     stage.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
     stage.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>40){show(cur+(dx<0?1:-1));start();}},{passive:true});
-    start();
+    cards.forEach(function(c,i){c.addEventListener('click',function(){if(i!==cur){show(i);start();}});});
+    show(0);start();
   })();
   </script>
 </section>
