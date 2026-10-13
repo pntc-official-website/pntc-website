@@ -1232,7 +1232,8 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #uniforms .uni-nav-btn:hover{background:rgba(243,207,51,.35);border-color:#F3CF33}
 #stats{background:#F3CF33!important}
 #stats .stat{border-right-color:rgba(28,22,80,.22)}
-#stats .stat-n{color:#1C1650!important}
+#stats .stat-n{color:#1C1650!important;text-transform:uppercase}
+@media(max-width:600px){#stats .stat:last-child{flex:1 1 100%}}
 #stats .stat-l{color:rgba(28,22,80,.78)!important}
 #news{background:#1C1650!important}
 #accreds.pntc-acc{background:#1C1650!important;border:0!important}
@@ -1795,11 +1796,11 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 
 <!-- ══════ STATS ══════ -->
 <div id="stats">
-  <div class="stat reveal"><div class="stat-n">30+</div><div class="stat-l">Years of Excellence</div></div>
-  <div class="stat reveal" style="transition-delay:.08s"><div class="stat-n">5</div><div class="stat-l">Degree Programs</div></div>
-  <div class="stat reveal" style="transition-delay:.16s"><div class="stat-n">10K+</div><div class="stat-l">Alumni Worldwide</div></div>
-  <div class="stat reveal" style="transition-delay:.24s"><div class="stat-n">ISO</div><div class="stat-l">9001:2015 Certified</div></div>
-  <div class="stat reveal" style="transition-delay:.32s"><div class="stat-n">95%</div><div class="stat-l">Employment Rate</div></div>
+  <div class="stat reveal"><div class="stat-n"><!--c:college.stat1.n-->30+<!--/c--></div><div class="stat-l"><!--c:college.stat1.l-->Years of Excellence<!--/c--></div></div>
+  <div class="stat reveal" style="transition-delay:.08s"><div class="stat-n"><!--c:college.stat2.n-->6<!--/c--></div><div class="stat-l"><!--c:college.stat2.l-->Degree Programs<!--/c--></div></div>
+  <div class="stat reveal" style="transition-delay:.16s"><div class="stat-n"><!--c:college.stat3.n-->10K+<!--/c--></div><div class="stat-l"><!--c:college.stat3.l-->Alumni Worldwide<!--/c--></div></div>
+  <div class="stat reveal" style="transition-delay:.24s"><div class="stat-n"><!--c:college.stat4.n-->ISO<!--/c--></div><div class="stat-l"><!--c:college.stat4.l-->9001:2015 Certified<!--/c--></div></div>
+  <div class="stat reveal" style="transition-delay:.32s"><div class="stat-n"><!--c:college.stat5.n-->Growing<!--/c--></div><div class="stat-l"><!--c:college.stat5.l-->Stronger<!--/c--></div></div>
 </div>
 
 <!-- ══════ NEWS ══════ -->

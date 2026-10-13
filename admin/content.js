@@ -169,6 +169,9 @@ const GROUPS = [
     T('college.hero.btn2', 'Second button, text'), H('college.hero.btn2.href', 'Second button, link'),
     T('college.hero.proofn', 'Proof line, number'), T('college.hero.proof', 'Proof line, text'),
   ] },
+  { id: 'college-stats', site: 'Colleges', title: 'Yellow numbers band', files: ['PNTC Colleges/index.html'], fields: [
+    ...[1, 2, 3, 4, 5].flatMap(n => [T('college.stat' + n + '.n', 'Box ' + n + ': big text'), T('college.stat' + n + '.l', 'Box ' + n + ': label')]),
+  ] },
   { id: 'college-values', site: 'Colleges', title: 'What We Stand For', files: ['PNTC Colleges/index.html'],
     fields: Array.from({ length: VALUES }, (_, i) => [T(`college.value${i + 1}.name`, `Value ${i + 1}: name`), P(`college.value${i + 1}.desc`, `Value ${i + 1}: description`)]).flat() },
   ...PROGRAMS.map(([id, name]) => ({ id: 'college-program-' + id, site: 'Colleges', title: 'Program details: ' + name, files: ['PNTC Colleges/programs.html'], fields: [
