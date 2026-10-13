@@ -815,6 +815,169 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .pv-units .pv-source{color:rgba(28,22,80,.5)!important}
 .pv-unit{background:#1C1650!important;border-color:#1C1650!important}
 </style>
+<style id="about-modern">
+/* About page, modern layout */
+.ab-wrap{max-width:1240px;margin:0 auto}
+#about.ab-who,.ab-years,.ab-vmv,.ab-vivid,.ab-units{padding:5.5rem clamp(1.25rem,4vw,3rem);background:#fff!important;position:relative;overflow:hidden}
+#about .eyebrow,.ab-years .eyebrow,.ab-vmv .eyebrow,.ab-vivid .eyebrow,.ab-units .eyebrow{color:#1C1650!important;display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1rem}
+#about .eyebrow::before,.ab-years .eyebrow::before,.ab-vmv .eyebrow::before,.ab-vivid .eyebrow::before,.ab-units .eyebrow::before{content:'';width:26px;height:3px;border-radius:3px;background:#F3CF33}
+.ab-h2{font-weight:800;font-size:clamp(2rem,4.2vw,3.3rem);line-height:1.08;letter-spacing:-.025em;color:#1C1650}
+.ab-h2-sm{font-size:clamp(1.7rem,3.2vw,2.5rem)}
+.ab-h3{font-weight:700;font-size:clamp(1.1rem,1.9vw,1.45rem);line-height:1.4;color:#1C1650;max-width:780px;letter-spacing:-.01em}
+.ab-mark{position:relative;display:inline-block;white-space:nowrap}
+.ab-mark svg{position:absolute;left:0;right:0;bottom:-.14em;width:100%;height:.22em}
+.ab-link{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#1C1650;text-decoration:none;border-bottom:2px solid #F3CF33;padding-bottom:.3rem;transition:gap .25s}
+.ab-link:hover{gap:.85rem}
+.ab-link-gold{color:#F3CF33}
+
+/* Who we are */
+#about.ab-who{padding-top:6rem}
+#about.ab-who::before{content:'';position:absolute;right:-180px;top:-160px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(243,207,51,.22),transparent 68%);pointer-events:none}
+.ab-who-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(2rem,5vw,4.5rem);align-items:center;position:relative}
+.ab-lead{font-size:1rem;line-height:1.8;color:rgba(28,22,80,.72);margin-top:1.3rem;max-width:600px}
+.ab-roles{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.7rem}
+.ab-roles span{font-size:.74rem;font-weight:700;color:#1C1650;padding:.5rem .9rem;border-radius:999px;background:rgba(28,22,80,.06);border:1px solid rgba(28,22,80,.1)}
+.ab-photos{position:relative;aspect-ratio:1/1.02;max-width:540px;width:100%;margin-left:auto}
+.ab-ph{position:absolute;object-fit:cover;border-radius:20px;border:6px solid #fff;box-shadow:0 24px 50px -18px rgba(28,22,80,.45);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.ab-ph1{left:0;top:4%;width:62%;height:58%;transform:rotate(-4deg)}
+.ab-ph2{right:0;top:0;width:46%;height:44%;transform:rotate(5deg)}
+.ab-ph3{right:4%;bottom:0;width:66%;height:50%;transform:rotate(2deg)}
+.ab-photos:hover .ab-ph1{transform:rotate(-6deg) translate(-6px,-4px)}
+.ab-photos:hover .ab-ph2{transform:rotate(7deg) translate(6px,-6px)}
+.ab-photos:hover .ab-ph3{transform:rotate(0deg) translateY(6px)}
+.ab-ph-dots{position:absolute;left:-4%;bottom:6%;width:42%;height:38%;background-image:radial-gradient(rgba(28,22,80,.22) 1.6px,transparent 1.6px);background-size:16px 16px}
+.ab-since{position:absolute;left:2%;bottom:9%;background:#F3CF33;color:#1C1650;border-radius:18px;padding:1rem 1.3rem;box-shadow:0 18px 34px -14px rgba(28,22,80,.5);transform:rotate(-3deg)}
+.ab-since b{display:block;font-size:2rem;font-weight:800;line-height:1;letter-spacing:-.03em}
+.ab-since span{font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.ab-stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:4.5rem;background:#1C1650;border-radius:24px;overflow:hidden;position:relative}
+.ab-stats::after{content:'';position:absolute;right:-60px;top:-90px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(243,207,51,.28),transparent 70%)}
+.ab-stat{padding:2.1rem 1.6rem;border-left:1px solid rgba(255,255,255,.1);position:relative;z-index:1}
+.ab-stat:first-child{border-left:0}
+.ab-stat b{display:block;font-size:clamp(2rem,3.6vw,3rem);font-weight:800;line-height:1;color:#F3CF33;letter-spacing:-.03em}
+.ab-stat span{display:block;margin-top:.6rem;font-size:.74rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+
+/* Through the years */
+.ab-years{padding-top:1rem!important}
+.ab-years-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.ab-line{list-style:none;margin:2.6rem 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.ab-line::before{content:'';position:absolute;left:0;right:0;top:9px;height:2px;background:linear-gradient(90deg,#F3CF33,rgba(28,22,80,.18))}
+.ab-line li{position:relative;padding:2.2rem 1.2rem 0 0}
+.ab-line li::before{content:'';position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:#fff;border:5px solid #1C1650;box-sizing:border-box;transition:transform .25s,background .25s}
+.ab-line li:hover::before{transform:scale(1.25);background:#F3CF33}
+.ab-line li:last-child::before{background:#F3CF33}
+.ab-line b{display:block;font-size:1.7rem;font-weight:800;color:#1C1650;letter-spacing:-.03em;line-height:1}
+.ab-line span{display:block;margin-top:.55rem;font-size:.86rem;line-height:1.5;color:rgba(28,22,80,.7);font-weight:500}
+
+/* Vision, mission, values */
+.ab-vmv{background:#F7F7FB!important}
+.ab-vm{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:1.25rem}
+.ab-vision,.ab-mission{border-radius:26px;padding:clamp(1.8rem,3.4vw,3rem);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;scroll-margin-top:120px}
+.ab-vision{background:#1C1650;color:#fff}
+.ab-vision::after{content:'';position:absolute;right:-90px;bottom:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(243,207,51,.3),transparent 70%)}
+.ab-q{position:absolute;right:1.6rem;top:-.4rem;font-size:11rem;line-height:1;font-weight:800;color:rgba(243,207,51,.22);font-family:Georgia,serif}
+.ab-mission{background:#fff;border:1px solid rgba(28,22,80,.1);box-shadow:0 20px 44px -30px rgba(28,22,80,.4)}
+.ab-mission::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:#F3CF33}
+.ab-tag{font-size:.7rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;padding:.45rem .85rem;border-radius:999px;position:relative;z-index:1}
+.ab-vision .ab-tag{background:#F3CF33;color:#1C1650}
+.ab-mission .ab-tag{background:#1C1650;color:#fff}
+.ab-state{margin:1.4rem 0 1.8rem;font-weight:700;line-height:1.38;letter-spacing:-.015em;position:relative;z-index:1;flex:1}
+.ab-vision .ab-state{font-size:clamp(1.3rem,2.5vw,2rem);color:#fff}
+.ab-mission .ab-state{font-size:clamp(1.1rem,1.7vw,1.4rem);color:#1C1650}
+.ab-vision .ab-link{position:relative;z-index:1}
+.ab-sub{margin-top:4.5rem;scroll-margin-top:120px}
+.ab-commits{list-style:none;margin:2rem 0 0;padding:0;counter-reset:abc;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.ab-commits li{counter-increment:abc;background:#fff;border:1px solid rgba(28,22,80,.09);border-radius:18px;padding:1.5rem 1.4rem 1.6rem;position:relative;transition:transform .3s,box-shadow .3s,border-color .3s}
+.ab-commits li.ab-wide{grid-column:span 2}
+.ab-commits li::before{content:counter(abc,decimal-leading-zero);display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;background:rgba(243,207,51,.35);color:#1C1650;font-size:.78rem;font-weight:800;margin-bottom:1rem;transition:background .3s}
+.ab-commits li:hover{transform:translateY(-5px);box-shadow:0 22px 40px -26px rgba(28,22,80,.5);border-color:rgba(28,22,80,.25)}
+.ab-commits li:hover::before{background:#F3CF33}
+.ab-commits strong{display:block;font-size:.98rem;font-weight:800;color:#1C1650;line-height:1.3;margin-bottom:.5rem}
+.ab-commits span{display:block;font-size:.85rem;line-height:1.65;color:rgba(28,22,80,.7)}
+.ab-values{list-style:none;margin:2rem 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
+.ab-values li{background:#fff;border:1px solid rgba(28,22,80,.09);border-radius:18px;padding:1.6rem 1.3rem;transition:transform .3s,box-shadow .3s}
+.ab-values li:hover{transform:translateY(-5px);box-shadow:0 22px 40px -26px rgba(28,22,80,.5)}
+.ab-values li.ab-key{background:#1C1650;border-color:#1C1650}
+.ab-ico{display:inline-flex;width:46px;height:46px;border-radius:13px;background:rgba(28,22,80,.07);align-items:center;justify-content:center;margin-bottom:1.1rem}
+.ab-ico svg,.ab-unit-ico svg{width:24px;height:24px;fill:none;stroke:#1C1650;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ab-key .ab-ico{background:#F3CF33}
+.ab-values strong{display:block;font-size:1.15rem;font-weight:800;color:#1C1650;margin-bottom:.45rem}
+.ab-values p{font-size:.84rem;line-height:1.6;color:rgba(28,22,80,.7)}
+.ab-key strong{color:#F3CF33}.ab-key p{color:rgba(255,255,255,.8)}
+
+/* What our vision looks like */
+.ab-vivid-head{max-width:860px}
+.ab-quote{margin:1.4rem 0 0;padding:.2rem 0 .2rem 1.3rem;border-left:4px solid #F3CF33;font-size:clamp(1.02rem,1.6vw,1.2rem);font-weight:600;line-height:1.6;color:rgba(28,22,80,.8)}
+.ab-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.4rem}
+.ab-tab{font-family:inherit;font-size:.8rem;font-weight:700;color:#1C1650;background:#fff;border:1.5px solid rgba(28,22,80,.16);border-radius:999px;padding:.6rem 1.1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.ab-tab:hover{border-color:#1C1650}
+.ab-tab.on{background:#1C1650;border-color:#1C1650;color:#fff}
+.ab-groups{margin-top:1.4rem}
+.ab-group{display:grid;grid-template-columns:260px minmax(0,1fr);gap:2rem;padding:2.2rem 0;border-top:1px solid rgba(28,22,80,.1)}
+.ab-group.hide{display:none}
+.ab-group-head{position:sticky;top:130px;align-self:start}
+.ab-num{display:block;font-size:3.4rem;font-weight:800;line-height:1;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px #F3CF33}
+.ab-group h3{margin-top:.7rem;font-size:1.3rem;font-weight:800;color:#1C1650;line-height:1.25}
+.ab-group ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
+.ab-group li{background:#F7F7FB;border-radius:18px;padding:1.5rem 1.4rem;border:1px solid transparent;transition:background .3s,border-color .3s,transform .3s}
+.ab-group li:hover{background:#fff;border-color:rgba(28,22,80,.18);transform:translateY(-4px)}
+.ab-group li strong{display:block;font-size:.95rem;font-weight:800;color:#1C1650;line-height:1.3;margin-bottom:.55rem;padding-left:.8rem;border-left:3px solid #F3CF33}
+.ab-group li p{font-size:.86rem;line-height:1.7;color:rgba(28,22,80,.72)}
+
+/* Mission statements */
+.ab-units{background:#F7F7FB!important}
+.ab-unit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem;margin-top:2.5rem}
+.ab-unit{background:#fff;border-radius:22px;overflow:hidden;border:1px solid rgba(28,22,80,.08);box-shadow:0 18px 40px -30px rgba(28,22,80,.45);padding:0 1.8rem 1.9rem;transition:transform .3s,box-shadow .3s}
+.ab-unit:hover{transform:translateY(-5px);box-shadow:0 28px 50px -30px rgba(28,22,80,.6)}
+.ab-unit header{display:flex;align-items:center;gap:1rem;margin:0 -1.8rem 1.5rem;padding:1.4rem 1.8rem;background:linear-gradient(120deg,var(--ud),var(--uc));position:relative;overflow:hidden}
+.ab-unit header::after{content:'';position:absolute;right:-40px;top:-60px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.09)}
+.ab-unit-ico{flex:0 0 46px;height:46px;border-radius:13px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center}
+.ab-unit-ico svg{stroke:#fff}
+.ab-unit h3{font-size:1.1rem;font-weight:800;color:#fff;line-height:1.25;position:relative;z-index:1}
+.ab-unit p{font-size:.88rem;line-height:1.72;color:rgba(28,22,80,.72);margin-top:.8rem}
+.ab-unit p.ab-unit-lead{margin-top:0;font-size:1rem;font-weight:700;line-height:1.5;color:var(--uc)}
+.ab-unit-wide{grid-column:1/-1}
+.ab-source{margin-top:2.2rem;font-size:.74rem;line-height:1.6;color:rgba(28,22,80,.55)}
+
+@media(max-width:1080px){
+  .ab-commits{grid-template-columns:repeat(2,1fr)}
+  .ab-values{grid-template-columns:repeat(3,1fr)}
+  .ab-group{grid-template-columns:1fr;gap:1.2rem}
+  .ab-group-head{position:static;display:flex;align-items:baseline;gap:.9rem}
+  .ab-num{font-size:2.4rem}.ab-group h3{margin-top:0}
+}
+@media(max-width:860px){
+  #about.ab-who,.ab-years,.ab-vmv,.ab-vivid,.ab-units{padding-top:4rem;padding-bottom:4rem}
+  .ab-who-grid,.ab-vm,.ab-unit-grid{grid-template-columns:1fr}
+  .ab-photos{margin:0 auto;max-width:440px}
+  .ab-stats{grid-template-columns:1fr 1fr;margin-top:3rem}
+  .ab-stat:nth-child(3){border-left:0}
+  .ab-stat:nth-child(n+3){border-top:1px solid rgba(255,255,255,.1)}
+  .ab-line{grid-template-columns:1fr;gap:0}
+  .ab-line::before{left:9px;right:auto;top:0;bottom:0;width:2px;height:auto;background:linear-gradient(180deg,#F3CF33,rgba(28,22,80,.18))}
+  .ab-line li{padding:0 0 1.6rem 2.4rem}
+  .ab-line li:last-child{padding-bottom:0}
+  .ab-line b{font-size:1.4rem}
+  .ab-tabs{flex-wrap:nowrap;overflow-x:auto;margin-right:-1.25rem;padding-right:1.25rem;scrollbar-width:none}
+  .ab-tabs::-webkit-scrollbar{display:none}
+  .ab-tab{white-space:nowrap}
+}
+@media(max-width:600px){
+  .ab-commits,.ab-values{grid-template-columns:1fr}
+  .ab-commits li.ab-wide{grid-column:auto}
+  .ab-mark{white-space:normal}
+  .ab-q{font-size:7rem}
+}
+@media(prefers-reduced-motion:reduce){.ab-ph,.ab-commits li,.ab-values li,.ab-group li,.ab-unit{transition:none}}
+</style>
+<script id="about-tabs">
+document.addEventListener('DOMContentLoaded',function(){
+  var tabs=document.querySelectorAll('.ab-tab'),groups=document.querySelectorAll('.ab-group');
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    tabs.forEach(function(x){var on=x===t;x.classList.toggle('on',on);x.setAttribute('aria-selected',on?'true':'false');});
+    groups.forEach(function(g){g.classList.toggle('hide',t.dataset.g!=='all'&&g.dataset.g!==t.dataset.g);g.classList.add('in');});
+  });});
+});
+</script>
 <meta name="description" content="About PNTC Colleges, Inc., a maritime and business institution since 1994 with campuses in Dasmariñas, Cavite and Intramuros, Manila, and its vision and mission.">
 <link rel="canonical" href="https://www.pntc.edu.ph/about">
 <meta property="og:type" content="website">
@@ -863,102 +1026,144 @@ h1.hero-h1 span.gold { color:var(--gold); }
   </div>
 </section>
 
-<section id="about">
-  <div class="about-wrap">
-    <div class="about-left reveal">
-      <p class="eyebrow" style="margin-bottom:1.1rem;">Who We Are</p>
-      <h2 class="about-h2">Virtue and Quality at the Heart of Everything We Do</h2>
-      <p class="about-lead">PNTC Colleges, Inc. is a private, non-sectarian maritime and business institution supervised by the Commission on Higher Education (CHED) and the Maritime Industry Authority (MARINA). We serve students and professionals as a Higher Education Institution (HEI), Maritime Training Institution (MTI), and Maritime Assessment Center (AC).</p>
-      <p class="about-lead">Over three decades, PNTC has built a complete maritime education pathway, from senior high school to professional seafarer certification, within one institution.</p>
-      <div class="about-stats">
-        <div class="stat-box"><div class="stat-num">30+</div><div class="stat-lbl">Years of Excellence</div></div>
-        <div class="stat-box"><div class="stat-num">4</div><div class="stat-lbl">Institutions</div></div>
-        <div class="stat-box"><div class="stat-num">ISO</div><div class="stat-lbl">9001:2015 Certified</div></div>
-        <div class="stat-box"><div class="stat-num">IMO</div><div class="stat-lbl">Compliant Training</div></div>
+<section id="about" class="ab-who">
+  <div class="ab-wrap ab-who-grid">
+    <div class="ab-who-copy reveal">
+      <p class="eyebrow"><!--c:about.who.eyebrow-->Who We Are<!--/c--></p>
+      <h2 class="ab-h2"><span class="ab-mark"><!--c:about.who.mark-->Virtue and Quality<!--/c--><svg viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 10 C 70 2, 190 2, 297 8" fill="none" stroke="#F3CF33" stroke-width="5" stroke-linecap="round"/></svg></span> <!--c:about.who.rest-->at the Heart of Everything We Do<!--/c--></h2>
+      <p class="ab-lead"><!--c:about.who.p1-->PNTC Colleges, Inc. is a private, non-sectarian maritime and business institution supervised by the Commission on Higher Education (CHED) and the Maritime Industry Authority (MARINA). We serve students and professionals as a Higher Education Institution (HEI), Maritime Training Institution (MTI), and Maritime Assessment Center (AC).<!--/c--></p>
+      <p class="ab-lead"><!--c:about.who.p2-->Over three decades, PNTC has built a complete maritime education pathway, from senior high school to professional seafarer certification, within one institution.<!--/c--></p>
+      <div class="ab-roles">
+        <span>Higher Education Institution</span><span>Maritime Training Institution</span><span>Maritime Assessment Center</span>
       </div>
     </div>
-
-    <div class="about-right reveal">
-      <div class="tab-nav">
-        <button class="tab-btn active" onclick="openTab('vision',this)">Vision</button>
-        <button class="tab-btn" onclick="openTab('mission',this)">Mission</button>
-        <button class="tab-btn" onclick="openTab('values',this)">Values</button>
-      </div>
-
-      <div class="tab-panel active" id="tab-vision">
-        <h3 class="tab-h3">Our Vision</h3>
-        <p class="tab-p pv-statement">To be the leading educational institution that inspires globally successful learners of competence and character at every phase of their development.</p>
-        <a class="pv-more" href="#vivid">See what our vision looks like &rarr;</a>
-      </div>
-
-      <div class="tab-panel" id="tab-mission">
-        <h3 class="tab-h3">Our Mission</h3>
-        <p class="tab-p pv-statement">Our mission is to educate and inspire through academic programs that develop competencies and build character to prepare our students for global success.</p>
-        <p class="pv-commit-lbl">To achieve our mission, we are committed to the following.</p>
-        <ol class="pv-commits">
-          <li><strong>Dedicated Teaching</strong><span>Teaching with dedication through curricula, methodologies, and practices that advance students' competencies and character, while enhancing their micro-credentials and soft skills.</span></li>
-          <li><strong>Real-World Experience</strong><span>Providing students with real-world experience in their chosen fields through practical and training-focused final years.</span></li>
-          <li><strong>Accessible Education</strong><span>Ensuring that our education is accessible to all by removing physical, financial, social, or other barriers.</span></li>
-          <li><strong>Qualified Faculty and Staff</strong><span>Engaging only qualified, competent, and inspiring faculty, and ensuring that our staff are competent, friendly, and supportive.</span></li>
-          <li><strong>A Complete College Experience</strong><span>Delivering a complete college experience with access to comprehensive services, including library resources, guidance counseling, career and alumni services, sports and arts programs, healthcare, nutrition, student organizations, safety and security, dormitories, and other facilities.</span></li>
-          <li><strong>A Safe, Modern Environment</strong><span>Providing a safe, inclusive, and engaging learning environment equipped with advanced technologies.</span></li>
-          <li><strong>Streamlined Processes</strong><span>Streamlining registration, enrollment, payment, and other processes for the ease and convenience of our students.</span></li>
-          <li><strong>Rigorous Compliance</strong><span>Maintaining rigorous compliance with government regulations and industry standards.</span></li>
-          <li><strong>Innovation and Research</strong><span>Contributing to the knowledge and advancement of industries through innovation and research.</span></li>
-        </ol>
-      </div>
-
-      <div class="tab-panel" id="tab-values">
-        <h3 class="tab-h3">Core Values</h3>
-        <p class="tab-p">Every program, policy, and interaction at PNTC is grounded in two principles, Virtue and Quality. We apply these principles in our daily work.</p>
-        <ul class="pill-list" style="margin-top:1.4rem;">
-          <li><strong>Virtue</strong><br>Integrity, honesty, and moral courage in all conduct and decisions</li>
-          <li><strong>Quality</strong><br>Excellence in education, training, assessment, and institutional practice</li>
-          <li><strong>Service</strong><br>Commitment to our students, industry partners, and the Filipino nation</li>
-          <li><strong>Discipline</strong><br>Respect for structure, professional standards, and accountability</li>
-          <li><strong>Excellence</strong><br>Continuous improvement and the pursuit of mastery in every endeavor</li>
-        </ul>
-      </div>
+    <div class="ab-photos reveal" aria-hidden="true">
+      <span class="ab-ph-dots"></span>
+      <img class="ab-ph ab-ph1" src="/hero-collage-01.jpg" alt="" loading="lazy">
+      <img class="ab-ph ab-ph2" src="/hero-collage-05.jpg" alt="" loading="lazy">
+      <img class="ab-ph ab-ph3" src="/hero-collage-09.jpg" alt="" loading="lazy">
+      <div class="ab-since"><b>1994</b><span>Established</span></div>
+    </div>
+  </div>
+  <div class="ab-wrap">
+    <div class="ab-stats reveal">
+      <div class="ab-stat"><b><!--c:about.stat1.n-->30+<!--/c--></b><span><!--c:about.stat1.l-->Years of Excellence<!--/c--></span></div>
+      <div class="ab-stat"><b><!--c:about.stat2.n-->4<!--/c--></b><span><!--c:about.stat2.l-->Institutions<!--/c--></span></div>
+      <div class="ab-stat"><b><!--c:about.stat3.n-->ISO<!--/c--></b><span><!--c:about.stat3.l-->9001:2015 Certified<!--/c--></span></div>
+      <div class="ab-stat"><b><!--c:about.stat4.n-->IMO<!--/c--></b><span><!--c:about.stat4.l-->Compliant Training<!--/c--></span></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== ACCREDITATIONS ===================== -->
-<!-- OUR VISION -->
-<section id="vivid" class="pv-vivid">
-  <div class="pv-wrap">
-    <div class="pv-head reveal">
-      <p class="eyebrow" style="margin-bottom:.8rem">Our Vision</p>
-      <h2 class="pv-h2">What Our Vision Looks Like</h2>
-      <blockquote class="pv-vision">To be the leading educational institution that inspires globally successful learners of competence and character at every phase of their development.</blockquote>
+<!-- THROUGH THE YEARS -->
+<section id="years" class="ab-years">
+  <div class="ab-wrap">
+    <div class="ab-years-head reveal">
+      <div>
+        <p class="eyebrow">PNTC Through the Years</p>
+        <h2 class="ab-h2 ab-h2-sm">Foundation and Evolution</h2>
+      </div>
+      <a class="ab-link" href="/about/history">Read our history <span aria-hidden="true">&rarr;</span></a>
     </div>
-    <div class="pv-groups">
-      <div class="pv-group reveal">
-        <div class="pv-group-head"><span class="pv-group-ico">🎓</span><h3>Our Learners</h3></div>
+    <ol class="ab-line reveal">
+      <li><b>1994</b><span>Established as PNTI</span></li>
+      <li><b>2001</b><span>Renamed Philippine Nautical and Technological College (PNTC)</span></li>
+      <li><b>2004</b><span>Became PNTC Colleges</span></li>
+      <li><b>2016</b><span>Senior High School Opens</span></li>
+      <li><b>Today</b><span>Three Locations</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- VISION, MISSION AND VALUES -->
+<section id="vmv" class="ab-vmv">
+  <div class="ab-wrap">
+    <div class="ab-vm">
+      <article class="ab-vision reveal" id="tab-vision">
+        <span class="ab-q" aria-hidden="true">&ldquo;</span>
+        <p class="ab-tag">Our Vision</p>
+        <p class="ab-state"><!--c:about.vision-->To be the leading educational institution that inspires globally successful learners of competence and character at every phase of their development.<!--/c--></p>
+        <a class="ab-link ab-link-gold" href="#vivid">See what our vision looks like <span aria-hidden="true">&rarr;</span></a>
+      </article>
+      <article class="ab-mission reveal" id="tab-mission">
+        <p class="ab-tag">Our Mission</p>
+        <p class="ab-state"><!--c:about.mission-->Our mission is to educate and inspire through academic programs that develop competencies and build character to prepare our students for global success.<!--/c--></p>
+        <a class="ab-link" href="#commitments">See our commitments <span aria-hidden="true">&rarr;</span></a>
+      </article>
+    </div>
+
+    <div class="ab-sub reveal" id="commitments">
+      <p class="eyebrow">Our Commitments</p>
+      <h3 class="ab-h3">To achieve our mission, we are committed to the following.</h3>
+    </div>
+    <ol class="ab-commits">
+      <li class="reveal ab-wide"><strong>Dedicated Teaching</strong><span>Teaching with dedication through curricula, methodologies, and practices that advance students' competencies and character, while enhancing their micro-credentials and soft skills.</span></li>
+      <li class="reveal"><strong>Real-World Experience</strong><span>Providing students with real-world experience in their chosen fields through practical and training-focused final years.</span></li>
+      <li class="reveal"><strong>Accessible Education</strong><span>Ensuring that our education is accessible to all by removing physical, financial, social, or other barriers.</span></li>
+      <li class="reveal"><strong>Qualified Faculty and Staff</strong><span>Engaging only qualified, competent, and inspiring faculty, and ensuring that our staff are competent, friendly, and supportive.</span></li>
+      <li class="reveal ab-wide"><strong>A Complete College Experience</strong><span>Delivering a complete college experience with access to comprehensive services, including library resources, guidance counseling, career and alumni services, sports and arts programs, healthcare, nutrition, student organizations, safety and security, dormitories, and other facilities.</span></li>
+      <li class="reveal"><strong>A Safe, Modern Environment</strong><span>Providing a safe, inclusive, and engaging learning environment equipped with advanced technologies.</span></li>
+      <li class="reveal"><strong>Streamlined Processes</strong><span>Streamlining registration, enrollment, payment, and other processes for the ease and convenience of our students.</span></li>
+      <li class="reveal"><strong>Rigorous Compliance</strong><span>Maintaining rigorous compliance with government regulations and industry standards.</span></li>
+      <li class="reveal ab-wide"><strong>Innovation and Research</strong><span>Contributing to the knowledge and advancement of industries through innovation and research.</span></li>
+    </ol>
+
+    <div class="ab-sub reveal" id="tab-values">
+      <p class="eyebrow">Core Values</p>
+      <h3 class="ab-h3"><!--c:about.values.intro-->Every program, policy, and interaction at PNTC is grounded in two principles, Virtue and Quality. We apply these principles in our daily work.<!--/c--></h3>
+    </div>
+    <ul class="ab-values">
+      <li class="reveal ab-key"><span class="ab-ico"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.6-3 8.3-7 10-4-1.7-7-5.4-7-10V6z"/><path d="M9 12l2.2 2.200L15.5 10"/></svg></span><strong>Virtue</strong><p>Integrity, honesty, and moral courage in all conduct and decisions</p></li>
+      <li class="reveal ab-key"><span class="ab-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.500L7 21l5-2.500L17 21l-1.5-7.5"/></svg></span><strong>Quality</strong><p>Excellence in education, training, assessment, and institutional practice</p></li>
+      <li class="reveal"><span class="ab-ico"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.3-7-9.500A4 4 0 0 1 12 8a4 4 0 0 1 7 2.500C19 15.7 12 20 12 20z"/></svg></span><strong>Service</strong><p>Commitment to our students, industry partners, and the Filipino nation</p></li>
+      <li class="reveal"><span class="ab-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg></span><strong>Discipline</strong><p>Respect for structure, professional standards, and accountability</p></li>
+      <li class="reveal"><span class="ab-ico"><svg viewBox="0 0 24 24"><path d="M12 3.500l2.6 5.3 5.9.900-4.3 4.1 1 5.800L12 16.9 6.8 19.600l1-5.800L3.5 9.700l5.9-.900z"/></svg></span><strong>Excellence</strong><p>Continuous improvement and the pursuit of mastery in every endeavor</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- OUR VISION -->
+<section id="vivid" class="pv-vivid ab-vivid">
+  <div class="ab-wrap">
+    <div class="ab-vivid-head reveal">
+      <p class="eyebrow">Our Vision</p>
+      <h2 class="ab-h2 ab-h2-sm">What Our Vision Looks Like</h2>
+      <blockquote class="ab-quote"><!--c:about.vision-->To be the leading educational institution that inspires globally successful learners of competence and character at every phase of their development.<!--/c--></blockquote>
+    </div>
+    <div class="ab-tabs" role="tablist" aria-label="Parts of our vision">
+      <button class="ab-tab on" role="tab" aria-selected="true" data-g="all">All</button>
+      <button class="ab-tab" role="tab" aria-selected="false" data-g="g1">Our Learners</button>
+      <button class="ab-tab" role="tab" aria-selected="false" data-g="g2">Our Institution</button>
+      <button class="ab-tab" role="tab" aria-selected="false" data-g="g3">Our Community and Partners</button>
+      <button class="ab-tab" role="tab" aria-selected="false" data-g="g4">Our Governance and Growth</button>
+    </div>
+    <div class="ab-groups">
+      <div class="ab-group reveal" data-g="g1">
+        <div class="ab-group-head"><span class="ab-num">01</span><h3>Our Learners</h3></div>
         <ul>
           <li><strong>Education and Inspiration</strong><p>Education and inspiration are our cores. We educate through curricula, methodologies, and practices that build competencies and character to prepare learners for global success. We inspire by giving hope and nurturing ambitions to ignite a lifelong passion for learning.</p></li>
           <li><strong>Sought-After Graduates</strong><p>Our graduates are highly sought after by international and local institutions for their competence and character.</p></li>
           <li><strong>Accessible to All</strong><p>We are accessible to all members of our community. Our services are free from physical, financial, social, or any other barriers and are available to everyone with the drive to learn.</p></li>
         </ul>
       </div>
-      <div class="pv-group reveal">
-        <div class="pv-group-head"><span class="pv-group-ico">🏛️</span><h3>Our Institution</h3></div>
+      <div class="ab-group reveal" data-g="g2">
+        <div class="ab-group-head"><span class="ab-num">02</span><h3>Our Institution</h3></div>
         <ul>
           <li><strong>Superior Quality</strong><p>We are a university where our educational programs, training courses, applied learning initiatives, and general services are recognized for their superior quality.</p></li>
           <li><strong>Modern Learning Environment</strong><p>We provide a conducive learning environment with modern infrastructure and advanced technologies to ensure a safe, inclusive, and engaging space that fosters both competency and character growth.</p></li>
           <li><strong>The Showcase University</strong><p>We are the showcase university. We are the driver of change. We are the forerunners of true quality and set a no-compromise policy as the standard for teaching.</p></li>
         </ul>
       </div>
-      <div class="pv-group reveal">
-        <div class="pv-group-head"><span class="pv-group-ico">🤝</span><h3>Our Community and Partners</h3></div>
+      <div class="ab-group reveal" data-g="g3">
+        <div class="ab-group-head"><span class="ab-num">03</span><h3>Our Community and Partners</h3></div>
         <ul>
           <li><strong>A Community That Loves PNTC</strong><p>We love PNTC. Our community is driven by an intense desire to be part of the organization, with every member dedicated to realizing our vision and fulfilling our mission.</p></li>
           <li><strong>Top-of-Mind in Education and Training</strong><p>We maintain top-of-mind awareness in the fields of training and education among stakeholders, the market, and our partners.</p></li>
           <li><strong>True Partnership with Government</strong><p>Our relationship with the government is a true partnership, not merely regulatory compliance. They acknowledge our commitment to compliance and seek our community for consultation and advice.</p></li>
         </ul>
       </div>
-      <div class="pv-group reveal">
-        <div class="pv-group-head"><span class="pv-group-ico">📈</span><h3>Our Governance and Growth</h3></div>
+      <div class="ab-group reveal" data-g="g4">
+        <div class="ab-group-head"><span class="ab-num">04</span><h3>Our Governance and Growth</h3></div>
         <ul>
           <li><strong>Strong Internal Systems</strong><p>We uphold robust internal systems that ensure compliance with standards, thorough risk assessments, and effective governance, fostering transparency and accountability.</p></li>
           <li><strong>Sustainable Growth</strong><p>We ensure sustainable growth and practice sound financial management. We reinvest profits into human and capital development for the institution’s advancement.</p></li>
@@ -969,49 +1174,44 @@ h1.hero-h1 span.gold { color:var(--gold); }
 </section>
 
 <!-- MISSION STATEMENTS OF THE COLLEGES AND BASIC EDUCATION -->
-<section id="unit-missions" class="pv-units">
-  <div class="pv-wrap">
+<section id="unit-missions" class="pv-units ab-units">
+  <div class="ab-wrap">
     <div class="reveal">
-      <p class="eyebrow" style="margin-bottom:.8rem">Mission Statements</p>
-      <h2 class="pv-h2" style="color:#fff">Our Colleges and Basic Education</h2>
+      <p class="eyebrow">Mission Statements</p>
+      <h2 class="ab-h2 ab-h2-sm">Our Colleges and Basic Education</h2>
     </div>
-    <div class="pv-unit-grid">
-      <article class="pv-unit reveal">
-        <div class="pv-unit-ico">⚓</div>
-        <h3>College of Maritime Education</h3>
-        <p class="pv-unit-lead">Our mission is to educate and inspire through programs that prepare students for the global maritime industry.</p>
+    <div class="ab-unit-grid">
+      <article class="ab-unit reveal" style="--uc:#1244B8;--ud:#0b2870">
+        <header><span class="ab-unit-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v14M8 11h8M4.5 14a7.5 7.5 0 0 0 15 0"/></svg></span><h3>College of Maritime Education</h3></header>
+        <p class="ab-unit-lead">Our mission is to educate and inspire through programs that prepare students for the global maritime industry.</p>
         <p>The College of Maritime Education is committed to instilling discipline, developing maritime competencies, and cultivating skills, soft skills, and micro-skills to produce seafarers who survive and thrive in the global maritime industry.</p>
         <p>Our students will gain practical experience through rigorous training in our training center, onboard our dedicated training vessel, or through partnerships with local and international maritime entities.</p>
       </article>
-      <article class="pv-unit reveal">
-        <div class="pv-unit-ico">📦</div>
-        <h3>College of Customs and Business Management Education</h3>
-        <p class="pv-unit-lead">Our mission is to educate and inspire through programs that prepare students for global trade and business.</p>
+      <article class="ab-unit reveal" style="--uc:#3d2f9e;--ud:#1c1c50">
+        <header><span class="ab-unit-ico"><svg viewBox="0 0 24 24"><path d="M3.5 8L12 3.5 20.5 8v8L12 20.5 3.5 16z"/><path d="M3.5 8L12 12.5 20.5 8M12 12.500v8"/></svg></span><h3>College of Customs and Business Management Education</h3></header>
+        <p class="ab-unit-lead">Our mission is to educate and inspire through programs that prepare students for global trade and business.</p>
         <p>The College of Customs and Business Management Education is committed to instilling innovation, developing business competencies, and cultivating skills, soft skills, and micro-skills to produce professionals who drive success in global trade, medical, legal, and business operations.</p>
         <p>Our students will gain practical experience through rigorous training in our training center, on-the-job training, startup incubators, simulation labs, or partnerships with local and international businesses.</p>
       </article>
-      <article class="pv-unit reveal">
-        <div class="pv-unit-ico">✈️</div>
-        <h3>College of International Tourism</h3>
-        <p class="pv-unit-lead">Our mission is to educate and inspire through programs that prepare students for the global tourism and hospitality industries.</p>
+      <article class="ab-unit reveal" style="--uc:#1d661d;--ud:#143d12">
+        <header><span class="ab-unit-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.500c2.6 2.4 2.6 14.6 0 17M12 3.500c-2.6 2.4-2.6 14.6 0 17"/></svg></span><h3>College of International Tourism</h3></header>
+        <p class="ab-unit-lead">Our mission is to educate and inspire through programs that prepare students for the global tourism and hospitality industries.</p>
         <p>The College of International Tourism is committed to instilling professionalism, developing hospitality competencies, and cultivating skills, soft skills, and micro-skills to produce professionals who deliver exceptional services, adapt to industry challenges, and lead with integrity.</p>
         <p>Our students will gain practical experience through rigorous training in our training center, on-the-job training, real-world hotel and restaurant training, or partnerships with local and international entities.</p>
       </article>
-      <article class="pv-unit reveal">
-        <div class="pv-unit-ico">⚖️</div>
-        <h3>College of Criminology</h3>
-        <p class="pv-unit-lead">Our mission is to educate and inspire through programs that prepare students for the global criminal justice, law enforcement, and public safety sectors.</p>
+      <article class="ab-unit reveal" style="--uc:#8a1818;--ud:#5c1212">
+        <header><span class="ab-unit-ico"><svg viewBox="0 0 24 24"><path d="M12 4v16M7 20h10M5 7h14M5 7l-2.5 6a2.5 2.5 0 0 0 5 0zM19 7l-2.5 6a2.5 2.5 0 0 0 5 0z"/></svg></span><h3>College of Criminology</h3></header>
+        <p class="ab-unit-lead">Our mission is to educate and inspire through programs that prepare students for the global criminal justice, law enforcement, and public safety sectors.</p>
         <p>The College of Criminology is committed to instilling courage, developing criminology competencies, and cultivating skills, soft skills, and micro-skills to produce officers in the public safety sector who provide services in crime prevention, crime detection and investigation, and law enforcement while leading with unwavering integrity and expertise.</p>
         <p>Our students will gain practical experience through rigorous training in our training center, on-the-job training, real world law enforcement scenarios, and partnerships with local and international entities.</p>
       </article>
-      <article class="pv-unit reveal">
-        <div class="pv-unit-ico">📘</div>
-        <h3>Basic Education Department</h3>
-        <p class="pv-unit-lead">Our mission is to educate and inspire through programs that prepare students for success in further studies, careers, and life.</p>
+      <article class="ab-unit ab-unit-wide reveal" style="--uc:#181D71;--ud:#101450">
+        <header><span class="ab-unit-ico"><svg viewBox="0 0 24 24"><path d="M4 5.500C6.5 4.5 9.5 4.5 12 6c2.5-1.5 5.5-1.5 8-.500v13c-2.5-1-5.5-1-8 .500-2.5-1.5-5.5-1.5-8-.500zM12 6v13.5"/></svg></span><h3>Basic Education Department</h3></header>
+        <p class="ab-unit-lead">Our mission is to educate and inspire through programs that prepare students for success in further studies, careers, and life.</p>
         <p>The Basic Education Department is dedicated to developing well-rounded individuals who demonstrate intellectual growth, nationalism, social competence, physical well-being, integrity, responsibility, and emotional maturity.</p>
       </article>
     </div>
-    <p class="pv-source">Vision and Mission Statements as approved by the PNTC Colleges, Inc. Board of Directors on 28 June 2025 (BOD-RES-EXT Nos. 2025-001, 2025-002, and 2025-004).</p>
+    <p class="ab-source">Vision and Mission Statements as approved by the PNTC Colleges, Inc. Board of Directors on 28 June 2025 (BOD-RES-EXT Nos. 2025-001, 2025-002, and 2025-004).</p>
   </div>
 </section>
 

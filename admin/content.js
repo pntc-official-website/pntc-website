@@ -103,6 +103,14 @@ const GROUPS = [
     T('main.cta.btn2', 'Button 2, text'), H('main.cta.btn2.href', 'Button 2, link'),
     T('main.cta.btn3', 'Button 3, text'), H('main.cta.btn3.href', 'Button 3, link'),
   ] },
+  { id: 'main-about', site: 'Main Site', title: 'About page: who we are, vision and mission', files: ['PNTC Main Landing Page/about.html'], fields: [
+    T('about.who.eyebrow', 'Small label'),
+    T('about.who.mark', 'Heading, underlined words'), T('about.who.rest', 'Heading, rest of the line'),
+    P('about.who.p1', 'First paragraph'), P('about.who.p2', 'Second paragraph'),
+    ...[1, 2, 3, 4].flatMap(n => [T(`about.stat${n}.n`, `Number box ${n}: big text`), T(`about.stat${n}.l`, `Number box ${n}: label`)]),
+    P('about.vision', 'Vision statement'), P('about.mission', 'Mission statement'),
+    P('about.values.intro', 'Core Values introduction'),
+  ] },
   { id: 'college-hero', site: 'Colleges', title: 'College hero', files: ['PNTC Colleges/index.html'], fields: [
     T('college.hero.pill', 'Small tag above the headline'),
     T('college.hero.mark', 'Headline, highlighted word'), T('college.hero.line1', 'Headline, rest of line 1'), T('college.hero.line2', 'Headline, line 2'),
