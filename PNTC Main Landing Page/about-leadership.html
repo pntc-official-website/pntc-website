@@ -800,7 +800,7 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .ld-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--ac)}
 .ld-card:hover{transform:translateY(-4px);box-shadow:0 26px 46px -28px rgba(28,22,80,.6);border-color:rgba(28,22,80,.25)}
 .ld-av{flex:0 0 54px;width:54px;height:54px;border-radius:50%;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;letter-spacing:.02em;box-shadow:0 0 0 4px rgba(243,207,51,.45)}
-.ld-info{min-width:0}
+.ld-info{min-width:0;overflow-wrap:anywhere}
 .ld-role{font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,22,80,.62);line-height:1.5}
 .ld-name{margin-top:.25rem;font-size:1.02rem;font-weight:800;line-height:1.25;letter-spacing:-.01em;color:#1C1650}
 .ld-unit{margin-top:.45rem;display:inline-block;font-size:.7rem;font-weight:700;color:#1C1650;padding:.26rem .65rem;border-radius:999px;background:rgba(243,207,51,.4)}
@@ -845,13 +845,16 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .lt-lbl{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:#1C1650;padding:.42rem .85rem;border-radius:999px;margin-bottom:.9rem}
 .lt-maritime .lt-lbl{background:#1244B8}
 .lt-cards{display:grid;gap:.8rem}
+.lt-group>.lt-under{margin-top:.8rem}
+.lt-l2>.lt-dept>.lt-body{padding:1.3rem}
+.lt-l2>.lt-dept>.lt-body>.lt-group:first-of-type{margin-top:.6rem}
 .lt-c4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .lt-c3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .lt-c4 .ld-card{flex-direction:column;align-items:flex-start}
-.lt-maritime .ld-card:first-child{background:#1244B8;border-color:#1244B8}
-.lt-maritime .ld-card:first-child .ld-av{background:#fff;color:#1244B8}
-.lt-maritime .ld-card:first-child .ld-role{color:rgba(255,255,255,.8)}
-.lt-maritime .ld-card:first-child .ld-name{color:#fff}
+.lt-maritime>.lt-cards>.ld-card{background:#1244B8;border-color:#1244B8}
+.lt-maritime>.lt-cards>.ld-card .ld-av{background:#fff;color:#1244B8}
+.lt-maritime>.lt-cards>.ld-card .ld-role{color:rgba(255,255,255,.8)}
+.lt-maritime>.lt-cards>.ld-card .ld-name{color:#fff}
 
 /* departments side by side, all at one level */
 .lt-note{font-size:.84rem;font-weight:600;color:rgba(28,22,80,.65);margin:-.6rem 0 1.6rem}
@@ -990,9 +993,9 @@ document.addEventListener('DOMContentLoaded',function(){
 
     <div class="lt-tree" id="tree-colleges">
       <div class="lt-tree-head reveal"><span class="lt-tree-n">Tree 1</span><h3><!--c:lead.tree1-->PNTC Colleges<!--/c--></h3></div>
-      <p class="lt-note reveal"><!--c:lead.level-->These departments stand at the same level.<!--/c--></p>
-      <div class="lt-depts lt-level lt-l5">
-        <section class="lt-dept  reveal">
+      <p class="lt-note reveal"><!--c:lead.level-->Academic Affairs and Administration stand at the same level.<!--/c--></p>
+      <div class="lt-depts lt-level lt-l2">
+        <section class="lt-dept reveal">
           <header><h3>Academic Affairs Department</h3></header>
           <div class="lt-body">
           <article class="ld-card ld-lead">
@@ -1003,81 +1006,9 @@ document.addEventListener('DOMContentLoaded',function(){
               
             </div>
           </article>
-          
-          </div>
-        </section>
-        <section class="lt-dept  reveal">
-          <header><h3>Administration Department</h3></header>
-          <div class="lt-body">
-          <article class="ld-card ld-lead">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.vp-admin.role-->Vice President for Administration<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.vp-admin.name-->Atty. Krisha Fabia-Quiazon<!--/c--></h3>
-              
-            </div>
-          </article>
-          <div class="lt-under">
-          <article class="ld-card ">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.sup-hrdm.role-->Supervisor, HRDM<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.sup-hrdm.name-->Tracy Lord Rodriguez<!--/c--></h3>
-              <p class="ld-unit"><!--c:lead.sup-hrdm.unit-->Colleges<!--/c--></p>
-            </div>
-          </article>
-          </div>
-          </div>
-        </section>
-        <section class="lt-dept  reveal">
-          <header><h3>Marketing Department</h3></header>
-          <div class="lt-body">
-          <article class="ld-card ld-lead">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.mgr-college.role-->Manager, Marketing, Admission and Aid Department<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.mgr-college.name-->Jayson Samson<!--/c--></h3>
-              <p class="ld-unit"><!--c:lead.mgr-college.unit-->College<!--/c--></p>
-            </div>
-          </article>
-          
-          </div>
-        </section>
-        <section class="lt-dept  reveal">
-          <header><h3>Quality Department</h3></header>
-          <div class="lt-body">
-          <article class="ld-card ld-lead">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.head-quality.role-->Head, Quality Assurance<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.head-quality.name-->Raquel Kaye Gannaban<!--/c--></h3>
-              
-            </div>
-          </article>
-          
-          </div>
-        </section>
-        <section class="lt-dept  reveal">
-          <header><h3>Finance Department</h3></header>
-          <div class="lt-body">
-          <article class="ld-card ld-lead">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.sup-finance.role-->Supervisor, Finance<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.sup-finance.name-->Genilyn Dela Cruz<!--/c--></h3>
-              <p class="ld-unit"><!--c:lead.sup-finance.unit-->Colleges<!--/c--></p>
-            </div>
-          </article>
-          
-          </div>
-        </section>
-      </div>
-      <section class="lt-dept lt-wide lt-acad reveal">
-          <header><h3><!--c:lead.acad-->Deans and Heads of Academic Affairs<!--/c--></h3></header>
-          <div class="lt-body">
           <div class="lt-group lt-maritime">
             <p class="lt-lbl">College of Maritime Education</p>
-            <div class="lt-cards lt-c4">
+            <div class="lt-cards">
           <article class="ld-card " style="--ac:#1244B8">
             <span class="ld-av" aria-hidden="true"></span>
             <div class="ld-info">
@@ -1086,6 +1017,8 @@ document.addEventListener('DOMContentLoaded',function(){
               
             </div>
           </article>
+            </div>
+            <div class="lt-under">
           <article class="ld-card " style="--ac:#1244B8">
             <span class="ld-av" aria-hidden="true"></span>
             <div class="ld-info">
@@ -1110,15 +1043,15 @@ document.addEventListener('DOMContentLoaded',function(){
               
             </div>
           </article>
-            </div>
+          </div>
           </div>
           <div class="lt-group ">
             <p class="lt-lbl">Deans</p>
-            <div class="lt-cards lt-c3">
+            <div class="lt-cards">
           <article class="ld-card " style="--ac:#3d2f9e">
             <span class="ld-av" aria-hidden="true"></span>
             <div class="ld-info">
-              <p class="ld-role"><!--c:lead.dean-business.role-->Dean of Business and Management<!--/c--></p>
+              <p class="ld-role"><!--c:lead.dean-business.role-->Dean of the College of Business and Management<!--/c--></p>
               <h3 class="ld-name"><!--c:lead.dean-business.name-->Dr. Zarny Zaragoza<!--/c--></h3>
               
             </div>
@@ -1126,7 +1059,7 @@ document.addEventListener('DOMContentLoaded',function(){
           <article class="ld-card " style="--ac:#8a1818">
             <span class="ld-av" aria-hidden="true"></span>
             <div class="ld-info">
-              <p class="ld-role"><!--c:lead.dean-crim.role-->Dean of Criminal Justice<!--/c--></p>
+              <p class="ld-role"><!--c:lead.dean-crim.role-->Dean of the College of Criminal Justice<!--/c--></p>
               <h3 class="ld-name"><!--c:lead.dean-crim.name-->Dr. Rudy Gahar<!--/c--></h3>
               
             </div>
@@ -1140,10 +1073,11 @@ document.addEventListener('DOMContentLoaded',function(){
             </div>
           </article>
             </div>
+            
           </div>
           <div class="lt-group ">
             <p class="lt-lbl">Heads</p>
-            <div class="lt-cards lt-c3">
+            <div class="lt-cards">
           <article class="ld-card ">
             <span class="ld-av" aria-hidden="true"></span>
             <div class="ld-info">
@@ -1169,9 +1103,89 @@ document.addEventListener('DOMContentLoaded',function(){
             </div>
           </article>
             </div>
+            
           </div>
           </div>
-      </section>
+        </section>
+        <section class="lt-dept reveal">
+          <header><h3>Administration Department</h3></header>
+          <div class="lt-body">
+          <article class="ld-card ld-lead">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.vp-admin.role-->Vice President for Administration<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.vp-admin.name-->Atty. Krisha Fabia-Quiazon<!--/c--></h3>
+              
+            </div>
+          </article>
+          <div class="lt-group ">
+            <p class="lt-lbl">Marketing Department</p>
+            <div class="lt-cards">
+          <article class="ld-card ">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.mgr-college.role-->Manager, Marketing, Admission and Aid Department<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.mgr-college.name-->Jayson Samson<!--/c--></h3>
+              <p class="ld-unit"><!--c:lead.mgr-college.unit-->College<!--/c--></p>
+            </div>
+          </article>
+            </div>
+            <div class="lt-under">
+          <article class="ld-card ">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.sup-marketing.role-->Supervisor, Marketing<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.sup-marketing.name-->Emil Fugoso<!--/c--></h3>
+              
+            </div>
+          </article>
+          </div>
+          </div>
+          <div class="lt-group ">
+            <p class="lt-lbl">Quality Department</p>
+            <div class="lt-cards">
+          <article class="ld-card ">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.head-quality.role-->Head, Quality Assurance<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.head-quality.name-->Raquel Kaye Gannaban<!--/c--></h3>
+              
+            </div>
+          </article>
+            </div>
+            
+          </div>
+          <div class="lt-group ">
+            <p class="lt-lbl">Finance Department</p>
+            <div class="lt-cards">
+          <article class="ld-card ">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.sup-finance.role-->Supervisor, Finance<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.sup-finance.name-->Genilyn Dela Cruz<!--/c--></h3>
+              <p class="ld-unit"><!--c:lead.sup-finance.unit-->Colleges<!--/c--></p>
+            </div>
+          </article>
+            </div>
+            
+          </div>
+          <div class="lt-group ">
+            <p class="lt-lbl">HRDM</p>
+            <div class="lt-cards">
+          <article class="ld-card ">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.sup-hrdm.role-->Supervisor, HRDM<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.sup-hrdm.name-->Tracy Lord Rodriguez<!--/c--></h3>
+              <p class="ld-unit"><!--c:lead.sup-hrdm.unit-->Colleges<!--/c--></p>
+            </div>
+          </article>
+            </div>
+            
+          </div>
+          </div>
+        </section>
+      </div>
     </div>
 
     <div class="lt-tree lt-tree-b" id="tree-training">

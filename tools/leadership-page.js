@@ -33,12 +33,23 @@ const dept = (name, top, under = [], cls = '') => `<section class="lt-dept ${cls
           ${under.length ? `<div class="lt-under">\n          ${cards(under)}\n          </div>` : ''}
           </div>
         </section>`;
-const group = (label, ids, cls = '') => `<div class="lt-group ${cls}">
+const group = (label, ids, cls = '', under = []) => `<div class="lt-group ${cls}">
             <p class="lt-lbl">${label}</p>
-            <div class="lt-cards lt-c${ids.length}">
+            <div class="lt-cards">
           ${cards(ids)}
             </div>
+            ${under.length ? `<div class="lt-under">
+          ${cards(under)}
+          </div>` : ''}
           </div>`;
+// A department with its head on top and the groups that report to that head
+const big = (name, lead, groups) => `<section class="lt-dept reveal">
+          <header><h3>${name}</h3></header>
+          <div class="lt-body">
+          ${card(lead, 'ld-lead')}
+          ${groups.join('\n          ')}
+          </div>
+        </section>`;
 
 const section = `<section id="leadership" class="ld">
   <span class="ld-ghost" aria-hidden="true">PNTC</span>
@@ -62,22 +73,20 @@ const section = `<section id="leadership" class="ld">
 
     <div class="lt-tree" id="tree-colleges">
       <div class="lt-tree-head reveal"><span class="lt-tree-n">Tree 1</span><h3>${slot('lead.tree1', 'PNTC Colleges')}</h3></div>
-      <p class="lt-note reveal">${slot('lead.level', 'These departments stand at the same level.')}</p>
-      <div class="lt-depts lt-level lt-l5">
-        ${dept('Academic Affairs Department', ['vp-acad'])}
-        ${dept('Administration Department', ['vp-admin'], ['sup-hrdm'])}
-        ${dept('Marketing Department', ['mgr-college'])}
-        ${dept('Quality Department', ['head-quality'])}
-        ${dept('Finance Department', ['sup-finance'])}
+      <p class="lt-note reveal">${slot('lead.level', 'Academic Affairs and Administration stand at the same level.')}</p>
+      <div class="lt-depts lt-level lt-l2">
+        ${big('Academic Affairs Department', 'vp-acad', [
+          group('College of Maritime Education', ['dean-maritime'], 'lt-maritime', ['head-bsmt', 'head-bsmare', 'head-obt']),
+          group('Deans', ['dean-business', 'dean-crim', 'dean-osa']),
+          group('Heads', ['head-gened', 'head-research', 'head-registrar']),
+        ])}
+        ${big('Administration Department', 'vp-admin', [
+          group('Marketing Department', ['mgr-college'], '', ['sup-marketing']),
+          group('Quality Department', ['head-quality']),
+          group('Finance Department', ['sup-finance']),
+          group('HRDM', ['sup-hrdm']),
+        ])}
       </div>
-      <section class="lt-dept lt-wide lt-acad reveal">
-          <header><h3>${slot('lead.acad', 'Deans and Heads of Academic Affairs')}</h3></header>
-          <div class="lt-body">
-          ${group('College of Maritime Education', ['dean-maritime', 'head-bsmt', 'head-bsmare', 'head-obt'], 'lt-maritime')}
-          ${group('Deans', ['dean-business', 'dean-crim', 'dean-osa'])}
-          ${group('Heads', ['head-gened', 'head-research', 'head-registrar'])}
-          </div>
-      </section>
     </div>
 
     <div class="lt-tree lt-tree-b" id="tree-training">
@@ -112,5 +121,8 @@ h = h.slice(0, start) + section + '\n\n\n\n' + h.slice(end);
 h = h.replace(/<style id="leaders-modern">[\s\S]*?<\/script>\n/, '');
 h = h.replace('<meta name="description"', `<style id="leaders-modern">\n${CSS}\n</style>\n${SCRIPT}\n<meta name="description"`);
 h = C.preserveSlots(before, h);
+// wording corrected by the school after the first build
+const FIX = { 'lead.dean-business.role': ['Dean of Business and Management', 'Dean of the College of Business and Management'], 'lead.dean-crim.role': ['Dean of Criminal Justice', 'Dean of the College of Criminal Justice'], 'lead.level': ['These departments stand at the same level.', 'Academic Affairs and Administration stand at the same level.'] };
+for (const k in FIX) if (C.getSlot(h, k) === FIX[k][0]) h = C.setSlot(h, k, FIX[k][1]);
 fs.writeFileSync(FILE, h);
 console.log('leadership page built:', (section.match(/class="ld-card/g) || []).length, 'of', PEOPLE.length, 'leaders placed');
