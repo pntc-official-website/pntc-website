@@ -100,6 +100,7 @@ const LEADERS = [
   { id: 'head-obt', role: 'Head, On Board Training Department', name: 'C/M Adrian Bawag', accent: '#1244B8' },
   { id: 'dean-business', role: 'Dean of the College of Business and Management', name: 'Dr. Zarny Zaragoza', accent: '#3d2f9e' },
   { id: 'dean-crim', role: 'Dean of the College of Criminal Justice', name: 'Dr. Rudy Gahar', accent: '#8a1818' },
+  { id: 'principal-shs', role: 'Principal, Senior High School', name: 'Camille Rementilla', accent: '#181D71' },
   { id: 'dean-osa', role: 'Dean of Student Affairs', name: 'Dr. Celso Servas' },
   { id: 'head-gened', role: 'Head of General Education', name: 'Engr. Pamela Bautista' },
   { id: 'head-research', role: 'Head, Research and Development', name: 'Dr. Diana Rose Manaligod' },

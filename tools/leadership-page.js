@@ -80,13 +80,15 @@ const section = `<section id="leadership" class="ld">
           group('College of Maritime Education', ['dean-maritime'], 'lt-col" style="--gc:#1244B8', ['head-bsmt', 'head-bsmare', 'head-obt']),
           group('College of Business and Management', ['dean-business'], 'lt-col" style="--gc:#3d2f9e'),
           group('College of Criminal Justice', ['dean-crim'], 'lt-col" style="--gc:#8a1818'),
+          group('Senior High School', ['principal-shs'], 'lt-col" style="--gc:#181D71'),
           group('Student Affairs', ['dean-osa']),
-          group('Heads', ['head-gened', 'head-research', 'head-registrar']),
+          group('Heads', ['head-gened', 'head-registrar']),
         ])}
         ${big('Administration Department', 'vp-admin', [
           group('Marketing Department', ['mgr-college'], '', ['sup-marketing']),
           group('Quality Department', ['head-quality']),
           group('Finance Department', ['sup-finance']),
+          group('Research and Development', ['head-research']),
           group('HRDM', ['sup-hrdm']),
         ])}
       </div>
