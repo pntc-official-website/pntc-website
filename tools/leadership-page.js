@@ -34,7 +34,7 @@ const dept = (name, top, under = [], cls = '') => `<section class="lt-dept ${cls
           </div>
         </section>`;
 // A unit under a department head. "w" is how many people stand side by side in it, "color" highlights a college.
-const group = (label, ids, o = {}) => `<div class="lt-group${o.color ? ' lt-col' : ''}" style="--w:${o.w || 1}${o.color ? ';--gc:' + o.color : ''}">
+const group = (label, ids, o = {}) => `<div class="lt-group${o.color ? ' lt-col' : ''}${o.low ? ' lt-low' : ''}" style="--w:${o.w || 1}${o.color ? ';--gc:' + o.color : ''}">
             <p class="lt-lbl">${label}</p>
             <div class="lt-cards">
           ${cards(ids)}
@@ -73,10 +73,10 @@ const section = `<section id="leadership" class="ld">
       </div>
     </div>
 
-    <nav class="lt-jump reveal" aria-label="Jump to a tree">
-      <a href="#tree-colleges">${slot('lead.tree1', 'PNTC Colleges')}</a>
-      <a href="#tree-training">${slot('lead.tree2', 'Maritime Training Center')}</a>
-    </nav>
+    <div class="lt-toggle reveal" role="tablist" aria-label="Choose a tree">
+      <button type="button" class="on" role="tab" aria-selected="true" data-tree="tree-colleges">${slot('lead.tree1', 'PNTC Colleges')}</button>
+      <button type="button" role="tab" aria-selected="false" data-tree="tree-training">${slot('lead.tree2', 'Maritime Training Center')}</button>
+    </div>
   </div>
 
   <div class="lt-trees">
@@ -89,8 +89,8 @@ const section = `<section id="leadership" class="ld">
           group('College of Criminal Justice', ['dean-crim'], { color: '#8a1818' }),
           group('Student Affairs', ['dean-osa']),
           group('Senior High School', ['principal-shs'], { color: '#181D71' }),
-          group('General Education', ['head-gened']),
-          group('Registrar', ['head-registrar']),
+          group('General Education', ['head-gened'], { low: true }),
+          group('Registrar', ['head-registrar'], { low: true }),
         ])}
         ${big('Administration Department', 'vp-admin', [
           group('Marketing Department', ['mgr-college'], { under: ['sup-marketing'] }),
@@ -120,6 +120,28 @@ document.addEventListener('DOMContentLoaded',function(){
     var w=n.split(/\\s+/).filter(Boolean);
     c.querySelector('.ld-av').textContent=w.length?(w[0][0]+(w.length>1?w[w.length-1][0]:'')).toUpperCase():'';
   });
+  /* General Education and Registrar stand on the heads level: line them up with the first head under a dean */
+  function drop(){
+    document.querySelectorAll('.lt-groups').forEach(function(g){
+      var low=g.querySelectorAll('.lt-low');if(!low.length)return;
+      g.style.setProperty('--drop','0px');
+      var ref=g.querySelector('.lt-group:not(.lt-low) .lt-under .ld-card'),lbl=low[0].querySelector('.ld-card');
+      if(!ref||!lbl||!g.offsetParent||getComputedStyle(g).flexDirection!=='row')return;
+      var d=ref.getBoundingClientRect().top-lbl.getBoundingClientRect().top;
+      g.style.setProperty('--drop',Math.max(0,Math.round(d))+'px');
+    });
+  }
+  /* one tree at a time */
+  var tabs=document.querySelectorAll('.lt-toggle button');
+  function show(id){
+    tabs.forEach(function(b){var on=b.dataset.tree===id;b.classList.toggle('on',on);b.setAttribute('aria-selected',on?'true':'false');});
+    document.querySelectorAll('.lt-tree').forEach(function(x){x.hidden=x.id!==id;x.querySelectorAll('.reveal').forEach(function(r){r.classList.add('in');});});
+    drop();
+  }
+  tabs.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.tree);});});
+  show(location.hash==='#tree-training'?'tree-training':'tree-colleges');
+  window.addEventListener('resize',drop);window.addEventListener('load',drop);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(drop);
 });
 </script>`;
 
