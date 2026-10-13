@@ -147,7 +147,8 @@ const GROUPS = [
   ] },
   { id: 'main-leaders', site: 'Main Site', title: 'Leadership page: leaders', files: ['PNTC Main Landing Page/about-leadership.html'], fields: [
     T('lead.eyebrow', 'Small label'), T('lead.mark', 'Heading, underlined words'), T('lead.rest', 'Heading, rest of the line'),
-    T('lead.tree1', 'Name of the first tree'), T('lead.tree2', 'Name of the second tree'),
+    T('lead.tree1', 'Switch button 1 (Colleges)'), T('lead.tree2', 'Switch button 2 (Training Center)'),
+    T('lead.acad', 'Heading of the academics cards'), T('lead.admin', 'Heading of the administration cards'),
    
     ...LEADERS.flatMap(p => [
       T(`lead.${p.id}.name`, `${p.role}${p.unit ? ' (' + p.unit + ')' : ''}: name`), T(`lead.${p.id}.role`, `${p.role}${p.unit ? ' (' + p.unit + ')' : ''}: title`),

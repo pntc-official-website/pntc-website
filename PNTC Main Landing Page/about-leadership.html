@@ -785,7 +785,7 @@ h1.hero-h1 span.gold { color:var(--gold); }
 <style id="leaders-modern">
 /* Leadership page */
 .ld-wrap{max-width:1240px;margin:0 auto;position:relative}
-#leadership.ld{padding:5.5rem clamp(1rem,3vw,3rem) 6rem;position:relative;overflow:hidden;background:#fff}
+#leadership.ld{padding:5.5rem clamp(1.25rem,4vw,3rem) 6rem;position:relative;overflow:hidden;background:#fff}
 #leadership.ld::before{content:'';position:absolute;right:-200px;top:-180px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(243,207,51,.2),transparent 68%);pointer-events:none}
 .ld-ghost{position:absolute;left:-.04em;top:1rem;font-size:clamp(8rem,24vw,22rem);font-weight:800;line-height:.8;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.5px rgba(28,22,80,.06);pointer-events:none;user-select:none}
 #leadership .eyebrow{color:#1C1650!important;display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1rem}
@@ -796,116 +796,71 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .ld-mark svg{position:absolute;left:0;right:0;bottom:-.14em;width:100%;height:.22em}
 
 /* person card */
-.ld-card{--ac:#1C1650;background:#fff;border:1px solid rgba(28,22,80,.1);border-radius:16px;padding:1rem 1.1rem;display:flex;align-items:center;gap:.9rem;position:relative;overflow:hidden;min-width:0;box-shadow:0 18px 38px -30px rgba(28,22,80,.5);transition:transform .3s,box-shadow .3s,border-color .3s}
-.ld-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--ac)}
-.ld-card:hover{transform:translateY(-4px);box-shadow:0 26px 46px -28px rgba(28,22,80,.6);border-color:rgba(28,22,80,.25)}
-.ld-av{flex:0 0 48px;width:48px;height:48px;border-radius:50%;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;letter-spacing:.02em;box-shadow:0 0 0 4px rgba(243,207,51,.45)}
+.ld-card{--ac:#1C1650;background:#fff;border:1px solid rgba(28,22,80,.1);border-radius:20px;padding:1.5rem 1.3rem 1.4rem;display:flex;flex-direction:column;align-items:flex-start;gap:1rem;position:relative;overflow:hidden;min-width:0;box-shadow:0 20px 42px -32px rgba(28,22,80,.5);transition:transform .3s,box-shadow .3s,border-color .3s}
+.ld-card::before{content:'';position:absolute;left:0;right:0;top:0;height:5px;background:var(--ac)}
+.ld-card:hover{transform:translateY(-5px);box-shadow:0 28px 50px -30px rgba(28,22,80,.6);border-color:rgba(28,22,80,.25)}
+.ld-av{flex:0 0 auto;width:58px;height:58px;border-radius:50%;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.05rem;letter-spacing:.02em;box-shadow:0 0 0 5px rgba(243,207,51,.45)}
 .ld-info{min-width:0;overflow-wrap:anywhere}
-.ld-role{font-size:.64rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(28,22,80,.62);line-height:1.45}
-.ld-name{margin-top:.25rem;font-size:.98rem;font-weight:800;line-height:1.25;letter-spacing:-.01em;color:#1C1650}
-.ld-unit{margin-top:.45rem;display:inline-block;font-size:.68rem;font-weight:700;line-height:1.35;color:#1C1650;padding:.26rem .65rem;border-radius:12px;background:rgba(243,207,51,.4)}
-.ld-lead{border-color:rgba(28,22,80,.2)}
+.ld-role{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,22,80,.62);line-height:1.5}
+.ld-name{margin-top:.35rem;font-size:1.1rem;font-weight:800;line-height:1.25;letter-spacing:-.01em;color:#1C1650}
+.ld-unit{margin-top:.6rem;display:inline-block;font-size:.7rem;font-weight:700;line-height:1.35;color:#1C1650;padding:.28rem .7rem;border-radius:12px;background:rgba(243,207,51,.4)}
 
-/* chairman, president and the shared quality office */
-.lt-apex{margin-top:3.2rem;display:flex;flex-direction:column;align-items:center}
-.lt-v{width:3px;height:34px;background:#1C1650}
-.ld-big{width:100%;max-width:560px;background:#1C1650;border-color:#1C1650;border-radius:24px;padding:clamp(1.5rem,2.6vw,2.1rem);gap:1.4rem}
+/* chairman, president, vice presidents */
+.lc-exec{margin-top:3.2rem}
+.lc-top{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
+.ld-big{flex-direction:row;align-items:center;background:#1C1650;border-color:#1C1650;border-radius:24px;padding:clamp(1.6rem,2.8vw,2.4rem);gap:1.5rem}
 .ld-big::before{display:none}
-.ld-big::after{content:'';position:absolute;right:-80px;bottom:-110px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(243,207,51,.3),transparent 70%)}
-.ld-big .ld-av{flex-basis:80px;width:80px;height:80px;font-size:1.5rem;background:#F3CF33;color:#1C1650;box-shadow:0 0 0 6px rgba(255,255,255,.14)}
+.ld-big::after{content:'';position:absolute;right:-80px;bottom:-110px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(243,207,51,.3),transparent 70%)}
+.ld-big .ld-av{width:92px;height:92px;font-size:1.7rem;background:#F3CF33;color:#1C1650;box-shadow:0 0 0 6px rgba(255,255,255,.14)}
 .ld-big .ld-role{color:#F3CF33;font-size:.74rem}
-.ld-big .ld-name{color:#fff;font-size:clamp(1.3rem,2.2vw,1.7rem);margin-top:.35rem}
+.ld-big .ld-name{color:#fff;font-size:clamp(1.4rem,2.4vw,1.9rem);margin-top:.4rem}
 .ld-big .ld-info{position:relative;z-index:1}
-.lt-staff{position:relative;display:flex;justify-content:center;width:100%;max-width:560px}
-.lt-staff>.lt-v{height:150px}
-.lt-staff-box{position:absolute;left:calc(50% + 46px);top:50%;transform:translateY(-50%);width:300px;background:#F7F7FB;border:1.5px dashed rgba(28,22,80,.45);border-radius:18px;padding:.8rem}
-.lt-staff-box::before{content:'';position:absolute;right:100%;top:50%;width:45px;border-top:1.5px dashed rgba(28,22,80,.45)}
-.lt-staff-box .lt-lbl{margin-bottom:.6rem}
+.lc-vps{margin-top:1.25rem}
+.ld-vp{flex-direction:row;align-items:center;border-color:rgba(28,22,80,.2);padding:1.5rem}
+.ld-vp::before{right:auto;bottom:0;width:6px;height:auto}
+.ld-vp .ld-av{width:66px;height:66px;font-size:1.2rem}
+.ld-vp .ld-name{font-size:1.2rem}
 
-.lt-lbl{display:inline-block;font-size:.64rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;line-height:1.4;color:#fff;background:#1C1650;padding:.4rem .8rem;border-radius:12px;margin-bottom:.7rem}
-.lt-toggle{display:flex;justify-content:center;gap:.3rem;width:max-content;max-width:100%;margin:0 auto;padding:.35rem;border-radius:999px;background:#F7F7FB;border:1.5px solid rgba(28,22,80,.18);position:relative;z-index:2}
-.lt-toggle button{font-family:inherit;font-size:.82rem;font-weight:800;color:#1C1650;background:transparent;border:0;border-radius:999px;padding:.7rem 1.3rem;cursor:pointer;transition:background .2s,color .2s}
+/* switch */
+.lt-toggle{display:flex;justify-content:center;gap:.3rem;width:max-content;max-width:100%;margin:3.5rem auto 0;padding:.4rem;border-radius:999px;background:#F7F7FB;border:1.5px solid rgba(28,22,80,.18)}
+.lt-toggle button{font-family:inherit;font-size:.88rem;font-weight:800;color:#1C1650;background:transparent;border:0;border-radius:999px;padding:.8rem 1.5rem;cursor:pointer;transition:background .2s,color .2s}
 .lt-toggle button:hover{background:rgba(28,22,80,.08)}
 .lt-toggle button.on{background:#1C1650;color:#F3CF33}
-.lt-tree[hidden]{display:none}
+.lc-panel[hidden]{display:none}
 
-/* trees, departments and units (stacked layout, used on tablets and phones) */
-.lt-trees{max-width:1240px;margin:0 auto;position:relative;display:grid;gap:1.6rem;padding-top:26px}
-.lt-trees::before{content:'';position:absolute;left:50%;top:0;width:3px;height:26px;margin-left:-1.5px;background:#1C1650}
-.lt-tree{scroll-margin-top:140px;border:2px solid #1C1650;border-radius:26px;padding:1rem;background:#fff;position:relative;min-width:0}
-.lt-tree-b{border-color:#F3CF33}
-.lt-tree-head{margin-bottom:1rem;text-align:center}
-.lt-tree-head h3{font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:800;letter-spacing:-.02em;color:#1C1650;line-height:1.15}
-.lt-depts{display:grid;gap:1rem;align-items:start}
-.lt-l2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.lt-dept{background:#F7F7FB;border:1px solid rgba(28,22,80,.08);border-radius:20px;min-width:0;position:relative}
-.lt-dept>header{background:#1C1650;border-radius:19px 19px 0 0;padding:.9rem 1rem}
-.lt-dept>header h3{font-size:.92rem;font-weight:800;color:#fff;line-height:1.3}
-.lt-body{padding:1rem;display:flex;flex-direction:column;gap:.8rem}
-.lt-groups{display:flex;flex-direction:column;gap:.9rem}
-.lt-group{border-top:1px dashed rgba(28,22,80,.2);padding-top:.9rem;min-width:0}
-.lt-cards{display:grid;gap:.7rem}
-.lt-under{margin:.7rem 0 0 .9rem;padding-left:.9rem;border-left:2px solid rgba(28,22,80,.18);display:flex;flex-direction:column;gap:.7rem}
-.lt-col .lt-lbl{background:var(--gc)}
-.lt-col>.lt-cards>.ld-card{background:var(--gc);border-color:var(--gc)}
-.lt-col>.lt-cards>.ld-card .ld-av{background:#fff;color:var(--gc)}
-.lt-col>.lt-cards>.ld-card .ld-role{color:rgba(255,255,255,.8)}
-.lt-col>.lt-cards>.ld-card .ld-name{color:#fff}
+/* card groups */
+.lc-block{margin-top:2.6rem;background:#F7F7FB;border:1px solid rgba(28,22,80,.08);border-radius:28px;padding:clamp(1.2rem,2.6vw,2.2rem)}
+.lc-block+.lc-block{margin-top:1.5rem}
+.lc-h3{display:flex;align-items:center;gap:1rem;font-size:clamp(1.5rem,2.8vw,2.1rem);font-weight:800;letter-spacing:-.02em;color:#1C1650;line-height:1.15}
+.lc-h3 span{border-bottom:5px solid #F3CF33;padding-bottom:.2rem}
+.lc-h3::after{content:'';flex:1;height:1px;background:rgba(28,22,80,.14)}
+.lc-set{margin-top:1.8rem}
+.lc-lbl{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:#1C1650;padding:.45rem .9rem;border-radius:999px;margin-bottom:1rem}
+.lc-grid{display:grid;gap:1rem}
+.lc-g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.lc-g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.lc-g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.lc-g2{grid-template-columns:repeat(2,minmax(0,1fr));max-width:820px}
+.lc-g5 .ld-name{font-size:1.02rem}
+.lc-g5 .ld-role{font-size:.64rem;letter-spacing:.08em}
 
-/* wide screens: one chart, every unit on the same level, sized to fit the screen */
-@media(min-width:1181px){
-  .lt-trees{container-type:inline-size;max-width:1840px}
-  .lt-tree{padding:.6rem;border-radius:20px}
-  .lt-tree-b{width:100%;max-width:640px;margin:0 auto}
-  .lt-tree-b .lt-body{padding:.8rem}
-  .lt-tree-head{margin-bottom:.6rem}
-  .lt-tree-head h3{font-size:clamp(1.15rem,1.6cqw,1.7rem)}
-  .lt-level{padding-top:16px;position:relative;gap:.5rem}
-  .lt-level::before{content:'';position:absolute;top:0;left:25%;right:25%;height:3px;background:#1C1650}
-  .lt-level>.lt-dept::before{content:'';position:absolute;left:50%;top:-16px;width:3px;height:15px;margin-left:-1.5px;background:#1C1650}
-  .lt-split{grid-template-columns:minmax(0,7fr) minmax(0,4fr)}
-  .lt-split::before{left:31.8%;right:18.2%}
-  .lt-group.lt-low{padding-top:var(--drop,0px)}
-  .lt-group.lt-low::before{height:calc(14px + var(--drop,0px))}
-  .lt-dept{border-radius:16px}
-  .lt-dept>header{border-radius:15px 15px 0 0;padding:.55rem .5rem;text-align:center;min-height:2.9rem;display:flex;align-items:center;justify-content:center}
-  .lt-dept>header h3{font-size:clamp(.72rem,.95cqw,1rem)}
-  .lt-body{padding:.5rem;gap:0;align-items:center}
-  .lt-big>.lt-body>.ld-lead{width:min(100%,22rem)}
-  .lt-groups{flex-direction:row;align-items:flex-start;gap:.35rem;width:100%;margin-top:16px;padding-top:14px;border-top:3px solid #1C1650;position:relative}
-  .lt-groups::before{content:'';position:absolute;left:50%;top:-19px;width:3px;height:16px;margin-left:-1.5px;background:#1C1650}
-  .lt-group{flex:var(--w,1) 1 0;border-top:0;padding-top:0;position:relative;display:flex;flex-direction:column;align-items:center}
-  .lt-group::before{content:'';position:absolute;left:50%;top:-14px;width:3px;height:14px;margin-left:-1.5px;background:#1C1650}
-  .lt-groups>.lt-group:first-child::after,.lt-groups>.lt-group:last-child::after{content:'';position:absolute;top:-17px;height:3px;width:calc(50% - 1.5px);background:#F7F7FB}
-  .lt-groups>.lt-group:first-child::after{left:0}
-  .lt-groups>.lt-group:last-child::after{right:0}
-  .lt-group .lt-lbl{display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-height:3.4em;font-size:clamp(.54rem,.7cqw,.76rem);letter-spacing:.04em;padding:.3rem .25rem;border-radius:9px;margin-bottom:.35rem}
-  .lt-cards{width:100%;gap:.35rem}
-  .lt-under{width:100%;margin:.35rem 0 0;padding:.35rem 0 0;border-left:0;gap:.35rem;position:relative}
-  .lt-under::before{content:'';position:absolute;left:50%;top:-.05rem;width:2px;height:.4rem;margin-left:-1px;background:rgba(28,22,80,.35)}
-  .lt-groups .ld-card{flex-direction:column;align-items:center;text-align:center;gap:.35rem;padding:.6rem .3rem;border-radius:12px;width:100%}
-  .lt-groups .ld-card::before{width:100%;height:4px;bottom:auto}
-  .lt-groups .ld-av{flex:0 0 auto;width:clamp(28px,2.5cqw,44px);height:clamp(28px,2.5cqw,44px);font-size:clamp(.56rem,.68cqw,.85rem);box-shadow:0 0 0 3px rgba(243,207,51,.45)}
-  .lt-groups .ld-role{font-size:clamp(.56rem,.7cqw,.74rem);letter-spacing:0;line-height:1.35}
-  .lt-groups .ld-name{font-size:clamp(.74rem,.96cqw,1.05rem);margin-top:.2rem;line-height:1.2}
-  .lt-groups .ld-unit{font-size:clamp(.5rem,.62cqw,.68rem);padding:.15rem .4rem;margin-top:.3rem}
-  .lt-big>.lt-body>.ld-lead .ld-role{font-size:clamp(.54rem,.62cqw,.7rem)}
-  .lt-big>.lt-body>.ld-lead .ld-name{font-size:clamp(.8rem,1cqw,1.1rem)}
-}
-
-@media(max-width:1180px){
-  .lt-staff{flex-direction:column;align-items:center}
-  .lt-staff>.lt-v{height:34px}
-  .lt-staff-box{position:static;transform:none;width:100%;margin-bottom:1.2rem}
-  .lt-staff-box::before{display:none}
+@media(max-width:1080px){
+  .lc-g5,.lc-g4{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media(max-width:760px){
   #leadership.ld{padding-top:4rem;padding-bottom:4rem}
   .ld-head{text-align:left}
   #leadership .eyebrow::after{display:none}
-  .lt-apex{margin-top:2.4rem}
-  .ld-big .ld-av{flex-basis:66px;width:66px;height:66px;font-size:1.25rem}
-  .lt-l2{grid-template-columns:1fr}
+  .lc-exec{margin-top:2.4rem}
+  .lc-top,.lc-g3,.lc-g2{grid-template-columns:1fr}
+  .lc-g5,.lc-g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ld-big .ld-av{width:70px;height:70px;font-size:1.3rem}
+  .lt-toggle{margin-top:2.6rem}
+  .lt-toggle button{padding:.7rem 1rem;font-size:.8rem}
+}
+@media(max-width:480px){
+  .lc-g5,.lc-g4{grid-template-columns:1fr}
+  .lc-g5 .ld-card,.lc-g4 .ld-card,.lc-g3 .ld-card:not(.ld-vp),.lc-g2 .ld-card{flex-direction:row;align-items:center}
 }
 @media(prefers-reduced-motion:reduce){.ld-card{transition:none}}
 </style>
@@ -917,28 +872,14 @@ document.addEventListener('DOMContentLoaded',function(){
     var w=n.split(/\s+/).filter(Boolean);
     c.querySelector('.ld-av').textContent=w.length?(w[0][0]+(w.length>1?w[w.length-1][0]:'')).toUpperCase():'';
   });
-  /* General Education and Registrar stand on the heads level: line them up with the first head under a dean */
-  function drop(){
-    document.querySelectorAll('.lt-groups').forEach(function(g){
-      var low=g.querySelectorAll('.lt-low');if(!low.length)return;
-      g.style.setProperty('--drop','0px');
-      var ref=g.querySelector('.lt-group:not(.lt-low) .lt-under .ld-card'),lbl=low[0].querySelector('.ld-card');
-      if(!ref||!lbl||!g.offsetParent||getComputedStyle(g).flexDirection!=='row')return;
-      var d=ref.getBoundingClientRect().top-lbl.getBoundingClientRect().top;
-      g.style.setProperty('--drop',Math.max(0,Math.round(d))+'px');
-    });
-  }
-  /* one tree at a time */
+  /* Colleges or Training Center, one at a time */
   var tabs=document.querySelectorAll('.lt-toggle button');
   function show(id){
-    tabs.forEach(function(b){var on=b.dataset.tree===id;b.classList.toggle('on',on);b.setAttribute('aria-selected',on?'true':'false');});
-    document.querySelectorAll('.lt-tree').forEach(function(x){x.hidden=x.id!==id;x.querySelectorAll('.reveal').forEach(function(r){r.classList.add('in');});});
-    drop();
+    tabs.forEach(function(b){var on=b.dataset.panel===id;b.classList.toggle('on',on);b.setAttribute('aria-selected',on?'true':'false');});
+    document.querySelectorAll('.lc-panel').forEach(function(x){x.hidden=x.id!==id;if(x.id===id)x.querySelectorAll('.reveal').forEach(function(r){r.classList.add('in');});});
   }
-  tabs.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.tree);});});
-  show(location.hash==='#tree-training'?'tree-training':'tree-colleges');
-  window.addEventListener('resize',drop);window.addEventListener('load',drop);
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(drop);
+  tabs.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.panel);});});
+  show(location.hash==='#training'?'panel-training':'panel-colleges');
 });
 </script>
 <meta name="description" content="The executive, academic, and administrative leadership of PNTC Colleges, Inc. in Dasmariñas, Cavite.">
@@ -997,8 +938,9 @@ document.addEventListener('DOMContentLoaded',function(){
       <h2 class="ld-h2"><span class="ld-mark"><!--c:lead.mark-->The People<!--/c--><svg viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 10 C 70 2, 190 2, 297 8" fill="none" stroke="#F3CF33" stroke-width="5" stroke-linecap="round"/></svg></span> <!--c:lead.rest-->Who Lead PNTC<!--/c--></h2>
     </div>
 
-    <div class="lt-apex reveal">
-      <article class="ld-card ld-big">
+    <div class="lc-exec">
+      <div class="lc-top">
+        <article class="ld-card ld-big reveal">
             <span class="ld-av" aria-hidden="true"></span>
             <div class="ld-info">
               <p class="ld-role"><!--c:lead.chairman.role-->Chairman of the Board<!--/c--></p>
@@ -1006,8 +948,7 @@ document.addEventListener('DOMContentLoaded',function(){
               
             </div>
           </article>
-      <span class="lt-v" aria-hidden="true"></span>
-      <article class="ld-card ld-big">
+        <article class="ld-card ld-big reveal">
             <span class="ld-av" aria-hidden="true"></span>
             <div class="ld-info">
               <p class="ld-role"><!--c:lead.president.role-->President<!--/c--></p>
@@ -1015,36 +956,9 @@ document.addEventListener('DOMContentLoaded',function(){
               
             </div>
           </article>
-      <div class="lt-staff">
-        <span class="lt-v" aria-hidden="true"></span>
-        <div class="lt-staff-box">
-          <p class="lt-lbl">Quality Department</p>
-          <article class="ld-card ">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.head-quality.role-->Head, Quality Assurance<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.head-quality.name-->Raquel Kaye Gannaban<!--/c--></h3>
-              <p class="ld-unit"><!--c:lead.head-quality.unit-->PNTC Colleges and Maritime Training Center<!--/c--></p>
-            </div>
-          </article>
-        </div>
       </div>
-    </div>
-
-    <div class="lt-toggle reveal" role="tablist" aria-label="Choose a tree">
-      <button type="button" class="on" role="tab" aria-selected="true" data-tree="tree-colleges"><!--c:lead.tree1-->PNTC Colleges<!--/c--></button>
-      <button type="button" role="tab" aria-selected="false" data-tree="tree-training"><!--c:lead.tree2-->Maritime Training Center<!--/c--></button>
-    </div>
-  </div>
-
-  <div class="lt-trees">
-    <div class="lt-tree" id="tree-colleges">
-      <div class="lt-tree-head reveal"><h3><!--c:lead.tree1-->PNTC Colleges<!--/c--></h3></div>
-      <div class="lt-depts lt-level lt-l2 lt-split">
-        <section class="lt-dept lt-big reveal">
-          <header><h3>Academic Affairs Department</h3></header>
-          <div class="lt-body">
-          <article class="ld-card ld-lead">
+      <div class="lc-grid lc-g3 lc-vps">
+        <article class="ld-card ld-vp reveal">
             <span class="ld-av" aria-hidden="true"></span>
             <div class="ld-info">
               <p class="ld-role"><!--c:lead.vp-acad.role-->Vice President for Academic Affairs<!--/c--></p>
@@ -1052,137 +966,7 @@ document.addEventListener('DOMContentLoaded',function(){
               
             </div>
           </article>
-          <div class="lt-groups">
-          <div class="lt-group lt-col" style="--w:1;--gc:#1244B8">
-            <p class="lt-lbl">College of Maritime Education</p>
-            <div class="lt-cards">
-          <article class="ld-card " style="--ac:#1244B8">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.dean-maritime.role-->Dean of the College of Maritime Education<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.dean-maritime.name-->C/E Jeynard Mowler Tan<!--/c--></h3>
-              
-            </div>
-          </article>
-            </div>
-            <div class="lt-under">
-          <article class="ld-card " style="--ac:#1244B8">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.head-bsmt.role-->Head, College of Marine Transportation<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.head-bsmt.name-->C/M Patrick Del Rosario<!--/c--></h3>
-              
-            </div>
-          </article>
-          <article class="ld-card " style="--ac:#1244B8">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.head-bsmare.role-->Head, College of Marine Engineering<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.head-bsmare.name-->3/E Jercie Dizon<!--/c--></h3>
-              
-            </div>
-          </article>
-          <article class="ld-card " style="--ac:#1244B8">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.head-obt.role-->Head, On Board Training Department<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.head-obt.name-->C/M Adrian Bawag<!--/c--></h3>
-              
-            </div>
-          </article>
-          </div>
-          </div>
-          <div class="lt-group lt-col" style="--w:1;--gc:#3d2f9e">
-            <p class="lt-lbl">College of Business and Management</p>
-            <div class="lt-cards">
-          <article class="ld-card " style="--ac:#3d2f9e">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.dean-business.role-->Dean of the College of Business and Management<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.dean-business.name-->Dr. Zarny Zaragoza<!--/c--></h3>
-              
-            </div>
-          </article>
-            </div>
-            
-          </div>
-          <div class="lt-group lt-col" style="--w:1;--gc:#8a1818">
-            <p class="lt-lbl">College of Criminal Justice</p>
-            <div class="lt-cards">
-          <article class="ld-card " style="--ac:#8a1818">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.dean-crim.role-->Dean of the College of Criminal Justice<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.dean-crim.name-->Dr. Rudy Gahar<!--/c--></h3>
-              
-            </div>
-          </article>
-            </div>
-            
-          </div>
-          <div class="lt-group" style="--w:1">
-            <p class="lt-lbl">Student Affairs</p>
-            <div class="lt-cards">
-          <article class="ld-card ">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.dean-osa.role-->Dean of Student Affairs<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.dean-osa.name-->Dr. Celso Servas<!--/c--></h3>
-              
-            </div>
-          </article>
-            </div>
-            
-          </div>
-          <div class="lt-group lt-col" style="--w:1;--gc:#181D71">
-            <p class="lt-lbl">Senior High School</p>
-            <div class="lt-cards">
-          <article class="ld-card " style="--ac:#181D71">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.principal-shs.role-->Principal, Senior High School<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.principal-shs.name-->Camille Rementilla<!--/c--></h3>
-              
-            </div>
-          </article>
-            </div>
-            
-          </div>
-          <div class="lt-group lt-low" style="--w:1">
-            <p class="lt-lbl">General Education</p>
-            <div class="lt-cards">
-          <article class="ld-card ">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.head-gened.role-->Head of General Education<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.head-gened.name-->Engr. Pamela Bautista<!--/c--></h3>
-              
-            </div>
-          </article>
-            </div>
-            
-          </div>
-          <div class="lt-group lt-low" style="--w:1">
-            <p class="lt-lbl">Registrar</p>
-            <div class="lt-cards">
-          <article class="ld-card ">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.head-registrar.role-->Head, Registrar<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.head-registrar.name-->Rachel Vicedo<!--/c--></h3>
-              <p class="ld-unit"><!--c:lead.head-registrar.unit-->Colleges<!--/c--></p>
-            </div>
-          </article>
-            </div>
-            
-          </div>
-          </div>
-          </div>
-        </section>
-        <section class="lt-dept lt-big reveal">
-          <header><h3>Administration Department</h3></header>
-          <div class="lt-body">
-          <article class="ld-card ld-lead">
+        <article class="ld-card ld-vp reveal">
             <span class="ld-av" aria-hidden="true"></span>
             <div class="ld-info">
               <p class="ld-role"><!--c:lead.vp-admin.role-->Vice President for Administration<!--/c--></p>
@@ -1190,85 +974,7 @@ document.addEventListener('DOMContentLoaded',function(){
               
             </div>
           </article>
-          <div class="lt-groups">
-          <div class="lt-group" style="--w:1">
-            <p class="lt-lbl">Marketing Department</p>
-            <div class="lt-cards">
-          <article class="ld-card ">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.mgr-college.role-->Manager, Marketing, Admission and Aid Department<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.mgr-college.name-->Jayson Samson<!--/c--></h3>
-              <p class="ld-unit"><!--c:lead.mgr-college.unit-->College<!--/c--></p>
-            </div>
-          </article>
-            </div>
-            <div class="lt-under">
-          <article class="ld-card ">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.sup-marketing.role-->Supervisor, Marketing<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.sup-marketing.name-->Emil Fugoso<!--/c--></h3>
-              
-            </div>
-          </article>
-          </div>
-          </div>
-          <div class="lt-group" style="--w:1">
-            <p class="lt-lbl">Finance Department</p>
-            <div class="lt-cards">
-          <article class="ld-card ">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.sup-finance.role-->Supervisor, Finance<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.sup-finance.name-->Genilyn Dela Cruz<!--/c--></h3>
-              <p class="ld-unit"><!--c:lead.sup-finance.unit-->Colleges<!--/c--></p>
-            </div>
-          </article>
-            </div>
-            
-          </div>
-          <div class="lt-group" style="--w:1">
-            <p class="lt-lbl">Research and Development</p>
-            <div class="lt-cards">
-          <article class="ld-card ">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.head-research.role-->Head, Research and Development<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.head-research.name-->Dr. Diana Rose Manaligod<!--/c--></h3>
-              
-            </div>
-          </article>
-            </div>
-            
-          </div>
-          <div class="lt-group" style="--w:1">
-            <p class="lt-lbl">HRDM</p>
-            <div class="lt-cards">
-          <article class="ld-card ">
-            <span class="ld-av" aria-hidden="true"></span>
-            <div class="ld-info">
-              <p class="ld-role"><!--c:lead.sup-hrdm.role-->Supervisor, HRDM<!--/c--></p>
-              <h3 class="ld-name"><!--c:lead.sup-hrdm.name-->Tracy Lord Rodriguez<!--/c--></h3>
-              <p class="ld-unit"><!--c:lead.sup-hrdm.unit-->Colleges<!--/c--></p>
-            </div>
-          </article>
-            </div>
-            
-          </div>
-          </div>
-          </div>
-        </section>
-      </div>
-    </div>
-
-    <div class="lt-tree lt-tree-b" id="tree-training">
-      <div class="lt-tree-head reveal"><h3><!--c:lead.tree2-->Maritime Training Center<!--/c--></h3></div>
-      <div class="lt-depts lt-level lt-l2">
-        <section class="lt-dept  reveal">
-          <header><h3>Maritime Training and Assessment Center</h3></header>
-          <div class="lt-body">
-          <article class="ld-card ld-lead">
+        <article class="ld-card ld-vp reveal">
             <span class="ld-av" aria-hidden="true"></span>
             <div class="ld-info">
               <p class="ld-role"><!--c:lead.vp-training.role-->Vice President for Training<!--/c--></p>
@@ -1276,13 +982,173 @@ document.addEventListener('DOMContentLoaded',function(){
               
             </div>
           </article>
-          
+      </div>
+    </div>
+
+    <div class="lt-toggle reveal" role="tablist" aria-label="Choose a group">
+      <button type="button" class="on" role="tab" aria-selected="true" data-panel="panel-colleges"><!--c:lead.tree1-->PNTC Colleges<!--/c--></button>
+      <button type="button" role="tab" aria-selected="false" data-panel="panel-training"><!--c:lead.tree2-->Maritime Training Center<!--/c--></button>
+    </div>
+
+    <div class="lc-panel" id="panel-colleges">
+      <section class="lc-block">
+        <h3 class="lc-h3 reveal"><span><!--c:lead.acad-->Academics<!--/c--></span></h3>
+        <div class="lc-set">
+          <p class="lc-lbl reveal">Deans and Principal</p>
+          <div class="lc-grid lc-g5">
+          <article class="ld-card reveal" style="--ac:#1244B8">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.dean-maritime.role-->Dean of the College of Maritime Education<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.dean-maritime.name-->C/E Jeynard Mowler Tan<!--/c--></h3>
+              
+            </div>
+          </article>
+          <article class="ld-card reveal" style="--ac:#3d2f9e">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.dean-business.role-->Dean of the College of Business and Management<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.dean-business.name-->Dr. Zarny Zaragoza<!--/c--></h3>
+              
+            </div>
+          </article>
+          <article class="ld-card reveal" style="--ac:#8a1818">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.dean-crim.role-->Dean of the College of Criminal Justice<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.dean-crim.name-->Dr. Rudy Gahar<!--/c--></h3>
+              
+            </div>
+          </article>
+          <article class="ld-card reveal">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.dean-osa.role-->Dean of Student Affairs<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.dean-osa.name-->Dr. Celso Servas<!--/c--></h3>
+              
+            </div>
+          </article>
+          <article class="ld-card reveal" style="--ac:#181D71">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.principal-shs.role-->Principal, Senior High School<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.principal-shs.name-->Camille Rementilla<!--/c--></h3>
+              
+            </div>
+          </article>
           </div>
-        </section>
-        <section class="lt-dept  reveal">
-          <header><h3>Marketing Department</h3></header>
-          <div class="lt-body">
-          <article class="ld-card ld-lead">
+        </div>
+        <div class="lc-set">
+          <p class="lc-lbl reveal">Heads</p>
+          <div class="lc-grid lc-g5">
+          <article class="ld-card reveal" style="--ac:#1244B8">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.head-bsmt.role-->Head, College of Marine Transportation<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.head-bsmt.name-->C/M Patrick Del Rosario<!--/c--></h3>
+              
+            </div>
+          </article>
+          <article class="ld-card reveal" style="--ac:#1244B8">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.head-bsmare.role-->Head, College of Marine Engineering<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.head-bsmare.name-->3/E Jercie Dizon<!--/c--></h3>
+              
+            </div>
+          </article>
+          <article class="ld-card reveal" style="--ac:#1244B8">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.head-obt.role-->Head, On Board Training Department<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.head-obt.name-->C/M Adrian Bawag<!--/c--></h3>
+              
+            </div>
+          </article>
+          <article class="ld-card reveal">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.head-gened.role-->Head of General Education<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.head-gened.name-->Engr. Pamela Bautista<!--/c--></h3>
+              
+            </div>
+          </article>
+          <article class="ld-card reveal">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.head-registrar.role-->Head, Registrar<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.head-registrar.name-->Rachel Vicedo<!--/c--></h3>
+              <p class="ld-unit"><!--c:lead.head-registrar.unit-->Colleges<!--/c--></p>
+            </div>
+          </article>
+          </div>
+        </div>
+      </section>
+      <section class="lc-block">
+        <h3 class="lc-h3 reveal"><span><!--c:lead.admin-->Administration<!--/c--></span></h3>
+        <div class="lc-set">
+          <p class="lc-lbl reveal">Managers, Heads and Supervisors</p>
+          <div class="lc-grid lc-g3">
+          <article class="ld-card reveal">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.mgr-college.role-->Manager, Marketing, Admission and Aid Department<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.mgr-college.name-->Jayson Samson<!--/c--></h3>
+              <p class="ld-unit"><!--c:lead.mgr-college.unit-->College<!--/c--></p>
+            </div>
+          </article>
+          <article class="ld-card reveal">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.sup-marketing.role-->Supervisor, Marketing<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.sup-marketing.name-->Emil Fugoso<!--/c--></h3>
+              
+            </div>
+          </article>
+          <article class="ld-card reveal">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.head-quality.role-->Head, Quality Assurance<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.head-quality.name-->Raquel Kaye Gannaban<!--/c--></h3>
+              <p class="ld-unit"><!--c:lead.head-quality.unit-->PNTC Colleges and Maritime Training Center<!--/c--></p>
+            </div>
+          </article>
+          <article class="ld-card reveal">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.sup-finance.role-->Supervisor, Finance<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.sup-finance.name-->Genilyn Dela Cruz<!--/c--></h3>
+              <p class="ld-unit"><!--c:lead.sup-finance.unit-->Colleges<!--/c--></p>
+            </div>
+          </article>
+          <article class="ld-card reveal">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.head-research.role-->Head, Research and Development<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.head-research.name-->Dr. Diana Rose Manaligod<!--/c--></h3>
+              
+            </div>
+          </article>
+          <article class="ld-card reveal">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.sup-hrdm.role-->Supervisor, HRDM<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.sup-hrdm.name-->Tracy Lord Rodriguez<!--/c--></h3>
+              <p class="ld-unit"><!--c:lead.sup-hrdm.unit-->Colleges<!--/c--></p>
+            </div>
+          </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="lc-panel" id="panel-training">
+      <section class="lc-block">
+        <h3 class="lc-h3 reveal"><span><!--c:lead.tree2-->Maritime Training Center<!--/c--></span></h3>
+        <div class="lc-set">
+          <p class="lc-lbl reveal">Managers and Heads</p>
+          <div class="lc-grid lc-g2">
+          <article class="ld-card reveal">
             <span class="ld-av" aria-hidden="true"></span>
             <div class="ld-info">
               <p class="ld-role"><!--c:lead.mgr-mtc.role-->Manager, Marketing, Admission and Aid Department<!--/c--></p>
@@ -1290,10 +1156,17 @@ document.addEventListener('DOMContentLoaded',function(){
               <p class="ld-unit"><!--c:lead.mgr-mtc.unit-->Maritime Training Center<!--/c--></p>
             </div>
           </article>
-          
+          <article class="ld-card reveal">
+            <span class="ld-av" aria-hidden="true"></span>
+            <div class="ld-info">
+              <p class="ld-role"><!--c:lead.head-quality.role-->Head, Quality Assurance<!--/c--></p>
+              <h3 class="ld-name"><!--c:lead.head-quality.name-->Raquel Kaye Gannaban<!--/c--></h3>
+              <p class="ld-unit"><!--c:lead.head-quality.unit-->PNTC Colleges and Maritime Training Center<!--/c--></p>
+            </div>
+          </article>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   </div>
 </section>

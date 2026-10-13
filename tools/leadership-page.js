@@ -25,32 +25,17 @@ const card = (id, cls = '') => {
           </article>`;
 };
 const cards = (ids, cls) => ids.map(id => card(id, cls)).join('\n          ');
-// A department on the chart: its head first, then the people under that head
-const dept = (name, top, under = [], cls = '') => `<section class="lt-dept ${cls} reveal">
-          <header><h3>${name}</h3></header>
-          <div class="lt-body">
-          ${cards(top, 'ld-lead')}
-          ${under.length ? `<div class="lt-under">\n          ${cards(under)}\n          </div>` : ''}
+// A titled set of cards
+const set = (label, ids, cols = 4) => `<div class="lc-set">
+          <p class="lc-lbl reveal">${label}</p>
+          <div class="lc-grid lc-g${cols}">
+          ${ids.map(id => card(id, 'reveal')).join('\n          ')}
           </div>
-        </section>`;
-// A unit under a department head. "w" is how many people stand side by side in it, "color" highlights a college.
-const group = (label, ids, o = {}) => `<div class="lt-group${o.color ? ' lt-col' : ''}${o.low ? ' lt-low' : ''}" style="--w:${o.w || 1}${o.color ? ';--gc:' + o.color : ''}">
-            <p class="lt-lbl">${label}</p>
-            <div class="lt-cards">
-          ${cards(ids)}
-            </div>
-            ${o.under ? `<div class="lt-under">\n          ${cards(o.under)}\n          </div>` : ''}
-          </div>`;
-// A department with its head on top and, on one level below, the units that report to that head
-const big = (name, lead, groups) => `<section class="lt-dept lt-big reveal">
-          <header><h3>${name}</h3></header>
-          <div class="lt-body">
-          ${card(lead, 'ld-lead')}
-          <div class="lt-groups">
-          ${groups.join('\n          ')}
-          </div>
-          </div>
-        </section>`;
+        </div>`;
+const block = (key, title, sets) => `<section class="lc-block">
+        <h3 class="lc-h3 reveal"><span>${slot(key, title)}</span></h3>
+        ${sets.join('\n        ')}
+      </section>`;
 
 const section = `<section id="leadership" class="ld">
   <span class="ld-ghost" aria-hidden="true">PNTC</span>
@@ -60,53 +45,35 @@ const section = `<section id="leadership" class="ld">
       <h2 class="ld-h2"><span class="ld-mark">${slot('lead.mark', 'The People')}<svg viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 10 C 70 2, 190 2, 297 8" fill="none" stroke="#F3CF33" stroke-width="5" stroke-linecap="round"/></svg></span> ${slot('lead.rest', 'Who Lead PNTC')}</h2>
     </div>
 
-    <div class="lt-apex reveal">
-      ${card('chairman', 'ld-big')}
-      <span class="lt-v" aria-hidden="true"></span>
-      ${card('president', 'ld-big')}
-      <div class="lt-staff">
-        <span class="lt-v" aria-hidden="true"></span>
-        <div class="lt-staff-box">
-          <p class="lt-lbl">Quality Department</p>
-          ${card('head-quality')}
-        </div>
+    <div class="lc-exec">
+      <div class="lc-top">
+        ${card('chairman', 'ld-big reveal')}
+        ${card('president', 'ld-big reveal')}
+      </div>
+      <div class="lc-grid lc-g3 lc-vps">
+        ${['vp-acad', 'vp-admin', 'vp-training'].map(id => card(id, 'ld-vp reveal')).join('\n        ')}
       </div>
     </div>
 
-    <div class="lt-toggle reveal" role="tablist" aria-label="Choose a tree">
-      <button type="button" class="on" role="tab" aria-selected="true" data-tree="tree-colleges">${slot('lead.tree1', 'PNTC Colleges')}</button>
-      <button type="button" role="tab" aria-selected="false" data-tree="tree-training">${slot('lead.tree2', 'Maritime Training Center')}</button>
-    </div>
-  </div>
-
-  <div class="lt-trees">
-    <div class="lt-tree" id="tree-colleges">
-      <div class="lt-tree-head reveal"><h3>${slot('lead.tree1', 'PNTC Colleges')}</h3></div>
-      <div class="lt-depts lt-level lt-l2 lt-split">
-        ${big('Academic Affairs Department', 'vp-acad', [
-          group('College of Maritime Education', ['dean-maritime'], { color: '#1244B8', under: ['head-bsmt', 'head-bsmare', 'head-obt'] }),
-          group('College of Business and Management', ['dean-business'], { color: '#3d2f9e' }),
-          group('College of Criminal Justice', ['dean-crim'], { color: '#8a1818' }),
-          group('Student Affairs', ['dean-osa']),
-          group('Senior High School', ['principal-shs'], { color: '#181D71' }),
-          group('General Education', ['head-gened'], { low: true }),
-          group('Registrar', ['head-registrar'], { low: true }),
-        ])}
-        ${big('Administration Department', 'vp-admin', [
-          group('Marketing Department', ['mgr-college'], { under: ['sup-marketing'] }),
-          group('Finance Department', ['sup-finance']),
-          group('Research and Development', ['head-research']),
-          group('HRDM', ['sup-hrdm']),
-        ])}
-      </div>
+    <div class="lt-toggle reveal" role="tablist" aria-label="Choose a group">
+      <button type="button" class="on" role="tab" aria-selected="true" data-panel="panel-colleges">${slot('lead.tree1', 'PNTC Colleges')}</button>
+      <button type="button" role="tab" aria-selected="false" data-panel="panel-training">${slot('lead.tree2', 'Maritime Training Center')}</button>
     </div>
 
-    <div class="lt-tree lt-tree-b" id="tree-training">
-      <div class="lt-tree-head reveal"><h3>${slot('lead.tree2', 'Maritime Training Center')}</h3></div>
-      <div class="lt-depts lt-level lt-l2">
-        ${dept('Maritime Training and Assessment Center', ['vp-training'])}
-        ${dept('Marketing Department', ['mgr-mtc'])}
-      </div>
+    <div class="lc-panel" id="panel-colleges">
+      ${block('lead.acad', 'Academics', [
+        set('Deans and Principal', ['dean-maritime', 'dean-business', 'dean-crim', 'dean-osa', 'principal-shs'], 5),
+        set('Heads', ['head-bsmt', 'head-bsmare', 'head-obt', 'head-gened', 'head-registrar'], 5),
+      ])}
+      ${block('lead.admin', 'Administration', [
+        set('Managers, Heads and Supervisors', ['mgr-college', 'sup-marketing', 'head-quality', 'sup-finance', 'head-research', 'sup-hrdm'], 3),
+      ])}
+    </div>
+
+    <div class="lc-panel" id="panel-training">
+      ${block('lead.tree2', 'Maritime Training Center', [
+        set('Managers and Heads', ['mgr-mtc', 'head-quality'], 2),
+      ])}
     </div>
   </div>
 </section>`;
@@ -120,28 +87,14 @@ document.addEventListener('DOMContentLoaded',function(){
     var w=n.split(/\\s+/).filter(Boolean);
     c.querySelector('.ld-av').textContent=w.length?(w[0][0]+(w.length>1?w[w.length-1][0]:'')).toUpperCase():'';
   });
-  /* General Education and Registrar stand on the heads level: line them up with the first head under a dean */
-  function drop(){
-    document.querySelectorAll('.lt-groups').forEach(function(g){
-      var low=g.querySelectorAll('.lt-low');if(!low.length)return;
-      g.style.setProperty('--drop','0px');
-      var ref=g.querySelector('.lt-group:not(.lt-low) .lt-under .ld-card'),lbl=low[0].querySelector('.ld-card');
-      if(!ref||!lbl||!g.offsetParent||getComputedStyle(g).flexDirection!=='row')return;
-      var d=ref.getBoundingClientRect().top-lbl.getBoundingClientRect().top;
-      g.style.setProperty('--drop',Math.max(0,Math.round(d))+'px');
-    });
-  }
-  /* one tree at a time */
+  /* Colleges or Training Center, one at a time */
   var tabs=document.querySelectorAll('.lt-toggle button');
   function show(id){
-    tabs.forEach(function(b){var on=b.dataset.tree===id;b.classList.toggle('on',on);b.setAttribute('aria-selected',on?'true':'false');});
-    document.querySelectorAll('.lt-tree').forEach(function(x){x.hidden=x.id!==id;x.querySelectorAll('.reveal').forEach(function(r){r.classList.add('in');});});
-    drop();
+    tabs.forEach(function(b){var on=b.dataset.panel===id;b.classList.toggle('on',on);b.setAttribute('aria-selected',on?'true':'false');});
+    document.querySelectorAll('.lc-panel').forEach(function(x){x.hidden=x.id!==id;if(x.id===id)x.querySelectorAll('.reveal').forEach(function(r){r.classList.add('in');});});
   }
-  tabs.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.tree);});});
-  show(location.hash==='#tree-training'?'tree-training':'tree-colleges');
-  window.addEventListener('resize',drop);window.addEventListener('load',drop);
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(drop);
+  tabs.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.panel);});});
+  show(location.hash==='#training'?'panel-training':'panel-colleges');
 });
 </script>`;
 
