@@ -155,6 +155,12 @@ const GROUPS = [
       ...(p.unit ? [T(`lead.${p.id}.unit`, `${p.role} (${p.unit}): unit tag`)] : []),
     ]),
   ] },
+  { id: 'main-careers', site: 'Main Site', title: 'Careers page: heading and apply band', note: 'Job openings are managed in Landing Content, under Careers.', files: ['PNTC Main Landing Page/careers.html'], fields: [
+    T('careers.eyebrow', 'Small label'), T('careers.mark', 'Heading, underlined word'), T('careers.rest', 'Heading, rest of the line'),
+    T('careers.empty', 'Message when no opening matches a search'),
+    T('careers.cta.tag', 'Yellow band, small label'), T('careers.cta.title', 'Yellow band, heading'),
+    { key: 'careers.email', label: 'HR email (also used by every Apply button)', type: 'email' },
+  ] },
   { id: 'college-hero', site: 'Colleges', title: 'College hero', files: ['PNTC Colleges/index.html'], fields: [
     T('college.hero.pill', 'Small tag above the headline'),
     T('college.hero.mark', 'Headline, highlighted word'), T('college.hero.line1', 'Headline, rest of line 1'), T('college.hero.line2', 'Headline, line 2'),

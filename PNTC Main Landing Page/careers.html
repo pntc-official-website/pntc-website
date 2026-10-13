@@ -781,6 +781,94 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .pv-units .pv-source{color:rgba(28,22,80,.5)!important}
 .pv-unit{background:#1C1650!important;border-color:#1C1650!important}
 </style>
+<style id="careers-modern">
+/* Careers page */
+#careers.cr{background:#fff!important;padding:5.5rem 0 0!important;position:relative;overflow:hidden}
+#careers.cr::before{content:'';position:absolute;right:-200px;top:-180px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(243,207,51,.2),transparent 68%);pointer-events:none}
+.cr-ghost{position:absolute;left:-.04em;top:1rem;font-size:clamp(7rem,20vw,19rem);font-weight:800;line-height:.8;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.5px rgba(28,22,80,.06);pointer-events:none;user-select:none}
+#careers .careers-wrap{max-width:1240px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);position:relative}
+.cr-head{text-align:center}
+#careers .eyebrow{color:#1C1650!important;display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1rem}
+#careers .eyebrow::before,#careers .eyebrow::after{content:'';width:26px;height:3px;border-radius:3px;background:#F3CF33}
+.cr-h2{font-weight:800;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.08;letter-spacing:-.03em;color:#1C1650}
+.cr-mark{position:relative;display:inline-block}
+.cr-mark svg{position:absolute;left:0;right:0;bottom:-.14em;width:100%;height:.22em}
+
+/* search and filters */
+.cr-bar{margin-top:2.6rem;display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;background:#F7F7FB;border:1px solid rgba(28,22,80,.08);border-radius:22px;padding:.8rem}
+.cr-search{flex:1 1 260px;display:flex;align-items:center;gap:.6rem;background:#fff;border:1.5px solid rgba(28,22,80,.16);border-radius:14px;padding:0 1rem;transition:border-color .2s,box-shadow .2s}
+.cr-search:focus-within{border-color:#1C1650;box-shadow:0 0 0 4px rgba(243,207,51,.4)}
+.cr-search svg{width:18px;height:18px;flex:0 0 auto;fill:none;stroke:#1C1650;stroke-width:2;stroke-linecap:round}
+.cr-search input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-family:inherit;font-size:.92rem;font-weight:500;color:#1C1650;padding:.85rem 0}
+.cr-search input::placeholder{color:rgba(28,22,80,.5)}
+.cr-chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.cr-chips[hidden]{display:none}
+.cr-chip{font-family:inherit;font-size:.8rem;font-weight:700;color:#1C1650;background:#fff;border:1.5px solid rgba(28,22,80,.16);border-radius:999px;padding:.6rem 1.05rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.cr-chip:hover{border-color:#1C1650}
+.cr-chip.on{background:#1C1650;border-color:#1C1650;color:#F3CF33}
+.cr-count{margin-left:auto;font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#1C1650;padding:0 .6rem}
+
+/* job cards */
+#careers .jobs-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem;margin-top:1.4rem;border:0;background:none}
+#careers .job-card{background:#fff;border:1px solid rgba(28,22,80,.1);border-radius:22px;padding:1.6rem 1.5rem 1.5rem;display:flex;flex-direction:column;position:relative;overflow:hidden;box-shadow:0 22px 46px -34px rgba(28,22,80,.5);transition:transform .3s,box-shadow .3s,border-color .3s}
+#careers .job-card[hidden]{display:none}
+#careers .job-card::before{content:'';position:absolute;left:0;right:0;top:0;height:5px;background:#1C1650;transform:scaleX(0);transform-origin:left;transition:transform .35s}
+#careers .job-card:hover{transform:translateY(-6px);box-shadow:0 30px 54px -30px rgba(28,22,80,.6);border-color:rgba(28,22,80,.25)}
+#careers .job-card:hover::before{transform:scaleX(1)}
+.job-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.7rem}
+#careers .job-dept{font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(28,22,80,.62);line-height:1.5;margin:0}
+#careers .job-badge{flex:0 0 auto;font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:.34rem .7rem;border-radius:999px;margin:0;white-space:nowrap;border:0}
+#careers .job-badge.b-ft{background:rgba(243,207,51,.45);color:#1C1650}
+#careers .job-badge.b-pt{background:rgba(28,22,80,.08);color:#1C1650}
+#careers .job-badge.b-ct{background:#1C1650;color:#fff}
+#careers .job-title{margin:1rem 0 0;font-size:1.22rem;font-weight:800;line-height:1.25;letter-spacing:-.015em;color:#1C1650}
+#careers .job-meta{margin:.7rem 0 0;display:flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:600;color:rgba(28,22,80,.75)}
+#careers .job-meta svg{width:16px;height:16px;flex:0 0 auto;fill:none;stroke:#1C1650;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#careers .job-desc{margin:.9rem 0 1.3rem;font-size:.88rem;line-height:1.7;color:rgba(28,22,80,.72);flex:1}
+.job-apply{align-self:flex-start;display:inline-flex;align-items:center;gap:.5rem;font-size:.76rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#1C1650;text-decoration:none;background:#F3CF33;padding:.75rem 1.15rem;border-radius:999px;transition:gap .25s,background .25s,color .25s}
+.job-apply:hover{gap:.85rem;background:#1C1650;color:#F3CF33}
+.cr-empty{margin-top:1.4rem;text-align:center;font-size:.95rem;font-weight:600;color:rgba(28,22,80,.65);background:#F7F7FB;border:1.5px dashed rgba(28,22,80,.25);border-radius:22px;padding:2.4rem 1rem}
+.cr-empty[hidden]{display:none}
+
+/* apply band */
+.cr-cta{margin-top:5rem;background:#F3CF33;position:relative;padding:3.4rem clamp(1.25rem,4vw,3rem) 3.6rem;clip-path:polygon(0 2.2rem,100% 0,100% 100%,0 100%)}
+.cr-cta-in{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;padding-top:1.2rem}
+.cr-cta-tag{font-size:.7rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#1C1650}
+.cr-cta-h{margin-top:.4rem;font-size:clamp(1.5rem,3.2vw,2.4rem);font-weight:800;line-height:1.15;letter-spacing:-.02em;color:#1C1650;max-width:720px}
+.cr-cta-btn{display:inline-flex;align-items:center;background:#1C1650;color:#F3CF33;font-size:clamp(.95rem,1.6vw,1.15rem);font-weight:800;text-decoration:none;padding:1.05rem 1.8rem;border-radius:999px;transition:transform .25s,box-shadow .25s}
+.cr-cta-btn:hover{transform:translateY(-3px);box-shadow:0 18px 30px -14px rgba(28,22,80,.6)}
+
+@media(max-width:1000px){#careers .jobs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){
+  #careers.cr{padding-top:4rem!important}
+  .cr-head{text-align:left}
+  #careers .eyebrow::after{display:none}
+  #careers .jobs-grid{grid-template-columns:1fr}
+  .cr-count{margin-left:0;width:100%;padding:.2rem .4rem 0}
+  .cr-cta{margin-top:3.5rem;clip-path:polygon(0 1.2rem,100% 0,100% 100%,0 100%)}
+  .cr-cta-btn{width:100%;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){#careers .job-card,#careers .job-card::before,.job-apply,.cr-cta-btn{transition:none}}
+</style>
+<script id="careers-js">
+document.addEventListener('DOMContentLoaded',function(){
+  var cards=[].slice.call(document.querySelectorAll('#careers .job-card')),q=document.getElementById('cr-q'),chips=document.getElementById('cr-chips'),count=document.getElementById('cr-count'),empty=document.getElementById('cr-empty'),mail=document.getElementById('cr-email'),type='All';
+  if(!chips)return;
+  /* apply buttons follow the HR email shown on the page */
+  var addr=mail?(mail.getAttribute('href')||'').replace(/^mailto:/,'').split('?')[0]:'';
+  if(addr)cards.forEach(function(c){var a=c.querySelector('.job-apply'),t=c.querySelector('.job-title');if(a)a.href='mailto:'+addr+'?subject='+encodeURIComponent('Application for '+(t?t.textContent.trim():'a position'));});
+  var types=['All'];cards.forEach(function(c){var t=c.getAttribute('data-type');if(t&&types.indexOf(t)<0)types.push(t);});
+  types.forEach(function(t){var b=document.createElement('button');b.type='button';b.className='cr-chip'+(t==='All'?' on':'');b.textContent=t;b.addEventListener('click',function(){type=t;[].forEach.call(chips.children,function(x){x.classList.toggle('on',x===b);});run();});chips.appendChild(b);});
+  if(types.length<3)chips.hidden=true;
+  function run(){
+    var s=(q.value||'').toLowerCase().trim(),n=0;
+    cards.forEach(function(c){var ok=(type==='All'||c.getAttribute('data-type')===type)&&(!s||c.textContent.toLowerCase().indexOf(s)>-1);c.hidden=!ok;if(ok){n++;c.classList.add('in');}});
+    count.textContent=n+(n===1?' opening':' openings');
+    empty.hidden=n>0;
+  }
+  q.addEventListener('input',run);run();
+});
+</script>
 <meta name="description" content="Teaching, training, and administrative careers at PNTC Colleges, Inc. at our Dasmariñas, Cavite campus and our maritime training center in Manila.">
 <link rel="canonical" href="https://www.pntc.edu.ph/careers">
 <meta property="og:type" content="website">
@@ -825,62 +913,34 @@ h1.hero-h1 span.gold { color:var(--gold); }
   </div>
 </section>
 
-<section id="careers">
+<section id="careers" class="cr">
+  <span class="cr-ghost" aria-hidden="true">Careers</span>
   <div class="careers-wrap">
-    <div class="sec-header reveal">
-      <div>
-        <p class="eyebrow" style="margin-bottom:.5rem;">Join Our Team</p>
-        <h2 class="sec-h2">Careers at PNTC</h2>
-      </div>
-      <a href="mailto:hr@pntc.edu.ph" class="sec-link">View All Openings →</a>
+    <div class="cr-head reveal">
+      <p class="eyebrow"><!--c:careers.eyebrow-->Join Our Team<!--/c--></p>
+      <h2 class="cr-h2"><span class="cr-mark"><!--c:careers.mark-->Careers<!--/c--><svg viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 10 C 70 2, 190 2, 297 8" fill="none" stroke="#F3CF33" stroke-width="5" stroke-linecap="round"/></svg></span> <!--c:careers.rest-->at PNTC<!--/c--></h2>
+    </div>
+
+    <div class="cr-bar reveal">
+      <label class="cr-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input type="search" id="cr-q" placeholder="Search by role or department" aria-label="Search job openings"></label>
+      <div class="cr-chips" id="cr-chips" role="group" aria-label="Filter by employment type"></div>
+      <p class="cr-count" id="cr-count" aria-live="polite"></p>
     </div>
 
     <!-- PNTC_CAREERS_START -->
-    <div class="jobs-grid">
-      <div class="job-card reveal">
-        <div class="job-dept">Maritime Department</div>
-        <div class="job-title">Faculty Member, BS Marine Transportation</div>
-        <div class="job-meta"><span>📍 Dasmariñas, Cavite</span></div>
-        <p class="job-desc">Must hold a Master Mariner license or equivalent. Minimum 5 years sea service. CHED faculty qualification required. Experience in simulator-based instruction preferred.</p>
-        <span class="job-badge b-ft">Full-Time</span>
-      </div>
-      <div class="job-card reveal">
-        <div class="job-dept">MTC Training Division</div>
-        <div class="job-title">STCW Training Instructor</div>
-        <div class="job-meta"><span>📍 Dasmariñas, Cavite</span></div>
-        <p class="job-desc">Deliver STCW Basic Safety, PSSR, PSCRB, and Advanced Fire Fighting courses. Valid STCW certificates and minimum 5 years at-sea experience required.</p>
-        <span class="job-badge b-ft">Full-Time</span>
-      </div>
-      <div class="job-card reveal">
-        <div class="job-dept">College, Business Faculty</div>
-        <div class="job-title">Faculty Member, Tourism Management</div>
-        <div class="job-meta"><span>📍 Dasmariñas, Cavite</span></div>
-        <p class="job-desc">Master's degree in Tourism, Hospitality, or a related field required. Industry experience in travel and tourism operations an advantage.</p>
-        <span class="job-badge b-ft">Full-Time</span>
-      </div>
-      <div class="job-card reveal">
-        <div class="job-dept">Admissions Office</div>
-        <div class="job-title">Admissions Officer</div>
-        <div class="job-meta"><span>📍 Dasmariñas, Cavite</span></div>
-        <p class="job-desc">Manage enrollment processes, prospective student inquiries, and academic records. Excellent communication skills and a service-oriented mindset required.</p>
-        <span class="job-badge b-ft">Full-Time</span>
-      </div>
-      <div class="job-card reveal">
-        <div class="job-dept">Information Technology</div>
-        <div class="job-title">IT Support Specialist</div>
-        <div class="job-meta"><span>📍 Dasmariñas, Cavite</span></div>
-        <p class="job-desc">Support institutional systems, bridge and engine room simulators, and learning platforms. Experience with educational or maritime technology preferred.</p>
-        <span class="job-badge b-ft">Full-Time</span>
-      </div>
-      <div class="job-card reveal">
-        <div class="job-dept">MTC Assessment Center</div>
-        <div class="job-title">Maritime Assessor</div>
-        <div class="job-meta"><span>📍 Dasmariñas, Cavite</span></div>
-        <p class="job-desc">Conduct STCW competency assessments for seafarers seeking certification. Must hold a valid MARINA Assessor's Certificate and current professional license.</p>
-        <span class="job-badge b-pt">Part-Time</span>
-      </div>
-    </div>
+    <div class="jobs-grid"><article class="job-card reveal" data-type="Full-Time"><div class="job-top"><span class="job-dept">Maritime Department</span><span class="job-badge b-ft">Full-Time</span></div><h3 class="job-title">Faculty Member, BS Marine Transportation</h3><p class="job-meta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg><span>Dasmariñas, Cavite</span></p><p class="job-desc">Must hold a Master Mariner license or equivalent. Minimum 5 years sea service. CHED faculty qualification required. Experience in simulator-based instruction preferred.</p><a class="job-apply" href="mailto:hr@pntc.edu.ph?subject=Application%20for%20Faculty%20Member%2C%20BS%20Marine%20Transportation">Apply for this role <span aria-hidden="true">&rarr;</span></a></article><article class="job-card reveal" data-type="Full-Time"><div class="job-top"><span class="job-dept">MTC Training Division</span><span class="job-badge b-ft">Full-Time</span></div><h3 class="job-title">STCW Training Instructor</h3><p class="job-meta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg><span>Dasmariñas, Cavite</span></p><p class="job-desc">Deliver STCW Basic Safety, PSSR, PSCRB, and Advanced Fire Fighting courses. Valid STCW certificates and minimum 5 years at-sea experience required.</p><a class="job-apply" href="mailto:hr@pntc.edu.ph?subject=Application%20for%20STCW%20Training%20Instructor">Apply for this role <span aria-hidden="true">&rarr;</span></a></article><article class="job-card reveal" data-type="Full-Time"><div class="job-top"><span class="job-dept">College, Business Faculty</span><span class="job-badge b-ft">Full-Time</span></div><h3 class="job-title">Faculty Member, Tourism Management</h3><p class="job-meta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg><span>Dasmariñas, Cavite</span></p><p class="job-desc">Master's degree in Tourism, Hospitality, or a related field required. Industry experience in travel and tourism operations an advantage.</p><a class="job-apply" href="mailto:hr@pntc.edu.ph?subject=Application%20for%20Faculty%20Member%2C%20Tourism%20Management">Apply for this role <span aria-hidden="true">&rarr;</span></a></article><article class="job-card reveal" data-type="Full-Time"><div class="job-top"><span class="job-dept">Admissions Office</span><span class="job-badge b-ft">Full-Time</span></div><h3 class="job-title">Admissions Officer</h3><p class="job-meta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg><span>Dasmariñas, Cavite</span></p><p class="job-desc">Manage enrollment processes, prospective student inquiries, and academic records. Excellent communication skills and a service-oriented mindset required.</p><a class="job-apply" href="mailto:hr@pntc.edu.ph?subject=Application%20for%20Admissions%20Officer">Apply for this role <span aria-hidden="true">&rarr;</span></a></article><article class="job-card reveal" data-type="Full-Time"><div class="job-top"><span class="job-dept">Information Technology</span><span class="job-badge b-ft">Full-Time</span></div><h3 class="job-title">IT Support Specialist</h3><p class="job-meta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg><span>Dasmariñas, Cavite</span></p><p class="job-desc">Support institutional systems, bridge and engine room simulators, and learning platforms. Experience with educational or maritime technology preferred.</p><a class="job-apply" href="mailto:hr@pntc.edu.ph?subject=Application%20for%20IT%20Support%20Specialist">Apply for this role <span aria-hidden="true">&rarr;</span></a></article><article class="job-card reveal" data-type="Part-Time"><div class="job-top"><span class="job-dept">MTC Assessment Center</span><span class="job-badge b-pt">Part-Time</span></div><h3 class="job-title">Maritime Assessor</h3><p class="job-meta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg><span>Dasmariñas, Cavite</span></p><p class="job-desc">Conduct STCW competency assessments for seafarers seeking certification. Must hold a valid MARINA Assessor's Certificate and current professional license.</p><a class="job-apply" href="mailto:hr@pntc.edu.ph?subject=Application%20for%20Maritime%20Assessor">Apply for this role <span aria-hidden="true">&rarr;</span></a></article></div>
     <!-- PNTC_CAREERS_END -->
+    <p class="cr-empty" id="cr-empty" hidden><!--c:careers.empty-->No openings match your search.<!--/c--></p>
+  </div>
+
+  <div class="cr-cta reveal">
+    <div class="cr-cta-in">
+      <div>
+        <p class="cr-cta-tag"><!--c:careers.cta.tag-->Apply<!--/c--></p>
+        <h3 class="cr-cta-h"><!--c:careers.cta.title-->Send your application to our HR office<!--/c--></h3>
+      </div>
+      <a class="cr-cta-btn" id="cr-email" data-c="careers.email" href="mailto:hr@pntc.edu.ph"><!--c:careers.email-->hr@pntc.edu.ph<!--/c--></a>
+    </div>
   </div>
 </section>
 

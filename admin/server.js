@@ -1179,8 +1179,9 @@ function buildLandingBlock(type,items){
 function buildResearchBlock(items){
   return`    <div class="research-grid">${items.map(i=>`<div class="research-card reveal"><div class="rc-icon">${escHtml(i.icon||'🏅')}</div><div class="rc-title">${escHtml(i.title)}</div><p class="rc-body">${escHtml(i.body)}</p><div class="rc-year">${escHtml(i.year||'')}</div></div>`).join('')}</div>`;
 }
+// Job cards for the Careers page. The markup lives in admin/careers.js so the page tools build the same cards.
 function buildCareersBlock(items){
-  return`    <div class="jobs-grid">${items.map(i=>`<div class="job-card reveal"><div class="job-dept">${escHtml(i.department)}</div><div class="job-title">${escHtml(i.title)}</div><div class="job-meta"><span>📍 ${escHtml(i.location||'Dasmariñas, Cavite')}</span></div><p class="job-desc">${escHtml(i.description)}</p><span class="job-badge ${i.badgeType==='Part-Time'?'b-pt':'b-ft'}">${escHtml(i.badgeType||'Full-Time')}</span></div>`).join('')}</div>`;
+  return require('./careers').build(items);
 }
 // One contact line from the admin form becomes one link or label on the directory pages.
 // Accepted: an email, a phone number, a tel:/mailto:/https: link, or "Facebook: Page Name" (add " | https://facebook.com/..." to make it clickable).
