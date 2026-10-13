@@ -1387,6 +1387,8 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #hero.hx .hx-side::before{content:'';position:absolute;inset:0;background:radial-gradient(40% 40% at 85% 10%,rgba(243,207,51,.16),transparent 70%),radial-gradient(45% 45% at 20% 95%,rgba(80,66,200,.5),transparent 70%);pointer-events:none}
 #hero.hx .hx-side::after{content:'';position:absolute;right:-70px;bottom:-70px;width:230px;height:230px;border-radius:50%;background:repeating-linear-gradient(135deg,rgba(243,207,51,.5) 0 3px,transparent 3px 11px);pointer-events:none}
 #hero.hx .hx-d3{width:120px;top:9%;right:6%;stroke:rgba(255,255,255,.35);stroke-width:2}
+#hero.hx .hx-crest{position:absolute;z-index:1;right:clamp(1rem,3.5vw,4rem);top:50%;width:min(calc(100% - var(--sh) * .58 - 4rem),380px);height:auto;transform:translateY(-54%);opacity:.26;pointer-events:none;filter:drop-shadow(0 0 40px rgba(243,207,51,.35));animation:hx-crest 9s ease-in-out infinite alternate}
+@keyframes hx-crest{from{opacity:.2}to{opacity:.32}}
 #hero.hx .hx-ring{position:absolute;left:38%;top:5%;width:16px;height:16px;border-radius:50%;border:3px solid #F3CF33;animation:hx-float 5s ease-in-out infinite}
 /* One college card at a time. Each card keeps its own college color, photo, name, programs and value */
 #hero.hx .hx-stage{position:relative;z-index:2;width:calc(var(--sh) * .8);height:var(--sh);margin-left:calc(var(--sh) * -.22);animation:hx-fade 1s 1.6s both}
@@ -1426,6 +1428,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
   #hero.hx{--sh:clamp(380px,112vw,520px);grid-template-columns:minmax(0,1fr);min-height:0}
   #hero.hx .hx-h1{font-size:clamp(2.5rem,11.5vw,4.4rem)}
   #hero.hx .hx-d2{display:none}
+  #hero.hx .hx-crest{display:none}
   #hero.hx .hx-d1{right:5%;top:1.2rem;width:44px}
   #hero.hx .hx-copy{padding:2.6rem 1.4rem 2.4rem}
   #hero.hx .hx-side{align-items:center;padding:2.6rem 1.4rem 4rem}
@@ -1436,7 +1439,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 @media(prefers-reduced-motion:reduce){
   #hero.hx .hl>span,#hero.hx .hx-pill,#hero.hx .hx-sub,#hero.hx .hx-btns,#hero.hx .hx-proof,#hero.hx .hx-stage,#hero.hx .hx-tabs{animation:none}
   #hero.hx .hx-swoosh{animation:none;stroke-dashoffset:0}
-  #hero.hx .hx-doodle,#hero.hx .hx-ring,#hero.hx .hx-pill-dot::after{animation:none}
+  #hero.hx .hx-doodle,#hero.hx .hx-ring,#hero.hx .hx-crest,#hero.hx .hx-pill-dot::after{animation:none}
   #hero.hx .hc-panel,#hero.hx .hc-panel img{transition:none}
   #hero.hx .hx-tab.on .hx-tab-bar i{animation:none;width:100%}
 }
@@ -1501,6 +1504,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
   <div class="hx-side">
     <svg class="hx-doodle hx-d3" viewBox="0 0 120 70" aria-hidden="true"><path d="M14 56c-10-2-12-18 2-20 0-14 20-20 28-8 8-10 26-6 26 8 14-2 20 16 6 20z"/></svg>
     <span class="hx-ring" aria-hidden="true"></span>
+    <img class="hx-crest" src="/PNTC%20Crest.png" alt="" aria-hidden="true">
     <div class="hx-stage" id="hxStage">
       <div class="hc-panel hc-p1 on" data-i="0">
     <span class="hc-college-name" aria-hidden="true">College of Maritime Education</span>
