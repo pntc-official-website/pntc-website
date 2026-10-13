@@ -208,7 +208,11 @@ const GROUPS = [
     T('training.hero.btn1', 'First button, text'), H('training.hero.btn1.href', 'First button, link'),
     T('training.hero.btn2', 'Second button, text'), H('training.hero.btn2.href', 'Second button, link'),
   ] },
-  { id: 'training-cta', site: 'Training Center', title: 'Training Center name in the contact and enroll bands', note: 'Used in the navy contact band on the Training Center home page and the enroll band on the courses page.', files: ['PNTC Maritime Training and Assessment Center/index.html', 'PNTC Maritime Training and Assessment Center/maritime-courses.html'], fields: [
+  { id: 'training-assess', site: 'Training Center', title: 'Assessment page: headings', note: 'The list of assessments and their requirements is edited in Course list.', files: ['PNTC Maritime Training and Assessment Center/assessment.html'], fields: [
+    T('training.assess.eyebrow', 'Small label'), T('training.assess.h2a', 'Heading, first word'), T('training.assess.h2b', 'Heading, highlighted word'),
+    T('training.assess.cta', 'Small label above the navy band'),
+  ] },
+  { id: 'training-cta', site: 'Training Center', title: 'Training Center name in the contact and enroll bands', note: 'Used in the navy contact band on the Training Center home page and the enroll band on the courses page.', files: ['PNTC Maritime Training and Assessment Center/index.html', 'PNTC Maritime Training and Assessment Center/maritime-courses.html', 'PNTC Maritime Training and Assessment Center/assessment.html'], fields: [
     T('training.cta.mark', 'Name, gold part'), T('training.cta.rest', 'Name, white part'),
   ] },
 ];

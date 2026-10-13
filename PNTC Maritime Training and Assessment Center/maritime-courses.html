@@ -890,6 +890,14 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .cc-reqcard li::before{content:'';position:absolute;left:0;top:.72rem;width:16px;height:16px;border-radius:50%;background:#F3CF33 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231C1650' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/10px no-repeat}
 .cc-incl{margin-top:1.1rem;font-size:.9rem;line-height:1.6;color:#1C1650;font-weight:600;background:rgba(243,207,51,.35);border-radius:16px;padding:1rem 1.2rem}
 
+/* assessment page */
+#assess{background:var(--tc-soft,#F7F7FB);padding:clamp(4.5rem,8vw,7rem) clamp(1.25rem,6vw,5rem);position:relative}
+#assess .eyebrow{color:#1C1650!important;display:inline-flex;align-items:center;gap:.6rem}
+#assess .eyebrow::before{content:'';width:30px;height:3px;border-radius:3px;background:#F3CF33}
+.cc-plain .cc-meta{margin-top:0}
+.cc-plain .cc-group{margin-top:2rem}
+.cc-plain .cc-reqgrid{grid-template-columns:minmax(0,560px)}
+
 /* the fiery navy band: enroll on the courses page, contact on the home page */
 #enroll .enroll-h2{font-size:clamp(2.3rem,5vw,4.4rem)!important;line-height:.95!important}
 #contact{background:#1C1650!important;overflow:hidden}
@@ -929,9 +937,9 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 <script id="tc-courses-js">
 document.addEventListener('DOMContentLoaded',function(){
   var box=document.getElementById('catalogue');if(!box)return;
-  var q=document.getElementById('cc-q'),chips=[].slice.call(document.querySelectorAll('.cc-chip')),count=document.getElementById('cc-count'),none=document.getElementById('cc-none'),req=document.getElementById('requirements'),g='all';
-  /* the search bar sticks just under the two navigation bars */
   function top(){var m=0;document.querySelectorAll('nav,header').forEach(function(e){var p=getComputedStyle(e).position;if(p==='fixed'||p==='sticky'){var r=e.getBoundingClientRect();if(r.top<200&&r.height<200)m=Math.max(m,r.bottom);}});if(m>0)box.style.setProperty('--cc-top',Math.round(m+10)+'px');}
+  if(!document.getElementById('cc-q')){top();window.addEventListener('resize',top);return;}
+  var q=document.getElementById('cc-q'),chips=[].slice.call(document.querySelectorAll('.cc-chip')),count=document.getElementById('cc-count'),none=document.getElementById('cc-none'),req=document.getElementById('requirements'),g='all';
   function run(){
     var s=(q.value||'').toLowerCase().trim(),n=0;
     box.querySelectorAll('.cc-group').forEach(function(gr){
@@ -1000,8 +1008,8 @@ document.addEventListener('DOMContentLoaded',function(){
   <div class="cc" id="catalogue">
     <div class="cc-tools">
       <label class="cc-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input type="search" id="cc-q" placeholder="Search by course name or code" aria-label="Search courses"></label>
-      <div class="cc-chips" id="cc-chips" role="group" aria-label="Filter by course group"><button type="button" class="cc-chip on" data-g="all">All</button><button type="button" class="cc-chip" data-g="stcw">STCW Mandatory</button><button type="button" class="cc-chip" data-g="mlc">Management Level</button><button type="button" class="cc-chip" data-g="inhouse">In-House</button><button type="button" class="cc-chip" data-g="assessment">Practical Assessments</button></div>
-      <p class="cc-count" id="cc-count" aria-live="polite">55 courses</p>
+      <div class="cc-chips" id="cc-chips" role="group" aria-label="Filter by course group"><button type="button" class="cc-chip on" data-g="all">All</button><button type="button" class="cc-chip" data-g="stcw">STCW Mandatory</button><button type="button" class="cc-chip" data-g="mlc">Management Level</button><button type="button" class="cc-chip" data-g="inhouse">In-House</button></div>
+      <p class="cc-count" id="cc-count" aria-live="polite">51 courses</p>
     </div>
     <p class="cc-meta"><b>As of January 2026</b><span>Slots are limited and schedules may change without prior notice.</span></p>
     <section class="cc-group" id="cat-stcw" data-g="stcw">
@@ -1033,15 +1041,8 @@ document.addEventListener('DOMContentLoaded',function(){
       <div class="cc-sec"><h4>Allied Refresher Courses</h4><ul class="cc-list"><li class="cc-row"><span class="cc-code">RMECA</span><span class="cc-name">Medical Care Refresher</span><span class="cc-days"><b>3</b> days</span></li><li class="cc-row"><span class="cc-code">RMEFA</span><span class="cc-name">Medical First Aid Refresher</span><span class="cc-days"><b>2</b> days</span></li><li class="cc-row"><span class="cc-code">RECDIS</span><span class="cc-name">Operational Use of Electronic Chart Display and Information System Refresher</span><span class="cc-days"><b>2</b> days</span></li></ul></div>
       </div>
     </section>
-    <section class="cc-group" id="cat-assessment" data-g="assessment">
-      <h3 class="cc-gh"><span>Maritime Assessment Center (Practical Assessments)</span><b>4 courses</b></h3>
-      <div class="cc-secs">
-      <div class="cc-sec"><h4>Assessment for Able Bodied Seafarers</h4><ul class="cc-list"><li class="cc-row"><span class="cc-code">A-ABDECK</span><span class="cc-name">Reg II/5, Assessment for Able Bodied (AB) Deck</span><span class="cc-days"><b>2</b> days</span></li><li class="cc-row"><span class="cc-code">A-ABENGINE</span><span class="cc-name">Reg III/5, Assessment for Able Bodied (AB) Engine</span><span class="cc-days"><b>2</b> days</span></li></ul></div>
-      <div class="cc-sec"><h4>Assessment for Ratings</h4><ul class="cc-list"><li class="cc-row"><span class="cc-code">A-RFPNW</span><span class="cc-name">Reg II/4, Assessment for Ratings Forming Part of a Navigational Watch</span><span class="cc-days"><b>2</b> days</span></li><li class="cc-row"><span class="cc-code">A-RFPEW</span><span class="cc-name">Reg III/4, Assessment for Ratings Forming Part of an Engineering Watch</span><span class="cc-days"><b>2</b> days</span></li></ul></div>
-      </div>
-    </section>
     <p class="cc-none" id="cc-none" hidden>No course matches your search.</p>
-    <div class="cc-req" id="requirements"><h3 class="cc-gh"><span>Requirements</span></h3><div class="cc-reqgrid"><div class="cc-reqcard"><h4>General Training Requirements</h4><ul><li>1 valid ID</li><li>Seafarer's Registration Number (SRN)</li><li>Down payment or full payment</li><li>For courses other than BT, see the Additional Training Requirements</li></ul></div><div class="cc-reqcard"><h4>Additional Training Requirements</h4><ul><li>All courses (except BT) need a BT COP or Training Certificate</li><li>ATCT and ATOT need a BTOC COP or Training Certificate</li><li>ATLG needs a BTLG COP or Training Certificate</li><li>MECA needs a MEFA COP or Training Certificate</li><li>FRB needs a SCRB COP or Training Certificate</li><li>Refresher courses need a valid COP of the training to be revalidated</li><li>AB Deck needs a RFPNW COP and at least 12 months of sea service experience</li><li>AB Engine needs a RFPEW COP and at least 12 months of sea service experience</li><li>CROWD needs a STPP training certificate</li><li>CRISIS needs a STPP training certificate and a CROWD training certificate</li><li>CRS-HULL needs STPP, CROWD, and CRISIS training certificates</li></ul></div><div class="cc-reqcard"><h4>Practical Assessment Requirements</h4><ul><li>Application Number</li><li>Full payment of assessment fee</li></ul></div></div><p class="cc-incl">Training inclusions are a polo shirt, maritime photo, basic medical exam, and transportation to the practicum site for courses with practicum.</p></div>
+    <div class="cc-req" id="requirements"><h3 class="cc-gh"><span>Requirements</span></h3><div class="cc-reqgrid"><div class="cc-reqcard"><h4>General Training Requirements</h4><ul><li>1 valid ID</li><li>Seafarer's Registration Number (SRN)</li><li>Down payment or full payment</li><li>For courses other than BT, see the Additional Training Requirements</li></ul></div><div class="cc-reqcard"><h4>Additional Training Requirements</h4><ul><li>All courses (except BT) need a BT COP or Training Certificate</li><li>ATCT and ATOT need a BTOC COP or Training Certificate</li><li>ATLG needs a BTLG COP or Training Certificate</li><li>MECA needs a MEFA COP or Training Certificate</li><li>FRB needs a SCRB COP or Training Certificate</li><li>Refresher courses need a valid COP of the training to be revalidated</li><li>AB Deck needs a RFPNW COP and at least 12 months of sea service experience</li><li>AB Engine needs a RFPEW COP and at least 12 months of sea service experience</li><li>CROWD needs a STPP training certificate</li><li>CRISIS needs a STPP training certificate and a CROWD training certificate</li><li>CRS-HULL needs STPP, CROWD, and CRISIS training certificates</li></ul></div></div><p class="cc-incl">Training inclusions are a polo shirt, maritime photo, basic medical exam, and transportation to the practicum site for courses with practicum.</p></div>
   </div>
   <!-- TC_COURSES_END -->
   <div class="courses-cta reveal">

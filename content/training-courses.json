@@ -353,6 +353,7 @@
    "id": "assessment",
    "title": "Maritime Assessment Center (Practical Assessments)",
    "short": "Practical Assessments",
+   "page": "assessment",
    "sections": [
     {
      "title": "Assessment for Able Bodied Seafarers",
@@ -415,6 +416,7 @@
   },
   {
    "title": "Practical Assessment Requirements",
+   "page": "assessment",
    "items": [
     "Application Number",
     "Full payment of assessment fee"

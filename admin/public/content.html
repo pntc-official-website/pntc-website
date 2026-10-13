@@ -273,14 +273,14 @@ function renderCourses() {
   const total = crs.groups.reduce((n, g) => n + g.sections.reduce((m, s) => m + s.courses.length, 0), 0);
   $('panel').innerHTML = `
     <div class="sc-head">
-      <div><h2>Training Center course list</h2><p>Training Center · shown on <a href="/training/maritime-courses" target="_blank" rel="noopener">/training/maritime-courses</a> and as the course cards on <a href="/training/" target="_blank" rel="noopener">/training/</a><br>${total} courses. Write one course per line as <b>CODE | Course name | Days</b>. Prices are not shown on the site, so leave them out.</p></div>
+      <div><h2>Training Center course list</h2><p>Training Center · shown on <a href="/training/maritime-courses" target="_blank" rel="noopener">/training/maritime-courses</a> also <a href="/training/assessment" target="_blank" rel="noopener">/training/assessment</a> and as the course cards on <a href="/training/" target="_blank" rel="noopener">/training/</a><br>${total} courses. Write one course per line as <b>CODE | Course name | Days</b>. Prices are not shown on the site, so leave them out.</p></div>
       <button class="btn btn-primary" id="crssave">Save and publish</button>
     </div>
     <div class="sc-field"><label for="crs-asof">List is as of</label><input class="form-input" id="crs-asof" value="${esc(crs.asOf)}"><small>For example January 2026.</small></div>
     <div class="sc-field"><label for="crs-note">Note under the search bar</label><input class="form-input" id="crs-note" value="${esc(crs.note)}"></div>
     <div class="sc-field"><label for="crs-incl">Training inclusions</label><textarea class="form-input" id="crs-incl" rows="2">${esc(crs.inclusions)}</textarea></div>
     ${crs.groups.map((g, gi) => `
-    <h3 style="margin:1.75rem 0 .5rem;font-size:1rem">Group ${gi + 1}</h3>
+    <h3 style="margin:1.75rem 0 .5rem;font-size:1rem">Group ${gi + 1} <small style="font-weight:500;opacity:.7">· shown on the ${g.page === 'assessment' ? 'Assessment page' : 'Maritime Courses page'}</small></h3>
     <div class="sc-field"><label for="crs-g${gi}-t">Group title</label><input class="form-input" id="crs-g${gi}-t" value="${esc(g.title)}"></div>
     <div class="sc-field"><label for="crs-g${gi}-s">Short name on the filter button</label><input class="form-input" id="crs-g${gi}-s" value="${esc(g.short || '')}"></div>
     ${g.sections.map((s, si) => `
@@ -293,7 +293,7 @@ function renderCourses() {
     <button class="btn crs-add" data-g="${gi}" style="font-size:.78rem">+ Add a section to this group</button>`).join('')}
     <h3 style="margin:1.75rem 0 .5rem;font-size:1rem">Requirements</h3>
     ${crs.requirements.map((q, qi) => `
-    <div class="sc-field"><label for="crs-r${qi}-t">Box title</label><input class="form-input" id="crs-r${qi}-t" value="${esc(q.title)}">
+    <div class="sc-field"><label for="crs-r${qi}-t">Box title <small style="font-weight:500;opacity:.7">· shown on the ${q.page === 'assessment' ? 'Assessment page' : 'Maritime Courses page'}</small></label><input class="form-input" id="crs-r${qi}-t" value="${esc(q.title)}">
       <label for="crs-r${qi}-i" style="margin-top:.5rem">Items, one per line</label>
       <textarea class="form-input" id="crs-r${qi}-i" rows="${Math.max(3, q.items.length + 1)}">${esc(q.items.join('\n'))}</textarea></div>`).join('')}
     <div style="margin-top:1.25rem"><button class="btn btn-primary" id="crssave2">Save and publish</button></div>

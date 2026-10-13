@@ -57,6 +57,14 @@
 .cc-reqcard li::before{content:'';position:absolute;left:0;top:.72rem;width:16px;height:16px;border-radius:50%;background:#F3CF33 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231C1650' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/10px no-repeat}
 .cc-incl{margin-top:1.1rem;font-size:.9rem;line-height:1.6;color:#1C1650;font-weight:600;background:rgba(243,207,51,.35);border-radius:16px;padding:1rem 1.2rem}
 
+/* assessment page */
+#assess{background:var(--tc-soft,#F7F7FB);padding:clamp(4.5rem,8vw,7rem) clamp(1.25rem,6vw,5rem);position:relative}
+#assess .eyebrow{color:#1C1650!important;display:inline-flex;align-items:center;gap:.6rem}
+#assess .eyebrow::before{content:'';width:30px;height:3px;border-radius:3px;background:#F3CF33}
+.cc-plain .cc-meta{margin-top:0}
+.cc-plain .cc-group{margin-top:2rem}
+.cc-plain .cc-reqgrid{grid-template-columns:minmax(0,560px)}
+
 /* the fiery navy band: enroll on the courses page, contact on the home page */
 #enroll .enroll-h2{font-size:clamp(2.3rem,5vw,4.4rem)!important;line-height:.95!important}
 #contact{background:#1C1650!important;overflow:hidden}

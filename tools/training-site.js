@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 </script>`;
 
-for (const name of ['index.html', 'maritime-courses.html']) {
+for (const name of ['index.html', 'maritime-courses.html', 'assessment.html']) {
   const file = path.join(DIR, name);
   let h = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
   h = h.replace(/class=”([\w-]+)”/g, 'class="$1"');

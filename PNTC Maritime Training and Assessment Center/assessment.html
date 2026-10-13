@@ -684,6 +684,280 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"EducationalOrganization","@id":"https://www.pntc.edu.ph/#organization","name":"PNTC Colleges, Inc.","alternateName":["PNTC","PNTC Colleges","Philippine Nautical and Technological College"],"url":"https://www.pntc.edu.ph/","description":"Maritime and business education institution established in 1994, with campuses and facilities in Dasmariñas (Cavite), Intramuros (Manila), and Tanza (Cavite).","location":[{"@type":"Place","name":"PNTC Colleges Dasmariñas Campus","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"}},{"@type":"Place","name":"PNTC Maritime Training and Assessment Center, Intramuros","address":{"@type":"PostalAddress","streetAddress":"5th Floor, Intramuros Corporate Plaza, Recoletos Street, Intramuros","addressLocality":"Manila","addressRegion":"Metro Manila","postalCode":"1002","addressCountry":"PH"}},{"@type":"Place","name":"PNTC Tanza Training Center","address":{"@type":"PostalAddress","addressLocality":"Tanza","addressRegion":"Cavite","addressCountry":"PH"}}],"logo":"https://www.pntc.edu.ph/SHS/PNTC%20White%20Horizontal.png","foundingDate":"1994","address":{"@type":"PostalAddress","streetAddress":"Brgy. Zone 3, Amuntay Road","addressLocality":"Dasmariñas","addressRegion":"Cavite","postalCode":"4114","addressCountry":"PH"},"telephone":"+63-46-438-8835","email":"info@pntc.edu.ph","sameAs":["https://www.facebook.com/pntccolleges"]},{"@type":"EducationalOrganization","@id":"https://www.pntc.edu.ph/training/#mtc","name":"PNTC Maritime Training and Assessment Center","url":"https://www.pntc.edu.ph/training/","address":{"@type":"PostalAddress","streetAddress":"5th Floor, Intramuros Corporate Plaza, Recoletos Street, Intramuros","addressLocality":"Manila","addressRegion":"Metro Manila","postalCode":"1002","addressCountry":"PH"},"telephone":"+63-917-182-9158","email":"admissions@mypntc.edu.ph","parentOrganization":{"@id":"https://www.pntc.edu.ph/#organization"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"17:30"}]},{"@type":"WebPage","@id":"https://www.pntc.edu.ph/training/assessment","url":"https://www.pntc.edu.ph/training/assessment","name":"Maritime Assessment Courses in Manila | PNTC Training Center","description":"Maritime competence assessment at the PNTC Maritime Training and Assessment Center in Intramuros, Manila.","inLanguage":"en-PH","isPartOf":{"@type":"WebSite","name":"PNTC Colleges, Inc.","url":"https://www.pntc.edu.ph/"},"about":{"@id":"https://www.pntc.edu.ph/training/#mtc"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.pntc.edu.ph/"},{"@type":"ListItem","position":2,"name":"Training Center","item":"https://www.pntc.edu.ph/training/"},{"@type":"ListItem","position":3,"name":"Assessment Courses","item":"https://www.pntc.edu.ph/training/assessment"}]}]}</script>
 <script src="/global-nav.js" data-area="training"></script>
+<style id="tc-modern">
+/* Training Center: modern look for everything below the hero (light sections, rounded cards) */
+:root{--tc-navy:#1C1650;--tc-gold:#F3CF33;--tc-soft:#F7F7FB;--tc-text:rgba(28,22,80,.74);--tc-line:rgba(28,22,80,.1)}
+
+/* numbers band */
+#stats{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding:clamp(1.8rem,3.4vw,2.8rem) clamp(1.25rem,5vw,4rem)!important;max-width:none}
+#stats .stat{padding:.4rem 1rem!important;border-right:1px solid rgba(28,22,80,.16)}
+#stats .stat-n{font-size:clamp(2.2rem,4.6vw,3.8rem)!important;color:var(--tc-navy)!important;letter-spacing:-.01em}
+#stats .stat-l{font-size:.7rem!important;color:rgba(28,22,80,.75)!important;margin-top:.45rem!important}
+
+/* shared section pieces */
+#about,#courses,#facilities,#why,#voices,#contact{position:relative}
+#about .eyebrow,#courses .eyebrow,#facilities .eyebrow,#why .eyebrow,#voices .eyebrow,#contact .eyebrow{color:var(--tc-navy)!important;display:inline-flex;align-items:center;gap:.6rem}
+#courses .eyebrow::before,#facilities .eyebrow::before,#why .eyebrow::before,#voices .eyebrow::before,#contact .eyebrow::before{content:'';width:30px;height:3px;border-radius:3px;background:var(--tc-gold)}
+.section-head h2{color:var(--tc-navy)!important;font-size:clamp(2.4rem,5.2vw,4rem)!important;line-height:.95!important}
+.section-head h2 span,.about-h2 em,#contact h2 em{color:var(--tc-navy)!important;background:linear-gradient(transparent 62%,var(--tc-gold) 62%,var(--tc-gold) 92%,transparent 92%);padding:0 .08em}
+.section-head p{color:var(--tc-text)!important;font-size:1rem!important}
+
+/* who we are */
+#about{background:#fff!important;padding:clamp(4.5rem,8vw,7rem) clamp(1.25rem,6vw,5rem)!important;overflow:hidden}
+#about::before{content:''!important;position:absolute!important;inset:auto -180px -200px auto!important;width:560px!important;height:560px!important;border-radius:50%!important;background:radial-gradient(circle,rgba(243,207,51,.22),transparent 68%)!important;clip-path:none!important;transform:none!important;opacity:1!important}
+#about .about-grid{position:relative;align-items:center}
+#about .about-label::before{border-radius:3px}
+#about .about-h2{color:var(--tc-navy)!important}
+#about .about-body{color:var(--tc-text)!important;font-size:1rem!important}
+#about .about-link{display:inline-flex;align-items:center;gap:.6rem;background:var(--tc-navy)!important;color:var(--tc-gold)!important;border:0!important;border-radius:999px!important;clip-path:none!important;padding:.95rem 1.7rem!important;font-weight:800;letter-spacing:.08em;text-decoration:none;transition:gap .25s,transform .25s,box-shadow .25s}
+#about .about-link:hover{gap:.95rem;transform:translateY(-2px);box-shadow:0 16px 28px -14px rgba(28,22,80,.6)}
+#about .about-features{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem!important}
+#about .about-feat{display:flex;flex-direction:column;align-items:flex-start;gap:1rem;background:#fff!important;border:1px solid var(--tc-line)!important;border-radius:22px!important;clip-path:none!important;filter:none!important;padding:1.6rem 1.4rem!important;box-shadow:0 22px 46px -34px rgba(28,22,80,.5);transition:transform .3s,box-shadow .3s,border-color .3s}
+#about .about-feat:hover{transform:translateY(-6px);box-shadow:0 30px 54px -30px rgba(28,22,80,.6);border-color:rgba(28,22,80,.25)!important;background:#fff!important}
+#about .about-feat:nth-child(1){background:var(--tc-navy)!important;border-color:var(--tc-navy)!important}
+#about .about-feat:nth-child(1) .feat-h{color:var(--tc-gold)!important}
+#about .about-feat:nth-child(1) .feat-p{color:rgba(255,255,255,.8)!important}
+#about .feat-icon{width:50px!important;height:50px!important;border-radius:14px!important;background:var(--tc-gold)!important;border:0!important;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+#about .feat-icon svg{stroke:var(--tc-navy)!important}
+#about .feat-h{color:var(--tc-navy)!important;font-size:1.2rem!important}
+#about .feat-p{color:var(--tc-text)!important;font-size:.88rem!important}
+
+/* courses */
+#courses{background:var(--tc-soft)!important;padding:clamp(4.5rem,8vw,7rem) clamp(1.25rem,6vw,5rem)!important}
+#courses .course-card{background:#fff!important;border:1px solid var(--tc-line)!important;border-radius:22px!important;clip-path:none!important;filter:none!important;padding:1.7rem 1.5rem 1.4rem!important;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 22px 46px -34px rgba(28,22,80,.5);transition:transform .3s,box-shadow .3s,border-color .3s!important}
+#courses .course-card::before{border:0!important;left:0;right:0;top:0;height:5px;background:linear-gradient(90deg,var(--tc-gold),#FF7A1A);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+#courses .course-card:hover{background:#fff!important;transform:translateY(-6px)!important;box-shadow:0 30px 54px -30px rgba(28,22,80,.6);border-color:rgba(28,22,80,.25)!important;filter:none!important}
+#courses .course-card:hover::before{transform:scaleX(1)}
+#courses .course-tag{align-self:flex-start;background:rgba(243,207,51,.45);color:var(--tc-navy)!important;opacity:1!important;border-radius:999px;padding:.36rem .75rem;font-size:.62rem!important;letter-spacing:.12em!important;font-weight:800!important}
+#courses .course-name{color:var(--tc-navy)!important}
+#courses .course-desc{color:var(--tc-text)!important;font-size:.88rem!important;flex:1}
+#courses .course-meta{border-top:1px solid var(--tc-line)!important;padding-top:1rem;align-items:center}
+#courses .course-meta-item{color:var(--tc-navy)!important;font-weight:700;font-size:.8rem!important}
+#courses .course-meta-item svg{stroke:var(--tc-navy)!important}
+#courses .course-enroll{display:inline-flex;align-items:center;gap:.4rem;background:var(--tc-navy)!important;color:var(--tc-gold)!important;border:0!important;border-radius:999px;padding:.55rem 1rem!important;font-weight:800;text-decoration:none;transition:gap .25s,background .25s,color .25s}
+#courses .course-enroll:hover{gap:.7rem;background:var(--tc-gold)!important;color:var(--tc-navy)!important}
+#courses .btn-enroll,#enroll .btn-enroll,#enroll .btn-call{clip-path:none!important;border-radius:999px!important}
+#courses .courses-cta{max-width:1200px;margin:3rem auto 0!important;background:var(--tc-navy);border:0!important;border-radius:26px;padding:clamp(1.6rem,3vw,2.4rem)!important;display:flex;align-items:center;justify-content:space-between;gap:1.4rem;flex-wrap:wrap;text-align:left;position:relative;overflow:hidden}
+#courses .courses-cta::after{content:'';position:absolute;right:-70px;bottom:-110px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,122,26,.4),transparent 70%);pointer-events:none}
+#courses .courses-cta p{color:#fff!important;font-size:1.05rem!important;font-weight:600;margin:0!important;max-width:40rem;position:relative;z-index:1}
+#courses .courses-cta .btn-enroll{position:relative;z-index:1}
+
+/* facilities */
+#facilities{background:#fff!important;clip-path:none!important;margin-top:0!important;padding:clamp(4.5rem,8vw,7rem) clamp(1.25rem,6vw,5rem)!important}
+#facilities .fac-grid{gap:1rem}
+#facilities .fac-card{border:0!important;border-radius:24px!important;clip-path:none!important;filter:none!important;min-height:250px;box-shadow:0 26px 50px -34px rgba(28,22,80,.6);transition:transform .35s,box-shadow .35s}
+#facilities .fac-card:hover{transform:translateY(-6px);box-shadow:0 36px 60px -32px rgba(28,22,80,.7)}
+#facilities .fac-card::after{border:0!important;content:''!important;top:1rem!important;right:1rem!important;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.92) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231C1650' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5'/%3E%3C/svg%3E") center/18px no-repeat;opacity:0;transform:scale(.8);transition:opacity .3s,transform .3s}
+#facilities .fac-card:hover::after{opacity:1;transform:none}
+#facilities .fac-photo{filter:brightness(.92) saturate(1.08)!important}
+#facilities .fac-card:hover .fac-photo{filter:brightness(1) saturate(1.15)!important}
+#facilities .fac-caption{padding:3.4rem 1.5rem 1.3rem!important;background:linear-gradient(to top,rgba(16,11,51,.9) 0%,rgba(16,11,51,0) 100%)!important}
+#facilities .fac-tag{display:inline-block;background:var(--tc-gold);color:var(--tc-navy)!important;border-radius:999px;padding:.3rem .65rem;font-weight:800!important;letter-spacing:.1em!important;margin-bottom:.5rem!important}
+#facilities .fac-caption h3{font-size:1.3rem!important}
+
+/* why */
+#why{background:var(--tc-soft)!important;padding:clamp(4.5rem,8vw,7rem) clamp(1.25rem,6vw,5rem)!important}
+#why .why-card{background:#fff!important;border:1px solid var(--tc-line)!important;border-radius:22px!important;clip-path:none!important;filter:none!important;padding:1.8rem 1.5rem!important;overflow:hidden;box-shadow:0 22px 46px -34px rgba(28,22,80,.5);transition:transform .3s,box-shadow .3s,border-color .3s!important}
+#why .why-card::before{border:0!important;left:0;right:0;top:auto;bottom:0;height:5px;background:linear-gradient(90deg,var(--tc-gold),#FF7A1A);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+#why .why-card:hover{background:#fff!important;transform:translateY(-6px)!important;box-shadow:0 30px 54px -30px rgba(28,22,80,.6);border-color:rgba(28,22,80,.25)!important}
+#why .why-card:hover::before{transform:scaleX(1)}
+#why .why-num{font-size:3.6rem!important;line-height:1!important;color:transparent!important;-webkit-text-stroke:2px var(--tc-gold);opacity:1!important;margin-bottom:.9rem!important}
+#why .why-h{color:var(--tc-navy)!important;font-size:1.3rem!important}
+#why .why-p{color:var(--tc-text)!important;font-size:.9rem!important}
+
+/* accreditations */
+#accreds.pntc-acc{background:#fff!important;border-top:1px solid var(--tc-line)!important;border-bottom:1px solid var(--tc-line)!important;padding:3.2rem clamp(1.25rem,5vw,4rem)!important}
+#accreds .pntc-acc-lbl{color:var(--tc-navy)!important}
+#accreds .pntc-acc-row{gap:.9rem!important}
+#accreds .pntc-acc-item{background:#fff;border:1px solid var(--tc-line);border-radius:18px;padding:.9rem 1.3rem .9rem .9rem;box-shadow:0 18px 36px -30px rgba(28,22,80,.5);transition:transform .3s,border-color .3s}
+#accreds .pntc-acc-item:hover{transform:translateY(-4px);border-color:rgba(28,22,80,.3)}
+#accreds .pntc-acc-ico{background:var(--tc-gold)!important;color:var(--tc-navy)!important;border-radius:12px!important}
+#accreds .pntc-acc-name{color:var(--tc-navy)!important}
+#accreds .pntc-acc-sub{color:var(--tc-text)!important}
+
+/* graduates */
+#voices{background:#fff!important;padding:clamp(4.5rem,8vw,7rem) clamp(1.25rem,6vw,5rem)!important}
+#voices .voice-card{background:var(--tc-soft)!important;border:1px solid transparent!important;border-radius:24px!important;clip-path:none!important;filter:none!important;padding:3.6rem 1.7rem 1.7rem!important;transition:transform .3s,background .3s,border-color .3s,box-shadow .3s!important}
+#voices .voice-card::after{border:0!important;content:'\201C'!important;left:1.5rem!important;top:.6rem!important;bottom:auto!important;font-family:Georgia,serif;font-size:5rem;line-height:1;font-weight:800;color:var(--tc-gold)}
+#voices .voice-card:hover{background:#fff!important;border-color:rgba(28,22,80,.2)!important;transform:translateY(-6px);box-shadow:0 30px 54px -30px rgba(28,22,80,.6)}
+#voices .voice-quote{color:var(--tc-navy)!important;font-style:normal!important;font-weight:500!important;font-size:.98rem!important;border-left:0!important;padding-left:0!important}
+#voices .voice-name{color:var(--tc-navy)!important;font-size:1.2rem!important}
+#voices .voice-role{color:var(--tc-navy)!important;font-weight:700}
+#voices .voice-rank{color:var(--tc-text)!important}
+
+/* news cards, when there are posts */
+.pntc-news{background:var(--tc-soft)!important}
+.pntc-news-eyebrow,.pntc-news-h2{color:var(--tc-navy)!important}
+.pntc-news-card{border-radius:22px!important;overflow:hidden}
+
+/* contact */
+#contact{background:var(--tc-soft)!important;padding:clamp(4.5rem,8vw,7rem) clamp(1.25rem,6vw,5rem) 0!important}
+#contact h2{color:var(--tc-navy)!important;font-family:'Barlow Condensed',sans-serif!important;font-weight:900!important;font-size:clamp(2.4rem,5.2vw,4rem)!important;line-height:.95!important;text-transform:uppercase;margin-bottom:1rem!important}
+#contact h2 em{font-style:normal!important}
+#contact .contact-grid>div>p{color:var(--tc-text)!important;font-size:1rem!important}
+#contact .contact-item{background:#fff!important;border:1px solid var(--tc-line)!important;border-radius:18px!important;clip-path:none!important;align-items:center!important;box-shadow:0 18px 36px -30px rgba(28,22,80,.5);transition:transform .3s,border-color .3s}
+#contact .contact-item:hover{transform:translateX(6px);border-color:rgba(28,22,80,.3)!important}
+#contact .contact-item-icon{background:var(--tc-gold)!important;border:0!important;border-radius:13px!important;width:46px!important;height:46px!important;flex:0 0 auto}
+#contact .contact-item-icon svg{stroke:var(--tc-navy)!important}
+#contact .contact-item-label{color:rgba(28,22,80,.6)!important}
+#contact .contact-item-val,#contact .contact-item-val a{color:var(--tc-navy)!important;font-weight:700}
+#contact .contact-item-val a:hover{text-decoration:underline}
+#contact .contact-map{border-radius:26px!important;clip-path:none!important;border:6px solid #fff!important;overflow:hidden;min-height:420px;box-shadow:0 30px 56px -34px rgba(28,22,80,.6)}
+#contact .contact-map::before{display:none}
+#contact .contact-footer{max-width:none!important;margin:clamp(3.5rem,6vw,5rem) calc(-1*clamp(1.25rem,6vw,5rem)) 0!important;padding:1.6rem clamp(1.25rem,6vw,5rem)!important;background:var(--tc-navy)!important;border-top:0!important;color:rgba(255,255,255,.75)!important}
+#contact .contact-footer a{color:rgba(255,255,255,.75)!important}
+#contact .contact-footer a:hover{color:var(--tc-gold)!important}
+
+/* enroll band on the courses page */
+#enroll{background:var(--tc-navy)!important;overflow:hidden}
+#enroll::before{content:''!important;position:absolute!important;inset:auto auto -40% 50%!important;width:900px!important;height:600px!important;transform:translateX(-50%)!important;background:radial-gradient(closest-side,rgba(255,122,26,.42),rgba(255,70,0,.14) 55%,transparent)!important;clip-path:none!important;border:0!important;opacity:1!important;animation:tc-flicker 3.6s ease-in-out infinite}
+#enroll .enroll-note{margin-top:1.8rem;font-size:.86rem;color:rgba(255,255,255,.75);position:relative;z-index:1}
+#enroll .btn-call{border:1.5px solid rgba(255,255,255,.45)!important;background:rgba(255,255,255,.06)!important;color:#fff!important}
+#enroll .btn-call:hover{background:#fff!important;color:var(--tc-navy)!important}
+@keyframes tc-flicker{0%,100%{opacity:.75}30%{opacity:1}55%{opacity:.6}80%{opacity:.95}}
+
+@media(max-width:900px){
+  #stats{grid-template-columns:repeat(2,minmax(0,1fr))!important;row-gap:1.4rem}
+  #stats .stat:nth-child(2){border-right:0}
+  #courses .courses-cta{flex-direction:column;align-items:flex-start}
+  #contact .contact-map{min-height:320px}
+}
+@media(max-width:560px){
+  #about .about-features{grid-template-columns:1fr}
+  #about .about-feat{flex-direction:row;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){
+  #about .about-feat,#courses .course-card,#why .why-card,#voices .voice-card,#facilities .fac-card,#contact .contact-item{transition:none!important}
+  #enroll::before{animation:none}
+}
+</style>
+<style id="tc-courses">
+/* Training Center: course catalogue, home category cards, and the fiery contact band */
+
+/* home page category cards */
+.ch-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.1rem;max-width:1200px;margin:0 auto}
+.ch-card{display:flex;flex-direction:column;align-items:flex-start;background:#1C1650;border-radius:24px;padding:1.8rem 1.6rem 1.6rem;text-decoration:none;position:relative;overflow:hidden;box-shadow:0 26px 50px -32px rgba(28,22,80,.7);transition:transform .3s,box-shadow .3s}
+.ch-card::after{content:'';position:absolute;right:-70px;bottom:-110px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,122,26,.45),transparent 70%);opacity:.55;transition:opacity .3s,transform .4s;pointer-events:none}
+.ch-card:hover{transform:translateY(-8px);box-shadow:0 36px 60px -30px rgba(28,22,80,.85)}
+.ch-card:hover::after{opacity:1;transform:scale(1.15)}
+.ch-n{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:5rem;line-height:.85;color:#F3CF33;letter-spacing:-.02em;position:relative;z-index:1}
+.ch-lbl{font-size:.7rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:.35rem;position:relative;z-index:1}
+.ch-card h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.55rem;line-height:1.05;text-transform:uppercase;color:#fff;margin:1.2rem 0 .9rem;position:relative;z-index:1}
+.ch-card ul{list-style:none;margin:0 0 1.4rem;padding:0;display:flex;flex-wrap:wrap;gap:.35rem;position:relative;z-index:1;flex:1;align-content:flex-start}
+.ch-card li{font-size:.74rem;font-weight:700;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:.3rem .65rem}
+.ch-go{display:inline-flex;align-items:center;gap:.5rem;font-size:.76rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1C1650;background:#F3CF33;border-radius:999px;padding:.65rem 1.1rem;position:relative;z-index:1;transition:gap .25s}
+.ch-card:hover .ch-go{gap:.85rem}
+
+/* catalogue */
+.cc{max-width:1200px;margin:0 auto}
+.cc-tools{position:sticky;top:var(--cc-top,126px);z-index:20;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;background:#fff;border:1px solid rgba(28,22,80,.1);border-radius:22px;padding:.75rem;box-shadow:0 22px 40px -28px rgba(28,22,80,.55)}
+.cc-search{flex:1 1 260px;display:flex;align-items:center;gap:.6rem;background:#F7F7FB;border:1.5px solid rgba(28,22,80,.14);border-radius:14px;padding:0 1rem;transition:border-color .2s,box-shadow .2s}
+.cc-search:focus-within{border-color:#1C1650;box-shadow:0 0 0 4px rgba(243,207,51,.45)}
+.cc-search svg{width:18px;height:18px;flex:0 0 auto;fill:none;stroke:#1C1650;stroke-width:2;stroke-linecap:round}
+.cc-search input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-family:inherit;font-size:.95rem;font-weight:600;color:#1C1650;padding:.85rem 0}
+.cc-search input::placeholder{color:rgba(28,22,80,.5);font-weight:500}
+.cc-chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.cc-chip{font-family:inherit;font-size:.8rem;font-weight:700;color:#1C1650;background:#fff;border:1.5px solid rgba(28,22,80,.18);border-radius:999px;padding:.6rem 1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.cc-chip:hover{border-color:#1C1650}
+.cc-chip.on{background:#1C1650;border-color:#1C1650;color:#F3CF33}
+.cc-count{margin-left:auto;font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#1C1650;padding:0 .6rem;white-space:nowrap}
+.cc-meta{margin:1.2rem 0 0;display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.88rem;color:rgba(28,22,80,.74)}
+.cc-meta b{color:#1C1650;font-weight:800}
+.cc-group{margin-top:3rem;scroll-margin-top:calc(var(--cc-top,126px) + 110px)}
+.cc-group[hidden],.cc-sec[hidden],.cc-row[hidden]{display:none!important}
+.cc-gh{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.cc-gh span{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1;text-transform:uppercase;color:#1C1650;padding-left:.9rem;border-left:7px solid #F3CF33}
+.cc-gh b{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#F3CF33;background:#1C1650;border-radius:999px;padding:.45rem .9rem}
+.cc-secs{columns:2;column-gap:1.1rem}
+.cc-sec{break-inside:avoid;background:#fff;border:1px solid rgba(28,22,80,.1);border-radius:22px;padding:1.3rem 1.3rem .6rem;margin:0 0 1.1rem;box-shadow:0 22px 46px -36px rgba(28,22,80,.5)}
+.cc-sec h4{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#1C1650;background:rgba(243,207,51,.5);border-radius:999px;padding:.42rem .9rem;margin-bottom:.5rem}
+.cc-list{list-style:none;margin:0;padding:0}
+.cc-row{display:grid;grid-template-columns:6.4rem minmax(0,1fr) auto;align-items:center;gap:.9rem;padding:.75rem .5rem;margin:0 -.5rem;border-top:1px solid rgba(28,22,80,.08);border-radius:12px;transition:background .2s}
+.cc-row:first-child{border-top:0}
+.cc-row:hover{background:#F7F7FB}
+.cc-code{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.02rem;letter-spacing:.03em;line-height:1.1;text-align:center;color:#F3CF33;background:#1C1650;border-radius:10px;padding:.5rem .35rem;overflow-wrap:anywhere}
+.cc-name{font-size:.96rem;font-weight:700;line-height:1.35;color:#1C1650}
+.cc-days{white-space:nowrap;font-size:.74rem;font-weight:700;color:#1C1650;background:#F7F7FB;border:1px solid rgba(28,22,80,.12);border-radius:999px;padding:.34rem .7rem}
+.cc-days b{font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:800}
+.cc-none{margin-top:2rem;text-align:center;font-weight:600;color:rgba(28,22,80,.7);background:#fff;border:1.5px dashed rgba(28,22,80,.25);border-radius:22px;padding:2.4rem 1rem}
+.cc-none[hidden]{display:none}
+.cc-req{margin-top:3.4rem;scroll-margin-top:calc(var(--cc-top,126px) + 110px)}
+.cc-reqgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem;align-items:start}
+.cc-reqcard{background:#fff;border:1px solid rgba(28,22,80,.1);border-radius:22px;padding:1.4rem;box-shadow:0 22px 46px -36px rgba(28,22,80,.5)}
+.cc-reqcard h4{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.3rem;line-height:1.1;text-transform:uppercase;color:#1C1650;margin-bottom:.8rem}
+.cc-reqcard ul{list-style:none;margin:0;padding:0}
+.cc-reqcard li{position:relative;padding:.5rem 0 .5rem 1.7rem;font-size:.9rem;font-weight:500;line-height:1.5;color:rgba(28,22,80,.82);border-top:1px solid rgba(28,22,80,.08)}
+.cc-reqcard li:first-child{border-top:0}
+.cc-reqcard li::before{content:'';position:absolute;left:0;top:.72rem;width:16px;height:16px;border-radius:50%;background:#F3CF33 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231C1650' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/10px no-repeat}
+.cc-incl{margin-top:1.1rem;font-size:.9rem;line-height:1.6;color:#1C1650;font-weight:600;background:rgba(243,207,51,.35);border-radius:16px;padding:1rem 1.2rem}
+
+/* assessment page */
+#assess{background:var(--tc-soft,#F7F7FB);padding:clamp(4.5rem,8vw,7rem) clamp(1.25rem,6vw,5rem);position:relative}
+#assess .eyebrow{color:#1C1650!important;display:inline-flex;align-items:center;gap:.6rem}
+#assess .eyebrow::before{content:'';width:30px;height:3px;border-radius:3px;background:#F3CF33}
+.cc-plain .cc-meta{margin-top:0}
+.cc-plain .cc-group{margin-top:2rem}
+.cc-plain .cc-reqgrid{grid-template-columns:minmax(0,560px)}
+
+/* the fiery navy band: enroll on the courses page, contact on the home page */
+#enroll .enroll-h2{font-size:clamp(2.3rem,5vw,4.4rem)!important;line-height:.95!important}
+#contact{background:#1C1650!important;overflow:hidden}
+#contact::before{content:'';position:absolute;left:50%;bottom:-34%;width:1100px;height:700px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(255,122,26,.42),rgba(255,70,0,.14) 55%,transparent);animation:tc-flicker 3.6s ease-in-out infinite;pointer-events:none}
+#contact .contact-grid,#contact .contact-footer{position:relative;z-index:1}
+#contact .eyebrow{color:#F3CF33!important}
+#contact h2{color:#fff!important;font-size:clamp(2.2rem,4.4vw,3.6rem)!important}
+#contact h2 em{color:#F3CF33!important;background:none!important;padding:0!important}
+#contact .contact-grid>div>p{color:rgba(255,255,255,.8)!important}
+#contact .contact-item{background:rgba(255,255,255,.08)!important;border-color:rgba(255,255,255,.16)!important;box-shadow:none!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#contact .contact-item:hover{border-color:rgba(243,207,51,.6)!important}
+#contact .contact-item-label{color:rgba(255,255,255,.65)!important}
+#contact .contact-item-val,#contact .contact-item-val a{color:#fff!important}
+#contact .contact-map{border-color:rgba(255,255,255,.2)!important;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)!important}
+#contact .contact-footer{background:#120D3A!important}
+
+@media(max-width:1000px){
+  .ch-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cc-secs{columns:1}
+  .cc-reqgrid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .ch-grid{grid-template-columns:1fr}
+  .ch-n{font-size:4rem}
+  .cc-tools{position:static;padding:.6rem}
+  .cc-chips{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none}
+  .cc-chips::-webkit-scrollbar{display:none}
+  .cc-chip{white-space:nowrap}
+  .cc-count{margin-left:0;padding:.2rem .4rem 0}
+  .cc-row{grid-template-columns:5.4rem minmax(0,1fr);gap:.3rem .8rem}
+  .cc-code{font-size:.92rem}
+  .cc-days{grid-column:2;justify-self:start}
+  .cc-sec{padding:1.1rem 1rem .4rem}
+}
+@media(prefers-reduced-motion:reduce){.ch-card,.ch-card::after{transition:none}#contact::before{animation:none}}
+</style>
+<script id="tc-courses-js">
+document.addEventListener('DOMContentLoaded',function(){
+  var box=document.getElementById('catalogue');if(!box)return;
+  function top(){var m=0;document.querySelectorAll('nav,header').forEach(function(e){var p=getComputedStyle(e).position;if(p==='fixed'||p==='sticky'){var r=e.getBoundingClientRect();if(r.top<200&&r.height<200)m=Math.max(m,r.bottom);}});if(m>0)box.style.setProperty('--cc-top',Math.round(m+10)+'px');}
+  if(!document.getElementById('cc-q')){top();window.addEventListener('resize',top);return;}
+  var q=document.getElementById('cc-q'),chips=[].slice.call(document.querySelectorAll('.cc-chip')),count=document.getElementById('cc-count'),none=document.getElementById('cc-none'),req=document.getElementById('requirements'),g='all';
+  function run(){
+    var s=(q.value||'').toLowerCase().trim(),n=0;
+    box.querySelectorAll('.cc-group').forEach(function(gr){
+      var on=g==='all'||gr.getAttribute('data-g')===g,gn=0;
+      gr.querySelectorAll('.cc-sec').forEach(function(sec){var sn=0;
+        sec.querySelectorAll('.cc-row').forEach(function(r){var ok=on&&(!s||r.textContent.toLowerCase().indexOf(s)>-1);r.hidden=!ok;if(ok)sn++;});
+        sec.hidden=!sn;gn+=sn;});
+      gr.hidden=!gn;n+=gn;});
+    count.textContent=n+(n===1?' course':' courses');
+    none.hidden=n>0;
+    if(req)req.hidden=!!s||g!=='all';
+  }
+  chips.forEach(function(b){b.addEventListener('click',function(){g=b.getAttribute('data-g');chips.forEach(function(x){x.classList.toggle('on',x===b);});run();});});
+  q.addEventListener('input',run);
+  top();window.addEventListener('resize',top);window.addEventListener('load',top);run();
+});
+</script>
 </head>
 <body>
 
@@ -725,14 +999,40 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   </div>
 </section>
 
-<section id="coming-soon" class="pntc-soon">
-  <div class="pntc-soon-box">
-    <div class="pntc-soon-ico">⚓</div>
-    <h2>Coming Soon</h2>
-    <p>We're preparing this page. Please check back soon.</p>
-    <div class="pntc-soon-chips"><span>Assessment Courses</span><span>Assessment Requirements</span><span>Assessment Process</span><span>Contact Information</span></div>
-    <a class="pntc-soon-btn" href="/training/">Back to Training &amp; Assessment</a>
+<section id="assess">
+  <div class="section-head reveal">
+    <div class="eyebrow"><!--c:training.assess.eyebrow-->Maritime Assessment Center<!--/c--></div>
+    <h2><!--c:training.assess.h2a-->Practical<!--/c--> <span><!--c:training.assess.h2b-->Assessments<!--/c--></span></h2>
   </div>
+  <!-- TC_COURSES_START -->
+  <div class="cc cc-plain" id="catalogue">
+    <p class="cc-meta"><b>As of January 2026</b><span>Slots are limited and schedules may change without prior notice.</span></p>
+    <section class="cc-group" id="cat-assessment" data-g="assessment">
+      <h3 class="cc-gh"><span>Maritime Assessment Center (Practical Assessments)</span><b>4 assessments</b></h3>
+      <div class="cc-secs">
+      <div class="cc-sec"><h4>Assessment for Able Bodied Seafarers</h4><ul class="cc-list"><li class="cc-row"><span class="cc-code">A-ABDECK</span><span class="cc-name">Reg II/5, Assessment for Able Bodied (AB) Deck</span><span class="cc-days"><b>2</b> days</span></li><li class="cc-row"><span class="cc-code">A-ABENGINE</span><span class="cc-name">Reg III/5, Assessment for Able Bodied (AB) Engine</span><span class="cc-days"><b>2</b> days</span></li></ul></div>
+      <div class="cc-sec"><h4>Assessment for Ratings</h4><ul class="cc-list"><li class="cc-row"><span class="cc-code">A-RFPNW</span><span class="cc-name">Reg II/4, Assessment for Ratings Forming Part of a Navigational Watch</span><span class="cc-days"><b>2</b> days</span></li><li class="cc-row"><span class="cc-code">A-RFPEW</span><span class="cc-name">Reg III/4, Assessment for Ratings Forming Part of an Engineering Watch</span><span class="cc-days"><b>2</b> days</span></li></ul></div>
+      </div>
+    </section>
+    <div class="cc-req" id="requirements"><h3 class="cc-gh"><span>Requirements</span></h3><div class="cc-reqgrid"><div class="cc-reqcard"><h4>Practical Assessment Requirements</h4><ul><li>Application Number</li><li>Full payment of assessment fee</li></ul></div></div></div>
+  </div>
+  <!-- TC_COURSES_END -->
+</section>
+
+<section id="enroll">
+  <div class="enroll-eyebrow eyebrow"><!--c:training.assess.cta-->Book Your Assessment<!--/c--></div>
+  <h2 class="enroll-h2 reveal"><em><!--c:training.cta.mark-->PNTC Maritime<!--/c--></em><br><!--c:training.cta.rest-->Training and Assessment Center<!--/c--></h2>
+  <div class="enroll-ctas reveal">
+    <a href="mailto:admissions@mypntc.edu.ph" class="btn-enroll">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Email Admissions
+    </a>
+    <a href="tel:+639171829158" class="btn-call">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.37 9.55a19.79 19.79 0 01-3.07-8.67A2 2 0 012.28 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006 6l1.27-.52a2 2 0 012.11.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      0917 182 9158
+    </a>
+  </div>
+  <p class="enroll-note">Walk-in inquiries are welcome Monday to Saturday, 8:00 AM to 5:30 PM, at the 5th Floor, Intramuros Corporate Plaza, Manila.</p>
 </section>
 
 

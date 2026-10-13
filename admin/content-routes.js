@@ -105,23 +105,24 @@ module.exports = function contentRoutes(app, { requireAuth, ghGetFile, ghPutFile
     const data = {
       asOf: str(b.asOf, 60), note: str(b.note, 400), inclusions: str(b.inclusions, 600),
       groups: (Array.isArray(b.groups) ? b.groups : []).slice(0, 12).map(g => ({
-        id: str(g.id, 40).toLowerCase().replace(/[^a-z0-9-]/g, ''), title: str(g.title, 120), short: str(g.short, 40),
+        id: str(g.id, 40).toLowerCase().replace(/[^a-z0-9-]/g, ''), title: str(g.title, 120), short: str(g.short, 40), ...(g.page === 'assessment' ? { page: 'assessment' } : {}),
         sections: (Array.isArray(g.sections) ? g.sections : []).slice(0, 30).map(s => ({
           title: str(s.title, 120),
           courses: (Array.isArray(s.courses) ? s.courses : []).slice(0, 80).map(c => ({ code: str(c.code, 24), name: str(c.name, 220), days: str(c.days, 8) })).filter(c => c.code || c.name),
         })).filter(s => s.title && s.courses.length),
       })).filter(g => g.title && g.sections.length),
-      requirements: (Array.isArray(b.requirements) ? b.requirements : []).slice(0, 8).map(q => ({ title: str(q.title, 120), items: (Array.isArray(q.items) ? q.items : []).map(i => str(i, 300)).filter(Boolean).slice(0, 40) })).filter(q => q.title),
+      requirements: (Array.isArray(b.requirements) ? b.requirements : []).slice(0, 8).map(q => ({ title: str(q.title, 120), ...(q.page === 'assessment' ? { page: 'assessment' } : {}), items: (Array.isArray(q.items) ? q.items : []).map(i => str(i, 300)).filter(Boolean).slice(0, 40) })).filter(q => q.title),
     };
     const errs = COURSES.validate(data);
     if (errs.length) return res.status(400).json({ error: errs.slice(0, 6).join(' ') + (errs.length > 6 ? ` And ${errs.length - 6} more.` : '') });
     try {
-      const home = await ghGetFile(COURSES.HOME_PAGE), list = await ghGetFile(COURSES.LIST_PAGE);
-      if (!home || !list) return res.status(404).json({ error: 'Training Center pages not found in the repo.' });
-      const homeHtml = COURSES.apply(text(home), data, 'home'), listHtml = COURSES.apply(text(list), data, 'list');   // build first, so a bad build never saves the data
+      const home = await ghGetFile(COURSES.HOME_PAGE), list = await ghGetFile(COURSES.LIST_PAGE), assess = await ghGetFile(COURSES.ASSESS_PAGE);
+      if (!home || !list || !assess) return res.status(404).json({ error: 'Training Center pages not found in the repo.' });
+      const homeHtml = COURSES.apply(text(home), data, 'home'), listHtml = COURSES.apply(text(list), data, 'list'), assessHtml = COURSES.apply(text(assess), data, 'assessment');   // build first, so a bad build never saves the data
       const dataFile = await ghGetFile(COURSE_DATA);
       await ghPutFile(COURSE_DATA, JSON.stringify(data, null, 1) + '\n', 'Update Training Center course list', dataFile && dataFile.sha);
       await ghPutFile(COURSES.LIST_PAGE, listHtml, 'Update Training Center courses page', list.sha);
+      if (assessHtml !== text(assess)) await ghPutFile(COURSES.ASSESS_PAGE, assessHtml, 'Update Training Center assessment page', assess.sha);
       await ghPutFile(COURSES.HOME_PAGE, homeHtml, 'Update Training Center home course cards', home.sha);
       res.json({ ok: true, courses: data.groups.reduce((n, g) => n + g.sections.reduce((m, s) => m + s.courses.length, 0), 0) });
     } catch (e) { fail(res, e); }
