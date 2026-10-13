@@ -1478,6 +1478,14 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 }
 @media(prefers-reduced-motion:reduce){#hero.hx .hc-panel,#hero.hx .hc-panel.on,#hero.hx .hc-panel.s1,#hero.hx .hc-panel.s2,#hero.hx .hc-panel.out{transition:none}}
 </style>
+<style id="mission-swap">
+/* Why Choose PNTC: description on the left, headline on the right (desktop) */
+@media(min-width:1025px){
+  #mission .mission-top{grid-template-columns:1.6fr 1fr}
+  #mission .mission-right{order:1}
+  #mission .mission-left{order:2;justify-self:end}
+}
+</style>
 </head>
 <body>
 
