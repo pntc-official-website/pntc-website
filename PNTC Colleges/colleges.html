@@ -1118,6 +1118,14 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .cl-more:hover svg{transform:translateX(4px)}
 .cl-photo{position:absolute;right:0;bottom:0;z-index:1;height:88%;width:auto;max-width:52%;object-fit:contain;object-position:bottom right;filter:drop-shadow(0 16px 30px rgba(0,0,0,.4));transition:transform .6s var(--ease);transform-origin:bottom center}
 .cl-card:hover .cl-photo{transform:scale(1.04)}
+/* Models share one scale and head position. Sizes come from measuring each photo */
+@media(min-width:561px){
+  .cl-photo{max-width:none;right:var(--px,clamp(120px,27%,170px));height:var(--ph,88%);bottom:var(--pb,0%);translate:var(--ptx,50%) 0}
+  .cl-card:nth-child(1) .cl-photo{--ptx:47.1%}
+  .cl-card:nth-child(2) .cl-photo{--ph:94%;--pb:-3.2%;--ptx:47%}
+  .cl-card:nth-child(3) .cl-photo{--ph:94%;--pb:-8.4%;--ptx:50.3%}
+  .cl-card:nth-child(4) .cl-photo{--ptx:49.3%}
+}
 .cl-src{margin:2rem 0 0;font-size:.74rem;color:rgba(28,22,80,.55)}
 @media(max-width:1000px){.cl-grid{grid-template-columns:1fr}}
 @media(max-width:560px){
