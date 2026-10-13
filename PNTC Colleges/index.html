@@ -1378,14 +1378,8 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #hero.hx .hx-play svg{width:18px;height:18px;fill:none;stroke:#1C1650;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 #hero.hx .hx-btn-ghost:hover .hx-play{transform:translateX(4px)}
 #hero.hx .hx-proof{display:flex;align-items:center;gap:1rem;animation:hx-fade .9s 2.3s both}
-#hero.hx .hx-proof p{margin:0;font-size:.92rem;line-height:1.3;color:rgba(28,22,80,.8);max-width:10ch}
-#hero.hx .hx-proof strong{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.7rem;line-height:1;color:#1C1650}
-#hero.hx .hx-faces{display:flex}
-#hero.hx .hx-face{width:50px;height:50px;border-radius:50%;overflow:hidden;border:3px solid #fff;margin-left:-12px;box-shadow:0 6px 14px -6px rgba(28,22,80,.5);position:relative}
-#hero.hx .hx-face:first-child{margin-left:0}
-#hero.hx .hx-face img{position:absolute;width:260%;max-width:none;left:50%;top:-22%;transform:translateX(-50%)}
-#hero.hx .hx-f1{background:#0b2870}#hero.hx .hx-f2{background:#143d12}#hero.hx .hx-f3{background:#5c1212}#hero.hx .hx-f4{background:#1c1c50}
-#hero.hx .hx-f1 img{left:48%;top:-62%}
+#hero.hx .hx-proof p{margin:0;font-size:.95rem;line-height:1.3;color:rgba(28,22,80,.8);display:flex;align-items:center;gap:.7rem;border-left:4px solid #F3CF33;padding-left:.9rem}
+#hero.hx .hx-proof strong{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.7rem;line-height:1;color:#1C1650}
 #hero.hx .hx-doodle{position:absolute;fill:none;stroke:#F3CF33;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
 #hero.hx .hx-d1{width:58px;top:clamp(1.2rem,5vh,3.2rem);right:24%;animation:hx-float 6s ease-in-out infinite}
 #hero.hx .hx-d2{width:76px;right:26%;bottom:clamp(4.5rem,15vh,8rem);animation:hx-float 7s ease-in-out infinite reverse}
@@ -1401,11 +1395,14 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #hero.hx .hc-panel.on{opacity:1;visibility:visible;transform:none;z-index:2;transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1),visibility 0s}
 #hero.hx .hc-panel img{height:88%;left:50%;transform:translateX(-50%) translateY(4%);transition:transform 1s cubic-bezier(.2,.7,.2,1) .1s}
 #hero.hx .hc-panel.on img{transform:translateX(-50%)}
-#hero.hx .hc-p1 img{transform:translateX(calc(-50% + var(--sh) * .02)) translateY(4%)}
-#hero.hx .hc-p1.on img{transform:translateX(calc(-50% + var(--sh) * .02))}
-#hero.hx .hc-p2 img{transform:translateX(-62%) translateY(4%)}
-#hero.hx .hc-p2.on img{transform:translateX(-62%)}
-#hero.hx .hx-f2 img{left:38%}
+#hero.hx .hc-p1 img{transform:translateX(-52.2%) translateY(4%)}
+#hero.hx .hc-p1.on img{transform:translateX(-52.2%)}
+#hero.hx .hc-p2 img{transform:translateX(-52.6%) translateY(4%)}
+#hero.hx .hc-p2.on img{transform:translateX(-52.6%)}
+#hero.hx .hc-p3 img{transform:translateX(-49.6%) translateY(4%)}
+#hero.hx .hc-p3.on img{transform:translateX(-49.6%)}
+#hero.hx .hc-p4 img{transform:translateX(-50.6%) translateY(4%)}
+#hero.hx .hc-p4.on img{transform:translateX(-50.6%)}
 #hero.hx .hc-college-name{top:5%;left:7%!important;right:7%!important;font-size:clamp(1.7rem,2.5vw,2.4rem);line-height:.86;color:rgba(255,255,255,.6)}
 #hero.hx .hc-label{left:0!important;right:0;opacity:1;animation:none!important;align-items:flex-start;text-align:left;gap:.2rem;padding:3.5rem 1.6rem 1.5rem;background:linear-gradient(to top,rgba(13,9,48,.97) 0%,rgba(13,9,48,.72) 55%,transparent 100%)}
 #hero.hx .hco-abbr{font-size:.8rem;letter-spacing:.2em;background:#F3CF33;color:#1C1650;padding:.28rem .7rem;border-radius:999px;margin-bottom:.35rem}
@@ -1488,7 +1485,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 <section id="hero" class="hx">
   <div class="hx-copy">
     <svg class="hx-doodle hx-d1" viewBox="0 0 60 60" aria-hidden="true"><path d="M8 44c10-22 30-34 40-26 8 7-6 20-14 14-7-6 4-20 20-24"/></svg>
-    <p class="hx-pill"><span class="hx-pill-dot"></span>Enrollment Open &nbsp;·&nbsp; AY 2026-2027</p>
+    <p class="hx-pill"><span class="hx-pill-dot"></span>Enrollment Open &nbsp;·&nbsp; AY 2027-2028</p>
     <h1 class="hx-h1"><span class="sr-only">Marine Transportation, Marine Engineering, Tourism, Criminology, Customs and Office Administration Programs at PNTC Colleges Dasmariñas, Cavite. </span><span class="hl"><span>Skills You Can Use</span></span><span class="hl"><span><em>Values</em> You Can</span></span><span class="hl"><span>Stand On<svg class="hx-swoosh" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 15 C 80 4, 200 3, 297 11"/></svg></span></span></h1>
     <p class="hx-sub">Degree programs in maritime, tourism, criminology, customs and office administration at PNTC Colleges Dasmariñas, Cavite.</p>
     <div class="hx-btns">
@@ -1496,7 +1493,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
       <a href="/college/programs" class="hx-btn hx-btn-ghost"><span class="hx-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>Explore Programs</a>
     </div>
     <div class="hx-proof">
-      <div class="hx-faces" aria-hidden="true"><span class="hx-face hx-f1"><img src="Maritime Female (3).png" alt=""></span><span class="hx-face hx-f2"><img src="Tourism.png" alt=""></span><span class="hx-face hx-f3"><img src="Criminology1.png" alt=""></span><span class="hx-face hx-f4"><img src="Custom Administration (Program Section).png" alt=""></span></div>
+
       <p><strong>30+</strong> Years of Excellence</p>
     </div>
     <svg class="hx-doodle hx-d2" viewBox="0 0 80 70" aria-hidden="true"><path d="M6 60c6-24 24-40 52-44"/><path d="M46 6l14 10-12 12"/></svg>
