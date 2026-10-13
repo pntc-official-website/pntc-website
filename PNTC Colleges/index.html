@@ -1506,6 +1506,12 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #hero.hx .hx-proof p{border-left:0;padding-left:0;gap:.6rem}
 #hero.hx .hx-proof strong{font-size:2rem;color:#1C1650;background:linear-gradient(transparent 62%,#F3CF33 62%,#F3CF33 94%,transparent 94%);padding:0 .1em}
 </style>
+<style id="fac-more-photos">
+/* extra photo tiles after the first six keep the same height as a grid row */
+#facilities .fac-card.has-photo:nth-child(n+7){min-height:clamp(190px,17vw,250px)}
+/* the one card left without a photo runs the full width as a band */
+@media(min-width:1025px){#facilities .fac-card:not(.has-photo):last-child{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:1.4rem}#facilities .fac-card:not(.has-photo):last-child .fac-icon{grid-row:1/4;margin:0}#facilities .fac-card:not(.has-photo):last-child .fac-status{grid-column:3;grid-row:1/4;margin:0}#facilities .fac-card:not(.has-photo):last-child .fac-tag,#facilities .fac-card:not(.has-photo):last-child .fac-name,#facilities .fac-card:not(.has-photo):last-child .fac-desc{grid-column:2;margin-bottom:.2rem;max-width:none}}
+</style>
 </head>
 <body>
 
@@ -1962,32 +1968,34 @@ As green mandates and digital integration redefine the seas, early adopters prio
         <div class="fac-status">Tanza, Cavite</div>
       </div>
     </div>
-    <!-- Training Center Swimming Pool — icon card -->
-    <div class="fac-card reveal" style="transition-delay:.17s">
-      <div class="fac-card-bg" style="background:linear-gradient(135deg,#040e24,#0b2870)"></div>
-      <div class="fac-icon"><svg viewBox="0 0 24 24"><path d="M2 12c1.5-1.5 3-2 4.5-2s3 .5 4.5 2 3 2 4.5 2 3-.5 4.5-2"/><path d="M2 17c1.5-1.5 3-2 4.5-2s3 .5 4.5 2 3 2 4.5 2 3-.5 4.5-2"/><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="10"/></svg></div>
-      <div class="fac-tag">Sports & Wellness</div>
-      <div class="fac-name">Training Center Swimming Pool</div>
-      <p class="fac-desc">Aquatic facility at the Tanza Training Center supporting STCW survival craft and water safety training requirements.</p>
-      <div class="fac-status">Tanza Campus</div>
+    <!-- Audio Visual Room — real photo -->
+    <div class="fac-card has-photo reveal" style="transition-delay:.17s">
+      <img class="fac-photo" src="Facility - Audio Visual Room.jpg" alt="Audio Visual Room" loading="lazy">
+      <div class="fac-img-overlay"></div>
+      <div class="fac-content">
+        <div class="fac-tag">Campus Facility</div>
+        <div class="fac-name">Audio Visual Room (AVR)</div>
+      </div>
     </div>
-    <!-- Tourism Laboratory — icon card -->
-    <div class="fac-card reveal" style="transition-delay:.2s">
-      <div class="fac-card-bg" style="background:linear-gradient(135deg,#071a07,#1d661d)"></div>
-      <div class="fac-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-      <div class="fac-tag">Academic Lab</div>
-      <div class="fac-name">Tourism Laboratory</div>
-      <p class="fac-desc">Simulated hospitality and travel workspace where BSTM students practice front desk, tour operations, and event management skills.</p>
-      <div class="fac-status">For BSTM students</div>
+    <!-- Tourism Laboratory — real photo -->
+    <div class="fac-card has-photo reveal" style="transition-delay:.2s">
+      <img class="fac-photo" src="Facility - Tourism Laboratory.jpg" alt="Tourism Laboratory" loading="lazy">
+      <div class="fac-img-overlay"></div>
+      <div class="fac-content">
+        <div class="fac-tag">Academic Lab</div>
+        <div class="fac-name">Tourism Laboratory</div>
+        <div class="fac-status">For BSTM students</div>
+      </div>
     </div>
-    <!-- Criminology Laboratory — icon card -->
-    <div class="fac-card reveal" style="transition-delay:.22s">
-      <div class="fac-card-bg" style="background:linear-gradient(135deg,#180606,#5c1212)"></div>
-      <div class="fac-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <div class="fac-tag">Academic Lab</div>
-      <div class="fac-name">Criminology Laboratory</div>
-      <p class="fac-desc">Equipped with forensic tools, lie detection apparatus, and firearms simulation for hands-on criminology and law enforcement training.</p>
-      <div class="fac-status">For BSCrim students</div>
+    <!-- Criminology Laboratory — real photo -->
+    <div class="fac-card has-photo reveal" style="transition-delay:.22s">
+      <img class="fac-photo" src="Facility - Criminology Laboratory.jpg" alt="Criminology Laboratory" loading="lazy">
+      <div class="fac-img-overlay"></div>
+      <div class="fac-content">
+        <div class="fac-tag">Academic Lab</div>
+        <div class="fac-name">Criminology Laboratory</div>
+        <div class="fac-status">For BSCrim students</div>
+      </div>
     </div>
     <!-- Campus Gymnasium — icon card -->
     <div class="fac-card reveal" style="transition-delay:.25s">
