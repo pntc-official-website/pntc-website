@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Onboard Training Program for Maritime Cadets | PhilNautical Shipping</title>
+<title>On Board Training Program for Maritime Cadets | PhilNautical Shipping Corporation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Barlow+Condensed:wght@800;900&display=swap" rel="stylesheet">
@@ -782,7 +782,139 @@ h1.hero-h1 span.gold { color:var(--gold); }
 .pv-unit{background:#1C1650!important;border-color:#1C1650!important}
 </style>
 <meta name="robots" content="noindex, follow">
-<meta name="description" content="The PhilNautical Shipping Corporation onboard training program for PNTC maritime cadets, with eligibility, requirements, and how to apply.">
+<style id="pnsc-css">
+/* PhilNautical Shipping Corporation pages */
+.ps-wrap{max-width:1240px;margin:0 auto;position:relative}
+.ps-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-size:.7rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#1C1650;margin-bottom:1rem}
+.ps-eyebrow::before{content:'';width:28px;height:3px;border-radius:3px;background:#F3CF33}
+.ps-h2{font-weight:800;font-size:clamp(2rem,4.2vw,3.2rem);line-height:1.08;letter-spacing:-.025em;color:#1C1650}
+.ps-h2 em{font-style:normal;background:linear-gradient(transparent 62%,#F3CF33 62%,#F3CF33 92%,transparent 92%);padding:0 .06em}
+.ps-lead{font-size:1.02rem;line-height:1.8;color:rgba(28,22,80,.74);margin-top:1.2rem;max-width:640px}
+.ps-btn{display:inline-flex;align-items:center;gap:.6rem;font-weight:800;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:1rem 1.7rem;border-radius:999px;transition:transform .25s,box-shadow .25s,background .25s,color .25s,gap .25s}
+.ps-btn:hover{transform:translateY(-3px);gap:.9rem}
+.ps-btn-gold{background:#F3CF33;color:#1C1650;box-shadow:0 16px 30px -14px rgba(243,207,51,.8)}
+.ps-btn-line{color:#fff;border:1.5px solid rgba(255,255,255,.5);background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.ps-btn-line:hover{background:#fff;color:#1C1650}
+.ps-btn-navy{background:#1C1650;color:#F3CF33}
+
+/* hero with the vessel */
+.ps-hero{position:relative;min-height:max(88svh,620px);display:flex;align-items:flex-end;background:#1C1650;overflow:hidden;padding:calc(var(--ps-nav,130px) + 2rem) clamp(1.25rem,5vw,4rem) 5.5rem}
+.ps-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 55%;animation:ps-zoom 18s ease-out both}
+.ps-hero::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(98deg,rgba(28,22,80,.96) 0%,rgba(28,22,80,.82) 34%,rgba(28,22,80,.3) 62%,rgba(28,22,80,.05) 100%),linear-gradient(to top,rgba(16,11,51,.9),rgba(16,11,51,0) 42%)}
+.ps-hero::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:60px;background:#fff;clip-path:polygon(0 100%,100% 0,100% 100%);z-index:3}
+.ps-hero-in{position:relative;z-index:2;max-width:1240px;width:100%;margin:0 auto}
+.ps-tag{display:inline-flex;align-items:center;gap:.6rem;font-size:.68rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:.55rem 1rem;border-radius:999px;margin-bottom:1.4rem}
+.ps-tag i{width:7px;height:7px;border-radius:50%;background:#F3CF33;box-shadow:0 0 0 4px rgba(243,207,51,.3)}
+.ps-h1{font-weight:800;font-size:clamp(2.4rem,6vw,5rem);line-height:1.02;letter-spacing:-.03em;color:#fff;max-width:13ch}
+.ps-h1 em{font-style:normal;color:#F3CF33}
+.ps-hero p.ps-sub{margin-top:1.4rem;font-size:clamp(1rem,1.3vw,1.15rem);line-height:1.75;color:rgba(255,255,255,.86);max-width:36rem}
+.ps-hero-btns{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.ps-facts{list-style:none;margin:2.4rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.ps-facts li{font-size:.74rem;font-weight:700;color:#fff;border:1px solid rgba(255,255,255,.24);background:rgba(16,11,51,.45);border-radius:999px;padding:.45rem .9rem}
+@keyframes ps-zoom{from{transform:scale(1.12)}to{transform:scale(1)}}
+
+/* sections */
+.ps-sec{padding:5.5rem clamp(1.25rem,4vw,3rem);background:#fff;position:relative;overflow:hidden}
+.ps-soft{background:#F7F7FB}
+.ps-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.ps-photo{position:relative}
+.ps-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:26px;border:6px solid #fff;box-shadow:0 30px 60px -30px rgba(28,22,80,.6);display:block;transform:rotate(-2deg);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.ps-photo:hover img{transform:rotate(0)}
+.ps-photo::before{content:'';position:absolute;inset:8% -5% -7% 9%;border-radius:26px;background:#F3CF33;transform:rotate(3deg);z-index:-1}
+.ps-photo{z-index:1}
+
+/* vessel numbers */
+.ps-nums{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));margin-top:3rem;background:#1C1650;border-radius:26px;overflow:hidden;position:relative}
+.ps-nums::after{content:'';position:absolute;right:-70px;top:-100px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(243,207,51,.3),transparent 70%)}
+.ps-num{padding:1.9rem 1.3rem;border-left:1px solid rgba(255,255,255,.1);position:relative;z-index:1}
+.ps-num:first-child{border-left:0}
+.ps-num b{display:block;font-size:clamp(1.6rem,2.6vw,2.4rem);font-weight:800;line-height:1;letter-spacing:-.03em;color:#F3CF33}
+.ps-num span{display:block;margin-top:.55rem;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.78)}
+.ps-specs{list-style:none;margin:1.25rem 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem}
+.ps-specs li{background:#fff;border:1px solid rgba(28,22,80,.1);border-radius:18px;padding:1.1rem 1.2rem;transition:transform .3s,border-color .3s}
+.ps-specs li:hover{transform:translateY(-4px);border-color:rgba(28,22,80,.3)}
+.ps-specs span{display:block;font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(28,22,80,.6)}
+.ps-specs b{display:block;margin-top:.35rem;font-size:1rem;font-weight:800;color:#1C1650;line-height:1.3}
+
+/* behind the name */
+.ps-story{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(2rem,5vw,4.5rem);align-items:start}
+.ps-story-steps{list-style:none;margin:0;padding:0;counter-reset:st;display:grid;gap:1rem}
+.ps-story-steps li{counter-increment:st;position:relative;background:#fff;border:1px solid rgba(28,22,80,.1);border-radius:20px;padding:1.4rem 1.4rem 1.4rem 4.4rem;font-size:.96rem;line-height:1.75;color:rgba(28,22,80,.78);box-shadow:0 20px 40px -32px rgba(28,22,80,.5)}
+.ps-story-steps li::before{content:counter(st,decimal-leading-zero);position:absolute;left:1.2rem;top:1.3rem;width:2.4rem;height:2.4rem;border-radius:12px;background:#F3CF33;color:#1C1650;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.ps-story-steps em{font-style:italic;font-weight:700;color:#1C1650}
+.ps-quote{margin-top:1.6rem;font-size:.9rem;font-weight:700;color:#1C1650;background:rgba(243,207,51,.4);border-radius:16px;padding:1rem 1.2rem}
+
+/* cards */
+.ps-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin-top:2.6rem}
+.ps-card{background:#fff;border:1px solid rgba(28,22,80,.1);border-radius:22px;padding:1.7rem 1.5rem;box-shadow:0 22px 46px -34px rgba(28,22,80,.5);transition:transform .3s,box-shadow .3s,border-color .3s}
+.ps-card:hover{transform:translateY(-6px);box-shadow:0 30px 54px -30px rgba(28,22,80,.6);border-color:rgba(28,22,80,.25)}
+.ps-card:first-child{background:#1C1650;border-color:#1C1650}
+.ps-ico{width:50px;height:50px;border-radius:14px;background:#F3CF33;display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem}
+.ps-ico svg{width:24px;height:24px;fill:none;stroke:#1C1650;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ps-card h3{font-size:1.12rem;font-weight:800;line-height:1.25;color:#1C1650;margin-bottom:.5rem}
+.ps-card p{font-size:.9rem;line-height:1.7;color:rgba(28,22,80,.74)}
+.ps-card:first-child h3{color:#F3CF33}.ps-card:first-child p{color:rgba(255,255,255,.82)}
+
+/* program highlight band */
+.ps-band{background:#1C1650;border-radius:30px;padding:clamp(2rem,4vw,3.4rem);display:grid;grid-template-columns:minmax(0,1.2fr) auto;gap:2rem;align-items:center;position:relative;overflow:hidden}
+.ps-band::after{content:'';position:absolute;right:-90px;bottom:-130px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(243,207,51,.32),transparent 70%)}
+.ps-band>*{position:relative;z-index:1}
+.ps-band .ps-eyebrow{color:#F3CF33}
+.ps-band h2{font-weight:800;font-size:clamp(1.7rem,3.2vw,2.5rem);line-height:1.12;letter-spacing:-.02em;color:#fff}
+.ps-band p{margin-top:.9rem;font-size:1rem;line-height:1.75;color:rgba(255,255,255,.82);max-width:42rem}
+.ps-was{display:inline-block;margin-top:1rem;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#1C1650;background:#F3CF33;border-radius:999px;padding:.4rem .85rem}
+
+/* partners */
+.ps-partners{list-style:none;margin:2.6rem 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+.ps-partners li{background:#fff;border:1.5px dashed rgba(28,22,80,.28);border-radius:22px;padding:1.4rem 1.2rem 1.2rem;text-align:center;font-size:.86rem;font-weight:800;color:#1C1650;line-height:1.35;display:flex;flex-direction:column;align-items:center;gap:.9rem;transition:transform .3s,border-color .3s,box-shadow .3s}
+.ps-partners li::before{content:'Logo';width:100%;aspect-ratio:16/9;border-radius:14px;background:repeating-linear-gradient(135deg,rgba(28,22,80,.05) 0 12px,rgba(28,22,80,.09) 12px 24px);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(28,22,80,.45)}
+.ps-partners li.has-logo{border-style:solid;border-color:rgba(28,22,80,.12);box-shadow:0 22px 46px -34px rgba(28,22,80,.5)}
+.ps-partners li.has-logo::before{display:none}
+.ps-partners li img{width:100%;aspect-ratio:16/9;object-fit:contain}
+.ps-partners li:hover{transform:translateY(-5px);border-color:#1C1650}
+.ps-partners-note{margin-top:1.4rem;font-size:.86rem;font-weight:600;color:rgba(28,22,80,.65)}
+
+/* contact band */
+.ps-cta{background:#F3CF33;padding:4rem clamp(1.25rem,4vw,3rem) 4.2rem;clip-path:polygon(0 2.2rem,100% 0,100% 100%,0 100%);margin-top:-1px}
+.ps-cta-in{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;padding-top:1rem}
+.ps-cta h2{font-weight:800;font-size:clamp(1.6rem,3.2vw,2.5rem);line-height:1.12;letter-spacing:-.02em;color:#1C1650;max-width:720px}
+.ps-cta p{font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#1C1650;margin-bottom:.4rem}
+.ps-cta-btns{display:flex;flex-wrap:wrap;gap:.7rem}
+
+@media(max-width:1000px){
+  .ps-two,.ps-story,.ps-band{grid-template-columns:1fr}
+  .ps-nums{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .ps-num:nth-child(4){border-left:0}.ps-num:nth-child(n+4){border-top:1px solid rgba(255,255,255,.1)}
+  .ps-specs,.ps-cards,.ps-partners{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+  .ps-sec{padding-top:4rem;padding-bottom:4rem}
+  .ps-hero{padding-bottom:4.4rem}.ps-hero::after{height:34px}
+  .ps-hero::before{background:linear-gradient(to top,rgba(28,22,80,.97) 0%,rgba(28,22,80,.88) 55%,rgba(28,22,80,.45) 100%)}
+  .ps-nums{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ps-num:nth-child(odd){border-left:0}.ps-num:nth-child(4){border-left:1px solid rgba(255,255,255,.1)}.ps-num:nth-child(n+3){border-top:1px solid rgba(255,255,255,.1)}
+  .ps-specs,.ps-cards{grid-template-columns:1fr}
+  .ps-story-steps li{padding:4.2rem 1.2rem 1.3rem}
+  .ps-btn{width:100%;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){.ps-hero-img{animation:none}.ps-btn,.ps-card,.ps-photo img,.ps-specs li,.ps-partners li{transition:none}}
+</style>
+<script id="pnsc-js">
+document.addEventListener('DOMContentLoaded',function(){
+  /* keep the hero text clear of the fixed navigation */
+  function fit(){var m=0;document.querySelectorAll('nav,header').forEach(function(e){var p=getComputedStyle(e).position;if(p==='fixed'||p==='sticky'){var r=e.getBoundingClientRect();if(r.top<200&&r.height<200)m=Math.max(m,r.bottom);}});var h=document.querySelector('.ps-hero');if(h&&m>0)h.style.setProperty('--ps-nav',Math.round(m)+'px');}
+  fit();window.addEventListener('load',fit);window.addEventListener('resize',fit);
+  /* partner logos: a file named pnsc-partner-01.png (02, 03 ...) fills the matching tile. jpg and webp also work */
+  var list=document.getElementById('ps-partners');if(!list)return;
+  var exts=['png','jpg','webp'];
+  var tiles=[].slice.call(list.children);
+  /* one tile at a time, and stop at the first number with no file, so an empty folder costs only a few requests */
+  (function tile(i){if(i>=tiles.length)return;var li=tiles[i],n=('0'+(i+1)).slice(-2),k=0;
+    (function next(){if(k>=exts.length)return;var img=new Image();img.alt=li.textContent.trim();img.onload=function(){li.insertBefore(img,li.firstChild);li.classList.add('has-logo');tile(i+1);};img.onerror=function(){k++;next();};img.src='/pnsc-partner-'+n+'.'+exts[k];})();
+  })(0);
+});
+</script>
+<meta name="description" content="The On Board Training Program of PhilNautical Shipping Corporation for maritime cadets, aboard MV Aman Sinaya and with our maritime partners.">
 <link rel="canonical" href="https://www.pntc.edu.ph/philnautical/onboard-training">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PNTC Colleges, Inc.">
@@ -802,7 +934,7 @@ h1.hero-h1 span.gold { color:var(--gold); }
   <a class="pntc-area" href="/philnautical"><span class="pa-top">PNTC Colleges</span><span class="pa-name">PhilNautical Shipping Corporation</span></a>
   <div class="nav-links">
     <a href="/philnautical">Overview</a>
-    <a href="/philnautical/onboard-training" class="is-current" aria-current="page">Onboard Training Program</a>
+    <a href="/philnautical/onboard-training" class="is-current" aria-current="page">On Board Training Program</a>
   </div>
   <a href="/admin/login.html" class="nav-login" aria-label="Staff login">Login</a>
   <a href="/#cta" class="nav-cta">Enroll Now</a>
@@ -814,27 +946,75 @@ h1.hero-h1 span.gold { color:var(--gold); }
 <div id="mob-menu" role="dialog" aria-modal="true" aria-label="Navigation">
   <button class="mob-x" id="mob-close" aria-label="Close menu">&times;</button>
   <a href="/philnautical">Overview</a>
-    <a href="/philnautical/onboard-training" class="is-current" aria-current="page">Onboard Training Program</a>
+    <a href="/philnautical/onboard-training" class="is-current" aria-current="page">On Board Training Program</a>
   <a href="/#cta" style="color:var(--gold);">Enroll Now</a>
 </div>
 
 <!-- ===================== HERO ===================== -->
 <!-- PAGE BANNER -->
-<section id="page-banner" class="pntc-sub">
-  <div class="pntc-sub-in">
-    <p class="pntc-sub-eyebrow">PhilNautical</p>
-    <h1>Onboard Training Program</h1>
-    <p class="pntc-sub-lead">Onboard (shipboard) training for PNTC maritime cadets through PhilNautical Shipping Corporation.</p>
+<section class="ps-hero" id="obt">
+  <img class="ps-hero-img" src="/pnsc-aman-sinaya.jpg" alt="MV Aman Sinaya, the PNTC training vessel, alongside the pier">
+  <div class="ps-hero-in">
+    <p class="ps-tag"><i></i><!--c:obt.hero.tag-->Formerly PNTC Shipboard Training<!--/c--></p>
+    <h1 class="ps-h1"><!--c:obt.hero.line1-->On Board<!--/c--> <em><!--c:obt.hero.line2-->Training Program<!--/c--></em></h1>
+    <p class="ps-sub"><!--c:obt.hero.sub-->On board training for maritime cadets through PhilNautical Shipping Corporation, aboard MV Aman Sinaya and with our maritime partners.<!--/c--></p>
+    <div class="ps-hero-btns">
+      <a class="ps-btn ps-btn-gold" href="#partners"><!--c:obt.hero.btn1-->Our Maritime Partners<!--/c--></a>
+      <a class="ps-btn ps-btn-line" href="/philnautical#vessel"><!--c:obt.hero.btn2-->Meet the Vessel<!--/c--></a>
+    </div>
   </div>
 </section>
 
-<section id="coming-soon" class="pntc-soon">
-  <div class="pntc-soon-box">
-    <div class="pntc-soon-ico">⚓</div>
-    <h2>Coming Soon</h2>
-    <p>We're preparing this page. Please check back soon.</p>
-    <div class="pntc-soon-chips"><span>Program Overview</span><span>Eligibility and Requirements</span><span>Application Process</span><span>Training Experience</span><span>Contact Information</span></div>
-    <a class="pntc-soon-btn" href="/">Back to Home</a>
+<section class="ps-sec" id="about-program">
+  <div class="ps-wrap">
+    <div class="reveal">
+      <p class="ps-eyebrow"><!--c:obt.about.eyebrow-->The Program<!--/c--></p>
+      <h2 class="ps-h2"><!--c:obt.about.title-->Sea Time That<!--/c--> <em><!--c:obt.about.mark-->Counts<!--/c--></em></h2>
+      <p class="ps-lead"><!--c:obt.about.lead-->The program opens opportunities for maritime students by developing their leadership skills and technical competencies in a systematic manner.<!--/c--></p>
+    </div>
+    <div class="ps-cards">
+      <div class="ps-card reveal"><span class="ps-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v4.5M12 17.5V22M2 12h4.5M17.5 12H22M5 5l3.2 3.200M15.8 15.8 19 19M19 5l-3.2 3.200M8.2 15.8 5 19"/></svg></span><h3><!--c:obt.card1.title-->Structured Training<!--/c--></h3><p><!--c:obt.card1.text-->Leadership skills and technical competencies are developed step by step, not left to chance.<!--/c--></p></div>
+      <div class="ps-card reveal"><span class="ps-ico"><svg viewBox="0 0 24 24"><path d="M3 17l1.5 3h15l1.5-3M4 17l1-6h14l1 6M8 11V7h8v4M12 7V4"/></svg></span><h3><!--c:obt.card2.title-->A Real Passenger Vessel<!--/c--></h3><p><!--c:obt.card2.text-->Cadets serve aboard MV Aman Sinaya and are trained in actual passenger vessel operations.<!--/c--></p></div>
+      <div class="ps-card reveal"><span class="ps-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span><h3><!--c:obt.card3.title-->Graduate Without Delay<!--/c--></h3><p><!--c:obt.card3.text-->A dedicated training vessel helps students complete the required length of seagoing service on time.<!--/c--></p></div>
+      <div class="ps-card reveal"><span class="ps-ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.800a3.5 3.5 0 0 1 0 6.400M18 14.5a6.5 6.5 0 0 1 3.5 5.5"/></svg></span><h3><!--c:obt.card4.title-->For Deck and Engine Cadets<!--/c--></h3><p><!--c:obt.card4.text-->For BS Marine Transportation and BS Marine Engineering students. Maritime students from other schools are also accepted.<!--/c--></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ps-sec ps-soft" id="partners">
+  <div class="ps-wrap">
+    <div class="reveal">
+      <p class="ps-eyebrow"><!--c:obt.partners.eyebrow-->Our Maritime Partners<!--/c--></p>
+      <h2 class="ps-h2"><!--c:obt.partners.title-->Training With the<!--/c--> <em><!--c:obt.partners.mark-->Industry<!--/c--></em></h2>
+      <p class="ps-lead"><!--c:obt.partners.lead-->Our maritime partners take PNTC cadets on board their vessels for training.<!--/c--></p>
+    </div>
+    <ul class="ps-partners reveal" id="ps-partners"><!--c:obt.partners.list--><li>Maritime Partner 1</li><li>Maritime Partner 2</li><li>Maritime Partner 3</li><li>Maritime Partner 4</li><li>Maritime Partner 5</li><li>Maritime Partner 6</li><li>Maritime Partner 7</li><li>Maritime Partner 8</li><!--/c--></ul>
+    <p class="ps-partners-note"><!--c:obt.partners.note-->Partner names and logos will be posted here soon.<!--/c--></p>
+  </div>
+</section>
+
+<section class="ps-sec" id="vessel-teaser">
+  <div class="ps-wrap ps-two">
+    <div class="ps-photo reveal"><img src="/pnsc-aman-sinaya.jpg" alt="MV Aman Sinaya" loading="lazy"></div>
+    <div class="reveal">
+      <p class="ps-eyebrow"><!--c:obt.vessel.eyebrow-->Our Training Vessel<!--/c--></p>
+      <h2 class="ps-h2"><!--c:obt.vessel.title-->MV<!--/c--> <em><!--c:obt.vessel.mark-->Aman Sinaya<!--/c--></em></h2>
+      <p class="ps-lead"><!--c:obt.vessel.text-->A passenger vessel of 2,075 gross tonnage, 72.48 meters long, homeported in Batangas and built in Norway.<!--/c--></p>
+      <p style="margin-top:1.6rem"><a class="ps-btn ps-btn-navy" href="/philnautical#vessel"><!--c:obt.vessel.btn-->Vessel Details<!--/c--> <span aria-hidden="true">&rarr;</span></a></p>
+    </div>
+  </div>
+</section>
+
+<section class="ps-cta">
+  <div class="ps-cta-in">
+    <div>
+      <p><!--c:pnsc.cta.tag-->Get in Touch<!--/c--></p>
+      <h2><!--c:pnsc.cta.title-->Ask us about on board training with PNSC<!--/c--></h2>
+    </div>
+    <div class="ps-cta-btns">
+      <a class="ps-btn ps-btn-navy" data-c="pnsc.cta.phone.href" href="tel:+63463232424"><!--c:pnsc.cta.phone-->(046) 323-2424<!--/c--></a>
+      <a class="ps-btn ps-btn-navy" data-c="pnsc.cta.email" href="mailto:info@pntc.edu.ph"><!--c:pnsc.cta.email-->info@pntc.edu.ph<!--/c--></a>
+    </div>
   </div>
 </section>
 
