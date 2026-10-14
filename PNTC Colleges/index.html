@@ -1758,7 +1758,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     <div class="uni-col" data-who="male">
       <div class="uni-who">Male</div>
       <div class="uni-stage" id="uniStage">
-        <img class="uni-img uni-img-left" src="Maritime Uniform1.jpeg" alt="">
+        <img class="uni-img uni-img-left" src="Maritime Uniform1.png" alt="">
         <img class="uni-img uni-img-right" src="Maritime Uniform2.jpeg" alt="">
         <div class="uni-label uni-label-left"></div>
         <div class="uni-label uni-label-right"></div>
@@ -2172,7 +2172,7 @@ document.querySelectorAll('.mm').forEach(a => a.addEventListener('click', closeM
     {
       abbr:'BSMT', name:'BS Marine Transportation', label:'Maritime',
       desc:'Two uniform variants, officer whites for sea duty and cadet blues for training, worn during STCW certification and maritime practicum.',
-      uniforms:['Maritime Uniform1.jpeg','Maritime Uniform2.jpeg'],
+      uniforms:['Maritime Uniform1.png','Maritime Uniform2.jpeg'],
       uniLabels:['Uniform A','Uniform B']
     },
     {
@@ -2265,7 +2265,7 @@ document.querySelectorAll('.mm').forEach(a => a.addEventListener('click', closeM
     for(const n of names){ for(const x of EXTS){ const f = n + '.' + x; if(await exists(f)) return f; } }
     return null;
   }
-  // "Maritime Uniform1.jpeg" gives the base "Maritime Uniform"
+  // "Maritime Uniform1.png" gives the base "Maritime Uniform"
   function baseOf(file){ return file.replace(/\.[a-z]+$/i,'').replace(/\s*\d+$/,''); }
   function findFemale(idx){
     if(!femaleCache[idx]) femaleCache[idx] = (async ()=>{
