@@ -51,7 +51,7 @@ const CSS = `<style id="th-action">
 .ta-bg span.on{opacity:1}
 .ta-glow{position:absolute;right:4%;bottom:-26%;width:62%;height:96%;background:radial-gradient(closest-side,rgba(255,120,10,.6),rgba(255,70,0,.22) 55%,transparent);mix-blend-mode:screen;animation:ta-flicker 3.4s ease-in-out infinite;z-index:1}
 /* card stack */
-.ta-stack{position:absolute;z-index:4;right:clamp(2rem,6vw,6.5rem);top:calc(50% + var(--ta-nav,120px)/2 - 44px);width:clamp(320px,34vw,580px);aspect-ratio:3/2;transform:translateY(-50%);perspective:1400px}
+.ta-stack{position:absolute;z-index:4;right:clamp(2rem,6vw,6.5rem);top:calc(50% + var(--ta-nav,120px)/2 - 44px);width:min(clamp(320px,calc(68vw - 410px),760px),calc((100vh - var(--ta-nav,120px) - 240px)*1.5));aspect-ratio:3/2;transform:translateY(-50%);perspective:1400px}
 .ta-card{position:absolute;inset:0;margin:0;border-radius:26px;overflow:hidden;border:5px solid #fff;background:#120D3A;box-shadow:0 44px 70px -30px rgba(0,0,0,.75),0 0 60px -6px rgba(255,120,10,.5);opacity:0;transform:translate3d(18%,10%,0) rotate(12deg) scale(.7);transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .6s ease;will-change:transform}
 .ta-card img{width:100%;height:100%;object-fit:cover;display:block}
 .ta-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(255,96,0,.3),rgba(255,96,0,0) 42%);pointer-events:none}
@@ -61,7 +61,7 @@ const CSS = `<style id="th-action">
 .ta-card.p2{opacity:1;z-index:3;transform:translate3d(17%,-17%,0) rotate(9deg) scale(.86);filter:brightness(.56)}
 .ta-card.out{opacity:0;z-index:6;transform:translate3d(-58%,14%,0) rotate(-22deg) scale(.96);transition:transform .75s cubic-bezier(.5,0,.8,.4),opacity .7s ease .1s}
 /* counter, progress, thumbnails */
-.ta-hud{position:absolute;z-index:5;right:clamp(2rem,6vw,6.5rem);bottom:calc(56px + 1.9rem);width:clamp(320px,34vw,580px);display:flex;align-items:center;gap:1rem}
+.ta-hud{position:absolute;z-index:5;right:clamp(2rem,6vw,6.5rem);bottom:calc(56px + 1.9rem);width:min(clamp(320px,calc(68vw - 410px),760px),calc((100vh - var(--ta-nav,120px) - 240px)*1.5));display:flex;align-items:center;gap:1rem}
 .ta-count{display:flex;align-items:baseline;gap:.35rem;color:#fff;font-family:'Barlow Condensed','Montserrat',sans-serif}
 .ta-count b{font-size:2.3rem;font-weight:800;line-height:1;color:#F3CF33}
 .ta-count i{font-style:normal;font-size:.95rem;font-weight:700;letter-spacing:.08em;opacity:.7}
