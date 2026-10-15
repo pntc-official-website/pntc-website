@@ -24,7 +24,7 @@
 .ra-play small{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
 .ra-play b{font-size:1.15rem;font-weight:700;letter-spacing:.01em}
 .ra-play:hover{box-shadow:0 20px 40px -14px rgba(0,0,0,.8),0 0 0 3px rgba(243,207,51,.55)}
-.ra-ghost{color:var(--ra-navy);border:1.5px solid rgba(28,22,80,.25);background:#fff}
+.ra-ghost{color:var(--ra-navy);border:1.5px solid rgba(28,22,80,.25);background:transparent}
 .ra-ghost:hover{border-color:var(--ra-navy);background:var(--ra-navy);color:var(--ra-gold)}
 .ra-ghost svg{width:20px;height:20px}
 .ra-gold-btn{background:var(--ra-gold);color:var(--ra-navy);box-shadow:0 14px 30px -14px rgba(243,207,51,.9)}
@@ -32,10 +32,10 @@
 .ra-navy-btn:hover{background:#2B2275}
 
 /* hero */
-.ra-hero{position:relative;overflow:hidden;background:#fff;padding:clamp(3.5rem,7vw,5.5rem) 0}
+.ra-hero{position:relative;overflow:hidden;background:#F7F7FB;padding:clamp(3.5rem,7vw,5.5rem) 0}
 .ra-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(28,22,80,.07) 1px,transparent 0);background-size:28px 28px;mask-image:linear-gradient(to left,#000,transparent 70%);-webkit-mask-image:linear-gradient(to left,#000,transparent 70%);pointer-events:none}
 .ra-hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
-.ra-pill{display:inline-flex;align-items:center;gap:.7rem;padding:.4rem 1rem .4rem .4rem;border-radius:999px;background:#F7F7FB;border:1px solid rgba(28,22,80,.1);color:var(--ra-navy);font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.ra-pill{display:inline-flex;align-items:center;gap:.7rem;padding:.4rem 1rem .4rem .4rem;border-radius:999px;background:#fff;border:1px solid rgba(28,22,80,.1);color:var(--ra-navy);font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
 .ra-pill img{width:30px;height:30px;border-radius:9px}
 .ra-h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;line-height:.95;font-size:clamp(2.9rem,5vw,4.8rem);margin-top:1.3rem;letter-spacing:.005em;color:var(--ra-navy)}
 .ra-h1 span{display:block}
