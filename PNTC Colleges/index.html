@@ -1529,32 +1529,28 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .cl-head h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(2.4rem,5vw,4rem);line-height:.95;color:#1C1650;margin:0}
 .cl-head h2 span{background:linear-gradient(transparent 62%,#F3CF33 62%,#F3CF33 92%,transparent 92%);padding:0 .08em}
 .cl-head p{margin:1rem auto 0;max-width:56ch;font-size:1rem;line-height:1.7;color:rgba(28,22,80,0.86)}
-/* gallery: slim photo panels, the open one wide and in full colour */
-.cl-acc{display:flex;gap:10px;height:clamp(380px,40vw,540px);max-width:1320px;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
-.cl-p{position:relative;flex:1 1 0;min-width:0;padding:0;border:0;border-radius:22px;overflow:hidden;cursor:pointer;background:#1C1650;box-shadow:0 20px 34px -24px rgba(28,22,80,.6);transition:flex-grow 1.1s cubic-bezier(.65,0,.25,1),box-shadow .6s}
-.cl-p.on{flex-grow:9;box-shadow:0 34px 60px -30px rgba(28,22,80,.75)}
-.cl-p img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.85) brightness(.55);transform:scale(1.15);transition:filter 1.1s ease,transform 6s ease}
-.cl-p.on img{filter:none;transform:scale(1)}
-.cl-p::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(16,11,51,.85),rgba(16,11,51,0) 45%);opacity:0;transition:opacity .8s}
-.cl-p.on::after{opacity:1}
-.cl-num{position:absolute;left:50%;bottom:1.1rem;transform:translateX(-50%);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.05rem;letter-spacing:.08em;color:rgba(255,255,255,.9);z-index:2;transition:opacity .4s}
-.cl-p.on .cl-num{opacity:0}
-.cl-cap{position:absolute;left:clamp(1.2rem,2.5vw,2rem);right:1.5rem;bottom:clamp(1.3rem,2.5vw,1.9rem);z-index:2;display:flex;align-items:flex-end;gap:1rem;text-align:left;opacity:0;transform:translateY(16px);transition:opacity .5s,transform .7s cubic-bezier(.2,.7,.2,1)}
-.cl-p.on .cl-cap{opacity:1;transform:none;transition-delay:.55s}
-.cl-cap b{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(3rem,5vw,4.6rem);line-height:.8;color:#F3CF33}
-.cl-cap span{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(1.1rem,1.8vw,1.6rem);line-height:1.05;color:#fff;max-width:22ch;white-space:normal}
-.cl-bar{position:absolute;left:0;bottom:0;height:4px;width:0;background:#F3CF33;z-index:3}
-.cl-p.on .cl-bar{animation:cl-bar 5.2s linear forwards}
-.cl-acc.paused .cl-p.on .cl-bar{animation-play-state:paused}
-@keyframes cl-bar{to{width:100%}}
-.cl-p:focus-visible{outline:3px solid #F3CF33;outline-offset:3px}
+/* mosaic: photos only, in tiles of mixed sizes; a tile reveals its next photo sliding up with a slow zoom */
+.cl-mosaic{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.25fr;grid-template-rows:repeat(2,clamp(170px,17vw,260px));gap:clamp(.6rem,1.2vw,1rem);max-width:1280px;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
+.cl-t{position:relative;margin:0;border-radius:22px;overflow:hidden;background:#1C1650;box-shadow:0 2px 4px rgba(28,22,80,.06),0 22px 36px -22px rgba(28,22,80,.55);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
+.cl-t:hover{transform:translateY(-6px);box-shadow:0 2px 4px rgba(28,22,80,.08),0 34px 50px -24px rgba(28,22,80,.65)}
+.cl-t img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;animation:cl-drift 14s ease-in-out infinite alternate}
+.cl-t img.in{z-index:1;animation:cl-reveal 1.9s cubic-bezier(.7,0,.2,1) both}
+@keyframes cl-reveal{from{clip-path:inset(100% 0 0 0);transform:scale(1.18)}to{clip-path:inset(0 0 0 0);transform:scale(1)}}
+@keyframes cl-drift{from{transform:scale(1)}to{transform:scale(1.07)}}
+.cl-t1{grid-column:1;grid-row:1 / span 2}
+.cl-t2{grid-column:2 / span 2;grid-row:1}
+.cl-t3{grid-column:4;grid-row:1 / span 2}
+.cl-t4{grid-column:2;grid-row:2}
+.cl-t5{grid-column:3;grid-row:2}
 @media(max-width:760px){
-  .cl-acc{flex-direction:column;height:auto;gap:8px}
-  .cl-p{flex:none;height:46px;transition:height 1s cubic-bezier(.65,0,.25,1)}
-  .cl-p.on{height:min(78vw,340px)}
-  .cl-num{left:1.2rem;bottom:50%;transform:translateY(50%)}
+  .cl-mosaic{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,clamp(140px,38vw,200px))}
+  .cl-t1{grid-column:1 / span 2;grid-row:1}
+  .cl-t2{grid-column:1;grid-row:2}
+  .cl-t3{grid-column:2;grid-row:2 / span 2}
+  .cl-t4{grid-column:1;grid-row:3}
+  .cl-t5{display:none}
 }
-@media(prefers-reduced-motion:reduce){.cl-p,.cl-p img{transition:none}.cl-p.on .cl-bar{animation:none}}
+@media(prefers-reduced-motion:reduce){.cl-t img{animation:none}}
 </style>
 </head>
 <body>
@@ -1791,7 +1787,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     <h2><!--c:college.life.title-->Campus<!--/c--> <span><!--c:college.life.mark-->Life<!--/c--></span></h2>
     <p><!--c:college.life.lead-->Parades, ceremonies, celebrations and the friendships that last long after graduation.<!--/c--></p>
   </div>
-  <div class="cl-acc" id="cl-acc"><button type="button" class="cl-p on" aria-label="Color run on campus"><img src="Campus Life 01.jpg" alt="Color run on campus" loading="lazy" width="900" height="600"><span class="cl-num" aria-hidden="true">01</span><span class="cl-cap"><b>01</b><span><!--c:college.life.cap1-->Color run on campus<!--/c--></span></span><i class="cl-bar" aria-hidden="true"></i></button><button type="button" class="cl-p" aria-label="A cadet officer at the parade"><img src="Campus Life 02.jpg" alt="A cadet officer at the parade" loading="lazy" width="900" height="600"><span class="cl-num" aria-hidden="true">02</span><span class="cl-cap"><b>02</b><span><!--c:college.life.cap2-->A cadet officer at the parade<!--/c--></span></span><i class="cl-bar" aria-hidden="true"></i></button><button type="button" class="cl-p" aria-label="Cadets on the steps of the main building"><img src="Campus Life 03.jpg" alt="Cadets on the steps of the main building" loading="lazy" width="900" height="600"><span class="cl-num" aria-hidden="true">03</span><span class="cl-cap"><b>03</b><span><!--c:college.life.cap3-->Cadets on the steps of the main building<!--/c--></span></span><i class="cl-bar" aria-hidden="true"></i></button><button type="button" class="cl-p" aria-label="The majorettes at the parade"><img src="Campus Life 04.jpg" alt="The majorettes at the parade" loading="lazy" width="900" height="600"><span class="cl-num" aria-hidden="true">04</span><span class="cl-cap"><b>04</b><span><!--c:college.life.cap4-->The majorettes at the parade<!--/c--></span></span><i class="cl-bar" aria-hidden="true"></i></button><button type="button" class="cl-p" aria-label="The PNTC drum and bugle corps"><img src="Campus Life 05.jpg" alt="The PNTC drum and bugle corps" loading="lazy" width="900" height="600"><span class="cl-num" aria-hidden="true">05</span><span class="cl-cap"><b>05</b><span><!--c:college.life.cap5-->The PNTC drum and bugle corps<!--/c--></span></span><i class="cl-bar" aria-hidden="true"></i></button><button type="button" class="cl-p" aria-label="Students between classes"><img src="Campus Life 06.jpg" alt="Students between classes" loading="lazy" width="900" height="600"><span class="cl-num" aria-hidden="true">06</span><span class="cl-cap"><b>06</b><span><!--c:college.life.cap6-->Students between classes<!--/c--></span></span><i class="cl-bar" aria-hidden="true"></i></button><button type="button" class="cl-p" aria-label="Cadets marching in the rain"><img src="Campus Life 07.jpg" alt="Cadets marching in the rain" loading="lazy" width="900" height="600"><span class="cl-num" aria-hidden="true">07</span><span class="cl-cap"><b>07</b><span><!--c:college.life.cap7-->Cadets marching in the rain<!--/c--></span></span><i class="cl-bar" aria-hidden="true"></i></button><button type="button" class="cl-p" aria-label="Students on campus"><img src="Campus Life 08.jpg" alt="Students on campus" loading="lazy" width="900" height="600"><span class="cl-num" aria-hidden="true">08</span><span class="cl-cap"><b>08</b><span><!--c:college.life.cap8-->Students on campus<!--/c--></span></span><i class="cl-bar" aria-hidden="true"></i></button><button type="button" class="cl-p" aria-label="The Philippine flag and the PNTC Colleges flag"><img src="Campus Life 09.jpg" alt="The Philippine flag and the PNTC Colleges flag" loading="lazy" width="900" height="600"><span class="cl-num" aria-hidden="true">09</span><span class="cl-cap"><b>09</b><span><!--c:college.life.cap9-->The Philippine flag and the PNTC Colleges flag<!--/c--></span></span><i class="cl-bar" aria-hidden="true"></i></button><button type="button" class="cl-p" aria-label="A graduate with his mother at the awarding"><img src="Campus Life 10.jpg" alt="A graduate with his mother at the awarding" loading="lazy" width="900" height="600"><span class="cl-num" aria-hidden="true">10</span><span class="cl-cap"><b>10</b><span><!--c:college.life.cap10-->A graduate with his mother at the awarding<!--/c--></span></span><i class="cl-bar" aria-hidden="true"></i></button><button type="button" class="cl-p" aria-label="Cadets with the class name boards"><img src="Campus Life 11.jpg" alt="Cadets with the class name boards" loading="lazy" width="900" height="600"><span class="cl-num" aria-hidden="true">11</span><span class="cl-cap"><b>11</b><span><!--c:college.life.cap11-->Cadets with the class name boards<!--/c--></span></span><i class="cl-bar" aria-hidden="true"></i></button></div>
+  <div class="cl-mosaic" id="cl-mosaic" data-photos="Campus Life 01.jpg~Color run on campus|Campus Life 02.jpg~A cadet officer at the parade|Campus Life 03.jpg~Cadets on the steps of the main building|Campus Life 04.jpg~The majorettes at the parade|Campus Life 05.jpg~The PNTC drum and bugle corps|Campus Life 06.jpg~Students between classes|Campus Life 07.jpg~Cadets marching in the rain|Campus Life 08.jpg~Students on campus|Campus Life 09.jpg~The Philippine flag and the PNTC Colleges flag|Campus Life 10.jpg~A graduate with his mother at the awarding|Campus Life 11.jpg~Cadets with the class name boards"><figure class="cl-t cl-t1"><img src="Campus Life 01.jpg" alt="Color run on campus" loading="lazy" width="900" height="600"></figure><figure class="cl-t cl-t2"><img src="Campus Life 02.jpg" alt="A cadet officer at the parade" loading="lazy" width="900" height="600"></figure><figure class="cl-t cl-t3"><img src="Campus Life 03.jpg" alt="Cadets on the steps of the main building" loading="lazy" width="900" height="600"></figure><figure class="cl-t cl-t4"><img src="Campus Life 04.jpg" alt="The majorettes at the parade" loading="lazy" width="900" height="600"></figure><figure class="cl-t cl-t5"><img src="Campus Life 05.jpg" alt="The PNTC drum and bugle corps" loading="lazy" width="900" height="600"></figure></div>
 </section>
 
 <!-- ══════ PROGRAMS ══════ -->
@@ -2428,16 +2424,23 @@ document.querySelectorAll('.mm').forEach(a => a.addEventListener('click', closeM
 })();
 </script>
 <script src="/admin/chat-widget.js" data-site="colleges"></script>
-<script id="cl-acc-js">
+<script id="cl-mosaic-js">
 document.addEventListener('DOMContentLoaded',function(){
-  var acc=document.getElementById('cl-acc');if(!acc)return;
-  var ps=[].slice.call(acc.children),cur=0,t=null,still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  function open(i){cur=(i+ps.length)%ps.length;ps.forEach(function(p,k){p.classList.toggle('on',k===cur);p.setAttribute('aria-expanded',k===cur);});}
-  function play(){stop();if(!still)t=setInterval(function(){open(cur+1);},5200);acc.classList.remove('paused');}
-  function stop(){if(t){clearInterval(t);t=null;}}
-  ps.forEach(function(p,k){p.addEventListener('click',function(){open(k);play();});p.addEventListener('mouseenter',function(){if(window.matchMedia('(hover:hover)').matches&&k!==cur)open(k);});});
-  acc.addEventListener('mouseenter',function(){stop();acc.classList.add('paused');});acc.addEventListener('mouseleave',play);
-  if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)play();else stop();});},{threshold:.3}).observe(acc);}else play();
+  var box=document.getElementById('cl-mosaic');if(!box)return;
+  var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;if(still)return;
+  var all=box.getAttribute('data-photos').split('|').map(function(x){x=x.split('~');return{src:x[0],alt:x[1]};});
+  var tiles=[].slice.call(box.children),shown=tiles.map(function(t,i){return i;}),next=tiles.length,last=-1,timer=null,busy=false;
+  function swap(){
+    if(busy)return;var vis=tiles.map(function(t,i){return t.offsetParent?i:-1;}).filter(function(i){return i>-1&&i!==last;});if(!vis.length)return;
+    var k=vis[Math.floor(Math.random()*vis.length)];last=k;
+    var p=next%all.length;while(shown.indexOf(p)>-1)p=(p+1)%all.length;next=p+1;
+    var t=tiles[k],old=t.querySelector('img'),img=new Image();img.alt=all[p].alt;img.className='in';
+    img.onload=function(){busy=true;t.appendChild(img);shown[k]=p;setTimeout(function(){old.remove();img.className='';busy=false;},1900);};
+    img.src=all[p].src;
+  }
+  function play(){stop();timer=setInterval(swap,3200);}
+  function stop(){if(timer){clearInterval(timer);timer=null;}}
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)play();else stop();});},{threshold:.2}).observe(box);}else play();
 });
 </script>
 </body>
