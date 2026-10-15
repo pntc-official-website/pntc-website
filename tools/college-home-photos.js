@@ -1,6 +1,6 @@
 // College home page: photos so the page does not read as text only.
 //  - a photo on top of each "Why Choose PNTC" card (Home - Our Story / Our People / Our Promise .jpg, and the Engine Room Simulator facility photo)
-//  - a Campus Life photo stage after the values (Campus Life 01.jpg to 11.jpg): photos only, one wide photo at a time with a slow zoom and a long crossfade
+//  - a Campus Life memories scene after the values (Campus Life 01.jpg to 11.jpg): printed photos that develop into view, rest and fade, then return with the next photo
 // The photos sit in the PNTC Colleges folder, so they can be replaced from the admin Images screen under the same names.
 // The Campus Life heading is in Site Content (group college-life).
 // Rerunnable:  node tools/college-home-photos.js
@@ -30,7 +30,10 @@ if (k !== 4) throw new Error('expected 4 cards, found ' + k);
 // 2. Campus Life band after the values
 const LIFE = ['Color run on campus', 'A cadet officer at the parade', 'Cadets on the steps of the main building', 'The majorettes at the parade', 'The PNTC drum and bugle corps', 'Students between classes', 'Cadets marching in the rain', 'Students on campus', 'The Philippine flag and the PNTC Colleges flag', 'A graduate with his mother at the awarding', 'Cadets with the class name boards'];
 const photo = (i) => `Campus Life ${String(i + 1).padStart(2, '0')}.jpg`;
-const slide = (i) => `<img class="cl-s${i === 0 ? ' on' : ''}" ${i < 2 ? 'src' : 'data-src'}="${photo(i)}" alt="${LIFE[i]}"${i === 0 ? '' : ' loading="lazy"'} width="900" height="600">`;
+// print slots: left %, top %, width, tilt in degrees, and the spot on phones (left %, top %); the last three are not shown on phones
+const SLOTS = [[17, 31, 'clamp(220px,26vw,400px)', -7, 32, 22], [41, 25, 'clamp(200px,23vw,350px)', 4, 68, 40], [66, 30, 'clamp(230px,27vw,410px)', -3, 34, 62],
+  [87, 40, 'clamp(190px,21vw,320px)', 8, 68, 80], [25, 72, 'clamp(200px,23vw,340px)', 5], [53, 69, 'clamp(240px,28vw,430px)', -4], [79, 74, 'clamp(190px,22vw,330px)', -8]];
+const print = ([x, y, w, r, mx, my], i) => `<figure class="cl-print${mx === undefined ? ' cl-wide' : ''}" style="--x:${x}%;--y:${y}%;--w:${w};--r:${r}deg${mx === undefined ? '' : `;--mx:${mx}%;--my:${my}%`}"><img src="${photo(i)}" alt="${LIFE[i]}" loading="lazy" width="900" height="600"></figure>`;
 const LIFE_HTML = `<!-- ══════ CAMPUS LIFE ══════ -->
 <section id="campus-life" aria-label="Campus life at PNTC Colleges">
   <div class="cl-head reveal">
@@ -38,7 +41,7 @@ const LIFE_HTML = `<!-- ══════ CAMPUS LIFE ══════ -->
     <h2>${slot('college.life.title', 'Campus')} <span>${slot('college.life.mark', 'Life')}</span></h2>
     <p>${slot('college.life.lead', 'Parades, ceremonies, celebrations and the friendships that last long after graduation.')}</p>
   </div>
-  <div class="cl-stage" id="cl-stage" aria-roledescription="slideshow" aria-label="Campus life photos">${LIFE.map((a, i) => slide(i)).join("")}<i class="cl-bar" aria-hidden="true"></i></div>
+  <div class="cl-mem" id="cl-mem" aria-label="Campus life photos" data-photos="${LIFE.map((a, i) => photo(i) + "~" + a).join("|")}">${SLOTS.map(print).join("")}</div>
 </section>
 `;
 h = h.replace(/<!-- ══════ CAMPUS LIFE ══════ -->\n<section id="campus-life"[\s\S]*?<\/section>\n\n?/, '');
@@ -52,24 +55,38 @@ h = h.replace(/\s*<figure class="cta-photo[^>]*>[\s\S]*?<\/figure>/g, '');
 h = h.replace(/\s*<div class="cta-bubbles"[\s\S]*?<\/div><!--\/cta-bubbles-->/g, '');
 h = h.replace(/<script id="cta-bubbles-js">[\s\S]*?<\/script>\n/, '');
 
-// the stage: one photo at a time, a slow zoom and drift, then a long crossfade into the next photo
-const JS = `<script id="cl-stage-js">
+// the memories: each print develops into view, rests, fades away, then comes back a little moved with the next photo
+const JS = `<script id="cl-mem-js">
 document.addEventListener('DOMContentLoaded',function(){
-  var box=document.getElementById('cl-stage');if(!box)return;
-  var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var s=[].slice.call(box.querySelectorAll('.cl-s')),cur=0,timer=null;
-  function load(i){var im=s[i%s.length];if(im.dataset.src){im.src=im.dataset.src;im.removeAttribute('data-src');}}
-  function go(){var prev=s[cur];cur=(cur+1)%s.length;var nx=s[cur];load(cur+1);
-    nx.classList.remove('kb0','kb1','kb2','kb3');void nx.offsetWidth;nx.classList.add('kb'+(cur%4),'on');
-    prev.classList.add('was');prev.classList.remove('on');setTimeout(function(){prev.classList.remove('was');},2700);box.classList.remove('tick');void box.offsetWidth;box.classList.add('tick');}
-  function play(){stop();if(still)return;box.classList.add('tick');timer=setInterval(go,6500);}
-  function stop(){if(timer){clearInterval(timer);timer=null;}}
-  s[0].classList.add('kb0');load(1);
-  if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)play();else stop();});},{threshold:.25}).observe(box);}else play();
+  var box=document.getElementById('cl-mem');if(!box)return;
+  var prints=[].slice.call(box.querySelectorAll('.cl-print'));
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches){prints.forEach(function(p){p.classList.add('show');});return;}
+  var all=box.getAttribute('data-photos').split('|').map(function(x){x=x.split('~');return{src:x[0],alt:x[1]};});
+  var used=prints.map(function(p,i){return i;}),next=prints.length,z=10,running=false,timers=[];
+  function later(f,ms){timers.push(setTimeout(f,ms));}
+  function cycle(p,i){
+    if(!running)return;
+    p.style.zIndex=++z;p.classList.add('show');
+    later(function(){
+      p.classList.remove('show');
+      later(function(){
+        var k=next%all.length;while(used.indexOf(k)>-1)k=(k+1)%all.length;next=k+1;used[i]=k;
+        var img=p.querySelector('img'),pre=new Image();
+        pre.onload=function(){img.src=all[k].src;img.alt=all[k].alt;
+          p.style.setProperty('--dx',(Math.random()*40-20).toFixed(0)+'px');p.style.setProperty('--dy',(Math.random()*30-15).toFixed(0)+'px');
+          p.style.setProperty('--j',(Math.random()*6-3).toFixed(1)+'deg');
+          later(function(){cycle(p,i);},900);};
+        pre.src=all[k].src;
+      },3000);
+    },8000);
+  }
+  function start(){if(running)return;running=true;prints.forEach(function(p,i){later(function(){cycle(p,i);},i*1700);});}
+  function stop(){running=false;timers.forEach(clearTimeout);timers=[];}
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)start();else stop();});},{threshold:.2}).observe(box);}else start();
 });
 </script>`;
-h = h.replace(/<script id="cl-mosaic-js">[\s\S]*?<\/script>\n/, '');
 h = h.replace(/<script id="cl-stage-js">[\s\S]*?<\/script>\n/, '');
+h = h.replace(/<script id="cl-mem-js">[\s\S]*?<\/script>\n/, '');
 h = h.replace('</body>', JS + '\n</body>');
 
 const CSS = `<style id="home-photos">
@@ -87,26 +104,22 @@ const CSS = `<style id="home-photos">
 .cl-head h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(2.4rem,5vw,4rem);line-height:.95;color:#1C1650;margin:0}
 .cl-head h2 span{background:linear-gradient(transparent 62%,#F3CF33 62%,#F3CF33 92%,transparent 92%);padding:0 .08em}
 .cl-head p{margin:1rem auto 0;max-width:56ch;font-size:1rem;line-height:1.7;color:rgba(28,22,80,.7)}
-/* stage: one wide rectangular photo at a time, a slow zoom and drift, a long crossfade, dark cinematic edges */
-.cl-stage{position:relative;width:100%;height:clamp(340px,46vw,680px);overflow:hidden;background:#0B0826}
-.cl-s{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 2.6s ease-in-out;transform-origin:50% 50%}
-.cl-s.on{opacity:1;z-index:1}
-.cl-s.was{opacity:1;transition:none}
-.cl-s.kb0{animation:cl-kb0 9.5s linear both}
-.cl-s.kb1{animation:cl-kb1 9.5s linear both}
-.cl-s.kb2{animation:cl-kb2 9.5s linear both}
-.cl-s.kb3{animation:cl-kb3 9.5s linear both}
-@keyframes cl-kb0{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.16) translate(-2%,-1.5%)}}
-@keyframes cl-kb1{from{transform:scale(1.16) translate(2%,1%)}to{transform:scale(1.03) translate(0,0)}}
-@keyframes cl-kb2{from{transform:scale(1.03) translate(1.5%,-1%)}to{transform:scale(1.15) translate(-1.5%,1.5%)}}
-@keyframes cl-kb3{from{transform:scale(1.15) translate(-2%,0)}to{transform:scale(1.03) translate(2%,-1%)}}
-.cl-stage::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at center,rgba(11,8,38,0) 55%,rgba(11,8,38,.55) 100%),linear-gradient(to bottom,rgba(11,8,38,.35),rgba(11,8,38,0) 18%,rgba(11,8,38,0) 80%,rgba(11,8,38,.45))}
-.cl-bar{position:absolute;left:0;bottom:0;height:3px;width:0;background:#F3CF33;z-index:3}
-.cl-stage.tick .cl-bar{animation:cl-bar 6.5s linear forwards}
-@keyframes cl-bar{to{width:100%}}
+/* memories: printed photos scattered on a dark, softly lit surface; each develops into view, rests, and fades away */
+.cl-mem{position:relative;height:clamp(440px,46vw,680px);overflow:hidden;background:radial-gradient(ellipse 70% 60% at 50% 45%,#2A2170 0%,#15104A 45%,#0B0826 100%)}
+.cl-mem::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.05) 1px,transparent 0);background-size:22px 22px;pointer-events:none}
+.cl-mem::after{content:'';position:absolute;inset:0;z-index:100;pointer-events:none;background:radial-gradient(ellipse at center,rgba(11,8,38,0) 60%,rgba(11,8,38,.6) 100%)}
+.cl-print{position:absolute;left:var(--x);top:var(--y);width:var(--w);margin:0;padding:clamp(6px,.7vw,10px);background:#FBF8F1;box-shadow:0 2px 3px rgba(0,0,0,.25),0 30px 50px -18px rgba(0,0,0,.75);
+  transform:translate(calc(-50% + var(--dx,0px)),calc(-50% + var(--dy,0px))) rotate(calc(var(--r) + var(--j,0deg))) scale(.9);opacity:0;filter:blur(8px) sepia(.9) brightness(1.15);
+  transition:opacity 2.6s ease,transform 3.2s cubic-bezier(.2,.7,.2,1),filter 3.4s ease}
+.cl-print.show{opacity:1;transform:translate(calc(-50% + var(--dx,0px)),calc(-50% + var(--dy,0px))) rotate(calc(var(--r) + var(--j,0deg))) scale(1);filter:blur(0) sepia(0) brightness(1)}
+.cl-print img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
 #campus-life{padding-bottom:0!important}
-@media(max-width:760px){.cl-stage{height:clamp(260px,72vw,420px)}}
-@media(prefers-reduced-motion:reduce){.cl-s{transition:none}.cl-s[class*=kb]{animation:none}.cl-stage.tick .cl-bar{animation:none}}
+@media(max-width:760px){
+  .cl-mem{height:clamp(420px,120vw,560px)}
+  .cl-print{left:var(--mx);top:var(--my);width:min(54vw,240px)}
+  .cl-print.cl-wide{display:none}
+}
+@media(prefers-reduced-motion:reduce){.cl-print{transition:none}}
 </style>`;
 h = h.replace(/<style id="home-photos">[\s\S]*?<\/style>\n/, '');
 h = h.replace('</head>', CSS + '\n</head>');
