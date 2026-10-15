@@ -1514,6 +1514,42 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 #hero.hx .hx-proof p{border-left:0;padding-left:0;gap:.6rem}
 #hero.hx .hx-proof strong{font-size:2rem;color:#1C1650;background:linear-gradient(transparent 62%,#F3CF33 62%,#F3CF33 94%,transparent 94%);padding:0 .1em}
 </style>
+<style id="home-photos">
+/* photos on the Why Choose PNTC cards */
+.usp-photo{margin:-2rem -1.6rem 0;height:clamp(150px,13vw,190px);overflow:hidden;position:relative}
+.usp-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(16,11,51,0) 45%,rgba(16,11,51,.45))}
+.usp-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.usp:hover .usp-photo img{transform:scale(1.07)}
+.usp-photo + .usp-num{color:rgba(255,255,255,.85)!important;text-shadow:0 2px 10px rgba(0,0,0,.35);z-index:2}
+.usp-photo ~ .usp-ico{position:relative;z-index:2;margin-top:-27px;border:3px solid #fff}
+/* Campus Life band */
+#campus-life{background:#ECEEF7;padding:clamp(4.5rem,8vw,6.5rem) 0;overflow:hidden;position:relative}
+.cl-head{max-width:760px;margin:0 auto clamp(2.2rem,4vw,3rem);padding:0 1.5rem;text-align:center}
+.cl-head .eyebrow{display:inline-flex;margin-bottom:.8rem}
+.cl-head h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(2.4rem,5vw,4rem);line-height:.95;color:#1C1650;margin:0}
+.cl-head h2 span{background:linear-gradient(transparent 62%,#F3CF33 62%,#F3CF33 92%,transparent 92%);padding:0 .08em}
+.cl-head p{margin:1rem auto 0;max-width:56ch;font-size:1rem;line-height:1.7;color:rgba(28,22,80,.7)}
+.cl-rows{display:grid;gap:1.1rem;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.cl-row{overflow:hidden}
+.cl-track{display:flex;gap:1.1rem;width:max-content;animation:cl-move 60s linear infinite}
+.cl-rev .cl-track{animation-direction:reverse;animation-duration:70s}
+.cl-rows:hover .cl-track{animation-play-state:paused}
+.cl-track figure{margin:0;height:clamp(170px,19vw,250px);aspect-ratio:3/2;border-radius:18px;overflow:hidden;flex:none;box-shadow:0 18px 30px -20px rgba(28,22,80,.55);transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s}
+.cl-track figure:nth-child(odd){transform:rotate(-1.2deg)}
+.cl-track figure:nth-child(even){transform:rotate(1.2deg) translateY(6px)}
+.cl-track figure:hover{transform:rotate(0) scale(1.05);box-shadow:0 26px 40px -20px rgba(28,22,80,.7);z-index:1}
+.cl-track img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes cl-move{to{transform:translateX(calc(-50% - .55rem))}}
+/* photos beside the closing band */
+#cta{position:relative;overflow:hidden}
+#cta > :not(.cta-photo){position:relative;z-index:2}
+.cta-photo{position:absolute;margin:0;width:min(270px,calc((100vw - 780px) / 2 - 50px));aspect-ratio:3/2;border-radius:16px;overflow:hidden;border:6px solid #fff;box-shadow:0 26px 44px -22px rgba(16,11,51,.6);z-index:1}
+.cta-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.cta-l{left:clamp(1rem,3vw,4rem);top:50%;transform:translateY(-50%) rotate(-6deg)}
+.cta-r{right:clamp(1rem,3vw,4rem);top:50%;transform:translateY(-44%) rotate(5deg)}
+@media(max-width:1180px){.cta-photo{display:none}}
+@media(prefers-reduced-motion:reduce){.cl-track{animation:none}.cl-row{overflow-x:auto}}
+</style>
 </head>
 <body>
 
@@ -1660,6 +1696,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
   <div class="mission-divider reveal"></div>
   <div class="usp-grid reveal" style="transition-delay:.18s">
     <article class="usp">
+      <figure class="usp-photo"><img src="Home - Our Story.jpg" alt="PNTC maritime graduates in white uniforms at commencement" loading="lazy" width="1000" height="666"></figure>
       <span class="usp-num" aria-hidden="true">01</span>
       <div class="usp-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="3"/><path d="M12 8v14M5 12H2a10 10 0 0 0 20 0h-3"/></svg></div>
       <p class="usp-tag">Our Story</p>
@@ -1667,6 +1704,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
       <p class="usp-text">For over 30 years, we have focused on producing maritime graduates who are ready for the demands of the industry. The same discipline, rigor, and standards now guide every program we offer.</p>
     </article>
     <article class="usp">
+      <figure class="usp-photo"><img src="Facility - Engine Room Simulator.jpg" alt="The engine room simulator at PNTC Colleges" loading="lazy" width="1000" height="666"></figure>
       <span class="usp-num" aria-hidden="true">02</span>
       <div class="usp-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
       <p class="usp-tag">Our Facilities</p>
@@ -1674,6 +1712,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
       <p class="usp-text">Ship bridge and engine room simulators, a live training vessel, campus swimming pools, and criminology and tourism laboratories allow every student in every program to train in an environment that reflects the real world they are preparing for.</p>
     </article>
     <article class="usp">
+      <figure class="usp-photo"><img src="Home - Our People.jpg" alt="PNTC maritime cadets with their training officer" loading="lazy" width="1000" height="666"></figure>
       <span class="usp-num" aria-hidden="true">03</span>
       <div class="usp-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
       <p class="usp-tag">Our People</p>
@@ -1681,6 +1720,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
       <p class="usp-text">Our deans and program heads bring industry experience and academic leadership to every program they lead. Students learn from people with real experience in their fields.</p>
     </article>
     <article class="usp">
+      <figure class="usp-photo"><img src="Home - Our Promise.jpg" alt="PNTC Colleges graduates in their togas" loading="lazy" width="1000" height="666"></figure>
       <span class="usp-num" aria-hidden="true">04</span>
       <div class="usp-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
       <p class="usp-tag">Our Promise</p>
@@ -1736,6 +1776,19 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     </article>
   </div>
   <script>(function(){var g=document.getElementById('vbGrid');if(!g||!window.matchMedia('(hover:hover)').matches)return;g.addEventListener('pointermove',function(e){var c=e.target.closest('.vb-card');if(!c)return;var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')})})();</script>
+</section>
+
+<!-- ══════ CAMPUS LIFE ══════ -->
+<section id="campus-life" aria-label="Campus life at PNTC Colleges">
+  <div class="cl-head reveal">
+    <div class="eyebrow"><!--c:college.life.eyebrow-->Life at PNTC<!--/c--></div>
+    <h2><!--c:college.life.title-->Campus<!--/c--> <span><!--c:college.life.mark-->Life<!--/c--></span></h2>
+    <p><!--c:college.life.lead-->Parades, ceremonies, celebrations and the friendships that last long after graduation.<!--/c--></p>
+  </div>
+  <div class="cl-rows">
+    <div class="cl-row"><div class="cl-track"><figure><img src="Campus Life 01.jpg" alt="Color run on campus" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 02.jpg" alt="A cadet officer at the parade" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 03.jpg" alt="Cadets on the steps of the main building" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 04.jpg" alt="The majorettes at the parade" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 05.jpg" alt="The PNTC drum and bugle corps" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 06.jpg" alt="Students between classes" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 01.jpg" alt="" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 02.jpg" alt="" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 03.jpg" alt="" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 04.jpg" alt="" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 05.jpg" alt="" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 06.jpg" alt="" loading="lazy" width="900" height="600"></figure></div></div>
+    <div class="cl-row cl-rev"><div class="cl-track"><figure><img src="Campus Life 07.jpg" alt="Cadets marching in the rain" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 08.jpg" alt="Students on campus" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 09.jpg" alt="The Philippine flag and the PNTC Colleges flag" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 10.jpg" alt="A graduate with his mother at the awarding" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 11.jpg" alt="Cadets with the class name boards" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 03.jpg" alt="Cadets on the steps of the main building" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 07.jpg" alt="" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 08.jpg" alt="" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 09.jpg" alt="" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 10.jpg" alt="" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 11.jpg" alt="" loading="lazy" width="900" height="600"></figure><figure><img src="Campus Life 03.jpg" alt="" loading="lazy" width="900" height="600"></figure></div></div>
+  </div>
 </section>
 
 <!-- ══════ PROGRAMS ══════ -->
@@ -2048,6 +2101,8 @@ As green mandates and digital integration redefine the seas, early adopters prio
 </section>
 
 <section id="cta">
+  <figure class="cta-photo cta-l" aria-hidden="true"><img src="Home - Join Us 1.jpg" alt="" loading="lazy"></figure>
+  <figure class="cta-photo cta-r" aria-hidden="true"><img src="Home - Join Us 2.jpg" alt="" loading="lazy"></figure>
   <div class="eyebrow" style="color:var(--ink);margin-bottom:.75rem;opacity:.6">Choose PNTC</div>
   <h2>Begin Your Journey<br>at PNTC Colleges</h2>
   <p>For over 30 years, PNTC Colleges has educated and trained professionals who serve the Philippines and the world. We invite you to be part of that legacy.</p>
