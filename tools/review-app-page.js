@@ -224,7 +224,7 @@ const SCRIPT = `<script id="ra-js">
 document.documentElement.classList.add('ra-js');
 document.addEventListener('DOMContentLoaded',function(){
   /* keep the hero clear of the fixed navigation */
-  function fit(){var m=0;document.querySelectorAll('nav,header').forEach(function(e){var p=getComputedStyle(e).position;if(p==='fixed'||p==='sticky'){var r=e.getBoundingClientRect();if(r.top<200&&r.height<200)m=Math.max(m,r.bottom);}});var h=document.querySelector('.ra-hero');if(h&&m>0)h.style.setProperty('--ra-nav',Math.round(m)+'px');}
+  function fit(){var m=0;document.querySelectorAll('nav,header').forEach(function(e){var p=getComputedStyle(e).position;if(p==='fixed'||p==='sticky'){var r=e.getBoundingClientRect();if(r.top<200&&r.height<200)m=Math.max(m,r.bottom);}});var h=document.querySelector('.ra-hero');if(!h)return;var t=Math.max(0,h.getBoundingClientRect().top+scrollY);h.style.setProperty('--ra-top',Math.round(t)+'px');if(m>0)h.style.setProperty('--ra-nav',Math.max(0,Math.round(m-t))+'px');}
   fit();window.addEventListener('load',fit);window.addEventListener('resize',fit);
   /* every download button uses the Google Play address set on the hero button */
   var main=document.querySelector('[data-c="ra.play.href"]');
