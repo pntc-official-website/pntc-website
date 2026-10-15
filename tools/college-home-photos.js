@@ -1,6 +1,6 @@
 // College home page: photos so the page does not read as text only.
 //  - a photo on top of each "Why Choose PNTC" card (Home - Our Story / Our People / Our Promise .jpg, and the Engine Room Simulator facility photo)
-//  - a Campus Life photo mosaic after the values (Campus Life 01.jpg to 11.jpg): photos only; every few seconds one tile reveals the next photo
+//  - a Campus Life photo stage after the values (Campus Life 01.jpg to 11.jpg): photos only, one wide photo at a time with a slow zoom and a long crossfade
 // The photos sit in the PNTC Colleges folder, so they can be replaced from the admin Images screen under the same names.
 // The Campus Life heading is in Site Content (group college-life).
 // Rerunnable:  node tools/college-home-photos.js
@@ -30,8 +30,7 @@ if (k !== 4) throw new Error('expected 4 cards, found ' + k);
 // 2. Campus Life band after the values
 const LIFE = ['Color run on campus', 'A cadet officer at the parade', 'Cadets on the steps of the main building', 'The majorettes at the parade', 'The PNTC drum and bugle corps', 'Students between classes', 'Cadets marching in the rain', 'Students on campus', 'The Philippine flag and the PNTC Colleges flag', 'A graduate with his mother at the awarding', 'Cadets with the class name boards'];
 const photo = (i) => `Campus Life ${String(i + 1).padStart(2, '0')}.jpg`;
-const TILES = 5;
-const tile = (i) => `<figure class="cl-t cl-t${i + 1}"><img src="${photo(i)}" alt="${LIFE[i]}" loading="lazy" width="900" height="600"></figure>`;
+const slide = (i) => `<img class="cl-s${i === 0 ? ' on' : ''}" ${i < 2 ? 'src' : 'data-src'}="${photo(i)}" alt="${LIFE[i]}"${i === 0 ? '' : ' loading="lazy"'} width="900" height="600">`;
 const LIFE_HTML = `<!-- ══════ CAMPUS LIFE ══════ -->
 <section id="campus-life" aria-label="Campus life at PNTC Colleges">
   <div class="cl-head reveal">
@@ -39,7 +38,7 @@ const LIFE_HTML = `<!-- ══════ CAMPUS LIFE ══════ -->
     <h2>${slot('college.life.title', 'Campus')} <span>${slot('college.life.mark', 'Life')}</span></h2>
     <p>${slot('college.life.lead', 'Parades, ceremonies, celebrations and the friendships that last long after graduation.')}</p>
   </div>
-  <div class="cl-mosaic" id="cl-mosaic" data-photos="${LIFE.map((a, i) => photo(i) + '~' + a).join('|')}">${Array.from({ length: TILES }, (_, i) => tile(i)).join('')}</div>
+  <div class="cl-stage" id="cl-stage" aria-roledescription="slideshow" aria-label="Campus life photos">${LIFE.map((a, i) => slide(i)).join("")}<i class="cl-bar" aria-hidden="true"></i></div>
 </section>
 `;
 h = h.replace(/<!-- ══════ CAMPUS LIFE ══════ -->\n<section id="campus-life"[\s\S]*?<\/section>\n\n?/, '');
@@ -53,28 +52,24 @@ h = h.replace(/\s*<figure class="cta-photo[^>]*>[\s\S]*?<\/figure>/g, '');
 h = h.replace(/\s*<div class="cta-bubbles"[\s\S]*?<\/div><!--\/cta-bubbles-->/g, '');
 h = h.replace(/<script id="cta-bubbles-js">[\s\S]*?<\/script>\n/, '');
 
-// the mosaic: every few seconds one tile reveals the next photo that is not on screen, sliding up over the old one
-const JS = `<script id="cl-mosaic-js">
+// the stage: one photo at a time, a slow zoom and drift, then a long crossfade into the next photo
+const JS = `<script id="cl-stage-js">
 document.addEventListener('DOMContentLoaded',function(){
-  var box=document.getElementById('cl-mosaic');if(!box)return;
-  var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;if(still)return;
-  var all=box.getAttribute('data-photos').split('|').map(function(x){x=x.split('~');return{src:x[0],alt:x[1]};});
-  var tiles=[].slice.call(box.children),shown=tiles.map(function(t,i){return i;}),next=tiles.length,last=-1,timer=null,busy=false;
-  function swap(){
-    if(busy)return;var vis=tiles.map(function(t,i){return t.offsetParent?i:-1;}).filter(function(i){return i>-1&&i!==last;});if(!vis.length)return;
-    var k=vis[Math.floor(Math.random()*vis.length)];last=k;
-    var p=next%all.length;while(shown.indexOf(p)>-1)p=(p+1)%all.length;next=p+1;
-    var t=tiles[k],old=t.querySelector('img'),img=new Image();img.alt=all[p].alt;img.className='in';
-    img.onload=function(){busy=true;t.appendChild(img);shown[k]=p;setTimeout(function(){old.remove();img.className='';busy=false;},1900);};
-    img.src=all[p].src;
-  }
-  function play(){stop();timer=setInterval(swap,3200);}
+  var box=document.getElementById('cl-stage');if(!box)return;
+  var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var s=[].slice.call(box.querySelectorAll('.cl-s')),cur=0,timer=null;
+  function load(i){var im=s[i%s.length];if(im.dataset.src){im.src=im.dataset.src;im.removeAttribute('data-src');}}
+  function go(){var prev=s[cur];cur=(cur+1)%s.length;var nx=s[cur];load(cur+1);
+    nx.classList.remove('kb0','kb1','kb2','kb3');void nx.offsetWidth;nx.classList.add('kb'+(cur%4),'on');
+    prev.classList.add('was');prev.classList.remove('on');setTimeout(function(){prev.classList.remove('was');},2700);box.classList.remove('tick');void box.offsetWidth;box.classList.add('tick');}
+  function play(){stop();if(still)return;box.classList.add('tick');timer=setInterval(go,6500);}
   function stop(){if(timer){clearInterval(timer);timer=null;}}
-  if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)play();else stop();});},{threshold:.2}).observe(box);}else play();
+  s[0].classList.add('kb0');load(1);
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)play();else stop();});},{threshold:.25}).observe(box);}else play();
 });
 </script>`;
-h = h.replace(/<script id="cl-acc-js">[\s\S]*?<\/script>\n/, '');
 h = h.replace(/<script id="cl-mosaic-js">[\s\S]*?<\/script>\n/, '');
+h = h.replace(/<script id="cl-stage-js">[\s\S]*?<\/script>\n/, '');
 h = h.replace('</body>', JS + '\n</body>');
 
 const CSS = `<style id="home-photos">
@@ -92,28 +87,26 @@ const CSS = `<style id="home-photos">
 .cl-head h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(2.4rem,5vw,4rem);line-height:.95;color:#1C1650;margin:0}
 .cl-head h2 span{background:linear-gradient(transparent 62%,#F3CF33 62%,#F3CF33 92%,transparent 92%);padding:0 .08em}
 .cl-head p{margin:1rem auto 0;max-width:56ch;font-size:1rem;line-height:1.7;color:rgba(28,22,80,.7)}
-/* mosaic: photos only, in tiles of mixed sizes; a tile reveals its next photo sliding up with a slow zoom */
-.cl-mosaic{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.25fr;grid-template-rows:repeat(2,clamp(170px,17vw,260px));gap:clamp(.6rem,1.2vw,1rem);max-width:1280px;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
-.cl-t{position:relative;margin:0;border-radius:22px;overflow:hidden;background:#1C1650;box-shadow:0 2px 4px rgba(28,22,80,.06),0 22px 36px -22px rgba(28,22,80,.55);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
-.cl-t:hover{transform:translateY(-6px);box-shadow:0 2px 4px rgba(28,22,80,.08),0 34px 50px -24px rgba(28,22,80,.65)}
-.cl-t img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;animation:cl-drift 14s ease-in-out infinite alternate}
-.cl-t img.in{z-index:1;animation:cl-reveal 1.9s cubic-bezier(.7,0,.2,1) both}
-@keyframes cl-reveal{from{clip-path:inset(100% 0 0 0);transform:scale(1.18)}to{clip-path:inset(0 0 0 0);transform:scale(1)}}
-@keyframes cl-drift{from{transform:scale(1)}to{transform:scale(1.07)}}
-.cl-t1{grid-column:1;grid-row:1 / span 2}
-.cl-t2{grid-column:2 / span 2;grid-row:1}
-.cl-t3{grid-column:4;grid-row:1 / span 2}
-.cl-t4{grid-column:2;grid-row:2}
-.cl-t5{grid-column:3;grid-row:2}
-@media(max-width:760px){
-  .cl-mosaic{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,clamp(140px,38vw,200px))}
-  .cl-t1{grid-column:1 / span 2;grid-row:1}
-  .cl-t2{grid-column:1;grid-row:2}
-  .cl-t3{grid-column:2;grid-row:2 / span 2}
-  .cl-t4{grid-column:1;grid-row:3}
-  .cl-t5{display:none}
-}
-@media(prefers-reduced-motion:reduce){.cl-t img{animation:none}}
+/* stage: one wide rectangular photo at a time, a slow zoom and drift, a long crossfade, dark cinematic edges */
+.cl-stage{position:relative;width:100%;height:clamp(340px,46vw,680px);overflow:hidden;background:#0B0826}
+.cl-s{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 2.6s ease-in-out;transform-origin:50% 50%}
+.cl-s.on{opacity:1;z-index:1}
+.cl-s.was{opacity:1;transition:none}
+.cl-s.kb0{animation:cl-kb0 9.5s linear both}
+.cl-s.kb1{animation:cl-kb1 9.5s linear both}
+.cl-s.kb2{animation:cl-kb2 9.5s linear both}
+.cl-s.kb3{animation:cl-kb3 9.5s linear both}
+@keyframes cl-kb0{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.16) translate(-2%,-1.5%)}}
+@keyframes cl-kb1{from{transform:scale(1.16) translate(2%,1%)}to{transform:scale(1.03) translate(0,0)}}
+@keyframes cl-kb2{from{transform:scale(1.03) translate(1.5%,-1%)}to{transform:scale(1.15) translate(-1.5%,1.5%)}}
+@keyframes cl-kb3{from{transform:scale(1.15) translate(-2%,0)}to{transform:scale(1.03) translate(2%,-1%)}}
+.cl-stage::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at center,rgba(11,8,38,0) 55%,rgba(11,8,38,.55) 100%),linear-gradient(to bottom,rgba(11,8,38,.35),rgba(11,8,38,0) 18%,rgba(11,8,38,0) 80%,rgba(11,8,38,.45))}
+.cl-bar{position:absolute;left:0;bottom:0;height:3px;width:0;background:#F3CF33;z-index:3}
+.cl-stage.tick .cl-bar{animation:cl-bar 6.5s linear forwards}
+@keyframes cl-bar{to{width:100%}}
+#campus-life{padding-bottom:0!important}
+@media(max-width:760px){.cl-stage{height:clamp(260px,72vw,420px)}}
+@media(prefers-reduced-motion:reduce){.cl-s{transition:none}.cl-s[class*=kb]{animation:none}.cl-stage.tick .cl-bar{animation:none}}
 </style>`;
 h = h.replace(/<style id="home-photos">[\s\S]*?<\/style>\n/, '');
 h = h.replace('</head>', CSS + '\n</head>');
