@@ -42,11 +42,20 @@ const ICON = {
 
 const playBtn = (key, first) => `<a class="ra-btn ra-play"${first ? ` data-c="ra.play.href" href="${PLAY}"` : ` href="${PLAY}" data-ra-play`} target="_blank" rel="noopener">${ICON.play}<span><small>${slot(key + '.small', 'Get it on')}</small><b>${slot(key + '.big', 'Google Play')}</b></span></a>`;
 
+const banner = `<section id="page-banner" class="pntc-sub">
+  <div class="pntc-sub-in">
+    <p class="pntc-sub-eyebrow">${slot('ra.banner.eyebrow', 'Training &amp; Assessment')}</p>
+    <h1>${slot('ra.banner.title', 'Maritime Review App')}</h1>
+    <p class="pntc-sub-lead">${slot('ra.banner.lead', 'PNTC Maritime Review, the gamified Android reviewer that helps seafarers prepare for their MARINA examinations.')}</p>
+  </div>
+</section>`;
+
+// the app introduction with the phone, right below the banner
 const hero = `<section class="ra ra-hero" id="review-app">
   <div class="ra-wrap ra-hero-grid">
     <div>
       <p class="ra-pill"><img src="${IMG}icon.png" alt="" width="30" height="30">${slot('ra.hero.tag', 'PNTC Maritime Review')}</p>
-      <h1 class="ra-h1"><span>${slot('ra.hero.line1', 'Study Hard.')}</span><span class="g">${slot('ra.hero.line2', 'Level Harder.')}</span></h1>
+      <h2 class="ra-h1"><span>${slot('ra.hero.line1', 'Study Hard.')}</span><span class="g">${slot('ra.hero.line2', 'Level Harder.')}</span></h2>
       <p class="ra-sub">${slot('ra.hero.sub', 'PNTC Maritime Review is an Android app that prepares seafarers for MARINA examinations. Every question you answer earns experience points, builds your daily streak and brings you closer to your license.')}</p>
       <div class="ra-btns">
         ${playBtn('ra.hero.play', true)}
@@ -223,9 +232,6 @@ const cta = `<section class="ra ra-cta" id="contact-review">
 const SCRIPT = `<script id="ra-js">
 document.documentElement.classList.add('ra-js');
 document.addEventListener('DOMContentLoaded',function(){
-  /* keep the hero clear of the fixed navigation */
-  function fit(){var m=0;document.querySelectorAll('nav,header').forEach(function(e){var p=getComputedStyle(e).position;if(p==='fixed'||p==='sticky'){var r=e.getBoundingClientRect();if(r.top<200&&r.height<200)m=Math.max(m,r.bottom);}});var h=document.querySelector('.ra-hero');if(!h)return;var t=Math.max(0,h.getBoundingClientRect().top+scrollY);h.style.setProperty('--ra-top',Math.round(t)+'px');if(m>0)h.style.setProperty('--ra-nav',Math.max(0,Math.round(m-t))+'px');}
-  fit();window.addEventListener('load',fit);window.addEventListener('resize',fit);
   /* every download button uses the Google Play address set on the hero button */
   var main=document.querySelector('[data-c="ra.play.href"]');
   if(main)document.querySelectorAll('[data-ra-play]').forEach(function(a){a.href=main.href;});
@@ -259,7 +265,7 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 </script>`;
 
-const body = [hero, about, cover, feat, shots, tut, plan, lead, cta].join('\n\n');
+const body = [banner, hero, about, cover, feat, shots, tut, plan, lead, cta].join('\n\n');
 const TITLE = 'PNTC Maritime Review App | MARINA Exam Reviewer for Seafarers';
 const DESC = 'PNTC Maritime Review is a gamified Android reviewer for MARINA examinations, with OIC, Management Level and GOC review, daily streaks, badges and progress stats.';
 

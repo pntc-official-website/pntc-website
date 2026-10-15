@@ -246,7 +246,8 @@ const GROUPS = [
   ] },
   { id: 'training-review', site: 'Training Center', title: 'Review App page', note: 'The Google Play link below is used by every download button on the page. The tutorial plays whatever YouTube link is set below. Images are review-app-*.png and .jpg in Images, Training Center.', files: ['PNTC Maritime Training and Assessment Center/review-app.html'], fields: [
     H('ra.play.href', 'Google Play link (all download buttons)'), H('ra.video.href', 'YouTube tutorial link'),
-    T('ra.hero.tag', 'Hero, small tag'), T('ra.hero.line1', 'Hero, headline in white'), T('ra.hero.line2', 'Hero, headline in gold'), P('ra.hero.sub', 'Hero, description'),
+    T('ra.banner.eyebrow', 'Top banner, small label'), T('ra.banner.title', 'Top banner, page title'), P('ra.banner.lead', 'Top banner, description'),
+    T('ra.hero.tag', 'App intro, small tag'), T('ra.hero.line1', 'App intro, headline line 1'), T('ra.hero.line2', 'App intro, headline line 2 (highlighted)'), P('ra.hero.sub', 'App intro, description'),
     T('ra.hero.play.small', 'Hero download button, small text'), T('ra.hero.play.big', 'Hero download button, big text'), T('ra.hero.btn2', 'Hero, video button'),
     ...[1, 2, 3].flatMap(n => [T('ra.stat' + n + '.n', 'Hero number ' + n), T('ra.stat' + n + '.l', 'Hero number ' + n + ', label')]),
     T('ra.chip1.title', 'Floating card 1, title'), T('ra.chip1.text', 'Floating card 1, text'), T('ra.chip2.title', 'Floating card 2, title'), T('ra.chip2.text', 'Floating card 2, text'),
