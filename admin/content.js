@@ -197,8 +197,9 @@ const GROUPS = [
   ] },
   { id: 'college-values', site: 'Colleges', title: 'What We Stand For', files: ['PNTC Colleges/index.html'],
     fields: Array.from({ length: VALUES }, (_, i) => [T(`college.value${i + 1}.name`, `Value ${i + 1}: name`), P(`college.value${i + 1}.desc`, `Value ${i + 1}: description`)]).flat() },
-  { id: 'college-life', site: 'Colleges', title: 'Campus Life photo band', note: 'The photos are Campus Life 01.jpg to Campus Life 11.jpg in Images, PNTC Colleges. Upload a photo with the same name to replace one.', files: ['PNTC Colleges/index.html'], fields: [
+  { id: 'college-life', site: 'Colleges', title: 'Campus Life gallery', note: 'The photos are Campus Life 01.jpg to Campus Life 11.jpg in Images, PNTC Colleges. Upload a photo with the same name to replace one. Each caption shows when its photo is open.', files: ['PNTC Colleges/index.html'], fields: [
     T('college.life.eyebrow', 'Small label'), T('college.life.title', 'Heading, first word'), T('college.life.mark', 'Heading, highlighted word'), P('college.life.lead', 'Text under the heading'),
+    ...Array.from({ length: 11 }, (_, i) => T(`college.life.cap${i + 1}`, `Photo ${i + 1} caption (Campus Life ${String(i + 1).padStart(2, '0')}.jpg)`)),
   ] },
   ...PROGRAMS.map(([id, name]) => ({ id: 'college-program-' + id, site: 'Colleges', title: 'Program details: ' + name, files: ['PNTC Colleges/programs.html'], fields: [
     T(`college.prog.${id}.college`, 'College'), T(`college.prog.${id}.name`, 'Program name'), P(`college.prog.${id}.tagline`, 'Tagline'),
