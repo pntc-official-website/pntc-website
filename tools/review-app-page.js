@@ -283,8 +283,8 @@ h = h.replace(/(<meta (?:name="description"|property="og:description") content="
 h = h.replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${TITLE}">`);
 h = h.replace(/<meta property="og:image" content="[^"]*">/, '<meta property="og:image" content="https://www.pntc.edu.ph/maritime/review-app-shot1.jpg">');
 h = h.replace(/"name":"Maritime Review App for Seafarers \| PNTC Training Center","description":"[^"]*"/, `"name":"${TITLE}","description":"${DESC}"`);
-// the Montserrat weights used on this page
-h = h.replace('family=Montserrat:wght@300;400;500;600;700', 'family=Montserrat:wght@300;400;500;600;700;800');
+// the same font weights as the other Training Center pages, so the header looks the same
+h = h.replace(/family=Montserrat:wght@[\d;]+/,'family=Montserrat:wght@300;400;500;600;700');
 h = C.preserveSlots(before, h);
 fs.writeFileSync(FILE, h);
 console.log('review-app.html built', h.length);
