@@ -6,7 +6,7 @@
 <title>PNTC Maritime Review App | MARINA Exam Reviewer for Seafarers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700;800;800;800;800;800;800;800;800;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700;800;800;800;800;800;800;800;800;800;800;800;800&display=swap" rel="stylesheet">
 <style>
 /* â”€â”€ TOKENS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 :root{
@@ -706,8 +706,10 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .ra-navy-btn:hover{background:#2B2275}
 
 /* hero */
-.ra-hero{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 85% 10%,#2B3FB8 0%,rgba(43,63,184,0) 55%),radial-gradient(80% 70% at 0% 100%,rgba(243,207,51,.18) 0%,rgba(243,207,51,0) 60%),linear-gradient(160deg,#100B33 0%,#1C1650 55%,#17127A 100%);color:#fff;padding:calc(var(--ra-nav,120px) + clamp(2rem,5vw,3.5rem)) 0 clamp(3.5rem,7vw,5.5rem)}
+.ra-hero{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 85% 10%,#2B3FB8 0%,rgba(43,63,184,0) 55%),radial-gradient(80% 70% at 0% 100%,rgba(243,207,51,.18) 0%,rgba(243,207,51,0) 60%),linear-gradient(160deg,#100B33 0%,#1C1650 55%,#17127A 100%);color:#fff;padding:calc(var(--ra-nav,120px) + clamp(1.5rem,3vw,2.5rem)) 0 clamp(2.5rem,4vw,3.5rem);min-height:100vh;display:flex;align-items:center}
+.ra-hero > .ra-wrap{width:100%}
 .ra-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.08) 1px,transparent 0);background-size:28px 28px;mask-image:linear-gradient(to bottom,#000,transparent 85%);-webkit-mask-image:linear-gradient(to bottom,#000,transparent 85%);pointer-events:none}
+.ra-hero .ra-wrap{max-width:none;padding:0 clamp(1.5rem,6vw,6rem)}
 .ra-hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
 .ra-pill{display:inline-flex;align-items:center;gap:.7rem;padding:.4rem 1rem .4rem .4rem;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
 .ra-pill img{width:30px;height:30px;border-radius:9px}
@@ -717,11 +719,11 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .ra-h1 .g::after{content:'';position:absolute;left:0;right:0;bottom:-.06em;height:.09em;border-radius:99px;background:linear-gradient(90deg,var(--ra-gold),rgba(243,207,51,0))}
 .ra-sub{font-size:clamp(1rem,1.35vw,1.12rem);line-height:1.75;color:rgba(255,255,255,.78);max-width:560px;margin-top:1.6rem}
 .ra-btns{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem;align-items:center}
-.ra-stats{display:flex;flex-wrap:wrap;gap:clamp(1.2rem,3vw,2.6rem);margin-top:2.6rem;padding-top:1.8rem;border-top:1px solid rgba(255,255,255,.12)}
+.ra-stats{display:flex;flex-wrap:wrap;gap:clamp(1.2rem,3vw,2.6rem);margin-top:2.2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12)}
 .ra-stat b{display:flex;align-items:center;gap:.35rem;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(1.9rem,3vw,2.5rem);line-height:1;color:#fff}
 .ra-stat b svg{width:.7em;height:.7em;fill:var(--ra-gold)}
 .ra-stat small{display:block;margin-top:.35rem;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-.ra-stage{position:relative;justify-self:center;width:min(100%,380px)}
+.ra-stage{position:relative;justify-self:end;width:min(100%,380px,calc((100vh - var(--ra-nav,120px) - 90px) / 2.05));min-width:240px;margin-right:clamp(0rem,5vw,6rem)}
 .ra-stage::before{content:'';position:absolute;inset:8% -18% 4%;border-radius:50%;background:radial-gradient(circle,rgba(91,140,255,.55) 0%,rgba(91,140,255,0) 65%);filter:blur(10px)}
 .ra-ring{position:absolute;left:50%;top:50%;width:118%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:1.5px dashed rgba(243,207,51,.35);animation:ra-spin 40s linear infinite}
 .ra-phone{position:relative;width:100%;transform:rotate(-4deg);filter:drop-shadow(0 40px 60px rgba(0,0,0,.55));animation:ra-float 6s ease-in-out infinite}
@@ -784,18 +786,24 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
 /* screenshots */
 .ra-shots{background:#fff;overflow:hidden}
-.ra-shots-top{display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;margin-bottom:2.2rem}
-.ra-shots-top .ra-head{margin-bottom:0}
-.ra-arrows{display:flex;gap:.6rem;flex:none}
-.ra-arrows button{width:50px;height:50px;border-radius:50%;border:1.5px solid rgba(28,22,80,.2);background:#fff;color:var(--ra-navy);cursor:pointer;display:grid;place-items:center;transition:background .25s ease,color .25s ease,border-color .25s ease}
-.ra-arrows button:hover{background:var(--ra-navy);color:var(--ra-gold);border-color:var(--ra-navy)}
-.ra-arrows svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.ra-strip{--ra-in:max(clamp(1.25rem,5vw,3rem),calc((100vw - 1200px)/2 + 3rem));display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.5rem var(--ra-in) 1.8rem;scroll-padding-inline:var(--ra-in);scrollbar-width:none;cursor:grab}
-.ra-strip::-webkit-scrollbar{display:none}
-.ra-strip.drag{cursor:grabbing;scroll-snap-type:none}
-.ra-strip figure{flex:none;width:clamp(210px,22vw,270px);scroll-snap-align:start;border-radius:24px;overflow:hidden;box-shadow:0 26px 40px -26px rgba(28,22,80,.6);transition:transform .35s ease}
-.ra-strip figure:hover{transform:translateY(-6px)}
-.ra-strip img{width:100%;height:auto;pointer-events:none;user-select:none}
+.ra-show{--sw:clamp(220px,23vw,300px);position:relative;height:calc(var(--sw) * 1.777 + 2.5rem);margin-top:.5rem;touch-action:pan-y;user-select:none}
+.ra-show::before{content:'';position:absolute;left:50%;top:46%;width:min(90vw,880px);aspect-ratio:2.2;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(43,91,215,.16),rgba(43,91,215,0))}
+.ra-slide{position:absolute;left:50%;top:0;width:var(--sw);margin:0;border-radius:26px;overflow:hidden;box-shadow:0 34px 50px -30px rgba(28,22,80,.7);transform:translateX(-50%) scale(.6);opacity:0;pointer-events:none;transition:transform .8s cubic-bezier(.2,.7,.2,1),opacity .6s ease,filter .8s ease;will-change:transform}
+.ra-slide img{width:100%;height:auto;pointer-events:none;-webkit-user-drag:none}
+.ra-slide[data-pos='0']{z-index:5;opacity:1;transform:translateX(-50%) scale(1);pointer-events:auto;box-shadow:0 40px 60px -28px rgba(28,22,80,.75),0 0 0 4px var(--ra-gold)}
+.ra-slide[data-pos='-1'],.ra-slide[data-pos='1']{z-index:4;opacity:.9;filter:brightness(.82) saturate(.9);pointer-events:auto;cursor:pointer}
+.ra-slide[data-pos='-1']{transform:translateX(-128%) scale(.84) rotate(-3deg)}
+.ra-slide[data-pos='1']{transform:translateX(28%) scale(.84) rotate(3deg)}
+.ra-slide[data-pos='-2'],.ra-slide[data-pos='2']{z-index:3;opacity:.5;filter:brightness(.7) blur(1px);pointer-events:auto;cursor:pointer}
+.ra-slide[data-pos='-2']{transform:translateX(-190%) scale(.68) rotate(-6deg)}
+.ra-slide[data-pos='2']{transform:translateX(90%) scale(.68) rotate(6deg)}
+.ra-show-nav{display:flex;align-items:center;justify-content:center;gap:1.2rem;margin-top:.4rem}
+.ra-nav-btn{width:50px;height:50px;border-radius:50%;border:1.5px solid rgba(28,22,80,.2);background:#fff;color:var(--ra-navy);cursor:pointer;display:grid;place-items:center;transition:background .25s ease,color .25s ease,border-color .25s ease}
+.ra-nav-btn:hover{background:var(--ra-navy);color:var(--ra-gold);border-color:var(--ra-navy)}
+.ra-nav-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ra-dots{display:flex;gap:.5rem}
+.ra-dots button{width:10px;height:10px;padding:0;border:0;border-radius:99px;background:rgba(28,22,80,.2);cursor:pointer;transition:width .35s ease,background .35s ease}
+.ra-dots button.on{width:30px;background:var(--ra-navy)}
 
 /* tutorial */
 .ra-tut{background:#F5F6FB}
@@ -866,7 +874,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
 @media(max-width:1024px){
   .ra-hero-grid,.ra-two,.ra-tut-grid,.ra-lead-grid,.ra-cta-grid{grid-template-columns:minmax(0,1fr)}
-  .ra-stage{width:min(78%,330px);margin-top:1rem}
+  .ra-stage{width:min(78%,330px);margin:1rem auto 0;justify-self:center}
   .ra-chip.c1{left:-14%}.ra-chip.c2{right:-10%}
   .ra-cards,.ra-plan-grid{grid-template-columns:1fr;max-width:560px;margin:0 auto}
   .ra-tiles{grid-template-columns:repeat(2,1fr)}
@@ -880,8 +888,10 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   .ra-chip{padding:.55rem .75rem;font-size:.7rem}
   .ra-chip i{width:30px;height:30px}
   .ra-chip.c1{left:-8%;top:10%}.ra-chip.c2{right:-6%}
-  .ra-shots-top{flex-direction:column;align-items:flex-start}
-  .ra-arrows{display:none}
+  .ra-show{--sw:min(62vw,250px)}
+  .ra-slide[data-pos='-1']{transform:translateX(-112%) scale(.8) rotate(-3deg)}
+  .ra-slide[data-pos='1']{transform:translateX(12%) scale(.8) rotate(3deg)}
+  .ra-slide[data-pos='-2'],.ra-slide[data-pos='2']{opacity:0;pointer-events:none}
   .ra-stats{gap:1.4rem 2rem}
 }
 @media(prefers-reduced-motion:reduce){
@@ -901,14 +911,23 @@ document.addEventListener('DOMContentLoaded',function(){
   /* the tutorial plays the YouTube link set on "Watch on YouTube" */
   var yt=document.getElementById('ra-yt'),fr=document.getElementById('ra-video');
   if(yt&&fr){var m=/(?:shorts\/|youtu\.be\/|[?&]v=|embed\/)([\w-]{11})/.exec(yt.href);if(m)fr.src='https://www.youtube-nocookie.com/embed/'+m[1]+'?rel=0&playsinline=1';}
-  /* screenshot strip: arrows and drag */
-  var s=document.getElementById('ra-strip');
-  if(s){
-    document.querySelectorAll('.ra-arrows button').forEach(function(b){b.addEventListener('click',function(){var f=s.querySelector('figure');s.scrollBy({left:(+b.dataset.dir)*((f?f.offsetWidth:260)+19)*2,behavior:'smooth'});});});
-    var down=false,x0=0,l0=0,moved=0;
-    s.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse')return;down=true;moved=0;x0=e.clientX;l0=s.scrollLeft;s.classList.add('drag');});
-    window.addEventListener('pointermove',function(e){if(!down)return;moved=Math.abs(e.clientX-x0);s.scrollLeft=l0-(e.clientX-x0);});
-    window.addEventListener('pointerup',function(){if(!down)return;down=false;s.classList.remove('drag');});
+  /* screenshot slideshow: the current screen in front, its neighbours fanned out behind, plays by itself */
+  var show=document.getElementById('ra-show');
+  if(show){
+    var slides=[].slice.call(show.querySelectorAll('.ra-slide')),dots=[].slice.call(document.querySelectorAll('.ra-dots button')),n=slides.length,cur=0,timer=null;
+    var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    function go(i){cur=(i+n)%n;slides.forEach(function(el,k){var d=k-cur;if(d>n/2)d-=n;if(d<-n/2)d+=n;el.setAttribute('data-pos',Math.abs(d)>2?'off':String(d));el.setAttribute('aria-hidden',d!==0);});dots.forEach(function(b,k){b.classList.toggle('on',k===cur);});}
+    function play(){stop();if(!still)timer=setInterval(function(){go(cur+1);},3800);}
+    function stop(){if(timer){clearInterval(timer);timer=null;}}
+    document.querySelectorAll('.ra-nav-btn').forEach(function(b){b.addEventListener('click',function(){go(cur+(+b.dataset.dir));play();});});
+    dots.forEach(function(b){b.addEventListener('click',function(){go(+b.dataset.i);play();});});
+    slides.forEach(function(el){el.addEventListener('click',function(){var p=el.getAttribute('data-pos');if(p!=='0'&&p!=='off'){go(+el.dataset.i);play();}});});
+    show.addEventListener('mouseenter',stop);show.addEventListener('mouseleave',play);
+    var sx=null;
+    show.addEventListener('pointerdown',function(e){sx=e.clientX;});
+    show.addEventListener('pointerup',function(e){if(sx===null)return;var dx=e.clientX-sx;sx=null;if(Math.abs(dx)>40){go(cur+(dx<0?1:-1));play();}});
+    document.addEventListener('visibilitychange',function(){if(document.hidden)stop();else play();});
+    go(0);play();
   }
   /* reveal on scroll */
   var els=[].slice.call(document.querySelectorAll('.ra-rv'));
@@ -1042,21 +1061,25 @@ document.addEventListener('DOMContentLoaded',function(){
 </section>
 
 <section class="ra ra-sec ra-shots" id="screens">
-  <div class="ra-wrap ra-shots-top">
-    <div class="ra-head ra-rv">
+  <div class="ra-wrap">
+    <div class="ra-head center ra-rv">
       <p class="ra-eyebrow"><!--c:ra.shots.eyebrow-->Inside the App<!--/c--></p>
       <h2 class="ra-h2"><!--c:ra.shots.title-->Take a look<!--/c--> <em><!--c:ra.shots.mark-->inside<!--/c--></em></h2>
     </div>
-    <div class="ra-arrows"><button type="button" data-dir="-1" aria-label="Previous screens"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" data-dir="1" aria-label="Next screens"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>
   </div>
-  <div class="ra-strip" id="ra-strip">
-    <figure><img src="/maritime/review-app-shot1.jpg" alt="Review screen with Daily Mock Test and Retake" width="600" height="1066" loading="lazy"></figure>
-    <figure><img src="/maritime/review-app-shot2.jpg" alt="A question with answer choices" width="600" height="1066" loading="lazy"></figure>
-    <figure><img src="/maritime/review-app-shot3.jpg" alt="Answer explanation after a question" width="600" height="1066" loading="lazy"></figure>
-    <figure><img src="/maritime/review-app-shot4.jpg" alt="Choosing a module to review" width="600" height="1066" loading="lazy"></figure>
-    <figure><img src="/maritime/review-app-shot5.jpg" alt="Your statistics and correct answers" width="600" height="1066" loading="lazy"></figure>
-    <figure><img src="/maritime/review-app-shot6.jpg" alt="Badges earned in the app" width="600" height="1066" loading="lazy"></figure>
-    <figure><img src="/maritime/review-app-shot7.jpg" alt="Your profile and competence title" width="600" height="1066" loading="lazy"></figure>
+  <div class="ra-show" id="ra-show" aria-roledescription="slideshow" aria-label="App screens">
+    <figure class="ra-slide" data-i="0"><img src="/maritime/review-app-shot1.jpg" alt="Review screen with Daily Mock Test and Retake" width="600" height="1066"></figure>
+    <figure class="ra-slide" data-i="1"><img src="/maritime/review-app-shot2.jpg" alt="A question with answer choices" width="600" height="1066"></figure>
+    <figure class="ra-slide" data-i="2"><img src="/maritime/review-app-shot3.jpg" alt="Answer explanation after a question" width="600" height="1066"></figure>
+    <figure class="ra-slide" data-i="3"><img src="/maritime/review-app-shot4.jpg" alt="Choosing a module to review" width="600" height="1066" loading="lazy"></figure>
+    <figure class="ra-slide" data-i="4"><img src="/maritime/review-app-shot5.jpg" alt="Your statistics and correct answers" width="600" height="1066" loading="lazy"></figure>
+    <figure class="ra-slide" data-i="5"><img src="/maritime/review-app-shot6.jpg" alt="Badges earned in the app" width="600" height="1066"></figure>
+    <figure class="ra-slide" data-i="6"><img src="/maritime/review-app-shot7.jpg" alt="Your profile and competence title" width="600" height="1066"></figure>
+  </div>
+  <div class="ra-show-nav">
+    <button type="button" class="ra-nav-btn" data-dir="-1" aria-label="Previous screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="ra-dots"><button type="button" data-i="0" aria-label="Screen 1"></button><button type="button" data-i="1" aria-label="Screen 2"></button><button type="button" data-i="2" aria-label="Screen 3"></button><button type="button" data-i="3" aria-label="Screen 4"></button><button type="button" data-i="4" aria-label="Screen 5"></button><button type="button" data-i="5" aria-label="Screen 6"></button><button type="button" data-i="6" aria-label="Screen 7"></button></div>
+    <button type="button" class="ra-nav-btn" data-dir="1" aria-label="Next screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
   </div>
 </section>
 

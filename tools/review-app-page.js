@@ -128,15 +128,19 @@ const feat = `<section class="ra ra-sec ra-feat" id="features">
 
 const shotAlt = ['Review screen with Daily Mock Test and Retake', 'A question with answer choices', 'Answer explanation after a question', 'Choosing a module to review', 'Your statistics and correct answers', 'Badges earned in the app', 'Your profile and competence title'];
 const shots = `<section class="ra ra-sec ra-shots" id="screens">
-  <div class="ra-wrap ra-shots-top">
-    <div class="ra-head ra-rv">
+  <div class="ra-wrap">
+    <div class="ra-head center ra-rv">
       <p class="ra-eyebrow">${slot('ra.shots.eyebrow', 'Inside the App')}</p>
       <h2 class="ra-h2">${slot('ra.shots.title', 'Take a look')} <em>${slot('ra.shots.mark', 'inside')}</em></h2>
     </div>
-    <div class="ra-arrows"><button type="button" data-dir="-1" aria-label="Previous screens">${ICON.left}</button><button type="button" data-dir="1" aria-label="Next screens">${ICON.right}</button></div>
   </div>
-  <div class="ra-strip" id="ra-strip">
-    ${shotAlt.map((a, i) => `<figure><img src="${IMG}shot${i + 1}.jpg" alt="${a}" width="600" height="1066" loading="lazy"></figure>`).join('\n    ')}
+  <div class="ra-show" id="ra-show" aria-roledescription="slideshow" aria-label="App screens">
+    ${shotAlt.map((a, i) => `<figure class="ra-slide" data-i="${i}"><img src="${IMG}shot${i + 1}.jpg" alt="${a}" width="600" height="1066"${i > 2 && i < shotAlt.length - 2 ? ' loading="lazy"' : ''}></figure>`).join('\n    ')}
+  </div>
+  <div class="ra-show-nav">
+    <button type="button" class="ra-nav-btn" data-dir="-1" aria-label="Previous screen">${ICON.left}</button>
+    <div class="ra-dots">${shotAlt.map((a, i) => `<button type="button" data-i="${i}" aria-label="Screen ${i + 1}"></button>`).join('')}</div>
+    <button type="button" class="ra-nav-btn" data-dir="1" aria-label="Next screen">${ICON.right}</button>
   </div>
 </section>`;
 
@@ -228,14 +232,23 @@ document.addEventListener('DOMContentLoaded',function(){
   /* the tutorial plays the YouTube link set on "Watch on YouTube" */
   var yt=document.getElementById('ra-yt'),fr=document.getElementById('ra-video');
   if(yt&&fr){var m=/(?:shorts\\/|youtu\\.be\\/|[?&]v=|embed\\/)([\\w-]{11})/.exec(yt.href);if(m)fr.src='https://www.youtube-nocookie.com/embed/'+m[1]+'?rel=0&playsinline=1';}
-  /* screenshot strip: arrows and drag */
-  var s=document.getElementById('ra-strip');
-  if(s){
-    document.querySelectorAll('.ra-arrows button').forEach(function(b){b.addEventListener('click',function(){var f=s.querySelector('figure');s.scrollBy({left:(+b.dataset.dir)*((f?f.offsetWidth:260)+19)*2,behavior:'smooth'});});});
-    var down=false,x0=0,l0=0,moved=0;
-    s.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse')return;down=true;moved=0;x0=e.clientX;l0=s.scrollLeft;s.classList.add('drag');});
-    window.addEventListener('pointermove',function(e){if(!down)return;moved=Math.abs(e.clientX-x0);s.scrollLeft=l0-(e.clientX-x0);});
-    window.addEventListener('pointerup',function(){if(!down)return;down=false;s.classList.remove('drag');});
+  /* screenshot slideshow: the current screen in front, its neighbours fanned out behind, plays by itself */
+  var show=document.getElementById('ra-show');
+  if(show){
+    var slides=[].slice.call(show.querySelectorAll('.ra-slide')),dots=[].slice.call(document.querySelectorAll('.ra-dots button')),n=slides.length,cur=0,timer=null;
+    var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    function go(i){cur=(i+n)%n;slides.forEach(function(el,k){var d=k-cur;if(d>n/2)d-=n;if(d<-n/2)d+=n;el.setAttribute('data-pos',Math.abs(d)>2?'off':String(d));el.setAttribute('aria-hidden',d!==0);});dots.forEach(function(b,k){b.classList.toggle('on',k===cur);});}
+    function play(){stop();if(!still)timer=setInterval(function(){go(cur+1);},3800);}
+    function stop(){if(timer){clearInterval(timer);timer=null;}}
+    document.querySelectorAll('.ra-nav-btn').forEach(function(b){b.addEventListener('click',function(){go(cur+(+b.dataset.dir));play();});});
+    dots.forEach(function(b){b.addEventListener('click',function(){go(+b.dataset.i);play();});});
+    slides.forEach(function(el){el.addEventListener('click',function(){var p=el.getAttribute('data-pos');if(p!=='0'&&p!=='off'){go(+el.dataset.i);play();}});});
+    show.addEventListener('mouseenter',stop);show.addEventListener('mouseleave',play);
+    var sx=null;
+    show.addEventListener('pointerdown',function(e){sx=e.clientX;});
+    show.addEventListener('pointerup',function(e){if(sx===null)return;var dx=e.clientX-sx;sx=null;if(Math.abs(dx)>40){go(cur+(dx<0?1:-1));play();}});
+    document.addEventListener('visibilitychange',function(){if(document.hidden)stop();else play();});
+    go(0);play();
   }
   /* reveal on scroll */
   var els=[].slice.call(document.querySelectorAll('.ra-rv'));
