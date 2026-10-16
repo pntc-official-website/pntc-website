@@ -116,6 +116,9 @@ const LEADERS = [
 // pages that carry the enrollment popup and the footer social links
 const COLLEGE_PAGES = ['admissions.html', 'calendar.html', 'colleges.html', 'directory.html', 'index.html', 'merchandise.html', 'programs.html', 'research.html', 'resources.html', 'scholarships.html', 'student-life.html'];
 const SHS_PAGES = ['admissions.html', 'calendar.html', 'directory.html', 'index.html', 'resources.html', 'scholarships.html', 'strands.html', 'student-life.html'];
+const MAIN_PAGES = ['index.html', 'about.html', 'about-history.html', 'about-leadership.html', 'careers.html'].map(f => 'PNTC Main Landing Page/' + f);
+const PNSC_PAGES = ['philnautical.html', 'philnautical-onboard-training.html'].map(f => 'PNTC Main Landing Page/' + f);
+const TRAINING_PAGES = ['index.html', 'maritime-courses.html', 'assessment.html', 'review-app.html', 'corporate.html', 'tesda.html'].map(f => 'PNTC Maritime Training and Assessment Center/' + f);
 const MAIN_SOCIAL_PAGES = ['index.html', 'about.html', 'about-history.html', 'about-leadership.html', 'careers.html', 'philnautical.html', 'philnautical-onboard-training.html'].map(f => 'PNTC Main Landing Page/' + f);
 
 const GROUPS = [
@@ -126,13 +129,6 @@ const GROUPS = [
     T('main.hero.btn1', 'First button, text'), H('main.hero.btn1.href', 'First button, link'),
     T('main.hero.btn2', 'Second button, text'), H('main.hero.btn2.href', 'Second button, link'),
     T('main.hero.wall', 'Signature on the photo wall'),
-  ] },
-  { id: 'main-cta', site: 'Main Site', title: 'Home page yellow call to action', files: ['PNTC Main Landing Page/index.html'], fields: [
-    T('main.cta.eyebrow', 'Small label'), T('main.cta.line1', 'Heading, line 1'), T('main.cta.line2', 'Heading, line 2'),
-    P('main.cta.sub', 'Description'),
-    T('main.cta.btn1', 'Button 1, text'), H('main.cta.btn1.href', 'Button 1, link'),
-    T('main.cta.btn2', 'Button 2, text'), H('main.cta.btn2.href', 'Button 2, link'),
-    T('main.cta.btn3', 'Button 3, text'), H('main.cta.btn3.href', 'Button 3, link'),
   ] },
   { id: 'main-about', site: 'Main Site', title: 'About page: who we are, vision and mission', files: ['PNTC Main Landing Page/about.html'], fields: [
     T('about.who.eyebrow', 'Small label'),
@@ -166,7 +162,7 @@ const GROUPS = [
     T('careers.cta.tag', 'Yellow band, small label'), T('careers.cta.title', 'Yellow band, heading'),
     { key: 'careers.email', label: 'HR email (also used by every Apply button)', type: 'email' },
   ] },
-  { id: 'pnsc-overview', site: 'PNSC', title: 'PNSC overview page', note: 'The yellow band at the bottom is shared with the On Board Training page.', files: ['PNTC Main Landing Page/philnautical.html', 'PNTC Main Landing Page/philnautical-onboard-training.html'], fields: [
+  { id: 'pnsc-overview', site: 'PNSC', title: 'PNSC overview page', files: ['PNTC Main Landing Page/philnautical.html'], fields: [
     T('pnsc.hero.tag', 'Hero, small tag'), T('pnsc.hero.line1', 'Hero, headline'), P('pnsc.hero.sub', 'Hero, description'),
     T('pnsc.hero.btn1', 'Hero, first button'), T('pnsc.hero.btn2', 'Hero, second button'),
     T('pnsc.vessel.eyebrow', 'Vessel, small label'), T('pnsc.vessel.title', 'Vessel, heading start'), T('pnsc.vessel.mark', 'Vessel, highlighted name'),
@@ -175,9 +171,6 @@ const GROUPS = [
     P('pnsc.name.lead', 'Name story, introduction'), P('pnsc.name.note', 'Name story, yellow note'),
     T('pnsc.band.eyebrow', 'Program band, small label'), T('pnsc.band.title', 'Program band, heading'), P('pnsc.band.text', 'Program band, text'),
     T('pnsc.band.was', 'Program band, former name tag'), T('pnsc.band.btn', 'Program band, button'),
-    T('pnsc.cta.tag', 'Yellow band, small label'), T('pnsc.cta.title', 'Yellow band, heading'),
-    T('pnsc.cta.phone', 'Yellow band, phone number shown'), H('pnsc.cta.phone.href', 'Yellow band, phone link'),
-    { key: 'pnsc.cta.email', label: 'Yellow band, email', type: 'email' },
   ] },
   { id: 'pnsc-obt', site: 'PNSC', title: 'On Board Training Program page', note: 'Partner logos are picked up by file name. Upload them in Images, Main Site, as pnsc-partner-01.png, pnsc-partner-02.png and so on (png, jpg or webp), in the same order as the names below, with no numbers skipped.', files: ['PNTC Main Landing Page/philnautical-onboard-training.html'], fields: [
     T('obt.hero.tag', 'Hero, small tag'), T('obt.hero.line1', 'Hero, headline start'), T('obt.hero.line2', 'Hero, headline in gold'), P('obt.hero.sub', 'Hero, description'),
@@ -247,10 +240,6 @@ const GROUPS = [
   ] },
   { id: 'training-assess', site: 'Training Center', title: 'Assessment page: headings', note: 'The list of assessments and their requirements is edited in Course list.', files: ['PNTC Maritime Training and Assessment Center/assessment.html'], fields: [
     T('training.assess.eyebrow', 'Small label'), T('training.assess.h2a', 'Heading, first word'), T('training.assess.h2b', 'Heading, highlighted word'),
-    T('training.assess.cta', 'Small label above the navy band'),
-  ] },
-  { id: 'training-cta', site: 'Training Center', title: 'Training Center name in the contact and enroll bands', note: 'Used in the navy contact band on the Training Center home page and the enroll band on the courses page.', files: ['PNTC Maritime Training and Assessment Center/index.html', 'PNTC Maritime Training and Assessment Center/maritime-courses.html', 'PNTC Maritime Training and Assessment Center/assessment.html'], fields: [
-    T('training.cta.mark', 'Name, gold part'), T('training.cta.rest', 'Name, white part'),
   ] },
   { id: 'training-review', site: 'Training Center', title: 'Review App page', note: 'The Google Play link below is used by every download button on the page. The tutorial plays whatever YouTube link is set below. Images are review-app-*.png and .jpg in Images, Training Center.', files: ['PNTC Maritime Training and Assessment Center/review-app.html'], fields: [
     H('ra.play.href', 'Google Play link (all download buttons)'), H('ra.video.href', 'YouTube tutorial link'),
@@ -294,9 +283,28 @@ const GROUPS = [
     files: [...MAIN_SOCIAL_PAGES, ...COLLEGE_PAGES.map(f => 'PNTC Colleges/' + f), ...SHS_PAGES.map(f => 'SHS/' + f)], fields: [
       H('social.fb', 'Facebook'), H('social.tiktok', 'TikTok'), H('social.ig', 'Instagram (empty hides the icon)'), H('social.yt', 'YouTube (empty hides the icon)'), H('social.li', 'LinkedIn (empty hides the icon)'),
     ] },
-  { id: 'training-social', site: 'Training Center', title: 'Social links in the footer', note: 'The Facebook and TikTok links in the Training Center footer.', files: ['PNTC Maritime Training and Assessment Center/index.html'], fields: [
-    H('mtc.social.fb', 'Facebook'), H('mtc.social.tiktok', 'TikTok'),
+  { id: 'training-social', site: 'Training Center', title: 'Social links in the footer', note: 'The Facebook and TikTok links in the Training Center footer, on every Training Center page. Leave a link empty to hide its icon.', files: TRAINING_PAGES, fields: [
+    H('mtc.social.fb', 'Facebook'), H('mtc.social.tiktok', 'TikTok'), H('mtc.social.ig', 'Instagram (empty hides the icon)'), H('mtc.social.yt', 'YouTube (empty hides the icon)'),
   ] },
+  // Closing band and footer on every page of each site (built by tools/site-footer.js), saved to all pages of that site
+  ...[
+    ['main', 'Main Site', MAIN_PAGES, [T('main.cta.eyebrow', 'Band, small label'), T('main.cta.line1', 'Band, heading line 1'), T('main.cta.line2', 'Band, heading line 2'), P('main.cta.sub', 'Band, text'),
+      T('main.cta.btn1', 'Band, button 1 text'), H('main.cta.btn1.href', 'Band, button 1 link'), T('main.cta.btn2', 'Band, button 2 text'), H('main.cta.btn2.href', 'Band, button 2 link'), T('main.cta.btn3', 'Band, button 3 text'), H('main.cta.btn3.href', 'Band, button 3 link')]],
+    ['pnsc', 'PNSC', PNSC_PAGES, [T('pnsc.cta.tag', 'Band, small label'), T('pnsc.cta.title', 'Band, heading'), P('pnsc.cta.sub', 'Band, text'),
+      T('pnsc.cta.phone', 'Band, phone shown'), H('pnsc.cta.phone.href', 'Band, phone link (tel:+63...)'), { key: 'pnsc.cta.email', label: 'Band, email', type: 'email' }]],
+    ['college', 'Colleges', COLLEGE_PAGES.map(f => 'PNTC Colleges/' + f), [T('college.cta.eyebrow', 'Band, small label'), T('college.cta.line1', 'Band, heading line 1'), T('college.cta.line2', 'Band, heading line 2'), P('college.cta.sub', 'Band, text'), T('college.cta.btn', 'Band, button text (opens the enrollment popup)')]],
+    ['shs', 'Senior High School', SHS_PAGES.map(f => 'SHS/' + f), [T('shs.cta.eyebrow', 'Band, small label'), T('shs.cta.line1', 'Band, heading line 1'), T('shs.cta.line2', 'Band, heading line 2'), P('shs.cta.sub', 'Band, text'), T('shs.cta.btn', 'Band, first button text (opens the enrollment popup)'), T('shs.cta.btn2', 'Band, second button text'), H('shs.cta.btn2.href', 'Band, second button link')]],
+    ['training', 'Training Center', TRAINING_PAGES, [T('training.cta.eyebrow', 'Band, small label'), T('training.cta.mark', 'Band, heading line 1 (Training Center name, first part)'), T('training.cta.rest', 'Band, heading line 2 (Training Center name, second part)'), P('training.cta.sub', 'Band, text'),
+      T('training.cta.btn1', 'Band, button 1 text'), H('training.cta.btn1.href', 'Band, button 1 link'), T('training.cta.btn2', 'Band, button 2 text'), H('training.cta.btn2.href', 'Band, button 2 link'), P('training.cta.note', 'Band, note under the buttons')]],
+  ].map(([id, site, files, band]) => ({
+    id: 'footer-' + id, site, title: 'Closing band and footer', note: `The yellow band and the footer at the bottom of every ${site} page. Saved to all ${files.length} pages. Social links have their own section.`, files, fields: [
+      ...band,
+      T(`footer.${id}.tagline`, 'Footer, name under the logo'), P(`footer.${id}.desc`, 'Footer, short description'),
+      T(`footer.${id}.addr`, 'Footer, address'), T(`footer.${id}.phone`, 'Footer, phone shown'), H(`footer.${id}.phone.href`, 'Footer, phone link (tel:+63...)'),
+      { key: `footer.${id}.email`, label: 'Footer, email', type: 'email' },
+      ...(id === 'college' || id === 'training' ? [T(`footer.${id}.hours`, 'Footer, office hours')] : []),
+      T(`footer.${id}.copy`, 'Footer, name in the copyright line'),
+    ] })),
 ];
 
 module.exports = { GROUPS, LEADERS, escHtml, decode, getSlot, setSlot, getAttr, setAttr, readField, writeField, readGroup, writeGroup, preserveSlots, CHECK };

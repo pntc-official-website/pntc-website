@@ -121,10 +121,10 @@ function mainSocial(h) {
   };
   const inner = ['', a('fb', 'Facebook', LINK.fb), a('tiktok', 'TikTok', LINK.tiktok), a('ig', 'Instagram', ''), a('yt', 'YouTube', ''), a('li', 'LinkedIn', '')].join('\n          ');
   h = h.replace(box, `<div class="footer-socials">${inner}\n        </div>`);
-  return h.replace(/<style id="main-social-css">[\s\S]*?<\/style>\n/, '').replace('</head>', MAIN_SOCIAL_CSS + '\n</head>');
+  return /<style id="main-social-css">/.test(h) ? h.replace(/<style id="main-social-css">[\s\S]*?<\/style>/, () => MAIN_SOCIAL_CSS) : h.replace('</head>', MAIN_SOCIAL_CSS + '\n</head>');
 }
 function finish(file, h) {
-  h = h.replace(/<style id="social-links-css">[\s\S]*?<\/style>\n/, '').replace('</head>', hideEmpty + '\n</head>');
+  h = /<style id="social-links-css">/.test(h) ? h.replace(/<style id="social-links-css">[\s\S]*?<\/style>/, () => hideEmpty) : h.replace('</head>', hideEmpty + '\n</head>');
   return h;
 }
 
@@ -143,10 +143,10 @@ function edit(rel, fn) {
 for (const [list, site, socialCls] of [[COLLEGE, 'college', 'soc-btn'], [SHS, 'shs', 'social-btn']]) {
   for (const rel of list) edit(rel, h => {
     h = markEnroll(h);
-    h = h.replace(/\n?<div class="ep" id="enroll-pop"[\s\S]*?<\/div><!--\/enroll-pop-->/, '')
-      .replace(/<style id="enroll-pop-css">[\s\S]*?<\/style>\n/, '').replace(/<script id="enroll-pop-js">[\s\S]*?<\/script>\n/, '');
-    h = h.replace('</head>', popupStyle(site) + '\n</head>');
-    h = h.replace('</body>', popup(site) + '\n' + POP_JS + '\n</body>');
+    // popup, its styles and its script: replaced in place when already there
+    h = /<style id="enroll-pop-css">/.test(h) ? h.replace(/<style id="enroll-pop-css">[\s\S]*?<\/style>/, () => popupStyle(site)) : h.replace('</head>', popupStyle(site) + '\n</head>');
+    if (/id="enroll-pop"/.test(h)) h = h.replace(/<div class="ep" id="enroll-pop"[\s\S]*?<\/div><!--\/enroll-pop-->/, () => popup(site)).replace(/<script id="enroll-pop-js">[\s\S]*?<\/script>/, () => POP_JS);
+    else h = h.replace('</body>', popup(site) + '\n' + POP_JS + '\n</body>');
     h = collegeLikeSocial(h, socialCls);
     // links with nowhere to go yet
     h = h.replace(/ \| <a href="#">Privacy Policy<\/a>/g, '');

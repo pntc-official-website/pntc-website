@@ -112,7 +112,7 @@ const overview = `<section class="ps-hero" id="pnsc">
   </div>
 </section>
 
-${cta}`;
+`;
 
 const PARTNERS = Array.from({ length: 8 }, (_, i) => `<li>Maritime Partner ${i + 1}</li>`).join('');
 const obt = `<section class="ps-hero" id="obt">
@@ -168,7 +168,7 @@ const obt = `<section class="ps-hero" id="obt">
   </div>
 </section>
 
-${cta}`;
+`;
 
 const SCRIPT = `<script id="pnsc-js">
 document.addEventListener('DOMContentLoaded',function(){

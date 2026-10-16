@@ -272,7 +272,7 @@ const DESC = 'PNTC Maritime Review is a gamified Android reviewer for MARINA exa
 const before = fs.readFileSync(FILE, 'utf8').replace(/\r\n/g, '\n');
 let h = before;
 const a = h.search(/<section id="page-banner"|<section class="ra ra-hero"/);
-const b = h.indexOf('<script src="/admin/chat-widget.js"');
+const b = h.includes('<!--site-footer-->') ? h.indexOf('<!--site-footer-->') : h.indexOf('<script src="/admin/chat-widget.js"');
 if (a < 0 || b < a) throw new Error('review-app.html: page body not found');
 h = h.slice(0, a) + body + '\n\n\n\n' + h.slice(b);
 h = h.replace(/<style id="ra-css">[\s\S]*?<\/style>\n<script id="ra-js">[\s\S]*?<\/script>\n/, '');
