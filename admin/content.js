@@ -113,6 +113,11 @@ const LEADERS = [
   { id: 'sup-hrdm', role: 'Supervisor, HRDM', name: 'Tracy Lord Rodriguez', unit: 'Colleges' },
 ];
 
+// pages that carry the enrollment popup and the footer social links
+const COLLEGE_PAGES = ['admissions.html', 'calendar.html', 'colleges.html', 'directory.html', 'index.html', 'merchandise.html', 'programs.html', 'research.html', 'resources.html', 'scholarships.html', 'student-life.html'];
+const SHS_PAGES = ['admissions.html', 'calendar.html', 'directory.html', 'index.html', 'resources.html', 'scholarships.html', 'strands.html', 'student-life.html'];
+const MAIN_SOCIAL_PAGES = ['index.html', 'about.html', 'about-history.html', 'about-leadership.html', 'careers.html', 'philnautical.html', 'philnautical-onboard-training.html'].map(f => 'PNTC Main Landing Page/' + f);
+
 const GROUPS = [
   { id: 'main-hero', site: 'Main Site', title: 'Home page hero', files: ['PNTC Main Landing Page/index.html'], fields: [
     T('main.hero.pill', 'Small tag above the headline'),
@@ -275,6 +280,22 @@ const GROUPS = [
     T('ra.cta.phone.label', 'Contact, phone label'), T('ra.cta.phone', 'Contact, phone shown'), H('ra.cta.phone.href', 'Contact, phone link (tel:+63...)'),
     T('ra.cta.fb.label', 'Contact, Facebook label'), T('ra.cta.fb', 'Contact, Facebook shown'), H('ra.cta.fb.href', 'Contact, Facebook link'),
     T('ra.cta.email.label', 'Contact, email label'), { key: 'ra.cta.email', label: 'Contact, email', type: 'email' },
+  ] },
+  // Apply Now / Enroll Now popups and the footer social links (built by tools/site-buttons.js), saved to every page that has them
+  ...[['college', 'Colleges', 'PNTC Colleges', COLLEGE_PAGES, 'Apply Now'], ['shs', 'Senior High School', 'SHS', SHS_PAGES, 'Enroll Now']].map(([p, site, dir, list, btn]) => ({
+    id: 'enroll-' + p, site, title: 'Enrollment popup', note: `Opens from every ${btn} button on the ${site} pages and asks New Student or Old Student. Saved to all ${list.length} pages.`,
+    files: list.map(f => dir + '/' + f), fields: [
+      H(p + '.enroll.new.href', 'New Student link'), H(p + '.enroll.old.href', 'Old Student link'),
+      T(p + '.enroll.tag', 'Small label'), T(p + '.enroll.title', 'Heading'), T(p + '.enroll.sub', 'Question under the heading'),
+      T(p + '.enroll.new', 'New Student button'), T(p + '.enroll.new.sub', 'New Student button, small text'),
+      T(p + '.enroll.old', 'Old Student button'), T(p + '.enroll.old.sub', 'Old Student button, small text'),
+    ] })),
+  { id: 'social-links', site: 'Main Site', title: 'Social links in the footers', note: 'Used in the footers of the Main Site, PNSC, College and Senior High School pages. Leave a link empty to hide its icon (for example Instagram until the account is ready). LinkedIn shows on the Main Site only. Saved to every page.',
+    files: [...MAIN_SOCIAL_PAGES, ...COLLEGE_PAGES.map(f => 'PNTC Colleges/' + f), ...SHS_PAGES.map(f => 'SHS/' + f)], fields: [
+      H('social.fb', 'Facebook'), H('social.tiktok', 'TikTok'), H('social.ig', 'Instagram (empty hides the icon)'), H('social.yt', 'YouTube (empty hides the icon)'), H('social.li', 'LinkedIn (empty hides the icon)'),
+    ] },
+  { id: 'training-social', site: 'Training Center', title: 'Social links in the footer', note: 'The Facebook and TikTok links in the Training Center footer.', files: ['PNTC Maritime Training and Assessment Center/index.html'], fields: [
+    H('mtc.social.fb', 'Facebook'), H('mtc.social.tiktok', 'TikTok'),
   ] },
 ];
 

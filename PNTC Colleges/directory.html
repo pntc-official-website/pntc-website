@@ -1262,6 +1262,30 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 @media(max-width:600px){#directory .dir-grid{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){#directory .dir-card,#directory .dir-ico{transition:none}}
 </style>
+<style id="enroll-pop-css">
+.ep{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;padding:1.2rem;font-family:'Montserrat',sans-serif}
+.ep[hidden]{display:none}
+.ep-back{position:absolute;inset:0;background:rgba(11,8,38,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:ep-fade .3s ease both}
+.ep-box{position:relative;width:min(100%,480px);background:#fff;border-radius:24px;padding:2.2rem 1.8rem 1.8rem;box-shadow:0 40px 80px -30px rgba(0,0,0,.6);border-top:6px solid #F3CF33;animation:ep-pop .45s cubic-bezier(.2,.9,.3,1.2) both}
+.ep-x{position:absolute;top:.8rem;right:.9rem;width:38px;height:38px;border-radius:50%;border:0;background:#F1F2F7;color:#1C1650;font-size:1.5rem;line-height:1;cursor:pointer}
+.ep-x:hover{background:#1C1650;color:#fff}
+.ep-tag{margin:0;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#1C1650;opacity:.86}
+.ep-title{margin:.5rem 0 .4rem;font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(1.8rem,5vw,2.3rem);line-height:1;color:#1C1650}
+.ep-sub{margin:0 0 1.4rem;font-size:.95rem;line-height:1.6;color:rgba(28,22,80,.86)}
+.ep-choices{display:grid;gap:.8rem}
+.ep-choice{display:flex;align-items:center;gap:1rem;padding:1rem 1.1rem;border-radius:16px;border:1.5px solid rgba(28,22,80,.12);text-decoration:none;color:#1C1650;transition:border-color .25s,background .25s,transform .25s}
+.ep-choice:hover,.ep-choice:focus-visible{border-color:#1C1650;background:#1C1650;color:#fff;transform:translateY(-2px)}
+.ep-ico{display:grid;place-items:center;width:46px;height:46px;flex:none;border-radius:13px;background:#F3CF33;color:#1C1650}
+.ep-ico svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.ep-choice b{display:block;font-size:1.02rem}
+.ep-choice small{display:block;font-size:.8rem;margin-top:.15rem;opacity:.86}
+.ep-choice i{margin-left:auto;font-style:normal;font-size:1.3rem;transition:transform .25s}
+.ep-choice:hover i{transform:translateX(4px)}
+@keyframes ep-fade{from{opacity:0}}
+@keyframes ep-pop{from{opacity:0;transform:translateY(24px) scale(.96)}}
+@media(prefers-reduced-motion:reduce){.ep-back,.ep-box{animation:none}}
+</style>
+<style id="social-links-css">a[data-c^="social."][href=""],a[data-c^="mtc.social."][href=""]{display:none!important}</style>
 </head>
 <body>
 
@@ -1278,7 +1302,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     <a href="/college/directory" class="is-current" aria-current="page">Directory</a>
     <div class="hdr-dd"><button type="button" class="hdr-dd-btn" aria-haspopup="true" aria-expanded="false" onclick="var d=this.parentElement;d.classList.toggle('open');this.setAttribute('aria-expanded',d.classList.contains('open'))">More<svg viewBox="0 0 10 6" aria-hidden="true"><polyline points="1 1 5 5 9 1"/></svg></button><div class="hdr-dd-menu"><a href="/college/research">Research</a><a href="/college/resources">Resources</a><a href="/college/merchandise">Merchandise</a></div></div>
   </nav>
-  <a href="/college/#cta" class="hdr-apply">Apply Now</a>
+  <a href="/college/#cta" class="hdr-apply" data-enroll>Apply Now</a>
   <button class="hamburger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
 
@@ -1294,7 +1318,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     <a href="/college/research" class="mm">Research</a>
     <a href="/college/resources" class="mm">Resources</a>
     <a href="/college/merchandise" class="mm">Merchandise</a>
-<a href="/college/#cta" class="mm" style="color:var(--gold)">Apply Now →</a>
+<a href="/college/#cta" class="mm" style="color:var(--gold)" data-enroll>Apply Now →</a>
 </div>
 
 <!-- ══════ HERO ══════ -->
@@ -1344,9 +1368,10 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
       <div class="footer-tagline">PNTC Colleges Dasmariñas</div>
       <p>Private, non-sectarian maritime and business school in Dasmariñas, Cavite. CHED-recognized. MARINA-accredited. ISO 9001:2015 certified.</p>
       <div class="footer-socials">
-        <a href="#" class="soc-btn" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-        <a href="#" class="soc-btn" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="rgba(255,255,255,.55)" stroke="none"/></svg></a>
-        <a href="#" class="soc-btn" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="rgba(255,255,255,.55)" stroke="none"/></svg></a>
+        <a href="https://www.facebook.com/pntc.edu/" target="_blank" rel="noopener" class="soc-btn" aria-label="Facebook" data-c="social.fb"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.tiktok.com/@pntc.edu" target="_blank" rel="noopener" class="soc-btn" aria-label="TikTok" data-c="social.tiktok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9.2a7.4 7.4 0 0 0 4.3 1.4V7.5a4.3 4.3 0 0 1-3.2-1.7z"/></svg></a>
+        <a href="" target="_blank" rel="noopener" class="soc-btn" aria-label="Instagram" data-c="social.ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="rgba(255,255,255,.55)" stroke="none"/></svg></a>
+        <a href="" target="_blank" rel="noopener" class="soc-btn" aria-label="YouTube" data-c="social.yt"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="rgba(255,255,255,.55)" stroke="none"/></svg></a>
       </div>
     </div>
     <div class="footer-col">
@@ -1377,7 +1402,7 @@ canvas#heroBg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     </div>
   </div>
   <div class="footer-bottom">
-    <p>&copy; 2026 PNTC Colleges Dasmariñas, Inc. All rights reserved. | <a href="#">Privacy Policy</a></p>
+    <p>&copy; 2026 PNTC Colleges Dasmariñas, Inc. All rights reserved.</p>
     <div class="ched-tag"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M20.618 5.984A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9a12.02 12.02 0 0 0-.382-3.016z"/></svg>CHED Recognized &amp; MARINA Accredited</div>
   </div>
 </footer>
@@ -1650,6 +1675,30 @@ document.querySelectorAll('.mm').forEach(a => a.addEventListener('click', closeM
   q.addEventListener('input',apply);
   chips.forEach(function(b){b.addEventListener('click',function(){g=b.getAttribute('data-g');chips.forEach(function(x){x.classList.toggle('on',x===b);});apply();});});
 })();
+</script>
+<div class="ep" id="enroll-pop" role="dialog" aria-modal="true" aria-labelledby="ep-title" hidden>
+  <div class="ep-back" data-ep-close></div>
+  <div class="ep-box">
+    <button type="button" class="ep-x" data-ep-close aria-label="Close">&times;</button>
+    <p class="ep-tag"><!--c:college.enroll.tag-->Academic Year 2027-2028<!--/c--></p>
+    <h2 class="ep-title" id="ep-title"><!--c:college.enroll.title-->Apply to PNTC Colleges<!--/c--></h2>
+    <p class="ep-sub"><!--c:college.enroll.sub-->Are you a new student or an old student?<!--/c--></p>
+    <div class="ep-choices">
+      <a class="ep-choice" data-c="college.enroll.new.href" href="https://pntc-colleges.orangeapps.ph/landing/pntc/" target="_blank" rel="noopener"><span class="ep-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span><span><b><!--c:college.enroll.new-->New Student<!--/c--></b><small><!--c:college.enroll.new.sub-->First time enrolling at PNTC<!--/c--></small></span><i aria-hidden="true">&rarr;</i></a>
+      <a class="ep-choice" data-c="college.enroll.old.href" href="https://pntc-colleges.orangeapps.ph/landing/enrollment/pntc/" target="_blank" rel="noopener"><span class="ep-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/></svg></span><span><b><!--c:college.enroll.old-->Old Student<!--/c--></b><small><!--c:college.enroll.old.sub-->Continuing or returning to PNTC<!--/c--></small></span><i aria-hidden="true">&rarr;</i></a>
+    </div>
+  </div>
+</div><!--/enroll-pop-->
+<script id="enroll-pop-js">
+/* Apply and Enroll buttons ask New Student or Old Student first */
+document.addEventListener('DOMContentLoaded',function(){
+  var pop=document.getElementById('enroll-pop');if(!pop)return;var from=null;
+  function open(e){e.preventDefault();from=document.activeElement;pop.hidden=false;document.body.style.overflow='hidden';var f=pop.querySelector('.ep-choice');if(f)f.focus();}
+  function close(){pop.hidden=true;document.body.style.overflow='';if(from&&from.focus)from.focus();}
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-enroll]');if(b)open(e);});
+  pop.addEventListener('click',function(e){if(e.target.closest('[data-ep-close]'))close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!pop.hidden)close();});
+});
 </script>
 </body>
 </html>
