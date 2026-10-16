@@ -101,14 +101,28 @@ function collegeLikeSocial(h, cls) {
     .replace(new RegExp(`<a href="[^"]*" class="${cls}" aria-label="YouTube"`, 'g'), `<a href="" ${ext} class="${cls}" aria-label="YouTube" data-c="social.yt"`)
     .replace(new RegExp(`(<a href="[^"]*" ${ext} class="${cls}" aria-label="Facebook" data-c="social.fb"[^>]*>(?:(?!</a>)[\\s\\S])*</a>)(?!\\s*<a[^>]*aria-label="TikTok")`),`$1\n        <a href="${LINK.tiktok}" ${ext} class="${cls}" aria-label="TikTok" data-c="social.tiktok">${TIKTOK_SVG.replace('<svg ', cls === 'social-btn' ? '<svg width="15" height="15" ' : '<svg ')}</a>`);
 }
+// Main Site and PNSC footers: round buttons with the brand logos
+const ICON = {
+  fb: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.5-1 .9-1H17V2.1L14.1 2C10.9 2 10.2 4.4 10.2 6v2.5H8v3.8h2.2V22H14v-9.7h2.8l.4-3.8z"/></svg>',
+  tiktok: TIKTOK_SVG.replace('<svg ', '<svg aria-hidden="true" '),
+  ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg>',
+  yt: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 7.2a3 3 0 0 0-2.1-2.1C18.5 4.6 12 4.6 12 4.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 7.2 31 31 0 0 0 1 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23 12a31 31 0 0 0-.5-4.8zM9.8 15.1V8.9l5.4 3.1z"/></svg>',
+  li: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></svg>',
+};
+const MAIN_SOCIAL_CSS = `<style id="main-social-css">.footer-socials a{color:rgba(255,255,255,.86)!important;border-color:rgba(255,255,255,.22)!important}.footer-socials a:hover{color:#F3CF33!important;border-color:#F3CF33!important}.footer-socials a svg{width:16px;height:16px;display:block}</style>`;
 function mainSocial(h) {
-  return h.replace(/<a href="[^"]*"(?: target="_blank" rel="noopener")? aria-label="Facebook"(?: data-c="social\.fb")?>FB<\/a>/, `<a href="${LINK.fb}" ${ext} aria-label="Facebook" data-c="social.fb">FB</a>`)
-    .replace(/<a href="[^"]*"(?: target="_blank" rel="noopener")? aria-label="Instagram"(?: data-c="social\.ig")?>IG<\/a>/, `<a href="" ${ext} aria-label="Instagram" data-c="social.ig">IG</a>`)
-    .replace(/<a href="[^"]*"(?: target="_blank" rel="noopener")? aria-label="YouTube"(?: data-c="social\.yt")?>YT<\/a>/, `<a href="" ${ext} aria-label="YouTube" data-c="social.yt">YT</a>`)
-    .replace(/<a href="[^"]*"(?: target="_blank" rel="noopener")? aria-label="LinkedIn"(?: data-c="social\.li")?>IN<\/a>/, `<a href="" ${ext} aria-label="LinkedIn" data-c="social.li">IN</a>`)
-    .replace(/(<a [^>]*data-c="social\.fb">FB<\/a>)(?!\s*<a[^>]*aria-label="TikTok")/, `$1\n          <a href="${LINK.tiktok}" ${ext} aria-label="TikTok" data-c="social.tiktok">TT</a>`);
+  const box = /<div class="footer-socials">[\s\S]*?<\/div>/;
+  const m = box.exec(h);
+  if (!m) return h;
+  const a = (key, label, href) => {
+    const cur = new RegExp(`<a [^>]*data-c="social\\.${key}"[^>]*href="([^"]*)"|<a href="([^"]*)"[^>]*data-c="social\\.${key}"`).exec(m[0]);
+    const keep = cur ? (cur[1] !== undefined ? cur[1] : cur[2]) : href;
+    return `<a href="${keep}" ${ext} aria-label="${label}" data-c="social.${key}">${ICON[key]}</a>`;
+  };
+  const inner = ['', a('fb', 'Facebook', LINK.fb), a('tiktok', 'TikTok', LINK.tiktok), a('ig', 'Instagram', ''), a('yt', 'YouTube', ''), a('li', 'LinkedIn', '')].join('\n          ');
+  h = h.replace(box, `<div class="footer-socials">${inner}\n        </div>`);
+  return h.replace(/<style id="main-social-css">[\s\S]*?<\/style>\n/, '').replace('</head>', MAIN_SOCIAL_CSS + '\n</head>');
 }
-
 function finish(file, h) {
   h = h.replace(/<style id="social-links-css">[\s\S]*?<\/style>\n/, '').replace('</head>', hideEmpty + '\n</head>');
   return h;
