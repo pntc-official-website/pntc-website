@@ -69,7 +69,7 @@ const SITES = {
       btns: [['training.cta.btn1', 'Email Admissions', 'mailto:admissions@mypntc.edu.ph', 'training.cta.btn1.href'], ['training.cta.btn2', '0917 182 9158', 'tel:+639171829158', 'training.cta.btn2.href']],
       note: ['training.cta.note', 'Walk-in inquiries are welcome Monday to Saturday, 8:00 AM to 5:30 PM, at the 5th Floor, Intramuros Corporate Plaza, Manila.'] },
     tagline: 'Maritime Training and Assessment Center', desc: 'STCW and MARINA courses and competence assessment for seafarers in Intramuros, Manila.',
-    linksTitle: 'Training', links: [['Maritime Courses', '/training/maritime-courses'], ['Assessment', '/training/assessment'], ['Review App', '/training/review-app'], ['Corporate', '/training/corporate'], ['TESDA', '/training/tesda'], ['PNTC Main Site', '/']],
+    linksTitle: 'Training', links: [['Maritime Courses', '/training/maritime-courses'], ['Assessment', '/training/assessment'], ['Review App', '/training/review-app'], ['Corporate', '/training/corporate'], ['TESDA', '/training/tesda'], ['Verify Certificate', 'https://secur-a-print.net/pntc2.sap'], ['PNTC Main Site', '/']],
     contact: { addr: '5th Floor, Intramuros Corporate Plaza, Recoletos St, Intramuros, Manila 1002', phone: ['0917 182 9158', 'tel:+639171829158'], email: 'admissions@mypntc.edu.ph', hours: 'Monday to Saturday, 8:00 AM to 5:30 PM' },
     map: MAP_MTC, copy: 'PNTC Maritime Training and Assessment Center', badge: 'Part of the PNTC Education Group', social: 'mtc.social',
   },
@@ -122,7 +122,7 @@ function block(id, s) {
     </div>
     <div class="pf-col">
       <h4>${s.linksTitle}</h4>
-      <ul>${s.links.map(([t, h]) => `<li><a href="${h}">${t}</a></li>`).join('')}</ul>
+      <ul>${s.links.map(([t, h]) => `<li><a href="${h}"${/^https?:/.test(h) ? ' ' + ext : ''}>${t}</a></li>`).join('')}</ul>
     </div>
     <div class="pf-col">
       <h4>Contact Us</h4>
