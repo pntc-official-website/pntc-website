@@ -10,5 +10,20 @@
     "express": "^4.18.2",
     "multer": "^1.4.5-lts.2",
     "uuid": "^11.0.0"
+  },
+  "scripts": {
+    "build:cloudflare": "node tools/build-cloudflare.js",
+    "dev:cloudflare": "node tools/build-cloudflare.js && wrangler dev",
+    "deploy:cloudflare": "node tools/build-cloudflare.js && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.40.0"
+  },
+  "allowScripts": {
+    "workerd@1.20261102.1": true,
+    "esbuild@0.28.2": true
+  },
+  "overrides": {
+    "iconv-lite": "0.6.3"
   }
 }

@@ -5,6 +5,12 @@ const path    = require('path');
 const { v4: uuidv4 } = require('uuid');
 const { createClient } = require('@supabase/supabase-js');
 
+// GitHub refuses API requests without a User-Agent. Node.js adds one by itself, Cloudflare does not.
+const nativeFetch = globalThis.fetch;
+const fetch = (url, opts = {}) => /^https:\/\/api\.github\.com\//.test(String(url))
+  ? nativeFetch(url, { ...opts, headers: { 'User-Agent': 'pntc-admin-console', ...(opts.headers || {}) } })
+  : nativeFetch(url, opts);
+
 const app  = express();
 const PORT = process.env.PORT || 3000;
 
@@ -111,10 +117,12 @@ const IMAGE_SITES = {
 
 // ── Middleware ─────────────────────────────────────────────────
 app.use(express.json({ limit: '50mb' }));
-app.use(express.static(path.join(__dirname, 'public')));
+// On Cloudflare there is no __dirname: the admin pages and website files are served from dist/ instead
+const LOCAL = typeof __dirname !== 'undefined';
+if (LOCAL) app.use(express.static(path.join(__dirname, 'public')));
 
 // Local dev only: serve website files so /site-files/ works in the admin
-if (process.env.NODE_ENV !== 'production') {
+if (LOCAL && process.env.NODE_ENV !== 'production') {
   try {
     const fs = require('fs');
     const WEBSITE_ROOT = path.resolve(__dirname, '..');
