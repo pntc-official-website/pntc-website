@@ -179,8 +179,9 @@ app.get('/api/public/posts', async (req, res) => {
 // ══════════════════════════════════════════════════════════════
 app.get('/api/posts', async (_req, res) => {
   try {
+    // the list screens need no article text, so it is left out (keeps Supabase egress low)
     const { data, error } = await supabase
-      .from('posts').select('*')
+      .from('posts').select('id,title,slug,excerpt,featuredImage,category,status,sites,tags,author,createdAt,updatedAt,publishedAt')
       .order('updatedAt', { ascending: false });
     if (error) throw error;
     res.json(data || []);
@@ -388,20 +389,25 @@ app.post('/api/upload/featured', (req, res) => {
     const site   = SITES[siteId];
     if (!site) return res.status(400).json({ error: 'Unknown site' });
 
+    // Cover photos are saved into the website through GitHub (<site folder>/blog/images/), so Cloudflare serves
+    // them for free. They used to go to Supabase Storage, where every visitor's download counted against the
+    // free tier egress. The photo shows on the site after the next rebuild (2 to 4 minutes).
     try {
-      const ext       = path.extname(req.file.originalname).toLowerCase() || '.jpg';
-      const filename  = `${Date.now()}-${Math.random().toString(36).slice(2,6)}${ext}`;
-      const storePath = `${site.dir}/uploads/featured/${filename}`;
-
-      const { error: upErr } = await supabase.storage
-        .from('site-images')
-        .upload(storePath, req.file.buffer, { contentType: req.file.mimetype });
-      if (upErr) throw upErr;
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('site-images').getPublicUrl(storePath);
-
-      res.json({ url: publicUrl, filename, siteDir: site.dir });
+      let ext = path.extname(req.file.originalname).toLowerCase() || '.jpg';
+      if (ext === '.jfif' || ext === '.jpeg') ext = '.jpg';
+      if (!/^\.(jpg|png|webp|gif)$/.test(ext)) return res.status(400).json({ error: 'Use a JPG, PNG, WebP or GIF image.' });
+      if (req.file.size > 8 * 1024 * 1024) return res.status(400).json({ error: 'The image is larger than 8 MB. Please use a smaller one.' });
+      const filename = `${Date.now()}-${Math.random().toString(36).slice(2,6)}${ext}`;
+      const repoPath = `${site.dir}/blog/images/${filename}`;
+      const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${repoPath.split('/').map(encodeURIComponent).join('/')}`, {
+        method: 'PUT',
+        headers: { Authorization: `Bearer ${GH_TOKEN}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json', 'X-GitHub-Api-Version': '2022-11-28' },
+        body: JSON.stringify({ message: `Upload blog cover photo: ${filename}`, content: req.file.buffer.toString('base64'), branch: GH_BRANCH }),
+      });
+      if (!r.ok) { const t = await r.text(); throw new Error(`GitHub ${r.status}: ${t.slice(0, 200)}`); }
+      const URL_PREFIX = { 'PNTC Colleges': '/college', 'SHS': '/shs', 'PNTC Maritime Training and Assessment Center': '/training', 'Aman Sinaya': '/aman-sinaya', 'PNTC Main Landing Page': '' };
+      const base = URL_PREFIX[site.dir] !== undefined ? URL_PREFIX[site.dir] : '/' + encodeURIComponent(site.dir);
+      res.json({ url: `${base}/blog/images/${filename}`, filename, siteDir: site.dir });
     } catch (e) {
       res.status(500).json({ error: e.message });
     }
@@ -815,11 +821,15 @@ app.post('/api/chat/session/:id/message', async (req, res) => {
 // Visitor: poll for new messages
 app.get('/api/chat/session/:id/messages', async (req, res) => {
   try {
-    const { data, error } = await supabase
+    // ?after=<time of the last message the visitor has> returns only newer messages
+    let q = supabase
       .from('chat_messages')
       .select('id,sender,message,created_at')
       .eq('session_id', req.params.id)
-      .order('created_at', { ascending: true });
+      .order('created_at', { ascending: true })
+      .limit(200);
+    if (req.query.after) q = q.gt('created_at', req.query.after);
+    const { data, error } = await q;
     if (error) throw error;
     res.json(data || []);
   } catch (e) { res.status(500).json({ error: e.message }); }
@@ -828,34 +838,45 @@ app.get('/api/chat/session/:id/messages', async (req, res) => {
 // Admin: list all sessions with last message
 app.get('/api/chat/sessions', requireAuth, async (req, res) => {
   try {
+    // Kept small for the Supabase free tier: the 100 most recent chats, and two queries in total
+    // (latest messages and unread visitor messages for all of them) instead of two per chat.
     const { data: sessions, error } = await supabase
       .from('chat_sessions')
       .select('id,visitor_name,visitor_email,visitor_contact,concern_type,concern_background,site,status,created_at,updated_at')
-      .order('updated_at', { ascending: false });
+      .order('updated_at', { ascending: false })
+      .limit(100);
     if (error) throw error;
-    const result = await Promise.all((sessions || []).map(async s => {
-      const { data: lm } = await supabase.from('chat_messages')
-        .select('message,sender,created_at').eq('session_id', s.id)
-        .order('created_at', { ascending: false }).limit(1).maybeSingle();
-      const { count } = await supabase.from('chat_messages')
-        .select('id', { count: 'exact', head: true })
-        .eq('session_id', s.id).eq('sender', 'visitor').eq('read', false);
-      return { ...s, lastMessage: lm || null, unread: count || 0 };
-    }));
-    res.json(result);
+    const ids = (sessions || []).map(s => s.id);
+    const last = {}, unread = {};
+    if (ids.length) {
+      const [{ data: recent }, { data: notRead }] = await Promise.all([
+        supabase.from('chat_messages').select('session_id,message,sender,created_at')
+          .in('session_id', ids).order('created_at', { ascending: false }).limit(400),
+        supabase.from('chat_messages').select('session_id')
+          .in('session_id', ids).eq('sender', 'visitor').eq('read', false).limit(1000),
+      ]);
+      for (const m of recent || []) if (!last[m.session_id]) last[m.session_id] = { message: m.message, sender: m.sender, created_at: m.created_at };
+      for (const m of notRead || []) unread[m.session_id] = (unread[m.session_id] || 0) + 1;
+    }
+    res.json((sessions || []).map(s => ({ ...s, lastMessage: last[s.id] || null, unread: unread[s.id] || 0 })));
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 // Admin: get session detail + messages
 app.get('/api/chat/session/:id', requireAuth, async (req, res) => {
   try {
+    // ?after=<time of the last message the screen has> returns only newer messages
+    const after = req.query.after;
+    let mq = supabase.from('chat_messages').select('*').eq('session_id', req.params.id).order('created_at', { ascending: true }).limit(500);
+    if (after) mq = mq.gt('created_at', after);
     const [{ data: session }, { data: messages }] = await Promise.all([
       supabase.from('chat_sessions').select('*').eq('id', req.params.id).single(),
-      supabase.from('chat_messages').select('*').eq('session_id', req.params.id).order('created_at', { ascending: true })
+      mq,
     ]);
-    // Mark visitor messages as read
-    await supabase.from('chat_messages').update({ read: true })
-      .eq('session_id', req.params.id).eq('sender', 'visitor').eq('read', false);
+    // Mark visitor messages as read (only when there is something new to mark)
+    if (!after || (messages || []).some(m => m.sender === 'visitor'))
+      await supabase.from('chat_messages').update({ read: true })
+        .eq('session_id', req.params.id).eq('sender', 'visitor').eq('read', false);
     res.json({ session: session || null, messages: messages || [] });
   } catch (e) { res.status(500).json({ error: e.message }); }
 });

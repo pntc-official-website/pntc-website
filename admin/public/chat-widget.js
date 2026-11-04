@@ -382,15 +382,19 @@
     if (!sessionId) return;
     await fetch(API+'/session/'+sessionId+'/message',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});
   }
+  // Light on the Supabase free tier: only messages newer than the last one received, only while the chat box
+  // is open, and never in a background tab.
+  var lastAt = null;
   async function poll() {
-    if (!sessionId) return;
+    if (!sessionId || document.hidden) return;
     try {
-      var r = await fetch(API+'/session/'+sessionId+'/messages');
+      var r = await fetch(API+'/session/'+sessionId+'/messages'+(lastAt ? '?after='+encodeURIComponent(lastAt) : ''));
       var d = await r.json();
-      if (Array.isArray(d)) d.forEach(renderMsg);
+      if (Array.isArray(d)) d.forEach(function (m) { renderMsg(m); if (!lastAt || m.created_at > lastAt) lastAt = m.created_at; });
     } catch(e){}
   }
-  function startPoll() { if (pollTimer) return; poll(); pollTimer = setInterval(poll, 3000); }
+  function startPoll() { if (pollTimer) return; poll(); pollTimer = setInterval(poll, 4000); }
+  document.addEventListener('visibilitychange', function () { if (!document.hidden && pollTimer) poll(); });
   function stopPoll()  { clearInterval(pollTimer); pollTimer = null; }
 
   /* ─── UI states ──────────────────────────────────────────── */
@@ -468,8 +472,9 @@
       .catch(function () {});
   }
   agentLabel.addEventListener('click', function () { if (!isOpen) openPanel(); });
+  // once on load, then every 5 minutes while the tab is in view (the answer is also cached by Cloudflare)
   checkAgentOnline();
-  setInterval(checkAgentOnline, 90000);
+  setInterval(function () { if (!document.hidden) checkAgentOnline(); }, 300000);
 
   /* ─── Panel open / close ─────────────────────────────────── */
   function openPanel() {

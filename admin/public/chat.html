@@ -258,6 +258,7 @@
   var API = '/api/chat';
   var activeId     = null;
   var knownMsgIds  = {};
+  var lastMsgAt    = null; // time of the newest message shown, so each check asks only for newer ones
   var sessions     = {};
   var filterMode   = 'open';
   var pollTimer    = null;
@@ -460,7 +461,7 @@
 
   // ── Open session ──────────────────────────────────────────────
   async function openSession(id) {
-    activeId = id; knownMsgIds = {}; messagesArea.innerHTML = ''; lastMsgDate = null;
+    activeId = id; knownMsgIds = {}; lastMsgAt = null; messagesArea.innerHTML = ''; lastMsgDate = null;
     renderSessionList();
     convoEmpty.style.display = 'none';
     convoView.style.display = 'flex';
@@ -512,14 +513,19 @@
   async function fetchMessages() {
     if (!activeId) return;
     try {
-      var r = await fetch(API + '/session/' + activeId);
+      var forId = activeId;
+      var r = await fetch(API + '/session/' + activeId + (lastMsgAt ? '?after=' + encodeURIComponent(lastMsgAt) : ''));
       var d = await r.json();
+      if (forId !== activeId) return;
       if (d.session) {
         sessions[activeId] = Object.assign(sessions[activeId]||{}, d.session, { unread_count: 0 });
         updateConvoStatus(d.session.status);
         renderSessionList(); updateUnreadTotal();
       }
-      if (Array.isArray(d.messages)) renderMessages(d.messages);
+      if (Array.isArray(d.messages)) {
+        d.messages.forEach(function (m) { if (!lastMsgAt || m.created_at > lastMsgAt) lastMsgAt = m.created_at; });
+        renderMessages(d.messages);
+      }
     } catch (e) {}
   }
 
@@ -658,10 +664,13 @@
   function startPolling() {
     if (pollTimer) return;
     loadSessions();
+    // every 6 seconds while this tab is in view, paused in a background tab (light on the Supabase free tier)
     pollTimer = setInterval(function () {
+      if (document.hidden) return;
       loadSessions();
       if (activeId) fetchMessages();
-    }, 5000);
+    }, 6000);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) { loadSessions(); if (activeId) fetchMessages(); } });
   }
 })();
 

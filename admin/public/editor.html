@@ -204,6 +204,31 @@ const quill = new Quill('#quill-editor', {
   }
 });
 
+// Pictures in the article are uploaded like cover photos (saved into the website, served by Cloudflare) and linked.
+// Quill's own button would store them as base64 text inside the post, which every page view then downloads
+// from Supabase and quickly uses up the free tier egress.
+quill.getModule('toolbar').addHandler('image', () => {
+  const pick = document.createElement('input');
+  pick.type = 'file'; pick.accept = 'image/png,image/jpeg,image/webp,image/gif';
+  pick.onchange = async () => {
+    const file = pick.files[0];
+    if (!file) return;
+    const fd = new FormData();
+    fd.append('image', file);
+    fd.append('site', document.getElementById('feat-site').value);
+    showToast('Uploading image…', false, true);
+    try {
+      const res = await fetch('/api/upload/featured', { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!res.ok || !data.url) throw new Error(data.error || 'Upload failed');
+      const range = quill.getSelection(true);
+      quill.insertEmbed(range ? range.index : quill.getLength(), 'image', data.url, 'user');
+      showToast('Image added. It appears on the live site after the next rebuild (2 to 4 minutes).');
+    } catch (e) { showToast(e.message || 'Upload failed', true); }
+  };
+  pick.click();
+});
+
 // Site checkboxes
 const siteChecks = document.getElementById('site-checks');
 SITES.forEach(s => {
@@ -275,8 +300,10 @@ featFile.addEventListener('change', async () => {
   try {
     const res  = await fetch('/api/upload/featured', { method: 'POST', body: fd });
     const data = await res.json();
+    if (!res.ok || !data.url) throw new Error(data.error || 'Upload failed');
     featuredUrl = data.url;
-    showFeatPreview(featuredUrl);
+    // the photo goes live with the next site rebuild, so preview the chosen file right away
+    showFeatPreview(URL.createObjectURL(file));
     document.getElementById('feat-url-display').textContent = data.filename;
     showToast('Image uploaded');
   } catch(e) {
@@ -358,6 +385,7 @@ function collectData(status) {
 async function save(status) {
   const data = collectData(status);
   if (!data.title) { showToast('Please enter a title', true); return null; }
+  if (/<img[^>]+src="data:/i.test(data.content)) { showToast('A pasted picture is in the article. Remove it and add it with the image button instead.', true); return null; }
 
   const url    = postId ? `/api/posts/${postId}` : '/api/posts';
   const method = postId ? 'PUT' : 'POST';
